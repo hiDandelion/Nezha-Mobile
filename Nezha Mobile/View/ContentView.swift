@@ -58,8 +58,3 @@ struct ContentView: View {
         }
     }
 }
-
-#Preview {
-    ContentView()
-        .modelContainer(for: Dashboard.self, inMemory: true)
-}

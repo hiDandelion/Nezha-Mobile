@@ -75,6 +75,9 @@ struct ServerDetailView: View {
                 print("Scene Phase became active")
                 dashboardViewModel.connect(to: connectionURLString)
             }
+            else {
+                dashboardViewModel.disconnect()
+            }
         }
     }
     

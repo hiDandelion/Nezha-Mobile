@@ -54,6 +54,9 @@ struct DashboardDetailView: View {
                 print("Scene Phase became active")
                 dashboardViewModel.connect(to: connectionURLString)
             }
+            else {
+                dashboardViewModel.disconnect()
+            }
         }
     }
     
@@ -66,8 +69,6 @@ struct DashboardDetailView: View {
                             HStack {
                                 Text(countryFlagEmoji(countryCode: server.host.countryCode))
                                 Text(server.name)
-                                    .foregroundStyle(.foreground)
-                                
                             }
                         } contentView: {
                             HStack {
