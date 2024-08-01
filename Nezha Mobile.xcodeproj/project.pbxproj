@@ -7,21 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB701A0F2C5BB47600019344 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CB701A0E2C5BB47600019344 /* README.md */; };
+		CB701A112C5BB58D00019344 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CB701A102C5BB58D00019344 /* LICENSE */; };
 		CB9C606B2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606A2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift */; };
 		CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */; };
-		CB9C606F2C5AF76E00DAE1E3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606E2C5AF76E00DAE1E3 /* Item.swift */; };
+		CB9C606F2C5AF76E00DAE1E3 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606E2C5AF76E00DAE1E3 /* Dashboard.swift */; };
 		CB9C60712C5AF76F00DAE1E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */; };
 		CB9C60752C5AF76F00DAE1E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9C60742C5AF76F00DAE1E3 /* Preview Assets.xcassets */; };
+		CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */; };
+		CB9C607E2C5AFB4E00DAE1E3 /* DashboardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */; };
+		CB9C60802C5B089100DAE1E3 /* SocketHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607F2C5B089100DAE1E3 /* SocketHandler.swift */; };
+		CB9C60822C5B11D800DAE1E3 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60812C5B11D800DAE1E3 /* DashboardViewModel.swift */; };
+		CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */; };
+		CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
+		CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */; };
+		CB9C608C2C5B666300DAE1E3 /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C608B2C5B666300DAE1E3 /* CustomStackView.swift */; };
+		CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB701A0E2C5BB47600019344 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CB701A102C5BB58D00019344 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nezha Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9C606A2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nezha_MobileApp.swift; sourceTree = "<group>"; };
 		CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CB9C606E2C5AF76E00DAE1E3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		CB9C606E2C5AF76E00DAE1E3 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB9C60722C5AF76F00DAE1E3 /* Nezha_Mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nezha_Mobile.entitlements; sourceTree = "<group>"; };
 		CB9C60742C5AF76F00DAE1E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDashboardView.swift; sourceTree = "<group>"; };
+		CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDetailView.swift; sourceTree = "<group>"; };
+		CB9C607F2C5B089100DAE1E3 /* SocketHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketHandler.swift; sourceTree = "<group>"; };
+		CB9C60812C5B11D800DAE1E3 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
+		CB9C60852C5B293100DAE1E3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		CB9C608B2C5B666300DAE1E3 /* CustomStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomStackView.swift; path = ../../../../../Users/junhuilou/Downloads/WeatherAppScrolling/Shared/View/CustomStackView.swift; sourceTree = "<group>"; };
+		CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		CB9C608F2C5BAF0A00DAE1E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +61,9 @@
 		CB9C605E2C5AF76E00DAE1E3 = {
 			isa = PBXGroup;
 			children = (
+				CB701A102C5BB58D00019344 /* LICENSE */,
+				CB701A0E2C5BB47600019344 /* README.md */,
+				CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */,
 				CB9C60692C5AF76E00DAE1E3 /* Nezha Mobile */,
 				CB9C60682C5AF76E00DAE1E3 /* Products */,
 			);
@@ -55,9 +81,13 @@
 			isa = PBXGroup;
 			children = (
 				CB9C606A2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift */,
-				CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */,
-				CB9C606E2C5AF76E00DAE1E3 /* Item.swift */,
+				CB9C60872C5B5C9100DAE1E3 /* View */,
+				CB9C60882C5B5CAA00DAE1E3 /* ViewModel */,
+				CB9C607F2C5B089100DAE1E3 /* SocketHandler.swift */,
+				CB9C606E2C5AF76E00DAE1E3 /* Dashboard.swift */,
+				CB9C60852C5B293100DAE1E3 /* Utilities.swift */,
 				CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */,
+				CB9C608F2C5BAF0A00DAE1E3 /* Info.plist */,
 				CB9C60722C5AF76F00DAE1E3 /* Nezha_Mobile.entitlements */,
 				CB9C60732C5AF76F00DAE1E3 /* Preview Content */,
 			);
@@ -70,6 +100,27 @@
 				CB9C60742C5AF76F00DAE1E3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CB9C60872C5B5C9100DAE1E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */,
+				CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */,
+				CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */,
+				CB9C608B2C5B666300DAE1E3 /* CustomStackView.swift */,
+				CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */,
+				CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CB9C60882C5B5CAA00DAE1E3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CB9C60812C5B11D800DAE1E3 /* DashboardViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,6 +165,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = CB9C605E2C5AF76E00DAE1E3;
 			productRefGroup = CB9C60682C5AF76E00DAE1E3 /* Products */;
@@ -132,6 +184,9 @@
 			files = (
 				CB9C60752C5AF76F00DAE1E3 /* Preview Assets.xcassets in Resources */,
 				CB9C60712C5AF76F00DAE1E3 /* Assets.xcassets in Resources */,
+				CB701A0F2C5BB47600019344 /* README.md in Resources */,
+				CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */,
+				CB701A112C5BB58D00019344 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,9 +197,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB9C607E2C5AFB4E00DAE1E3 /* DashboardDetailView.swift in Sources */,
+				CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */,
 				CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */,
-				CB9C606F2C5AF76E00DAE1E3 /* Item.swift in Sources */,
+				CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */,
+				CB9C608C2C5B666300DAE1E3 /* CustomStackView.swift in Sources */,
+				CB9C60802C5B089100DAE1E3 /* SocketHandler.swift in Sources */,
+				CB9C606F2C5AF76E00DAE1E3 /* Dashboard.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift in Sources */,
+				CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */,
+				CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */,
+				CB9C60822C5B11D800DAE1E3 /* DashboardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +337,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Nezha;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -286,7 +353,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -294,10 +361,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -310,8 +378,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Nezha;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -322,7 +394,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -330,10 +402,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
