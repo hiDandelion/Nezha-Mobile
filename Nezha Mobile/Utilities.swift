@@ -32,7 +32,7 @@ func getCore(_ str: [String]?) -> String {
 
 func countryFlagEmoji(countryCode: String) -> String {
     let base = UnicodeScalar("🇦").value - UnicodeScalar("A").value
-
+    
     return countryCode
         .uppercased()
         .unicodeScalars
@@ -68,15 +68,30 @@ extension View {
     func offsetChange(offset: @escaping (CGRect) -> ()) -> some View {
         self
             .overlay {
-                GeometryReader(content: { geometry in
-                    let rect = geometry.frame(in: .global)
-                    
+                GeometryReader { geometry in
                     Color.clear
-                        .preference(key: OffsetKey.self, value: rect)
-                        .onPreferenceChange(OffsetKey.self, perform: { value in
-                            offset(value)
-                        })
-                })
+                        .preference(key: OffsetKey.self, value: geometry.frame(in: .global))
+                        .onPreferenceChange(OffsetKey.self) { value in
+                            DispatchQueue.main.async {
+                                let safeArea = getSafeAreaInsets()
+                                let adjustedRect = CGRect(
+                                    x: value.minX,
+                                    y: value.minY - safeArea.top,
+                                    width: value.width,
+                                    height: value.height
+                                )
+                                offset(adjustedRect)
+                            }
+                        }
+                }
             }
+    }
+    
+    private func getSafeAreaInsets() -> UIEdgeInsets {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = scene.windows.first else {
+            return .zero
+        }
+        return window.safeAreaInsets
     }
 }

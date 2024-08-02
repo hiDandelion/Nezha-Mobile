@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CB701A0F2C5BB47600019344 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CB701A0E2C5BB47600019344 /* README.md */; };
 		CB701A112C5BB58D00019344 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CB701A102C5BB58D00019344 /* LICENSE */; };
+		CB701A132C5C5DA500019344 /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A122C5C5DA500019344 /* CustomStackView.swift */; };
 		CB9C606B2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606A2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift */; };
 		CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */; };
 		CB9C606F2C5AF76E00DAE1E3 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606E2C5AF76E00DAE1E3 /* Dashboard.swift */; };
@@ -21,13 +22,13 @@
 		CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */; };
 		CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
 		CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */; };
-		CB9C608C2C5B666300DAE1E3 /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C608B2C5B666300DAE1E3 /* CustomStackView.swift */; };
 		CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB701A0E2C5BB47600019344 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CB701A102C5BB58D00019344 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CB701A122C5C5DA500019344 /* CustomStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
 		CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nezha Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9C606A2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nezha_MobileApp.swift; sourceTree = "<group>"; };
 		CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
 		CB9C60852C5B293100DAE1E3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		CB9C608B2C5B666300DAE1E3 /* CustomStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomStackView.swift; path = ../../../../../Users/junhuilou/Downloads/WeatherAppScrolling/Shared/View/CustomStackView.swift; sourceTree = "<group>"; };
 		CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		CB9C608F2C5BAF0A00DAE1E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -108,7 +108,7 @@
 				CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */,
 				CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */,
 				CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */,
-				CB9C608B2C5B666300DAE1E3 /* CustomStackView.swift */,
+				CB701A122C5C5DA500019344 /* CustomStackView.swift */,
 				CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */,
 				CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */,
 			);
@@ -197,11 +197,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB701A132C5C5DA500019344 /* CustomStackView.swift in Sources */,
 				CB9C607E2C5AFB4E00DAE1E3 /* DashboardDetailView.swift in Sources */,
 				CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */,
 				CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */,
 				CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */,
-				CB9C608C2C5B666300DAE1E3 /* CustomStackView.swift in Sources */,
 				CB9C60802C5B089100DAE1E3 /* SocketHandler.swift in Sources */,
 				CB9C606F2C5AF76E00DAE1E3 /* Dashboard.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift in Sources */,
@@ -335,7 +335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -357,7 +357,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -376,7 +376,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -398,7 +398,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

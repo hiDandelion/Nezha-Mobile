@@ -75,7 +75,7 @@ struct ServerDetailView: View {
                 print("Scene Phase became active")
                 dashboardViewModel.connect(to: connectionURLString)
             }
-            else {
+            if scenePhase == .background {
                 dashboardViewModel.disconnect()
             }
         }

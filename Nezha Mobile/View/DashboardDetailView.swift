@@ -13,6 +13,7 @@ struct DashboardDetailView: View {
     @Bindable var dashboard: Dashboard
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @AppStorage("bgColor") private var bgColor = "blue"
+    @State private var isShowingSettingView: Bool = false
     
     var body: some View {
         let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
@@ -28,23 +29,54 @@ struct DashboardDetailView: View {
                     ZStack {
                         backgroundGradient(color: bgColor)
                             .ignoresSafeArea()
-                        serverList
-                    }
-                case .error(let message):
-                    VStack {
-                        Text("An error occured")
-                            .font(.headline)
-                        Text(message)
-                            .font(.subheadline)
-                        Button("Retry") {
-                            dashboardViewModel.connect(to: connectionURLString)
+                        ZStack(alignment: .bottomTrailing) {
+                            if isShowingSettingView {
+                                SettingView(dashboardViewModel: dashboardViewModel)
+                            }
+                            else {
+                                serverList
+                            }
+                            
+                            Button {
+                                withAnimation {
+                                    isShowingSettingView.toggle()
+                                }
+                            } label: {
+                                Image(systemName: isShowingSettingView ? "chevron.left" : "gear")
+                                    .font(.title.weight(.semibold))
+                                    .frame(width: 30, height: 30)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 4, x: 0, y: 4)
+                                
+                            }
+                            .padding()
                         }
                     }
-                    .padding()
+                case .error(let message):
+                    ZStack(alignment: .bottomTrailing) {
+                        VStack(spacing: 10) {
+                            Text("An error occured")
+                                .font(.headline)
+                            Text(message)
+                                .font(.subheadline)
+                            Button("Retry") {
+                                dashboardViewModel.connect(to: connectionURLString)
+                            }
+                            Button("Settings") {
+                                isShowingSettingView.toggle()
+                            }
+                            .sheet(isPresented: $isShowingSettingView) {
+                                SettingView(dashboardViewModel: dashboardViewModel)
+                            }
+                        }
+                        .padding()
+                    }
                 }
             }
-            .navigationTitle(dashboard.name)
-            .toolbarBackground(.hidden, for: .navigationBar)
+            .toolbar(.hidden)
         }
         .onAppear {
             dashboardViewModel.connect(to: connectionURLString)
@@ -54,7 +86,7 @@ struct DashboardDetailView: View {
                 print("Scene Phase became active")
                 dashboardViewModel.connect(to: connectionURLString)
             }
-            else {
+            if scenePhase == .background {
                 dashboardViewModel.disconnect()
             }
         }
@@ -122,8 +154,8 @@ struct DashboardDetailView: View {
                                     HStack {
                                         Image(systemName: "network")
                                         VStack(alignment: .leading) {
-                                            Text("↑\(formatBytes(server.state.netOutSpeed))/s")
-                                            Text("↓\(formatBytes(server.state.netInSpeed))/s")
+                                            Text("↑\(formatBytes(server.state.netOutTransfer))")
+                                            Text("↓\(formatBytes(server.state.netInTransfer))")
                                         }
                                     }
                                     .padding(.top, 5)
@@ -133,7 +165,6 @@ struct DashboardDetailView: View {
                                 .padding(.leading, 10)
                             }
                         }
-                            
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding(.horizontal, 20)

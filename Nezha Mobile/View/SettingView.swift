@@ -12,16 +12,16 @@ struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     @Query private var dashboards: [Dashboard]
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @State private var color = "blue"
-    @AppStorage("bgColor") private var bgColor = "blue"
+    @State private var requireReconnection: Bool = false
+    @AppStorage("bgColor") private var bgColor: String = "blue"
     
     var body: some View {
         NavigationStack {
             Form {
-                DashboardSettingView(dashboard: dashboards[0])
+                DashboardSettingView(dashboard: dashboards[0], requireReconnection: $requireReconnection)
                 
                 Section("Theme") {
-                    Picker("Background", selection: $color) {
+                    Picker("Background", selection: $bgColor) {
                         Text("Blue").tag("blue")
                         Text("Green").tag("green")
                         Text("Yellow").tag("yellow")
@@ -39,24 +39,19 @@ struct SettingView: View {
             }
             .navigationTitle("Settings")
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        let dashboard = dashboards[0]
-                        let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
-                        dashboardViewModel.disconnect()
-                        dashboardViewModel.connect(to: connectionURLString)
-                        
-                        bgColor = color
-                        
                         dismiss()
                     }
                 }
+            }
+        }
+        .onDisappear {
+            if requireReconnection {
+                let dashboard = dashboards[0]
+                let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
+                dashboardViewModel.disconnect()
+                dashboardViewModel.connect(to: connectionURLString)
             }
         }
     }
@@ -64,6 +59,7 @@ struct SettingView: View {
 
 struct DashboardSettingView: View {
     @Bindable var dashboard: Dashboard
+    @Binding var requireReconnection: Bool
     
     var body: some View {
         Section("Dashboard") {
@@ -71,7 +67,13 @@ struct DashboardSettingView: View {
             TextField("Link", text: $dashboard.link)
                 .autocorrectionDisabled()
                 .autocapitalization(.none)
+                .onChange(of: dashboard.link) {
+                    requireReconnection = true
+                }
             Toggle("Use SSL", isOn: $dashboard.ssl)
+                .onChange(of: dashboard.ssl) {
+                    requireReconnection = true
+                }
         }
     }
 }
