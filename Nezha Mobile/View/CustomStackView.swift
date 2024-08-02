@@ -26,7 +26,7 @@ struct CustomStackView<Title: View, Content: View>: View {
                 HStack {
                     titleView
                         .font(.callout)
-                        .opacity(0.6)
+                        .opacity(0.8)
                     Spacer()
                 }
                 .frame(height: titleHeight)

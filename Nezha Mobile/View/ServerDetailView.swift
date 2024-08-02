@@ -67,13 +67,10 @@ struct ServerDetailView: View {
                 .navigationTitle(server.name)
             }
         }
-        .onAppear {
-            dashboardViewModel.connect(to: connectionURLString)
-        }
         .onChange(of: scenePhase) {
             if scenePhase == .active {
                 print("Scene Phase became active")
-                dashboardViewModel.connect(to: connectionURLString)
+                dismiss()
             }
             if scenePhase == .background {
                 dashboardViewModel.disconnect()

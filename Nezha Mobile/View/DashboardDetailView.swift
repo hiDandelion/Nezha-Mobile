@@ -13,6 +13,29 @@ struct DashboardDetailView: View {
     @Bindable var dashboard: Dashboard
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @AppStorage("bgColor") private var bgColor = "blue"
+    @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation {
+        didSet {
+            if orientation == .portrait {
+                showDynamicIslandProgressIndicator = true
+                DynamicIsland.progressIndicator.progressColor = .systemBlue
+                DynamicIsland.progressIndicator.isProgressIndeterminate = false
+                DynamicIsland.progressIndicator.progress = scrollPercentage * 100
+            }
+            else {
+                showDynamicIslandProgressIndicator = false
+                DynamicIsland.progressIndicator.hideProgressIndicator()
+            }
+        }
+    }
+    @State private var showDynamicIslandProgressIndicator: Bool = false
+    @State private var scrollViewHeight: CGFloat = 0
+    @State private var scrollPercentage: CGFloat = 0 {
+        didSet {
+            if showDynamicIslandProgressIndicator {
+                DynamicIsland.progressIndicator.progress = scrollPercentage * 100
+            }
+        }
+    }
     @State private var isShowingSettingView: Bool = false
     
     var body: some View {
@@ -22,13 +45,24 @@ struct DashboardDetailView: View {
             VStack {
                 switch(dashboardViewModel.loadingState) {
                 case .idle:
-                    Text("Preparing...")
+                    ZStack {
+                        backgroundGradient(color: bgColor)
+                            .ignoresSafeArea()
+                            .blur(radius: 3)
+                    }
                 case .loading:
-                    ProgressView("Loading...")
+                    ZStack {
+                        backgroundGradient(color: bgColor)
+                            .ignoresSafeArea()
+                            .blur(radius: 0)
+                        
+                        ProgressView("Loading...")
+                    }
                 case .loaded:
                     ZStack {
                         backgroundGradient(color: bgColor)
                             .ignoresSafeArea()
+                        
                         ZStack(alignment: .bottomTrailing) {
                             if isShowingSettingView {
                                 SettingView(dashboardViewModel: dashboardViewModel)
@@ -80,99 +114,131 @@ struct DashboardDetailView: View {
         }
         .onAppear {
             dashboardViewModel.connect(to: connectionURLString)
+            
+            if orientation == .portrait {
+                showDynamicIslandProgressIndicator = true
+                DynamicIsland.progressIndicator.progressColor = .systemBlue
+                DynamicIsland.progressIndicator.isProgressIndeterminate = false
+                DynamicIsland.progressIndicator.progress = scrollPercentage * 100
+            }
+        }
+        .onDisappear {
+            showDynamicIslandProgressIndicator = false
+            DynamicIsland.progressIndicator.hideProgressIndicator()
         }
         .onChange(of: scenePhase) {
             if scenePhase == .active {
                 print("Scene Phase became active")
                 dashboardViewModel.connect(to: connectionURLString)
             }
+            if scenePhase != .active {
+                showDynamicIslandProgressIndicator = false
+                DynamicIsland.progressIndicator.hideProgressIndicator()
+            }
             if scenePhase == .background {
                 dashboardViewModel.disconnect()
             }
+        }
+        .onRotate { orientation in
+            self.orientation = orientation
         }
     }
     
     private var serverList: some View {
         ScrollView {
-            if let servers = dashboardViewModel.socketResponse?.servers {
-                ForEach(servers, id: \.id) { server in
-                    NavigationLink(destination: ServerDetailView(dashboard: dashboard, dashboardViewModel: dashboardViewModel, serverId: server.id)) {
-                        CustomStackView {
-                            HStack {
-                                Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                                Text(server.name)
-                            }
-                        } contentView: {
-                            HStack {
+            VStack {
+                if let servers = dashboardViewModel.socketResponse?.servers {
+                    ForEach(servers, id: \.id) { server in
+                        NavigationLink(destination: ServerDetailView(dashboard: dashboard, dashboardViewModel: dashboardViewModel, serverId: server.id)) {
+                            CustomStackView {
                                 HStack {
-                                    let cpuUsage = server.state.cpu / 100
-                                    let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.state.memUsed) / Double(server.host.memTotal))
-                                    let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.state.diskUsed) / Double(server.host.diskTotal))
-                                    Gauge(value: cpuUsage) {
-                                        
-                                    } currentValueLabel: {
-                                        VStack {
-                                            Text("CPU")
-                                            Text("\(cpuUsage * 100, specifier: "%.0f")%")
-                                        }
-                                    }
-                                    Gauge(value: memUsage) {
-                                        
-                                    } currentValueLabel: {
-                                        VStack {
-                                            Text("MEM")
-                                            Text("\(memUsage * 100, specifier: "%.0f")%")
-                                        }
-                                    }
-                                    Gauge(value: diskUsage) {
-                                        
-                                    } currentValueLabel: {
-                                        VStack {
-                                            Text("DISK")
-                                            Text("\(diskUsage * 100, specifier: "%.0f")%")
-                                        }
-                                    }
+                                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                                    Text(server.name)
+                                    Image(systemName: "circlebadge.fill")
+                                        .foregroundStyle(server.state.cpu != 0 || server.state.memUsed != 0 ? .green : .red)
                                 }
-                                .gaugeStyle(.accessoryCircularCapacity)
-                                
-                                VStack(alignment: .leading) {
+                            } contentView: {
+                                HStack {
                                     HStack {
-                                        Image(systemName: "cpu")
-                                        Text(getCore(server.host.cpu))
-                                    }
-                                    
-                                    HStack {
-                                        Image(systemName: "memorychip")
-                                        Text("\(formatBytes(server.host.memTotal))")
-                                    }
-                                    
-                                    HStack {
-                                        Image(systemName: "internaldrive")
-                                        Text("\(formatBytes(server.host.diskTotal))")
-                                    }
-                                    
-                                    HStack {
-                                        Image(systemName: "network")
-                                        VStack(alignment: .leading) {
-                                            Text("↑\(formatBytes(server.state.netOutTransfer))")
-                                            Text("↓\(formatBytes(server.state.netInTransfer))")
+                                        let cpuUsage = server.state.cpu / 100
+                                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.state.memUsed) / Double(server.host.memTotal))
+                                        let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.state.diskUsed) / Double(server.host.diskTotal))
+                                        Gauge(value: cpuUsage) {
+                                            
+                                        } currentValueLabel: {
+                                            VStack {
+                                                Text("CPU")
+                                                Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                                            }
+                                        }
+                                        Gauge(value: memUsage) {
+                                            
+                                        } currentValueLabel: {
+                                            VStack {
+                                                Text("MEM")
+                                                Text("\(memUsage * 100, specifier: "%.0f")%")
+                                            }
+                                        }
+                                        Gauge(value: diskUsage) {
+                                            
+                                        } currentValueLabel: {
+                                            VStack {
+                                                Text("DISK")
+                                                Text("\(diskUsage * 100, specifier: "%.0f")%")
+                                            }
                                         }
                                     }
-                                    .padding(.top, 5)
+                                    .gaugeStyle(.accessoryCircularCapacity)
+                                    
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Image(systemName: "cpu")
+                                            Text(getCore(server.host.cpu))
+                                        }
+                                        
+                                        HStack {
+                                            Image(systemName: "memorychip")
+                                            Text("\(formatBytes(server.host.memTotal))")
+                                        }
+                                        
+                                        HStack {
+                                            Image(systemName: "internaldrive")
+                                            Text("\(formatBytes(server.host.diskTotal))")
+                                        }
+                                        
+                                        HStack {
+                                            Image(systemName: "network")
+                                            VStack(alignment: .leading) {
+                                                Text("↑\(formatBytes(server.state.netOutTransfer))")
+                                                Text("↓\(formatBytes(server.state.netInTransfer))")
+                                            }
+                                        }
+                                        .padding(.top, 5)
+                                    }
+                                    .font(.caption2)
+                                    .frame(width: 100)
+                                    .padding(.leading, 10)
                                 }
-                                .font(.caption2)
-                                .frame(width: 100)
-                                .padding(.leading, 10)
                             }
                         }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.horizontal, 20)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.horizontal, 20)
+                }
+                else {
+                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
             }
-            else {
-                ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
-            }
+            .background(GeometryReader { proxy -> Color in
+                DispatchQueue.main.async {
+                    let totalHeight = proxy.size.height
+                    let screenHeight = UIScreen.main.bounds.size.height
+                    let currentOffset = -proxy.frame(in: .named("scroll")).origin.y
+                    scrollPercentage = min(max(currentOffset / (totalHeight - screenHeight), 0), 1)
+                }
+                return Color.clear
+            })
         }
+        .scrollIndicators(showDynamicIslandProgressIndicator ? .never : .automatic)
     }
 }

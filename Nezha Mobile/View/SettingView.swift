@@ -29,9 +29,13 @@ struct SettingView: View {
                 }
                 
                 Section("Aknowledge") {
+                    Link("How to install Nezha Dashboard", destination: URL(string: "https://nezha.wiki")!)
                     NavigationLink(destination: {
-                        Text("This project contains code by naiba/nezha which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
-                            .padding()
+                        Form {
+                            Text("This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
+                            Text("Part of this project is related to Project Nezha by naiba which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
+                        }
+                        .navigationTitle("LICENSE")
                     }) {
                         Text("LICENSE")
                     }
