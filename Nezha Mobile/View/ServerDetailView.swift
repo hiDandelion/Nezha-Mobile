@@ -29,6 +29,7 @@ struct ServerDetailView: View {
                     Section("Basic") {
                         pieceOfInfo(systemImage: "cube", name: "ID", content: "\(server.id)")
                         pieceOfInfo(systemImage: "tag", name: "Tag", content: "\(server.tag)")
+                        pieceOfInfo(systemImage: "power", name: "Boot Time", content: "\(formatTimeInterval(server.host.bootTime))")
                         if let lastActiveDate = dateFormatter.date(from: server.lastActive) {
                             VStack(alignment: .leading) {
                                 Label("Last Active", systemImage: "clock")

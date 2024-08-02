@@ -40,6 +40,30 @@ func countryFlagEmoji(countryCode: String) -> String {
         .joined()
 }
 
+/// Time Related
+func formatTimeInterval(_ interval: Int) -> String {
+    let seconds = interval / 1000
+    let minutes = seconds / 60
+    let hours = minutes / 60
+    let days = hours / 24
+    let months = days / 30
+    let years = months / 12
+
+    if years > 0 {
+        return "\(years)y \(months % 12)m \(days % 30)d"
+    } else if months > 0 {
+        return "\(months)m \(days % 30)d"
+    } else if days > 0 {
+        return "\(days)d \(hours % 24)h"
+    } else if hours > 0 {
+        return "\(hours)h \(minutes % 60)m"
+    } else if minutes > 0 {
+        return "\(minutes)m \(seconds % 60)s"
+    } else {
+        return "\(seconds)s"
+    }
+}
+
 /// Style Related
 func backgroundGradient(color: String) -> LinearGradient {
     switch color {

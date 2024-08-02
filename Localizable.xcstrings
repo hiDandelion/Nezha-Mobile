@@ -116,13 +116,12 @@
         }
       }
     },
-    "Cancel" : {
-      "extractionState" : "stale",
+    "Boot Time" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "启动时间"
           }
         }
       }
@@ -253,6 +252,9 @@
         }
       }
     },
+    "Load" : {
+
+    },
     "Loading..." : {
       "localizations" : {
         "zh-Hans" : {
@@ -325,17 +327,6 @@
     },
     "Part of this project is related to Project Nezha by naiba which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
 
-    },
-    "Preparing..." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "准备中..."
-          }
-        }
-      }
     },
     "Retry" : {
       "localizations" : {
