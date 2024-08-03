@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> ServerEntry {
-        ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "1.1.1.1", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024, diskTotal: 1024, countryCode: "US"), status: ServerStatus(cpu: 0.10, memUsed: 1024, diskUsed: 1024, netInTransfer: 1024, netOutTransfer: 1024, uptime: 60, load15: 0.10)), message: "Placeholder")
+        ServerEntry(date: Date(), server: nil, message: "Placeholder")
     }
     
     func getSnapshot(in context: Context, completion: @escaping (ServerEntry) -> ()) {
@@ -100,6 +100,39 @@ struct WidgetEntryView : View {
     var body: some View {
         if let server = entry.server {
             switch(family) {
+            case .accessoryCircular:
+                let totalCore = getCore(server.host.cpu).toDouble()
+                let loadPressure = server.status.load15 / (totalCore ?? 1.0)
+                
+                Gauge(value: loadPressure) {
+                    Text("Load")
+                }
+            currentValueLabel: {
+                    Text("\(loadPressure * 100, specifier: "%.1f")%")
+                }
+                .gaugeStyle(.accessoryCircular)
+            case .accessoryInline:
+                let cpuUsage = server.status.cpu / 100
+                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                Text("CPU \(cpuUsage * 100, specifier: "%.0f")% MEM \(memUsage * 100, specifier: "%.0f")%")
+            case .accessoryRectangular:
+                let cpuUsage = server.status.cpu / 100
+                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                VStack {
+                    Text(server.name)
+                        .widgetAccentable()
+                    HStack {
+                        HStack(spacing: 0) {
+                            Image(systemName: "cpu")
+                            Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                        }
+                        HStack(spacing: 0) {
+                            Image(systemName: "memorychip")
+                            Text("\(memUsage * 100, specifier: "%.0f")%")
+                        }
+                    }
+                    Text("↑\(formatBytes(server.status.netOutTransfer))")
+                }
             case .systemSmall:
                 VStack(spacing: 0) {
                     HStack {
@@ -276,15 +309,15 @@ struct WidgetApp: Widget {
                 .containerBackground(.blue.gradient, for: .widget)
         }
         .configurationDisplayName("Nezha")
-        .description("View your server at a glance")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .description("View your server at a glance.")
+        .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular, .systemSmall, .systemMedium])
     }
 }
 
-//struct WidgetApp_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "1.1.1.1", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024, diskTotal: 1024, countryCode: "US"), status: ServerStatus(cpu: 0.10, memUsed: 1024, diskUsed: 1024, netInTransfer: 1024, netOutTransfer: 1024, uptime: 60, load15: 0.10)), message: "Placeholder"))
-//            .containerBackground(.blue.gradient, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
-//    }
-//}
+struct WidgetApp_Previews: PreviewProvider {
+    static var previews: some View {
+        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "1.1.1.1", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 60, load15: 0.10)), message: "Placeholder"))
+            .containerBackground(.blue.gradient, for: .widget)
+            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+    }
+}

@@ -13,7 +13,7 @@ struct CustomStackView<Title: View, Content: View>: View {
     /// View Properties
     @State var topOffset: CGFloat = 0
     @State var bottomOffset: CGFloat = 0
-    private var titleHeight: CGFloat = 38
+    private var titleHeight: CGFloat = 35
     
     init(@ViewBuilder titleView: @escaping () -> Title, @ViewBuilder contentView: @escaping () -> Content) {
         self.contentView = contentView()
@@ -30,7 +30,7 @@ struct CustomStackView<Title: View, Content: View>: View {
                     Spacer()
                 }
                 .frame(height: titleHeight)
-                .padding(.leading, 10)
+                .padding([.top, .leading], 10)
                 
                 contentView
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

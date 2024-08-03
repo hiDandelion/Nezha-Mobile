@@ -4,6 +4,9 @@
     "%.0f%%" : {
 
     },
+    "%.1f%%" : {
+
+    },
     "%.2f%%" : {
 
     },
@@ -87,7 +90,14 @@
       }
     },
     "Apply configuration now" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "立即应用配置"
+          }
+        }
+      }
     },
     "Background" : {
       "localizations" : {
@@ -130,7 +140,14 @@
       }
     },
     "Configuration has been applied." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配置已应用。"
+          }
+        }
+      }
     },
     "Configurations" : {
       "localizations" : {
@@ -158,6 +175,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "CPU"
+          }
+        }
+      }
+    },
+    "CPU %.0f%% MEM %.0f%%" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "CPU %1$.0f%% MEM %2$.0f%%"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU %1$.0f%% 内存 %2$.0f%%"
           }
         }
       }
@@ -193,7 +226,14 @@
       }
     },
     "Deploy" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部署"
+          }
+        }
+      }
     },
     "Disk" : {
       "localizations" : {
@@ -304,7 +344,14 @@
       }
     },
     "Get up-to-date info of a server." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取服务器的最新信息。"
+          }
+        }
+      }
     },
     "Green" : {
       "localizations" : {
@@ -341,7 +388,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如何安装Nezha Dashboard"
+            "value" : "如何安装哪吒Dashboard"
           }
         }
       }
@@ -382,6 +429,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "链接"
+          }
+        }
+      }
+    },
+    "Load" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "负载"
           }
         }
       }
@@ -447,7 +504,14 @@
       }
     },
     "Nezha" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哪吒"
+          }
+        }
+      }
     },
     "No Server" : {
       "localizations" : {
@@ -473,7 +537,14 @@
 
     },
     "Refresh Server" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刷新服务器"
+          }
+        }
+      }
     },
     "Retry" : {
       "localizations" : {
@@ -536,7 +607,14 @@
       }
     },
     "Success" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "成功"
+          }
+        }
+      }
     },
     "Swap" : {
       "localizations" : {
@@ -572,7 +650,14 @@
 
     },
     "Unsupported family" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不支持的模式"
+          }
+        }
+      }
     },
     "Up Time" : {
       "localizations" : {
@@ -614,8 +699,15 @@
         }
       }
     },
-    "View your server at a glance" : {
-
+    "View your server at a glance." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快速查看你的服务器。"
+          }
+        }
+      }
     },
     "Widget" : {
       "localizations" : {
