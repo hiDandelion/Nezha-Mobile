@@ -14,6 +14,7 @@ struct ContentView: View {
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @State private var isShowingAddDashboardSheet: Bool = false
     @State private var isShowingSettingSheet: Bool = false
+    @State private var newSettingRequireReconnection: Bool? = true
 
     var body: some View {
         NavigationStack {
@@ -41,7 +42,7 @@ struct ContentView: View {
                                 isShowingSettingSheet = true
                             }
                             .sheet(isPresented: $isShowingSettingSheet) {
-                                SettingView(dashboardViewModel: dashboardViewModel)
+                                SettingView(dashboardViewModel: dashboardViewModel, requireReconnection: $newSettingRequireReconnection)
                             }
                         }
                     }

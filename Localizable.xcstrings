@@ -523,6 +523,16 @@
         }
       }
     },
+    "Original Project Nezha" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原项目哪吒"
+          }
+        }
+      }
+    },
     "OS" : {
       "localizations" : {
         "zh-Hans" : {

@@ -57,7 +57,7 @@ struct CustomStackView<Title: View, Content: View>: View {
     /// Opacity
     func getOpacity() -> CGFloat {
         if bottomOffset < titleHeight {
-            let progress = bottomOffset < 0 ? 0 : pow(bottomOffset / titleHeight, 3)
+            let progress = bottomOffset < 0 ? 0 : pow(bottomOffset / titleHeight, 2)
             return progress
         }
         

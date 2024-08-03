@@ -33,6 +33,7 @@ struct DashboardDetailView: View {
         }
     }
     @State private var isShowingSettingView: Bool = false
+    @State private var newSettingRequireReconnection: Bool? = false
     
     var body: some View {
         let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
@@ -62,12 +63,19 @@ struct DashboardDetailView: View {
                         ZStack(alignment: .bottomTrailing) {
                             serverList
                             
-                            SettingView(dashboardViewModel: dashboardViewModel)
+                            SettingView(dashboardViewModel: dashboardViewModel, requireReconnection: $newSettingRequireReconnection)
                                 .opacity(isShowingSettingView ? 1 : 0)
                             
                             Button {
                                 withAnimation {
                                     isShowingSettingView.toggle()
+                                    
+                                    if let newSettingRequireReconnection, !isShowingSettingView && newSettingRequireReconnection {
+                                        let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
+                                        dashboardViewModel.disconnect()
+                                        dashboardViewModel.connect(to: connectionURLString)
+                                        self.newSettingRequireReconnection = false
+                                    }
                                 }
                             } label: {
                                 Image(systemName: isShowingSettingView ? "server.rack" : "gear")
@@ -97,7 +105,7 @@ struct DashboardDetailView: View {
                                 isShowingSettingView.toggle()
                             }
                             .sheet(isPresented: $isShowingSettingView) {
-                                SettingView(dashboardViewModel: dashboardViewModel)
+                                SettingView(dashboardViewModel: dashboardViewModel, requireReconnection: $newSettingRequireReconnection)
                             }
                         }
                         .padding()

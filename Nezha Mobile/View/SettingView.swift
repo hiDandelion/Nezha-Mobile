@@ -13,7 +13,7 @@ struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     @Query private var dashboards: [Dashboard]
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @State private var requireReconnection: Bool = false
+    @Binding var requireReconnection: Bool?
     @AppStorage("bgColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var bgColor: String = "blue"
     @AppStorage("widgetDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetDashboardLink: String = ""
     @AppStorage("widgetAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetAPIToken: String = ""
@@ -76,6 +76,7 @@ struct SettingView: View {
                 
                 Section("Aknowledge") {
                     Link("How to install Nezha Dashboard", destination: URL(string: "https://nezha.wiki")!)
+                    Link("Original Project Nezha", destination: URL(string: "https://github.com/naiba/nezha")!)
                     NavigationLink(destination: {
                         Form {
                             Text("This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
@@ -91,17 +92,15 @@ struct SettingView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
+                        if let requireReconnection, requireReconnection {
+                            let dashboard = dashboards[0]
+                            let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
+                            dashboardViewModel.disconnect()
+                            dashboardViewModel.connect(to: connectionURLString)
+                        }
                         dismiss()
                     }
                 }
-            }
-        }
-        .onDisappear {
-            if requireReconnection {
-                let dashboard = dashboards[0]
-                let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
-                dashboardViewModel.disconnect()
-                dashboardViewModel.connect(to: connectionURLString)
             }
         }
     }
@@ -109,7 +108,7 @@ struct SettingView: View {
 
 struct DashboardSettingView: View {
     @Bindable var dashboard: Dashboard
-    @Binding var requireReconnection: Bool
+    @Binding var requireReconnection: Bool?
     
     var body: some View {
         Section("Dashboard") {
