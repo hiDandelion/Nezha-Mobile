@@ -12,7 +12,7 @@ struct DashboardDetailView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Bindable var dashboard: Dashboard
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @AppStorage("bgColor") private var bgColor = "blue"
+    @AppStorage("bgColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var bgColor = "blue"
     @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation {
         didSet {
             if DynamicIsland.isAvailable && orientation == .portrait {
@@ -60,15 +60,10 @@ struct DashboardDetailView: View {
                             .ignoresSafeArea()
                         
                         ZStack(alignment: .bottomTrailing) {
-                            Group {
-                                if isShowingSettingView {
-                                    SettingView(dashboardViewModel: dashboardViewModel)
-                                }
-                                else {
-                                    serverList
-                                }
-                            }
-                            .transition(.asymmetric(insertion: .push(from: .trailing), removal: .push(from: .leading)))
+                            serverList
+                            
+                            SettingView(dashboardViewModel: dashboardViewModel)
+                                .opacity(isShowingSettingView ? 1 : 0)
                             
                             Button {
                                 withAnimation {
@@ -205,7 +200,7 @@ struct DashboardDetailView: View {
                                             VStack(alignment: .leading) {
                                                 HStack {
                                                     Image(systemName: "power")
-                                                    Text("\(formatTimeInterval(server.host.bootTime))")
+                                                    Text("\(formatTimeInterval(seconds: server.state.uptime))")
                                                 }
                                                 
                                                 HStack {
@@ -224,16 +219,18 @@ struct DashboardDetailView: View {
                                     }
                                     
                                     HStack {
-                                        Text("Load")
+                                        let totalCore = getCore(server.host.cpu).toDouble()
+                                        let loadPressure = server.state.load1 / (totalCore ?? 1.0)
+                                        
+                                        Text("Load \(server.state.load1, specifier: "%.2f")")
                                             .font(.caption2)
-                                        let loadPressure = server.state.load1 / ((Double(getCore(server.host.cpu)) ?? 1) * 2)
                                         
                                         Gauge(value: loadPressure <= 1 ? loadPressure : 1) {
                                             
                                         }
                                         .gaugeStyle(.accessoryLinearCapacity)
                                     }
-                                    .padding(.horizontal)
+                                    .padding([.horizontal, .bottom])
                                 }
                             }
                         }

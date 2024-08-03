@@ -7,13 +7,18 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     @Query private var dashboards: [Dashboard]
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var requireReconnection: Bool = false
-    @AppStorage("bgColor") private var bgColor: String = "blue"
+    @AppStorage("bgColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var bgColor: String = "blue"
+    @AppStorage("widgetDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetDashboardLink: String = ""
+    @AppStorage("widgetAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetAPIToken: String = ""
+    @AppStorage("widgetServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetServerID: String = ""
+    @State private var isShowingApplyConfigurationSucceedAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -25,6 +30,47 @@ struct SettingView: View {
                         Text("Blue").tag("blue")
                         Text("Green").tag("green")
                         Text("Yellow").tag("yellow")
+                    }
+                }
+                
+                Section("Widget") {
+                    NavigationLink {
+                        NavigationStack {
+                            Form {
+                                Section {
+                                    TextField("Dashboard Link", text: $widgetDashboardLink)
+                                        .autocorrectionDisabled()
+                                        .autocapitalization(.none)
+                                    TextField("API Token", text: $widgetAPIToken)
+                                        .autocorrectionDisabled()
+                                        .autocapitalization(.none)
+                                    TextField("Server ID", text: $widgetServerID)
+                                        .autocorrectionDisabled()
+                                        .autocapitalization(.none)
+                                } header: {
+                                    Text("Configurations")
+                                } footer: {
+                                    Text("For security concerns, you must enable SSL before using API tokens.")
+                                }
+                                
+                                Section("Deploy") {
+                                    Button("Apply configuration now") {
+                                        WidgetCenter.shared.reloadAllTimelines()
+                                        isShowingApplyConfigurationSucceedAlert = true
+                                    }
+                                }
+                            }
+                            .navigationTitle("Configure Widget")
+                            .alert("Success", isPresented: $isShowingApplyConfigurationSucceedAlert, actions: {
+                                Button("Done") {
+                                    isShowingApplyConfigurationSucceedAlert = false
+                                }
+                            }, message: {
+                                Text("Configuration has been applied.")
+                            })
+                        }
+                    } label: {
+                        Text("Configure Widget")
                     }
                 }
                 

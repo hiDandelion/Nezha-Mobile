@@ -37,7 +37,6 @@ struct ServerHost: Codable {
     let memTotal: Int
     let swapTotal: Int
     let diskTotal: Int
-    let bootTime: Int
     let countryCode: String
     
     enum CodingKeys: String, CodingKey {
@@ -47,7 +46,6 @@ struct ServerHost: Codable {
         case memTotal = "MemTotal"
         case swapTotal = "SwapTotal"
         case diskTotal = "DiskTotal"
-        case bootTime = "BootTime"
         case countryCode = "CountryCode"
     }
 }
@@ -61,6 +59,7 @@ struct ServerState: Codable {
     let netOutTransfer: Int
     let netInSpeed: Int
     let netOutSpeed: Int
+    let uptime: Int
     let load1: Double
     let load5: Double
     let load15: Double
@@ -74,6 +73,7 @@ struct ServerState: Codable {
         case netOutTransfer = "NetOutTransfer"
         case netInSpeed = "NetInSpeed"
         case netOutSpeed = "NetOutSpeed"
+        case uptime = "Uptime"
         case load1 = "Load1"
         case load5 = "Load5"
         case load15 = "Load15"
