@@ -40,15 +40,8 @@ struct CardView<Title: View, Content: View>: View {
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
         }
-        .mask(alignment: .top) {
-            Rectangle()
-                .frame(height: bottomOffset < titleHeight ? titleHeight : bottomOffset)
-                .frame(maxWidth: .infinity)
-                .cornerRadius(12)
-        }
         .opacity(getOpacity())
         .cornerRadius(12)
-        .offset(y: max(0, -topOffset))
         .offsetChange { rect in
             withAnimation {
                 self.topOffset = rect.minY
@@ -59,8 +52,8 @@ struct CardView<Title: View, Content: View>: View {
     
     /// Opacity
     func getOpacity() -> CGFloat {
-        if bottomOffset < titleHeight {
-            let progress = bottomOffset < 0 ? 0 : pow(bottomOffset / titleHeight, 2)
+        if bottomOffset < cardHeight {
+            let progress = bottomOffset < 0 ? 0 : pow(bottomOffset / cardHeight, 2)
             return progress
         }
         
