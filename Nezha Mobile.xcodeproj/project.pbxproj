@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CB701A0F2C5BB47600019344 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CB701A0E2C5BB47600019344 /* README.md */; };
 		CB701A112C5BB58D00019344 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CB701A102C5BB58D00019344 /* LICENSE */; };
-		CB701A132C5C5DA500019344 /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A122C5C5DA500019344 /* CustomStackView.swift */; };
+		CB701A132C5C5DA500019344 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A122C5C5DA500019344 /* CardView.swift */; };
 		CB701A162C5C98CE00019344 /* DynamicIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A152C5C98CE00019344 /* DynamicIsland.swift */; };
 		CB701A202C5CF93500019344 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB701A1F2C5CF93500019344 /* WidgetKit.framework */; };
 		CB701A222C5CF93500019344 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB701A212C5CF93500019344 /* SwiftUI.framework */; };
@@ -64,7 +64,7 @@
 /* Begin PBXFileReference section */
 		CB701A0E2C5BB47600019344 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CB701A102C5BB58D00019344 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CB701A122C5C5DA500019344 /* CustomStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
+		CB701A122C5C5DA500019344 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CB701A152C5C98CE00019344 /* DynamicIsland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicIsland.swift; sourceTree = "<group>"; };
 		CB701A1D2C5CF93500019344 /* WidgetAppExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetAppExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB701A1F2C5CF93500019344 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -201,7 +201,7 @@
 				CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */,
 				CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */,
 				CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */,
-				CB701A122C5C5DA500019344 /* CustomStackView.swift */,
+				CB701A122C5C5DA500019344 /* CardView.swift */,
 				CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */,
 				CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */,
 			);
@@ -334,7 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB701A132C5C5DA500019344 /* CustomStackView.swift in Sources */,
+				CB701A132C5C5DA500019344 /* CardView.swift in Sources */,
 				CB9C607E2C5AFB4E00DAE1E3 /* DashboardDetailView.swift in Sources */,
 				CB701A162C5C98CE00019344 /* DynamicIsland.swift in Sources */,
 				CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */,
@@ -544,7 +544,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -566,7 +566,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -586,7 +586,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -608,7 +608,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

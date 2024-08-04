@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct CustomStackView<Title: View, Content: View>: View {
+struct CardView<Title: View, Content: View>: View {
     var titleView: Title
     var contentView: Content
     /// View Properties
     @State var topOffset: CGFloat = 0
-    @State var bottomOffset: CGFloat = 0
+    @State var bottomOffset: CGFloat = 160
+    private var cardHeight: CGFloat = 160
     private var titleHeight: CGFloat = 35
     
     init(@ViewBuilder titleView: @escaping () -> Title, @ViewBuilder contentView: @escaping () -> Content) {
@@ -30,12 +31,12 @@ struct CustomStackView<Title: View, Content: View>: View {
                     Spacer()
                 }
                 .frame(height: titleHeight)
-                .padding([.top, .leading], 10)
+                .padding(.horizontal, 10)
                 
                 contentView
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(height: 150)
+            .frame(height: cardHeight)
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
         }
@@ -49,8 +50,10 @@ struct CustomStackView<Title: View, Content: View>: View {
         .cornerRadius(12)
         .offset(y: max(0, -topOffset))
         .offsetChange { rect in
-            self.topOffset = rect.minY
-            self.bottomOffset = rect.maxY
+            withAnimation {
+                self.topOffset = rect.minY
+                self.bottomOffset = rect.maxY
+            }
         }
     }
     

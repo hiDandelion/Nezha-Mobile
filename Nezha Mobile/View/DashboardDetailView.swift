@@ -145,7 +145,7 @@ struct DashboardDetailView: View {
                 if let servers = dashboardViewModel.socketResponse?.servers {
                     ForEach(servers, id: \.id) { server in
                         NavigationLink(destination: ServerDetailView(dashboard: dashboard, dashboardViewModel: dashboardViewModel, serverId: server.id)) {
-                            CustomStackView {
+                            CardView {
                                 HStack {
                                     Text(countryFlagEmoji(countryCode: server.host.countryCode))
                                     Text(server.name)
