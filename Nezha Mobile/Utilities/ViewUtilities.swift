@@ -21,17 +21,10 @@ func backgroundGradient(color: String) -> LinearGradient {
     }
 }
 
-/// Offset Preference Key
+/// Offset Key
 struct OffsetKey: PreferenceKey {
     static var defaultValue: CGRect = .zero
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
-        value = nextValue()
-    }
-}
-
-struct ScrollViewHeightPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
     }
 }

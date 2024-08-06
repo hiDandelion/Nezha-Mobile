@@ -6,55 +6,35 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var dashboards: [Dashboard]
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
+    @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
     @State private var isShowingAddDashboardSheet: Bool = false
-    @State private var isShowingSettingSheet: Bool = false
-    @State private var newSettingRequireReconnection: Bool? = true
 
     var body: some View {
         NavigationStack {
-            if dashboards.isEmpty {
-                VStack {
-                    Text("Start your journey with Nezha Mobile")
-                        .font(.title3)
-                        .frame(alignment: .center)
-                    Button("Start", systemImage: "arrow.right.circle") {
-                        isShowingAddDashboardSheet = true
-                    }
-                    .font(.headline)
-                    .padding(.top, 20)
-                    .sheet(isPresented: $isShowingAddDashboardSheet) {
-                        AddDashboardView()
-                    }
-                }
-                .padding()
-            }
-            else {
-                DashboardDetailView(dashboard: dashboards[0], dashboardViewModel: dashboardViewModel)
-                    .toolbar {
-                        ToolbarItem {
-                            Button("Settings", systemImage: "gear") {
-                                isShowingSettingSheet = true
-                            }
-                            .sheet(isPresented: $isShowingSettingSheet) {
-                                SettingView(dashboardViewModel: dashboardViewModel, requireReconnection: $newSettingRequireReconnection)
-                            }
+            VStack {
+                if dashboardLink == "" {
+                    VStack {
+                        Text("Start your journey with Nezha Mobile")
+                            .font(.title3)
+                            .frame(alignment: .center)
+                        Button("Start", systemImage: "arrow.right.circle") {
+                            isShowingAddDashboardSheet = true
+                        }
+                        .font(.headline)
+                        .padding(.top, 20)
+                        .sheet(isPresented: $isShowingAddDashboardSheet) {
+                            AddDashboardView()
                         }
                     }
-            }
-        }
-    }
-
-
-    private func deleteDashboards(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(dashboards[index])
+                    .padding()
+                }
+                else {
+                    DashboardDetailView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
+                }
             }
         }
     }

@@ -22,14 +22,14 @@
 		CB701A3B2C5DCFD100019344 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3A2C5DCFD100019344 /* AppIntent.swift */; };
 		CB701A3C2C5DD5DD00019344 /* WidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A262C5CF93500019344 /* WidgetApp.swift */; };
 		CB701A3D2C5DE13F00019344 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
+		CB701A3F2C61B73000019344 /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3E2C61B73000019344 /* APIResponseModel.swift */; };
 		CB9C606B2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606A2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift */; };
 		CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */; };
-		CB9C606F2C5AF76E00DAE1E3 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606E2C5AF76E00DAE1E3 /* Dashboard.swift */; };
 		CB9C60712C5AF76F00DAE1E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */; };
 		CB9C60752C5AF76F00DAE1E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9C60742C5AF76F00DAE1E3 /* Preview Assets.xcassets */; };
 		CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */; };
 		CB9C607E2C5AFB4E00DAE1E3 /* DashboardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */; };
-		CB9C60802C5B089100DAE1E3 /* SocketHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607F2C5B089100DAE1E3 /* SocketHandler.swift */; };
+		CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */; };
 		CB9C60822C5B11D800DAE1E3 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60812C5B11D800DAE1E3 /* DashboardViewModel.swift */; };
 		CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */; };
 		CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
@@ -77,16 +77,16 @@
 		CB701A352C5D06B300019344 /* HTTPResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseModel.swift; sourceTree = "<group>"; };
 		CB701A382C5DC9F000019344 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
 		CB701A3A2C5DCFD100019344 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		CB701A3E2C61B73000019344 /* APIResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModel.swift; sourceTree = "<group>"; };
 		CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nezha Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9C606A2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nezha_MobileApp.swift; sourceTree = "<group>"; };
 		CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CB9C606E2C5AF76E00DAE1E3 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB9C60722C5AF76F00DAE1E3 /* Nezha_Mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nezha_Mobile.entitlements; sourceTree = "<group>"; };
 		CB9C60742C5AF76F00DAE1E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDashboardView.swift; sourceTree = "<group>"; };
 		CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDetailView.swift; sourceTree = "<group>"; };
-		CB9C607F2C5B089100DAE1E3 /* SocketHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketHandler.swift; sourceTree = "<group>"; };
+		CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		CB9C60812C5B11D800DAE1E3 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
 		CB9C60852C5B293100DAE1E3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -177,8 +177,8 @@
 				CB9C60872C5B5C9100DAE1E3 /* View */,
 				CB9C60882C5B5CAA00DAE1E3 /* ViewModel */,
 				CB701A142C5C98B900019344 /* Utilities */,
-				CB9C607F2C5B089100DAE1E3 /* SocketHandler.swift */,
-				CB9C606E2C5AF76E00DAE1E3 /* Dashboard.swift */,
+				CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */,
+				CB701A3E2C61B73000019344 /* APIResponseModel.swift */,
 				CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */,
 				CB9C608F2C5BAF0A00DAE1E3 /* Info.plist */,
 				CB9C60722C5AF76F00DAE1E3 /* Nezha_Mobile.entitlements */,
@@ -334,15 +334,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB701A3F2C61B73000019344 /* APIResponseModel.swift in Sources */,
 				CB701A132C5C5DA500019344 /* CardView.swift in Sources */,
 				CB9C607E2C5AFB4E00DAE1E3 /* DashboardDetailView.swift in Sources */,
 				CB701A162C5C98CE00019344 /* DynamicIsland.swift in Sources */,
 				CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */,
 				CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */,
 				CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */,
-				CB9C60802C5B089100DAE1E3 /* SocketHandler.swift in Sources */,
+				CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */,
 				CB701A392C5DC9F000019344 /* ViewUtilities.swift in Sources */,
-				CB9C606F2C5AF76E00DAE1E3 /* Dashboard.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* Nezha_MobileApp.swift in Sources */,
 				CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */,
 				CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */,
@@ -544,7 +544,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -586,7 +586,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;

@@ -40,6 +40,7 @@
       }
     },
     "Add" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -265,19 +266,18 @@
         }
       }
     },
-    "error.authenticationFailed" : {
-      "extractionState" : "manual",
+    "error.dashboardAuthenticationFailed" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentication failed. Please check your configuration in Nezha Mobile App."
+            "value" : "Authentication failed. Please check your Dashboard Link and API Token."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "认证失败。请在Nezha Mobile App中检查你的配置。"
+            "value" : "认证失败。请检查你的Dashboard域名和API Token是否设置正确。"
           }
         }
       }
@@ -316,29 +316,50 @@
         }
       }
     },
-    "error.invalidConfiguration" : {
-      "extractionState" : "manual",
+    "error.invalidDashboardConfiguration" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invalid configuration. Please check your configuration in Nezha Mobile App."
+            "value" : "Invalid configuration. Please ensure your Dashboard Link and API Token are set properly."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "无效配置。请在Nezha Mobile App中检查你的配置。"
+            "value" : "无效配置。请检查你的Dashboard域名和API Token是否设置正确。"
           }
         }
       }
     },
-    "For security concerns, you must enable SSL before using API tokens." : {
+    "error.invalidWidgetConfiguration" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid configuration. Please check your Widget Configuration in Nezha Mobile App."
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由于安全原因，在使用API Token时必须启用SSL连接。"
+            "value" : "无效配置。请在Nezha Mobile App中检查你的小组件配置。"
+          }
+        }
+      }
+    },
+    "error.unknownError" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown error."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未知错误。"
           }
         }
       }
@@ -404,6 +425,7 @@
       }
     },
     "Last Active" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -424,6 +446,7 @@
       }
     },
     "Link" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -484,6 +507,7 @@
       }
     },
     "Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -675,26 +699,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "运行时间"
-          }
-        }
-      }
-    },
-    "Use Demo" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用演示站"
-          }
-        }
-      }
-    },
-    "Use SSL" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用SSL"
           }
         }
       }

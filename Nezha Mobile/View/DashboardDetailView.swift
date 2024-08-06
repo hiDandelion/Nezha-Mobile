@@ -10,8 +10,10 @@ import SwiftUI
 struct DashboardDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
-    @Bindable var dashboard: Dashboard
+    var dashboardLink: String
+    var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
+    @State private var servers: [(key: Int, value: Server)] = []
     @AppStorage("bgColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var bgColor = "blue"
     @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation {
         didSet {
@@ -32,12 +34,10 @@ struct DashboardDetailView: View {
             }
         }
     }
-    @State private var isShowingSettingView: Bool = false
+    @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     
     var body: some View {
-        let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
-        
         NavigationStack {
             VStack {
                 switch(dashboardViewModel.loadingState) {
@@ -45,13 +45,11 @@ struct DashboardDetailView: View {
                     ZStack {
                         backgroundGradient(color: bgColor)
                             .ignoresSafeArea()
-                            .blur(radius: 3)
                     }
                 case .loading:
                     ZStack {
                         backgroundGradient(color: bgColor)
                             .ignoresSafeArea()
-                            .blur(radius: 0)
                         
                         ProgressView("Loading...")
                     }
@@ -60,36 +58,14 @@ struct DashboardDetailView: View {
                         backgroundGradient(color: bgColor)
                             .ignoresSafeArea()
                         
-                        ZStack(alignment: .bottomTrailing) {
-                            serverList
-                            
-                            SettingView(dashboardViewModel: dashboardViewModel, requireReconnection: $newSettingRequireReconnection)
-                                .opacity(isShowingSettingView ? 1 : 0)
-                            
-                            Button {
-                                withAnimation {
-                                    isShowingSettingView.toggle()
-                                    
-                                    if let newSettingRequireReconnection, !isShowingSettingView && newSettingRequireReconnection {
-                                        let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
-                                        dashboardViewModel.disconnect()
-                                        dashboardViewModel.connect(to: connectionURLString)
-                                        self.newSettingRequireReconnection = false
+                        serverList
+                            .toolbar {
+                                ToolbarItem {
+                                    Button("Settings", systemImage: "gear") {
+                                        isShowingSettingSheet = true
                                     }
                                 }
-                            } label: {
-                                Image(systemName: isShowingSettingView ? "server.rack" : "gear")
-                                    .font(.title.weight(.semibold))
-                                    .frame(width: 30, height: 30)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 4, x: 0, y: 4)
-                                
                             }
-                            .padding()
-                        }
                     }
                 case .error(let message):
                     ZStack(alignment: .bottomTrailing) {
@@ -99,23 +75,25 @@ struct DashboardDetailView: View {
                             Text(message)
                                 .font(.subheadline)
                             Button("Retry") {
-                                dashboardViewModel.connect(to: connectionURLString)
+                                
                             }
                             Button("Settings") {
-                                isShowingSettingView.toggle()
-                            }
-                            .sheet(isPresented: $isShowingSettingView) {
-                                SettingView(dashboardViewModel: dashboardViewModel, requireReconnection: $newSettingRequireReconnection)
+                                isShowingSettingSheet.toggle()
                             }
                         }
                         .padding()
                     }
                 }
             }
-            .toolbar(.hidden)
+            .toolbarBackground(.hidden)
+            .sheet(isPresented: $isShowingSettingSheet) {
+                SettingView(dashboardViewModel: dashboardViewModel)
+            }
         }
         .onAppear {
-            dashboardViewModel.connect(to: connectionURLString)
+            if dashboardLink != "" && !dashboardViewModel.isMonitoringEnabled {
+                dashboardViewModel.startMonitoring()
+            }
             activateDynamicIslandIndicator()
         }
         .onDisappear {
@@ -123,15 +101,10 @@ struct DashboardDetailView: View {
         }
         .onChange(of: scenePhase) {
             if scenePhase == .active {
-                print("Scene Phase became active")
-                dashboardViewModel.connect(to: connectionURLString)
                 activateDynamicIslandIndicator()
             }
             if scenePhase != .active {
                 deactivateDynamicIslandIndicator()
-            }
-            if scenePhase == .background {
-                dashboardViewModel.disconnect()
             }
         }
         .onRotate { orientation in
@@ -142,23 +115,24 @@ struct DashboardDetailView: View {
     private var serverList: some View {
         ScrollView {
             VStack {
-                if let servers = dashboardViewModel.socketResponse?.servers {
+                if true {
+                    let servers = dashboardViewModel.servers.sorted { $0.displayIndex == $1.displayIndex ? ($0.id < $1.id) : ($0.displayIndex > $1.displayIndex) }
                     ForEach(servers, id: \.id) { server in
-                        NavigationLink(destination: ServerDetailView(dashboard: dashboard, dashboardViewModel: dashboardViewModel, serverId: server.id)) {
+                        NavigationLink(destination: ServerDetailView(server: server)) {
                             CardView {
                                 HStack {
                                     Text(countryFlagEmoji(countryCode: server.host.countryCode))
                                     Text(server.name)
                                     Image(systemName: "circlebadge.fill")
-                                        .foregroundStyle(server.state.cpu != 0 || server.state.memUsed != 0 ? .green : .red)
+                                        .foregroundStyle(server.status.cpu != 0 || server.status.memUsed != 0 ? .green : .red)
                                 }
                             } contentView: {
                                 VStack {
                                     HStack {
                                         HStack {
-                                            let cpuUsage = server.state.cpu / 100
-                                            let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.state.memUsed) / Double(server.host.memTotal))
-                                            let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.state.diskUsed) / Double(server.host.diskTotal))
+                                            let cpuUsage = server.status.cpu / 100
+                                            let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                                            let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
                                             
                                             Gauge(value: cpuUsage) {
                                                 
@@ -208,14 +182,14 @@ struct DashboardDetailView: View {
                                             VStack(alignment: .leading) {
                                                 HStack {
                                                     Image(systemName: "power")
-                                                    Text("\(formatTimeInterval(seconds: server.state.uptime))")
+                                                    Text("\(formatTimeInterval(seconds: server.status.uptime))")
                                                 }
                                                 
                                                 HStack {
                                                     Image(systemName: "network")
                                                     VStack(alignment: .leading) {
-                                                        Text("↑\(formatBytes(server.state.netOutTransfer))")
-                                                        Text("↓\(formatBytes(server.state.netInTransfer))")
+                                                        Text("↑\(formatBytes(server.status.netOutTransfer))")
+                                                        Text("↓\(formatBytes(server.status.netInTransfer))")
                                                     }
                                                 }
                                             }
@@ -228,9 +202,9 @@ struct DashboardDetailView: View {
                                     
                                     HStack {
                                         let totalCore = getCore(server.host.cpu).toDouble()
-                                        let loadPressure = server.state.load1 / (totalCore ?? 1.0)
+                                        let loadPressure = server.status.load1 / (totalCore ?? 1.0)
                                         
-                                        Text("Load \(server.state.load1, specifier: "%.2f")")
+                                        Text("Load \(server.status.load1, specifier: "%.2f")")
                                             .font(.caption2)
                                         
                                         Gauge(value: loadPressure <= 1 ? loadPressure : 1) {

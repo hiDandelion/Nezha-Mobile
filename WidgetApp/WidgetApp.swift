@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> ServerEntry {
-        ServerEntry(date: Date(), server: nil, message: "Placeholder")
+        ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "1.1.1.1", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 60, load15: 0.10)), message: "Placeholder")
     }
     
     func getSnapshot(in context: Context, completion: @escaping (ServerEntry) -> ()) {
@@ -41,12 +41,12 @@ struct Provider: TimelineProvider {
     
     func fetchServerData(completion: @escaping (_ response: HTTPResponse?, _ errorDescription: String?) -> Void) {
         guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
-              let widgetDashboardLink = userDefaults.string(forKey: "widgetDashboardLink"),
-              let widgetAPIToken = userDefaults.string(forKey: "widgetAPIToken"),
-              let widgetServerID = userDefaults.string(forKey: "widgetServerID"),
+              let widgetDashboardLink = userDefaults.string(forKey: "NMDashboardLink"),
+              let widgetAPIToken = userDefaults.string(forKey: "NMDashboardAPIToken"),
+              let widgetServerID = userDefaults.string(forKey: "NMWidgetServerID"),
               let url = URL(string: "https://\(widgetDashboardLink)/api/v1/server/details?id=\(widgetServerID)") else {
             print("Error obtaining connection info")
-            completion(nil, String(localized: "error.invalidConfiguration"))
+            completion(nil, String(localized: "error.invalidWidgetConfiguration"))
             return
         }
         
@@ -71,7 +71,7 @@ struct Provider: TimelineProvider {
                 }
                 
                 if httpResponse.code == 403 {
-                    completion(nil, String(localized: "error.authenticationFailed"))
+                    completion(nil, String(localized: "error.dashboardAuthenticationFailed"))
                     return
                 }
                 
@@ -318,6 +318,6 @@ struct WidgetApp_Previews: PreviewProvider {
     static var previews: some View {
         WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "1.1.1.1", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 60, load15: 0.10)), message: "Placeholder"))
             .containerBackground(.blue.gradient, for: .widget)
-            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

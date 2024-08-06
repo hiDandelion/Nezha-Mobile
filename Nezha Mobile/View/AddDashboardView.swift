@@ -9,44 +9,34 @@ import SwiftUI
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var modelContext
-    @State private var name: String = ""
-    @State private var link: String = ""
-    @State private var ssl: Bool = true
+    @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
+    @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
     
     var body: some View {
         NavigationStack {
             Form {
                 Section("Dashboard Info") {
-                    TextField("Name", text: $name)
-                    TextField("Link", text: $link)
+                    TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
-                    Toggle("Use SSL", isOn: $ssl)
+                    TextField("API Token", text: $dashboardAPIToken)
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
                 }
                 
                 Section("Help") {
-                    Link("User Guide", destination: URL(string: "https://nezha.wiki")!)
-                    Button("Use Demo") {
-                        name = "Demo Dashboard"
-                        link = "server.hidandelion.com"
-                        addDashboard()
-                    }
+                    Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
+                    Link("How to install Nezha Dashboard", destination: URL(string: "https://nezha.wiki")!)
                 }
             }
             .navigationTitle("Add Dashboard")
             .toolbar {
                 ToolbarItem {
-                    Button("Add") {
-                        addDashboard()
+                    Button("Done") {
                         dismiss()
                     }
                 }
             }
         }
-    }
-    
-    private func addDashboard() {
-        modelContext.insert(Dashboard(name: name, link: link, ssl: ssl))
     }
 }

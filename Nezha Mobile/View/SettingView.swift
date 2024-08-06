@@ -6,24 +6,45 @@
 //
 
 import SwiftUI
-import SwiftData
 import WidgetKit
 
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
-    @Query private var dashboards: [Dashboard]
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @Binding var requireReconnection: Bool?
+    @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.string(forKey: "NMDashboardLink") ?? ""
+    @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.string(forKey: "NMDashboardAPIToken") ?? ""
+    @State private var needReconnection: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                dashboardViewModel.stopMonitoring()
+            }
+        }
+    }
     @AppStorage("bgColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var bgColor: String = "blue"
-    @AppStorage("widgetDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetDashboardLink: String = ""
-    @AppStorage("widgetAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetAPIToken: String = ""
-    @AppStorage("widgetServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetServerID: String = ""
+    @AppStorage("NMWidgetServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetServerID: String = ""
     @State private var isShowingApplyConfigurationSucceedAlert: Bool = false
     
     var body: some View {
         NavigationStack {
             Form {
-                DashboardSettingView(dashboard: dashboards[0], requireReconnection: $requireReconnection)
+                Section("Dashboard") {
+                    TextField("Dashboard Link", text: $dashboardLink)
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                        .onChange(of: dashboardLink) {
+                            DispatchQueue.main.async {
+                                needReconnection = true
+                            }
+                        }
+                    TextField("API Token", text: $dashboardAPIToken)
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                        .onChange(of: dashboardAPIToken) {
+                            DispatchQueue.main.async {
+                                needReconnection = true
+                            }
+                        }
+                }
                 
                 Section("Theme") {
                     Picker("Background", selection: $bgColor) {
@@ -37,20 +58,10 @@ struct SettingView: View {
                     NavigationLink {
                         NavigationStack {
                             Form {
-                                Section {
-                                    TextField("Dashboard Link", text: $widgetDashboardLink)
-                                        .autocorrectionDisabled()
-                                        .autocapitalization(.none)
-                                    TextField("API Token", text: $widgetAPIToken)
-                                        .autocorrectionDisabled()
-                                        .autocapitalization(.none)
+                                Section("Configurations") {
                                     TextField("Server ID", text: $widgetServerID)
                                         .autocorrectionDisabled()
                                         .autocapitalization(.none)
-                                } header: {
-                                    Text("Configurations")
-                                } footer: {
-                                    Text("For security concerns, you must enable SSL before using API tokens.")
                                 }
                                 
                                 Section("Deploy") {
@@ -74,8 +85,12 @@ struct SettingView: View {
                     }
                 }
                 
-                Section("Aknowledge") {
+                Section("Help") {
+                    Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
                     Link("How to install Nezha Dashboard", destination: URL(string: "https://nezha.wiki")!)
+                }
+                
+                Section("Aknowledge") {
                     Link("Original Project Nezha", destination: URL(string: "https://github.com/naiba/nezha")!)
                     NavigationLink(destination: {
                         Form {
@@ -92,37 +107,17 @@ struct SettingView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        if let requireReconnection, requireReconnection {
-                            let dashboard = dashboards[0]
-                            let connectionURLString: String = "\(dashboard.ssl ? "wss" : "ws")://\(dashboard.link)/ws"
-                            dashboardViewModel.disconnect()
-                            dashboardViewModel.connect(to: connectionURLString)
+                        if needReconnection {
+                            if let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") {
+                                userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
+                                userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                                dashboardViewModel.startMonitoring()
+                            }
                         }
                         dismiss()
                     }
                 }
             }
-        }
-    }
-}
-
-struct DashboardSettingView: View {
-    @Bindable var dashboard: Dashboard
-    @Binding var requireReconnection: Bool?
-    
-    var body: some View {
-        Section("Dashboard") {
-            TextField("Name", text: $dashboard.name)
-            TextField("Link", text: $dashboard.link)
-                .autocorrectionDisabled()
-                .autocapitalization(.none)
-                .onChange(of: dashboard.link) {
-                    requireReconnection = true
-                }
-            Toggle("Use SSL", isOn: $dashboard.ssl)
-                .onChange(of: dashboard.ssl) {
-                    requireReconnection = true
-                }
         }
     }
 }
