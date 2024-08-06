@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct Nezha_MobileApp: App {
+struct NezhaMobileApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -174,7 +174,7 @@ struct WidgetEntryView : View {
                         HStack {
                             HStack {
                                 Image(systemName: "power")
-                                Text("\(formatTimeInterval(seconds: server.status.uptime))")
+                                Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
                             }
                             
                             HStack {
@@ -283,7 +283,7 @@ struct WidgetEntryView : View {
             VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "power")
-                    Text("\(formatTimeInterval(seconds: server.status.uptime))")
+                    Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
                 }
                 
                 HStack {

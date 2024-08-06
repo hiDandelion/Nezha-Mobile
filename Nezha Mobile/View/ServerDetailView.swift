@@ -62,6 +62,7 @@ struct ServerDetailView: View {
                 }
             }
             .navigationTitle(server.name)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     

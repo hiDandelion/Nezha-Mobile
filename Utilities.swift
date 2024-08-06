@@ -49,7 +49,7 @@ extension String {
 }
 
 /// Time Related
-func formatTimeInterval(seconds: Int) -> String {
+func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
     let minutes = seconds / 60
     let hours = minutes / 60
     let days = hours / 24
@@ -57,15 +57,15 @@ func formatTimeInterval(seconds: Int) -> String {
     let years = months / 12
 
     if years > 0 {
-        return "\(years)y \(months % 12)m \(days % 30)d"
+        return shortened ? "\(days)d" : "\(years)y \(months % 12)m \(days % 30)d"
     } else if months > 0 {
-        return "\(months)m \(days % 30)d"
+        return shortened ? "\(days)d" : "\(months)m \(days % 30)d"
     } else if days > 0 {
-        return "\(days)d \(hours % 24)h"
+        return shortened ? "\(days)d" : "\(days)d \(hours % 24)h"
     } else if hours > 0 {
-        return "\(hours)h \(minutes % 60)m"
+        return shortened ? "\(hours)h" : "\(hours)h \(minutes % 60)m"
     } else if minutes > 0 {
-        return "\(minutes)m \(seconds % 60)s"
+        return shortened ? "\(minutes)m" : "\(minutes)m \(seconds % 60)s"
     } else {
         return "\(seconds)s"
     }

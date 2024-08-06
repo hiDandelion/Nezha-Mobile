@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if dashboardLink == "" {
+                if dashboardLink == "" || isShowingAddDashboardSheet {
                     VStack {
                         Text("Start your journey with Nezha Mobile")
                             .font(.title3)

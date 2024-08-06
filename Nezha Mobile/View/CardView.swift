@@ -52,8 +52,8 @@ struct CardView<Title: View, Content: View>: View {
     
     /// Opacity
     func getOpacity() -> CGFloat {
-        if bottomOffset < cardHeight {
-            let progress = bottomOffset < 0 ? 0 : pow(bottomOffset / cardHeight, 2)
+        if bottomOffset < 190 {
+            let progress = bottomOffset < 0 ? 0 : bottomOffset / cardHeight
             return progress
         }
         
