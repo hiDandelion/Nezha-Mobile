@@ -13,7 +13,7 @@ struct SettingView: View {
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.string(forKey: "NMDashboardAPIToken") ?? ""
-    @State private var needReconnection: Bool = false {
+    @State private var isNeedReconnection: Bool = false {
         didSet {
             DispatchQueue.main.async {
                 dashboardViewModel.stopMonitoring()
@@ -22,6 +22,7 @@ struct SettingView: View {
     }
     @AppStorage("bgColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var bgColor: String = "blue"
     @AppStorage("NMWidgetServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetServerID: String = ""
+    @State private var isShowingChangeThemeSheet: Bool = false
     @State private var isShowingApplyConfigurationSucceedAlert: Bool = false
     
     var body: some View {
@@ -33,7 +34,7 @@ struct SettingView: View {
                         .autocapitalization(.none)
                         .onChange(of: dashboardLink) {
                             DispatchQueue.main.async {
-                                needReconnection = true
+                                isNeedReconnection = true
                             }
                         }
                     TextField("API Token", text: $dashboardAPIToken)
@@ -41,16 +42,19 @@ struct SettingView: View {
                         .autocapitalization(.none)
                         .onChange(of: dashboardAPIToken) {
                             DispatchQueue.main.async {
-                                needReconnection = true
+                                isNeedReconnection = true
                             }
                         }
                 }
                 
                 Section("Theme") {
-                    Picker("Background", selection: $bgColor) {
-                        Text("Blue").tag("blue")
-                        Text("Green").tag("green")
-                        Text("Yellow").tag("yellow")
+                    Button("Change Theme") {
+                        isShowingChangeThemeSheet.toggle()
+                    }
+                    .sheet(isPresented: $isShowingChangeThemeSheet) {
+                        ChangeThemeView()
+                            .presentationDetents([.height(410)])
+                            .presentationBackground(.clear)
                     }
                 }
                 
@@ -90,7 +94,7 @@ struct SettingView: View {
                     Link("How to install Nezha Dashboard", destination: URL(string: "https://nezha.wiki")!)
                 }
                 
-                Section("Aknowledge") {
+                Section("About") {
                     Link("Original Project Nezha", destination: URL(string: "https://github.com/naiba/nezha")!)
                     NavigationLink(destination: {
                         Form {
@@ -105,9 +109,18 @@ struct SettingView: View {
             }
             .navigationTitle("Settings")
             .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        if !dashboardViewModel.isMonitoringEnabled {
+                            dashboardViewModel.startMonitoring()
+                        }
+                        dismiss()
+                    }
+                }
+                
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        if needReconnection {
+                        if !dashboardViewModel.isMonitoringEnabled {
                             if let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") {
                                 userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
                                 userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")

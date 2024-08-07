@@ -148,6 +148,7 @@ struct WidgetEntryView : View {
                     
                     VStack(spacing: 5) {
                         Text(server.ipv4)
+                            .font(.callout)
                         
                         HStack {
                             let cpuUsage = server.status.cpu / 100
@@ -160,12 +161,12 @@ struct WidgetEntryView : View {
                             }
                             
                             VStack {
-                                Text("Memory")
+                                Text("MEM")
                                 Text("\(memUsage * 100, specifier: "%.0f")%")
                             }
                             
                             VStack {
-                                Text("Disk")
+                                Text("DISK")
                                 Text("\(diskUsage * 100, specifier: "%.0f")%")
                             }
                         }
@@ -211,6 +212,8 @@ struct WidgetEntryView : View {
                         Spacer()
                         infoView(server: server)
                             .font(.caption2)
+                            .frame(maxWidth: 100)
+                            .padding(.leading, 20)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -267,36 +270,44 @@ struct WidgetEntryView : View {
         VStack(alignment: .leading) {
             HStack {
                 Image(systemName: "cpu")
+                    .frame(width: 10)
                 Text(getCore(server.host.cpu))
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
                 Image(systemName: "memorychip")
+                    .frame(width: 10)
                 Text("\(formatBytes(server.host.memTotal))")
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
                 Image(systemName: "internaldrive")
+                    .frame(width: 10)
                 Text("\(formatBytes(server.host.diskTotal))")
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "power")
-                    Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
+                        .frame(width: 10)
+                    Text("\(formatTimeInterval(seconds: server.status.uptime))")
                 }
                 
                 HStack {
-                    Image(systemName: "network")
+                    Image(systemName: "circle.dotted.circle")
+                        .frame(width: 10)
                     VStack(alignment: .leading) {
                         Text("↑\(formatBytes(server.status.netOutTransfer))")
                         Text("↓\(formatBytes(server.status.netInTransfer))")
                     }
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 5)
         }
-        .frame(width: 100)
     }
 }
 
@@ -316,7 +327,10 @@ struct WidgetApp: Widget {
 
 struct WidgetApp_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "1.1.1.1", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 60, load15: 0.10)), message: "Placeholder"))
+        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "255.255.255.255", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 600, load15: 0.10)), message: "Placeholder"))
+            .containerBackground(.blue.gradient, for: .widget)
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "255.255.255.255", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 600, load15: 0.10)), message: "Placeholder"))
             .containerBackground(.blue.gradient, for: .widget)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }

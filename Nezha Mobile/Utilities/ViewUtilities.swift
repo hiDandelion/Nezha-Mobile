@@ -8,14 +8,20 @@
 import SwiftUI
 
 /// Style Related
-func backgroundGradient(color: String) -> LinearGradient {
-    switch color {
-    case "blue":
+func backgroundGradient(color: NMTheme, scheme: ColorScheme) -> LinearGradient {
+    switch (color, scheme) {
+    case (.blue, .light):
         return LinearGradient(gradient: Gradient(colors: [Color(red: 146/255, green: 239/255, blue: 253/255), Color(red: 78/255, green: 101/255, blue: 255/255)]), startPoint: .top, endPoint: .bottom)
-    case "yellow":
-        return LinearGradient(gradient: Gradient(colors: [Color(red: 251/255, green: 176/255, blue: 59/255), Color(red: 212/255, green: 20/255, blue: 90/255)]), startPoint: .top, endPoint: .bottom)
-    case "green":
+    case (.blue, .dark):
+        return LinearGradient(gradient: Gradient(colors: [Color(red: 32/255, green: 164/255, blue: 243/255), Color(red: 24/255, green: 43/255, blue: 58/255)]), startPoint: .top, endPoint: .bottom)
+    case (.green, .light):
         return LinearGradient(gradient: Gradient(colors: [Color(red: 252/255, green: 238/255, blue: 33/255), Color(red: 0/255, green: 146/255, blue: 69/255)]), startPoint: .top, endPoint: .bottom)
+    case (.green, .dark):
+        return LinearGradient(gradient: Gradient(colors: [Color(red: 22/255, green: 109/255, blue: 59/255), Color(red: 0/255, green: 0/255, blue: 0/255)]), startPoint: .top, endPoint: .bottom)
+    case (.yellow, .light):
+        return LinearGradient(gradient: Gradient(colors: [Color(red: 251/255, green: 176/255, blue: 59/255), Color(red: 212/255, green: 20/255, blue: 90/255)]), startPoint: .top, endPoint: .bottom)
+    case (.yellow, .dark):
+        return LinearGradient(gradient: Gradient(colors: [Color(red: 245/255, green: 101/255, blue: 69/255), Color(red: 153/255, green: 32/255, blue: 28/255)]), startPoint: .top, endPoint: .bottom)
     default:
         return LinearGradient(gradient: Gradient(colors: [Color(red: 146/255, green: 239/255, blue: 253/255), Color(red: 78/255, green: 101/255, blue: 255/255)]), startPoint: .top, endPoint: .bottom)
     }
@@ -54,7 +60,7 @@ extension View {
             }
     }
     
-    private func getSafeAreaInsets() -> UIEdgeInsets {
+    func getSafeAreaInsets() -> UIEdgeInsets {
         guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = scene.windows.first else {
             return .zero

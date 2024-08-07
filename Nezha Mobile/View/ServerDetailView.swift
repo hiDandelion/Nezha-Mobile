@@ -13,26 +13,12 @@ struct ServerDetailView: View {
     var server: Server
     
     var body: some View {
-//        let dateFormatter: DateFormatter = {
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
-//            formatter.timeZone = TimeZone(abbreviation: "UTC")
-//            return formatter
-//        }()
-        
         NavigationStack {
             Form {
                 Section("Basic") {
                     pieceOfInfo(systemImage: "cube", name: "ID", content: "\(server.id)")
                     pieceOfInfo(systemImage: "tag", name: "Tag", content: "\(server.tag)")
                     pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
-//                    if let lastActiveDate = dateFormatter.date(from: server.lastActive) {
-//                        VStack(alignment: .leading) {
-//                            Label("Last Active", systemImage: "clock")
-//                            Text(lastActiveDate.formatted(date: .numeric, time: .standard))
-//                                .foregroundStyle(.secondary)
-//                        }
-//                    }
                 }
                 
                 Section("State") {

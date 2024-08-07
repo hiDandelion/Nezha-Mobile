@@ -16,6 +16,9 @@
     "↑%@" : {
 
     },
+    "↑%@/s" : {
+
+    },
     "↓%@" : {
 
     },
@@ -29,6 +32,9 @@
         }
       }
     },
+    "↓%@/s" : {
+
+    },
     "↓%@/s ↑%@/s" : {
       "localizations" : {
         "en" : {
@@ -38,6 +44,9 @@
           }
         }
       }
+    },
+    "About" : {
+
     },
     "Add" : {
       "extractionState" : "stale",
@@ -56,16 +65,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加Dashboard"
-          }
-        }
-      }
-    },
-    "Aknowledge" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "承知"
           }
         }
       }
@@ -111,6 +110,7 @@
       }
     },
     "Background" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -141,11 +141,42 @@
       }
     },
     "Blue" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "蓝色"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "Change Theme" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更改主题"
+          }
+        }
+      }
+    },
+    "Choose a Style" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择一个样式"
           }
         }
       }
@@ -202,6 +233,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "CPU %1$.0f%% 内存 %2$.0f%%"
+          }
+        }
+      }
+    },
+    "Customize your interface." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "定制化你的界面。"
           }
         }
       }
@@ -385,6 +426,7 @@
       }
     },
     "Green" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -445,6 +487,17 @@
         }
       }
     },
+    "Leaf" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绿色"
+          }
+        }
+      }
+    },
     "LICENSE" : {
       "localizations" : {
         "zh-Hans" : {
@@ -492,6 +545,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "加载中..."
+          }
+        }
+      }
+    },
+    "Maple" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黄色"
           }
         }
       }
@@ -557,12 +621,23 @@
         }
       }
     },
+    "Ocean" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "蓝色"
+          }
+        }
+      }
+    },
     "Original Project Nezha" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "原项目哪吒"
+            "value" : "原项目 哪吒"
           }
         }
       }
@@ -754,6 +829,7 @@
       }
     },
     "Yellow" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
