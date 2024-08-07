@@ -46,7 +46,14 @@
       }
     },
     "About" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于"
+          }
+        }
+      }
     },
     "Add" : {
       "extractionState" : "stale",
@@ -100,6 +107,7 @@
       }
     },
     "Apply configuration now" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -182,6 +190,7 @@
       }
     },
     "Configuration has been applied." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -192,6 +201,7 @@
       }
     },
     "Configurations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -202,6 +212,7 @@
       }
     },
     "Configure Widget" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -278,6 +289,7 @@
       }
     },
     "Deploy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -383,18 +395,18 @@
         }
       }
     },
-    "error.invalidWidgetConfiguration" : {
+    "error.invalidServerConfiguration" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invalid configuration. Please check your Widget Configuration in Nezha Mobile App."
+            "value" : "Invalid configuration. Please ensure your server is selected and exists."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "无效配置。请在Nezha Mobile App中检查你的小组件配置。"
+            "state" : "needs_review",
+            "value" : "无效配置。请检查是否服务器是否已选择且存在。"
           }
         }
       }
@@ -415,7 +427,7 @@
         }
       }
     },
-    "Get up-to-date info of a server." : {
+    "Get up-to-date details of a server." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -602,6 +614,7 @@
       }
     },
     "Nezha" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -685,7 +698,48 @@
         }
       }
     },
+    "Select Server" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择服务器"
+          }
+        }
+      }
+    },
+    "Select the server to display details for." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择展示信息的服务器。"
+          }
+        }
+      }
+    },
+    "Server" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器"
+          }
+        }
+      }
+    },
+    "Server Details" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器信息"
+          }
+        }
+      }
+    },
     "Server ID" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -736,6 +790,7 @@
       }
     },
     "Success" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -778,6 +833,16 @@
     "This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
 
     },
+    "Uncategorized" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未分类"
+          }
+        }
+      }
+    },
     "Unsupported family" : {
       "localizations" : {
         "zh-Hans" : {
@@ -808,17 +873,18 @@
         }
       }
     },
-    "View your server at a glance." : {
+    "View details of your server at a glance." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "快速查看你的服务器。"
+            "value" : "快速查看你的服务器信息。"
           }
         }
       }
     },
     "Widget" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {

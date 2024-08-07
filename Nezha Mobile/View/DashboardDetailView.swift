@@ -31,28 +31,26 @@ struct DashboardDetailView: View {
                         backgroundGradient(color: theme, scheme: scheme)
                             .ignoresSafeArea()
                     }
-                case .loading:
+                case .loading, .loaded:
                     ZStack {
                         backgroundGradient(color: theme, scheme: scheme)
                             .ignoresSafeArea()
                         
-                        ProgressView("Loading...")
-                    }
-                case .loaded:
-                    ZStack {
-                        backgroundGradient(color: theme, scheme: scheme)
-                            .ignoresSafeArea()
-                        
-                        ScrollView {
-                            ExpandableNavigationBar()
-                                .zIndex(1)
-                                .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
-                            serverList
-                                .zIndex(0)
-                                .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                        if dashboardViewModel.servers.isEmpty {
+                            ProgressView("Loading...")
                         }
-                        .contentMargins(.top, 180, for: .scrollIndicators)
-                        .toolbar(.hidden, for: .navigationBar)
+                        else {
+                            ScrollView {
+                                ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
+                                    .zIndex(1)
+                                    .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                                serverList
+                                    .zIndex(0)
+                                    .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                            }
+                            .contentMargins(.top, 180, for: .scrollIndicators)
+                            .toolbar(.hidden, for: .navigationBar)
+                        }
                     }
                 case .error(let message):
                     ZStack(alignment: .bottomTrailing) {
@@ -85,7 +83,7 @@ struct DashboardDetailView: View {
     }
     
     @ViewBuilder
-    func ExpandableNavigationBar(_ title: String = "Dashboard") -> some View {
+    func ExpandableNavigationBar(title: String = "Dashboard", isLoading: Bool = false) -> some View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
             let scrollviewHeight = proxy.bounds(of: .scrollView(axis: .vertical))?.height ?? 0
@@ -95,10 +93,14 @@ struct DashboardDetailView: View {
             VStack(spacing: 10) {
                 /// Title
                 HStack {
-                    Text(title)
-                        .font(.largeTitle.bold())
-                        .scaleEffect(scaleProgress, anchor: .topLeading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack {
+                        Text(title)
+                            .font(.largeTitle.bold())
+                            .scaleEffect(scaleProgress, anchor: .topLeading)
+                        ProgressView()
+                            .opacity(isLoading ? 1 : 0)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Button {
                         isShowingSettingSheet = true
@@ -156,7 +158,7 @@ struct DashboardDetailView: View {
                                         activeTag = tag
                                     }
                                 }) {
-                                    Text(tag)
+                                    Text(tag == "" ? String(localized: "Uncategorized") : tag)
                                         .font(.callout)
                                         .foregroundStyle(activeTag == tag ? (scheme == .dark ? .black : .white) : Color.primary)
                                         .padding(.vertical, 8)

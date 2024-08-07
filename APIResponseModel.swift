@@ -18,8 +18,8 @@ struct Server: Codable {
     let name: String
     let tag: String
     let lastActive: Int
-    let iPv4: String
-    let iPv6: String
+    let IPv4: String
+    let IPv6: String
     let validIP: String
     let displayIndex: Int
     let host: ServerHost
@@ -28,8 +28,8 @@ struct Server: Codable {
     enum CodingKeys: String, CodingKey {
         case id, name, tag
         case lastActive = "last_active"
-        case iPv4 = "ipv4"
-        case iPv6 = "ipv6"
+        case IPv4 = "ipv4"
+        case IPv6 = "ipv6"
         case validIP = "valid_ip"
         case displayIndex = "display_index"
         case host, status

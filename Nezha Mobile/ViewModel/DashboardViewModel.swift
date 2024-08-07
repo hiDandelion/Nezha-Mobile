@@ -10,7 +10,7 @@ import Combine
 import BackgroundTasks
 import SwiftUI
 
-enum DashboardLoadingState {
+enum DashboardLoadingState: Equatable {
     case idle
     case loading
     case loaded
@@ -136,7 +136,7 @@ class DashboardViewModel: ObservableObject {
     }
     
     private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) {
-        GetServerDetailRequestHandler.getAllServerDetail { [weak self] response, errorDescription in
+        RequestHandler.getAllServerDetail { [weak self] response, errorDescription in
             DispatchQueue.main.async {
                 withAnimation {
                     if let response = response {

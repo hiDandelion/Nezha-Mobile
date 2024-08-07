@@ -8,81 +8,64 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
+struct ServerDetailProvider: AppIntentTimelineProvider {
+    typealias Entry = ServerEntry
+    
+    typealias Intent = SpecifyServerIDIntent
+    
     func placeholder(in context: Context) -> ServerEntry {
-        ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "1.1.1.1", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 60, load15: 0.10)), message: "Placeholder")
+        ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), message: "Placeholder")
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (ServerEntry) -> ()) {
-        fetchServerData(completion: { response, errorDescription in
-            if let response {
-                completion(ServerEntry(date: Date(), server: response.result![0], message: "OK"))
+    func snapshot(for configuration: SpecifyServerIDIntent, in context: Context) async -> ServerEntry {
+        do {
+            let response = try await RequestHandler.getServerDetail(serverID: String(configuration.server.id))
+            if let server = response.result?.first {
+                return ServerEntry(date: Date(), server: server, message: "OK")
             }
-            if let errorDescription {
-                completion(ServerEntry(date: Date(), server: nil, message: errorDescription))
+            else {
+                return ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))
             }
-        })
-    }
-    
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        fetchServerData(completion: { response, errorDescription in
-            if let response {
-                let entries = [ServerEntry(date: Date(), server: response.result![0], message: "OK")]
-                let timeline = Timeline(entries: entries, policy: .atEnd)
-                completion(timeline)
-            }
-            if let errorDescription {
-                let entries = [ServerEntry(date: Date(), server: nil, message: errorDescription)]
-                let timeline = Timeline(entries: entries, policy: .atEnd)
-                completion(timeline)
-            }
-        })
-    }
-    
-    func fetchServerData(completion: @escaping (_ response: HTTPResponse?, _ errorDescription: String?) -> Void) {
-        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
-              let widgetDashboardLink = userDefaults.string(forKey: "NMDashboardLink"),
-              let widgetAPIToken = userDefaults.string(forKey: "NMDashboardAPIToken"),
-              let widgetServerID = userDefaults.string(forKey: "NMWidgetServerID"),
-              let url = URL(string: "https://\(widgetDashboardLink)/api/v1/server/details?id=\(widgetServerID)") else {
-            print("Error obtaining connection info")
-            completion(nil, String(localized: "error.invalidWidgetConfiguration"))
-            return
+        } catch GetServerDetailError.invalidDashboardConfiguration {
+            return ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidDashboardConfiguration"))
+        } catch GetServerDetailError.dashboardAuthenticationFailed {
+            return ServerEntry(date: Date(), server: nil, message: String(localized: "error.dashboardAuthenticationFailed"))
+        } catch GetServerDetailError.invalidResponse(let message) {
+            return ServerEntry(date: Date(), server: nil, message: message)
+        } catch GetServerDetailError.decodingError {
+            return ServerEntry(date: Date(), server: nil, message: String(localized: "error.errorDecodingData"))
+        } catch {
+            return ServerEntry(date: Date(), server: nil, message: error.localizedDescription)
         }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue(widgetAPIToken, forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-                completion(nil, String(localized: "error.errorReceivingData"))
-                return
+    }
+    
+    func timeline(for configuration: SpecifyServerIDIntent, in context: Context) async -> Timeline<ServerEntry> {
+        do {
+            let response = try await RequestHandler.getServerDetail(serverID: String(configuration.server.id))
+            if let server = response.result?.first {
+                let entries = [ServerEntry(date: Date(), server: server, message: "OK")]
+                return Timeline(entries: entries, policy: .atEnd)
             }
-            
-            do {
-                let decoder = JSONDecoder()
-                let httpResponse = try decoder.decode(HTTPResponse.self, from: data)
-                
-                if httpResponse.result != nil {
-                    completion(httpResponse, nil)
-                    return
-                }
-                
-                if httpResponse.code == 403 {
-                    completion(nil, String(localized: "error.dashboardAuthenticationFailed"))
-                    return
-                }
-                
-                completion(nil, httpResponse.message)
-                return
-            } catch {
-                print("Error decoding data: \(error.localizedDescription)")
-                completion(nil, String(localized: "error.errorDecodingData"))
+            else {
+                let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))]
+                return Timeline(entries: entries, policy: .atEnd)
             }
+        } catch GetServerDetailError.invalidDashboardConfiguration {
+            let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidDashboardConfiguration"))]
+            return Timeline(entries: entries, policy: .atEnd)
+        } catch GetServerDetailError.dashboardAuthenticationFailed {
+            let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.dashboardAuthenticationFailed"))]
+            return Timeline(entries: entries, policy: .atEnd)
+        } catch GetServerDetailError.invalidResponse(let message) {
+            let entries = [ServerEntry(date: Date(), server: nil, message: message)]
+            return Timeline(entries: entries, policy: .atEnd)
+        } catch GetServerDetailError.decodingError {
+            let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.errorDecodingData"))]
+            return Timeline(entries: entries, policy: .atEnd)
+        } catch {
+            let entries = [ServerEntry(date: Date(), server: nil, message: error.localizedDescription)]
+            return Timeline(entries: entries, policy: .atEnd)
         }
-        .resume()
     }
 }
 
@@ -93,7 +76,7 @@ struct ServerEntry: TimelineEntry {
 }
 
 struct WidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: ServerDetailProvider.Entry
     
     @Environment(\.widgetFamily) var family
     
@@ -147,7 +130,7 @@ struct WidgetEntryView : View {
                     .font(.footnote)
                     
                     VStack(spacing: 5) {
-                        Text(server.ipv4)
+                        Text(server.IPv4)
                             .font(.callout)
                         
                         HStack {
@@ -195,7 +178,7 @@ struct WidgetEntryView : View {
                     HStack {
                         Text(countryFlagEmoji(countryCode: server.host.countryCode))
                         Text(server.name)
-                        Text(server.ipv4)
+                        Text(server.IPv4)
                         Spacer()
                         Button(intent: RefreshServerIntent()) {
                             Text(entry.date.formatted(date: .omitted, time: .shortened))
@@ -224,8 +207,15 @@ struct WidgetEntryView : View {
             }
         }
         else {
-            Text(entry.message)
-                .foregroundStyle(.white)
+            VStack {
+                Text(entry.message)
+                Button(intent: RefreshServerIntent()) {
+                    Text("Retry")
+                    Image(systemName: "arrow.clockwise")
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .foregroundStyle(.white)
         }
     }
     
@@ -312,26 +302,26 @@ struct WidgetEntryView : View {
 }
 
 struct WidgetApp: Widget {
-    let kind: String = "nezha-widget-single-server"
+    let kind: String = "nezha-widget-server-detail"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SpecifyServerIDIntent.self, provider: ServerDetailProvider()) { entry in
             WidgetEntryView(entry: entry)
                 .containerBackground(.blue.gradient, for: .widget)
         }
-        .configurationDisplayName("Nezha")
-        .description("View your server at a glance.")
+        .configurationDisplayName("Server Details")
+        .description("View details of your server at a glance.")
         .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular, .systemSmall, .systemMedium])
     }
 }
 
-struct WidgetApp_Previews: PreviewProvider {
-    static var previews: some View {
-        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "255.255.255.255", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 600, load15: 0.10)), message: "Placeholder"))
-            .containerBackground(.blue.gradient, for: .widget)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", ipv4: "255.255.255.255", ipv6: "1::", host: ServerHost(cpu: ["1 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, countryCode: "US"), status: ServerStatus(cpu: 100, memUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, uptime: 600, load15: 0.10)), message: "Placeholder"))
-            .containerBackground(.blue.gradient, for: .widget)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
-}
+//struct WidgetApp_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), message: "Placeholder"))
+//            .containerBackground(.blue.gradient, for: .widget)
+//            .previewContext(WidgetPreviewContext(family: .systemSmall))
+//        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), message: "Placeholder"))
+//            .containerBackground(.blue.gradient, for: .widget)
+//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//    }
+//}

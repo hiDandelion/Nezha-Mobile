@@ -20,10 +20,7 @@ struct SettingView: View {
             }
         }
     }
-    @AppStorage("bgColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var bgColor: String = "blue"
-    @AppStorage("NMWidgetServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetServerID: String = ""
     @State private var isShowingChangeThemeSheet: Bool = false
-    @State private var isShowingApplyConfigurationSucceedAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -55,37 +52,6 @@ struct SettingView: View {
                         ChangeThemeView()
                             .presentationDetents([.height(410)])
                             .presentationBackground(.clear)
-                    }
-                }
-                
-                Section("Widget") {
-                    NavigationLink {
-                        NavigationStack {
-                            Form {
-                                Section("Configurations") {
-                                    TextField("Server ID", text: $widgetServerID)
-                                        .autocorrectionDisabled()
-                                        .autocapitalization(.none)
-                                }
-                                
-                                Section("Deploy") {
-                                    Button("Apply configuration now") {
-                                        WidgetCenter.shared.reloadAllTimelines()
-                                        isShowingApplyConfigurationSucceedAlert = true
-                                    }
-                                }
-                            }
-                            .navigationTitle("Configure Widget")
-                            .alert("Success", isPresented: $isShowingApplyConfigurationSucceedAlert, actions: {
-                                Button("Done") {
-                                    isShowingApplyConfigurationSucceedAlert = false
-                                }
-                            }, message: {
-                                Text("Configuration has been applied.")
-                            })
-                        }
-                    } label: {
-                        Text("Configure Widget")
                     }
                 }
                 

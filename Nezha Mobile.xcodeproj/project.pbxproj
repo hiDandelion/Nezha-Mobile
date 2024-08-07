@@ -15,7 +15,6 @@
 		CB701A252C5CF93500019344 /* WidgetAppBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A242C5CF93500019344 /* WidgetAppBundle.swift */; };
 		CB701A2B2C5CF93600019344 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB701A2A2C5CF93600019344 /* Assets.xcassets */; };
 		CB701A2F2C5CF93600019344 /* WidgetAppExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CB701A1D2C5CF93500019344 /* WidgetAppExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CB701A362C5D06B300019344 /* HTTPResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A352C5D06B300019344 /* HTTPResponseModel.swift */; };
 		CB701A372C5DC9B400019344 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
 		CB701A392C5DC9F000019344 /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A382C5DC9F000019344 /* ViewUtilities.swift */; };
 		CB701A3B2C5DCFD100019344 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3A2C5DCFD100019344 /* AppIntent.swift */; };
@@ -23,6 +22,8 @@
 		CB701A3D2C5DE13F00019344 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
 		CB701A3F2C61B73000019344 /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3E2C61B73000019344 /* APIResponseModel.swift */; };
 		CB701A412C63131F00019344 /* ChangeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A402C63131F00019344 /* ChangeThemeView.swift */; };
+		CB701A422C631D4400019344 /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3E2C61B73000019344 /* APIResponseModel.swift */; };
+		CB701A432C631D8A00019344 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */; };
 		CB9C606B2C5AF76E00DAE1E3 /* NezhaMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606A2C5AF76E00DAE1E3 /* NezhaMobileApp.swift */; };
 		CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */; };
 		CB9C60712C5AF76F00DAE1E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */; };
@@ -73,7 +74,6 @@
 		CB701A2A2C5CF93600019344 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB701A2C2C5CF93600019344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB701A342C5CFC9400019344 /* WidgetAppExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetAppExtension.entitlements; sourceTree = "<group>"; };
-		CB701A352C5D06B300019344 /* HTTPResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseModel.swift; sourceTree = "<group>"; };
 		CB701A382C5DC9F000019344 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
 		CB701A3A2C5DCFD100019344 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		CB701A3E2C61B73000019344 /* APIResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModel.swift; sourceTree = "<group>"; };
@@ -138,7 +138,6 @@
 				CB701A242C5CF93500019344 /* WidgetAppBundle.swift */,
 				CB701A262C5CF93500019344 /* WidgetApp.swift */,
 				CB701A3A2C5DCFD100019344 /* AppIntent.swift */,
-				CB701A352C5D06B300019344 /* HTTPResponseModel.swift */,
 				CB701A2A2C5CF93600019344 /* Assets.xcassets */,
 				CB701A2C2C5CF93600019344 /* Info.plist */,
 			);
@@ -152,6 +151,8 @@
 				CB701A102C5BB58D00019344 /* LICENSE */,
 				CB701A0E2C5BB47600019344 /* README.md */,
 				CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */,
+				CB701A3E2C61B73000019344 /* APIResponseModel.swift */,
+				CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */,
 				CB9C60852C5B293100DAE1E3 /* Utilities.swift */,
 				CB9C60692C5AF76E00DAE1E3 /* Nezha Mobile */,
 				CB701A232C5CF93500019344 /* WidgetApp */,
@@ -176,8 +177,6 @@
 				CB9C60872C5B5C9100DAE1E3 /* View */,
 				CB9C60882C5B5CAA00DAE1E3 /* ViewModel */,
 				CB701A142C5C98B900019344 /* Utilities */,
-				CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */,
-				CB701A3E2C61B73000019344 /* APIResponseModel.swift */,
 				CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */,
 				CB9C608F2C5BAF0A00DAE1E3 /* Info.plist */,
 				CB9C60722C5AF76F00DAE1E3 /* Nezha_Mobile.entitlements */,
@@ -323,7 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB701A252C5CF93500019344 /* WidgetAppBundle.swift in Sources */,
-				CB701A362C5D06B300019344 /* HTTPResponseModel.swift in Sources */,
+				CB701A422C631D4400019344 /* APIResponseModel.swift in Sources */,
+				CB701A432C631D8A00019344 /* RequestHandler.swift in Sources */,
 				CB701A3B2C5DCFD100019344 /* AppIntent.swift in Sources */,
 				CB701A372C5DC9B400019344 /* Utilities.swift in Sources */,
 				CB701A3C2C5DD5DD00019344 /* WidgetApp.swift in Sources */,
@@ -544,7 +544,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -586,7 +586,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
