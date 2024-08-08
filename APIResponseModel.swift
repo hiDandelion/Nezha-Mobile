@@ -40,6 +40,7 @@ struct ServerHost: Codable {
     let platform: String
     let platformVersion: String
     let cpu: [String]?
+    let gpu: [String]?
     let memTotal: Int
     let diskTotal: Int
     let swapTotal: Int
@@ -53,6 +54,7 @@ struct ServerHost: Codable {
         case platform = "Platform"
         case platformVersion = "PlatformVersion"
         case cpu = "CPU"
+        case gpu = "GPU"
         case memTotal = "MemTotal"
         case diskTotal = "DiskTotal"
         case swapTotal = "SwapTotal"

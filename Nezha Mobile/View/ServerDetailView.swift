@@ -19,32 +19,169 @@ struct ServerDetailView: View {
                     pieceOfInfo(systemImage: "cube", name: "ID", content: "\(server.id)")
                     pieceOfInfo(systemImage: "tag", name: "Tag", content: "\(server.tag)")
                     pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
-                }
-                
-                Section("State") {
-                    pieceOfInfo(systemImage: "cpu", name: "CPU", content: Text("\(server.status.cpu, specifier: "%.2f")%"))
-                    pieceOfInfo(systemImage: "memorychip", name: "Memory", content: "\(formatBytes(server.status.memUsed))/\(formatBytes(server.host.memTotal))")
-                    pieceOfInfo(systemImage: "doc", name: "Swap", content: "\(formatBytes(server.status.swapUsed))/\(formatBytes(server.host.swapTotal))")
-                    pieceOfInfo(systemImage: "internaldrive", name: "Disk", content: "\(formatBytes(server.status.diskUsed))/\(formatBytes(server.host.diskTotal))")
                     VStack(alignment: .leading) {
-                        Label("Network", systemImage: "network")
-                        Text("↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s")
-                            .foregroundStyle(.secondary)
-                    }
-                    VStack(alignment: .leading) {
-                        Label("Bandwidth", systemImage: "circle.dotted.circle")
-                        Text("↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))")
+                        Label("Last Active", systemImage: "clock")
+                        let lastActiveDateString = convertTimestampToLocalizedDateString(timestamp: server.lastActive)
+                        Text("\(lastActiveDateString)")
                             .foregroundStyle(.secondary)
                     }
                 }
                 
                 Section("Host") {
-                    pieceOfInfo(systemImage: "opticaldisc", name: "OS", content: "\(server.host.platform) \(server.host.platformVersion)")
+                    VStack(alignment: .leading) {
+                        Label("Operating System", systemImage: "opticaldisc")
+                        HStack {
+                            let OSName = server.host.platform
+                            let OSVersion = server.host.platformVersion
+                            if OSName.contains("debian") {
+                                Image("DebianLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 50)
+                            }
+                            if OSName.contains("ubuntu") {
+                                Image("UbuntuLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 50)
+                            }
+                            Text(OSName == "" ? String(localized: "Unknown") : "\(OSName.capitalizeFirstLetter()) \(OSVersion)")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    
                     VStack(alignment: .leading) {
                         Label("CPU", systemImage: "cpu")
-                        Text(server.host.cpu?.joined(separator: ", ") ?? "N/A")
+                        HStack {
+                            let mainCPUInfo = server.host.cpu?.first
+                            if let mainCPUInfo, mainCPUInfo.contains("AMD") {
+                                Image("AMDLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 50)
+                            }
+                            if let mainCPUInfo, mainCPUInfo.contains("Intel") {
+                                Image("IntelLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 50)
+                            }
+                            Text(mainCPUInfo ?? "N/A")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    
+                    if let mainGPUInfo = server.host.gpu?.first {
+                        VStack(alignment: .leading) {
+                            Label("GPU", systemImage: "cpu.fill")
+                            HStack {
+                                Text(mainGPUInfo)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    
+                    pieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.arch)"))
+                    pieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization == "" ? String(localized: "Unknown") : server.host.virtualization)"))
+                }
+                
+                Section("Status") {
+                    let gaugeGradient = Gradient(colors: [.green, .blue, .pink])
+                    
+                    VStack {
+                        HStack {
+                            Label("CPU", systemImage: "cpu")
+                            Spacer()
+                            Text("\(server.status.cpu, specifier: "%.2f")%")
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        let cpuUsage = server.status.cpu / 100
+                        Gauge(value: cpuUsage) {
+                            
+                        }
+                        .gaugeStyle(AccessoryLinearGaugeStyle())
+                        .tint(gaugeGradient)
+                        .frame(height: 1)
+                    }
+                    
+                    VStack {
+                        HStack {
+                            Label("Memory", systemImage: "memorychip")
+                            Spacer()
+                            Text("\(formatBytes(server.status.memUsed))/\(formatBytes(server.host.memTotal))")
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                        Gauge(value: memUsage) {
+                            
+                        }
+                        .gaugeStyle(AccessoryLinearGaugeStyle())
+                        .tint(gaugeGradient)
+                        .frame(height: 1)
+                    }
+                    
+                    VStack {
+                        if server.host.swapTotal != 0 {
+                            HStack {
+                                Label("Swap", systemImage: "doc")
+                                Spacer()
+                                Text("\(formatBytes(server.status.swapUsed))/\(formatBytes(server.host.swapTotal))")
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            
+                            let swapUsage = Double(server.status.swapUsed) / Double(server.host.swapTotal)
+                            Gauge(value: swapUsage) {
+                                
+                            }
+                            .gaugeStyle(AccessoryLinearGaugeStyle())
+                            .tint(gaugeGradient)
+                            .frame(height: 1)
+                        }
+                        else {
+                            HStack {
+                                Label("Swap", systemImage: "doc")
+                                Spacer()
+                                Text("Disabled")
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    
+                    VStack {
+                        HStack {
+                            Label("Disk", systemImage: "internaldrive")
+                            Spacer()
+                            Text("\(formatBytes(server.status.diskUsed))/\(formatBytes(server.host.diskTotal))")
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
+                        Gauge(value: diskUsage) {
+                            
+                        }
+                        .gaugeStyle(AccessoryLinearGaugeStyle())
+                        .tint(gaugeGradient)
+                        .frame(height: 1)
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Label("Network", systemImage: "network")
+                        Text("↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s")
                             .foregroundStyle(.secondary)
                     }
+                    
+                    VStack(alignment: .leading) {
+                        Label("Bandwidth", systemImage: "circle.dotted.circle")
+                        Text("↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))")
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    pieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: "\(server.status.TCPConnectionCount)")
+                    pieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: "\(server.status.UDPConnectionCount)")
+                    pieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: "\(server.status.processCount)")
                 }
             }
             .navigationTitle(server.name)

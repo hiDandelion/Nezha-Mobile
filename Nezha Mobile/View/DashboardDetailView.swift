@@ -21,6 +21,7 @@ struct DashboardDetailView: View {
     @State private var activeTag: String = String(localized: "All")
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
+    @Namespace private var animation
     
     var body: some View {
         NavigationStack {
@@ -46,9 +47,8 @@ struct DashboardDetailView: View {
                                     .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
                                 serverList
                                     .zIndex(0)
-                                    .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
                             }
-                            .contentMargins(.top, 180, for: .scrollIndicators)
+                            .contentMargins(.top, 165, for: .scrollIndicators)
                             .toolbar(.hidden, for: .navigationBar)
                         }
                     }
@@ -90,7 +90,7 @@ struct DashboardDetailView: View {
             let scaleProgress = minY > 0 ? 1 + (max(min(minY / scrollviewHeight, 1), 0) * 0.5) : 1
             let progress = isSearching ? 1 : max(min(-minY / 70, 1), 0)
             
-            VStack(spacing: 10) {
+            VStack(spacing: 10 - (progress * 10)) {
                 /// Title
                 HStack {
                     HStack {
@@ -142,7 +142,7 @@ struct DashboardDetailView: View {
                         .fill(.ultraThinMaterial)
                         .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
                         .padding(.top, -progress * 165)
-                        .padding(.bottom, -progress * 65)
+                        .padding(.bottom, -progress * 45)
                         .padding(.horizontal, -progress * 15)
                 }
                 
@@ -167,18 +167,20 @@ struct DashboardDetailView: View {
                                             if activeTag == tag {
                                                 Capsule()
                                                     .fill(Color.primary)
+                                                    .matchedGeometryEffect(id: "ACTIVETAGTAB", in: animation)
                                             } else {
                                                 Capsule()
                                                     .fill(.regularMaterial)
                                             }
                                         }
+                                        .frame(maxHeight: .infinity)
                                 }
                                 .buttonStyle(.plain)
                             }
                         }
                     }
                 }
-                .frame(height: 50)
+                .frame(height: 40)
                 .scrollIndicators(.never)
             }
             .padding(.top, 15)
@@ -186,7 +188,7 @@ struct DashboardDetailView: View {
             .offset(y: minY < 0 || isSearching ? -minY : 0)
             .offset(y: -progress * 65)
         }
-        .frame(height: 165)
+        .frame(height: 155)
         .padding(.bottom, 10)
         .padding(.bottom, isSearching ? -65 : 0)
     }

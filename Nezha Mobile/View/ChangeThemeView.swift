@@ -29,11 +29,11 @@ struct ChangeThemeView: View {
                 .fill(backgroundGradient(color: theme, scheme: scheme))
                 .frame(width: 150, height: 150)
             
-            Text("Choose a Style")
+            Text("Choose Style")
                 .font(.title2.bold())
                 .padding(.top, 25)
             
-            Text("Customize your interface.")
+            Text("Customize your interface")
                 .multilineTextAlignment(.center)
             
             /// Segmented Picker

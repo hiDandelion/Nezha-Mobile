@@ -13,6 +13,16 @@
     "%@" : {
 
     },
+    "%@/%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@/%2$@"
+          }
+        }
+      }
+    },
     "↑%@" : {
 
     },
@@ -117,6 +127,16 @@
         }
       }
     },
+    "Architecture" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "架构"
+          }
+        }
+      }
+    },
     "Background" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -179,12 +199,12 @@
         }
       }
     },
-    "Choose a Style" : {
+    "Choose Style" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "选择一个样式"
+            "value" : "选择样式"
           }
         }
       }
@@ -248,12 +268,12 @@
         }
       }
     },
-    "Customize your interface." : {
+    "Customize your interface" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "定制化你的界面。"
+            "value" : "定制化你的界面"
           }
         }
       }
@@ -295,6 +315,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "部署"
+          }
+        }
+      }
+    },
+    "Disabled" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未启用"
           }
         }
       }
@@ -405,7 +435,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "无效配置。请检查是否服务器是否已选择且存在。"
           }
         }
@@ -433,6 +463,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "获取服务器的最新信息。"
+          }
+        }
+      }
+    },
+    "GPU" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU"
           }
         }
       }
@@ -489,7 +529,6 @@
       }
     },
     "Last Active" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -645,6 +684,16 @@
         }
       }
     },
+    "Operating System" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "操作系统"
+          }
+        }
+      }
+    },
     "Original Project Nezha" : {
       "localizations" : {
         "zh-Hans" : {
@@ -656,6 +705,7 @@
       }
     },
     "OS" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -667,6 +717,16 @@
     },
     "Part of this project is related to Project Nezha by naiba which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
 
+    },
+    "Process" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "进程"
+          }
+        }
+      }
     },
     "Refresh Server" : {
       "localizations" : {
@@ -779,7 +839,7 @@
         }
       }
     },
-    "State" : {
+    "Status" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -820,6 +880,16 @@
         }
       }
     },
+    "TCP Connection" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TCP连接"
+          }
+        }
+      }
+    },
     "Theme" : {
       "localizations" : {
         "zh-Hans" : {
@@ -833,12 +903,32 @@
     "This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
 
     },
+    "UDP Connection" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UDP连接"
+          }
+        }
+      }
+    },
     "Uncategorized" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "未分类"
+          }
+        }
+      }
+    },
+    "Unknown" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未知"
           }
         }
       }
@@ -879,6 +969,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "快速查看你的服务器信息。"
+          }
+        }
+      }
+    },
+    "Virtualization" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "虚拟化"
           }
         }
       }

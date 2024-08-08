@@ -13,6 +13,17 @@ func formatBytes(_ bytes: Int) -> String {
     return ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .memory)
 }
 
+func convertTimestampToLocalizedDateString(timestamp: Int) -> String {
+    let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    formatter.timeStyle = .medium
+
+    let localizedDateString = formatter.string(from: date)
+    return localizedDateString
+}
+
 func getCore(_ str: [String]?) -> String {
     guard let firstStr = str?.first else {
         return "N/A"
@@ -45,6 +56,11 @@ extension String {
         let scanner = Scanner(string: self)
         scanner.charactersToBeSkipped = CharacterSet.alphanumerics.inverted
         return scanner.scanDouble()
+    }
+    
+    func capitalizeFirstLetter() -> String {
+        guard !self.isEmpty else { return self }
+        return self.prefix(1).uppercased() + self.dropFirst()
     }
 }
 
