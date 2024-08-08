@@ -101,3 +101,29 @@ struct ServerStatus: Codable {
         case processCount = "ProcessCount"
     }
 }
+
+struct GetServerPingDataResponse: Codable {
+    let code: Int
+    let message: String
+    let result: [PingData]
+}
+
+struct PingData: Codable, Identifiable {
+    let monitorId: Int
+    let serverId: Int
+    let monitorName: String
+    let serverName: String
+    let createdAt: [Double]
+    let avgDelay: [Double]
+    
+    var id: Int { monitorId }
+    
+    enum CodingKeys: String, CodingKey {
+        case monitorId = "monitor_id"
+        case serverId = "server_id"
+        case monitorName = "monitor_name"
+        case serverName = "server_name"
+        case createdAt = "created_at"
+        case avgDelay = "avg_delay"
+    }
+}

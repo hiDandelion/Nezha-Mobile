@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ServerDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     var server: Server
+    @State private var pingData: [PingData]?
     
     var body: some View {
         NavigationStack {
@@ -102,7 +104,6 @@ struct ServerDetailView: View {
                         }
                         .gaugeStyle(AccessoryLinearGaugeStyle())
                         .tint(gaugeGradient)
-                        .frame(height: 1)
                     }
                     
                     VStack {
@@ -119,7 +120,6 @@ struct ServerDetailView: View {
                         }
                         .gaugeStyle(AccessoryLinearGaugeStyle())
                         .tint(gaugeGradient)
-                        .frame(height: 1)
                     }
                     
                     VStack {
@@ -138,7 +138,6 @@ struct ServerDetailView: View {
                             }
                             .gaugeStyle(AccessoryLinearGaugeStyle())
                             .tint(gaugeGradient)
-                            .frame(height: 1)
                         }
                         else {
                             HStack {
@@ -164,7 +163,6 @@ struct ServerDetailView: View {
                         }
                         .gaugeStyle(AccessoryLinearGaugeStyle())
                         .tint(gaugeGradient)
-                        .frame(height: 1)
                     }
                     
                     VStack(alignment: .leading) {
@@ -183,9 +181,57 @@ struct ServerDetailView: View {
                     pieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: "\(server.status.UDPConnectionCount)")
                     pieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: "\(server.status.processCount)")
                 }
+                
+                if let pingData {
+                    Section("Ping") {
+                        if pingData.isEmpty {
+                            Text("No Data")
+                        }
+                        else {
+                            ForEach(pingData) { data in
+                                VStack {
+                                    Text("\(data.monitorName)")
+                                    Chart {
+                                        ForEach(Array(zip(data.createdAt, data.avgDelay)), id: \.0) { timestamp, delay in
+                                            LineMark(
+                                                x: .value("Time", Date(timeIntervalSince1970: timestamp / 1000)),
+                                                y: .value("Ping", delay)
+                                            )
+                                        }
+                                    }
+                                    .chartXAxis {
+                                        AxisMarks(values: .automatic) { value in
+                                            AxisGridLine()
+                                            AxisValueLabel(format: .dateTime.hour())
+                                        }
+                                    }
+                                    .chartYAxis {
+                                        AxisMarks(position: .leading)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .onAppear {
+            RequestHandler.getServerPingData(id: String(server.id)) { response, errorDescription in
+                if let response {
+                    pingData = response.result
+                }
+            }
+        }
+        .onChange(of: scenePhase) {
+            if scenePhase == .active {
+                RequestHandler.getServerPingData(id: String(server.id)) { response, errorDescription in
+                    if let response {
+                        pingData = response.result
+                    }
+                }
+            }
         }
     }
     

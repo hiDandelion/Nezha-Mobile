@@ -11,8 +11,8 @@ import WidgetKit
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.string(forKey: "NMDashboardLink") ?? ""
-    @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.string(forKey: "NMDashboardAPIToken") ?? ""
+    @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
+    @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
     @State private var isNeedReconnection: Bool = false {
         didSet {
             DispatchQueue.main.async {
@@ -86,12 +86,14 @@ struct SettingView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
+                        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
+                            dismiss()
+                            return
+                        }
                         if !dashboardViewModel.isMonitoringEnabled {
-                            if let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") {
-                                userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
-                                userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-                                dashboardViewModel.startMonitoring()
-                            }
+                            userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
+                            userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                            dashboardViewModel.startMonitoring()
                         }
                         dismiss()
                     }
