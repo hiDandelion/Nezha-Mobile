@@ -203,17 +203,25 @@ struct ServerDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            RequestHandler.getServerPingData(id: String(server.id)) { response, errorDescription in
-                if let response {
+            Task {
+                do {
+                    let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
                     pingData = response.result
+                }
+                catch {
+                    
                 }
             }
         }
         .onChange(of: scenePhase) { _ in
             if scenePhase == .active {
-                RequestHandler.getServerPingData(id: String(server.id)) { response, errorDescription in
-                    if let response {
+                Task {
+                    do {
+                        let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
                         pingData = response.result
+                    }
+                    catch {
+                        
                     }
                 }
             }

@@ -105,7 +105,7 @@ struct ServerStatus: Codable {
 struct GetServerPingDataResponse: Codable {
     let code: Int
     let message: String
-    let result: [PingData]
+    let result: [PingData]?
 }
 
 struct PingData: Codable, Identifiable {

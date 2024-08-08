@@ -65,17 +65,6 @@
         }
       }
     },
-    "Add" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加"
-          }
-        }
-      }
-    },
     "Add Dashboard" : {
       "localizations" : {
         "zh-Hans" : {
@@ -126,34 +115,12 @@
         }
       }
     },
-    "Apply configuration now" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "立即应用配置"
-          }
-        }
-      }
-    },
     "Architecture" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "架构"
-          }
-        }
-      }
-    },
-    "Background" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "背景"
           }
         }
       }
@@ -174,17 +141,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基本"
-          }
-        }
-      }
-    },
-    "Blue" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "蓝色"
           }
         }
       }
@@ -215,50 +171,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择样式"
-          }
-        }
-      }
-    },
-    "Compliance" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "合规"
-          }
-        }
-      }
-    },
-    "Configuration has been applied." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "配置已应用。"
-          }
-        }
-      }
-    },
-    "Configurations" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "配置"
-          }
-        }
-      }
-    },
-    "Configure Widget" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "配置小组件"
           }
         }
       }
@@ -325,17 +237,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dashboard链接"
-          }
-        }
-      }
-    },
-    "Deploy" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "部署"
           }
         }
       }
@@ -478,17 +379,6 @@
         }
       }
     },
-    "For law enforcement, some software content is not available in some countries and regions. Turn on this toggle if you are in China mainland." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "由于法律原因，部分软件功能并非在所有国家和地区都可用。如果你位于中国大陆，启用此选项。"
-          }
-        }
-      }
-    },
     "Get up-to-date details of a server." : {
       "localizations" : {
         "zh-Hans" : {
@@ -505,17 +395,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "GPU"
-          }
-        }
-      }
-    },
-    "Green" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "绿色"
           }
         }
       }
@@ -540,23 +419,12 @@
         }
       }
     },
-    "How to install Nezha Dashboard" : {
+    "How to get API Token" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如何安装哪吒Dashboard"
-          }
-        }
-      }
-    },
-    "I am in China mainland" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我位于中国大陆"
+            "value" : "如何获取API Token"
           }
         }
       }
@@ -591,27 +459,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "绿色"
-          }
-        }
-      }
-    },
-    "LICENSE" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "LICENSE"
-          }
-        }
-      }
-    },
-    "Link" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "链接"
           }
         }
       }
@@ -677,34 +524,12 @@
         }
       }
     },
-    "Name" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "名称"
-          }
-        }
-      }
-    },
     "Network" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "网络"
-          }
-        }
-      }
-    },
-    "Nezha" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "哪吒"
           }
         }
       }
@@ -746,38 +571,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "操作系统"
-          }
-        }
-      }
-    },
-    "Original Project Nezha" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "原项目 哪吒"
-          }
-        }
-      }
-    },
-    "OS" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "操作系统"
-          }
-        }
-      }
-    },
-    "Other" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "其他"
           }
         }
       }
@@ -875,17 +668,6 @@
         }
       }
     },
-    "Server ID" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "服务器ID"
-          }
-        }
-      }
-    },
     "Settings" : {
       "localizations" : {
         "zh-Hans" : {
@@ -922,17 +704,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "状态"
-          }
-        }
-      }
-    },
-    "Success" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "成功"
           }
         }
       }
@@ -1066,28 +837,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "虚拟化"
-          }
-        }
-      }
-    },
-    "Widget" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小组件"
-          }
-        }
-      }
-    },
-    "Yellow" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "黄色"
           }
         }
       }

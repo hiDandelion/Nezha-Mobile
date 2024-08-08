@@ -26,7 +26,7 @@ struct AddDashboardView: View {
                 
                 Section("Help") {
                     Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
-                    Link("How to install Nezha Dashboard", destination: URL(string: "https://nezha.wiki")!)
+                    Link("How to get API Token", destination: URL(string: "https://nezha.wiki/guide/api.html")!)
                 }
             }
             .navigationTitle("Add Dashboard")

@@ -41,28 +41,16 @@ struct DashboardDetailView: View {
                             ProgressView("Loading...")
                         }
                         else {
-                            if #available(iOS 17.0, *) {
-                                ScrollView {
-                                    ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
-                                        .zIndex(1)
-                                        .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
-                                    serverList()
-                                        .zIndex(0)
-                                }
-                                .contentMargins(.top, 165, for: .scrollIndicators)
-                                .coordinateSpace(name: "scrollView")
-                                .toolbar(.hidden, for: .navigationBar)
-                            } else {
-                                ScrollView {
-                                    ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
-                                        .zIndex(1)
-                                        .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
-                                    serverList()
-                                        .zIndex(0)
-                                }
-                                .coordinateSpace(name: "scrollView")
-                                .toolbar(.hidden, for: .navigationBar)
+                            ScrollView {
+                                ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
+                                    .zIndex(1)
+                                    .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                                serverList()
+                                    .zIndex(0)
                             }
+                            .coordinateSpace(name: "scrollView")
+                            .toolbar(.hidden, for: .navigationBar)
+                            .scrollIndicators(.never)
                         }
                     }
                 case .error(let message):
@@ -100,18 +88,33 @@ struct DashboardDetailView: View {
             let minY = getScrollViewMinY(proxy: proxy)
             let progress = isSearching ? 1 : max(min(-minY / 70, 1), 0)
             
-            VStack(spacing: 10 - (progress * 10)) {
-                Title(title: title, isLoading: isLoading, progress: progress)
-                
-                SearchBar(progress: progress)
-                
-                GroupPicker()
-                
+            if #available(iOS 17.0, *) {
+                VStack(spacing: 10 - (progress * 10)) {
+                    Title(title: title, isLoading: isLoading, progress: progress)
+                    
+                    SearchBar(progress: progress)
+                    
+                    GroupPicker()
+                }
+                .padding(.top, 15)
+                .safeAreaPadding(.horizontal, 15)
+                .offset(y: minY < 0 || isSearching ? -minY : 0)
+                .offset(y: -progress * 65)
             }
-            .padding(.top, 15)
-            .padding(.horizontal, 15)
-            .offset(y: minY < 0 || isSearching ? -minY : 0)
-            .offset(y: -progress * 65)
+            else {
+                VStack(spacing: 10 - (progress * 10)) {
+                    Title(title: title, isLoading: isLoading, progress: progress)
+                    
+                    SearchBar(progress: progress)
+                    
+                    GroupPicker()
+                }
+                .padding(.top, 15)
+                // safeAreaPadding → padding
+                .padding(.horizontal, 15)
+                .offset(y: minY < 0 || isSearching ? -minY : 0)
+                .offset(y: -progress * 65)
+            }
         }
         .frame(height: 155)
         .padding(.bottom, 10)
@@ -247,6 +250,7 @@ struct DashboardDetailView: View {
                     ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
                 else {
+                    // ContentUnavailableView ×
                     Text("No Server")
                 }
             }

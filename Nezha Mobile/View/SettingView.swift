@@ -49,28 +49,33 @@ struct SettingView: View {
                         isShowingChangeThemeSheet.toggle()
                     }
                     .sheet(isPresented: $isShowingChangeThemeSheet) {
-                        ChangeThemeView()
-                            .presentationDetents([.height(410)])
-                            .presentationBackground(.clear)
+                        if #available(iOS 16.4, *) {
+                            ChangeThemeView()
+                                .presentationDetents([.height(410)])
+                                .presentationBackground(.clear)
+                        }
+                        else {
+                            ChangeThemeView()
+                                .presentationDetents([.height(410)])
+                                // presentationBackground ×
+                        }
                     }
                 }
                 
                 Section("Help") {
                     Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
-                    Link("How to install Nezha Dashboard", destination: URL(string: "https://nezha.wiki")!)
                 }
                 
                 Section("About") {
-                    Link("Original Project Nezha", destination: URL(string: "https://github.com/naiba/nezha")!)
                     NavigationLink(destination: {
                         Form {
                             Text("This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
                             Text("Part of this project is related to Project Nezha by naiba which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
                             Text("Intel logo is trademark of Intel Corporation. AMD logo is trademark of Advanced Micro Devices, Inc. ARM logo is trademark of Arm Limited. Apple logo is trademark of Apple Inc.")
                         }
-                        .navigationTitle("LICENSE")
+                        .navigationTitle("About")
                     }) {
-                        Text("LICENSE")
+                        Text("About")
                     }
                 }
             }
