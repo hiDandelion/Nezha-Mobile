@@ -196,35 +196,7 @@ struct ServerDetailView: View {
                 }
                 
                 if let pingData {
-                    Section("Ping") {
-                        if pingData.isEmpty {
-                            Text("No Data")
-                        }
-                        else {
-                            ForEach(pingData) { data in
-                                VStack {
-                                    Text("\(data.monitorName)")
-                                    Chart {
-                                        ForEach(Array(zip(data.createdAt, data.avgDelay)), id: \.0) { timestamp, delay in
-                                            LineMark(
-                                                x: .value("Time", Date(timeIntervalSince1970: timestamp / 1000)),
-                                                y: .value("Ping", delay)
-                                            )
-                                        }
-                                    }
-                                    .chartXAxis {
-                                        AxisMarks(values: .automatic) { value in
-                                            AxisGridLine()
-                                            AxisValueLabel(format: .dateTime.hour())
-                                        }
-                                    }
-                                    .chartYAxis {
-                                        AxisMarks(position: .leading)
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    pingCharts(pingData: pingData)
                 }
             }
             .navigationTitle(server.name)
@@ -237,7 +209,7 @@ struct ServerDetailView: View {
                 }
             }
         }
-        .onChange(of: scenePhase) {
+        .onChange(of: scenePhase) { _ in
             if scenePhase == .active {
                 RequestHandler.getServerPingData(id: String(server.id)) { response, errorDescription in
                     if let response {
@@ -263,6 +235,38 @@ struct ServerDetailView: View {
             Spacer()
             content
                 .foregroundStyle(.secondary)
+        }
+    }
+    
+    private func pingCharts(pingData: [PingData]) -> some View {
+        Section("Ping") {
+            if pingData.isEmpty {
+                Text("No Data")
+            }
+            else {
+                ForEach(pingData) { data in
+                    VStack {
+                        Text("\(data.monitorName)")
+                        Chart {
+                            ForEach(Array(zip(data.createdAt, data.avgDelay)), id: \.0) { timestamp, delay in
+                                LineMark(
+                                    x: .value("Time", Date(timeIntervalSince1970: timestamp / 1000)),
+                                    y: .value("Ping", delay)
+                                )
+                            }
+                        }
+                        .chartXAxis {
+                            AxisMarks(values: .automatic) { value in
+                                AxisGridLine()
+                                AxisValueLabel(format: .dateTime.hour())
+                            }
+                        }
+                        .chartYAxis {
+                            AxisMarks(position: .leading)
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -13,7 +13,19 @@ struct ServerQuery: EntityQuery {
             let response = try await RequestHandler.getServerDetail(serverID: "")
             if let servers = response.result {
                 let serverEntities = servers.map { ServerEntity(id: $0.id, name: $0.name, displayIndex: $0.displayIndex) }
-                let serverEntitiesSorted = serverEntities.sorted { (($0.displayIndex ?? -1) == ($1.displayIndex ?? -1)) ? ($0.id < $1.id) : (($0.displayIndex ?? -1) > ($1.displayIndex ?? -1)) }
+                let serverEntitiesSorted = serverEntities.sorted {
+                    if $0.displayIndex == nil || $0.displayIndex == nil {
+                        return $0.id < $1.id
+                    }
+                    else {
+                        if $0.displayIndex == $1.displayIndex {
+                            return $0.id < $1.id
+                        }
+                        else {
+                            return $0.displayIndex! > $1.displayIndex!
+                        }
+                    }
+                }
                 return serverEntitiesSorted
             }
             return []
@@ -28,7 +40,19 @@ struct ServerQuery: EntityQuery {
             let response = try await RequestHandler.getServerDetail(serverID: "")
             if let servers = response.result {
                 let serverEntities = servers.map { ServerEntity(id: $0.id, name: $0.name, displayIndex: $0.displayIndex) }
-                let serverEntitiesSorted = serverEntities.sorted { (($0.displayIndex ?? -1) == ($1.displayIndex ?? -1)) ? ($0.id < $1.id) : (($0.displayIndex ?? -1) > ($1.displayIndex ?? -1)) }
+                let serverEntitiesSorted = serverEntities.sorted {
+                    if $0.displayIndex == nil || $0.displayIndex == nil {
+                        return $0.id < $1.id
+                    }
+                    else {
+                        if $0.displayIndex == $1.displayIndex {
+                            return $0.id < $1.id
+                        }
+                        else {
+                            return $0.displayIndex! > $1.displayIndex!
+                        }
+                    }
+                }
                 return serverEntitiesSorted
             }
             return []

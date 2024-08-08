@@ -29,7 +29,7 @@ struct SettingView: View {
                     TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
-                        .onChange(of: dashboardLink) {
+                        .onChange(of: dashboardLink) { _ in
                             DispatchQueue.main.async {
                                 isNeedReconnection = true
                             }
@@ -37,7 +37,7 @@ struct SettingView: View {
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
-                        .onChange(of: dashboardAPIToken) {
+                        .onChange(of: dashboardAPIToken) { _ in
                             DispatchQueue.main.async {
                                 isNeedReconnection = true
                             }

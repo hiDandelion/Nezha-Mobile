@@ -41,15 +41,28 @@ struct DashboardDetailView: View {
                             ProgressView("Loading...")
                         }
                         else {
-                            ScrollView {
-                                ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
-                                    .zIndex(1)
-                                    .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
-                                serverList
-                                    .zIndex(0)
+                            if #available(iOS 17.0, *) {
+                                ScrollView {
+                                    ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
+                                        .zIndex(1)
+                                        .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                                    serverList()
+                                        .zIndex(0)
+                                }
+                                .contentMargins(.top, 165, for: .scrollIndicators)
+                                .coordinateSpace(name: "scrollView")
+                                .toolbar(.hidden, for: .navigationBar)
+                            } else {
+                                ScrollView {
+                                    ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
+                                        .zIndex(1)
+                                        .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                                    serverList()
+                                        .zIndex(0)
+                                }
+                                .coordinateSpace(name: "scrollView")
+                                .toolbar(.hidden, for: .navigationBar)
                             }
-                            .contentMargins(.top, 165, for: .scrollIndicators)
-                            .toolbar(.hidden, for: .navigationBar)
                         }
                     }
                 case .error(let message):
@@ -82,109 +95,21 @@ struct DashboardDetailView: View {
         }
     }
     
-    @ViewBuilder
     func ExpandableNavigationBar(title: String = "Dashboard", isLoading: Bool = false) -> some View {
         GeometryReader { proxy in
-            let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
-            let scrollviewHeight = proxy.bounds(of: .scrollView(axis: .vertical))?.height ?? 0
-            let scaleProgress = minY > 0 ? 1 + (max(min(minY / scrollviewHeight, 1), 0) * 0.5) : 1
+            let minY = getScrollViewMinY(proxy: proxy)
             let progress = isSearching ? 1 : max(min(-minY / 70, 1), 0)
             
             VStack(spacing: 10 - (progress * 10)) {
-                /// Title
-                HStack {
-                    HStack {
-                        Text(title)
-                            .font(.largeTitle.bold())
-                            .scaleEffect(scaleProgress, anchor: .topLeading)
-                        ProgressView()
-                            .opacity(isLoading ? 1 : 0)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Button {
-                        isShowingSettingSheet = true
-                    } label: {
-                        Image(systemName: "gear")
-                            .padding(10)
-                            .foregroundStyle(Color.primary)
-                            .background(.ultraThinMaterial)
-                            .clipShape(Circle())
-                            .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
-                    }
-                }
-                .opacity(1 - progress)
+                Title(title: title, isLoading: isLoading, progress: progress)
                 
-                /// Search Bar
-                HStack(spacing: 12) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.title3)
-                    
-                    TextField("Search Server", text: $searchText)
-                        .focused($isSearching)
-                    
-                    if isSearching {
-                        Button(action: {
-                            isSearching = false
-                        }, label: {
-                            Image(systemName: "xmark")
-                                .font(.title3)
-                        })
-                        .transition(.asymmetric(insertion: .push(from: .bottom), removal: .push(from: .top)))
-                    }
-                }
-                .foregroundStyle(Color.primary)
-                .padding(.horizontal, 15 - (progress * 15))
-                .frame(height: 45)
-                .clipShape(.capsule)
-                .background {
-                    RoundedRectangle(cornerRadius: 25 - (progress * 25))
-                        .fill(.ultraThinMaterial)
-                        .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
-                        .padding(.top, -progress * 165)
-                        .padding(.bottom, -progress * 45)
-                        .padding(.horizontal, -progress * 15)
-                }
+                SearchBar(progress: progress)
                 
-                /// Segmented Picker
-                ScrollView(.horizontal) {
-                    HStack(spacing: 12) {
-                        if !dashboardViewModel.servers.isEmpty {
-                            let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
-                            let allTags = [String(localized: "All")] + tags.sorted()
-                            ForEach(allTags, id: \.self) { tag in
-                                Button(action: {
-                                    withAnimation(.snappy) {
-                                        activeTag = tag
-                                    }
-                                }) {
-                                    Text(tag == "" ? String(localized: "Uncategorized") : tag)
-                                        .font(.callout)
-                                        .foregroundStyle(activeTag == tag ? (scheme == .dark ? .black : .white) : Color.primary)
-                                        .padding(.vertical, 8)
-                                        .padding(.horizontal, 15)
-                                        .background {
-                                            if activeTag == tag {
-                                                Capsule()
-                                                    .fill(Color.primary)
-                                                    .matchedGeometryEffect(id: "ACTIVETAGTAB", in: animation)
-                                            } else {
-                                                Capsule()
-                                                    .fill(.regularMaterial)
-                                            }
-                                        }
-                                        .frame(maxHeight: .infinity)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-                    }
-                }
-                .frame(height: 40)
-                .scrollIndicators(.never)
+                GroupPicker()
+                
             }
             .padding(.top, 15)
-            .safeAreaPadding(.horizontal, 15)
+            .padding(.horizontal, 15)
             .offset(y: minY < 0 || isSearching ? -minY : 0)
             .offset(y: -progress * 65)
         }
@@ -193,10 +118,120 @@ struct DashboardDetailView: View {
         .padding(.bottom, isSearching ? -65 : 0)
     }
     
-    private var serverList: some View {
+    private func Title(title: String = "Dashboard", isLoading: Bool = false, progress: CGFloat) -> some View {
+        HStack {
+            HStack {
+                Text(title)
+                    .font(.largeTitle.bold())
+                ProgressView()
+                    .opacity(isLoading ? 1 : 0)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Button {
+                isShowingSettingSheet = true
+            } label: {
+                Image(systemName: "gear")
+                    .padding(10)
+                    .foregroundStyle(Color.primary)
+                    .background(.ultraThinMaterial)
+                    .clipShape(Circle())
+                    .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
+            }
+        }
+        .opacity(1 - progress)
+    }
+    
+    private func SearchBar(progress: CGFloat) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: "magnifyingglass")
+                .font(.title3)
+            
+            TextField("Search Server", text: $searchText)
+                .focused($isSearching)
+            
+            if isSearching {
+                Button(action: {
+                    isSearching = false
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.title3)
+                })
+                .transition(.asymmetric(insertion: .push(from: .bottom), removal: .push(from: .top)))
+            }
+        }
+        .foregroundStyle(Color.primary)
+        .padding(.horizontal, 15 - (progress * 15))
+        .frame(height: 45)
+        .clipShape(.capsule)
+        .background {
+            RoundedRectangle(cornerRadius: 25 - (progress * 25))
+                .fill(.ultraThinMaterial)
+                .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
+                .padding(.top, -progress * 165)
+                .padding(.bottom, -progress * 45)
+                .padding(.horizontal, -progress * 15)
+        }
+    }
+    
+    private func GroupPicker() -> some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 12) {
+                if !dashboardViewModel.servers.isEmpty {
+                    let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
+                    let allTags = [String(localized: "All")] + tags.sorted()
+                    ForEach(allTags, id: \.self) { tag in
+                        GroupTag(tag: tag)
+                    }
+                }
+            }
+        }
+        .frame(height: 40)
+        .scrollIndicators(.never)
+    }
+    
+    private func GroupTag(tag: String) -> some View {
+        Button(action: {
+            withAnimation(.snappy) {
+                activeTag = tag
+            }
+        }) {
+            Text(tag == "" ? String(localized: "Uncategorized") : tag)
+                .font(.callout)
+                .foregroundStyle(activeTag == tag ? (scheme == .dark ? .black : .white) : Color.primary)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 15)
+                .background {
+                    if activeTag == tag {
+                        Capsule()
+                            .fill(Color.primary)
+                            .matchedGeometryEffect(id: "ACTIVETAGTAB", in: animation)
+                    } else {
+                        Capsule()
+                            .fill(.regularMaterial)
+                    }
+                }
+                .frame(maxHeight: .infinity)
+        }
+        .buttonStyle(.plain)
+    }
+    
+    private func serverList() -> some View {
         VStack {
             if !dashboardViewModel.servers.isEmpty {
-                let servers = dashboardViewModel.servers.sorted { (($0.displayIndex ?? -1) == ($1.displayIndex ?? -1)) ? ($0.id < $1.id) : (($0.displayIndex ?? -1) > ($1.displayIndex ?? -1)) }
+                let servers = dashboardViewModel.servers.sorted {
+                    if $0.displayIndex == nil || $0.displayIndex == nil {
+                        return $0.id < $1.id
+                    }
+                    else {
+                        if $0.displayIndex == $1.displayIndex {
+                            return $0.id < $1.id
+                        }
+                        else {
+                            return $0.displayIndex! > $1.displayIndex!
+                        }
+                    }
+                }
                 let taggedServers = servers.filter { activeTag == String(localized: "All") || $0.tag == activeTag }
                 let seachedServers = taggedServers.filter { searchText == "" || $0.name.contains(searchText) }
                 ForEach(seachedServers, id: \.id) { server in
@@ -204,16 +239,21 @@ struct DashboardDetailView: View {
                         serverCard(server: server)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .safeAreaPadding(.horizontal, 15)
+                    .padding(.horizontal, 15)
                 }
             }
             else {
-                ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
+                if #available(iOS 17.0, *) {
+                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
+                }
+                else {
+                    Text("No Server")
+                }
             }
         }
     }
     
-    func serverCard(server: Server) -> some View {
+    private func serverCard(server: Server) -> some View {
         CardView {
             HStack {
                 Text(countryFlagEmoji(countryCode: server.host.countryCode))
@@ -318,6 +358,15 @@ struct DashboardDetailView: View {
                 }
                 .padding(.horizontal)
             }
+        }
+    }
+    
+    func getScrollViewMinY(proxy: GeometryProxy) -> CGFloat {
+        if #available(iOS 17.0, *) {
+            return proxy.frame(in: .scrollView(axis: .vertical)).minY
+        }
+        else {
+            return proxy.frame(in: .named("scrollView")).minY
         }
     }
 }
