@@ -196,7 +196,7 @@ struct DashboardDetailView: View {
     private var serverList: some View {
         VStack {
             if !dashboardViewModel.servers.isEmpty {
-                let servers = dashboardViewModel.servers.sorted { $0.displayIndex == $1.displayIndex ? ($0.id < $1.id) : ($0.displayIndex > $1.displayIndex) }
+                let servers = dashboardViewModel.servers.sorted { (($0.displayIndex ?? -1) == ($1.displayIndex ?? -1)) ? ($0.id < $1.id) : (($0.displayIndex ?? -1) > ($1.displayIndex ?? -1)) }
                 let taggedServers = servers.filter { activeTag == String(localized: "All") || $0.tag == activeTag }
                 let seachedServers = taggedServers.filter { searchText == "" || $0.name.contains(searchText) }
                 ForEach(seachedServers, id: \.id) { server in

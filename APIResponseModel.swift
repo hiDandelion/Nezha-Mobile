@@ -21,7 +21,7 @@ struct Server: Codable {
     let IPv4: String
     let IPv6: String
     let validIP: String
-    let displayIndex: Int
+    let displayIndex: Int?
     let host: ServerHost
     let status: ServerStatus
     

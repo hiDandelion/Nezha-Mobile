@@ -13,7 +13,7 @@ struct ServerQuery: EntityQuery {
             let response = try await RequestHandler.getServerDetail(serverID: "")
             if let servers = response.result {
                 let serverEntities = servers.map { ServerEntity(id: $0.id, name: $0.name, displayIndex: $0.displayIndex) }
-                let serverEntitiesSorted = serverEntities.sorted { $0.displayIndex == $1.displayIndex ? ($0.id < $1.id) : ($0.displayIndex > $1.displayIndex) }
+                let serverEntitiesSorted = serverEntities.sorted { (($0.displayIndex ?? -1) == ($1.displayIndex ?? -1)) ? ($0.id < $1.id) : (($0.displayIndex ?? -1) > ($1.displayIndex ?? -1)) }
                 return serverEntitiesSorted
             }
             return []
@@ -28,7 +28,7 @@ struct ServerQuery: EntityQuery {
             let response = try await RequestHandler.getServerDetail(serverID: "")
             if let servers = response.result {
                 let serverEntities = servers.map { ServerEntity(id: $0.id, name: $0.name, displayIndex: $0.displayIndex) }
-                let serverEntitiesSorted = serverEntities.sorted { $0.displayIndex == $1.displayIndex ? ($0.id < $1.id) : ($0.displayIndex > $1.displayIndex) }
+                let serverEntitiesSorted = serverEntities.sorted { (($0.displayIndex ?? -1) == ($1.displayIndex ?? -1)) ? ($0.id < $1.id) : (($0.displayIndex ?? -1) > ($1.displayIndex ?? -1)) }
                 return serverEntitiesSorted
             }
             return []
@@ -46,7 +46,7 @@ struct ServerQuery: EntityQuery {
 struct ServerEntity: AppEntity {
     let id: Int
     let name: String
-    let displayIndex: Int
+    let displayIndex: Int?
     
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Server"
     static var defaultQuery = ServerQuery()

@@ -68,6 +68,18 @@ struct ServerDetailView: View {
                                     .scaledToFit()
                                     .frame(width: 100, height: 50)
                             }
+                            if let mainCPUInfo, mainCPUInfo.contains("Neoverse") {
+                                Image("ARMLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 50)
+                            }
+                            if let mainCPUInfo, mainCPUInfo.contains("Apple") {
+                                Image("AppleLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 50)
+                            }
                             Text(mainCPUInfo ?? "N/A")
                                 .foregroundStyle(.secondary)
                         }
@@ -85,6 +97,7 @@ struct ServerDetailView: View {
                     
                     pieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.arch)"))
                     pieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization == "" ? String(localized: "Unknown") : server.host.virtualization)"))
+                    pieceOfInfo(systemImage: "rectangle.2.swap", name: "Agent", content: Text("\(server.host.version)"))
                 }
                 
                 Section("Status") {
