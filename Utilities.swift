@@ -26,18 +26,18 @@ func convertTimestampToLocalizedDateString(timestamp: Int) -> String {
 
 func getCore(_ str: [String]?) -> String {
     guard let firstStr = str?.first else {
-        return "N/A"
+        return String(localized: "N/A")
     }
     
     let physicalCorePattern = #"(\d|\.)+ Physical"#
     let virtualCorePattern = #"(\d|\.)+ Virtual"#
     
     if let physicalCore = firstStr.range(of: physicalCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
-        return physicalCore.replacingOccurrences(of: "Physical", with: "Core")
+        return physicalCore.replacingOccurrences(of: "Physical", with: String(localized: "Core"))
     } else if let virtualCore = firstStr.range(of: virtualCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
-        return virtualCore.replacingOccurrences(of: "Virtual", with: "Core")
+        return virtualCore.replacingOccurrences(of: "Virtual", with: String(localized: "Core"))
     } else {
-        return "N/A"
+        return String(localized: "N/A")
     }
 }
 
@@ -83,9 +83,9 @@ func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
     let years = months / 12
 
     if years > 0 {
-        return shortened ? "\(days)d" : "\(years)y \(months % 12)m \(days % 30)d"
+        return "\(days)d"
     } else if months > 0 {
-        return shortened ? "\(days)d" : "\(months)m \(days % 30)d"
+        return "\(days)d"
     } else if days > 0 {
         return shortened ? "\(days)d" : "\(days)d \(hours % 24)h"
     } else if hours > 0 {

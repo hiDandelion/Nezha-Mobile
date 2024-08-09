@@ -42,18 +42,22 @@ struct DashboardDetailView: View {
                             ProgressView("Loading...")
                         }
                         else {
-                            ScrollView {
-                                ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
-                                    .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
-                                    .zIndex(1)
+                            GeometryReader { proxy in
+                                let isWideLayout = proxy.size.width > 600
+                                
+                                ScrollView {
+                                    ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
+                                        .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                                        .zIndex(1)
                                     
-                                serverList()
-                                    .padding(.top, isSearching ?  navigationBarHeight - 60 : navigationBarHeight - 5)
-                                    .zIndex(0)
+                                    serverList(isWideLayout: isWideLayout)
+                                        .padding(.top, isSearching ?  navigationBarHeight - 50 : navigationBarHeight - 5)
+                                        .zIndex(0)
+                                }
+                                .coordinateSpace(name: "scrollView")
+                                .toolbar(.hidden, for: .navigationBar)
+                                .scrollIndicators(.never)
                             }
-                            .coordinateSpace(name: "scrollView")
-                            .toolbar(.hidden, for: .navigationBar)
-                            .scrollIndicators(.never)
                         }
                     }
                 case .error(let message):
@@ -92,7 +96,7 @@ struct DashboardDetailView: View {
             let progress = isSearching ? 1 : max(min(-minY / 70, 1), 0)
             
             if #available(iOS 17.0, *) {
-                VStack(spacing: 10 - (progress * 10)) {
+                VStack(spacing: 15 - (progress * 15)) {
                     Title(title: title, isLoading: isLoading, progress: progress)
                     
                     SearchBar(progress: progress)
@@ -114,7 +118,7 @@ struct DashboardDetailView: View {
                 }
             }
             else {
-                VStack(spacing: 10 - (progress * 10)) {
+                VStack(spacing: 15 - (progress * 15)) {
                     Title(title: title, isLoading: isLoading, progress: progress)
                     
                     SearchBar(progress: progress)
@@ -173,10 +177,11 @@ struct DashboardDetailView: View {
             TextField("Search Server", text: $searchText)
                 .focused($isSearching)
             
-            if isSearching {
+            if isSearching || searchText != "" {
                 Button(action: {
                     withAnimation {
                         isSearching = false
+                        searchText = ""
                     }
                 }, label: {
                     Image(systemName: "xmark")
@@ -240,7 +245,7 @@ struct DashboardDetailView: View {
         .buttonStyle(.plain)
     }
     
-    private func serverList() -> some View {
+    private func serverList(isWideLayout: Bool) -> some View {
         VStack {
             if !dashboardViewModel.servers.isEmpty {
                 let servers = dashboardViewModel.servers.sorted {
@@ -257,14 +262,24 @@ struct DashboardDetailView: View {
                     }
                 }
                 let taggedServers = servers.filter { activeTag == String(localized: "All") || $0.tag == activeTag }
-                let seachedServers = taggedServers.filter { searchText == "" || $0.name.contains(searchText) }
-                ForEach(seachedServers, id: \.id) { server in
-                    NavigationLink(destination: ServerDetailView(server: server)) {
-                        serverCard(server: server)
+                let searchedServers = taggedServers.filter { searchText == "" || $0.name.contains(searchText) }
+                
+                let columns: [GridItem] = isWideLayout ? [
+                    GridItem(.flexible(), spacing: 10),
+                    GridItem(.flexible(), spacing: 10)
+                ] : [
+                    GridItem(.flexible())
+                ]
+                
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(searchedServers, id: \.id) { server in
+                        NavigationLink(destination: ServerDetailView(server: server)) {
+                            serverCard(server: server)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.horizontal, 15)
                 }
+                .padding(.horizontal, 15)
             }
             else {
                 if #available(iOS 17.0, *) {
@@ -285,7 +300,7 @@ struct DashboardDetailView: View {
                     Text(countryFlagEmoji(countryCode: server.host.countryCode))
                     Text(server.name)
                     Image(systemName: "circlebadge.fill")
-                        .foregroundStyle(server.status.cpu != 0 || server.status.memUsed != 0 ? .green : .red)
+                        .foregroundStyle(isOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
                 }
                 .font(.callout)
                 
@@ -404,5 +419,12 @@ struct DashboardDetailView: View {
         static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
             value = nextValue()
         }
+    }
+    
+    func isOnline(timestamp: Int) -> Bool {
+        let currentTimestamp = Int(Date().timeIntervalSince1970)
+        let fiveMinutesInSeconds = 60
+        
+        return currentTimestamp - timestamp > fiveMinutesInSeconds
     }
 }

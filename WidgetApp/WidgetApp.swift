@@ -18,8 +18,19 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func snapshot(for configuration: SpecifyServerIDIntent, in context: Context) async -> ServerEntry {
+        let serverID: Int = configuration.server.id
         do {
-            let response = try await RequestHandler.getServerDetail(serverID: String(configuration.server.id))
+            if serverID == -1 {
+                let response = try await RequestHandler.getAllServerDetail()
+                if let server = response.result?.first {
+                    return ServerEntry(date: Date(), server: server, message: "OK")
+                }
+                else {
+                    return ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))
+                }
+            }
+            
+            let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
             if let server = response.result?.first {
                 return ServerEntry(date: Date(), server: server, message: "OK")
             }
@@ -40,7 +51,20 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func timeline(for configuration: SpecifyServerIDIntent, in context: Context) async -> Timeline<ServerEntry> {
+        let serverID: Int = configuration.server.id
         do {
+            if serverID == -1 {
+                let response = try await RequestHandler.getAllServerDetail()
+                if let server = response.result?.first {
+                    let entries = [ServerEntry(date: Date(), server: server, message: "OK")]
+                    return Timeline(entries: entries, policy: .atEnd)
+                }
+                else {
+                    let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))]
+                    return Timeline(entries: entries, policy: .atEnd)
+                }
+            }
+            
             let response = try await RequestHandler.getServerDetail(serverID: String(configuration.server.id))
             if let server = response.result?.first {
                 let entries = [ServerEntry(date: Date(), server: server, message: "OK")]
@@ -178,7 +202,6 @@ struct WidgetEntryView : View {
                     HStack {
                         Text(countryFlagEmoji(countryCode: server.host.countryCode))
                         Text(server.name)
-                        Text(server.IPv4)
                         Spacer()
                         Button(intent: RefreshServerIntent()) {
                             Text(entry.date.formatted(date: .omitted, time: .shortened))

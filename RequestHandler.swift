@@ -75,6 +75,54 @@ class RequestHandler {
         .resume()
     }
     
+    static func getAllServerDetail() async throws -> GetServerDetailResponse {
+        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
+              let dashboardLink = userDefaults.string(forKey: "NMDashboardLink"),
+              let dashboardAPIToken = userDefaults.string(forKey: "NMDashboardAPIToken"),
+              let url = URL(string: "https://\(dashboardLink)/api/v1/server/details") else {
+            throw GetServerDetailError.invalidDashboardConfiguration
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue(dashboardAPIToken, forHTTPHeaderField: "Authorization")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        do {
+            let decoder = JSONDecoder()
+            let response = try decoder.decode(GetServerDetailResponse.self, from: data)
+            
+            if response.result != nil {
+                return response
+            }
+            
+            if response.code == 403 {
+                throw GetServerDetailError.dashboardAuthenticationFailed
+            }
+            
+            throw GetServerDetailError.invalidResponse(response.message)
+        } catch let error as GetServerDetailError {
+            throw error
+        } catch {
+            if let decodingError = error as? DecodingError {
+                switch decodingError {
+                case .dataCorrupted(let context):
+                    print("Data corrupted: \(context.debugDescription)")
+                case .keyNotFound(let key, let context):
+                    print("Key '\(key)' not found: \(context.debugDescription)")
+                case .typeMismatch(let type, let context):
+                    print("Type '\(type)' mismatch: \(context.debugDescription)")
+                case .valueNotFound(let type, let context):
+                    print("Value of type '\(type)' not found: \(context.debugDescription)")
+                @unknown default:
+                    print("Unknown decoding error")
+                }
+            }
+            throw GetServerDetailError.decodingError
+        }
+    }
+    
     static func getServerPingData(serverID: String) async throws -> GetServerPingDataResponse {
         guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
               let dashboardLink = userDefaults.string(forKey: "NMDashboardLink"),

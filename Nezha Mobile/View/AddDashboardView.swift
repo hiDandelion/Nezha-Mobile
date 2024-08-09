@@ -35,7 +35,7 @@ struct AddDashboardView: View {
             }
             .navigationTitle("Add Dashboard")
             .toolbar {
-                ToolbarItem {
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
                         dismiss()
                     }

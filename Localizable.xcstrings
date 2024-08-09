@@ -175,6 +175,16 @@
         }
       }
     },
+    "Core" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "核心"
+          }
+        }
+      }
+    },
     "CPU" : {
       "localizations" : {
         "zh-Hans" : {
@@ -449,8 +459,28 @@
         }
       }
     },
-    "Intel logo is trademark of Intel Corporation. AMD logo is trademark of Advanced Micro Devices, Inc. ARM logo is trademark of Arm Limited. Apple logo is trademark of Apple Inc." : {
+    "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Apple logo, macOS logo are trademarks of Apple Inc." : {
 
+    },
+    "IPv4" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IPv4"
+          }
+        }
+      }
+    },
+    "IPv6" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IPv6"
+          }
+        }
+      }
     },
     "Last Active" : {
       "localizations" : {
@@ -530,6 +560,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "内存"
+          }
+        }
+      }
+    },
+    "N/A" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不可用"
           }
         }
       }
@@ -674,6 +714,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "服务器信息"
+          }
+        }
+      }
+    },
+    "Server Unavailable" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器不可用"
           }
         }
       }

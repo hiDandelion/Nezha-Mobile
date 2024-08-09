@@ -88,7 +88,7 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     var server: ServerEntity
 
     init() {
-        self.server = ServerEntity(id: 0, name: "Default", displayIndex: 0)
+        self.server = ServerEntity(id: -1, name: "Demo", displayIndex: -1)
     }
 
     init(server: ServerEntity) {
