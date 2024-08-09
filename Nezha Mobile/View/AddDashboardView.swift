@@ -15,13 +15,17 @@ struct AddDashboardView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Dashboard Info") {
+                Section {
                     TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
+                } header: {
+                    Text("Dashboard Info")
+                } footer: {
+                    Text("Dashboard Link Example: server.hidandelion.com")
                 }
                 
                 Section("Help") {

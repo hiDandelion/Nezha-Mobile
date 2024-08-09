@@ -16,6 +16,7 @@ struct DashboardDetailView: View {
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var servers: [(key: Int, value: Server)] = []
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool
     @State private var searchText: String = ""
     @State private var activeTag: String = String(localized: "All")
@@ -43,9 +44,11 @@ struct DashboardDetailView: View {
                         else {
                             ScrollView {
                                 ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
-                                    .zIndex(1)
                                     .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+                                    .zIndex(1)
+                                    
                                 serverList()
+                                    .padding(.top, isSearching ?  navigationBarHeight - 60 : navigationBarHeight - 5)
                                     .zIndex(0)
                             }
                             .coordinateSpace(name: "scrollView")
@@ -100,6 +103,15 @@ struct DashboardDetailView: View {
                 .safeAreaPadding(.horizontal, 15)
                 .offset(y: minY < 0 || isSearching ? -minY : 0)
                 .offset(y: -progress * 65)
+                .overlay(
+                    GeometryReader { proxy in
+                        Color.clear
+                            .preference(key: NavigationBarHeightPreferenceKey.self, value: proxy.size.height)
+                    }
+                )
+                .onPreferenceChange(NavigationBarHeightPreferenceKey.self) { height in
+                    navigationBarHeight = height
+                }
             }
             else {
                 VStack(spacing: 10 - (progress * 10)) {
@@ -114,9 +126,17 @@ struct DashboardDetailView: View {
                 .padding(.horizontal, 15)
                 .offset(y: minY < 0 || isSearching ? -minY : 0)
                 .offset(y: -progress * 65)
+                .overlay(
+                    GeometryReader { proxy in
+                        Color.clear
+                            .preference(key: NavigationBarHeightPreferenceKey.self, value: proxy.size.height)
+                    }
+                )
+                .onPreferenceChange(NavigationBarHeightPreferenceKey.self) { height in
+                    navigationBarHeight = height
+                }
             }
         }
-        .frame(height: 155)
         .padding(.bottom, 10)
         .padding(.bottom, isSearching ? -65 : 0)
     }
@@ -155,7 +175,9 @@ struct DashboardDetailView: View {
             
             if isSearching {
                 Button(action: {
-                    isSearching = false
+                    withAnimation {
+                        isSearching = false
+                    }
                 }, label: {
                     Image(systemName: "xmark")
                         .font(.title3)
@@ -189,7 +211,6 @@ struct DashboardDetailView: View {
                 }
             }
         }
-        .frame(height: 40)
         .scrollIndicators(.never)
     }
     
@@ -260,10 +281,21 @@ struct DashboardDetailView: View {
     private func serverCard(server: Server) -> some View {
         CardView {
             HStack {
-                Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                Text(server.name)
-                Image(systemName: "circlebadge.fill")
-                    .foregroundStyle(server.status.cpu != 0 || server.status.memUsed != 0 ? .green : .red)
+                HStack {
+                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                    Text(server.name)
+                    Image(systemName: "circlebadge.fill")
+                        .foregroundStyle(server.status.cpu != 0 || server.status.memUsed != 0 ? .green : .red)
+                }
+                .font(.callout)
+                
+                Spacer()
+                
+                HStack {
+                    Image(systemName: "power")
+                    Text("\(formatTimeInterval(seconds: server.status.uptime))")
+                }
+                .font(.caption)
             }
         } contentView: {
             VStack {
@@ -326,12 +358,6 @@ struct DashboardDetailView: View {
                         
                         VStack(alignment: .leading) {
                             HStack {
-                                Image(systemName: "power")
-                                    .frame(width: 10)
-                                Text("\(formatTimeInterval(seconds: server.status.uptime))")
-                            }
-                            
-                            HStack {
                                 Image(systemName: "network")
                                     .frame(width: 10)
                                 VStack(alignment: .leading) {
@@ -347,20 +373,19 @@ struct DashboardDetailView: View {
                     .frame(maxWidth: 100)
                     .padding(.leading, 20)
                 }
+            }
+        } footerView: {
+            HStack {
+                let totalCore = getCore(server.host.cpu).toDouble()
+                let loadPressure = server.status.load1 / (totalCore ?? 1.0)
                 
-                HStack {
-                    let totalCore = getCore(server.host.cpu).toDouble()
-                    let loadPressure = server.status.load1 / (totalCore ?? 1.0)
+                Text("Load \(server.status.load1, specifier: "%.2f")")
+                    .font(.caption2)
+                
+                Gauge(value: loadPressure <= 1 ? loadPressure : 1) {
                     
-                    Text("Load \(server.status.load1, specifier: "%.2f")")
-                        .font(.caption2)
-                    
-                    Gauge(value: loadPressure <= 1 ? loadPressure : 1) {
-                        
-                    }
-                    .gaugeStyle(.accessoryLinearCapacity)
                 }
-                .padding(.horizontal)
+                .gaugeStyle(.accessoryLinearCapacity)
             }
         }
     }
@@ -371,6 +396,13 @@ struct DashboardDetailView: View {
         }
         else {
             return proxy.frame(in: .named("scrollView")).minY
+        }
+    }
+    
+    struct NavigationBarHeightPreferenceKey: PreferenceKey {
+        static var defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+            value = nextValue()
         }
     }
 }

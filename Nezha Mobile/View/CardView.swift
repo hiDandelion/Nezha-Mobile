@@ -7,56 +7,38 @@
 
 import SwiftUI
 
-struct CardView<Title: View, Content: View>: View {
+struct CardView<Title: View, Content: View, Footer: View>: View {
     var titleView: Title
     var contentView: Content
-    /// View Properties
-    @State var topOffset: CGFloat = 0
-    @State var bottomOffset: CGFloat = 160
-    private var cardHeight: CGFloat = 160
-    private var titleHeight: CGFloat = 35
+    var footerView: Footer
     
-    init(@ViewBuilder titleView: @escaping () -> Title, @ViewBuilder contentView: @escaping () -> Content) {
+    init(@ViewBuilder titleView: @escaping () -> Title, @ViewBuilder contentView: @escaping () -> Content, @ViewBuilder footerView: @escaping () -> Footer) {
         self.contentView = contentView()
         self.titleView = titleView()
+        self.footerView = footerView()
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 0) {
-                HStack {
-                    titleView
-                        .font(.callout)
-                        .opacity(0.8)
-                    Spacer()
-                }
-                .frame(height: titleHeight)
-                .padding(.horizontal, 10)
-                
-                contentView
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            HStack {
+                titleView
+                Spacer()
             }
-            .frame(height: cardHeight)
-            .frame(maxWidth: .infinity)
-            .background(.ultraThinMaterial)
+            .padding(.top, 5)
+            .padding(.horizontal, 10)
+            
+            contentView
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            HStack {
+                Spacer()
+                footerView
+            }
+            .padding(.bottom, 5)
+            .padding(.horizontal, 10)
         }
-        .opacity(getOpacity())
+        .frame(maxWidth: .infinity, minHeight: 160)
+        .background(.ultraThinMaterial)
         .cornerRadius(12)
-        .offsetChange { rect in
-            withAnimation {
-                self.topOffset = rect.minY
-                self.bottomOffset = rect.maxY
-            }
-        }
-    }
-    
-    /// Opacity
-    func getOpacity() -> CGFloat {
-        if bottomOffset < 190 {
-            let progress = bottomOffset < 0 ? 0 : bottomOffset / cardHeight
-            return progress
-        }
-        
-        return 1
     }
 }

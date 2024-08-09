@@ -241,6 +241,16 @@
         }
       }
     },
+    "Dashboard Link Example: server.hidandelion.com" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard链接示例: server.hidandelion.com"
+          }
+        }
+      }
+    },
     "Disabled" : {
       "localizations" : {
         "zh-Hans" : {

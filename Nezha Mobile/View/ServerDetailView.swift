@@ -101,7 +101,7 @@ struct ServerDetailView: View {
                 }
                 
                 Section("Status") {
-                    let gaugeGradient = Gradient(colors: [.green, .blue, .pink])
+                    let gaugeGradient = Gradient(colors: [.green, .pink])
                     
                     VStack {
                         HStack {
