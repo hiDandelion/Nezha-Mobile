@@ -300,7 +300,7 @@ struct DashboardDetailView: View {
                     Text(countryFlagEmoji(countryCode: server.host.countryCode))
                     Text(server.name)
                     Image(systemName: "circlebadge.fill")
-                        .foregroundStyle(isOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
+                        .foregroundStyle(isServerOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
                 }
                 .font(.callout)
                 
@@ -421,10 +421,5 @@ struct DashboardDetailView: View {
         }
     }
     
-    func isOnline(timestamp: Int) -> Bool {
-        let currentTimestamp = Int(Date().timeIntervalSince1970)
-        let fiveMinutesInSeconds = 60
-        
-        return currentTimestamp - timestamp > fiveMinutesInSeconds
-    }
+    
 }

@@ -96,3 +96,10 @@ func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
         return "\(seconds)s"
     }
 }
+
+func isServerOnline(timestamp: Int) -> Bool {
+    let currentTimestamp = Int(Date().timeIntervalSince1970)
+    let fiveMinutesInSeconds = 60
+    
+    return currentTimestamp - timestamp > fiveMinutesInSeconds
+}

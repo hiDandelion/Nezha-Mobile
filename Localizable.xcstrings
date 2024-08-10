@@ -32,28 +32,8 @@
     "↓%@" : {
 
     },
-    "↓%@ ↑%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "↓%1$@ ↑%2$@"
-          }
-        }
-      }
-    },
     "↓%@/s" : {
 
-    },
-    "↓%@/s ↑%@/s" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "↓%1$@/s ↑%2$@/s"
-          }
-        }
-      }
     },
     "About" : {
       "localizations" : {

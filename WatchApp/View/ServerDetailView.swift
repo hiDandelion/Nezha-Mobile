@@ -1,18 +1,14 @@
 //
 //  ServerDetailView.swift
-//  Nezha Mobile
+//  WatchApp
 //
-//  Created by Junhui Lou on 7/31/24.
+//  Created by Junhui Lou on 8/9/24.
 //
 
 import SwiftUI
-import Charts
 
 struct ServerDetailView: View {
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.scenePhase) private var scenePhase
     var server: Server
-    @State private var pingData: [PingData]?
     
     var body: some View {
         NavigationStack {
@@ -33,7 +29,7 @@ struct ServerDetailView: View {
                         Section("Host") {
                             VStack(alignment: .leading) {
                                 Label("Operating System", systemImage: "opticaldisc")
-                                HStack {
+                                VStack {
                                     let OSName = server.host.platform
                                     let OSVersion = server.host.platformVersion
                                     if OSName.contains("debian") {
@@ -61,7 +57,7 @@ struct ServerDetailView: View {
                             
                             VStack(alignment: .leading) {
                                 Label("CPU", systemImage: "cpu")
-                                HStack {
+                                VStack {
                                     let mainCPUInfo = server.host.cpu?.first
                                     if let mainCPUInfo, mainCPUInfo.contains("AMD") {
                                         Image("AMDLogo")
@@ -104,13 +100,10 @@ struct ServerDetailView: View {
                         Section("Status") {
                             let gaugeGradient = Gradient(colors: [.green, .pink])
                             
-                            VStack {
-                                HStack {
-                                    Label("CPU", systemImage: "cpu")
-                                    Spacer()
-                                    Text("\(server.status.cpu, specifier: "%.2f")%")
-                                        .foregroundStyle(.secondary)
-                                }
+                            VStack(alignment: .leading) {
+                                Label("CPU", systemImage: "cpu")
+                                Text("\(server.status.cpu, specifier: "%.2f")%")
+                                    .foregroundStyle(.secondary)
                                 
                                 let cpuUsage = server.status.cpu / 100
                                 Gauge(value: cpuUsage) {
@@ -120,13 +113,10 @@ struct ServerDetailView: View {
                                 .tint(gaugeGradient)
                             }
                             
-                            VStack {
-                                HStack {
-                                    Label("Memory", systemImage: "memorychip")
-                                    Spacer()
-                                    Text("\(formatBytes(server.status.memUsed))/\(formatBytes(server.host.memTotal))")
-                                        .foregroundStyle(.secondary)
-                                }
+                            VStack(alignment: .leading) {
+                                Label("Memory", systemImage: "memorychip")
+                                Text("\(formatBytes(server.status.memUsed))/\(formatBytes(server.host.memTotal))")
+                                    .foregroundStyle(.secondary)
                                 
                                 let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
                                 Gauge(value: memUsage) {
@@ -136,15 +126,11 @@ struct ServerDetailView: View {
                                 .tint(gaugeGradient)
                             }
                             
-                            VStack {
+                            VStack(alignment: .leading) {
                                 if server.host.swapTotal != 0 {
-                                    HStack {
-                                        Label("Swap", systemImage: "doc")
-                                        Spacer()
-                                        Text("\(formatBytes(server.status.swapUsed))/\(formatBytes(server.host.swapTotal))")
-                                            .foregroundStyle(.secondary)
-                                    }
-                                    
+                                    Label("Swap", systemImage: "doc")
+                                    Text("\(formatBytes(server.status.swapUsed))/\(formatBytes(server.host.swapTotal))")
+                                        .foregroundStyle(.secondary)
                                     
                                     let swapUsage = Double(server.status.swapUsed) / Double(server.host.swapTotal)
                                     Gauge(value: swapUsage) {
@@ -158,13 +144,10 @@ struct ServerDetailView: View {
                                 }
                             }
                             
-                            VStack {
-                                HStack {
-                                    Label("Disk", systemImage: "internaldrive")
-                                    Spacer()
-                                    Text("\(formatBytes(server.status.diskUsed))/\(formatBytes(server.host.diskTotal))")
-                                        .foregroundStyle(.secondary)
-                                }
+                            VStack(alignment: .leading) {
+                                Label("Disk", systemImage: "internaldrive")
+                                Text("\(formatBytes(server.status.diskUsed))/\(formatBytes(server.host.diskTotal))")
+                                    .foregroundStyle(.secondary)
                                 
                                 let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
                                 Gauge(value: diskUsage) {
@@ -180,66 +163,19 @@ struct ServerDetailView: View {
                             pieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: "\(server.status.UDPConnectionCount)")
                             pieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: "\(server.status.processCount)")
                         }
-                        
-                        if let pingData {
-                            pingCharts(pingData: pingData)
-                        }
                     }
                 }
                 else {
-                    if #available(iOS 17.0, *) {
+                    if #available(watchOS 10.0, *) {
                         ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
                     }
                     else {
-                        // ContentUnavailableView ×
                         Text("Server Unavailable")
                     }
                 }
             }
             .navigationTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .onAppear {
-            Task {
-                do {
-                    let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
-                    pingData = response.result
-                }
-                catch {
-                    
-                }
-            }
-        }
-        .onChange(of: scenePhase) { _ in
-            if scenePhase == .active {
-                Task {
-                    do {
-                        let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
-                        pingData = response.result
-                    }
-                    catch {
-                        
-                    }
-                }
-            }
-        }
-    }
-    
-    private func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: String) -> some View {
-        return HStack {
-            Label(name, systemImage: systemImage)
-            Spacer()
-            Text(content)
-                .foregroundStyle(.secondary)
-        }
-    }
-    
-    private func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: some View) -> some View {
-        return HStack {
-            Label(name, systemImage: systemImage)
-            Spacer()
-            content
-                .foregroundStyle(.secondary)
         }
     }
     
@@ -279,38 +215,6 @@ struct ServerDetailView: View {
                     Spacer()
                     content
                         .foregroundStyle(.secondary)
-                }
-            }
-        }
-    }
-    
-    private func pingCharts(pingData: [PingData]) -> some View {
-        Section("Ping") {
-            if pingData.isEmpty {
-                Text("No Data")
-            }
-            else {
-                ForEach(pingData) { data in
-                    VStack {
-                        Text("\(data.monitorName)")
-                        Chart {
-                            ForEach(Array(zip(data.createdAt, data.avgDelay)), id: \.0) { timestamp, delay in
-                                LineMark(
-                                    x: .value("Time", Date(timeIntervalSince1970: timestamp / 1000)),
-                                    y: .value("Ping", delay)
-                                )
-                            }
-                        }
-                        .chartXAxis {
-                            AxisMarks(values: .automatic) { value in
-                                AxisGridLine()
-                                AxisValueLabel(format: .dateTime.hour())
-                            }
-                        }
-                        .chartYAxis {
-                            AxisMarks(position: .leading)
-                        }
-                    }
                 }
             }
         }
