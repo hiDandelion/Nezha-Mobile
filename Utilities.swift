@@ -42,16 +42,6 @@ func getCore(_ str: [String]?) -> String {
 }
 
 func countryFlagEmoji(countryCode: String) -> String {
-    var countryCode = countryCode
-    
-    guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
-        return ""
-    }
-    let lawComplianceChinaMainland = userDefaults.bool(forKey: "NMLawComplianceChinaMainland")
-    if countryCode.uppercased() == "TW" && lawComplianceChinaMainland {
-        countryCode = "CN"
-    }
-    
     let base = UnicodeScalar("🇦").value - UnicodeScalar("A").value
     
     return countryCode

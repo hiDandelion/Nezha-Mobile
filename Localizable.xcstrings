@@ -629,6 +629,7 @@
       }
     },
     "Refresh Server" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -637,6 +638,9 @@
           }
         }
       }
+    },
+    "Refresh Widget" : {
+
     },
     "Retry" : {
       "localizations" : {

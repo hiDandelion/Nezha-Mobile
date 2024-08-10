@@ -96,8 +96,8 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     }
 }
 
-struct RefreshServerIntent: AppIntent {
-    static var title: LocalizedStringResource = "Refresh Server"
+struct RefreshWidgetIntent: AppIntent {
+    static var title: LocalizedStringResource = "Refresh Widget"
     static var description = IntentDescription("Get up-to-date details of a server.")
     
     func perform() async throws -> some IntentResult {

@@ -146,7 +146,7 @@ struct WidgetEntryView : View {
                         Text(countryFlagEmoji(countryCode: server.host.countryCode))
                         Text(server.name)
                         Spacer()
-                        Button(intent: RefreshServerIntent()) {
+                        Button(intent: RefreshWidgetIntent()) {
                             Image(systemName: "arrow.clockwise")
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -200,10 +200,19 @@ struct WidgetEntryView : View {
             case .systemMedium:
                 VStack(spacing: 0) {
                     HStack {
-                        Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                        if server.host.countryCode.uppercased() == "TW" {
+                            Image("TWFlag")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20)
+                        }
+                        else if server.host.countryCode.uppercased() != "" {
+                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                                .frame(width: 20)
+                        }
                         Text(server.name)
                         Spacer()
-                        Button(intent: RefreshServerIntent()) {
+                        Button(intent: RefreshWidgetIntent()) {
                             Text(entry.date.formatted(date: .omitted, time: .shortened))
                             Image(systemName: "arrow.clockwise")
                         }
@@ -232,7 +241,7 @@ struct WidgetEntryView : View {
         else {
             VStack {
                 Text(entry.message)
-                Button(intent: RefreshServerIntent()) {
+                Button(intent: RefreshWidgetIntent()) {
                     Text("Retry")
                     Image(systemName: "arrow.clockwise")
                 }

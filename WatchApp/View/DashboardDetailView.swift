@@ -46,7 +46,16 @@ struct DashboardDetailView: View {
                             ForEach(servers, id: \.id) { server in
                                 NavigationLink(destination: ServerDetailView(server: server)) {
                                     HStack {
-                                        Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                                        if server.host.countryCode.uppercased() == "TW" {
+                                            Image("TWFlag")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 20)
+                                        }
+                                        else if server.host.countryCode.uppercased() != "" {
+                                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                                                .frame(width: 20)
+                                        }
                                         Text(server.name)
                                     }
                                 }
