@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import Zephyr
 
 struct ServerDetailProvider: AppIntentTimelineProvider {
     typealias Entry = ServerEntry
@@ -105,149 +106,154 @@ struct WidgetEntryView : View {
     @Environment(\.widgetFamily) var family
     
     var body: some View {
-        if let server = entry.server {
-            switch(family) {
-            case .accessoryCircular:
-                let totalCore = getCore(server.host.cpu).toDouble()
-                let loadPressure = server.status.load15 / (totalCore ?? 1.0)
-                
-                Gauge(value: loadPressure) {
-                    Text("Load")
-                }
-            currentValueLabel: {
+        VStack {
+            if let server = entry.server {
+                switch(family) {
+                case .accessoryCircular:
+                    let totalCore = getCore(server.host.cpu).toDouble()
+                    let loadPressure = server.status.load15 / (totalCore ?? 1.0)
+                    
+                    Gauge(value: loadPressure) {
+                        Text("Load")
+                    }
+                currentValueLabel: {
                     Text("\(loadPressure * 100, specifier: "%.1f")%")
                 }
                 .gaugeStyle(.accessoryCircular)
-            case .accessoryInline:
-                let cpuUsage = server.status.cpu / 100
-                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                Text("CPU \(cpuUsage * 100, specifier: "%.0f")% MEM \(memUsage * 100, specifier: "%.0f")%")
-            case .accessoryRectangular:
-                let cpuUsage = server.status.cpu / 100
-                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                VStack {
-                    Text(server.name)
-                        .widgetAccentable()
-                    HStack {
-                        HStack(spacing: 0) {
-                            Image(systemName: "cpu")
-                            Text("\(cpuUsage * 100, specifier: "%.0f")%")
-                        }
-                        HStack(spacing: 0) {
-                            Image(systemName: "memorychip")
-                            Text("\(memUsage * 100, specifier: "%.0f")%")
-                        }
-                    }
-                    Text("↑\(formatBytes(server.status.netOutTransfer))")
-                }
-            case .systemSmall:
-                VStack(spacing: 0) {
-                    HStack {
-                        Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                case .accessoryInline:
+                    let cpuUsage = server.status.cpu / 100
+                    let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                    Text("CPU \(cpuUsage * 100, specifier: "%.0f")% MEM \(memUsage * 100, specifier: "%.0f")%")
+                case .accessoryRectangular:
+                    let cpuUsage = server.status.cpu / 100
+                    let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                    VStack {
                         Text(server.name)
-                        Spacer()
-                        Button(intent: RefreshWidgetIntent()) {
-                            Image(systemName: "arrow.clockwise")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    .font(.footnote)
-                    
-                    VStack(spacing: 5) {
-                        Text(server.IPv4)
-                            .font(.callout)
-                        
+                            .widgetAccentable()
                         HStack {
-                            let cpuUsage = server.status.cpu / 100
-                            let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                            let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
-                            
-                            VStack {
-                                Text("CPU")
+                            HStack(spacing: 0) {
+                                Image(systemName: "cpu")
                                 Text("\(cpuUsage * 100, specifier: "%.0f")%")
                             }
-                            
-                            VStack {
-                                Text("MEM")
+                            HStack(spacing: 0) {
+                                Image(systemName: "memorychip")
                                 Text("\(memUsage * 100, specifier: "%.0f")%")
                             }
-                            
-                            VStack {
-                                Text("DISK")
-                                Text("\(diskUsage * 100, specifier: "%.0f")%")
-                            }
                         }
-                        .font(.caption)
-                        
+                        Text("↑\(formatBytes(server.status.netOutTransfer))")
+                    }
+                case .systemSmall:
+                    VStack(spacing: 0) {
                         HStack {
-                            HStack {
-                                Image(systemName: "power")
-                                Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
+                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                            Text(server.name)
+                            Spacer()
+                            Button(intent: RefreshWidgetIntent()) {
+                                Image(systemName: "arrow.clockwise")
                             }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .font(.footnote)
+                        
+                        VStack(spacing: 5) {
+                            Text(server.IPv4)
+                                .font(.callout)
                             
                             HStack {
-                                VStack(alignment: .leading) {
-                                    Text("↑\(formatBytes(server.status.netOutTransfer))")
-                                    Text("↓\(formatBytes(server.status.netInTransfer))")
+                                let cpuUsage = server.status.cpu / 100
+                                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                                let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
+                                
+                                VStack {
+                                    Text("CPU")
+                                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                                }
+                                
+                                VStack {
+                                    Text("MEM")
+                                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                                }
+                                
+                                VStack {
+                                    Text("DISK")
+                                    Text("\(diskUsage * 100, specifier: "%.0f")%")
                                 }
                             }
+                            .font(.caption)
+                            
+                            HStack {
+                                HStack {
+                                    Image(systemName: "power")
+                                    Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
+                                }
+                                
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("↑\(formatBytes(server.status.netOutTransfer))")
+                                        Text("↓\(formatBytes(server.status.netInTransfer))")
+                                    }
+                                }
+                            }
+                            .font(.caption)
                         }
-                        .font(.caption)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .foregroundStyle(.white)
-            case .systemMedium:
-                VStack(spacing: 0) {
-                    HStack {
-                        if server.host.countryCode.uppercased() == "TW" {
-                            Image("TWFlag")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20)
-                        }
-                        else if server.host.countryCode.uppercased() != "" {
-                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                                .frame(width: 20)
-                        }
-                        Text(server.name)
-                        Spacer()
-                        Button(intent: RefreshWidgetIntent()) {
-                            Text(entry.date.formatted(date: .omitted, time: .shortened))
-                            Image(systemName: "arrow.clockwise")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    .font(.subheadline)
-                    
-                    HStack {
-                        VStack(spacing: 0) {
-                            gaugeView(server: server)
-                        }
-                        Spacer()
-                        infoView(server: server)
-                            .font(.caption2)
-                            .frame(maxWidth: 100)
-                            .padding(.leading, 20)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .foregroundStyle(.white)
-            default:
-                Text("Unsupported family")
                     .foregroundStyle(.white)
+                case .systemMedium:
+                    VStack(spacing: 0) {
+                        HStack {
+                            if server.host.countryCode.uppercased() == "TW" {
+                                Image("TWFlag")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20)
+                            }
+                            else if server.host.countryCode.uppercased() != "" {
+                                Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                                    .frame(width: 20)
+                            }
+                            Text(server.name)
+                            Spacer()
+                            Button(intent: RefreshWidgetIntent()) {
+                                Text(entry.date.formatted(date: .omitted, time: .shortened))
+                                Image(systemName: "arrow.clockwise")
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .font(.subheadline)
+                        
+                        HStack {
+                            VStack(spacing: 0) {
+                                gaugeView(server: server)
+                            }
+                            Spacer()
+                            infoView(server: server)
+                                .font(.caption2)
+                                .frame(maxWidth: 100)
+                                .padding(.leading, 20)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                    .foregroundStyle(.white)
+                default:
+                    Text("Unsupported family")
+                        .foregroundStyle(.white)
+                }
+            }
+            else {
+                VStack {
+                    Text(entry.message)
+                    Button(intent: RefreshWidgetIntent()) {
+                        Text("Retry")
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .foregroundStyle(.white)
             }
         }
-        else {
-            VStack {
-                Text(entry.message)
-                Button(intent: RefreshWidgetIntent()) {
-                    Text("Retry")
-                    Image(systemName: "arrow.clockwise")
-                }
-                .buttonStyle(PlainButtonStyle())
-            }
-            .foregroundStyle(.white)
+        .onAppear {
+            Zephyr.sync()
         }
     }
     
@@ -334,6 +340,18 @@ struct WidgetEntryView : View {
 }
 
 struct WidgetApp: Widget {
+    init() {
+        // Register UserDefaults
+        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
+        if let userDefaults {
+            let defaultValues: [String: Any] = [
+                "NMDashboardLink": "",
+                "NMDashboardAPIToken": ""
+            ]
+            userDefaults.register(defaults: defaultValues)
+        }
+    }
+    
     let kind: String = "nezha-widget-server-detail"
     
     var body: some WidgetConfiguration {

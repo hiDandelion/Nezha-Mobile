@@ -19,7 +19,6 @@ enum DashboardLoadingState: Equatable {
 
 class DashboardViewModel: ObservableObject {
     private var timer: Timer?
-    private var backgroundTask: BGTask?
     private let session: URLSession
     private var cancellables = Set<AnyCancellable>()
     @Published var loadingState: DashboardLoadingState = .idle
@@ -32,9 +31,6 @@ class DashboardViewModel: ObservableObject {
         config.isDiscretionary = false
         config.sessionSendsLaunchEvents = true
         self.session = URLSession(configuration: config)
-        
-        registerBackgroundTask()
-        setupNotifications()
     }
     
     func startMonitoring() {
@@ -49,7 +45,6 @@ class DashboardViewModel: ObservableObject {
     
     func stopMonitoring() {
         stopTimer()
-        cancelBackgroundRefresh()
         isMonitoringEnabled = false
         loadingState = .idle
     }
@@ -84,28 +79,6 @@ class DashboardViewModel: ObservableObject {
             return
         }
         stopTimer()
-        scheduleBackgroundRefresh()
-    }
-    
-    private func handleAppRefresh(task: BGAppRefreshTask) {
-        guard isMonitoringEnabled else {
-            task.setTaskCompleted(success: true)
-            return
-        }
-        
-        scheduleBackgroundRefresh()
-        
-        task.expirationHandler = { [weak self] in
-            self?.cancelBackgroundRefresh()
-            task.setTaskCompleted(success: false)
-        }
-        
-        Task {
-            await getAllServerDetail { [weak self] success in
-                self?.scheduleBackgroundRefresh()
-                task.setTaskCompleted(success: success)
-            }
-        }
     }
     
     private func startTimer() {
@@ -121,27 +94,6 @@ class DashboardViewModel: ObservableObject {
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
-    }
-    
-    private func registerBackgroundTask() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.argsment.Nezha-Mobile.get-all-server-detail", using: nil) { task in
-            self.handleAppRefresh(task: task as! BGAppRefreshTask)
-        }
-    }
-    
-    private func scheduleBackgroundRefresh() {
-        let request = BGAppRefreshTaskRequest(identifier: "com.argsment.Nezha-Mobile.get-all-server-detail")
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60)
-        
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        } catch {
-            print("Could not schedule app refresh: \(error)")
-        }
-    }
-    
-    private func cancelBackgroundRefresh() {
-        BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: "com.argsment.Nezha-Mobile.get-all-server-detail")
     }
     
     private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) async {

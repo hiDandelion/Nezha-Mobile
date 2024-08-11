@@ -50,11 +50,12 @@ struct DashboardDetailView: View {
                                             Image("TWFlag")
                                                 .resizable()
                                                 .scaledToFit()
-                                                .frame(width: 20)
                                         }
                                         else if server.host.countryCode.uppercased() != "" {
                                             Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                                                .frame(width: 20)
+                                        }
+                                        else {
+                                            Text("🏴‍☠️")
                                         }
                                         Text(server.name)
                                     }
@@ -80,7 +81,7 @@ struct DashboardDetailView: View {
                             Text(message)
                                 .font(.subheadline)
                             Button("Retry") {
-                                
+                                dashboardViewModel.startMonitoring()
                             }
                             Button("Settings") {
                                 isShowingSettingSheet.toggle()

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Zephyr
 
 struct ContentView: View {
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
@@ -23,15 +24,6 @@ struct ContentView: View {
                             .frame(alignment: .center)
                         Button("Start", systemImage: "arrow.right.circle") {
                             isShowingAddDashboardSheet = true
-                            // Ask for network permission
-                            Task {
-                                do {
-                                    try await _ = RequestHandler.getAllServerDetail()
-                                }
-                                catch {
-                                    _ = error
-                                }
-                            }
                         }
                         .font(.headline)
                         .padding(.top, 20)
@@ -45,6 +37,9 @@ struct ContentView: View {
                     DashboardDetailView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
                 }
             }
+        }
+        .onAppear {
+            Zephyr.sync()
         }
     }
 }

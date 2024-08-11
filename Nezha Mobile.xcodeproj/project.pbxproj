@@ -50,6 +50,13 @@
 		CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */; };
 		CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
 		CBD2BAE72C683C2B00BA9A36 /* PingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAE62C683C2B00BA9A36 /* PingChart.swift */; };
+		CBD2BAEA2C68890A00BA9A36 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = CBD2BAE92C68890A00BA9A36 /* Zephyr */; };
+		CBD2BAEC2C68891E00BA9A36 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = CBD2BAEB2C68891E00BA9A36 /* Zephyr */; };
+		CBD2BAEE2C68895000BA9A36 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = CBD2BAED2C68895000BA9A36 /* Zephyr */; };
+		CBD2BAF32C68DB2700BA9A36 /* ServerDetailHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF22C68DB2700BA9A36 /* ServerDetailHostView.swift */; };
+		CBD2BAF52C68DB7800BA9A36 /* GeneralViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */; };
+		CBD2BAF72C68DBCB00BA9A36 /* ServerDetailStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */; };
+		CBD2BAF92C68DC1600BA9A36 /* ServerDetailPingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +112,7 @@
 		CB701A262C5CF93500019344 /* WidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetApp.swift; sourceTree = "<group>"; };
 		CB701A2A2C5CF93600019344 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB701A2C2C5CF93600019344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CB701A342C5CFC9400019344 /* WidgetAppExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetAppExtension.entitlements; sourceTree = "<group>"; };
+		CB701A342C5CFC9400019344 /* WidgetApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetApp.entitlements; sourceTree = "<group>"; };
 		CB701A382C5DC9F000019344 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
 		CB701A3A2C5DCFD100019344 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		CB701A3E2C61B73000019344 /* APIResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModel.swift; sourceTree = "<group>"; };
@@ -127,7 +134,7 @@
 		CB9C606A2C5AF76E00DAE1E3 /* NezhaMobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NezhaMobileApp.swift; sourceTree = "<group>"; };
 		CB9C606C2C5AF76E00DAE1E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CB9C60722C5AF76F00DAE1E3 /* Nezha_Mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nezha_Mobile.entitlements; sourceTree = "<group>"; };
+		CB9C60722C5AF76F00DAE1E3 /* Nezha Mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nezha Mobile.entitlements"; sourceTree = "<group>"; };
 		CB9C60742C5AF76F00DAE1E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDashboardView.swift; sourceTree = "<group>"; };
 		CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDetailView.swift; sourceTree = "<group>"; };
@@ -138,6 +145,10 @@
 		CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		CBD2BAE62C683C2B00BA9A36 /* PingChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingChart.swift; sourceTree = "<group>"; };
+		CBD2BAF22C68DB2700BA9A36 /* ServerDetailHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailHostView.swift; sourceTree = "<group>"; };
+		CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViews.swift; sourceTree = "<group>"; };
+		CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailStatusView.swift; sourceTree = "<group>"; };
+		CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailPingChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB701A222C5CF93500019344 /* SwiftUI.framework in Frameworks */,
+				CBD2BAEE2C68895000BA9A36 /* Zephyr in Frameworks */,
 				CB701A202C5CF93500019344 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBD2BAEC2C68891E00BA9A36 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBD2BAEA2C68890A00BA9A36 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +206,7 @@
 				CB701A3A2C5DCFD100019344 /* AppIntent.swift */,
 				CB701A2A2C5CF93600019344 /* Assets.xcassets */,
 				CB701A2C2C5CF93600019344 /* Info.plist */,
-				CB701A342C5CFC9400019344 /* WidgetAppExtension.entitlements */,
+				CB701A342C5CFC9400019344 /* WidgetApp.entitlements */,
 			);
 			path = WidgetApp;
 			sourceTree = "<group>";
@@ -200,12 +214,12 @@
 		CB701A502C67077400019344 /* WatchApp */ = {
 			isa = PBXGroup;
 			children = (
-				CB701A702C6714FC00019344 /* Info.plist */,
-				CB701A6E2C67134900019344 /* WatchApp.entitlements */,
 				CB701A512C67077400019344 /* WatchApp.swift */,
 				CB701A632C67099300019344 /* View */,
 				CB701A642C67099D00019344 /* ViewModel */,
 				CB701A552C67077600019344 /* Assets.xcassets */,
+				CB701A702C6714FC00019344 /* Info.plist */,
+				CB701A6E2C67134900019344 /* WatchApp.entitlements */,
 				CB701A572C67077600019344 /* Preview Content */,
 			);
 			path = WatchApp;
@@ -275,7 +289,7 @@
 				CB701A142C5C98B900019344 /* Utilities */,
 				CB9C60702C5AF76F00DAE1E3 /* Assets.xcassets */,
 				CB701A742C677EEC00019344 /* Info.plist */,
-				CB9C60722C5AF76F00DAE1E3 /* Nezha_Mobile.entitlements */,
+				CB9C60722C5AF76F00DAE1E3 /* Nezha Mobile.entitlements */,
 				CB9C60732C5AF76F00DAE1E3 /* Preview Content */,
 			);
 			path = "Nezha Mobile";
@@ -296,10 +310,10 @@
 				CB9C607B2C5AF95B00DAE1E3 /* AddDashboardView.swift */,
 				CB9C607D2C5AFB4E00DAE1E3 /* DashboardDetailView.swift */,
 				CB701A122C5C5DA500019344 /* CardView.swift */,
-				CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */,
-				CBD2BAE62C683C2B00BA9A36 /* PingChart.swift */,
+				CBD2BAF12C68DB0700BA9A36 /* ServerDetail */,
 				CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */,
 				CB701A402C63131F00019344 /* ChangeThemeView.swift */,
+				CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +324,18 @@
 				CB9C60812C5B11D800DAE1E3 /* DashboardViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CBD2BAF12C68DB0700BA9A36 /* ServerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */,
+				CBD2BAF22C68DB2700BA9A36 /* ServerDetailHostView.swift */,
+				CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */,
+				CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */,
+				CBD2BAE62C683C2B00BA9A36 /* PingChart.swift */,
+			);
+			path = ServerDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +354,9 @@
 			dependencies = (
 			);
 			name = WidgetAppExtension;
+			packageProductDependencies = (
+				CBD2BAED2C68895000BA9A36 /* Zephyr */,
+			);
 			productName = WidgetAppExtension;
 			productReference = CB701A1D2C5CF93500019344 /* WidgetAppExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -345,6 +374,9 @@
 			dependencies = (
 			);
 			name = WatchApp;
+			packageProductDependencies = (
+				CBD2BAEB2C68891E00BA9A36 /* Zephyr */,
+			);
 			productName = "Watch App Watch App";
 			productReference = CB701A4F2C67077400019344 /* WatchApp.app */;
 			productType = "com.apple.product-type.application";
@@ -366,6 +398,9 @@
 				CB701A5B2C67077600019344 /* PBXTargetDependency */,
 			);
 			name = "Nezha Mobile";
+			packageProductDependencies = (
+				CBD2BAE92C68890A00BA9A36 /* Zephyr */,
+			);
 			productName = "Nezha Mobile";
 			productReference = CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */;
 			productType = "com.apple.product-type.application";
@@ -401,6 +436,9 @@
 				"zh-Hans",
 			);
 			mainGroup = CB9C605E2C5AF76E00DAE1E3;
+			packageReferences = (
+				CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */,
+			);
 			productRefGroup = CB9C60682C5AF76E00DAE1E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -489,10 +527,14 @@
 				CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */,
 				CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */,
 				CB701A392C5DC9F000019344 /* ViewUtilities.swift in Sources */,
+				CBD2BAF92C68DC1600BA9A36 /* ServerDetailPingChartView.swift in Sources */,
+				CBD2BAF52C68DB7800BA9A36 /* GeneralViews.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* NezhaMobileApp.swift in Sources */,
+				CBD2BAF32C68DB2700BA9A36 /* ServerDetailHostView.swift in Sources */,
 				CBD2BAE72C683C2B00BA9A36 /* PingChart.swift in Sources */,
 				CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */,
 				CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */,
+				CBD2BAF72C68DBCB00BA9A36 /* ServerDetailStatusView.swift in Sources */,
 				CB9C60822C5B11D800DAE1E3 /* DashboardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,9 +560,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetAppExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -532,7 +574,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.WidgetApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -548,9 +590,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetAppExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -562,7 +604,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.WidgetApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -581,7 +623,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -614,7 +656,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -761,9 +803,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -803,9 +845,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha_Mobile.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -879,6 +921,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ArtSabintsev/Zephyr.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBD2BAE92C68890A00BA9A36 /* Zephyr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */;
+			productName = Zephyr;
+		};
+		CBD2BAEB2C68891E00BA9A36 /* Zephyr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */;
+			productName = Zephyr;
+		};
+		CBD2BAED2C68895000BA9A36 /* Zephyr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */;
+			productName = Zephyr;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB9C605F2C5AF76E00DAE1E3 /* Project object */;
 }

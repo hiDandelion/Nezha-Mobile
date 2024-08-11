@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Zephyr
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
@@ -49,6 +50,7 @@ struct AddDashboardView: View {
                         }
                         userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
                         userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                        Zephyr.sync()
                         dismiss()
                     }
                     .disabled(dashboardLink == "" || dashboardAPIToken == "")

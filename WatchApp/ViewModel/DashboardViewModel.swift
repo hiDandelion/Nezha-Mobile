@@ -37,7 +37,9 @@ class DashboardViewModel: ObservableObject {
         stopMonitoring()
         isMonitoringEnabled = true
         loadingState = .loading
-        getAllServerDetail()
+        Task {
+            await getAllServerDetail()
+        }
     }
     
     func stopMonitoring() {
@@ -64,7 +66,9 @@ class DashboardViewModel: ObservableObject {
             return
         }
         loadingState = .loading
-        getAllServerDetail()
+        Task {
+            await getAllServerDetail()
+        }
     }
     
     private func handleEnterBackground() {
@@ -73,25 +77,26 @@ class DashboardViewModel: ObservableObject {
         }
     }
     
-    private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) {
-        RequestHandler.getAllServerDetail { [weak self] response, errorDescription in
+    private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) async {
+        do {
+            let response = try await RequestHandler.getAllServerDetail()
             DispatchQueue.main.async {
                 withAnimation {
-                    if let response = response {
-                        if let servers = response.result {
-                            self?.servers = servers
-                        }
-                        self?.loadingState = .loaded
-                        completion?(true)
-                    } else if let errorDescription = errorDescription {
-                        self?.loadingState = .error(errorDescription)
-                        completion?(false)
-                    } else {
-                        self?.loadingState = .error(String(localized: "error.unknownError"))
-                        completion?(false)
+                    if let servers = response.result {
+                        self.servers = servers
                     }
+                    self.loadingState = .loaded
                 }
             }
+            completion?(true)
+        }
+        catch {
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.loadingState = .error(error.localizedDescription)
+                }
+            }
+            completion?(false)
         }
     }
 }

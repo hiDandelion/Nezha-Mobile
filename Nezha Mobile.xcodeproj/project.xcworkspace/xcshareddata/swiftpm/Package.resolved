@@ -1,0 +1,15 @@
+{
+  "originHash" : "eb1f876163cc85e2e06cb86e9ea27aef070323f0020dc71633a543cf85b4f16c",
+  "pins" : [
+    {
+      "identity" : "zephyr",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ArtSabintsev/Zephyr.git",
+      "state" : {
+        "revision" : "b0dda179006b354680b1df96e279134a704b0c06",
+        "version" : "3.8.0"
+      }
+    }
+  ],
+  "version" : 3
+}

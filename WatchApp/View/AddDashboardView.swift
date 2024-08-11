@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Zephyr
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
@@ -39,6 +40,7 @@ struct AddDashboardView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
+                        Zephyr.sync()
                         dismiss()
                     } label: {
                         Label("Done", systemImage: "checkmark")
@@ -48,8 +50,4 @@ struct AddDashboardView: View {
             }
         }
     }
-}
-
-#Preview {
-    AddDashboardView()
 }

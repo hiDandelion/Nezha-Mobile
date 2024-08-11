@@ -645,6 +645,16 @@
         }
       }
     },
+    "Section" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分区"
+          }
+        }
+      }
+    },
     "Select Server" : {
       "localizations" : {
         "zh-Hans" : {
