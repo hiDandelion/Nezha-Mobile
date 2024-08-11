@@ -113,7 +113,7 @@ struct PingData: Codable, Identifiable {
     let serverId: Int
     let monitorName: String
     let serverName: String
-    let createdAt: [Double]
+    let createdAt: [Date]
     let avgDelay: [Double]
     
     var id: Int { monitorId }
@@ -125,5 +125,19 @@ struct PingData: Codable, Identifiable {
         case serverName = "server_name"
         case createdAt = "created_at"
         case avgDelay = "avg_delay"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        monitorId = try container.decode(Int.self, forKey: .monitorId)
+        serverId = try container.decode(Int.self, forKey: .serverId)
+        monitorName = try container.decode(String.self, forKey: .monitorName)
+        serverName = try container.decode(String.self, forKey: .serverName)
+        
+        let createdAtTimestamps = try container.decode([Double].self, forKey: .createdAt)
+        createdAt = createdAtTimestamps.map { Date(timeIntervalSince1970: $0 / 1000) }
+        
+        avgDelay = try container.decode([Double].self, forKey: .avgDelay)
     }
 }

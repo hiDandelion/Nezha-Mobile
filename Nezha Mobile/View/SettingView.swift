@@ -103,6 +103,7 @@ struct SettingView: View {
                         }
                         dismiss()
                     }
+                    .disabled(dashboardLink == "" || dashboardAPIToken == "")
                 }
             }
         }

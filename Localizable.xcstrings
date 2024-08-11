@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%.0f" : {
+
+    },
     "%.0f%%" : {
 
     },
@@ -34,6 +37,16 @@
     },
     "↓%@/s" : {
 
+    },
+    "🏴‍☠️" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏴‍☠️"
+          }
+        }
+      }
     },
     "About" : {
       "localizations" : {
@@ -363,22 +376,6 @@
         }
       }
     },
-    "error.unknownError" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown error."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未知错误。"
-          }
-        }
-      }
-    },
     "Get up-to-date details of a server." : {
       "localizations" : {
         "zh-Hans" : {
@@ -564,16 +561,6 @@
         }
       }
     },
-    "No Data" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无数据"
-          }
-        }
-      }
-    },
     "No Server" : {
       "localizations" : {
         "zh-Hans" : {
@@ -628,19 +615,15 @@
         }
       }
     },
-    "Refresh Server" : {
-      "extractionState" : "stale",
+    "Refresh Widget" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刷新服务器"
+            "value" : "刷新小组件"
           }
         }
       }
-    },
-    "Refresh Widget" : {
-
     },
     "Retry" : {
       "localizations" : {
@@ -678,6 +661,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择展示信息的服务器。"
+          }
+        }
+      }
+    },
+    "Selected" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已选择"
           }
         }
       }

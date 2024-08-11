@@ -41,7 +41,9 @@ class DashboardViewModel: ObservableObject {
         stopMonitoring()
         isMonitoringEnabled = true
         loadingState = .loading
-        getAllServerDetail()
+        Task {
+            await getAllServerDetail()
+        }
         startTimer()
     }
     
@@ -71,7 +73,9 @@ class DashboardViewModel: ObservableObject {
             return
         }
         loadingState = .loading
-        getAllServerDetail()
+        Task {
+            await getAllServerDetail()
+        }
         startTimer()
     }
     
@@ -96,16 +100,21 @@ class DashboardViewModel: ObservableObject {
             task.setTaskCompleted(success: false)
         }
         
-        getAllServerDetail { [weak self] success in
-            self?.scheduleBackgroundRefresh()
-            task.setTaskCompleted(success: success)
+        Task {
+            await getAllServerDetail { [weak self] success in
+                self?.scheduleBackgroundRefresh()
+                task.setTaskCompleted(success: success)
+            }
         }
     }
     
     private func startTimer() {
         stopTimer()
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
-            self?.getAllServerDetail()
+            Task { [weak self] in
+                guard let self = self else { return }
+                await self.getAllServerDetail()
+            }
         }
     }
     
@@ -135,25 +144,26 @@ class DashboardViewModel: ObservableObject {
         BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: "com.argsment.Nezha-Mobile.get-all-server-detail")
     }
     
-    private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) {
-        RequestHandler.getAllServerDetail { [weak self] response, errorDescription in
+    private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) async {
+        do {
+            let response = try await RequestHandler.getAllServerDetail()
             DispatchQueue.main.async {
                 withAnimation {
-                    if let response = response {
-                        if let servers = response.result {
-                            self?.servers = servers
-                        }
-                        self?.loadingState = .loaded
-                        completion?(true)
-                    } else if let errorDescription = errorDescription {
-                        self?.loadingState = .error(errorDescription)
-                        completion?(false)
-                    } else {
-                        self?.loadingState = .error(String(localized: "error.unknownError"))
-                        completion?(false)
+                    if let servers = response.result {
+                        self.servers = servers
                     }
+                    self.loadingState = .loaded
                 }
             }
+            completion?(true)
+        }
+        catch {
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.loadingState = .error(error.localizedDescription)
+                }
+            }
+            completion?(false)
         }
     }
 }

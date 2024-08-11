@@ -12,7 +12,8 @@ struct ServerDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     var server: Server
-    @State private var pingData: [PingData]?
+    @State private var pingDatas: [PingData]?
+    @State private var errorDescriptionLoadingPingData: String?
     
     var body: some View {
         NavigationStack {
@@ -181,8 +182,15 @@ struct ServerDetailView: View {
                             pieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: "\(server.status.processCount)")
                         }
                         
-                        if let pingData {
-                            pingCharts(pingData: pingData)
+                        Section("Ping") {
+                            if let pingDatas {
+                                ForEach(pingDatas) { pingData in
+                                    PingChart(pingData: pingData)
+                                }
+                            }
+                            else if let errorDescriptionLoadingPingData {
+                                Text(errorDescriptionLoadingPingData)
+                            }
                         }
                     }
                 }
@@ -203,10 +211,13 @@ struct ServerDetailView: View {
             Task {
                 do {
                     let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
-                    pingData = response.result
+                    withAnimation {
+                        errorDescriptionLoadingPingData = nil
+                        pingDatas = response.result
+                    }
                 }
                 catch {
-                    
+                    errorDescriptionLoadingPingData = error.localizedDescription
                 }
             }
         }
@@ -215,10 +226,13 @@ struct ServerDetailView: View {
                 Task {
                     do {
                         let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
-                        pingData = response.result
+                        withAnimation {
+                            errorDescriptionLoadingPingData = nil
+                            pingDatas = response.result
+                        }
                     }
                     catch {
-                        
+                        errorDescriptionLoadingPingData = error.localizedDescription
                     }
                 }
             }
@@ -279,38 +293,6 @@ struct ServerDetailView: View {
                     Spacer()
                     content
                         .foregroundStyle(.secondary)
-                }
-            }
-        }
-    }
-    
-    private func pingCharts(pingData: [PingData]) -> some View {
-        Section("Ping") {
-            if pingData.isEmpty {
-                Text("No Data")
-            }
-            else {
-                ForEach(pingData) { data in
-                    VStack {
-                        Text("\(data.monitorName)")
-                        Chart {
-                            ForEach(Array(zip(data.createdAt, data.avgDelay)), id: \.0) { timestamp, delay in
-                                LineMark(
-                                    x: .value("Time", Date(timeIntervalSince1970: timestamp / 1000)),
-                                    y: .value("Ping", delay)
-                                )
-                            }
-                        }
-                        .chartXAxis {
-                            AxisMarks(values: .automatic) { value in
-                                AxisGridLine()
-                                AxisValueLabel(format: .dateTime.hour())
-                            }
-                        }
-                        .chartYAxis {
-                            AxisMarks(position: .leading)
-                        }
-                    }
                 }
             }
         }

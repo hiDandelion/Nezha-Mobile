@@ -68,7 +68,7 @@ struct DashboardDetailView: View {
                             Text(message)
                                 .font(.subheadline)
                             Button("Retry") {
-                                
+                                dashboardViewModel.startMonitoring()
                             }
                             Button("Settings") {
                                 isShowingSettingSheet.toggle()
@@ -297,16 +297,20 @@ struct DashboardDetailView: View {
         CardView {
             HStack {
                 HStack {
-                    if server.host.countryCode.uppercased() == "TW" {
-                        Image("TWFlag")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20)
+                    HStack {
+                        if server.host.countryCode.uppercased() == "TW" {
+                            Image("TWFlag")
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        else if server.host.countryCode.uppercased() != "" {
+                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                        }
+                        else {
+                            Text("🏴‍☠️")
+                        }
                     }
-                    else if server.host.countryCode.uppercased() != "" {
-                        Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                            .frame(width: 20)
-                    }
+                        .frame(width: 20)
                     Text(server.name)
                     Image(systemName: "circlebadge.fill")
                         .foregroundStyle(isServerOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)

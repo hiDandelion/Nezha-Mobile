@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
-    @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
+    @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
+    @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
     
     var body: some View {
         NavigationStack {
@@ -35,10 +35,23 @@ struct AddDashboardView: View {
             }
             .navigationTitle("Add Dashboard")
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
                         dismiss()
                     }
+                }
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") {
+                        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
+                            dismiss()
+                            return
+                        }
+                        userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
+                        userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                        dismiss()
+                    }
+                    .disabled(dashboardLink == "" || dashboardAPIToken == "")
                 }
             }
         }
