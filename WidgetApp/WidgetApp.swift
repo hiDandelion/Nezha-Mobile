@@ -7,7 +7,6 @@
 
 import WidgetKit
 import SwiftUI
-import Zephyr
 
 struct ServerDetailProvider: AppIntentTimelineProvider {
     typealias Entry = ServerEntry
@@ -251,9 +250,6 @@ struct WidgetEntryView : View {
                 }
                 .foregroundStyle(.white)
             }
-        }
-        .onAppear {
-            Zephyr.sync()
         }
     }
     

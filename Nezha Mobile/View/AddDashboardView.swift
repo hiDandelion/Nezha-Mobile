@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import Zephyr
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
     
@@ -50,7 +50,11 @@ struct AddDashboardView: View {
                         }
                         userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
                         userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-                        Zephyr.sync()
+                        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                        NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
+                        NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                        dashboardViewModel.startMonitoring()
                         dismiss()
                     }
                     .disabled(dashboardLink == "" || dashboardAPIToken == "")

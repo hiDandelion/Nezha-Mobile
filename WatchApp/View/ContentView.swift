@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Zephyr
 
 struct ContentView: View {
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
@@ -17,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if dashboardLink == "" || isShowingAddDashboardSheet {
+                if dashboardLink == "" || dashboardAPIToken == "" || isShowingAddDashboardSheet {
                     VStack {
                         Text("Start your journey with Nezha Mobile")
                             .font(.title3)
@@ -28,7 +27,7 @@ struct ContentView: View {
                         .font(.headline)
                         .padding(.top, 20)
                         .sheet(isPresented: $isShowingAddDashboardSheet) {
-                            AddDashboardView()
+                            AddDashboardView(dashboardViewModel: dashboardViewModel)
                         }
                     }
                     .padding()
@@ -39,7 +38,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            Zephyr.sync()
+            syncWithiCloud()
         }
     }
 }

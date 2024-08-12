@@ -50,13 +50,14 @@
 		CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */; };
 		CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
 		CBD2BAE72C683C2B00BA9A36 /* PingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAE62C683C2B00BA9A36 /* PingChart.swift */; };
-		CBD2BAEA2C68890A00BA9A36 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = CBD2BAE92C68890A00BA9A36 /* Zephyr */; };
-		CBD2BAEC2C68891E00BA9A36 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = CBD2BAEB2C68891E00BA9A36 /* Zephyr */; };
-		CBD2BAEE2C68895000BA9A36 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = CBD2BAED2C68895000BA9A36 /* Zephyr */; };
 		CBD2BAF32C68DB2700BA9A36 /* ServerDetailHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF22C68DB2700BA9A36 /* ServerDetailHostView.swift */; };
 		CBD2BAF52C68DB7800BA9A36 /* GeneralViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */; };
 		CBD2BAF72C68DBCB00BA9A36 /* ServerDetailStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */; };
 		CBD2BAF92C68DC1600BA9A36 /* ServerDetailPingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */; };
+		CBD2BAFB2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
+		CBD2BAFC2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
+		CBD2BAFD2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
+		CBD2BAFF2C698EDE00BA9A36 /* ServerDetailBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFE2C698EDE00BA9A36 /* ServerDetailBasicView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,8 @@
 		CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViews.swift; sourceTree = "<group>"; };
 		CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailStatusView.swift; sourceTree = "<group>"; };
 		CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailPingChartView.swift; sourceTree = "<group>"; };
+		CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudSync.swift; sourceTree = "<group>"; };
+		CBD2BAFE2C698EDE00BA9A36 /* ServerDetailBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailBasicView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB701A222C5CF93500019344 /* SwiftUI.framework in Frameworks */,
-				CBD2BAEE2C68895000BA9A36 /* Zephyr in Frameworks */,
 				CB701A202C5CF93500019344 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +168,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBD2BAEC2C68891E00BA9A36 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +175,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBD2BAEA2C68890A00BA9A36 /* Zephyr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +262,7 @@
 				CB701A3E2C61B73000019344 /* APIResponseModel.swift */,
 				CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */,
 				CB9C60852C5B293100DAE1E3 /* Utilities.swift */,
+				CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */,
 				CB9C60692C5AF76E00DAE1E3 /* Nezha Mobile */,
 				CB701A232C5CF93500019344 /* WidgetApp */,
 				CB701A502C67077400019344 /* WatchApp */,
@@ -330,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				CB9C60832C5B1C2300DAE1E3 /* ServerDetailView.swift */,
+				CBD2BAFE2C698EDE00BA9A36 /* ServerDetailBasicView.swift */,
 				CBD2BAF22C68DB2700BA9A36 /* ServerDetailHostView.swift */,
 				CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */,
 				CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */,
@@ -355,7 +357,6 @@
 			);
 			name = WidgetAppExtension;
 			packageProductDependencies = (
-				CBD2BAED2C68895000BA9A36 /* Zephyr */,
 			);
 			productName = WidgetAppExtension;
 			productReference = CB701A1D2C5CF93500019344 /* WidgetAppExtension.appex */;
@@ -375,7 +376,6 @@
 			);
 			name = WatchApp;
 			packageProductDependencies = (
-				CBD2BAEB2C68891E00BA9A36 /* Zephyr */,
 			);
 			productName = "Watch App Watch App";
 			productReference = CB701A4F2C67077400019344 /* WatchApp.app */;
@@ -399,7 +399,6 @@
 			);
 			name = "Nezha Mobile";
 			packageProductDependencies = (
-				CBD2BAE92C68890A00BA9A36 /* Zephyr */,
 			);
 			productName = "Nezha Mobile";
 			productReference = CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */;
@@ -492,6 +491,7 @@
 				CB701A422C631D4400019344 /* APIResponseModel.swift in Sources */,
 				CB701A432C631D8A00019344 /* RequestHandler.swift in Sources */,
 				CB701A3B2C5DCFD100019344 /* AppIntent.swift in Sources */,
+				CBD2BAFC2C698D7C00BA9A36 /* iCloudSync.swift in Sources */,
 				CB701A372C5DC9B400019344 /* Utilities.swift in Sources */,
 				CB701A3C2C5DD5DD00019344 /* WidgetApp.swift in Sources */,
 			);
@@ -504,6 +504,7 @@
 				CB701A732C67158600019344 /* ServerDetailView.swift in Sources */,
 				CB701A542C67077400019344 /* ContentView.swift in Sources */,
 				CB701A622C6707CD00019344 /* AddDashboardView.swift in Sources */,
+				CBD2BAFD2C698D7C00BA9A36 /* iCloudSync.swift in Sources */,
 				CB701A6B2C67118500019344 /* DashboardDetailView.swift in Sources */,
 				CB701A6D2C6711F700019344 /* SettingView.swift in Sources */,
 				CB701A692C670A2100019344 /* Utilities.swift in Sources */,
@@ -523,6 +524,7 @@
 				CB9C607E2C5AFB4E00DAE1E3 /* DashboardDetailView.swift in Sources */,
 				CB9C608A2C5B5CC700DAE1E3 /* SettingView.swift in Sources */,
 				CB9C606D2C5AF76E00DAE1E3 /* ContentView.swift in Sources */,
+				CBD2BAFF2C698EDE00BA9A36 /* ServerDetailBasicView.swift in Sources */,
 				CB701A412C63131F00019344 /* ChangeThemeView.swift in Sources */,
 				CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */,
 				CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */,
@@ -534,6 +536,7 @@
 				CBD2BAE72C683C2B00BA9A36 /* PingChart.swift in Sources */,
 				CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */,
 				CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */,
+				CBD2BAFB2C698D7C00BA9A36 /* iCloudSync.swift in Sources */,
 				CBD2BAF72C68DBCB00BA9A36 /* ServerDetailStatusView.swift in Sources */,
 				CB9C60822C5B11D800DAE1E3 /* DashboardViewModel.swift in Sources */,
 			);
@@ -562,7 +565,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -592,7 +595,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -623,7 +626,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -656,7 +659,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -805,7 +808,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -847,7 +850,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -932,24 +935,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		CBD2BAE92C68890A00BA9A36 /* Zephyr */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */;
-			productName = Zephyr;
-		};
-		CBD2BAEB2C68891E00BA9A36 /* Zephyr */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */;
-			productName = Zephyr;
-		};
-		CBD2BAED2C68895000BA9A36 /* Zephyr */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */;
-			productName = Zephyr;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB9C605F2C5AF76E00DAE1E3 /* Project object */;
 }

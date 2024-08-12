@@ -96,7 +96,7 @@ struct DashboardDetailView: View {
             }
         }
         .onAppear {
-            if dashboardLink != "" && !dashboardViewModel.isMonitoringEnabled {
+            if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
             }
         }

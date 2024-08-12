@@ -561,6 +561,16 @@
         }
       }
     },
+    "No data" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无数据"
+          }
+        }
+      }
+    },
     "No Server" : {
       "localizations" : {
         "zh-Hans" : {

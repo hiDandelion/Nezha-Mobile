@@ -7,7 +7,6 @@
 
 import SwiftUI
 import WidgetKit
-import Zephyr
 
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
@@ -100,7 +99,10 @@ struct SettingView: View {
                         if !dashboardViewModel.isMonitoringEnabled {
                             userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
                             userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-                            Zephyr.sync()
+                            userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                            NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
+                            NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                            NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
                             dashboardViewModel.startMonitoring()
                         }
                         dismiss()

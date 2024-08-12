@@ -28,6 +28,9 @@ struct ServerDetailPingChartView: View {
                 else if let errorDescriptionLoadingPingData {
                     Text(errorDescriptionLoadingPingData)
                 }
+                else {
+                    Text("No data")
+                }
             }
         }
         .onAppear {

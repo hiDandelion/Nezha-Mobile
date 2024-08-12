@@ -31,6 +31,8 @@ class DashboardViewModel: ObservableObject {
         config.isDiscretionary = false
         config.sessionSendsLaunchEvents = true
         self.session = URLSession(configuration: config)
+        
+        setupNotifications()
     }
     
     func startMonitoring() {

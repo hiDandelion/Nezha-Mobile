@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct NezhaMobileApp: App {
@@ -16,7 +15,8 @@ struct NezhaMobileApp: App {
         if let userDefaults {
             let defaultValues: [String: Any] = [
                 "NMDashboardLink": "",
-                "NMDashboardAPIToken": ""
+                "NMDashboardAPIToken": "",
+                "NMLastModifyDate": 0
             ]
             userDefaults.register(defaults: defaultValues)
         }

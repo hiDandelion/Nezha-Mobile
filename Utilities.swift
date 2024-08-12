@@ -8,6 +8,13 @@
 import Foundation
 import SwiftUI
 
+/// Log Related
+func debugLog(_ message: String) {
+    #if DEBUG
+    print("Debug - \(message)")
+    #endif
+}
+
 /// Text Related
 func formatBytes(_ bytes: Int) -> String {
     return ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .memory)

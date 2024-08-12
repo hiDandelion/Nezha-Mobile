@@ -25,7 +25,7 @@ struct ServerDetailView: View {
                         
                         VStack {
                             Picker("Section", selection: $selectedSection) {
-                                Text("Host").tag(0)
+                                Text("Basic").tag(0)
                                 Text("Status").tag(1)
                                 Text("Ping").tag(2)
                             }
@@ -33,19 +33,9 @@ struct ServerDetailView: View {
                             .padding(.horizontal)
                             
                             Form {
-                                Section("Basic") {
-                                    pieceOfInfo(systemImage: "cube", name: "ID", content: "\(server.id)")
-                                    pieceOfInfo(systemImage: "tag", name: "Tag", content: "\(server.tag)")
-                                    pieceOfInfo(systemImage: "4.circle", name: "IPv4", content: "\(server.IPv4)")
-                                    if server.IPv6 != "" {
-                                        pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)", isLongContent: true)
-                                    }
-                                    pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
-                                    pieceOfInfo(systemImage: "clock", name: "Last Active", content: "\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))", isLongContent: true)
-                                }
-                                
                                 switch(selectedSection) {
                                 case 0:
+                                    ServerDetailBasicView(server: server)
                                     ServerDetailHostView(server: server)
                                 case 1:
                                     ServerDetailStatusView(server: server)

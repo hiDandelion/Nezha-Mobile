@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import Zephyr
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
-    @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
+    @ObservedObject var dashboardViewModel: DashboardViewModel
+    @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
+    @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
     
     var body: some View {
         NavigationStack {
@@ -40,7 +40,17 @@ struct AddDashboardView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        Zephyr.sync()
+                        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
+                            dismiss()
+                            return
+                        }
+                        userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
+                        userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                        NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
+                        NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                        dashboardViewModel.startMonitoring()
                         dismiss()
                     } label: {
                         Label("Done", systemImage: "checkmark")
