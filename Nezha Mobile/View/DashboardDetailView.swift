@@ -315,8 +315,10 @@ struct DashboardDetailView: View {
                     }
                         .frame(width: 20)
                     Text(server.name)
-                    Image(systemName: "circlebadge.fill")
-                        .foregroundStyle(isServerOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
+                    if dashboardViewModel.loadingState == .loaded {
+                        Image(systemName: "circlebadge.fill")
+                            .foregroundStyle(isServerOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
+                    }
                 }
                 .font(.callout)
                 

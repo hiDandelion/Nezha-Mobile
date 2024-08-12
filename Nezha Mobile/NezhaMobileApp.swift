@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct NezhaMobileApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    
     init() {
         // Register UserDefaults
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
@@ -16,7 +18,9 @@ struct NezhaMobileApp: App {
             let defaultValues: [String: Any] = [
                 "NMDashboardLink": "",
                 "NMDashboardAPIToken": "",
-                "NMLastModifyDate": 0
+                "NMLastModifyDate": 0,
+                "NMPushNotificationsToken": "",
+                "NMPushToStartToken": ""
             ]
             userDefaults.register(defaults: defaultValues)
         }
@@ -25,6 +29,9 @@ struct NezhaMobileApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear(perform: {
+                    appDelegate.app = self
+                })
         }
     }
 }

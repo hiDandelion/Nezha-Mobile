@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
-import WidgetKit
+import UniformTypeIdentifiers
+import UserNotifications
 
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var dashboardViewModel: DashboardViewModel
+    let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
     @State private var isNeedReconnection: Bool = false {
@@ -21,6 +23,7 @@ struct SettingView: View {
         }
     }
     @State private var isShowingChangeThemeSheet: Bool = false
+    @State private var isShowCopyTokenSuccessAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -62,6 +65,51 @@ struct SettingView: View {
                             ChangeThemeView()
                                 .presentationDetents([.height(410)])
                                 // presentationBackground ×
+                        }
+                    }
+                }
+                
+                Section("Notifications") {
+                    let pushNotificationsToken = userDefaults.string(forKey: "NMPushNotificationsToken")!
+                    if pushNotificationsToken == "" {
+                        Button("Obtain Push Notifications Token") {
+                            Task {
+                                do {
+                                    try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
+                                } catch {
+                                    debugLog("Obtain Push Notifications Token Error: \(error.localizedDescription)")
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        Button("Copy Push Notifications Token") {
+                            UIPasteboard.general.setValue(pushNotificationsToken, forPasteboardType: UTType.plainText.identifier)
+                            isShowCopyTokenSuccessAlert = true
+                        }
+                        .alert("Copied", isPresented: $isShowCopyTokenSuccessAlert) {
+                            Button("OK", role: .cancel) {
+                                isShowCopyTokenSuccessAlert = false
+                            }
+                        }
+                    }
+                    
+                    if #available(iOS 17.2, *) {
+                        let pushToStartToken = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMPushToStartToken")!
+                        if pushToStartToken != "" {
+                            Button("Copy Push To Start Token") {
+                                UIPasteboard.general.setValue(pushToStartToken, forPasteboardType: UTType.plainText.identifier)
+                                isShowCopyTokenSuccessAlert = true
+                            }
+                            .alert("Copied", isPresented: $isShowCopyTokenSuccessAlert) {
+                                Button("OK", role: .cancel) {
+                                    isShowCopyTokenSuccessAlert = false
+                                }
+                            }
+                        }
+                        else {
+                            Text("Live Activity Not Available")
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }

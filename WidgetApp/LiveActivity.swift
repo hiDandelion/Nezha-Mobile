@@ -1,0 +1,190 @@
+//
+//  LiveActivity.swift
+//  Nezha Mobile
+//
+//  Created by Junhui Lou on 8/12/24.
+//
+
+import ActivityKit
+import WidgetKit
+import SwiftUI
+
+struct LiveActivityAttributes: ActivityAttributes {
+    public struct ContentState: Codable, Hashable {
+        var name: String
+        var cpu: Double
+        var memUsed: Int
+        var diskUsed: Int
+        var memTotal: Int
+        var diskTotal: Int
+        var netInTransfer: Int
+        var netOutTransfer: Int
+        var load1: Double
+        var uptime: Int
+    }
+}
+
+@available(iOS 17.0, *)
+struct LiveActivity: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: LiveActivityAttributes.self) { context in
+            VStack {
+                HStack {
+                    Text("\(context.state.name)")
+                    Spacer()
+                    Text("\(context.state.load1, specifier: "%.2f")")
+                }
+                
+                HStack {
+                    HStack {
+                        let cpuUsage = context.state.cpu / 100
+                        let memUsage = (context.state.memTotal == 0 ? 0 : Double(context.state.memUsed) / Double(context.state.memTotal))
+                        let diskUsage = (context.state.diskTotal == 0 ? 0 : Double(context.state.diskUsed) / Double(context.state.diskTotal))
+                        
+                        Gauge(value: cpuUsage) {
+                            
+                        } currentValueLabel: {
+                            VStack {
+                                Text("CPU")
+                                Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                            }
+                        }
+                        
+                        Gauge(value: memUsage) {
+                            
+                        } currentValueLabel: {
+                            VStack {
+                                Text("MEM")
+                                Text("\(memUsage * 100, specifier: "%.0f")%")
+                            }
+                        }
+                        
+                        Gauge(value: diskUsage) {
+                            
+                        } currentValueLabel: {
+                            VStack {
+                                Text("DISK")
+                                Text("\(diskUsage * 100, specifier: "%.0f")%")
+                            }
+                        }
+                    }
+                    .gaugeStyle(.accessoryCircularCapacity)
+                    .tint(.cyan)
+                    
+                    VStack(spacing: 10) {
+                        HStack {
+                            Image(systemName: "power")
+                                .frame(width: 10)
+                            Text("\(formatTimeInterval(seconds: context.state.uptime))")
+                        }
+                        
+                        HStack {
+                            Image(systemName: "circle.dotted.circle")
+                                .frame(width: 10)
+                            VStack(alignment: .leading) {
+                                Text("↑\(formatBytes(context.state.netOutTransfer))")
+                                Text("↓\(formatBytes(context.state.netInTransfer))")
+                            }
+                        }
+                    }
+                    .font(.footnote)
+                    .padding(.leading, 10)
+                }
+            }
+            .padding()
+            .activityBackgroundTint(nil)
+        } dynamicIsland: { context in
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.leading) {
+                    Text("\(context.state.name)")
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    Text("\(context.state.load1, specifier: "%.2f")")
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                    HStack {
+                        HStack {
+                            let cpuUsage = context.state.cpu / 100
+                            let memUsage = (context.state.memTotal == 0 ? 0 : Double(context.state.memUsed) / Double(context.state.memTotal))
+                            let diskUsage = (context.state.diskTotal == 0 ? 0 : Double(context.state.diskUsed) / Double(context.state.diskTotal))
+                            
+                            Gauge(value: cpuUsage) {
+                                
+                            } currentValueLabel: {
+                                VStack {
+                                    Text("CPU")
+                                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                                }
+                            }
+                            
+                            Gauge(value: memUsage) {
+                                
+                            } currentValueLabel: {
+                                VStack {
+                                    Text("MEM")
+                                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                                }
+                            }
+                            
+                            Gauge(value: diskUsage) {
+                                
+                            } currentValueLabel: {
+                                VStack {
+                                    Text("DISK")
+                                    Text("\(diskUsage * 100, specifier: "%.0f")%")
+                                }
+                            }
+                        }
+                        .gaugeStyle(.accessoryCircularCapacity)
+                        .tint(.cyan)
+                        
+                        VStack(spacing: 10) {
+                            HStack {
+                                Image(systemName: "power")
+                                    .frame(width: 10)
+                                Text("\(formatTimeInterval(seconds: context.state.uptime))")
+                            }
+                            
+                            HStack {
+                                Image(systemName: "circle.dotted.circle")
+                                    .frame(width: 10)
+                                VStack(alignment: .leading) {
+                                    Text("↑\(formatBytes(context.state.netOutTransfer))")
+                                    Text("↓\(formatBytes(context.state.netInTransfer))")
+                                }
+                            }
+                        }
+                        .font(.footnote)
+                        .padding(.leading, 10)
+                    }
+                    .padding()
+                }
+            } compactLeading: {
+                Text("\(context.state.name)")
+            } compactTrailing: {
+                Text("\(context.state.load1, specifier: "%.2f")")
+            } minimal: {
+                Text("\(context.state.load1, specifier: "%.2f")")
+            }
+        }
+    }
+}
+
+extension LiveActivityAttributes {
+    fileprivate static var preview: LiveActivityAttributes {
+        LiveActivityAttributes()
+    }
+}
+
+extension LiveActivityAttributes.ContentState {
+    fileprivate static var demo: LiveActivityAttributes.ContentState {
+        LiveActivityAttributes.ContentState(name: "Demo", cpu: 50, memUsed: 512000, diskUsed: 512000, memTotal: 1024000, diskTotal: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, load1: 2.0, uptime: 600)
+    }
+}
+
+@available(iOS 17.0, *)
+#Preview("Notification", as: .content, using: LiveActivityAttributes.preview) {
+    LiveActivity()
+} contentStates: {
+    LiveActivityAttributes.ContentState.demo
+}

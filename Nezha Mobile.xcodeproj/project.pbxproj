@@ -58,6 +58,9 @@
 		CBD2BAFC2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
 		CBD2BAFD2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
 		CBD2BAFF2C698EDE00BA9A36 /* ServerDetailBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFE2C698EDE00BA9A36 /* ServerDetailBasicView.swift */; };
+		CBD2BB012C6A22B900BA9A36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB002C6A22B900BA9A36 /* AppDelegate.swift */; };
+		CBD2BB042C6A315900BA9A36 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */; };
+		CBD2BB052C6A316F00BA9A36 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +155,8 @@
 		CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailPingChartView.swift; sourceTree = "<group>"; };
 		CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudSync.swift; sourceTree = "<group>"; };
 		CBD2BAFE2C698EDE00BA9A36 /* ServerDetailBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailBasicView.swift; sourceTree = "<group>"; };
+		CBD2BB002C6A22B900BA9A36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +208,7 @@
 			children = (
 				CB701A242C5CF93500019344 /* WidgetAppBundle.swift */,
 				CB701A262C5CF93500019344 /* WidgetApp.swift */,
+				CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */,
 				CB701A3A2C5DCFD100019344 /* AppIntent.swift */,
 				CB701A2A2C5CF93600019344 /* Assets.xcassets */,
 				CB701A2C2C5CF93600019344 /* Info.plist */,
@@ -285,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				CB9C606A2C5AF76E00DAE1E3 /* NezhaMobileApp.swift */,
+				CBD2BB002C6A22B900BA9A36 /* AppDelegate.swift */,
 				CB9C60872C5B5C9100DAE1E3 /* View */,
 				CB9C60882C5B5CAA00DAE1E3 /* ViewModel */,
 				CB701A142C5C98B900019344 /* Utilities */,
@@ -489,6 +496,7 @@
 			files = (
 				CB701A252C5CF93500019344 /* WidgetAppBundle.swift in Sources */,
 				CB701A422C631D4400019344 /* APIResponseModel.swift in Sources */,
+				CBD2BB042C6A315900BA9A36 /* LiveActivity.swift in Sources */,
 				CB701A432C631D8A00019344 /* RequestHandler.swift in Sources */,
 				CB701A3B2C5DCFD100019344 /* AppIntent.swift in Sources */,
 				CBD2BAFC2C698D7C00BA9A36 /* iCloudSync.swift in Sources */,
@@ -529,6 +537,7 @@
 				CB9C607C2C5AF95B00DAE1E3 /* AddDashboardView.swift in Sources */,
 				CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */,
 				CB701A392C5DC9F000019344 /* ViewUtilities.swift in Sources */,
+				CBD2BB052C6A316F00BA9A36 /* LiveActivity.swift in Sources */,
 				CBD2BAF92C68DC1600BA9A36 /* ServerDetailPingChartView.swift in Sources */,
 				CBD2BAF52C68DB7800BA9A36 /* GeneralViews.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* NezhaMobileApp.swift in Sources */,
@@ -537,6 +546,7 @@
 				CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */,
 				CB9C60842C5B1C2300DAE1E3 /* ServerDetailView.swift in Sources */,
 				CBD2BAFB2C698D7C00BA9A36 /* iCloudSync.swift in Sources */,
+				CBD2BB012C6A22B900BA9A36 /* AppDelegate.swift in Sources */,
 				CBD2BAF72C68DBCB00BA9A36 /* ServerDetailStatusView.swift in Sources */,
 				CB9C60822C5B11D800DAE1E3 /* DashboardViewModel.swift in Sources */,
 			);
@@ -565,7 +575,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -595,7 +605,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -626,7 +636,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -659,7 +669,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -808,7 +818,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -850,7 +860,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;

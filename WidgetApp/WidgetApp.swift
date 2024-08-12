@@ -251,6 +251,9 @@ struct WidgetEntryView : View {
                 .foregroundStyle(.white)
             }
         }
+        .onAppear {
+            syncWithiCloud()
+        }
     }
     
     func gaugeView(server: Server) -> some View {
@@ -342,7 +345,8 @@ struct WidgetApp: Widget {
         if let userDefaults {
             let defaultValues: [String: Any] = [
                 "NMDashboardLink": "",
-                "NMDashboardAPIToken": ""
+                "NMDashboardAPIToken": "",
+                "NMLastModifyDate": 0
             ]
             userDefaults.register(defaults: defaultValues)
         }
