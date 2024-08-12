@@ -26,7 +26,7 @@ struct AddDashboardView: View {
                 } header: {
                     Text("Dashboard Info")
                 } footer: {
-                    Text("Dashboard Link Example: server.hidandelion.com")
+                    Text("SSL must be enabled. Dashboard Link Example: server.hidandelion.com")
                 }
                 
                 Section("Help") {

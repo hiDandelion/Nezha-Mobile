@@ -34,24 +34,7 @@ struct ServerDetailPingChartView: View {
             }
         }
         .onAppear {
-            Task {
-                do {
-                    isLoadingPingDatas = true
-                    let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
-                    withAnimation {
-                        errorDescriptionLoadingPingData = nil
-                        pingDatas = response.result
-                        isLoadingPingDatas = false
-                    }
-                }
-                catch {
-                    errorDescriptionLoadingPingData = error.localizedDescription
-                    isLoadingPingDatas = false
-                }
-            }
-        }
-        .onChange(of: scenePhase) { _ in
-            if scenePhase == .active {
+            if pingDatas == nil {
                 Task {
                     do {
                         isLoadingPingDatas = true

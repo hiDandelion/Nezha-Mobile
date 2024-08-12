@@ -23,23 +23,17 @@ struct SettingView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Dashboard") {
+                Section {
                     TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                        .onChange(of: dashboardLink) { _ in
-                            DispatchQueue.main.async {
-                                isNeedReconnection = true
-                            }
-                        }
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                        .onChange(of: dashboardAPIToken) { _ in
-                            DispatchQueue.main.async {
-                                isNeedReconnection = true
-                            }
-                        }
+                } header: {
+                    Text("Dashboard Info")
+                } footer: {
+                    Text("SSL must be enabled. Dashboard Link Example: server.hidandelion.com")
                 }
             }
             .toolbar {

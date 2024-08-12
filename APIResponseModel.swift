@@ -13,7 +13,7 @@ struct GetServerDetailResponse: Codable {
     let result: [Server]?
 }
 
-struct Server: Codable {
+struct Server: Codable, Identifiable {
     let id: Int
     let name: String
     let tag: String

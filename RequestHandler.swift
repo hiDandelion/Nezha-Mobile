@@ -49,15 +49,15 @@ class RequestHandler {
             if let decodingError = error as? DecodingError {
                 switch decodingError {
                 case .dataCorrupted(let context):
-                    print("Data corrupted: \(context.debugDescription)")
+                    debugLog("Data corrupted: \(context.debugDescription)")
                 case .keyNotFound(let key, let context):
-                    print("Key '\(key)' not found: \(context.debugDescription)")
+                    debugLog("Key '\(key)' not found: \(context.debugDescription)")
                 case .typeMismatch(let type, let context):
-                    print("Type '\(type)' mismatch: \(context.debugDescription)")
+                    debugLog("Type '\(type)' mismatch: \(context.debugDescription)")
                 case .valueNotFound(let type, let context):
-                    print("Value of type '\(type)' not found: \(context.debugDescription)")
+                    debugLog("Value of type '\(type)' not found: \(context.debugDescription)")
                 @unknown default:
-                    print("Unknown decoding error")
+                    debugLog("Unknown decoding error")
                 }
             }
             throw GetServerDetailError.decodingError
@@ -97,15 +97,15 @@ class RequestHandler {
             if let decodingError = error as? DecodingError {
                 switch decodingError {
                 case .dataCorrupted(let context):
-                    print("Data corrupted: \(context.debugDescription)")
+                    debugLog("Data corrupted: \(context.debugDescription)")
                 case .keyNotFound(let key, let context):
-                    print("Key '\(key)' not found: \(context.debugDescription)")
+                    debugLog("Key '\(key)' not found: \(context.debugDescription)")
                 case .typeMismatch(let type, let context):
-                    print("Type '\(type)' mismatch: \(context.debugDescription)")
+                    debugLog("Type '\(type)' mismatch: \(context.debugDescription)")
                 case .valueNotFound(let type, let context):
-                    print("Value of type '\(type)' not found: \(context.debugDescription)")
+                    debugLog("Value of type '\(type)' not found: \(context.debugDescription)")
                 @unknown default:
-                    print("Unknown decoding error")
+                    debugLog("Unknown decoding error")
                 }
             }
             throw GetServerDetailError.decodingError
@@ -145,15 +145,15 @@ class RequestHandler {
             if let decodingError = error as? DecodingError {
                 switch decodingError {
                 case .dataCorrupted(let context):
-                    print("Data corrupted: \(context.debugDescription)")
+                    debugLog("Data corrupted: \(context.debugDescription)")
                 case .keyNotFound(let key, let context):
-                    print("Key '\(key)' not found: \(context.debugDescription)")
+                    debugLog("Key '\(key)' not found: \(context.debugDescription)")
                 case .typeMismatch(let type, let context):
-                    print("Type '\(type)' mismatch: \(context.debugDescription)")
+                    debugLog("Type '\(type)' mismatch: \(context.debugDescription)")
                 case .valueNotFound(let type, let context):
-                    print("Value of type '\(type)' not found: \(context.debugDescription)")
+                    debugLog("Value of type '\(type)' not found: \(context.debugDescription)")
                 @unknown default:
-                    print("Unknown decoding error")
+                    debugLog("Unknown decoding error")
                 }
             }
             throw GetServerDetailError.decodingError

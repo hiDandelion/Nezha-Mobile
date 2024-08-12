@@ -214,16 +214,6 @@
         }
       }
     },
-    "Dashboard" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard"
-          }
-        }
-      }
-    },
     "Dashboard Info" : {
       "localizations" : {
         "zh-Hans" : {
@@ -240,16 +230,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dashboard链接"
-          }
-        }
-      }
-    },
-    "Dashboard Link Example: server.hidandelion.com" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard链接示例: server.hidandelion.com"
           }
         }
       }
@@ -655,16 +635,6 @@
         }
       }
     },
-    "Section" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "分区"
-          }
-        }
-      }
-    },
     "Select Server" : {
       "localizations" : {
         "zh-Hans" : {
@@ -731,6 +701,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
+          }
+        }
+      }
+    },
+    "SSL must be enabled. Dashboard Link Example: server.hidandelion.com" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSL必须启用。Dashboard链接示例: server.hidandelion.com"
           }
         }
       }

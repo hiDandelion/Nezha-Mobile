@@ -24,6 +24,29 @@ struct DashboardDetailView: View {
     @State private var newSettingRequireReconnection: Bool? = false
     @Namespace private var animation
     
+    private var filteredServers: [Server] {
+        dashboardViewModel.servers
+            .sorted { server1, server2 in
+                switch (server1.displayIndex, server2.displayIndex) {
+                case (.none, .none):
+                    return server1.id < server2.id
+                case (.none, .some):
+                    return false
+                case (.some, .none):
+                    return true
+                case let (.some(index1), .some(index2)):
+                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+                }
+            }
+            .filter { activeTag == "All" || $0.tag == activeTag }
+            .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
+    
+    private func columns(isWideLayout: Bool) -> [GridItem] {
+        isWideLayout ? [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)]
+        : [GridItem(.flexible())]
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -50,7 +73,7 @@ struct DashboardDetailView: View {
                                         .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
                                         .zIndex(1)
                                     
-                                    serverList(isWideLayout: isWideLayout)
+                                    ServerList(isWideLayout: isWideLayout)
                                         .padding(.top, isSearching ?  navigationBarHeight - 50 : navigationBarHeight - 5)
                                         .zIndex(0)
                                 }
@@ -245,38 +268,18 @@ struct DashboardDetailView: View {
         .buttonStyle(.plain)
     }
     
-    private func serverList(isWideLayout: Bool) -> some View {
+    private func ServerList(isWideLayout: Bool) -> some View {
         VStack {
             if !dashboardViewModel.servers.isEmpty {
-                let servers = dashboardViewModel.servers.sorted {
-                    if $0.displayIndex == nil || $0.displayIndex == nil {
-                        return $0.id < $1.id
-                    }
-                    else {
-                        if $0.displayIndex == $1.displayIndex {
-                            return $0.id < $1.id
-                        }
-                        else {
-                            return $0.displayIndex! > $1.displayIndex!
-                        }
-                    }
-                }
-                let taggedServers = servers.filter { activeTag == String(localized: "All") || $0.tag == activeTag }
-                let searchedServers = taggedServers.filter { searchText == "" || $0.name.contains(searchText) }
-                
-                let columns: [GridItem] = isWideLayout ? [
-                    GridItem(.flexible(), spacing: 10),
-                    GridItem(.flexible(), spacing: 10)
-                ] : [
-                    GridItem(.flexible())
-                ]
-                
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(searchedServers, id: \.id) { server in
-                        NavigationLink(destination: ServerDetailView(server: server)) {
-                            serverCard(server: server)
+                LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
+                    ForEach(filteredServers) { server in
+                        NavigationLink {
+                            ServerDetailView(server: server)
+                        } label: {
+                            ServerCard(server: server)
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .id(server.id)
                     }
                 }
                 .padding(.horizontal, 15)
@@ -293,7 +296,7 @@ struct DashboardDetailView: View {
         }
     }
     
-    private func serverCard(server: Server) -> some View {
+    private func ServerCard(server: Server) -> some View {
         CardView {
             HStack {
                 HStack {
@@ -433,6 +436,4 @@ struct DashboardDetailView: View {
             value = nextValue()
         }
     }
-    
-    
 }

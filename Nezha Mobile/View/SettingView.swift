@@ -25,7 +25,7 @@ struct SettingView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Dashboard") {
+                Section {
                     TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
@@ -42,6 +42,10 @@ struct SettingView: View {
                                 isNeedReconnection = true
                             }
                         }
+                } header: {
+                    Text("Dashboard Info")
+                } footer: {
+                    Text("SSL must be enabled. Dashboard Link Example: server.hidandelion.com")
                 }
                 
                 Section("Theme") {

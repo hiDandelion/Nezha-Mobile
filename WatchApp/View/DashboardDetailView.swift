@@ -15,6 +15,22 @@ struct DashboardDetailView: View {
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     
+    private var sortedServers: [Server] {
+        dashboardViewModel.servers
+            .sorted { server1, server2 in
+                switch (server1.displayIndex, server2.displayIndex) {
+                case (.none, .none):
+                    return server1.id < server2.id
+                case (.none, .some):
+                    return false
+                case (.some, .none):
+                    return true
+                case let (.some(index1), .some(index2)):
+                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+                }
+            }
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -29,21 +45,7 @@ struct DashboardDetailView: View {
                     }
                     else {
                         ScrollView {
-                            let servers = dashboardViewModel.servers.sorted {
-                                if $0.displayIndex == nil || $0.displayIndex == nil {
-                                    return $0.id < $1.id
-                                }
-                                else {
-                                    if $0.displayIndex == $1.displayIndex {
-                                        return $0.id < $1.id
-                                    }
-                                    else {
-                                        return $0.displayIndex! > $1.displayIndex!
-                                    }
-                                }
-                            }
-                            
-                            ForEach(servers, id: \.id) { server in
+                            ForEach(sortedServers, id: \.id) { server in
                                 NavigationLink(destination: ServerDetailView(server: server)) {
                                     HStack {
                                         if server.host.countryCode.uppercased() == "TW" {
