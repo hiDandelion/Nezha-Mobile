@@ -29,9 +29,7 @@ struct NezhaMobileApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onAppear(perform: {
-                    appDelegate.app = self
-                })
+                .environmentObject(appDelegate.notificationState)
         }
     }
 }

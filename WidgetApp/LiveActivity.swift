@@ -31,65 +31,72 @@ struct LiveActivity: Widget {
         ActivityConfiguration(for: LiveActivityAttributes.self) { context in
             VStack {
                 HStack {
-                    Text("\(context.state.name)")
+                    Text("Load \(context.state.load1, specifier: "%.2f")")
                     Spacer()
-                    Text("\(context.state.load1, specifier: "%.2f")")
+                    Button(intent: RefreshLiveActivityIntent()) {
+                        Text(Date().formatted(date: .omitted, time: .shortened))
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
                 
-                HStack {
+                VStack {
+                    Text("\(context.state.name)")
                     HStack {
-                        let cpuUsage = context.state.cpu / 100
-                        let memUsage = (context.state.memTotal == 0 ? 0 : Double(context.state.memUsed) / Double(context.state.memTotal))
-                        let diskUsage = (context.state.diskTotal == 0 ? 0 : Double(context.state.diskUsed) / Double(context.state.diskTotal))
-                        
-                        Gauge(value: cpuUsage) {
-                            
-                        } currentValueLabel: {
-                            VStack {
-                                Text("CPU")
-                                Text("\(cpuUsage * 100, specifier: "%.0f")%")
-                            }
-                        }
-                        
-                        Gauge(value: memUsage) {
-                            
-                        } currentValueLabel: {
-                            VStack {
-                                Text("MEM")
-                                Text("\(memUsage * 100, specifier: "%.0f")%")
-                            }
-                        }
-                        
-                        Gauge(value: diskUsage) {
-                            
-                        } currentValueLabel: {
-                            VStack {
-                                Text("DISK")
-                                Text("\(diskUsage * 100, specifier: "%.0f")%")
-                            }
-                        }
-                    }
-                    .gaugeStyle(.accessoryCircularCapacity)
-                    .tint(.cyan)
-                    
-                    VStack(spacing: 10) {
                         HStack {
-                            Image(systemName: "power")
-                                .frame(width: 10)
-                            Text("\(formatTimeInterval(seconds: context.state.uptime))")
-                        }
-                        
-                        HStack {
-                            Image(systemName: "circle.dotted.circle")
-                                .frame(width: 10)
-                            VStack(alignment: .leading) {
-                                Text("↑\(formatBytes(context.state.netOutTransfer))")
-                                Text("↓\(formatBytes(context.state.netInTransfer))")
+                            let cpuUsage = context.state.cpu / 100
+                            let memUsage = (context.state.memTotal == 0 ? 0 : Double(context.state.memUsed) / Double(context.state.memTotal))
+                            let diskUsage = (context.state.diskTotal == 0 ? 0 : Double(context.state.diskUsed) / Double(context.state.diskTotal))
+                            
+                            Gauge(value: cpuUsage) {
+                                
+                            } currentValueLabel: {
+                                VStack {
+                                    Text("CPU")
+                                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                                }
+                            }
+                            
+                            Gauge(value: memUsage) {
+                                
+                            } currentValueLabel: {
+                                VStack {
+                                    Text("MEM")
+                                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                                }
+                            }
+                            
+                            Gauge(value: diskUsage) {
+                                
+                            } currentValueLabel: {
+                                VStack {
+                                    Text("DISK")
+                                    Text("\(diskUsage * 100, specifier: "%.0f")%")
+                                }
                             }
                         }
+                        .gaugeStyle(.accessoryCircularCapacity)
+                        .tint(.cyan)
+                        
+                        VStack(spacing: 10) {
+                            HStack {
+                                Image(systemName: "power")
+                                    .frame(width: 10)
+                                Text("\(formatTimeInterval(seconds: context.state.uptime))")
+                            }
+                            
+                            HStack {
+                                Image(systemName: "circle.dotted.circle")
+                                    .frame(width: 10)
+                                VStack(alignment: .leading) {
+                                    Text("↑\(formatBytes(context.state.netOutTransfer))")
+                                    Text("↓\(formatBytes(context.state.netInTransfer))")
+                                }
+                            }
+                        }
+                        .font(.footnote)
+                        .padding(.leading, 10)
                     }
-                    .font(.footnote)
-                    .padding(.leading, 10)
                 }
             }
             .padding()
@@ -97,18 +104,19 @@ struct LiveActivity: Widget {
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Load")
+                    Text("Load \(context.state.load1, specifier: "%.2f")")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("\(context.state.load1, specifier: "%.2f")")
+                    Button(intent: RefreshLiveActivityIntent()) {
+                        Text(Date().formatted(date: .omitted, time: .shortened))
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     VStack {
                         HStack {
-                            Button(intent: RefreshLiveActivityIntent(), label: {
-                                Text("\(context.state.name)")
-                            })
-                            .buttonStyle(.plain)
+                            Text("\(context.state.name)")
                         }
                         HStack {
                             HStack {
@@ -192,9 +200,9 @@ extension LiveActivityAttributes.ContentState {
     }
 }
 
-//@available(iOS 17.2, *)
-//#Preview("Notification", as: .content, using: LiveActivityAttributes.preview) {
-//    LiveActivity()
-//} contentStates: {
-//    LiveActivityAttributes.ContentState.demo
-//}
+@available(iOS 17.2, *)
+#Preview("Notification", as: .content, using: LiveActivityAttributes.preview) {
+    LiveActivity()
+} contentStates: {
+    LiveActivityAttributes.ContentState.demo
+}

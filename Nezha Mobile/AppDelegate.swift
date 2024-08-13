@@ -9,8 +9,13 @@ import SwiftUI
 import UserNotifications
 import ActivityKit
 
-class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
-    var app: NezhaMobileApp?
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    let notificationState: NotificationState
+    
+    override init() {
+        self.notificationState = NotificationState()
+        super.init()
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         application.registerForRemoteNotifications()
@@ -39,14 +44,25 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
         userDefaults.set(pushNotificationsToken, forKey: "NMPushNotificationsToken")
     }
-}
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-            debugLog("Push Notification Info - Got notification title: \(response.notification.request.content.title)")
+        let title = response.notification.request.content.title
+        let body = response.notification.request.content.body
+        
+        debugLog("Notification Info - Title: \(title), Body: \(body)")
+        
+        DispatchQueue.main.async { [self] in
+            notificationState.notificationData = (title: title, body: body)
+            notificationState.shouldNavigateToNotificationView = true
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         return [.badge, .banner, .list, .sound]
     }
+}
+
+class NotificationState: ObservableObject {
+    @Published var shouldNavigateToNotificationView = false
+    @Published var notificationData: (title: String, body: String)?
 }

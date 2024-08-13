@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var notificationState: NotificationState
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
     @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
     @State private var isShowingAddDashboardSheet: Bool = false
-
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -35,6 +36,9 @@ struct ContentView: View {
                 else {
                     DashboardDetailView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
                 }
+            }
+            .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {
+                NotificationDetailView()
             }
         }
         .onAppear {
