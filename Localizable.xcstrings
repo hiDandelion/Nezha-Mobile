@@ -614,16 +614,6 @@
         }
       }
     },
-    "Obtain Push Notifications Token" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "获取推送通知Token"
-          }
-        }
-      }
-    },
     "Ocean" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -674,6 +664,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "进程"
+          }
+        }
+      }
+    },
+    "Push Notifications Not Available" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "推送通知不可用"
+          }
+        }
+      }
+    },
+    "Refresh Live Activity" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刷新实时活动"
           }
         }
       }

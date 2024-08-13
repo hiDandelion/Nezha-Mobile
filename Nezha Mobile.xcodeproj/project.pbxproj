@@ -61,6 +61,7 @@
 		CBD2BB012C6A22B900BA9A36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB002C6A22B900BA9A36 /* AppDelegate.swift */; };
 		CBD2BB042C6A315900BA9A36 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */; };
 		CBD2BB052C6A316F00BA9A36 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */; };
+		CBD2BB062C6AEDEC00BA9A36 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3A2C5DCFD100019344 /* AppIntent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -539,6 +540,7 @@
 				CB701A392C5DC9F000019344 /* ViewUtilities.swift in Sources */,
 				CBD2BB052C6A316F00BA9A36 /* LiveActivity.swift in Sources */,
 				CBD2BAF92C68DC1600BA9A36 /* ServerDetailPingChartView.swift in Sources */,
+				CBD2BB062C6AEDEC00BA9A36 /* AppIntent.swift in Sources */,
 				CBD2BAF52C68DB7800BA9A36 /* GeneralViews.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* NezhaMobileApp.swift in Sources */,
 				CBD2BAF32C68DB2700BA9A36 /* ServerDetailHostView.swift in Sources */,
@@ -575,7 +577,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -605,7 +607,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -636,7 +638,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -669,7 +671,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -818,7 +820,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -860,7 +862,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;

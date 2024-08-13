@@ -11,7 +11,9 @@ import SwiftUI
 @main
 struct WidgetAppBundle: WidgetBundle {
     var body: some Widget {
-        LiveActivity()
+        if #available(iOS 17.2, *) {
+            LiveActivity()
+        }
         WidgetApp()
     }
 }

@@ -15,6 +15,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         application.registerForRemoteNotifications()
         UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) {
+                granted, error in
+                debugLog("Push Notification Info - Permission granted: \(granted)")
+            }
         
         if #available(iOS 17.2, *) {
             Task {
@@ -38,7 +43,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-            print("Got notification title: ", response.notification.request.content.title)
+            debugLog("Push Notification Info - Got notification title: \(response.notification.request.content.title)")
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {

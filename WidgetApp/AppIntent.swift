@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import ActivityKit
 
 struct ServerQuery: EntityQuery {
     func entities(for identifiers: [ServerEntity.ID]) async throws -> [ServerEntity] {
@@ -80,6 +81,7 @@ struct ServerEntity: AppEntity {
     }
 }
 
+@available(iOS 17.0, *)
 struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Select Server"
     static var description = IntentDescription("Select the server to display details for.")
@@ -96,11 +98,38 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     }
 }
 
+@available(iOS 17.0, *)
 struct RefreshWidgetIntent: AppIntent {
     static var title: LocalizedStringResource = "Refresh Widget"
     static var description = IntentDescription("Get up-to-date details of a server.")
     
     func perform() async throws -> some IntentResult {
+        return .result()
+    }
+}
+
+@available(iOS 17.2, *)
+struct RefreshLiveActivityIntent: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Refresh Live Activity"
+    static var description = IntentDescription("Get up-to-date details of a server.")
+    
+    func perform() async throws -> some IntentResult {
+        let activities = Activity<LiveActivityAttributes>.activities
+        for activity in activities {
+            let serverID = activity.content.state.id
+            Task {
+                do {
+                    let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
+                    if let server = response.result?.first {
+                        let newContent = ActivityContent(state: LiveActivityAttributes.ContentState(name: server.name, id: server.id, cpu: server.status.cpu, memUsed: server.status.memUsed, diskUsed: server.status.diskUsed, memTotal: server.host.memTotal, diskTotal: server.host.diskTotal, netInTransfer: server.status.netInTransfer, netOutTransfer: server.status.netOutTransfer, load1: server.status.load1, uptime: server.status.uptime), staleDate: Date(timeIntervalSinceNow: 5 * 60))
+                        await activity.update(newContent)
+                    }
+                }
+                catch {
+                    
+                }
+            }
+        }
         return .result()
     }
 }

@@ -71,18 +71,7 @@ struct SettingView: View {
                 
                 Section("Notifications") {
                     let pushNotificationsToken = userDefaults.string(forKey: "NMPushNotificationsToken")!
-                    if pushNotificationsToken == "" {
-                        Button("Obtain Push Notifications Token") {
-                            Task {
-                                do {
-                                    try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
-                                } catch {
-                                    debugLog("Obtain Push Notifications Token Error: \(error.localizedDescription)")
-                                }
-                            }
-                        }
-                    }
-                    else {
+                    if pushNotificationsToken != "" {
                         Button("Copy Push Notifications Token") {
                             UIPasteboard.general.setValue(pushNotificationsToken, forPasteboardType: UTType.plainText.identifier)
                             isShowCopyTokenSuccessAlert = true
@@ -92,6 +81,10 @@ struct SettingView: View {
                                 isShowCopyTokenSuccessAlert = false
                             }
                         }
+                    }
+                    else {
+                        Text("Push Notifications Not Available")
+                            .foregroundStyle(.secondary)
                     }
                     
                     if #available(iOS 17.2, *) {
