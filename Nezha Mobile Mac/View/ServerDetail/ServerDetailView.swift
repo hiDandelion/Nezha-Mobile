@@ -47,7 +47,7 @@ struct ServerDetailView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: activeTab)
-            .navigationTitle("Server Detail")
+            .navigationTitle("Server Details")
             .navigationSubtitle(server.name)
             .toolbar {
                 ToolbarItem(placement: .principal) {

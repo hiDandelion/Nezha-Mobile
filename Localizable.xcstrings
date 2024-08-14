@@ -207,11 +207,35 @@
         }
       }
     },
+    "Copy" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制"
+          }
+        }
+      }
+    },
     "Copy IPv4" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制IPv4"
+          }
+        }
+      }
     },
     "Copy IPv6" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制IPv6"
+          }
+        }
+      }
     },
     "Copy Push Notifications Token" : {
       "localizations" : {
@@ -280,7 +304,14 @@
       }
     },
     "Dashboard" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        }
+      }
     },
     "Dashboard Info" : {
       "localizations" : {
@@ -425,7 +456,14 @@
       }
     },
     "General" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通用"
+          }
+        }
+      }
     },
     "Get up-to-date details of a server." : {
       "localizations" : {
@@ -613,7 +651,14 @@
       }
     },
     "Name" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名称"
+          }
+        }
+      }
     },
     "Network" : {
       "localizations" : {
@@ -750,7 +795,14 @@
       }
     },
     "Save" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存"
+          }
+        }
+      }
     },
     "Search Server" : {
       "localizations" : {
@@ -802,11 +854,15 @@
         }
       }
     },
-    "Server Detail" : {
-
-    },
     "Server Detail Tab" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器信息选项"
+          }
+        }
+      }
     },
     "Server Details" : {
       "localizations" : {
@@ -843,7 +899,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SSL必须启用。Dashboard链接示例: server.hidandelion.com"
+            "value" : "必须启用SSL。Dashboard链接示例: server.hidandelion.com"
           }
         }
       }
@@ -992,7 +1048,14 @@
       }
     },
     "View Details" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "查看详细信息"
+          }
+        }
+      }
     },
     "View details of your server at a glance." : {
       "localizations" : {

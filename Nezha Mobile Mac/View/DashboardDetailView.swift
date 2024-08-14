@@ -13,7 +13,7 @@ struct DashboardDetailView: View {
     var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var searchText: String = ""
-    @State private var activeTag: String = String(localized: "All")
+    @State private var activeTag: String = "All"
     @State private var selectedServers: Set<Server.ID> = Set<Server.ID>()
     @State private var isShowingSettingSheet: Bool = false
     
@@ -76,9 +76,9 @@ struct DashboardDetailView: View {
         NavigationSplitView {
             if !dashboardViewModel.servers.isEmpty {
                 let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
-                let allTags = [String(localized: "All")] + tags.sorted()
+                let allTags = ["All"] + tags.sorted()
                 List(allTags, id: \.self, selection: $activeTag) { tag in
-                    Text("\(tag)")
+                    Text("\(tag == "All" ? String(localized: "All") : tag)")
                 }
             }
         } detail: {

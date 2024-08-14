@@ -18,7 +18,7 @@ struct DashboardDetailView: View {
     @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool
     @State private var searchText: String = ""
-    @State private var activeTag: String = String(localized: "All")
+    @State private var activeTag: String = "All"
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     @Namespace private var animation
@@ -231,7 +231,7 @@ struct DashboardDetailView: View {
             HStack(spacing: 12) {
                 if !dashboardViewModel.servers.isEmpty {
                     let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
-                    let allTags = [String(localized: "All")] + tags.sorted()
+                    let allTags = ["All"] + tags.sorted()
                     ForEach(allTags, id: \.self) { tag in
                         GroupTag(tag: tag)
                     }
@@ -247,7 +247,7 @@ struct DashboardDetailView: View {
                 activeTag = tag
             }
         }) {
-            Text(tag == "" ? String(localized: "Uncategorized") : tag)
+            Text(tag == "All" ? String(localized: "All") : tag == "" ? String(localized: "Uncategorized") : tag)
                 .font(.callout)
                 .foregroundStyle(activeTag == tag ? (scheme == .dark ? .black : .white) : Color.primary)
                 .padding(.vertical, 8)

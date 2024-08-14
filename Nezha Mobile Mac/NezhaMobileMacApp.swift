@@ -47,7 +47,7 @@ struct NezhaMobileMacApp: App {
             }
         }
         
-        WindowGroup("Server Detail", for: Server.ID.self) { $serverID in
+        WindowGroup("Server Details", for: Server.ID.self) { $serverID in
             if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
                 ServerDetailView(server: server)
             }
