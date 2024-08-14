@@ -29,6 +29,22 @@
         }
       }
     },
+    "%@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@"
+          }
+        }
+      }
+    },
+    "%lf" : {
+
+    },
+    "%lld" : {
+
+    },
     "↑%@" : {
 
     },
@@ -191,6 +207,12 @@
         }
       }
     },
+    "Copy IPv4" : {
+
+    },
+    "Copy IPv6" : {
+
+    },
     "Copy Push Notifications Token" : {
       "localizations" : {
         "zh-Hans" : {
@@ -256,6 +278,9 @@
           }
         }
       }
+    },
+    "Dashboard" : {
+
     },
     "Dashboard Info" : {
       "localizations" : {
@@ -398,6 +423,9 @@
           }
         }
       }
+    },
+    "General" : {
+
     },
     "Get up-to-date details of a server." : {
       "localizations" : {
@@ -584,6 +612,9 @@
         }
       }
     },
+    "Name" : {
+
+    },
     "Network" : {
       "localizations" : {
         "zh-Hans" : {
@@ -718,6 +749,9 @@
         }
       }
     },
+    "Save" : {
+
+    },
     "Search Server" : {
       "localizations" : {
         "zh-Hans" : {
@@ -767,6 +801,12 @@
           }
         }
       }
+    },
+    "Server Detail" : {
+
+    },
+    "Server Detail Tab" : {
+
     },
     "Server Details" : {
       "localizations" : {
@@ -950,6 +990,9 @@
           }
         }
       }
+    },
+    "View Details" : {
+
     },
     "View details of your server at a glance." : {
       "localizations" : {

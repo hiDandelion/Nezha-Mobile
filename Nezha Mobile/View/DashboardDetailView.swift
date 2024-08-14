@@ -14,7 +14,6 @@ struct DashboardDetailView: View {
     var dashboardLink: String
     var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @State private var servers: [(key: Int, value: Server)] = []
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
     @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool

@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB1A51AA2C6C278B007FE35F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1A51A52C6C272F007FE35F /* Assets.xcassets */; };
+		CB1A51AB2C6C278F007FE35F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51A62C6C272F007FE35F /* ContentView.swift */; };
+		CB1A51AC2C6C2792007FE35F /* NezhaMobileMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51A82C6C272F007FE35F /* NezhaMobileMacApp.swift */; };
+		CB1A51AD2C6C28BC007FE35F /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */; };
+		CB1A51AE2C6C28BF007FE35F /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3E2C61B73000019344 /* APIResponseModel.swift */; };
+		CB1A51AF2C6C28C3007FE35F /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
+		CB1A51B02C6C28C8007FE35F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
+		CB1A51B52C6C29B2007FE35F /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51B42C6C29B2007FE35F /* DashboardViewModel.swift */; };
+		CB1A51B72C6C2A7B007FE35F /* DashboardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51B62C6C2A7B007FE35F /* DashboardDetailView.swift */; };
+		CB1A51B82C6C2CD2007FE35F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
+		CB1A51B92C6C2CD3007FE35F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
+		CB1A51BB2C6C380D007FE35F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51BA2C6C380D007FE35F /* SettingView.swift */; };
+		CB1A51BD2C6C7DC0007FE35F /* ServerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51BC2C6C7DC0007FE35F /* ServerDetailView.swift */; };
+		CB1A51CE2C6C8157007FE35F /* PingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51C92C6C8157007FE35F /* PingChart.swift */; };
+		CB1A51CF2C6C8157007FE35F /* ServerDetailPingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51CA2C6C8157007FE35F /* ServerDetailPingChartView.swift */; };
+		CB1A51D02C6C8157007FE35F /* ServerDetailHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51CB2C6C8157007FE35F /* ServerDetailHostView.swift */; };
+		CB1A51D12C6C8157007FE35F /* ServerDetailStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51CC2C6C8157007FE35F /* ServerDetailStatusView.swift */; };
+		CB1A51D22C6C8157007FE35F /* ServerDetailBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51CD2C6C8157007FE35F /* ServerDetailBasicView.swift */; };
+		CB1A51D32C6C817B007FE35F /* GeneralViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */; };
+		CB1A51D52C6C882C007FE35F /* AddDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51D42C6C882C007FE35F /* AddDashboardView.swift */; };
 		CB701A0F2C5BB47600019344 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CB701A0E2C5BB47600019344 /* README.md */; };
 		CB701A112C5BB58D00019344 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CB701A102C5BB58D00019344 /* LICENSE */; };
 		CB701A132C5C5DA500019344 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A122C5C5DA500019344 /* CardView.swift */; };
@@ -108,6 +128,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CB1A51A32C6C272F007FE35F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CB1A51A52C6C272F007FE35F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CB1A51A62C6C272F007FE35F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CB1A51A72C6C272F007FE35F /* Nezha Mobile Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nezha Mobile Mac.entitlements"; sourceTree = "<group>"; };
+		CB1A51A82C6C272F007FE35F /* NezhaMobileMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NezhaMobileMacApp.swift; sourceTree = "<group>"; };
+		CB1A51B42C6C29B2007FE35F /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		CB1A51B62C6C2A7B007FE35F /* DashboardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDetailView.swift; sourceTree = "<group>"; };
+		CB1A51BA2C6C380D007FE35F /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		CB1A51BC2C6C7DC0007FE35F /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
+		CB1A51C92C6C8157007FE35F /* PingChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingChart.swift; sourceTree = "<group>"; };
+		CB1A51CA2C6C8157007FE35F /* ServerDetailPingChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDetailPingChartView.swift; sourceTree = "<group>"; };
+		CB1A51CB2C6C8157007FE35F /* ServerDetailHostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDetailHostView.swift; sourceTree = "<group>"; };
+		CB1A51CC2C6C8157007FE35F /* ServerDetailStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDetailStatusView.swift; sourceTree = "<group>"; };
+		CB1A51CD2C6C8157007FE35F /* ServerDetailBasicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDetailBasicView.swift; sourceTree = "<group>"; };
+		CB1A51D42C6C882C007FE35F /* AddDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDashboardView.swift; sourceTree = "<group>"; };
 		CB701A0E2C5BB47600019344 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CB701A102C5BB58D00019344 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CB701A122C5C5DA500019344 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -160,6 +195,7 @@
 		CBD2BB002C6A22B900BA9A36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 		CBD2BB0B2C6B375000BA9A36 /* NotificationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
+		CBD2BB112C6C269800BA9A36 /* Nezha Mobile Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nezha Mobile Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,9 +222,70 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBD2BB0E2C6C269800BA9A36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB1A51A42C6C272F007FE35F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CB1A51A32C6C272F007FE35F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CB1A51A92C6C272F007FE35F /* Nezha Mobile Mac */ = {
+			isa = PBXGroup;
+			children = (
+				CB1A51A82C6C272F007FE35F /* NezhaMobileMacApp.swift */,
+				CB1A51B22C6C2935007FE35F /* View */,
+				CB1A51B32C6C2998007FE35F /* ViewModel */,
+				CB1A51A52C6C272F007FE35F /* Assets.xcassets */,
+				CB1A51A72C6C272F007FE35F /* Nezha Mobile Mac.entitlements */,
+				CB1A51A42C6C272F007FE35F /* Preview Content */,
+			);
+			path = "Nezha Mobile Mac";
+			sourceTree = "<group>";
+		};
+		CB1A51B22C6C2935007FE35F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CB1A51A62C6C272F007FE35F /* ContentView.swift */,
+				CB1A51D42C6C882C007FE35F /* AddDashboardView.swift */,
+				CB1A51B62C6C2A7B007FE35F /* DashboardDetailView.swift */,
+				CB1A51BE2C6C810D007FE35F /* ServerDetail */,
+				CB1A51BA2C6C380D007FE35F /* SettingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CB1A51B32C6C2998007FE35F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CB1A51B42C6C29B2007FE35F /* DashboardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CB1A51BE2C6C810D007FE35F /* ServerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CB1A51BC2C6C7DC0007FE35F /* ServerDetailView.swift */,
+				CB1A51CD2C6C8157007FE35F /* ServerDetailBasicView.swift */,
+				CB1A51CB2C6C8157007FE35F /* ServerDetailHostView.swift */,
+				CB1A51CC2C6C8157007FE35F /* ServerDetailStatusView.swift */,
+				CB1A51CA2C6C8157007FE35F /* ServerDetailPingChartView.swift */,
+				CB1A51C92C6C8157007FE35F /* PingChart.swift */,
+			);
+			path = ServerDetail;
+			sourceTree = "<group>";
+		};
 		CB701A142C5C98B900019344 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,10 +368,12 @@
 				CB701A3E2C61B73000019344 /* APIResponseModel.swift */,
 				CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */,
 				CB9C60852C5B293100DAE1E3 /* Utilities.swift */,
+				CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */,
 				CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */,
 				CB9C60692C5AF76E00DAE1E3 /* Nezha Mobile */,
-				CB701A232C5CF93500019344 /* WidgetApp */,
+				CB1A51A92C6C272F007FE35F /* Nezha Mobile Mac */,
 				CB701A502C67077400019344 /* WatchApp */,
+				CB701A232C5CF93500019344 /* WidgetApp */,
 				CB701A1E2C5CF93500019344 /* Frameworks */,
 				CB9C60682C5AF76E00DAE1E3 /* Products */,
 			);
@@ -286,6 +385,7 @@
 				CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */,
 				CB701A1D2C5CF93500019344 /* WidgetAppExtension.appex */,
 				CB701A4F2C67077400019344 /* WatchApp.app */,
+				CBD2BB112C6C269800BA9A36 /* Nezha Mobile Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -325,7 +425,6 @@
 				CBD2BAF12C68DB0700BA9A36 /* ServerDetail */,
 				CB9C60892C5B5CC700DAE1E3 /* SettingView.swift */,
 				CB701A402C63131F00019344 /* ChangeThemeView.swift */,
-				CBD2BAF42C68DB7800BA9A36 /* GeneralViews.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -415,6 +514,23 @@
 			productReference = CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CBD2BB102C6C269800BA9A36 /* Nezha Mobile Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBD2BB1F2C6C269900BA9A36 /* Build configuration list for PBXNativeTarget "Nezha Mobile Mac" */;
+			buildPhases = (
+				CBD2BB0D2C6C269800BA9A36 /* Sources */,
+				CBD2BB0E2C6C269800BA9A36 /* Frameworks */,
+				CBD2BB0F2C6C269800BA9A36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Nezha Mobile Mac";
+			productName = "Nezha-Mobile";
+			productReference = CBD2BB112C6C269800BA9A36 /* Nezha Mobile Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -434,6 +550,9 @@
 					CB9C60662C5AF76E00DAE1E3 = {
 						CreatedOnToolsVersion = 15.4;
 					};
+					CBD2BB102C6C269800BA9A36 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 				};
 			};
 			buildConfigurationList = CB9C60622C5AF76E00DAE1E3 /* Build configuration list for PBXProject "Nezha Mobile" */;
@@ -447,13 +566,13 @@
 			);
 			mainGroup = CB9C605E2C5AF76E00DAE1E3;
 			packageReferences = (
-				CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */,
 			);
 			productRefGroup = CB9C60682C5AF76E00DAE1E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				CB9C60662C5AF76E00DAE1E3 /* Nezha Mobile */,
+				CBD2BB102C6C269800BA9A36 /* Nezha Mobile Mac */,
 				CB701A1C2C5CF93500019344 /* WidgetAppExtension */,
 				CB701A4E2C67077400019344 /* WatchApp */,
 			);
@@ -476,6 +595,7 @@
 			files = (
 				CB701A592C67077600019344 /* Preview Assets.xcassets in Resources */,
 				CB701A562C67077600019344 /* Assets.xcassets in Resources */,
+				CB1A51B92C6C2CD3007FE35F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +608,15 @@
 				CB701A0F2C5BB47600019344 /* README.md in Resources */,
 				CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */,
 				CB701A112C5BB58D00019344 /* LICENSE in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBD2BB0F2C6C269800BA9A36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1A51B82C6C2CD2007FE35F /* Localizable.xcstrings in Resources */,
+				CB1A51AA2C6C278B007FE35F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +687,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBD2BB0D2C6C269800BA9A36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1A51BD2C6C7DC0007FE35F /* ServerDetailView.swift in Sources */,
+				CB1A51B02C6C28C8007FE35F /* Utilities.swift in Sources */,
+				CB1A51D02C6C8157007FE35F /* ServerDetailHostView.swift in Sources */,
+				CB1A51D52C6C882C007FE35F /* AddDashboardView.swift in Sources */,
+				CB1A51AC2C6C2792007FE35F /* NezhaMobileMacApp.swift in Sources */,
+				CB1A51D12C6C8157007FE35F /* ServerDetailStatusView.swift in Sources */,
+				CB1A51D22C6C8157007FE35F /* ServerDetailBasicView.swift in Sources */,
+				CB1A51CF2C6C8157007FE35F /* ServerDetailPingChartView.swift in Sources */,
+				CB1A51B72C6C2A7B007FE35F /* DashboardDetailView.swift in Sources */,
+				CB1A51BB2C6C380D007FE35F /* SettingView.swift in Sources */,
+				CB1A51D32C6C817B007FE35F /* GeneralViews.swift in Sources */,
+				CB1A51AB2C6C278F007FE35F /* ContentView.swift in Sources */,
+				CB1A51AD2C6C28BC007FE35F /* RequestHandler.swift in Sources */,
+				CB1A51AF2C6C28C3007FE35F /* iCloudSync.swift in Sources */,
+				CB1A51AE2C6C28BF007FE35F /* APIResponseModel.swift in Sources */,
+				CB1A51B52C6C29B2007FE35F /* DashboardViewModel.swift in Sources */,
+				CB1A51CE2C6C8157007FE35F /* PingChart.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -581,7 +734,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -593,11 +746,16 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.WidgetApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -611,7 +769,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WidgetApp/WidgetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetApp/Info.plist;
@@ -623,11 +781,16 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.WidgetApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -642,7 +805,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -656,7 +819,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -675,7 +838,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchApp/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -689,7 +852,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -824,7 +987,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -846,7 +1009,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -866,7 +1029,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -888,7 +1051,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -897,6 +1060,68 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CBD2BB1D2C6C269900BA9A36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile Mac/Nezha Mobile Mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 31;
+				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile Mac/Preview Content\"";
+				DEVELOPMENT_TEAM = C7AS5D38Q8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Nezha;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CBD2BB1E2C6C269900BA9A36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile Mac/Nezha Mobile Mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 31;
+				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile Mac/Preview Content\"";
+				DEVELOPMENT_TEAM = C7AS5D38Q8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Nezha;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -939,18 +1164,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-/* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		CBD2BAE82C68890A00BA9A36 /* XCRemoteSwiftPackageReference "Zephyr" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ArtSabintsev/Zephyr.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.8.0;
-			};
+		CBD2BB1F2C6C269900BA9A36 /* Build configuration list for PBXNativeTarget "Nezha Mobile Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBD2BB1D2C6C269900BA9A36 /* Debug */,
+				CBD2BB1E2C6C269900BA9A36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCConfigurationList section */
 	};
 	rootObject = CB9C605F2C5AF76E00DAE1E3 /* Project object */;
 }

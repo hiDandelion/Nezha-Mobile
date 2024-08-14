@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-               BuildableName = "Nezha Mobile.app"
-               BlueprintName = "Nezha Mobile"
+               BlueprintIdentifier = "CBD2BB102C6C269800BA9A36"
+               BuildableName = "Nezha Mobile Mac.app"
+               BlueprintName = "Nezha Mobile Mac"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "zh-Hans"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
+            BlueprintIdentifier = "CBD2BB102C6C269800BA9A36"
+            BuildableName = "Nezha Mobile Mac.app"
+            BlueprintName = "Nezha Mobile Mac"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
+            BlueprintIdentifier = "CBD2BB102C6C269800BA9A36"
+            BuildableName = "Nezha Mobile Mac.app"
+            BlueprintName = "Nezha Mobile Mac"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

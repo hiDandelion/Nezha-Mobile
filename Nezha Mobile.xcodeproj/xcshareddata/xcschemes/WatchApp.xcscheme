@@ -15,6 +15,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CB701A4E2C67077400019344"
+               BuildableName = "WatchApp.app"
+               BlueprintName = "WatchApp"
+               ReferencedContainer = "container:Nezha Mobile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
                BuildableName = "Nezha Mobile.app"
                BlueprintName = "Nezha Mobile"
@@ -34,7 +48,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "zh-Hans"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,9 +58,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
+            BlueprintIdentifier = "CB701A4E2C67077400019344"
+            BuildableName = "WatchApp.app"
+            BlueprintName = "WatchApp"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,9 +75,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
+            BlueprintIdentifier = "CB701A4E2C67077400019344"
+            BuildableName = "WatchApp.app"
+            BlueprintName = "WatchApp"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
