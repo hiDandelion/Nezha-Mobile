@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct NezhaMobileMacApp: App {
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
     init() {
         // Register UserDefaults
@@ -20,7 +21,9 @@ struct NezhaMobileMacApp: App {
                 "NMDashboardAPIToken": "",
                 "NMLastModifyDate": 0,
                 "NMPushNotificationsToken": "",
-                "NMPushToStartToken": ""
+                "NMPushToStartToken": "",
+                "NMMenuBarEnabled": false,
+                "NMMenuBarServerID": ""
             ]
             userDefaults.register(defaults: defaultValues)
         }
@@ -57,5 +60,37 @@ struct NezhaMobileMacApp: App {
         Settings {
             SettingView(dashboardViewModel: dashboardViewModel)
         }
+        
+        menuBarExtra()
+    }
+    
+    @SceneBuilder
+    private func menuBarExtra() -> some Scene {
+        @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = false
+        
+        MenuBarExtra(isInserted: $menuBarEnabled) {
+            let menuBarServerID = userDefaults.string(forKey: "NMMenuBarServerID")
+            if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
+                MenuBarView(server: server)
+            }
+            else {
+                ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
+            }
+        } label: {
+            if dashboardViewModel.loadingState == .loaded {
+                let menuBarServerID = userDefaults.string(forKey: "NMMenuBarServerID")
+                HStack {
+                    Image(systemName: "server.rack")
+                    
+                    if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
+                        Text("Load \(server.status.load1, specifier: "%.2f")")
+                    }
+                    else {
+                        Text("N/A")
+                    }
+                }
+            }
+        }
+        .menuBarExtraStyle(.window)
     }
 }

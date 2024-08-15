@@ -6,7 +6,9 @@
 //
 
 import AppIntents
+#if os(iOS)
 import ActivityKit
+#endif
 
 struct ServerQuery: EntityQuery {
     func entities(for identifiers: [ServerEntity.ID]) async throws -> [ServerEntity] {
@@ -88,13 +90,17 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
 
     @Parameter(title: "Server")
     var server: ServerEntity
+    @Parameter(title: "Show IP")
+    var isShowIP: Bool
 
     init() {
         self.server = ServerEntity(id: -1, name: "Demo", displayIndex: -1)
+        self.isShowIP = false
     }
 
-    init(server: ServerEntity) {
+    init(server: ServerEntity, isShowIP: Bool) {
         self.server = server
+        self.isShowIP = isShowIP
     }
 }
 
@@ -108,6 +114,7 @@ struct RefreshWidgetIntent: AppIntent {
     }
 }
 
+#if os(iOS)
 @available(iOS 17.2, *)
 struct RefreshLiveActivityIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Refresh Live Activity"
@@ -133,3 +140,4 @@ struct RefreshLiveActivityIntent: LiveActivityIntent {
         return .result()
     }
 }
+#endif

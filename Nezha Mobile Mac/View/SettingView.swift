@@ -12,6 +12,9 @@ struct SettingView: View {
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
+    @State private var menuBarEnabled: Bool = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.bool(forKey: "NMMenuBarEnabled")
+    @State private var menuBarServerID: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMMenuBarServerID") ?? ""
+    @State private var isShowSuccessfullySavedAlert: Bool = false
     
     var body: some View {
         TabView {
@@ -33,14 +36,38 @@ struct SettingView: View {
                     NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
                     NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
                     NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                    isShowSuccessfullySavedAlert = true
                     dashboardViewModel.startMonitoring()
                 }
+                .disabled(dashboardLink == "" || dashboardAPIToken == "")
             }
             .padding()
             .tabItem {
                 Label("General", systemImage: "gearshape")
             }
+            
+            Form {
+                Toggle("Enable Menu Bar", isOn: $menuBarEnabled)
+                TextField("Server ID", text: $menuBarServerID)
+                    .autocorrectionDisabled()
+                    .disabled(!menuBarEnabled)
+                Button("Save") {
+                    userDefaults.set(menuBarEnabled, forKey: "NMMenuBarEnabled")
+                    userDefaults.set(menuBarServerID, forKey: "NMMenuBarServerID")
+                    isShowSuccessfullySavedAlert = true
+                }
+                .disabled(menuBarServerID == "")
+            }
+            .padding()
+            .tabItem {
+                Label("Menu Bar", systemImage: "menubar.rectangle")
+            }
         }
         .frame(width: 600, height: 400)
+        .alert("Successfuly Saved", isPresented: $isShowSuccessfullySavedAlert) {
+            Button("OK", role: .cancel) {
+                isShowSuccessfullySavedAlert = false
+            }
+        }
     }
 }

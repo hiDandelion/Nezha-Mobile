@@ -8,10 +8,18 @@
 import SwiftUI
 import Charts
 
-enum ServerDetailTab: String, CaseIterable {
+enum ServerDetailTab: String, CaseIterable, Identifiable {
+    var id: String {
+        self.rawValue
+    }
+    
     case basic = "Basic"
     case status = "Status"
     case ping = "Ping"
+    
+    func localized() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 struct ServerDetailView: View {
@@ -109,7 +117,7 @@ struct ServerDetailView: View {
     func Tabbar(_ tint: Color, _ weight: Font.Weight = .regular) -> some View {
         HStack(spacing: 0) {
             ForEach(ServerDetailTab.allCases, id: \.rawValue) { tab in
-                Text(tab.rawValue)
+                Text(tab.localized())
                     .font(.system(size: 14))
                     .fontWeight(weight)
                     .foregroundStyle(tint)

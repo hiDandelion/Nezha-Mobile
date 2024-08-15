@@ -67,6 +67,16 @@
         }
       }
     },
+    "🏴‍☠️%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏴‍☠️%@"
+          }
+        }
+      }
+    },
     "About" : {
       "localizations" : {
         "zh-Hans" : {
@@ -373,6 +383,16 @@
         }
       }
     },
+    "Enable Menu Bar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用状态栏"
+          }
+        }
+      }
+    },
     "error.dashboardAuthenticationFailed" : {
       "localizations" : {
         "en" : {
@@ -640,6 +660,16 @@
         }
       }
     },
+    "Menu Bar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "状态栏"
+          }
+        }
+      }
+    },
     "N/A" : {
       "localizations" : {
         "zh-Hans" : {
@@ -874,6 +904,16 @@
         }
       }
     },
+    "Server ID" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器ID"
+          }
+        }
+      }
+    },
     "Server Unavailable" : {
       "localizations" : {
         "zh-Hans" : {
@@ -890,6 +930,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
+          }
+        }
+      }
+    },
+    "Show IP" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示IP"
           }
         }
       }
@@ -930,6 +980,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "状态"
+          }
+        }
+      }
+    },
+    "Successfuly Saved" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存成功"
           }
         }
       }

@@ -84,7 +84,18 @@ struct DashboardDetailView: View {
         } detail: {
             Table(of: Server.self, selection: $selectedServers) {
                 TableColumn("Name") { server in
-                    Text("\(countryFlagEmoji(countryCode: server.host.countryCode))\(server.name)")
+                    HStack {
+                        if dashboardViewModel.loadingState == .loaded {
+                            Image(systemName: "circlebadge.fill")
+                                .foregroundStyle(isServerOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
+                        }
+                        if server.host.countryCode.uppercased() != "" {
+                            Text("\(countryFlagEmoji(countryCode: server.host.countryCode))\(server.name)")
+                        }
+                        else {
+                            Text("🏴‍☠️\(server.name)")
+                        }
+                    }
                 }
                 TableColumn("Tag", value: \.tag)
                 TableColumn("CPU") { server in

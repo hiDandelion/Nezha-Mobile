@@ -5,6 +5,7 @@
 //  Created by Junhui Lou on 8/12/24.
 //
 
+#if os(iOS)
 import ActivityKit
 import WidgetKit
 import SwiftUI
@@ -206,3 +207,4 @@ extension LiveActivityAttributes.ContentState {
 } contentStates: {
     LiveActivityAttributes.ContentState.demo
 }
+#endif

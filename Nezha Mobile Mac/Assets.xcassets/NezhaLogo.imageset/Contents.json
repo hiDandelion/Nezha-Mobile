@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "AMDLogo.svg",
+      "filename" : "NezhaLogo.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "AMDLogo 1.svg",
+      "filename" : "NezhaLogo 1.svg",
       "idiom" : "universal"
     }
   ],
