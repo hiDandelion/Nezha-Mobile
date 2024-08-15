@@ -83,6 +83,26 @@ struct ServerEntity: AppEntity {
     }
 }
 
+enum WidgetBackgroundColor: String, Codable, Sendable {
+    case blue
+    case green
+    case orange
+    case black
+}
+
+extension WidgetBackgroundColor: AppEnum {
+    static var typeDisplayRepresentation: TypeDisplayRepresentation {
+        TypeDisplayRepresentation(name: LocalizedStringResource("Color"))
+    }
+    
+    static var caseDisplayRepresentations: [WidgetBackgroundColor : DisplayRepresentation] = [
+        .blue: DisplayRepresentation(title: "Ocean"),
+        .green: DisplayRepresentation(title: "Leaf"),
+        .orange: DisplayRepresentation(title: "Maple"),
+        .black: DisplayRepresentation(title: "Obsidian"),
+    ]
+}
+
 @available(iOS 17.0, *)
 struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Select Server"
@@ -92,15 +112,19 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     var server: ServerEntity
     @Parameter(title: "Show IP")
     var isShowIP: Bool
+    @Parameter(title: "Color")
+    var color: WidgetBackgroundColor
 
     init() {
         self.server = ServerEntity(id: -1, name: "Demo", displayIndex: -1)
         self.isShowIP = false
+        self.color = .blue
     }
 
-    init(server: ServerEntity, isShowIP: Bool) {
+    init(server: ServerEntity, isShowIP: Bool, color: WidgetBackgroundColor) {
         self.server = server
         self.isShowIP = isShowIP
+        self.color = color
     }
 }
 

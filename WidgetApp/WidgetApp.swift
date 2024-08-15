@@ -14,7 +14,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     typealias Intent = SpecifyServerIDIntent
     
     func placeholder(in context: Context) -> ServerEntry {
-        ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "Placeholder")
+        ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "Placeholder", color: .blue)
     }
     
     func snapshot(for configuration: SpecifyServerIDIntent, in context: Context) async -> ServerEntry {
@@ -23,30 +23,30 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
             if serverID == -1 {
                 let response = try await RequestHandler.getAllServerDetail()
                 if let server = response.result?.first {
-                    return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK")
+                    return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)
                 }
                 else {
-                    return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"))
+                    return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)
                 }
             }
             
             let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
             if let server = response.result?.first {
-                return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK")
+                return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)
             }
             else {
-                return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"))
+                return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)
             }
         } catch GetServerDetailError.invalidDashboardConfiguration {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidDashboardConfiguration"))
+            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidDashboardConfiguration"), color: configuration.color)
         } catch GetServerDetailError.dashboardAuthenticationFailed {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.dashboardAuthenticationFailed"))
+            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.dashboardAuthenticationFailed"), color: configuration.color)
         } catch GetServerDetailError.invalidResponse(let message) {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: message)
+            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: message, color: configuration.color)
         } catch GetServerDetailError.decodingError {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.errorDecodingData"))
+            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.errorDecodingData"), color: configuration.color)
         } catch {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: error.localizedDescription)
+            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: error.localizedDescription, color: configuration.color)
         }
     }
     
@@ -56,38 +56,38 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
             if serverID == -1 {
                 let response = try await RequestHandler.getAllServerDetail()
                 if let server = response.result?.first {
-                    let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK")]
+                    let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)]
                     return Timeline(entries: entries, policy: .atEnd)
                 }
                 else {
-                    let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"))]
+                    let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)]
                     return Timeline(entries: entries, policy: .atEnd)
                 }
             }
             
             let response = try await RequestHandler.getServerDetail(serverID: String(configuration.server.id))
             if let server = response.result?.first {
-                let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK")]
+                let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)]
                 return Timeline(entries: entries, policy: .atEnd)
             }
             else {
-                let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"))]
+                let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)]
                 return Timeline(entries: entries, policy: .atEnd)
             }
         } catch GetServerDetailError.invalidDashboardConfiguration {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidDashboardConfiguration"))]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidDashboardConfiguration"), color: configuration.color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch GetServerDetailError.dashboardAuthenticationFailed {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.dashboardAuthenticationFailed"))]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.dashboardAuthenticationFailed"), color: configuration.color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch GetServerDetailError.invalidResponse(let message) {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: message)]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: message, color: configuration.color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch GetServerDetailError.decodingError {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.errorDecodingData"))]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.errorDecodingData"), color: configuration.color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: error.localizedDescription)]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: error.localizedDescription, color: configuration.color)]
             return Timeline(entries: entries, policy: .atEnd)
         }
     }
@@ -98,12 +98,24 @@ struct ServerEntry: TimelineEntry {
     let server: Server?
     let isShowIP: Bool?
     let message: String
+    let color: WidgetBackgroundColor
 }
 
 struct WidgetEntryView : View {
-    var entry: ServerDetailProvider.Entry
-    
     @Environment(\.widgetFamily) var family
+    var entry: ServerDetailProvider.Entry
+    var color: AnyGradient {
+        switch(entry.color) {
+        case .blue:
+            return Color.blue.gradient
+        case .green:
+            return Color.green.gradient
+        case .orange:
+            return Color.orange.gradient
+        case .black:
+            return Color.black.gradient
+        }
+    }
     
     var body: some View {
         VStack {
@@ -257,6 +269,7 @@ struct WidgetEntryView : View {
                 .foregroundStyle(.white)
             }
         }
+        .containerBackground(color, for: .widget)
         .onAppear {
             syncWithiCloud()
         }
@@ -296,7 +309,7 @@ struct WidgetEntryView : View {
             }
         }
         .gaugeStyle(.accessoryCircularCapacity)
-        .tint(.cyan)
+        .tint(.white)
     }
     
     func infoView(server: Server) -> some View {
@@ -363,7 +376,6 @@ struct WidgetApp: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: SpecifyServerIDIntent.self, provider: ServerDetailProvider()) { entry in
             WidgetEntryView(entry: entry)
-                .containerBackground(.blue.gradient, for: .widget)
         }
         .configurationDisplayName("Server Details")
         .description("View details of your server at a glance.")

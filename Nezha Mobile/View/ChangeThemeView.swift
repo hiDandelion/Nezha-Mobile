@@ -10,7 +10,7 @@ import SwiftUI
 enum NMTheme: String, CaseIterable {
     case blue = "Ocean"
     case green = "Leaf"
-    case yellow = "Maple"
+    case orange = "Maple"
     
     func localizedString() -> String {
         return NSLocalizedString(self.rawValue, comment: "")

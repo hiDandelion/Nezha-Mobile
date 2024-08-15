@@ -69,18 +69,17 @@ struct NezhaDesktopApp: App {
     @SceneBuilder
     private func menuBarExtra() -> some Scene {
         @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = false
+        @AppStorage("NMMenuBarServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarServerID: String = ""
         
         MenuBarExtra(isInserted: $menuBarEnabled) {
-            let menuBarServerID = userDefaults.string(forKey: "NMMenuBarServerID")
             if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
-                MenuBarView(dashboardViewModel: dashboardViewModel, serverID: menuBarServerID!)
+                MenuBarView(dashboardViewModel: dashboardViewModel, serverID: $menuBarServerID)
             }
             else {
                 ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
             }
         } label: {
             if dashboardViewModel.loadingState == .loaded {
-                let menuBarServerID = userDefaults.string(forKey: "NMMenuBarServerID")
                 HStack {
                     Image(systemName: "server.rack")
                     

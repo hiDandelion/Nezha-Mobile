@@ -197,6 +197,16 @@
         }
       }
     },
+    "Color" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "颜色"
+          }
+        }
+      }
+    },
     "Content" : {
       "localizations" : {
         "zh-Hans" : {
@@ -584,7 +594,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "绿色"
+            "value" : "冬青绿"
           }
         }
       }
@@ -635,7 +645,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "黄色"
+            "value" : "枫叶橙"
           }
         }
       }
@@ -730,13 +740,23 @@
         }
       }
     },
+    "Obsidian" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黑曜石"
+          }
+        }
+      }
+    },
     "Ocean" : {
       "extractionState" : "manual",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "蓝色"
+            "value" : "海洋蓝"
           }
         }
       }

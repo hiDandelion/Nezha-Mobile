@@ -10,7 +10,7 @@ import SwiftUI
 struct MenuBarView: View {
     // Workaround
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    let serverID: String
+    @Binding var serverID: String
     
     var body: some View {
         if let server = dashboardViewModel.servers.first(where: { String($0.id) == serverID }) {
