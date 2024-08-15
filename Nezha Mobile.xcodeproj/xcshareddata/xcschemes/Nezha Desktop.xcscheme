@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CBD2BB102C6C269800BA9A36"
-               BuildableName = "Nezha Mobile Mac.app"
-               BlueprintName = "Nezha Mobile Mac"
+               BuildableName = "Nezha Desktop.app"
+               BlueprintName = "Nezha Desktop"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "zh-Hans"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -46,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBD2BB102C6C269800BA9A36"
-            BuildableName = "Nezha Mobile Mac.app"
-            BlueprintName = "Nezha Mobile Mac"
+            BuildableName = "Nezha Desktop.app"
+            BlueprintName = "Nezha Desktop"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBD2BB102C6C269800BA9A36"
-            BuildableName = "Nezha Mobile Mac.app"
-            BlueprintName = "Nezha Mobile Mac"
+            BuildableName = "Nezha Desktop.app"
+            BlueprintName = "Nezha Desktop"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

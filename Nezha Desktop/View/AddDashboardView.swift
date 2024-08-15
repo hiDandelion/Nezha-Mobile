@@ -1,6 +1,6 @@
 //
 //  AddDashboardView.swift
-//  Nezha Mobile Mac
+//  Nezha Desktop
 //
 //  Created by Junhui Lou on 8/13/24.
 //

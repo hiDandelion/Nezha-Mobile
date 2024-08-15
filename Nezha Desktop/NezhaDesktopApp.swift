@@ -1,6 +1,6 @@
 //
-//  NezhaMobileMacApp.swift
-//  Nezha Mobile Mac
+//  NezhaDesktopApp.swift
+//  Nezha Desktop
 //
 //  Created by Junhui Lou on 8/13/24.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct NezhaMobileMacApp: App {
+struct NezhaDesktopApp: App {
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
@@ -33,6 +33,7 @@ struct NezhaMobileMacApp: App {
         WindowGroup {
             ContentView(dashboardViewModel: dashboardViewModel)
         }
+        .defaultSize(width: 1000, height: 500)
         .commands {
             CommandGroup(before: CommandGroupPlacement.help) {
                 Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
@@ -56,6 +57,7 @@ struct NezhaMobileMacApp: App {
             }
         }
         .defaultSize(width: 800, height: 700)
+        .commandsRemoved()
         
         Settings {
             SettingView(dashboardViewModel: dashboardViewModel)
@@ -71,7 +73,7 @@ struct NezhaMobileMacApp: App {
         MenuBarExtra(isInserted: $menuBarEnabled) {
             let menuBarServerID = userDefaults.string(forKey: "NMMenuBarServerID")
             if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
-                MenuBarView(server: server)
+                MenuBarView(dashboardViewModel: dashboardViewModel, serverID: menuBarServerID!)
             }
             else {
                 ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
@@ -83,7 +85,7 @@ struct NezhaMobileMacApp: App {
                     Image(systemName: "server.rack")
                     
                     if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
-                        Text("Load \(server.status.load1, specifier: "%.2f")")
+                        Text("\(server.status.load1, specifier: "%.2f")")
                     }
                     else {
                         Text("N/A")
