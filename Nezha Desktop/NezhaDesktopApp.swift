@@ -72,7 +72,7 @@ struct NezhaDesktopApp: App {
         @AppStorage("NMMenuBarServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarServerID: String = ""
         
         MenuBarExtra(isInserted: $menuBarEnabled) {
-            if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
+            if dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) != nil {
                 MenuBarView(dashboardViewModel: dashboardViewModel, serverID: $menuBarServerID)
             }
             else {

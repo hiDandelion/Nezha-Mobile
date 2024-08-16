@@ -97,6 +97,16 @@
         }
       }
     },
+    "Advanced Customization" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高级自定义"
+          }
+        }
+      }
+    },
     "Agent" : {
       "localizations" : {
         "zh-Hans" : {
@@ -143,6 +153,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "架构"
+          }
+        }
+      }
+    },
+    "Background Color" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景颜色"
+          }
+        }
+      }
+    },
+    "Background Customization" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景自定义"
           }
         }
       }
@@ -313,9 +343,6 @@
         }
       }
     },
-    "Custom Background" : {
-
-    },
     "Customize your interface" : {
       "localizations" : {
         "zh-Hans" : {
@@ -357,7 +384,14 @@
       }
     },
     "Delete Custom Background" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清除自定义背景"
+          }
+        }
+      }
     },
     "Disabled" : {
       "localizations" : {
@@ -405,6 +439,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用状态栏"
+          }
+        }
+      }
+    },
+    "Enable Widget Customization" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用小组件自定义"
           }
         }
       }
@@ -840,6 +884,16 @@
         }
       }
     },
+    "Refresh widgets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刷新小组件"
+          }
+        }
+      }
+    },
     "Retry" : {
       "localizations" : {
         "zh-Hans" : {
@@ -866,6 +920,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "搜索服务器"
+          }
+        }
+      }
+    },
+    "Select Custom Background" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择自定义背景"
           }
         }
       }
@@ -1010,6 +1074,16 @@
         }
       }
     },
+    "Successfuly Refreshed" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "成功刷新"
+          }
+        }
+      }
+    },
     "Successfuly Saved" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1050,12 +1124,32 @@
         }
       }
     },
+    "Text Color" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文本颜色"
+          }
+        }
+      }
+    },
     "Theme" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "主题"
+          }
+        }
+      }
+    },
+    "These settings will overwrite widget configurations and apply to all widgets." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这些设置会覆盖小组件配置并应用于所有小组件。"
           }
         }
       }
@@ -1159,6 +1253,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "虚拟化"
+          }
+        }
+      }
+    },
+    "Widget Customization" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小组件自定义"
           }
         }
       }

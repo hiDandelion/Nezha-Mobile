@@ -7,6 +7,12 @@
 
 import Foundation
 import SwiftUI
+#if os(iOS) || os(watchOS)
+    import UIKit
+#endif
+#if os(macOS)
+    import AppKit
+#endif
 
 /// Log Related
 func debugLog(_ message: String) {
@@ -108,6 +114,40 @@ extension View {
             transform(self)
         } else {
             self
+        }
+    }
+}
+
+/// Color Related
+extension Color: RawRepresentable {
+    public init?(rawValue: String) {
+        guard let data = Data(base64Encoded: rawValue) else {
+            self = .gray
+            return
+        }
+        do {
+#if os(iOS) || os(watchOS)
+            let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) ?? .white
+#elseif os(macOS)
+            let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) ?? .white
+#endif
+            self = Color(color)
+        } catch {
+            self = .white
+        }
+    }
+
+    public var rawValue: String {
+        do {
+#if os(iOS) || os(watchOS)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false) as Data
+#elseif os(macOS)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: NSColor(self), requiringSecureCoding: false) as Data
+#endif
+
+            return data.base64EncodedString()
+        } catch {
+            return ""
         }
     }
 }

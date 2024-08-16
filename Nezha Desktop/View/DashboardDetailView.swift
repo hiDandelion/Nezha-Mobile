@@ -103,7 +103,7 @@ struct DashboardDetailView: View {
                     HStack {
                         Text("\(cpuUsage * 100, specifier: "%.0f")%")
                             .font(.system(size: 12))
-                            .frame(width: 30)
+                            .frame(minWidth: 30)
                         Gauge(value: cpuUsage) {
                             
                         }
@@ -115,7 +115,7 @@ struct DashboardDetailView: View {
                     HStack {
                         Text("\(memUsage * 100, specifier: "%.0f")%")
                             .font(.system(size: 12))
-                            .frame(width: 30)
+                            .frame(minWidth: 30)
                         Gauge(value: memUsage) {
                             
                         }
@@ -127,7 +127,7 @@ struct DashboardDetailView: View {
                     HStack {
                         Text("\(swapUsage * 100, specifier: "%.0f")%")
                             .font(.system(size: 12))
-                            .frame(width: 30)
+                            .frame(minWidth: 30)
                         Gauge(value: swapUsage) {
                             
                         }
@@ -139,7 +139,7 @@ struct DashboardDetailView: View {
                     HStack {
                         Text("\(diskUsage * 100, specifier: "%.0f")%")
                             .font(.system(size: 12))
-                            .frame(width: 30)
+                            .frame(minWidth: 30)
                         Gauge(value: diskUsage) {
                             
                         }

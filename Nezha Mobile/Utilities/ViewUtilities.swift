@@ -8,8 +8,6 @@
 import SwiftUI
 
 /// Style Related
-
-
 enum NMTheme: String, CaseIterable {
     case blue = "Ocean"
     case green = "Leaf"

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct DashboardDetailView: View {
     @Environment(\.dismiss) private var dismiss
@@ -53,9 +54,14 @@ struct DashboardDetailView: View {
                 ZStack {
                     // Background
                     if let backgroundImage {
-                        Image(uiImage: backgroundImage)
-                            .resizable()
-                            .ignoresSafeArea()
+                        GeometryReader { geometry in
+                            Image(uiImage: backgroundImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: geometry.size.height)
+                                .clipped()
+                        }
+                        .ignoresSafeArea()
                     }
                     else {
                         if theme == .plain {
@@ -447,6 +453,18 @@ struct DashboardDetailView: View {
                 .gaugeStyle(.accessoryLinearCapacity)
             }
         }
+        .contextMenu(ContextMenu(menuItems: {
+            Button {
+                UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
+            } label: {
+                Label("Copy IPv4", systemImage: "4.circle")
+            }
+            Button {
+                UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
+            } label: {
+                Label("Copy IPv6", systemImage: "6.circle")
+            }
+        }))
     }
     
     func getScrollViewMinY(proxy: GeometryProxy) -> CGFloat {

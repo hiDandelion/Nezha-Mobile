@@ -155,103 +155,48 @@ struct WidgetEntryView : View {
                         Text("↑\(formatBytes(server.status.netOutTransfer))")
                     }
                 case .systemSmall:
-                    VStack(spacing: 0) {
-                        HStack {
-                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                            Text(server.name)
-                            Spacer()
-                            Button(intent: RefreshWidgetIntent()) {
-                                Image(systemName: "arrow.clockwise")
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                        .font(.footnote)
-                        
-                        VStack(spacing: (entry.isShowIP ?? false) ? 5 : 10) {
-                            if let isShowIP = entry.isShowIP, isShowIP {
-                                Text(server.IPv4)
-                                    .font(.callout)
-                            }
-                            
-                            HStack {
-                                let cpuUsage = server.status.cpu / 100
-                                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                                let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
-                                
-                                VStack {
-                                    Text("CPU")
-                                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
-                                }
-                                
-                                VStack {
-                                    Text("MEM")
-                                    Text("\(memUsage * 100, specifier: "%.0f")%")
-                                }
-                                
-                                VStack {
-                                    Text("DISK")
-                                    Text("\(diskUsage * 100, specifier: "%.0f")%")
-                                }
-                            }
-                            .font(.caption)
-                            
-                            HStack {
-                                HStack {
-                                    Image(systemName: "power")
-                                    Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
-                                }
-                                
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text("↑\(formatBytes(server.status.netOutTransfer))")
-                                        Text("↓\(formatBytes(server.status.netInTransfer))")
-                                    }
-                                }
-                            }
-                            .font(.caption)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+#if os(iOS)
+                    let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
+                    @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
+                    @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
+                    if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                        serverDetailViewSystemSmall(server: server)
+                            .foregroundStyle(selectedWidgetTextColor)
+                            .containerBackground(selectedWidgetBackgroundColor, for: .widget)
                     }
-                    .foregroundStyle(.white)
+                    else {
+                        serverDetailViewSystemSmall(server: server)
+                            .foregroundStyle(.white)
+                            .containerBackground(color, for: .widget)
+                    }
+#else
+                    serverDetailViewSystemSmall(server: server)
+                        .foregroundStyle(.white)
+                        .containerBackground(color, for: .widget)
+#endif
                 case .systemMedium:
-                    VStack(spacing: 0) {
-                        HStack {
-                            if server.host.countryCode.uppercased() == "TW" {
-                                Image("TWFlag")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20)
-                            }
-                            else if server.host.countryCode.uppercased() != "" {
-                                Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                                    .frame(width: 20)
-                            }
-                            Text(server.name)
-                            if let isShowIP = entry.isShowIP, isShowIP {
-                                Text(server.IPv4)
-                            }
-                            Spacer()
-                            Button(intent: RefreshWidgetIntent()) {
-                                Text(entry.date.formatted(date: .omitted, time: .shortened))
-                                Image(systemName: "arrow.clockwise")
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                        .font(.subheadline)
-                        
-                        HStack {
-                            VStack(spacing: 0) {
-                                gaugeView(server: server)
-                            }
-                            Spacer()
-                            infoView(server: server)
-                                .font(.caption2)
-                                .frame(maxWidth: 100)
-                                .padding(.leading, 20)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+#if os(iOS)
+                    let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
+                    @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
+                    @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
+                    if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                        serverDetailViewSystemMedium(server: server)
+                            .foregroundStyle(selectedWidgetTextColor)
+                            .tint(selectedWidgetTextColor)
+                            .containerBackground(selectedWidgetBackgroundColor, for: .widget)
                     }
-                    .foregroundStyle(.white)
+                    else {
+                        serverDetailViewSystemMedium(server: server)
+                            .foregroundStyle(.white)
+                            .tint(.white)
+                            .containerBackground(color, for: .widget)
+                    }
+#else
+                    serverDetailViewSystemMedium(server: server)
+                        .foregroundStyle(.white)
+                        .tint(.white)
+                        .containerBackground(color, for: .widget)
+#endif
                 default:
                     Text("Unsupported family")
                         .foregroundStyle(.white)
@@ -269,9 +214,108 @@ struct WidgetEntryView : View {
                 .foregroundStyle(.white)
             }
         }
-        .containerBackground(color, for: .widget)
         .onAppear {
             syncWithiCloud()
+        }
+    }
+    
+    func serverDetailViewSystemSmall(server: Server) -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                Text(server.name)
+                Spacer()
+                Button(intent: RefreshWidgetIntent()) {
+                    Image(systemName: "arrow.clockwise")
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .font(.footnote)
+            
+            VStack(spacing: (entry.isShowIP ?? false) ? 5 : 10) {
+                if let isShowIP = entry.isShowIP, isShowIP {
+                    Text(server.IPv4)
+                        .font(.callout)
+                }
+                
+                HStack {
+                    let cpuUsage = server.status.cpu / 100
+                    let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                    let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
+                    
+                    VStack {
+                        Text("CPU")
+                        Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                    }
+                    
+                    VStack {
+                        Text("MEM")
+                        Text("\(memUsage * 100, specifier: "%.0f")%")
+                    }
+                    
+                    VStack {
+                        Text("DISK")
+                        Text("\(diskUsage * 100, specifier: "%.0f")%")
+                    }
+                }
+                .font(.caption)
+                
+                HStack {
+                    HStack {
+                        Image(systemName: "power")
+                        Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
+                    }
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("↑\(formatBytes(server.status.netOutTransfer))")
+                            Text("↓\(formatBytes(server.status.netInTransfer))")
+                        }
+                    }
+                }
+                .font(.caption)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+    
+    func serverDetailViewSystemMedium(server: Server) -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                if server.host.countryCode.uppercased() == "TW" {
+                    Image("TWFlag")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
+                }
+                else if server.host.countryCode.uppercased() != "" {
+                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                        .frame(width: 20)
+                }
+                Text(server.name)
+                if let isShowIP = entry.isShowIP, isShowIP {
+                    Text(server.IPv4)
+                }
+                Spacer()
+                Button(intent: RefreshWidgetIntent()) {
+                    Text(entry.date.formatted(date: .omitted, time: .shortened))
+                    Image(systemName: "arrow.clockwise")
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .font(.subheadline)
+            
+            HStack {
+                VStack(spacing: 0) {
+                    gaugeView(server: server)
+                }
+                Spacer()
+                infoView(server: server)
+                    .font(.caption2)
+                    .frame(maxWidth: 100)
+                    .padding(.leading, 20)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
@@ -309,7 +353,6 @@ struct WidgetEntryView : View {
             }
         }
         .gaugeStyle(.accessoryCircularCapacity)
-        .tint(.white)
     }
     
     func infoView(server: Server) -> some View {

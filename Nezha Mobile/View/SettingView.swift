@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PhotosUI
 import UniformTypeIdentifiers
 import UserNotifications
 
@@ -24,8 +23,6 @@ struct SettingView: View {
         }
     }
     @State private var isShowingChangeThemeSheet: Bool = false
-    @AppStorage("NMBackgroundPhotoData", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var backgroundPhotoData: Data?
-    @State var selectedPhoto: PhotosPickerItem?
     @Binding var backgroundImage: UIImage?
     @State private var isShowCopyTokenSuccessAlert: Bool = false
     
@@ -72,23 +69,8 @@ struct SettingView: View {
                         }
                     }
                     
-                    PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                        Text("Custom Background")
-                    }
-                    .onChange(of: selectedPhoto) { newItem in
-                        Task {
-                            if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                                backgroundPhotoData = data
-                                backgroundImage = UIImage(data: data)
-                            }
-                        }
-                    }
-                    
-                    if backgroundImage != nil {
-                        Button("Delete Custom Background") {
-                            backgroundPhotoData = nil
-                            backgroundImage = nil
-                        }
+                    NavigationLink("Advanced Customization") {
+                        AdvancedThemeCustomizationView(backgroundImage: $backgroundImage)
                     }
                 }
                 
