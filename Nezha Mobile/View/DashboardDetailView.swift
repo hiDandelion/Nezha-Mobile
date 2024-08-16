@@ -15,6 +15,7 @@ struct DashboardDetailView: View {
     var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @State private var backgroundImage: UIImage?
     @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool
     @State private var searchText: String = ""
@@ -49,17 +50,28 @@ struct DashboardDetailView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                switch(dashboardViewModel.loadingState) {
-                case .idle:
-                    ZStack {
-                        backgroundGradient(color: theme, scheme: scheme)
+                ZStack {
+                    // Background
+                    if let backgroundImage {
+                        Image(uiImage: backgroundImage)
+                            .resizable()
                             .ignoresSafeArea()
                     }
-                case .loading, .loaded:
-                    ZStack {
-                        backgroundGradient(color: theme, scheme: scheme)
-                            .ignoresSafeArea()
-                        
+                    else {
+                        if theme == .plain {
+                            Color(UIColor.systemGroupedBackground)
+                                .ignoresSafeArea()
+                        }
+                        else {
+                            backgroundGradient(color: theme, scheme: scheme)
+                                .ignoresSafeArea()
+                        }
+                    }
+                    
+                    switch(dashboardViewModel.loadingState) {
+                    case .idle:
+                        EmptyView()
+                    case .loading, .loaded:
                         if dashboardViewModel.servers.isEmpty {
                             ProgressView("Loading...")
                         }
@@ -81,9 +93,7 @@ struct DashboardDetailView: View {
                                 .scrollIndicators(.never)
                             }
                         }
-                    }
-                case .error(let message):
-                    ZStack(alignment: .bottomTrailing) {
+                    case .error(let message):
                         VStack(spacing: 20) {
                             Text("An error occured")
                                 .font(.headline)
@@ -102,12 +112,19 @@ struct DashboardDetailView: View {
             }
             .toolbarBackground(.hidden)
             .sheet(isPresented: $isShowingSettingSheet) {
-                SettingView(dashboardViewModel: dashboardViewModel)
+                SettingView(dashboardViewModel: dashboardViewModel, backgroundImage: $backgroundImage)
             }
         }
         .onAppear {
+            // Start monitoring
             if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
+            }
+            
+            // Set background
+            let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.data(forKey: "NMBackgroundPhotoData")
+            if let backgroundPhotoData {
+                backgroundImage = UIImage(data: backgroundPhotoData)
             }
         }
     }
@@ -172,6 +189,15 @@ struct DashboardDetailView: View {
             HStack {
                 Text(title)
                     .font(.largeTitle.bold())
+                    .if(backgroundImage != nil) { view in
+                        view
+                            .padding(10)
+                            .background {
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(.thinMaterial)
+                                .shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
+                        }
+                    }
                 ProgressView()
                     .opacity(isLoading ? 1 : 0)
             }
@@ -183,9 +209,9 @@ struct DashboardDetailView: View {
                 Image(systemName: "gear")
                     .padding(10)
                     .foregroundStyle(Color.primary)
-                    .background(.ultraThinMaterial)
+                    .background(.thinMaterial)
                     .clipShape(Circle())
-                    .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
+                    .shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
             }
         }
         .opacity(1 - progress)
@@ -218,8 +244,8 @@ struct DashboardDetailView: View {
         .clipShape(.capsule)
         .background {
             RoundedRectangle(cornerRadius: 25 - (progress * 25))
-                .fill(.ultraThinMaterial)
-                .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
+                .fill(.thinMaterial)
+                .shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
                 .padding(.top, -progress * 165)
                 .padding(.bottom, -progress * 45)
                 .padding(.horizontal, -progress * 15)
@@ -259,7 +285,7 @@ struct DashboardDetailView: View {
                             .matchedGeometryEffect(id: "ACTIVETAGTAB", in: animation)
                     } else {
                         Capsule()
-                            .fill(.regularMaterial)
+                            .fill(.thinMaterial)
                     }
                 }
                 .frame(maxHeight: .infinity)
@@ -365,6 +391,7 @@ struct DashboardDetailView: View {
                         }
                     }
                     .gaugeStyle(.accessoryCircularCapacity)
+                    .tint(themeColor(theme: theme))
                     
                     VStack(alignment: .leading) {
                         HStack {

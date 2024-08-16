@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-enum NMTheme: String, CaseIterable {
-    case blue = "Ocean"
-    case green = "Leaf"
-    case orange = "Maple"
-    
-    func localizedString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
-}
-
 struct ChangeThemeView: View {
     @Environment(\.colorScheme) private var scheme
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
@@ -25,9 +15,16 @@ struct ChangeThemeView: View {
     var body: some View {
         let safeArea = self.getSafeAreaInsets()
         VStack(spacing: 15) {
-            Circle()
-                .fill(backgroundGradient(color: theme, scheme: scheme))
-                .frame(width: 150, height: 150)
+            if theme == .plain {
+                Circle()
+                    .fill(scheme == .dark ? .black : Color(UIColor.systemGroupedBackground))
+                    .frame(width: 150, height: 150)
+            }
+            else {
+                Circle()
+                    .fill(backgroundGradient(color: theme, scheme: scheme))
+                    .frame(width: 150, height: 150)
+            }
             
             Text("Choose Style")
                 .font(.title2.bold())
@@ -40,8 +37,8 @@ struct ChangeThemeView: View {
             HStack(spacing: 0) {
                 ForEach(NMTheme.allCases, id: \.rawValue) { theme in
                     Text(theme.localizedString())
+                        .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .frame(width: 100)
                         .background {
                             ZStack {
                                 if self.theme == theme {
@@ -61,6 +58,8 @@ struct ChangeThemeView: View {
             .padding(3)
             .background(.primary.opacity(0.06), in: .capsule)
             .padding(.top, 20)
+            .padding(.horizontal, 10)
+            .frame(maxWidth: 500)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .frame(height: safeArea.bottom == .zero ? 395 : 410)

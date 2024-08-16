@@ -313,6 +313,9 @@
         }
       }
     },
+    "Custom Background" : {
+
+    },
     "Customize your interface" : {
       "localizations" : {
         "zh-Hans" : {
@@ -352,6 +355,9 @@
           }
         }
       }
+    },
+    "Delete Custom Background" : {
+
     },
     "Disabled" : {
       "localizations" : {

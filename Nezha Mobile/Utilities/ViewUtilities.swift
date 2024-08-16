@@ -8,6 +8,19 @@
 import SwiftUI
 
 /// Style Related
+
+
+enum NMTheme: String, CaseIterable {
+    case blue = "Ocean"
+    case green = "Leaf"
+    case orange = "Maple"
+    case plain = "Plain"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
+}
+
 func themeColor(theme: NMTheme) -> Color {
     switch (theme) {
     case .blue:
@@ -16,6 +29,8 @@ func themeColor(theme: NMTheme) -> Color {
         return Color.green
     case .orange:
         return Color.orange
+    default:
+        return Color.blue
     }
 }
 
