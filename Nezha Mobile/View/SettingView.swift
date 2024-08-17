@@ -15,13 +15,7 @@ struct SettingView: View {
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
-    @State private var isNeedReconnection: Bool = false {
-        didSet {
-            DispatchQueue.main.async {
-                dashboardViewModel.stopMonitoring()
-            }
-        }
-    }
+    @State private var isShowSaveDashboardSuccessAlert: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
     @Binding var backgroundImage: UIImage?
     @State private var isShowCopyTokenSuccessAlert: Bool = false
@@ -33,19 +27,25 @@ struct SettingView: View {
                     TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
-                        .onChange(of: dashboardLink) { _ in
-                            DispatchQueue.main.async {
-                                isNeedReconnection = true
-                            }
-                        }
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
-                        .onChange(of: dashboardAPIToken) { _ in
-                            DispatchQueue.main.async {
-                                isNeedReconnection = true
-                            }
+                    Button("Save & Reconnect") {
+                        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+                        userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
+                        userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                        NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
+                        NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
+                        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                        dashboardViewModel.startMonitoring()
+                        isShowSaveDashboardSuccessAlert = true
+                    }
+                    .alert("Successfully Saved", isPresented: $isShowSaveDashboardSuccessAlert) {
+                        Button("OK", role: .cancel) {
+                            isShowSaveDashboardSuccessAlert = false
                         }
+                    }
                 } header: {
                     Text("Dashboard Info")
                 } footer: {
@@ -53,7 +53,7 @@ struct SettingView: View {
                 }
                 
                 Section("Theme") {
-                    Button("Change Theme") {
+                    Button("Select Theme") {
                         isShowingChangeThemeSheet.toggle()
                     }
                     .sheet(isPresented: $isShowingChangeThemeSheet) {
@@ -70,7 +70,7 @@ struct SettingView: View {
                     }
                     
                     NavigationLink("Advanced Customization") {
-                        AdvancedThemeCustomizationView(backgroundImage: $backgroundImage)
+                        AdvancedCustomizationView(backgroundImage: $backgroundImage)
                     }
                 }
                 
@@ -131,33 +131,10 @@ struct SettingView: View {
             }
             .navigationTitle("Settings")
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        if !dashboardViewModel.isMonitoringEnabled {
-                            dashboardViewModel.startMonitoring()
-                        }
-                        dismiss()
-                    }
-                }
-                
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
-                            dismiss()
-                            return
-                        }
-                        if !dashboardViewModel.isMonitoringEnabled {
-                            userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
-                            userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-                            userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
-                            NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
-                            NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-                            NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
-                            dashboardViewModel.startMonitoring()
-                        }
                         dismiss()
                     }
-                    .disabled(dashboardLink == "" || dashboardAPIToken == "")
                 }
             }
         }

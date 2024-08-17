@@ -19,11 +19,7 @@ struct NezhaDesktopApp: App {
             let defaultValues: [String: Any] = [
                 "NMDashboardLink": "",
                 "NMDashboardAPIToken": "",
-                "NMLastModifyDate": 0,
-                "NMPushNotificationsToken": "",
-                "NMPushToStartToken": "",
-                "NMMenuBarEnabled": false,
-                "NMMenuBarServerID": ""
+                "NMLastModifyDate": 0
             ]
             userDefaults.register(defaults: defaultValues)
         }

@@ -27,6 +27,28 @@ struct ServerDetailView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
     var server: Server
+    @State var isFromIncomingURL: Bool = false
+    @AppStorage("NMThemeCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeCustomizationEnabled: Bool = false
+    @AppStorage("NMThemePrimaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorLight: Color = .black
+    @AppStorage("NMThemeSecondaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorLight: Color = Color(red: 1, green: 240/255, blue: 243/255)
+    @AppStorage("NMThemeTintColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorLight: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
+    @AppStorage("NMThemeBackgroundColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorLight: Color = Color(red: 1, green: 247/255, blue: 248/255)
+    @AppStorage("NMThemePrimaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorDark: Color = .white
+    @AppStorage("NMThemeSecondaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorDark: Color = Color(red: 33/255, green: 25/255, blue: 28/255)
+    @AppStorage("NMThemeTintColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorDark: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
+    @AppStorage("NMThemeBackgroundColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorDark: Color = .black
+    var themePrimaryColor: Color {
+        scheme == .light ? themePrimaryColorLight : themePrimaryColorDark
+    }
+    var themeSecondaryColor: Color {
+        scheme == .light ? themeSecondaryColorLight : themeSecondaryColorDark
+    }
+    var themeBackgroundColor: Color {
+        scheme == .light ? themeBackgroundColorLight : themeBackgroundColorDark
+    }
+    var themeTintColor: Color {
+        scheme == .light ? themeTintColorLight : themeTintColorDark
+    }
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
     @StateObject private var offsetObserver = PageOffsetObserver()
@@ -36,10 +58,23 @@ struct ServerDetailView: View {
             VStack {
                 if server.status.uptime != 0 {
                     ZStack {
-                        Color(UIColor.systemGroupedBackground)
-                            .ignoresSafeArea()
+                        if themeCustomizationEnabled {
+                            themeBackgroundColor
+                                .ignoresSafeArea()
+                        }
+                        else {
+                            Color(UIColor.systemGroupedBackground)
+                                .ignoresSafeArea()
+                        }
                         
                         VStack(spacing: 15) {
+                            if isFromIncomingURL {
+                                Text("URL triggered page is not getting updated. If you need live monitoring, please re-enter this page.")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .padding([.horizontal, .top])
+                            }
+                            
                             Tabbar(.gray)
                                 .overlay {
                                     GeometryReader {
@@ -49,7 +84,7 @@ struct ServerDetailView: View {
                                         let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
                                         
                                         Capsule()
-                                            .fill(scheme == .dark ? .white : .black)
+                                            .fill(themeCustomizationEnabled ? themeTintColor : (scheme == .dark ? .white : .black))
                                             .frame(width: capsuleWidth)
                                             .offset(x: progress * capsuleWidth)
                                         
@@ -62,11 +97,17 @@ struct ServerDetailView: View {
                                     }
                                     .allowsTightening(false)
                                 }
-                                .background(.ultraThinMaterial)
+                                .if(themeCustomizationEnabled) { view in
+                                    view.background(themeSecondaryColor)
+                                }
+                                .if(!themeCustomizationEnabled) { view in
+                                    view.background(.thinMaterial)
+                                }
                                 .clipShape(.capsule)
                                 .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)
                                 .shadow(color: .black.opacity(0.05), radius: 5, x: -5, y: -5)
-                                .padding([.horizontal, .top], 15)
+                                .padding(.horizontal, 15)
+                                .padding(.top, 5)
                             
                             TabView(selection: $activeTab) {
                                 Form {
@@ -93,6 +134,7 @@ struct ServerDetailView: View {
                                 }
                                 .tag(ServerDetailTab.ping)
                             }
+                            .scrollContentBackground(.hidden)
                             .tabViewStyle(.page(indexDisplayMode: .never))
                             .animation(.easeInOut(duration: 0.3), value: activeTab)
                             .ignoresSafeArea()

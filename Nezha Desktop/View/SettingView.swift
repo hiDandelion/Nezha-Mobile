@@ -64,7 +64,7 @@ struct SettingView: View {
             }
         }
         .frame(width: 600, height: 400)
-        .alert("Successfuly Saved", isPresented: $isShowSuccessfullySavedAlert) {
+        .alert("Successfully Saved", isPresented: $isShowSuccessfullySavedAlert) {
             Button("OK", role: .cancel) {
                 isShowSuccessfullySavedAlert = false
             }

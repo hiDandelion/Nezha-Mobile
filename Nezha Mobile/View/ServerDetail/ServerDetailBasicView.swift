@@ -24,7 +24,7 @@ struct ServerDetailBasicView: View {
                     }
                 }))
             if server.IPv6 != "" {
-                pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)", isLongContent: true)
+                pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
                             UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
@@ -34,7 +34,7 @@ struct ServerDetailBasicView: View {
                     }))
             }
             pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
-            pieceOfInfo(systemImage: "clock", name: "Last Active", content: "\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))", isLongContent: true)
+            pieceOfInfo(systemImage: "clock", name: "Last Active", content: "\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))")
         }
     }
 }

@@ -158,7 +158,7 @@ struct ServerDetailView: View {
                             }
                             
                             pieceOfInfo(systemImage: "network", name: "Network", content: "↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s", isLongContent: true)
-                            pieceOfInfo(systemImage: "circle.dotted.circle", name: "Bandwidth", content: "↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))", isLongContent: true)
+                            pieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: "↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))", isLongContent: true)
                             pieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: "\(server.status.TCPConnectionCount)")
                             pieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: "\(server.status.UDPConnectionCount)")
                             pieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: "\(server.status.processCount)")

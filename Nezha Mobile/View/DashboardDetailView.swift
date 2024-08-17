@@ -16,6 +16,27 @@ struct DashboardDetailView: View {
     var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @AppStorage("NMThemeCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeCustomizationEnabled: Bool = false
+    @AppStorage("NMThemePrimaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorLight: Color = .black
+    @AppStorage("NMThemeSecondaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorLight: Color = Color(red: 1, green: 240/255, blue: 243/255)
+    @AppStorage("NMThemeTintColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorLight: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
+    @AppStorage("NMThemeBackgroundColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorLight: Color = Color(red: 1, green: 247/255, blue: 248/255)
+    @AppStorage("NMThemePrimaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorDark: Color = .white
+    @AppStorage("NMThemeSecondaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorDark: Color = Color(red: 33/255, green: 25/255, blue: 28/255)
+    @AppStorage("NMThemeTintColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorDark: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
+    @AppStorage("NMThemeBackgroundColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorDark: Color = .black
+    var themePrimaryColor: Color {
+        scheme == .light ? themePrimaryColorLight : themePrimaryColorDark
+    }
+    var themeSecondaryColor: Color {
+        scheme == .light ? themeSecondaryColorLight : themeSecondaryColorDark
+    }
+    var themeBackgroundColor: Color {
+        scheme == .light ? themeBackgroundColorLight : themeBackgroundColorDark
+    }
+    var themeTintColor: Color {
+        scheme == .light ? themeTintColorLight : themeTintColorDark
+    }
     @State private var backgroundImage: UIImage?
     @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool
@@ -64,8 +85,8 @@ struct DashboardDetailView: View {
                         .ignoresSafeArea()
                     }
                     else {
-                        if theme == .plain {
-                            Color(UIColor.systemGroupedBackground)
+                        if themeCustomizationEnabled {
+                            themeBackgroundColor
                                 .ignoresSafeArea()
                         }
                         else {
@@ -86,7 +107,7 @@ struct DashboardDetailView: View {
                                 let isWideLayout = proxy.size.width > 600
                                 
                                 ScrollView {
-                                    ExpandableNavigationBar(isLoading: dashboardViewModel.loadingState == .loading)
+                                    ExpandableNavigationBar
                                         .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
                                         .zIndex(1)
                                     
@@ -135,18 +156,18 @@ struct DashboardDetailView: View {
         }
     }
     
-    func ExpandableNavigationBar(title: String = "Dashboard", isLoading: Bool = false) -> some View {
+    var ExpandableNavigationBar: some View {
         GeometryReader { proxy in
             let minY = getScrollViewMinY(proxy: proxy)
             let progress = isSearching ? 1 : max(min(-minY / 70, 1), 0)
             
             if #available(iOS 17.0, *) {
                 VStack(spacing: 15 - (progress * 15)) {
-                    Title(title: title, isLoading: isLoading, progress: progress)
+                    Title(progress: progress)
                     
                     SearchBar(progress: progress)
                     
-                    GroupPicker()
+                    GroupPicker
                 }
                 .padding(.top, 15)
                 .safeAreaPadding(.horizontal, 15)
@@ -164,11 +185,11 @@ struct DashboardDetailView: View {
             }
             else {
                 VStack(spacing: 15 - (progress * 15)) {
-                    Title(title: title, isLoading: isLoading, progress: progress)
+                    Title(progress: progress)
                     
                     SearchBar(progress: progress)
                     
-                    GroupPicker()
+                    GroupPicker
                 }
                 .padding(.top, 15)
                 // safeAreaPadding → padding
@@ -190,22 +211,28 @@ struct DashboardDetailView: View {
         .padding(.bottom, isSearching ? -65 : 0)
     }
     
-    private func Title(title: String = "Dashboard", isLoading: Bool = false, progress: CGFloat) -> some View {
+    private func Title(title: String = "Dashboard", progress: CGFloat) -> some View {
         HStack {
             HStack {
                 Text(title)
                     .font(.largeTitle.bold())
+                    .foregroundStyle(themeCustomizationEnabled ? themePrimaryColor : Color.primary)
                     .if(backgroundImage != nil) { view in
                         view
                             .padding(10)
                             .background {
-                            RoundedRectangle(cornerRadius: 25)
-                                .fill(.thinMaterial)
-                                .shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
-                        }
+                                if themeCustomizationEnabled {
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(themeSecondaryColor)
+                                }
+                                else {
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(.thinMaterial)
+                                }
+                            }
                     }
                 ProgressView()
-                    .opacity(isLoading ? 1 : 0)
+                    .opacity(dashboardViewModel.loadingState == .loading ? 1 : 0)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -214,10 +241,14 @@ struct DashboardDetailView: View {
             } label: {
                 Image(systemName: "gear")
                     .padding(10)
-                    .foregroundStyle(Color.primary)
-                    .background(.thinMaterial)
+                    .foregroundStyle(themeCustomizationEnabled ? themePrimaryColor : Color.primary)
+                    .if(themeCustomizationEnabled) { view in
+                        view.background(themeSecondaryColor)
+                    }
+                    .if(!themeCustomizationEnabled) { view in
+                        view.background(.thinMaterial)
+                    }
                     .clipShape(Circle())
-                    .shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
             }
         }
         .opacity(1 - progress)
@@ -249,16 +280,30 @@ struct DashboardDetailView: View {
         .frame(height: 45)
         .clipShape(.capsule)
         .background {
-            RoundedRectangle(cornerRadius: 25 - (progress * 25))
-                .fill(.thinMaterial)
-                .shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
-                .padding(.top, -progress * 165)
-                .padding(.bottom, -progress * 45)
-                .padding(.horizontal, -progress * 15)
+            if themeCustomizationEnabled {
+                RoundedRectangle(cornerRadius: 25 - (progress * 25))
+                    .fill(themeSecondaryColor)
+                    .if(progress == 1) { view in
+                        view.shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
+                    }
+                    .padding(.top, -progress * 165)
+                    .padding(.bottom, -progress * 45)
+                    .padding(.horizontal, -progress * 15)
+            }
+            else {
+                RoundedRectangle(cornerRadius: 25 - (progress * 25))
+                    .fill(.thinMaterial)
+                    .if(progress == 1) { view in
+                        view.shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
+                    }
+                    .padding(.top, -progress * 165)
+                    .padding(.bottom, -progress * 45)
+                    .padding(.horizontal, -progress * 15)
+            }
         }
     }
     
-    private func GroupPicker() -> some View {
+    var GroupPicker: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
                 if !dashboardViewModel.servers.isEmpty {
@@ -281,7 +326,7 @@ struct DashboardDetailView: View {
         }) {
             Text(tag == "All" ? String(localized: "All") : tag == "" ? String(localized: "Uncategorized") : tag)
                 .font(.callout)
-                .foregroundStyle(activeTag == tag ? (scheme == .dark ? .black : .white) : Color.primary)
+                .foregroundStyle(activeTag == tag ? (scheme == .light ? .white : .black) : (themeCustomizationEnabled ? themePrimaryColor : Color.primary))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 15)
                 .background {
@@ -290,8 +335,14 @@ struct DashboardDetailView: View {
                             .fill(Color.primary)
                             .matchedGeometryEffect(id: "ACTIVETAGTAB", in: animation)
                     } else {
-                        Capsule()
-                            .fill(.thinMaterial)
+                        if themeCustomizationEnabled {
+                            Capsule()
+                                .fill(themeSecondaryColor)
+                        }
+                        else {
+                            Capsule()
+                                .fill(.thinMaterial)
+                        }
                     }
                 }
                 .frame(maxHeight: .infinity)
@@ -397,7 +448,7 @@ struct DashboardDetailView: View {
                         }
                     }
                     .gaugeStyle(.accessoryCircularCapacity)
-                    .tint(themeColor(theme: theme))
+                    .tint(themeCustomizationEnabled ? themeTintColor : themeColor(theme: theme))
                     
                     VStack(alignment: .leading) {
                         HStack {
@@ -453,6 +504,16 @@ struct DashboardDetailView: View {
                 .gaugeStyle(.accessoryLinearCapacity)
             }
         }
+        .if(themeCustomizationEnabled) { view in
+            view.foregroundStyle(themePrimaryColor)
+        }
+        .if(themeCustomizationEnabled) { view in
+            view.background(themeSecondaryColor)
+        }
+        .if(!themeCustomizationEnabled) { view in
+            view.background(.thinMaterial)
+        }
+        .cornerRadius(12)
         .contextMenu(ContextMenu(menuItems: {
             Button {
                 UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)

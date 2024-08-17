@@ -23,12 +23,20 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 
 struct ServerDetailView: View {
     var server: Server
+    @State var isFromIncomingURL: Bool = false
     @State private var activeTab: ServerDetailTab = .basic
     
     var body: some View {
         NavigationStack {
             if server.status.uptime != 0 {
                 VStack {
+                    if isFromIncomingURL {
+                        Text("URL triggered page is not getting updated. If you need live monitoring, please re-enter this page.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .padding([.horizontal, .top])
+                    }
+                    
                     switch(activeTab) {
                     case .basic:
                         Form {

@@ -15,16 +15,9 @@ struct ChangeThemeView: View {
     var body: some View {
         let safeArea = self.getSafeAreaInsets()
         VStack(spacing: 15) {
-            if theme == .plain {
-                Circle()
-                    .fill(scheme == .dark ? .black : Color(UIColor.systemGroupedBackground))
-                    .frame(width: 150, height: 150)
-            }
-            else {
-                Circle()
-                    .fill(backgroundGradient(color: theme, scheme: scheme))
-                    .frame(width: 150, height: 150)
-            }
+            Circle()
+                .fill(backgroundGradient(color: theme, scheme: scheme))
+                .frame(width: 150, height: 150)
             
             Text("Choose Style")
                 .font(.title2.bold())

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var notificationState: NotificationState
+    @State private var shouldNavigateToServerDetailView: Bool = false
+    @State private var incomingURLCorrespondingServer: Server?
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
     @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
@@ -40,9 +42,59 @@ struct ContentView: View {
             .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {
                 NotificationDetailView()
             }
+            .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
+                if let incomingURLCorrespondingServer {
+                    ServerDetailView(server: incomingURLCorrespondingServer, isFromIncomingURL: true)
+                }
+            }
+            .onOpenURL { url in
+                debugLog("Incoming Link Info - App was opened via URL: \(url)")
+                handleIncomingURL(url)
+            }
         }
         .onAppear {
             syncWithiCloud()
+        }
+    }
+    
+    private func handleIncomingURL(_ url: URL) {
+        guard url.scheme == "nezha" else {
+            debugLog("Incoming Link Error - Invalid Scheme")
+            return
+        }
+        
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            debugLog("Incoming Link Error - Invalid URL")
+            return
+        }
+        
+        guard let action = components.host, action == "server-details" else {
+            debugLog("Incoming Link Error - Unknown action")
+            return
+        }
+        
+        guard let serverID = components.queryItems?.first(where: { $0.name == "serverID" })?.value else {
+            debugLog("Incoming Link Error - Server ID not found")
+            return
+        }
+        
+        Task {
+            if dashboardLink != "" && dashboardAPIToken != "" {
+                do {
+                    let response = try await RequestHandler.getServerDetail(serverID: serverID)
+                    if let server = response.result?.first {
+                        debugLog("Incoming Link Info - Successfully got server info")
+                        incomingURLCorrespondingServer = server
+                        shouldNavigateToServerDetailView = true
+                    }
+                    else {
+                        debugLog("Incoming Link Error - Invalid serverID")
+                    }
+                }
+                catch {
+                    debugLog("Incoming Link Error - Unable to get server info")
+                }
+            }
         }
     }
 }

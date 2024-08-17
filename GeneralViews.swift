@@ -8,60 +8,35 @@
 import SwiftUI
 
 func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: String) -> some View {
-    return HStack {
-        Label(name, systemImage: systemImage)
-        Spacer()
-        Text(content)
-            .foregroundStyle(.secondary)
+    ViewThatFits(in: .horizontal) {
+        HStack {
+            Label(name, systemImage: systemImage)
+            Spacer()
+            Text(content)
+                .foregroundStyle(.secondary)
+        }
+        
+        VStack(alignment: .leading) {
+            Label(name, systemImage: systemImage)
+            Text(content)
+                .foregroundStyle(.secondary)
+        }
     }
 }
 
 func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: some View) -> some View {
-    return HStack {
-        Label(name, systemImage: systemImage)
-        Spacer()
-        content
-            .foregroundStyle(.secondary)
-    }
-}
-
-func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: String, isLongContent: Bool = false) -> some View {
-    VStack {
-        if isLongContent {
-            VStack(alignment: .leading) {
-                Label(name, systemImage: systemImage)
-                Text(content)
-                    .foregroundStyle(.secondary)
-            }
+    ViewThatFits(in: .horizontal) {
+        HStack {
+            Label(name, systemImage: systemImage)
+            Spacer()
+            content
+                .foregroundStyle(.secondary)
         }
-        else {
-            HStack {
-                Label(name, systemImage: systemImage)
-                Spacer()
-                Text(content)
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-}
-
-func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: some View, isLongContent: Bool = false) -> some View {
-    VStack {
-        if isLongContent {
-            VStack(alignment: .leading) {
-                Label(name, systemImage: systemImage)
-                Spacer()
-                content
-                    .foregroundStyle(.secondary)
-            }
-        }
-        else {
-            HStack {
-                Label(name, systemImage: systemImage)
-                Spacer()
-                content
-                    .foregroundStyle(.secondary)
-            }
+        
+        VStack(alignment: .leading) {
+            Label(name, systemImage: systemImage)
+            content
+                .foregroundStyle(.secondary)
         }
     }
 }

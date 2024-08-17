@@ -120,87 +120,90 @@ struct WidgetEntryView : View {
     var body: some View {
         VStack {
             if let server = entry.server {
-                switch(family) {
-                case .accessoryCircular:
-                    let totalCore = getCore(server.host.cpu).toDouble()
-                    let loadPressure = server.status.load15 / (totalCore ?? 1.0)
-                    
-                    Gauge(value: loadPressure) {
-                        Text("Load")
-                    }
-                currentValueLabel: {
-                    Text("\(loadPressure * 100, specifier: "%.1f")%")
-                }
-                .gaugeStyle(.accessoryCircular)
-                case .accessoryInline:
-                    let cpuUsage = server.status.cpu / 100
-                    let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                    Text("CPU \(cpuUsage * 100, specifier: "%.0f")% MEM \(memUsage * 100, specifier: "%.0f")%")
-                case .accessoryRectangular:
-                    let cpuUsage = server.status.cpu / 100
-                    let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                    VStack {
-                        Text(server.name)
-                            .widgetAccentable()
-                        HStack {
-                            HStack(spacing: 0) {
-                                Image(systemName: "cpu")
-                                Text("\(cpuUsage * 100, specifier: "%.0f")%")
-                            }
-                            HStack(spacing: 0) {
-                                Image(systemName: "memorychip")
-                                Text("\(memUsage * 100, specifier: "%.0f")%")
-                            }
+                VStack {
+                    switch(family) {
+                    case .accessoryCircular:
+                        let totalCore = getCore(server.host.cpu).toDouble()
+                        let loadPressure = server.status.load15 / (totalCore ?? 1.0)
+                        
+                        Gauge(value: loadPressure) {
+                            Text("Load")
                         }
-                        Text("↑\(formatBytes(server.status.netOutTransfer))")
+                    currentValueLabel: {
+                        Text("\(loadPressure * 100, specifier: "%.1f")%")
                     }
-                case .systemSmall:
+                    .gaugeStyle(.accessoryCircular)
+                    case .accessoryInline:
+                        let cpuUsage = server.status.cpu / 100
+                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                        Text("CPU \(cpuUsage * 100, specifier: "%.0f")% MEM \(memUsage * 100, specifier: "%.0f")%")
+                    case .accessoryRectangular:
+                        let cpuUsage = server.status.cpu / 100
+                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                        VStack {
+                            Text(server.name)
+                                .widgetAccentable()
+                            HStack {
+                                HStack(spacing: 0) {
+                                    Image(systemName: "cpu")
+                                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                                }
+                                HStack(spacing: 0) {
+                                    Image(systemName: "memorychip")
+                                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                                }
+                            }
+                            Text("↑\(formatBytes(server.status.netOutTransfer))")
+                        }
+                    case .systemSmall:
 #if os(iOS)
-                    let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
-                    @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
-                    @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
-                    if let widgetCustomizationEnabled, widgetCustomizationEnabled {
-                        serverDetailViewSystemSmall(server: server)
-                            .foregroundStyle(selectedWidgetTextColor)
-                            .containerBackground(selectedWidgetBackgroundColor, for: .widget)
-                    }
-                    else {
+                        let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
+                        @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
+                        @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
+                        if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                            serverDetailViewSystemSmall(server: server)
+                                .foregroundStyle(selectedWidgetTextColor)
+                                .containerBackground(selectedWidgetBackgroundColor, for: .widget)
+                        }
+                        else {
+                            serverDetailViewSystemSmall(server: server)
+                                .foregroundStyle(.white)
+                                .containerBackground(color, for: .widget)
+                        }
+#else
                         serverDetailViewSystemSmall(server: server)
                             .foregroundStyle(.white)
                             .containerBackground(color, for: .widget)
-                    }
-#else
-                    serverDetailViewSystemSmall(server: server)
-                        .foregroundStyle(.white)
-                        .containerBackground(color, for: .widget)
 #endif
-                case .systemMedium:
+                    case .systemMedium:
 #if os(iOS)
-                    let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
-                    @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
-                    @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
-                    if let widgetCustomizationEnabled, widgetCustomizationEnabled {
-                        serverDetailViewSystemMedium(server: server)
-                            .foregroundStyle(selectedWidgetTextColor)
-                            .tint(selectedWidgetTextColor)
-                            .containerBackground(selectedWidgetBackgroundColor, for: .widget)
-                    }
-                    else {
+                        let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
+                        @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
+                        @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
+                        if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                            serverDetailViewSystemMedium(server: server)
+                                .foregroundStyle(selectedWidgetTextColor)
+                                .tint(selectedWidgetTextColor)
+                                .containerBackground(selectedWidgetBackgroundColor, for: .widget)
+                        }
+                        else {
+                            serverDetailViewSystemMedium(server: server)
+                                .foregroundStyle(.white)
+                                .tint(.white)
+                                .containerBackground(color, for: .widget)
+                        }
+#else
                         serverDetailViewSystemMedium(server: server)
                             .foregroundStyle(.white)
                             .tint(.white)
                             .containerBackground(color, for: .widget)
-                    }
-#else
-                    serverDetailViewSystemMedium(server: server)
-                        .foregroundStyle(.white)
-                        .tint(.white)
-                        .containerBackground(color, for: .widget)
 #endif
-                default:
-                    Text("Unsupported family")
-                        .foregroundStyle(.white)
+                    default:
+                        Text("Unsupported family")
+                            .foregroundStyle(.white)
+                    }
                 }
+                .widgetURL(URL(string: "nezha://server-details?serverID=\(server.id)")!)
             }
             else {
                 VStack {

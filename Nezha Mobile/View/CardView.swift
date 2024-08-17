@@ -38,8 +38,5 @@ struct CardView<Title: View, Content: View, Footer: View>: View {
             .padding(.horizontal, 10)
         }
         .frame(maxWidth: .infinity, minHeight: 160)
-        .background(.thinMaterial)
-        .cornerRadius(12)
-        .shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
     }
 }
