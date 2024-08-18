@@ -97,7 +97,7 @@ func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
     }
 
     if years > 0 {
-        return shortened ? formatShort("timeUnitShortened.y", years) : formatLong("timeUnitShortened.y", years, "timeUnitShortened.m", months % 12)
+        return shortened ? formatShort("timeUnitShortened.y", years) : formatLong("timeUnitShortened.y", years, "timeUnitShortened.mo", months % 12)
     } else if months > 0 {
         return shortened ? formatShort("timeUnitShortened.mo", months) : formatLong("timeUnitShortened.mo", months, "timeUnitShortened.d", days % 30)
     } else if days > 0 {

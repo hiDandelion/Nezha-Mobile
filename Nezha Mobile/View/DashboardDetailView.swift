@@ -75,11 +75,11 @@ struct DashboardDetailView: View {
                 ZStack {
                     // Background
                     if let backgroundImage {
-                        GeometryReader { geometry in
+                        GeometryReader { proxy in
                             Image(uiImage: backgroundImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(height: geometry.size.height)
+                                .frame(height: proxy.size.height)
                                 .clipped()
                         }
                         .ignoresSafeArea()
@@ -219,7 +219,7 @@ struct DashboardDetailView: View {
                     .foregroundStyle(themeCustomizationEnabled ? themePrimaryColor : Color.primary)
                     .if(backgroundImage != nil) { view in
                         view
-                            .padding(10)
+                            .padding(.horizontal, 10)
                             .background {
                                 if themeCustomizationEnabled {
                                     RoundedRectangle(cornerRadius: 25)

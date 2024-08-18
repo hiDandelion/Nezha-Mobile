@@ -300,8 +300,10 @@ struct WidgetEntryView : View {
                 }
                 Spacer()
                 Button(intent: RefreshWidgetIntent()) {
-                    Text(entry.date.formatted(date: .omitted, time: .shortened))
-                    Image(systemName: "arrow.clockwise")
+                    HStack {
+                        Text(entry.date.formatted(date: .omitted, time: .shortened))
+                        Image(systemName: "arrow.clockwise")
+                    }
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -418,7 +420,7 @@ struct NezhaWidgetApp: Widget {
         }
     }
     
-    let kind: String = "nezha-widget-server-detail"
+    let kind: String = "ServerDetailWidget"
     
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: SpecifyServerIDIntent.self, provider: ServerDetailProvider()) { entry in

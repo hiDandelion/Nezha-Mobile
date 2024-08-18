@@ -13,10 +13,6 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     
     typealias Intent = SpecifyServerIDIntent
     
-    func recommendations() -> [AppIntentRecommendation<SpecifyServerIDIntent>] {
-        []
-    }
-    
     func placeholder(in context: Context) -> ServerEntry {
         ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), message: "Placeholder")
     }
@@ -94,6 +90,11 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
             let entries = [ServerEntry(date: Date(), server: nil, message: error.localizedDescription)]
             return Timeline(entries: entries, policy: .atEnd)
         }
+    }
+    
+    
+    func recommendations() -> [AppIntentRecommendation<SpecifyServerIDIntent>] {
+        return [AppIntentRecommendation<SpecifyServerIDIntent>]()
     }
 }
 
@@ -218,7 +219,7 @@ struct NezhaWatchWidgetApp: Widget {
         }
     }
     
-    let kind: String = "nezha-widget-server-detail"
+    let kind: String = "ServerDetailWidget"
     
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: SpecifyServerIDIntent.self, provider: ServerDetailProvider()) { entry in

@@ -987,6 +987,12 @@
     "Leaf" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翠玉の輝"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1048,7 +1054,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ロード中..."
+            "value" : "読み込み中..."
           }
         },
         "zh-Hans" : {
@@ -1062,6 +1068,12 @@
     "Maple" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秋の装"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1232,6 +1244,12 @@
     },
     "Obsidian" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黒曜石"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1243,6 +1261,12 @@
     "Ocean" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "海の青"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1680,6 +1704,12 @@
     },
     "SSL must be enabled. Dashboard Link Example: server.hidandelion.com" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSLを有効にする必要があります。Dashboardリンク例: server.hidandelion.com"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1706,6 +1736,12 @@
     },
     "Start your journey with Nezha Mobile" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あなたの新たな一歩、Nezha Mobileとともに。"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1948,7 +1984,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "时"
+            "value" : "小时"
           }
         }
       }
@@ -1971,7 +2007,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "分"
+            "value" : "分钟"
           }
         }
       }
@@ -1988,7 +2024,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "月"
+            "value" : "ヶ月"
           }
         },
         "zh-Hans" : {
@@ -2147,6 +2183,12 @@
     },
     "URL triggered page is not getting updated. If you need live monitoring, please re-enter this page." : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URLトリガーされたページが更新されていません。リアルタイムモニタリングが必要な場合は、このページを再度読み込んでください。"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",

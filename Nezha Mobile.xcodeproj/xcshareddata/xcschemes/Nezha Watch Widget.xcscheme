@@ -16,9 +16,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CB701A1C2C5CF93500019344"
-               BuildableName = "Nezha Widget.appex"
-               BlueprintName = "Nezha Widget"
+               BlueprintIdentifier = "CB1A52022C7183B4007FE35F"
+               BuildableName = "Nezha Watch Widget.appex"
+               BlueprintName = "Nezha Watch Widget"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,6 +33,20 @@
                BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
                BuildableName = "Nezha Mobile.app"
                BlueprintName = "Nezha Mobile"
+               ReferencedContainer = "container:Nezha Mobile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CB701A4E2C67077400019344"
+               BuildableName = "Nezha Watch.app"
+               BlueprintName = "Nezha Watch"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -57,17 +71,16 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB701A1C2C5CF93500019344"
-            BuildableName = "Nezha Widget.appex"
-            BlueprintName = "Nezha Widget"
+            BlueprintIdentifier = "CB1A52022C7183B4007FE35F"
+            BuildableName = "Nezha Watch Widget.appex"
+            BlueprintName = "Nezha Watch Widget"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -85,12 +98,12 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetDefaultView"
-            value = "timeline"
+            value = "placeholder"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "systemMedium"
+            value = "accessoryCorner"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
@@ -100,16 +113,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES"
-      askForAppToLaunch = "Yes"
-      launchAutomaticallySubstyle = "2">
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
+            BlueprintIdentifier = "CB1A52022C7183B4007FE35F"
+            BuildableName = "Nezha Watch Widget.appex"
+            BlueprintName = "Nezha Watch Widget"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
