@@ -1,6 +1,6 @@
 //
 //  AppIntent.swift
-//  WidgetAppExtension
+//  Nezha Widget
 //
 //  Created by Junhui Lou on 8/2/24.
 //

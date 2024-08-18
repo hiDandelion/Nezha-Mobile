@@ -1,6 +1,6 @@
 //
 //  ServerDetailView.swift
-//  WatchApp
+//  Nezha Watch
 //
 //  Created by Junhui Lou on 8/9/24.
 //
@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ServerDetailView: View {
     var server: Server
+    @State var isFromIncomingURL: Bool = false
     
     var body: some View {
         NavigationStack {

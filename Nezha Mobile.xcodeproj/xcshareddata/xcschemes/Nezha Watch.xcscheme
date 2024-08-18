@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1540"
-   wasCreatedForAppExtension = "YES"
-   version = "2.0">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -16,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CB701A1C2C5CF93500019344"
-               BuildableName = "WidgetAppExtension.appex"
-               BlueprintName = "WidgetAppExtension"
+               BlueprintIdentifier = "CB701A4E2C67077400019344"
+               BuildableName = "Nezha Watch.app"
+               BlueprintName = "Nezha Watch"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,69 +46,38 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard">
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB701A1C2C5CF93500019344"
-            BuildableName = "WidgetAppExtension.appex"
-            BlueprintName = "WidgetAppExtension"
+            BlueprintIdentifier = "CB701A4E2C67077400019344"
+            BuildableName = "Nezha Watch.app"
+            BlueprintName = "Nezha Watch"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
-            ReferencedContainer = "container:Nezha Mobile.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "_XCWidgetKind"
-            value = ""
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetDefaultView"
-            value = "timeline"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetFamily"
-            value = "systemMedium"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES"
-      askForAppToLaunch = "Yes"
-      launchAutomaticallySubstyle = "2">
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
+            BlueprintIdentifier = "CB701A4E2C67077400019344"
+            BuildableName = "Nezha Watch.app"
+            BlueprintName = "Nezha Watch"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

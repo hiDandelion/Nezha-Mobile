@@ -1,6 +1,6 @@
 //
-//  WidgetApp.swift
-//  WidgetApp
+//  NezhaWidgetApp.swift
+//  Nezha Widget
 //
 //  Created by Junhui Lou on 8/2/24.
 //
@@ -123,8 +123,8 @@ struct WidgetEntryView : View {
                 VStack {
                     switch(family) {
                     case .accessoryCircular:
-                        let totalCore = getCore(server.host.cpu).toDouble()
-                        let loadPressure = server.status.load15 / (totalCore ?? 1.0)
+                        let totalCore = Double(getCore(server.host.cpu) ?? 1)
+                        let loadPressure = server.status.load15 / totalCore
                         
                         Gauge(value: loadPressure) {
                             Text("Load")
@@ -200,7 +200,6 @@ struct WidgetEntryView : View {
 #endif
                     default:
                         Text("Unsupported family")
-                            .foregroundStyle(.white)
                     }
                 }
                 .widgetURL(URL(string: "nezha://server-details?serverID=\(server.id)")!)
@@ -360,12 +359,14 @@ struct WidgetEntryView : View {
     
     func infoView(server: Server) -> some View {
         VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "cpu")
-                    .frame(width: 10)
-                Text(getCore(server.host.cpu))
+            if let core = getCore(server.host.cpu) {
+                HStack {
+                    Image(systemName: "cpu")
+                        .frame(width: 10)
+                    Text("\(core) Core")
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
                 Image(systemName: "memorychip")
@@ -403,7 +404,7 @@ struct WidgetEntryView : View {
     }
 }
 
-struct WidgetApp: Widget {
+struct NezhaWidgetApp: Widget {
     init() {
         // Register UserDefaults
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
@@ -434,13 +435,11 @@ struct WidgetApp: Widget {
     }
 }
 
-//struct WidgetApp_Previews: PreviewProvider {
+//struct NezhaWidgetApp_Previews: PreviewProvider {
 //    static var previews: some View {
-//        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "Placeholder"))
-//            .containerBackground(.blue.gradient, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemSmall))
-//        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "Placeholder"))
-//            .containerBackground(.blue.gradient, for: .widget)
+//        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "OK", color: .blue))
+//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//        WidgetEntryView(entry: ServerEntry(date: Date(), server: nil, isShowIP: false, message: "Error Description", color: .blue))
 //            .previewContext(WidgetPreviewContext(family: .systemMedium))
 //    }
 //}

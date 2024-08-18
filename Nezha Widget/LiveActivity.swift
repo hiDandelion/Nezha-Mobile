@@ -1,6 +1,6 @@
 //
 //  LiveActivity.swift
-//  Nezha Mobile
+//  Nezha Widget
 //
 //  Created by Junhui Lou on 8/12/24.
 //

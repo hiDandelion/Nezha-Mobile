@@ -1,6 +1,6 @@
 //
 //  DashboardViewModel.swift
-//  Watch App Watch App
+//  Nezha Watch
 //
 //  Created by Junhui Lou on 8/9/24.
 //

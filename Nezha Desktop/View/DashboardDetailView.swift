@@ -47,7 +47,7 @@ struct DashboardDetailView: View {
             case .error(let message):
                 ZStack(alignment: .bottomTrailing) {
                     VStack(spacing: 20) {
-                        Text("An error occured")
+                        Text("An error occurred")
                             .font(.headline)
                         Text(message)
                             .font(.subheadline)

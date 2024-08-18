@@ -79,7 +79,7 @@ struct AdvancedCustomizationView: View {
                         ColorPicker("Background Color", selection: $selectedWidgetBackgroundColor)
                         ColorPicker("Text Color", selection: $selectedWidgetTextColor)
                     }
-                    Button("Refresh widgets") {
+                    Button("Refresh Widgets") {
                         WidgetCenter.shared.reloadAllTimelines()
                         isShowWidgetsSuccessfullyRefreshedAlert = true
                     }

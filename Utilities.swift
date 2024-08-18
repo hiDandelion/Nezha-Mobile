@@ -37,20 +37,20 @@ func convertTimestampToLocalizedDateString(timestamp: Int) -> String {
     return localizedDateString
 }
 
-func getCore(_ str: [String]?) -> String {
+func getCore(_ str: [String]?) -> Int? {
     guard let firstStr = str?.first else {
-        return String(localized: "N/A")
+        return nil
     }
     
     let physicalCorePattern = #"(\d|\.)+ Physical"#
     let virtualCorePattern = #"(\d|\.)+ Virtual"#
     
     if let physicalCore = firstStr.range(of: physicalCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
-        return physicalCore.replacingOccurrences(of: "Physical", with: String(localized: "Core"))
+        return physicalCore.extractFirstNumber()
     } else if let virtualCore = firstStr.range(of: virtualCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
-        return virtualCore.replacingOccurrences(of: "Virtual", with: String(localized: "Core"))
+        return virtualCore.extractFirstNumber()
     } else {
-        return String(localized: "N/A")
+        return nil
     }
 }
 
@@ -65,10 +65,13 @@ func countryFlagEmoji(countryCode: String) -> String {
 }
 
 extension String {
-    func toDouble() -> Double? {
-        let scanner = Scanner(string: self)
-        scanner.charactersToBeSkipped = CharacterSet.alphanumerics.inverted
-        return scanner.scanDouble()
+    func extractFirstNumber() -> Int? {
+        let pattern = "\\d+"
+        if let range = self.range(of: pattern, options: .regularExpression) {
+            let numberString = String(self[range])
+            return Int(numberString)
+        }
+        return nil
     }
     
     func capitalizeFirstLetter() -> String {
@@ -85,18 +88,26 @@ func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
     let months = days / 30
     let years = months / 12
 
+    let formatShort: (String, Int) -> String = { unit, value in
+        return String(format: NSLocalizedString("%d%@", comment: "Short format: 5d"), value, NSLocalizedString(unit, comment: "Time unit"))
+    }
+
+    let formatLong: (String, Int, String, Int) -> String = { unit1, value1, unit2, value2 in
+        return String(format: NSLocalizedString("%d%@ %d%@", comment: "Long format: 5d 3h"), value1, NSLocalizedString(unit1, comment: "Time unit 1"), value2, NSLocalizedString(unit2, comment: "Time unit 2"))
+    }
+
     if years > 0 {
-        return "\(days)d"
+        return shortened ? formatShort("timeUnitShortened.y", years) : formatLong("timeUnitShortened.y", years, "timeUnitShortened.m", months % 12)
     } else if months > 0 {
-        return "\(days)d"
+        return shortened ? formatShort("timeUnitShortened.mo", months) : formatLong("timeUnitShortened.mo", months, "timeUnitShortened.d", days % 30)
     } else if days > 0 {
-        return shortened ? "\(days)d" : "\(days)d \(hours % 24)h"
+        return shortened ? formatShort("timeUnitShortened.d", days) : formatLong("timeUnitShortened.d", days, "timeUnitShortened.h", hours % 24)
     } else if hours > 0 {
-        return shortened ? "\(hours)h" : "\(hours)h \(minutes % 60)m"
+        return shortened ? formatShort("timeUnitShortened.h", hours) : formatLong("timeUnitShortened.h", hours, "timeUnitShortened.m", minutes % 60)
     } else if minutes > 0 {
-        return shortened ? "\(minutes)m" : "\(minutes)m \(seconds % 60)s"
+        return shortened ? formatShort("timeUnitShortened.m", minutes) : formatLong("timeUnitShortened.m", minutes, "timeUnitShortened.s", seconds % 60)
     } else {
-        return "\(seconds)s"
+        return formatShort("timeUnitShortened.s", seconds)
     }
 }
 

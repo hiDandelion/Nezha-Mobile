@@ -122,7 +122,7 @@ struct DashboardDetailView: View {
                         }
                     case .error(let message):
                         VStack(spacing: 20) {
-                            Text("An error occured")
+                            Text("An error occurred")
                                 .font(.headline)
                             Text(message)
                                 .font(.subheadline)
@@ -451,12 +451,14 @@ struct DashboardDetailView: View {
                     .tint(themeCustomizationEnabled ? themeTintColor : themeColor(theme: theme))
                     
                     VStack(alignment: .leading) {
-                        HStack {
-                            Image(systemName: "cpu")
-                                .frame(width: 10)
-                            Text(getCore(server.host.cpu))
+                        if let core = getCore(server.host.cpu) {
+                            HStack {
+                                Image(systemName: "cpu")
+                                    .frame(width: 10)
+                                Text("\(core) Core")
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack {
                             Image(systemName: "memorychip")
@@ -492,8 +494,8 @@ struct DashboardDetailView: View {
             }
         } footerView: {
             HStack {
-                let totalCore = getCore(server.host.cpu).toDouble()
-                let loadPressure = server.status.load1 / (totalCore ?? 1.0)
+                let totalCore = Double(getCore(server.host.cpu) ?? 1)
+                let loadPressure = server.status.load1 / totalCore
                 
                 Text("Load \(server.status.load1, specifier: "%.2f")")
                     .font(.caption2)

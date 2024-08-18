@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "--" : {
+
+    },
     "%.0f" : {
 
     },
@@ -39,11 +42,61 @@
         }
       }
     },
+    "%d%@" : {
+      "comment" : "Short format: 5d",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$d%2$@"
+          }
+        }
+      }
+    },
+    "%d%@ %d%@" : {
+      "comment" : "Long format: 5d 3h",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$d%2$@ %3$d%4$@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$d%2$@%3$d%4$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$d%2$@%3$d%4$@"
+          }
+        }
+      }
+    },
     "%lf" : {
 
     },
     "%lld" : {
 
+    },
+    "%lld Core" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld コアー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 核心"
+          }
+        }
+      }
     },
     "↑%@" : {
 
@@ -157,7 +210,7 @@
         }
       }
     },
-    "An error occured" : {
+    "An error occurred" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -433,22 +486,6 @@
         }
       }
     },
-    "Core" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コアー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "核心"
-          }
-        }
-      }
-    },
     "CPU" : {
       "localizations" : {
         "ja" : {
@@ -675,6 +712,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用小组件自定义"
+          }
+        }
+      }
+    },
+    "Error" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エラー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "错误"
           }
         }
       }
@@ -1333,7 +1386,7 @@
         }
       }
     },
-    "Refresh widgets" : {
+    "Refresh Widgets" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1850,6 +1903,144 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "时间"
+          }
+        }
+      }
+    },
+    "timeUnitShortened.d" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "d"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "天"
+          }
+        }
+      }
+    },
+    "timeUnitShortened.h" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "h"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "时"
+          }
+        }
+      }
+    },
+    "timeUnitShortened.m" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "m"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分"
+          }
+        }
+      }
+    },
+    "timeUnitShortened.mo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "月"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "月"
+          }
+        }
+      }
+    },
+    "timeUnitShortened.s" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "s"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秒"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秒"
+          }
+        }
+      }
+    },
+    "timeUnitShortened.y" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "y"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "年"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "年"
           }
         }
       }

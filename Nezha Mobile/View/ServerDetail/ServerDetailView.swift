@@ -101,12 +101,10 @@ struct ServerDetailView: View {
                                     view.background(themeSecondaryColor)
                                 }
                                 .if(!themeCustomizationEnabled) { view in
-                                    view.background(.thinMaterial)
+                                    view.background(.white)
                                 }
                                 .clipShape(.capsule)
-                                .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)
-                                .shadow(color: .black.opacity(0.05), radius: 5, x: -5, y: -5)
-                                .padding(.horizontal, 15)
+                                .padding(.horizontal, 20)
                                 .padding(.top, 5)
                             
                             TabView(selection: $activeTab) {

@@ -63,10 +63,12 @@ struct MenuBarView: View {
                 
                 HStack(spacing: 20) {
                     VStack(alignment: .leading) {
-                        HStack {
-                            Image(systemName: "cpu")
-                                .frame(width: 10)
-                            Text(getCore(server.host.cpu))
+                        if let core = getCore(server.host.cpu) {
+                            HStack {
+                                Image(systemName: "cpu")
+                                    .frame(width: 10)
+                                Text("\(core) Core")
+                            }
                         }
                         
                         HStack {

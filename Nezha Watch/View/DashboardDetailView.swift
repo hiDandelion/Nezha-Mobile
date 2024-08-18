@@ -1,6 +1,6 @@
 //
 //  DashboardDetailView.swift
-//  Watch App Watch App
+//  Nezha Watch
 //
 //  Created by Junhui Lou on 8/9/24.
 //
@@ -78,7 +78,7 @@ struct DashboardDetailView: View {
                 case .error(let message):
                     ZStack(alignment: .bottomTrailing) {
                         VStack(spacing: 5) {
-                            Text("An error occured")
+                            Text("An error occurred")
                                 .font(.headline)
                             Text(message)
                                 .font(.subheadline)

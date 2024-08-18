@@ -1,6 +1,6 @@
 //
-//  WidgetAppBundle.swift
-//  WidgetApp
+//  NezhaWidgetAppBundle.swift
+//  Nezha Widget
 //
 //  Created by Junhui Lou on 8/2/24.
 //
@@ -16,6 +16,6 @@ struct WidgetAppBundle: WidgetBundle {
             LiveActivity()
         }
 #endif
-        WidgetApp()
+        NezhaWidgetApp()
     }
 }
