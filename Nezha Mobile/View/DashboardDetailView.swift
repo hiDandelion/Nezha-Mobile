@@ -324,16 +324,23 @@ struct DashboardDetailView: View {
                 activeTag = tag
             }
         }) {
-            Text(tag == "All" ? String(localized: "All") : tag == "" ? String(localized: "Uncategorized") : tag)
+            Text(tag == "All" ? String(localized: "All") : (tag == "" ? String(localized: "Uncategorized") : tag))
                 .font(.callout)
-                .foregroundStyle(activeTag == tag ? (scheme == .light ? .white : .black) : (themeCustomizationEnabled ? themePrimaryColor : Color.primary))
+                .foregroundStyle(activeTag == tag ? (themeCustomizationEnabled ? themePrimaryColorDark : (scheme == .light ? .white : .black)) : (themeCustomizationEnabled ? themePrimaryColor : Color.primary))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 15)
                 .background {
                     if activeTag == tag {
-                        Capsule()
-                            .fill(Color.primary)
-                            .matchedGeometryEffect(id: "ACTIVETAGTAB", in: animation)
+                        if themeCustomizationEnabled {
+                            Capsule()
+                                .fill(themeTintColor)
+                                .matchedGeometryEffect(id: "ACTIVETAG", in: animation)
+                        }
+                        else {
+                            Capsule()
+                                .fill(Color.primary)
+                                .matchedGeometryEffect(id: "ACTIVETAG", in: animation)
+                        }
                     } else {
                         if themeCustomizationEnabled {
                             Capsule()

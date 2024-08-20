@@ -88,7 +88,7 @@ struct ServerDetailView: View {
                                             .frame(width: capsuleWidth)
                                             .offset(x: progress * capsuleWidth)
                                         
-                                        Tabbar(scheme == .dark ? .black : .white, .semibold)
+                                        Tabbar(themeCustomizationEnabled ? themePrimaryColorDark : (scheme == .dark ? .black : .white), .semibold)
                                             .mask(alignment: .leading) {
                                                 Capsule()
                                                     .frame(width: capsuleWidth)
@@ -97,12 +97,7 @@ struct ServerDetailView: View {
                                     }
                                     .allowsTightening(false)
                                 }
-                                .if(themeCustomizationEnabled) { view in
-                                    view.background(themeSecondaryColor)
-                                }
-                                .if(!themeCustomizationEnabled) { view in
-                                    view.background(.white)
-                                }
+                                .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : Color(red: 1, green: 1, blue: 1))
                                 .clipShape(.capsule)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 5)
@@ -135,7 +130,7 @@ struct ServerDetailView: View {
                             .scrollContentBackground(.hidden)
                             .tabViewStyle(.page(indexDisplayMode: .never))
                             .animation(.easeInOut(duration: 0.3), value: activeTab)
-                            .ignoresSafeArea()
+                            .ignoresSafeArea(.all, edges: .bottom)
                         }
                     }
                 }

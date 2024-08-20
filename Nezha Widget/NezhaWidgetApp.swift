@@ -294,13 +294,18 @@ struct WidgetEntryView : View {
                     Text(countryFlagEmoji(countryCode: server.host.countryCode))
                         .frame(width: 20)
                 }
-                Text(server.name)
-                if let isShowIP = entry.isShowIP, isShowIP {
-                    Text(server.IPv4)
+                ViewThatFits {
+                    HStack {
+                        Text(server.name)
+                        if let isShowIP = entry.isShowIP, isShowIP {
+                            Text(server.IPv4)
+                        }
+                    }
+                    Text(server.name)
                 }
                 Spacer()
                 Button(intent: RefreshWidgetIntent()) {
-                    HStack {
+                    HStack(spacing: 5) {
                         Text(entry.date.formatted(date: .omitted, time: .shortened))
                         Image(systemName: "arrow.clockwise")
                     }
@@ -314,10 +319,16 @@ struct WidgetEntryView : View {
                     gaugeView(server: server)
                 }
                 Spacer()
-                infoView(server: server)
-                    .font(.caption2)
-                    .frame(maxWidth: 100)
-                    .padding(.leading, 20)
+                ViewThatFits {
+                    VStack(spacing: 10) {
+                        infoViewUpperSection(server: server)
+                        infoViewLowerSection(server: server)
+                    }
+                    infoViewUpperSection(server: server)
+                }
+                .font(.caption2)
+                .frame(maxWidth: 100)
+                .padding(.leading, 20)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -359,7 +370,7 @@ struct WidgetEntryView : View {
         .gaugeStyle(.accessoryCircularCapacity)
     }
     
-    func infoView(server: Server) -> some View {
+    func infoViewUpperSection(server: Server) -> some View {
         VStack(alignment: .leading) {
             if let core = getCore(server.host.cpu) {
                 HStack {
@@ -383,26 +394,27 @@ struct WidgetEntryView : View {
                 Text("\(formatBytes(server.host.diskTotal))")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    func infoViewLowerSection(server: Server) -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Image(systemName: "power")
+                    .frame(width: 10)
+                Text("\(formatTimeInterval(seconds: server.status.uptime))")
+            }
             
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: "power")
-                        .frame(width: 10)
-                    Text("\(formatTimeInterval(seconds: server.status.uptime))")
-                }
-                
-                HStack {
-                    Image(systemName: "circle.dotted.circle")
-                        .frame(width: 10)
-                    VStack(alignment: .leading) {
-                        Text("↑\(formatBytes(server.status.netOutTransfer))")
-                        Text("↓\(formatBytes(server.status.netInTransfer))")
-                    }
+            HStack {
+                Image(systemName: "circle.dotted.circle")
+                    .frame(width: 10)
+                VStack(alignment: .leading) {
+                    Text("↑\(formatBytes(server.status.netOutTransfer))")
+                    Text("↓\(formatBytes(server.status.netInTransfer))")
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, 5)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
