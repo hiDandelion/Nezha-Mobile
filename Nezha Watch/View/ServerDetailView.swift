@@ -21,10 +21,10 @@ struct ServerDetailView: View {
                             pieceOfInfo(systemImage: "tag", name: "Tag", content: "\(server.tag)")
                             pieceOfInfo(systemImage: "4.circle", name: "IPv4", content: "\(server.IPv4)")
                             if server.IPv6 != "" {
-                                pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)", isLongContent: true)
+                                pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
                             }
                             pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
-                            pieceOfInfo(systemImage: "clock", name: "Last Active", content: "\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))", isLongContent: true)
+                            pieceOfInfo(systemImage: "clock", name: "Last Active", content: "\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))")
                         }
                         
                         Section("Host") {
@@ -158,8 +158,8 @@ struct ServerDetailView: View {
                                 .tint(gaugeGradient)
                             }
                             
-                            pieceOfInfo(systemImage: "network", name: "Network", content: "↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s", isLongContent: true)
-                            pieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: "↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))", isLongContent: true)
+                            pieceOfInfo(systemImage: "network", name: "Network", content: "↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s")
+                            pieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: "↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))")
                             pieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: "\(server.status.TCPConnectionCount)")
                             pieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: "\(server.status.UDPConnectionCount)")
                             pieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: "\(server.status.processCount)")
@@ -177,47 +177,6 @@ struct ServerDetailView: View {
             }
             .navigationTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
-        }
-    }
-    
-    private func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: String, isLongContent: Bool = false) -> some View {
-        VStack {
-            if isLongContent {
-                VStack(alignment: .leading) {
-                    Label(name, systemImage: systemImage)
-                    Text(content)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            else {
-                HStack {
-                    Label(name, systemImage: systemImage)
-                    Spacer()
-                    Text(content)
-                        .foregroundStyle(.secondary)
-                }
-            }
-        }
-    }
-    
-    private func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: some View, isLongContent: Bool = false) -> some View {
-        VStack {
-            if isLongContent {
-                VStack(alignment: .leading) {
-                    Label(name, systemImage: systemImage)
-                    Spacer()
-                    content
-                        .foregroundStyle(.secondary)
-                }
-            }
-            else {
-                HStack {
-                    Label(name, systemImage: systemImage)
-                    Spacer()
-                    content
-                        .foregroundStyle(.secondary)
-                }
-            }
         }
     }
 }

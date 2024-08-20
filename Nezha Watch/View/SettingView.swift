@@ -12,13 +12,6 @@ struct SettingView: View {
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
-    @State private var isNeedReconnection: Bool = false {
-        didSet {
-            DispatchQueue.main.async {
-                dashboardViewModel.stopMonitoring()
-            }
-        }
-    }
     
     var body: some View {
         NavigationStack {
@@ -27,9 +20,15 @@ struct SettingView: View {
                     TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
+                        .onChange(of: dashboardLink) {
+                            dashboardViewModel.stopMonitoring()
+                        }
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
+                        .onChange(of: dashboardAPIToken) {
+                            dashboardViewModel.stopMonitoring()
+                        }
                 } header: {
                     Text("Dashboard Info")
                 } footer: {

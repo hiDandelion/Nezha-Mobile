@@ -18,76 +18,82 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func snapshot(for configuration: SpecifyServerIDIntent, in context: Context) async -> ServerEntry {
-        let serverID: Int = configuration.server.id
+        let serverID: Int? = configuration.server?.id
+        let isShowIP: Bool = configuration.isShowIP ?? false
+        let color: WidgetBackgroundColor = configuration.color ?? .blue
         do {
-            if serverID == -1 {
-                let response = try await RequestHandler.getAllServerDetail()
+            if let serverID {
+                let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
                 if let server = response.result?.first {
-                    return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)
+                    return ServerEntry(date: Date(), server: server, isShowIP: isShowIP, message: "OK", color: color)
                 }
                 else {
-                    return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)
+                    return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidServerConfiguration"), color: color)
                 }
             }
-            
-            let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
-            if let server = response.result?.first {
-                return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)
-            }
             else {
-                return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)
+                let response = try await RequestHandler.getAllServerDetail()
+                if let server = response.result?.first {
+                    return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: color)
+                }
+                else {
+                    return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidServerConfiguration"), color: color)
+                }
             }
         } catch GetServerDetailError.invalidDashboardConfiguration {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidDashboardConfiguration"), color: configuration.color)
+            return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidDashboardConfiguration"), color: color)
         } catch GetServerDetailError.dashboardAuthenticationFailed {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.dashboardAuthenticationFailed"), color: configuration.color)
+            return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.dashboardAuthenticationFailed"), color: color)
         } catch GetServerDetailError.invalidResponse(let message) {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: message, color: configuration.color)
+            return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: message, color: color)
         } catch GetServerDetailError.decodingError {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.errorDecodingData"), color: configuration.color)
+            return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.errorDecodingData"), color: color)
         } catch {
-            return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: error.localizedDescription, color: configuration.color)
+            return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: error.localizedDescription, color: color)
         }
     }
     
     func timeline(for configuration: SpecifyServerIDIntent, in context: Context) async -> Timeline<ServerEntry> {
-        let serverID: Int = configuration.server.id
+        let serverID: Int? = configuration.server?.id
+        let isShowIP: Bool = configuration.isShowIP ?? false
+        let color: WidgetBackgroundColor = configuration.color ?? .blue
         do {
-            if serverID == -1 {
-                let response = try await RequestHandler.getAllServerDetail()
+            if let serverID {
+                let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
                 if let server = response.result?.first {
-                    let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)]
+                    let entries = [ServerEntry(date: Date(), server: server, isShowIP: isShowIP, message: "OK", color: color)]
                     return Timeline(entries: entries, policy: .atEnd)
                 }
                 else {
-                    let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)]
+                    let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidServerConfiguration"), color: color)]
                     return Timeline(entries: entries, policy: .atEnd)
                 }
             }
-            
-            let response = try await RequestHandler.getServerDetail(serverID: String(configuration.server.id))
-            if let server = response.result?.first {
-                let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: configuration.color)]
-                return Timeline(entries: entries, policy: .atEnd)
-            }
             else {
-                let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: configuration.color)]
-                return Timeline(entries: entries, policy: .atEnd)
+                let response = try await RequestHandler.getAllServerDetail()
+                if let server = response.result?.first {
+                    let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: color)]
+                    return Timeline(entries: entries, policy: .atEnd)
+                }
+                else {
+                    let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: color)]
+                    return Timeline(entries: entries, policy: .atEnd)
+                }
             }
         } catch GetServerDetailError.invalidDashboardConfiguration {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidDashboardConfiguration"), color: configuration.color)]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidDashboardConfiguration"), color: color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch GetServerDetailError.dashboardAuthenticationFailed {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.dashboardAuthenticationFailed"), color: configuration.color)]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.dashboardAuthenticationFailed"), color: color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch GetServerDetailError.invalidResponse(let message) {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: message, color: configuration.color)]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: message, color: color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch GetServerDetailError.decodingError {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.errorDecodingData"), color: configuration.color)]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.errorDecodingData"), color: color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: error.localizedDescription, color: configuration.color)]
+            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: error.localizedDescription, color: color)]
             return Timeline(entries: entries, policy: .atEnd)
         }
     }

@@ -15,14 +15,14 @@ struct LiveActivityAttributes: ActivityAttributes {
         var name: String
         var id: Int
         var cpu: Double
-        var memUsed: Int
-        var diskUsed: Int
-        var memTotal: Int
-        var diskTotal: Int
-        var netInTransfer: Int
-        var netOutTransfer: Int
+        var memUsed: Int64
+        var diskUsed: Int64
+        var memTotal: Int64
+        var diskTotal: Int64
+        var netInTransfer: Int64
+        var netOutTransfer: Int64
         var load1: Double
-        var uptime: Int
+        var uptime: Int64
     }
 }
 

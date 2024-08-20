@@ -109,17 +109,13 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     static var description = IntentDescription("Select the server to display details for.")
 
     @Parameter(title: "Server")
-    var server: ServerEntity
+    var server: ServerEntity?
     @Parameter(title: "Show IP")
-    var isShowIP: Bool
+    var isShowIP: Bool?
     @Parameter(title: "Color")
-    var color: WidgetBackgroundColor
+    var color: WidgetBackgroundColor?
 
-    init() {
-        self.server = ServerEntity(id: -1, name: "Demo", displayIndex: -1)
-        self.isShowIP = false
-        self.color = .blue
-    }
+    init() {}
 
     init(server: ServerEntity, isShowIP: Bool, color: WidgetBackgroundColor) {
         self.server = server

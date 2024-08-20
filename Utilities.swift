@@ -22,12 +22,12 @@ func debugLog(_ message: String) {
 }
 
 // Bytes To Data Amount String
-func formatBytes(_ bytes: Int) -> String {
+func formatBytes(_ bytes: Int64) -> String {
     return ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .memory)
 }
 
 // Timestamp To Date String
-func convertTimestampToLocalizedDateString(timestamp: Int) -> String {
+func convertTimestampToLocalizedDateString(timestamp: Int64) -> String {
     let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
 
     let formatter = DateFormatter()
@@ -39,19 +39,19 @@ func convertTimestampToLocalizedDateString(timestamp: Int) -> String {
 }
 
 // Seconds To Interval String
-func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
+func formatTimeInterval(seconds: Int64, shortened: Bool = false) -> String {
     let minutes = seconds / 60
     let hours = minutes / 60
     let days = hours / 24
     let months = days / 30
     let years = months / 12
 
-    let formatShort: (String, Int) -> String = { unit, value in
-        return String(format: NSLocalizedString("%d%@", comment: "Short format: 5d"), value, NSLocalizedString(unit, comment: "Time unit"))
+    func formatShort(_ unit: String, _ value: Int64) -> String {
+        return String(format: NSLocalizedString("%lld%@", comment: "Short format: 5d"), value, NSLocalizedString(unit, comment: "Time unit"))
     }
 
-    let formatLong: (String, Int, String, Int) -> String = { unit1, value1, unit2, value2 in
-        return String(format: NSLocalizedString("%d%@ %d%@", comment: "Long format: 5d 3h"), value1, NSLocalizedString(unit1, comment: "Time unit 1"), value2, NSLocalizedString(unit2, comment: "Time unit 2"))
+    func formatLong(_ unit1: String, _ value1: Int64, _ unit2: String, _ value2: Int64) -> String {
+        return String(format: NSLocalizedString("%lld%@ %lld%@", comment: "Long format: 5d 3h"), value1, NSLocalizedString(unit1, comment: "Time unit 1"), value2, NSLocalizedString(unit2, comment: "Time unit 2"))
     }
 
     if years > 0 {
@@ -99,8 +99,8 @@ func countryFlagEmoji(countryCode: String) -> String {
 }
 
 // Server Online Indicator
-func isServerOnline(timestamp: Int) -> Bool {
-    let currentTimestamp = Int(Date().timeIntervalSince1970)
+func isServerOnline(timestamp: Int64) -> Bool {
+    let currentTimestamp = Int64(Date().timeIntervalSince1970)
     let fiveMinutesInSeconds = 60
     
     return currentTimestamp - timestamp > fiveMinutesInSeconds

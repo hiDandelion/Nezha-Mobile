@@ -17,7 +17,7 @@ struct Server: Codable, Identifiable {
     let id: Int
     let name: String
     let tag: String
-    let lastActive: Int
+    let lastActive: Int64
     let IPv4: String
     let IPv6: String
     let validIP: String
@@ -41,12 +41,12 @@ struct ServerHost: Codable {
     let platformVersion: String
     let cpu: [String]?
     let gpu: [String]?
-    let memTotal: Int
-    let diskTotal: Int
-    let swapTotal: Int
+    let memTotal: Int64
+    let diskTotal: Int64
+    let swapTotal: Int64
     let arch: String
     let virtualization: String
-    let bootTime: Int
+    let bootTime: Int64
     let countryCode: String
     let version: String
     
@@ -68,20 +68,20 @@ struct ServerHost: Codable {
 
 struct ServerStatus: Codable {
     let cpu: Double
-    let memUsed: Int
-    let swapUsed: Int
-    let diskUsed: Int
-    let netInTransfer: Int
-    let netOutTransfer: Int
-    let netInSpeed: Int
-    let netOutSpeed: Int
-    let uptime: Int
+    let memUsed: Int64
+    let swapUsed: Int64
+    let diskUsed: Int64
+    let netInTransfer: Int64
+    let netOutTransfer: Int64
+    let netInSpeed: Int64
+    let netOutSpeed: Int64
+    let uptime: Int64
     let load1: Double
     let load5: Double
     let load15: Double
-    let TCPConnectionCount: Int
-    let UDPConnectionCount: Int
-    let processCount: Int
+    let TCPConnectionCount: Int64
+    let UDPConnectionCount: Int64
+    let processCount: Int64
     
     enum CodingKeys: String, CodingKey {
         case cpu = "CPU"
@@ -103,7 +103,7 @@ struct ServerStatus: Codable {
 }
 
 struct GetServerPingDataResponse: Codable {
-    let code: Int
+    let code: Int64
     let message: String
     let result: [PingData]?
 }

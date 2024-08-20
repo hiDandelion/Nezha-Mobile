@@ -85,11 +85,9 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     static var description = IntentDescription("Select the server to display details for.")
 
     @Parameter(title: "Server")
-    var server: ServerEntity
+    var server: ServerEntity?
 
-    init() {
-        self.server = ServerEntity(id: -1, name: "Demo", displayIndex: -1)
-    }
+    init() {}
 
     init(server: ServerEntity) {
         self.server = server

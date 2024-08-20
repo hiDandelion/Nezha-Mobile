@@ -18,10 +18,10 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func snapshot(for configuration: SpecifyServerIDIntent, in context: Context) async -> ServerEntry {
-        let serverID: Int = configuration.server.id
+        let serverID: Int? = configuration.server?.id
         do {
-            if serverID == -1 {
-                let response = try await RequestHandler.getAllServerDetail()
+            if let serverID {
+                let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
                 if let server = response.result?.first {
                     return ServerEntry(date: Date(), server: server, message: "OK")
                 }
@@ -29,13 +29,14 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                     return ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))
                 }
             }
-            
-            let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
-            if let server = response.result?.first {
-                return ServerEntry(date: Date(), server: server, message: "OK")
-            }
             else {
-                return ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))
+                let response = try await RequestHandler.getAllServerDetail()
+                if let server = response.result?.first {
+                    return ServerEntry(date: Date(), server: server, message: "OK")
+                }
+                else {
+                    return ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))
+                }
             }
         } catch GetServerDetailError.invalidDashboardConfiguration {
             return ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidDashboardConfiguration"))
@@ -51,10 +52,10 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func timeline(for configuration: SpecifyServerIDIntent, in context: Context) async -> Timeline<ServerEntry> {
-        let serverID: Int = configuration.server.id
+        let serverID: Int? = configuration.server?.id
         do {
-            if serverID == -1 {
-                let response = try await RequestHandler.getAllServerDetail()
+            if let serverID {
+                let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
                 if let server = response.result?.first {
                     let entries = [ServerEntry(date: Date(), server: server, message: "OK")]
                     return Timeline(entries: entries, policy: .atEnd)
@@ -64,15 +65,16 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                     return Timeline(entries: entries, policy: .atEnd)
                 }
             }
-            
-            let response = try await RequestHandler.getServerDetail(serverID: String(configuration.server.id))
-            if let server = response.result?.first {
-                let entries = [ServerEntry(date: Date(), server: server, message: "OK")]
-                return Timeline(entries: entries, policy: .atEnd)
-            }
             else {
-                let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))]
-                return Timeline(entries: entries, policy: .atEnd)
+                let response = try await RequestHandler.getAllServerDetail()
+                if let server = response.result?.first {
+                    let entries = [ServerEntry(date: Date(), server: server, message: "OK")]
+                    return Timeline(entries: entries, policy: .atEnd)
+                }
+                else {
+                    let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidServerConfiguration"))]
+                    return Timeline(entries: entries, policy: .atEnd)
+                }
             }
         } catch GetServerDetailError.invalidDashboardConfiguration {
             let entries = [ServerEntry(date: Date(), server: nil, message: String(localized: "error.invalidDashboardConfiguration"))]

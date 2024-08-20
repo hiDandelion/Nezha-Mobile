@@ -55,6 +55,7 @@
     },
     "%d%@ %d%@" : {
       "comment" : "Long format: 5d 3h",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -94,6 +95,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld 核心"
+          }
+        }
+      }
+    },
+    "%lld%@" : {
+      "comment" : "Short format: 5d",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld%2$@"
+          }
+        }
+      }
+    },
+    "%lld%@ %lld%@" : {
+      "comment" : "Long format: 5d 3h",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld%2$@ %3$lld%4$@"
           }
         }
       }
