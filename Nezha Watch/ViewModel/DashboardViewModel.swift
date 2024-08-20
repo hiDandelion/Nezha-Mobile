@@ -25,9 +25,6 @@ class DashboardViewModel: ObservableObject {
     
     init() {
         let config = URLSessionConfiguration.default
-        config.httpAdditionalHeaders = ["Connection": "keep-alive"]
-        config.isDiscretionary = false
-        config.sessionSendsLaunchEvents = true
         self.session = URLSession(configuration: config)
         
         setupNotifications()

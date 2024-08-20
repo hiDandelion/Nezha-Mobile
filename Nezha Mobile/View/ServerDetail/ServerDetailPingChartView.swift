@@ -10,6 +10,7 @@ import SwiftUI
 struct ServerDetailPingChartView: View {
     @Environment(\.scenePhase) private var scenePhase
     var server: Server
+    @ObservedObject var themeStore: ThemeStore
     @State private var pingDatas: [PingData]?
     @State private var errorDescriptionLoadingPingData: String?
     @State private var isLoadingPingDatas: Bool = false
@@ -22,7 +23,7 @@ struct ServerDetailPingChartView: View {
             else {
                 if let pingDatas {
                     ForEach(pingDatas) { pingData in
-                        PingChart(pingData: pingData)
+                        PingChart(pingData: pingData, themeStore: themeStore)
                     }
                 }
                 else if let errorDescriptionLoadingPingData {

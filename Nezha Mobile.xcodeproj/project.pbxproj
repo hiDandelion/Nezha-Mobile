@@ -97,6 +97,7 @@
 		CBD2BB062C6AEDEC00BA9A36 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3A2C5DCFD100019344 /* AppIntent.swift */; };
 		CBD2BB0C2C6B375000BA9A36 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB0B2C6B375000BA9A36 /* NotificationDetailView.swift */; };
 		CBD2EA792C718DFB00519DF4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
+		CBF04EE02C7439E700A35505 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF04EDF2C7439E700A35505 /* ThemeStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,6 +256,7 @@
 		CBD2BB022C6A2F4100BA9A36 /* LiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 		CBD2BB0B2C6B375000BA9A36 /* NotificationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
 		CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nezha Desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBF04EDF2C7439E700A35505 /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -479,6 +481,7 @@
 			children = (
 				CB9C606A2C5AF76E00DAE1E3 /* NezhaMobileApp.swift */,
 				CBD2BB002C6A22B900BA9A36 /* AppDelegate.swift */,
+				CBF04EDF2C7439E700A35505 /* ThemeStore.swift */,
 				CB9C60872C5B5C9100DAE1E3 /* View */,
 				CB9C60882C5B5CAA00DAE1E3 /* ViewModel */,
 				CB701A142C5C98B900019344 /* Utilities */,
@@ -808,6 +811,7 @@
 				CBD2BAF92C68DC1600BA9A36 /* ServerDetailPingChartView.swift in Sources */,
 				CBD2BB0C2C6B375000BA9A36 /* NotificationDetailView.swift in Sources */,
 				CBD2BB062C6AEDEC00BA9A36 /* AppIntent.swift in Sources */,
+				CBF04EE02C7439E700A35505 /* ThemeStore.swift in Sources */,
 				CBD2BAF52C68DB7800BA9A36 /* GeneralViews.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* NezhaMobileApp.swift in Sources */,
 				CBD2BAF32C68DB2700BA9A36 /* ServerDetailHostView.swift in Sources */,
@@ -879,7 +883,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch Widget/Nezha Watch Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Watch Widget/Info.plist";
@@ -910,7 +914,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch Widget/Nezha Watch Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Watch Widget/Info.plist";
@@ -942,7 +946,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -977,7 +981,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -1014,7 +1018,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1048,7 +1052,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1197,7 +1201,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1240,7 +1244,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1283,7 +1287,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1315,7 +1319,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;

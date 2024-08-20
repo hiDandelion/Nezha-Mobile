@@ -14,29 +14,9 @@ struct DashboardDetailView: View {
     @Environment(\.colorScheme) private var scheme
     var dashboardLink: String
     var dashboardAPIToken: String
-    @ObservedObject var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
-    @AppStorage("NMThemeCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeCustomizationEnabled: Bool = false
-    @AppStorage("NMThemePrimaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorLight: Color = .black
-    @AppStorage("NMThemeSecondaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorLight: Color = Color(red: 1, green: 240/255, blue: 243/255)
-    @AppStorage("NMThemeTintColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorLight: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
-    @AppStorage("NMThemeBackgroundColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorLight: Color = Color(red: 1, green: 247/255, blue: 248/255)
-    @AppStorage("NMThemePrimaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorDark: Color = .white
-    @AppStorage("NMThemeSecondaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorDark: Color = Color(red: 33/255, green: 25/255, blue: 28/255)
-    @AppStorage("NMThemeTintColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorDark: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
-    @AppStorage("NMThemeBackgroundColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorDark: Color = .black
-    var themePrimaryColor: Color {
-        scheme == .light ? themePrimaryColorLight : themePrimaryColorDark
-    }
-    var themeSecondaryColor: Color {
-        scheme == .light ? themeSecondaryColorLight : themeSecondaryColorDark
-    }
-    var themeBackgroundColor: Color {
-        scheme == .light ? themeBackgroundColorLight : themeBackgroundColorDark
-    }
-    var themeTintColor: Color {
-        scheme == .light ? themeTintColorLight : themeTintColorDark
-    }
+    @ObservedObject var themeStore: ThemeStore
+    @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var backgroundImage: UIImage?
     @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool
@@ -85,8 +65,8 @@ struct DashboardDetailView: View {
                         .ignoresSafeArea()
                     }
                     else {
-                        if themeCustomizationEnabled {
-                            themeBackgroundColor
+                        if themeStore.themeCustomizationEnabled {
+                            themeStore.themeBackgroundColor(scheme: scheme)
                                 .ignoresSafeArea()
                         }
                         else {
@@ -139,7 +119,7 @@ struct DashboardDetailView: View {
             }
             .toolbarBackground(.hidden)
             .sheet(isPresented: $isShowingSettingSheet) {
-                SettingView(dashboardViewModel: dashboardViewModel, backgroundImage: $backgroundImage)
+                SettingView(dashboardViewModel: dashboardViewModel, backgroundImage: $backgroundImage, themeStore: themeStore)
             }
         }
         .onAppear {
@@ -216,14 +196,14 @@ struct DashboardDetailView: View {
             HStack {
                 Text(title)
                     .font(.largeTitle.bold())
-                    .foregroundStyle(themeCustomizationEnabled ? themePrimaryColor : Color.primary)
+                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
                     .if(backgroundImage != nil) { view in
                         view
                             .padding(.horizontal, 10)
                             .background {
-                                if themeCustomizationEnabled {
+                                if themeStore.themeCustomizationEnabled {
                                     RoundedRectangle(cornerRadius: 25)
-                                        .fill(themeSecondaryColor)
+                                        .fill(themeStore.themeSecondaryColor(scheme: scheme))
                                 }
                                 else {
                                     RoundedRectangle(cornerRadius: 25)
@@ -241,11 +221,11 @@ struct DashboardDetailView: View {
             } label: {
                 Image(systemName: "gear")
                     .padding(10)
-                    .foregroundStyle(themeCustomizationEnabled ? themePrimaryColor : Color.primary)
-                    .if(themeCustomizationEnabled) { view in
-                        view.background(themeSecondaryColor)
+                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
+                    .if(themeStore.themeCustomizationEnabled) { view in
+                        view.background(themeStore.themeSecondaryColor(scheme: scheme))
                     }
-                    .if(!themeCustomizationEnabled) { view in
+                    .if(!themeStore.themeCustomizationEnabled) { view in
                         view.background(.thinMaterial)
                     }
                     .clipShape(Circle())
@@ -280,9 +260,9 @@ struct DashboardDetailView: View {
         .frame(height: 45)
         .clipShape(.capsule)
         .background {
-            if themeCustomizationEnabled {
+            if themeStore.themeCustomizationEnabled {
                 RoundedRectangle(cornerRadius: 25 - (progress * 25))
-                    .fill(themeSecondaryColor)
+                    .fill(themeStore.themeSecondaryColor(scheme: scheme))
                     .if(progress == 1) { view in
                         view.shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
                     }
@@ -326,14 +306,14 @@ struct DashboardDetailView: View {
         }) {
             Text(tag == "All" ? String(localized: "All") : (tag == "" ? String(localized: "Uncategorized") : tag))
                 .font(.callout)
-                .foregroundStyle(activeTag == tag ? (themeCustomizationEnabled ? themePrimaryColorDark : (scheme == .light ? .white : .black)) : (themeCustomizationEnabled ? themePrimaryColor : Color.primary))
+                .foregroundStyle(activeTag == tag ? (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColorDark : (scheme == .light ? .white : .black)) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 15)
                 .background {
                     if activeTag == tag {
-                        if themeCustomizationEnabled {
+                        if themeStore.themeCustomizationEnabled {
                             Capsule()
-                                .fill(themeTintColor)
+                                .fill(themeStore.themeTintColor(scheme: scheme))
                                 .matchedGeometryEffect(id: "ACTIVETAG", in: animation)
                         }
                         else {
@@ -342,9 +322,9 @@ struct DashboardDetailView: View {
                                 .matchedGeometryEffect(id: "ACTIVETAG", in: animation)
                         }
                     } else {
-                        if themeCustomizationEnabled {
+                        if themeStore.themeCustomizationEnabled {
                             Capsule()
-                                .fill(themeSecondaryColor)
+                                .fill(themeStore.themeSecondaryColor(scheme: scheme))
                         }
                         else {
                             Capsule()
@@ -363,7 +343,7 @@ struct DashboardDetailView: View {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
                     ForEach(filteredServers) { server in
                         NavigationLink {
-                            ServerDetailView(server: server)
+                            ServerDetailView(server: server, themeStore: themeStore)
                         } label: {
                             ServerCard(server: server)
                         }
@@ -455,7 +435,7 @@ struct DashboardDetailView: View {
                         }
                     }
                     .gaugeStyle(.accessoryCircularCapacity)
-                    .tint(themeCustomizationEnabled ? themeTintColor : themeColor(theme: theme))
+                    .tint(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
                     
                     VStack(alignment: .leading) {
                         if let core = getCore(server.host.cpu) {
@@ -513,13 +493,13 @@ struct DashboardDetailView: View {
                 .gaugeStyle(.accessoryLinearCapacity)
             }
         }
-        .if(themeCustomizationEnabled) { view in
-            view.foregroundStyle(themePrimaryColor)
+        .if(themeStore.themeCustomizationEnabled) { view in
+            view.foregroundStyle(themeStore.themePrimaryColor(scheme: scheme))
         }
-        .if(themeCustomizationEnabled) { view in
-            view.background(themeSecondaryColor)
+        .if(themeStore.themeCustomizationEnabled) { view in
+            view.background(themeStore.themeSecondaryColor(scheme: scheme))
         }
-        .if(!themeCustomizationEnabled) { view in
+        .if(!themeStore.themeCustomizationEnabled) { view in
             view.background(.thinMaterial)
         }
         .cornerRadius(12)

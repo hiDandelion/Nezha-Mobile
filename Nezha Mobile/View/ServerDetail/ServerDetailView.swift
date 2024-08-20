@@ -28,27 +28,7 @@ struct ServerDetailView: View {
     @Environment(\.colorScheme) private var scheme
     var server: Server
     @State var isFromIncomingURL: Bool = false
-    @AppStorage("NMThemeCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeCustomizationEnabled: Bool = false
-    @AppStorage("NMThemePrimaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorLight: Color = .black
-    @AppStorage("NMThemeSecondaryColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorLight: Color = Color(red: 1, green: 240/255, blue: 243/255)
-    @AppStorage("NMThemeTintColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorLight: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
-    @AppStorage("NMThemeBackgroundColorLight", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorLight: Color = Color(red: 1, green: 247/255, blue: 248/255)
-    @AppStorage("NMThemePrimaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themePrimaryColorDark: Color = .white
-    @AppStorage("NMThemeSecondaryColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeSecondaryColorDark: Color = Color(red: 33/255, green: 25/255, blue: 28/255)
-    @AppStorage("NMThemeTintColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeTintColorDark: Color = Color(red: 135/255, green: 14/255, blue: 78/255)
-    @AppStorage("NMThemeBackgroundColorDark", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var themeBackgroundColorDark: Color = .black
-    var themePrimaryColor: Color {
-        scheme == .light ? themePrimaryColorLight : themePrimaryColorDark
-    }
-    var themeSecondaryColor: Color {
-        scheme == .light ? themeSecondaryColorLight : themeSecondaryColorDark
-    }
-    var themeBackgroundColor: Color {
-        scheme == .light ? themeBackgroundColorLight : themeBackgroundColorDark
-    }
-    var themeTintColor: Color {
-        scheme == .light ? themeTintColorLight : themeTintColorDark
-    }
+    @ObservedObject var themeStore: ThemeStore
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
     @StateObject private var offsetObserver = PageOffsetObserver()
@@ -58,8 +38,8 @@ struct ServerDetailView: View {
             VStack {
                 if server.status.uptime != 0 {
                     ZStack {
-                        if themeCustomizationEnabled {
-                            themeBackgroundColor
+                        if themeStore.themeCustomizationEnabled {
+                            themeStore.themeBackgroundColor(scheme: scheme)
                                 .ignoresSafeArea()
                         }
                         else {
@@ -84,11 +64,11 @@ struct ServerDetailView: View {
                                         let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
                                         
                                         Capsule()
-                                            .fill(themeCustomizationEnabled ? themeTintColor : (scheme == .dark ? .white : .black))
+                                            .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : (scheme == .dark ? .white : .black))
                                             .frame(width: capsuleWidth)
                                             .offset(x: progress * capsuleWidth)
                                         
-                                        Tabbar(themeCustomizationEnabled ? themePrimaryColorDark : (scheme == .dark ? .black : .white), .semibold)
+                                        Tabbar(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColorDark : (scheme == .dark ? .black : .white), .semibold)
                                             .mask(alignment: .leading) {
                                                 Capsule()
                                                     .frame(width: capsuleWidth)
@@ -123,7 +103,7 @@ struct ServerDetailView: View {
                                 .tag(ServerDetailTab.status)
                                 
                                 Form {
-                                    ServerDetailPingChartView(server: server)
+                                    ServerDetailPingChartView(server: server, themeStore: themeStore)
                                 }
                                 .tag(ServerDetailTab.ping)
                             }

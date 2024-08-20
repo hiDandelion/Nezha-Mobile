@@ -12,6 +12,7 @@ struct DashboardDetailView: View {
     var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var servers: [(key: Int, value: Server)] = []
+    @State private var isShowingErrorDetailAlert: Bool = false
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     
@@ -78,10 +79,21 @@ struct DashboardDetailView: View {
                 case .error(let message):
                     ZStack(alignment: .bottomTrailing) {
                         VStack(spacing: 5) {
-                            Text("An error occurred")
-                                .font(.headline)
-                            Text(message)
-                                .font(.subheadline)
+                            Button {
+                                isShowingErrorDetailAlert = true
+                            } label: {
+                                Text("An error occurred")
+                                    .font(.headline)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .alert(message, isPresented: $isShowingErrorDetailAlert) {
+                                Button("OK", role: .cancel) {
+                                    isShowingErrorDetailAlert = false
+                                }
+                            }
+                            
+                            Spacer()
+                            
                             Button("Retry") {
                                 dashboardViewModel.startMonitoring()
                             }

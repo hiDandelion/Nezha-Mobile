@@ -14,18 +14,19 @@ import SwiftUI
     import AppKit
 #endif
 
-/// Log Related
+// Debug Log
 func debugLog(_ message: String) {
     #if DEBUG
     print("Debug - \(message)")
     #endif
 }
 
-/// Text Related
+// Bytes To Data Amount String
 func formatBytes(_ bytes: Int) -> String {
     return ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .memory)
 }
 
+// Timestamp To Date String
 func convertTimestampToLocalizedDateString(timestamp: Int) -> String {
     let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
 
@@ -37,50 +38,7 @@ func convertTimestampToLocalizedDateString(timestamp: Int) -> String {
     return localizedDateString
 }
 
-func getCore(_ str: [String]?) -> Int? {
-    guard let firstStr = str?.first else {
-        return nil
-    }
-    
-    let physicalCorePattern = #"(\d|\.)+ Physical"#
-    let virtualCorePattern = #"(\d|\.)+ Virtual"#
-    
-    if let physicalCore = firstStr.range(of: physicalCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
-        return physicalCore.extractFirstNumber()
-    } else if let virtualCore = firstStr.range(of: virtualCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
-        return virtualCore.extractFirstNumber()
-    } else {
-        return nil
-    }
-}
-
-func countryFlagEmoji(countryCode: String) -> String {
-    let base = UnicodeScalar("🇦").value - UnicodeScalar("A").value
-    
-    return countryCode
-        .uppercased()
-        .unicodeScalars
-        .map { String(UnicodeScalar(base + $0.value)!) }
-        .joined()
-}
-
-extension String {
-    func extractFirstNumber() -> Int? {
-        let pattern = "\\d+"
-        if let range = self.range(of: pattern, options: .regularExpression) {
-            let numberString = String(self[range])
-            return Int(numberString)
-        }
-        return nil
-    }
-    
-    func capitalizeFirstLetter() -> String {
-        guard !self.isEmpty else { return self }
-        return self.prefix(1).uppercased() + self.dropFirst()
-    }
-}
-
-/// Time Related
+// Seconds To Interval String
 func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
     let minutes = seconds / 60
     let hours = minutes / 60
@@ -111,6 +69,36 @@ func formatTimeInterval(seconds: Int, shortened: Bool = false) -> String {
     }
 }
 
+// Extract Core Count From CPU Information
+func getCore(_ str: [String]?) -> Int? {
+    guard let firstStr = str?.first else {
+        return nil
+    }
+    
+    let physicalCorePattern = #"(\d|\.)+ Physical"#
+    let virtualCorePattern = #"(\d|\.)+ Virtual"#
+    
+    if let physicalCore = firstStr.range(of: physicalCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
+        return physicalCore.extractFirstNumber()
+    } else if let virtualCore = firstStr.range(of: virtualCorePattern, options: .regularExpression).map({ String(firstStr[$0]) }) {
+        return virtualCore.extractFirstNumber()
+    } else {
+        return nil
+    }
+}
+
+// Country Code To Emoji
+func countryFlagEmoji(countryCode: String) -> String {
+    let base = UnicodeScalar("🇦").value - UnicodeScalar("A").value
+    
+    return countryCode
+        .uppercased()
+        .unicodeScalars
+        .map { String(UnicodeScalar(base + $0.value)!) }
+        .joined()
+}
+
+// Server Online Indicator
 func isServerOnline(timestamp: Int) -> Bool {
     let currentTimestamp = Int(Date().timeIntervalSince1970)
     let fiveMinutesInSeconds = 60
@@ -118,7 +106,24 @@ func isServerOnline(timestamp: Int) -> Bool {
     return currentTimestamp - timestamp > fiveMinutesInSeconds
 }
 
-/// View Related
+// Capitalizer
+extension String {
+    func extractFirstNumber() -> Int? {
+        let pattern = "\\d+"
+        if let range = self.range(of: pattern, options: .regularExpression) {
+            let numberString = String(self[range])
+            return Int(numberString)
+        }
+        return nil
+    }
+    
+    func capitalizeFirstLetter() -> String {
+        guard !self.isEmpty else { return self }
+        return self.prefix(1).uppercased() + self.dropFirst()
+    }
+}
+
+// "if" Modifier
 extension View {
     @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
         if condition {
@@ -129,7 +134,7 @@ extension View {
     }
 }
 
-/// Color Related
+// Color String Unarchiver
 extension Color: RawRepresentable {
     public init?(rawValue: String) {
         guard let data = Data(base64Encoded: rawValue) else {

@@ -18,6 +18,7 @@ struct SettingView: View {
     @State private var isShowSaveDashboardSuccessAlert: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
     @Binding var backgroundImage: UIImage?
+    @ObservedObject var themeStore: ThemeStore
     @State private var isShowCopyTokenSuccessAlert: Bool = false
     
     var body: some View {
@@ -70,7 +71,7 @@ struct SettingView: View {
                     }
                     
                     NavigationLink("Advanced Customization") {
-                        AdvancedCustomizationView(backgroundImage: $backgroundImage)
+                        AdvancedCustomizationView(backgroundImage: $backgroundImage, themeStore: themeStore)
                     }
                 }
                 

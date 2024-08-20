@@ -11,6 +11,7 @@ struct ContentView: View {
     @EnvironmentObject var notificationState: NotificationState
     @State private var shouldNavigateToServerDetailView: Bool = false
     @State private var incomingURLCorrespondingServer: Server?
+    @ObservedObject var themeStore: ThemeStore = ThemeStore()
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
     @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
@@ -36,7 +37,7 @@ struct ContentView: View {
                     .padding()
                 }
                 else {
-                    DashboardDetailView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
+                    DashboardDetailView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, themeStore: themeStore, dashboardViewModel: dashboardViewModel)
                 }
             }
             .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {
@@ -44,7 +45,7 @@ struct ContentView: View {
             }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
                 if let incomingURLCorrespondingServer {
-                    ServerDetailView(server: incomingURLCorrespondingServer, isFromIncomingURL: true)
+                    ServerDetailView(server: incomingURLCorrespondingServer, isFromIncomingURL: true, themeStore: themeStore)
                 }
             }
             .onOpenURL { url in
