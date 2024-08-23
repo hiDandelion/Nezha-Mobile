@@ -23,16 +23,14 @@ struct ServerDetailBasicView: View {
                         Label("Copy", systemImage: "doc.on.doc")
                     }
                 }))
-            if server.IPv6 != "" {
-                pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
-                    .contextMenu(ContextMenu(menuItems: {
-                        Button {
-                            UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
-                        } label: {
-                            Label("Copy", systemImage: "doc.on.doc")
-                        }
-                    }))
-            }
+            pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6 == "" ? String(localized: "Unknown") : server.IPv6)")
+                .contextMenu(ContextMenu(menuItems: {
+                    Button {
+                        UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
+                    } label: {
+                        Label("Copy", systemImage: "doc.on.doc")
+                    }
+                }))
             pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
             pieceOfInfo(systemImage: "clock", name: "Last Active", content: "\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))")
         }

@@ -103,7 +103,7 @@ struct ServerDetailView: View {
                                 .tag(ServerDetailTab.status)
                                 
                                 Form {
-                                    ServerDetailPingChartView(server: server, themeStore: themeStore)
+                                    ServerDetailPingChartView(server: server)
                                 }
                                 .tag(ServerDetailTab.ping)
                             }

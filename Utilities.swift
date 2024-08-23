@@ -51,7 +51,7 @@ func formatTimeInterval(seconds: Int64, shortened: Bool = false) -> String {
     }
 
     func formatLong(_ unit1: String, _ value1: Int64, _ unit2: String, _ value2: Int64) -> String {
-        return String(format: NSLocalizedString("%lld%@ %lld%@", comment: "Long format: 5d 3h"), value1, NSLocalizedString(unit1, comment: "Time unit 1"), value2, NSLocalizedString(unit2, comment: "Time unit 2"))
+        return String(format: NSLocalizedString("%lld%@%lld%@", comment: "Long format: 5d 3h"), value1, NSLocalizedString(unit1, comment: "Time unit 1"), value2, NSLocalizedString(unit2, comment: "Time unit 2"))
     }
 
     if years > 0 {

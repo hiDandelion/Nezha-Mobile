@@ -18,7 +18,6 @@ struct PingChart: View {
     @Environment(\.colorScheme) private var scheme
     let pingData: PingData
     @State private var pingDataPlots: [PingDataPlot]
-    @ObservedObject var themeStore: ThemeStore
     @State private var rawSelectedDate: Date?
     var selectedPingDataPlot: PingDataPlot? {
         guard let rawSelectedDate = rawSelectedDate else { return nil }
@@ -28,11 +27,10 @@ struct PingChart: View {
         }
     }
     
-    init(pingData: PingData, themeStore: ThemeStore) {
+    init(pingData: PingData) {
         self.pingData = pingData
         let plots = zip(pingData.createdAt, pingData.avgDelay).map { PingDataPlot(date: $0, delay: $1) }
         self._pingDataPlots = State(initialValue: plots)
-        self.themeStore = themeStore
     }
     
     var body: some View {
@@ -46,7 +44,6 @@ struct PingChart: View {
                             x: .value("Time", data.date),
                             y: .value("Ping", data.delay)
                         )
-                        .foregroundStyle(themeStore.themeTintColor(scheme: scheme))
                     }
                     
                     if let rawSelectedDate {

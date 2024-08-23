@@ -42,41 +42,6 @@
         }
       }
     },
-    "%d%@" : {
-      "comment" : "Short format: 5d",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$d%2$@"
-          }
-        }
-      }
-    },
-    "%d%@ %d%@" : {
-      "comment" : "Long format: 5d 3h",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$d%2$@ %3$d%4$@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d%2$@%3$d%4$@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d%2$@%3$d%4$@"
-          }
-        }
-      }
-    },
     "%lf" : {
 
     },
@@ -88,13 +53,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld コアー"
+            "value" : "%lldコアー"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 核心"
+            "value" : "%lld核心"
           }
         }
       }
@@ -110,12 +75,12 @@
         }
       }
     },
-    "%lld%@ %lld%@" : {
+    "%lld%@%lld%@" : {
       "comment" : "Long format: 5d 3h",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$lld%2$@ %3$lld%4$@"
           }
         }
