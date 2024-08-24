@@ -136,10 +136,9 @@ extension View {
 
 // Color String Unarchiver
 extension Color: RawRepresentable {
-    public init?(rawValue: String) {
-        guard let data = Data(base64Encoded: rawValue) else {
-            self = .gray
-            return
+    public init?(base64EncodedString: String) {
+        guard let data = Data(base64Encoded: base64EncodedString) else {
+            return nil
         }
         do {
 #if os(iOS) || os(watchOS)
@@ -149,7 +148,38 @@ extension Color: RawRepresentable {
 #endif
             self = Color(color)
         } catch {
-            self = .white
+            return nil
+        }
+    }
+
+    public var base64EncodedString: String? {
+        do {
+#if os(iOS) || os(watchOS)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false) as Data
+#elseif os(macOS)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: NSColor(self), requiringSecureCoding: false) as Data
+#endif
+
+            return data.base64EncodedString()
+        } catch {
+            return nil
+        }
+    }
+    
+    // Compatible with AppStorage
+    public init?(rawValue: String) {
+        guard let data = Data(base64Encoded: rawValue) else {
+            return nil
+        }
+        do {
+#if os(iOS) || os(watchOS)
+            let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) ?? .white
+#elseif os(macOS)
+            let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) ?? .white
+#endif
+            self = Color(color)
+        } catch {
+            return nil
         }
     }
 
