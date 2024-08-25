@@ -13,7 +13,7 @@ import ActivityKit
 struct ServerQuery: EntityQuery {
     func entities(for identifiers: [ServerEntity.ID]) async throws -> [ServerEntity] {
         do {
-            let response = try await RequestHandler.getServerDetail(serverID: "")
+            let response = try await RequestHandler.getAllServerDetail()
             if let servers = response.result {
                 let serverEntities = servers.map { ServerEntity(id: $0.id, name: $0.name, displayIndex: $0.displayIndex) }
                 let serverEntitiesSorted = serverEntities.sorted {
@@ -40,7 +40,7 @@ struct ServerQuery: EntityQuery {
     
     func suggestedEntities() async throws -> [ServerEntity] {
         do {
-            let response = try await RequestHandler.getServerDetail(serverID: "")
+            let response = try await RequestHandler.getAllServerDetail()
             if let servers = response.result {
                 let serverEntities = servers.map { ServerEntity(id: $0.id, name: $0.name, displayIndex: $0.displayIndex) }
                 let serverEntitiesSorted = serverEntities.sorted {

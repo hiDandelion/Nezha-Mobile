@@ -7,34 +7,60 @@
 
 import SwiftUI
 
-func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: String) -> some View {
+func pieceOfInfo(systemImage: String?, name: LocalizedStringKey, content: String) -> some View {
     ViewThatFits(in: .horizontal) {
         HStack {
-            Label(name, systemImage: systemImage)
+            if let systemImage {
+                Label(name, systemImage: systemImage)
+            }
+            else {
+                Text(name)
+            }
+            
             Spacer()
+            
             Text(content)
                 .foregroundStyle(.secondary)
         }
         
         VStack(alignment: .leading) {
-            Label(name, systemImage: systemImage)
+            if let systemImage {
+                Label(name, systemImage: systemImage)
+            }
+            else {
+                Text(name)
+            }
+            
             Text(content)
                 .foregroundStyle(.secondary)
         }
     }
 }
 
-func pieceOfInfo(systemImage: String, name: LocalizedStringKey, content: some View) -> some View {
+func pieceOfInfo(systemImage: String?, name: LocalizedStringKey, content: some View) -> some View {
     ViewThatFits(in: .horizontal) {
         HStack {
-            Label(name, systemImage: systemImage)
+            if let systemImage {
+                Label(name, systemImage: systemImage)
+            }
+            else {
+                Text(name)
+            }
+            
             Spacer()
+            
             content
                 .foregroundStyle(.secondary)
         }
         
         VStack(alignment: .leading) {
-            Label(name, systemImage: systemImage)
+            if let systemImage {
+                Label(name, systemImage: systemImage)
+            }
+            else {
+                Text(name)
+            }
+            
             content
                 .foregroundStyle(.secondary)
         }

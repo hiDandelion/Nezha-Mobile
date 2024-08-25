@@ -40,13 +40,13 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                     return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidServerConfiguration"), color: color)
                 }
             }
-        } catch GetServerDetailError.invalidDashboardConfiguration {
+        } catch NezhaDashboardError.invalidDashboardConfiguration {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidDashboardConfiguration"), color: color)
-        } catch GetServerDetailError.dashboardAuthenticationFailed {
+        } catch NezhaDashboardError.dashboardAuthenticationFailed {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.dashboardAuthenticationFailed"), color: color)
-        } catch GetServerDetailError.invalidResponse(let message) {
+        } catch NezhaDashboardError.invalidResponse(let message) {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: message, color: color)
-        } catch GetServerDetailError.decodingError {
+        } catch NezhaDashboardError.decodingError {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.errorDecodingData"), color: color)
         } catch {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: error.localizedDescription, color: color)
@@ -80,16 +80,16 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                     return Timeline(entries: entries, policy: .atEnd)
                 }
             }
-        } catch GetServerDetailError.invalidDashboardConfiguration {
+        } catch NezhaDashboardError.invalidDashboardConfiguration {
             let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidDashboardConfiguration"), color: color)]
             return Timeline(entries: entries, policy: .atEnd)
-        } catch GetServerDetailError.dashboardAuthenticationFailed {
+        } catch NezhaDashboardError.dashboardAuthenticationFailed {
             let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.dashboardAuthenticationFailed"), color: color)]
             return Timeline(entries: entries, policy: .atEnd)
-        } catch GetServerDetailError.invalidResponse(let message) {
+        } catch NezhaDashboardError.invalidResponse(let message) {
             let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: message, color: color)]
             return Timeline(entries: entries, policy: .atEnd)
-        } catch GetServerDetailError.decodingError {
+        } catch NezhaDashboardError.decodingError {
             let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.errorDecodingData"), color: color)]
             return Timeline(entries: entries, policy: .atEnd)
         } catch {
