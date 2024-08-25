@@ -1,5 +1,5 @@
 //
-//  DashboardDetailView.swift
+//  ServerListView.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 7/31/24.
@@ -8,20 +8,19 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct DashboardDetailView: View {
+struct ServerListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
-    var dashboardLink: String
-    var dashboardAPIToken: String
+    @ObservedObject var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
     @ObservedObject var themeStore: ThemeStore
-    @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var backgroundImage: UIImage?
     @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
+    @Binding var isShowingServerMapView: Bool
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     @Namespace private var animation
@@ -123,11 +122,6 @@ struct DashboardDetailView: View {
             }
         }
         .onAppear {
-            // Start monitoring
-            if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
-            }
-            
             // Set background
             let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
@@ -191,7 +185,7 @@ struct DashboardDetailView: View {
         .padding(.bottom, isSearching ? -65 : 0)
     }
     
-    private func Title(title: String = "Dashboard", progress: CGFloat) -> some View {
+    private func Title(title: String = "Servers", progress: CGFloat) -> some View {
         HStack {
             HStack {
                 Text(title)
@@ -217,6 +211,24 @@ struct DashboardDetailView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Button {
+                withAnimation {
+                    isShowingServerMapView = true
+                }
+            } label: {
+                Image(systemName: "map")
+                    .padding(10)
+                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
+                    .if(themeStore.themeCustomizationEnabled) { view in
+                        view.background(themeStore.themeSecondaryColor(scheme: scheme))
+                    }
+                    .if(!themeStore.themeCustomizationEnabled) { view in
+                        view.background(.thinMaterial)
+                    }
+                    .clipShape(Circle())
+            }
+            .hoverEffect(.lift)
+            
+            Button {
                 isShowingSettingSheet = true
             } label: {
                 Image(systemName: "gear")
@@ -230,6 +242,7 @@ struct DashboardDetailView: View {
                     }
                     .clipShape(Circle())
             }
+            .hoverEffect(.lift)
         }
         .opacity(1 - progress)
     }
@@ -332,7 +345,6 @@ struct DashboardDetailView: View {
                         }
                     }
                 }
-                .frame(maxHeight: .infinity)
         }
         .buttonStyle(.plain)
     }
@@ -382,7 +394,7 @@ struct DashboardDetailView: View {
                             Text("🏴‍☠️")
                         }
                     }
-                        .frame(width: 20)
+                    .frame(width: 20)
                     Text(server.name)
                     if dashboardViewModel.loadingState == .loaded {
                         Image(systemName: "circlebadge.fill")
@@ -491,6 +503,7 @@ struct DashboardDetailView: View {
                     
                 }
                 .gaugeStyle(.accessoryLinearCapacity)
+                .tint(themeStore.themeTintColor(scheme: scheme))
             }
         }
         .if(themeStore.themeCustomizationEnabled) { view in

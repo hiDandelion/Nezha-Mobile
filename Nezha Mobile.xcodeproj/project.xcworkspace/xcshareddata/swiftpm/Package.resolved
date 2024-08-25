@@ -1,0 +1,15 @@
+{
+  "originHash" : "8bd37faaf61435d64c4d628a864b4923df6e11839586eef2851941bc038d5f72",
+  "pins" : [
+    {
+      "identity" : "cache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hyperoslo/Cache.git",
+      "state" : {
+        "revision" : "d2e8f5a53c601b43371fdc90277d7f64b0e89a25",
+        "version" : "7.3.0"
+      }
+    }
+  ],
+  "version" : 3
+}

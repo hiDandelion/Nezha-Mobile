@@ -37,7 +37,7 @@ struct ContentView: View {
                     .padding()
                 }
                 else {
-                    DashboardDetailView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, themeStore: themeStore, dashboardViewModel: dashboardViewModel)
+                    DashboardView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel, themeStore: themeStore)
                 }
             }
             .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {

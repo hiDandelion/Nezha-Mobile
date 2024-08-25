@@ -7,18 +7,19 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import Cache
 
 struct ServerDetailBasicView: View {
     var server: Server
-    @State private var IPv4CityData: GetIPCityDataResponse?
-    @State private var IPv6CityData: GetIPCityDataResponse?
+    @State private var IPv4CityData: IPCityData?
+    @State private var IPv6CityData: IPCityData?
     
     var body: some View {
         Section("Basic") {
             pieceOfInfo(systemImage: "cube", name: "ID", content: "\(server.id)")
             pieceOfInfo(systemImage: "tag", name: "Tag", content: "\(server.tag)")
             
-            if let cityData = IPv4CityData?.result {
+            if server.IPv4 != "", let cityData = IPv4CityData {
                 DisclosureGroup {
                     pieceOfInfo(systemImage: nil, name: "Continent", content: "\(cityData.continent)")
                     pieceOfInfo(systemImage: nil, name: "Country", content: "\(cityData.country)")
@@ -47,7 +48,7 @@ struct ServerDetailBasicView: View {
                     }))
             }
             
-            if server.IPv6 != "", let cityData = IPv6CityData?.result {
+            if server.IPv6 != "", let cityData = IPv6CityData {
                 DisclosureGroup {
                     pieceOfInfo(systemImage: nil, name: "Continent", content: "\(cityData.continent)")
                     pieceOfInfo(systemImage: nil, name: "Country", content: "\(cityData.country)")
@@ -82,14 +83,40 @@ struct ServerDetailBasicView: View {
         .onAppear {
             if server.IPv4 != "" {
                 Task {
-                    IPv4CityData = try? await RequestHandler.getIPCityData(IP: server.IPv4, locale: Locale.preferredLanguages[0])
+                    IPv4CityData = await getIPCityData(IP: server.IPv4)
                 }
             }
             if server.IPv6 != "" {
                 Task {
-                    IPv6CityData = try? await RequestHandler.getIPCityData(IP: server.IPv6, locale: Locale.preferredLanguages[0])
+                    IPv6CityData = await getIPCityData(IP: server.IPv6)
                 }
             }
         }
+    }
+    
+    private func getIPCityData(IP: String) async -> IPCityData? {
+        var currentIPCityData: IPCityData?
+        
+        let storage = try? Storage<String, IPCityData>(
+            diskConfig: DiskConfig(name: "NMIPCityData"),
+            memoryConfig: MemoryConfig(expiry: .never),
+            fileManager: FileManager(),
+            transformer: TransformerFactory.forCodable(ofType: IPCityData.self)
+        )
+        
+        if let storage {
+            currentIPCityData = try? storage.object(forKey: IP)
+        }
+        
+        if currentIPCityData == nil {
+            let response = try? await RequestHandler.getIPCityData(IP: IP, locale: Locale.preferredLanguages[0])
+            currentIPCityData = response?.result
+            
+            if let storage, let currentIPCityData {
+                try? storage.setObject(currentIPCityData, forKey: IP)
+            }
+        }
+        
+        return currentIPCityData
     }
 }
