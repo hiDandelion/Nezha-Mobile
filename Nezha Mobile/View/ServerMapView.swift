@@ -31,11 +31,13 @@ struct ServerMapView: View {
                         .tag(serverCoordinate)
                 }
             }
-            .mapStyle(.hybrid(elevation: .realistic))
+            .mapStyle(.imagery(elevation: .realistic))
         }
+        .toolbar(.hidden)
         .overlay {
             VStack {
                 HStack {
+                    Spacer()
                     Button {
                         withAnimation {
                             isShowingServerMapView = false
@@ -50,7 +52,6 @@ struct ServerMapView: View {
                             .hoverEffect(.lift)
                     }
                     .buttonStyle(.plain)
-                    Spacer()
                 }
                 Spacer()
             }

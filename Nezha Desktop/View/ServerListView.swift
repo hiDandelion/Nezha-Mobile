@@ -1,5 +1,5 @@
 //
-//  DashboardDetailView.swift
+//  ServerListView.swift
 //  Nezha Desktop
 //
 //  Created by Junhui Lou on 8/13/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DashboardDetailView: View {
+struct ServerListView: View {
     @Environment(\.openWindow) var openWindow
     var dashboardLink: String
     var dashboardAPIToken: String
@@ -153,13 +153,17 @@ struct DashboardDetailView: View {
                 ForEach(filteredServers) { server in
                     TableRow(server)
                         .contextMenu {
-                            Button("Copy IPv4") {
-                                NSPasteboard.general.clearContents()
-                                NSPasteboard.general.setString(server.IPv4, forType: .string)
+                            if server.IPv4 != "" {
+                                Button("Copy IPv4") {
+                                    NSPasteboard.general.clearContents()
+                                    NSPasteboard.general.setString(server.IPv4, forType: .string)
+                                }
                             }
-                            Button("Copy IPv6") {
-                                NSPasteboard.general.clearContents()
-                                NSPasteboard.general.setString(server.IPv6, forType: .string)
+                            if server.IPv6 != "" {
+                                Button("Copy IPv6") {
+                                    NSPasteboard.general.clearContents()
+                                    NSPasteboard.general.setString(server.IPv6, forType: .string)
+                                }
                             }
                             Divider()
                             Button("View Details") {

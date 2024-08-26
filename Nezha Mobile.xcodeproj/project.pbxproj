@@ -15,7 +15,7 @@
 		CB1A51AF2C6C28C3007FE35F /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
 		CB1A51B02C6C28C8007FE35F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
 		CB1A51B52C6C29B2007FE35F /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51B42C6C29B2007FE35F /* DashboardViewModel.swift */; };
-		CB1A51B72C6C2A7B007FE35F /* DashboardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51B62C6C2A7B007FE35F /* DashboardDetailView.swift */; };
+		CB1A51B72C6C2A7B007FE35F /* ServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51B62C6C2A7B007FE35F /* ServerListView.swift */; };
 		CB1A51B82C6C2CD2007FE35F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
 		CB1A51B92C6C2CD3007FE35F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
 		CB1A51BB2C6C380D007FE35F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A51BA2C6C380D007FE35F /* SettingView.swift */; };
@@ -90,6 +90,7 @@
 		CBDAC3CA2C7B2DCE002AA675 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = CBDAC3C92C7B2DCE002AA675 /* Cache */; };
 		CBDAC3CE2C7B5C31002AA675 /* ServerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3CD2C7B5C31002AA675 /* ServerMapView.swift */; };
 		CBDAC3D02C7B63BB002AA675 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3CF2C7B63BB002AA675 /* DashboardView.swift */; };
+		CBDAC3D22C7BFF13002AA675 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = CBDAC3D12C7BFF13002AA675 /* Cache */; };
 		CBF04EE02C7439E700A35505 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF04EDF2C7439E700A35505 /* ThemeStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -170,7 +171,7 @@
 		CB1A51A72C6C272F007FE35F /* Nezha Desktop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nezha Desktop.entitlements"; sourceTree = "<group>"; };
 		CB1A51A82C6C272F007FE35F /* NezhaDesktopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NezhaDesktopApp.swift; sourceTree = "<group>"; };
 		CB1A51B42C6C29B2007FE35F /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
-		CB1A51B62C6C2A7B007FE35F /* DashboardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDetailView.swift; sourceTree = "<group>"; };
+		CB1A51B62C6C2A7B007FE35F /* ServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListView.swift; sourceTree = "<group>"; };
 		CB1A51BA2C6C380D007FE35F /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CB1A51BC2C6C7DC0007FE35F /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
 		CB1A51C92C6C8157007FE35F /* PingChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingChart.swift; sourceTree = "<group>"; };
@@ -269,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDAC3D22C7BFF13002AA675 /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +304,7 @@
 			children = (
 				CB1A51A62C6C272F007FE35F /* ContentView.swift */,
 				CB1A51D42C6C882C007FE35F /* AddDashboardView.swift */,
-				CB1A51B62C6C2A7B007FE35F /* DashboardDetailView.swift */,
+				CB1A51B62C6C2A7B007FE35F /* ServerListView.swift */,
 				CB1A51BE2C6C810D007FE35F /* ServerDetail */,
 				CB1A51BA2C6C380D007FE35F /* SettingView.swift */,
 				CB1A51E12C6D80D1007FE35F /* MenuBarView.swift */,
@@ -580,6 +582,9 @@
 				CB1A51DF2C6CA1E6007FE35F /* PBXTargetDependency */,
 			);
 			name = "Nezha Desktop";
+			packageProductDependencies = (
+				CBDAC3D12C7BFF13002AA675 /* Cache */,
+			);
 			productName = "Nezha-Mobile";
 			productReference = CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */;
 			productType = "com.apple.product-type.application";
@@ -759,7 +764,7 @@
 				CB1A51D12C6C8157007FE35F /* ServerDetailStatusView.swift in Sources */,
 				CB1A51D22C6C8157007FE35F /* ServerDetailBasicView.swift in Sources */,
 				CB1A51CF2C6C8157007FE35F /* ServerDetailPingChartView.swift in Sources */,
-				CB1A51B72C6C2A7B007FE35F /* DashboardDetailView.swift in Sources */,
+				CB1A51B72C6C2A7B007FE35F /* ServerListView.swift in Sources */,
 				CB1A51E22C6D80D1007FE35F /* MenuBarView.swift in Sources */,
 				CB1A51BB2C6C380D007FE35F /* SettingView.swift in Sources */,
 				CB1A51D32C6C817B007FE35F /* GeneralViews.swift in Sources */,
@@ -800,7 +805,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -835,7 +840,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -872,7 +877,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -906,7 +911,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1055,7 +1060,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1098,7 +1103,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1141,7 +1146,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1173,7 +1178,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1260,6 +1265,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		CBDAC3C92C7B2DCE002AA675 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBDAC3C82C7B2DCE002AA675 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
+		CBDAC3D12C7BFF13002AA675 /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CBDAC3C82C7B2DCE002AA675 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;

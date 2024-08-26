@@ -59,7 +59,6 @@ struct ServerDetailView: View {
                         .tag(ServerDetailTab.ping)
                     }
                 }
-                .animation(.easeInOut(duration: 0.3), value: activeTab)
                 .navigationTitle("Server Details")
                 .navigationSubtitle(server.name)
                 .toolbar {

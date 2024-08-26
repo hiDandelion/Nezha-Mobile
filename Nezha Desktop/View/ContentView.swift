@@ -35,7 +35,7 @@ struct ContentView: View {
                     .padding()
                 }
                 else {
-                    DashboardDetailView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
+                    ServerListView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
                 }
             }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {

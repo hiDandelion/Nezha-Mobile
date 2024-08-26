@@ -20,6 +20,7 @@ struct DashboardView: View {
                 if #available(iOS 17.0, *) {
                     ServerMapView(isShowingServerMapView: $isShowingServerMapView, servers: dashboardViewModel.servers)
                 } else {
+                    // ServerMapView ×
                     EmptyView()
                 }
             }

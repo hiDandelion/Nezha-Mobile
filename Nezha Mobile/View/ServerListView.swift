@@ -210,23 +210,25 @@ struct ServerListView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            Button {
-                withAnimation {
-                    isShowingServerMapView = true
+            if #available(iOS 17.0, *) {
+                Button {
+                    withAnimation {
+                        isShowingServerMapView = true
+                    }
+                } label: {
+                    Image(systemName: "map")
+                        .padding(10)
+                        .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
+                        .if(themeStore.themeCustomizationEnabled) { view in
+                            view.background(themeStore.themeSecondaryColor(scheme: scheme))
+                        }
+                        .if(!themeStore.themeCustomizationEnabled) { view in
+                            view.background(.thinMaterial)
+                        }
+                        .clipShape(Circle())
                 }
-            } label: {
-                Image(systemName: "map")
-                    .padding(10)
-                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
-                    .if(themeStore.themeCustomizationEnabled) { view in
-                        view.background(themeStore.themeSecondaryColor(scheme: scheme))
-                    }
-                    .if(!themeStore.themeCustomizationEnabled) { view in
-                        view.background(.thinMaterial)
-                    }
-                    .clipShape(Circle())
+                .hoverEffect(.lift)
             }
-            .hoverEffect(.lift)
             
             Button {
                 isShowingSettingSheet = true
@@ -503,7 +505,7 @@ struct ServerListView: View {
                     
                 }
                 .gaugeStyle(.accessoryLinearCapacity)
-                .tint(themeStore.themeTintColor(scheme: scheme))
+                .tint(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
             }
         }
         .if(themeStore.themeCustomizationEnabled) { view in
@@ -517,15 +519,19 @@ struct ServerListView: View {
         }
         .cornerRadius(12)
         .contextMenu(ContextMenu(menuItems: {
-            Button {
-                UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
-            } label: {
-                Label("Copy IPv4", systemImage: "4.circle")
+            if server.IPv4 != "" {
+                Button {
+                    UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
+                } label: {
+                    Label("Copy IPv4", systemImage: "4.circle")
+                }
             }
-            Button {
-                UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
-            } label: {
-                Label("Copy IPv6", systemImage: "6.circle")
+            if server.IPv6 != "" {
+                Button {
+                    UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
+                } label: {
+                    Label("Copy IPv6", systemImage: "6.circle")
+                }
             }
         }))
     }
