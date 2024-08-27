@@ -13,7 +13,7 @@ struct GetServerDetailResponse: Codable {
     let result: [Server]?
 }
 
-struct Server: Codable, Identifiable {
+struct Server: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let tag: String
@@ -33,6 +33,14 @@ struct Server: Codable, Identifiable {
         case validIP = "valid_ip"
         case displayIndex = "display_index"
         case host, status
+    }
+    
+    static func == (lhs: Server, rhs: Server) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
     }
 }
 

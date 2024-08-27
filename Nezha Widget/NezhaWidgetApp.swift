@@ -222,9 +222,6 @@ struct WidgetEntryView : View {
                 .foregroundStyle(.white)
             }
         }
-        .onAppear {
-            syncWithiCloud()
-        }
     }
     
     func serverDetailViewSystemSmall(server: Server) -> some View {

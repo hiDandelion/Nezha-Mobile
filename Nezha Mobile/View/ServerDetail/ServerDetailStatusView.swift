@@ -55,7 +55,6 @@ struct ServerDetailStatusView: View {
                             .foregroundStyle(.secondary)
                     }
                     
-                    
                     let swapUsage = Double(server.status.swapUsed) / Double(server.host.swapTotal)
                     Gauge(value: swapUsage) {
                         

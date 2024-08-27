@@ -9,16 +9,16 @@ import Foundation
 import CloudKit
 
 func syncWithiCloud() {
-    debugLog("Sync Info - Starting iCloud sync")
+    _ = debugLog("Sync Info - Starting iCloud sync")
     
     guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
-        debugLog("Sync Error - Unable to access UserDefaults")
+        _ = debugLog("Sync Error - Unable to access UserDefaults")
         return
     }
     
     let cloudStore = NSUbiquitousKeyValueStore.default
     
-    debugLog("Sync Info - Starting sync")
+    _ = debugLog("Sync Info - Starting sync")
     
     let keys = ["NMDashboardLink", "NMDashboardAPIToken", "NMLastModifyDate"]
     
@@ -26,57 +26,57 @@ func syncWithiCloud() {
     let lastModifyDateRemote = cloudStore.object(forKey: "NMLastModifyDate") as? Int
     
     guard let lastModifyDateLocal, let lastModifyDateRemote else {
-        debugLog("Sync Error - Unknown error")
+        _ = debugLog("Sync Error - Unknown error")
         return
     }
     
     if lastModifyDateLocal > lastModifyDateRemote {
-        debugLog("Sync Info - Local data is newer")
+        _ = debugLog("Sync Info - Local data is newer")
         
         // Sync from local to iCloud
         for key in keys {
             if let value = userDefaults.object(forKey: key) {
-                debugLog("Sync Info - Syncing from local to iCloud: \(key) = \(value)")
+                _ = debugLog("Sync Info - Syncing from local to iCloud: \(key) = \(value)")
                 cloudStore.set(value, forKey: key)
             } else {
-                debugLog("Sync Error - Key not found locally: \(key)")
+                _ = debugLog("Sync Error - Key not found locally: \(key)")
             }
         }
         
         // Force sync
         let syncResult = cloudStore.synchronize()
         if syncResult {
-            debugLog("Sync Info - iCloud sync successful")
+            _ = debugLog("Sync Info - iCloud sync successful")
         } else {
-            debugLog("Sync Warning - iCloud sync may have failed")
+            _ = debugLog("Sync Warning - iCloud sync may have failed")
         }
     }
     
     if lastModifyDateLocal < lastModifyDateRemote {
-        debugLog("Sync Info - iCloud data is newer")
+        _ = debugLog("Sync Info - iCloud data is newer")
         
         // Sync from iCloud to local
         for key in keys {
             if let value = cloudStore.object(forKey: key) {
-                debugLog("Sync Info - Syncing from iCloud to local: \(key) = \(value)")
+                _ = debugLog("Sync Info - Syncing from iCloud to local: \(key) = \(value)")
                 userDefaults.set(value, forKey: key)
             } else {
-                debugLog("Sync Error - Key not found in iCloud: \(key)")
+                _ = debugLog("Sync Error - Key not found in iCloud: \(key)")
             }
         }
         
         // Force sync
         let syncResult = cloudStore.synchronize()
         if syncResult {
-            debugLog("Sync Info - iCloud sync successful")
+            _ = debugLog("Sync Info - iCloud sync successful")
         } else {
-            debugLog("Sync Warning - iCloud sync may have failed")
+            _ = debugLog("Sync Warning - iCloud sync may have failed")
         }
     }
     
     if lastModifyDateLocal == lastModifyDateRemote {
-        debugLog("Sync Info - Already up-to-date")
+        _ = debugLog("Sync Info - Already up-to-date")
     }
     
-    debugLog("Sync Info - iCloud sync process completed")
+    _ = debugLog("Sync Info - iCloud sync process completed")
 }

@@ -27,15 +27,15 @@ class RequestHandler {
     static func handleDecodingError(error: DecodingError) {
         switch error {
         case .dataCorrupted(let context):
-            debugLog("Data corrupted - \(context.debugDescription)")
+            _ = debugLog("Data corrupted - \(context.debugDescription)")
         case .keyNotFound(let key, let context):
-            debugLog("Key '\(key)' not found - \(context.debugDescription)")
+            _ = debugLog("Key '\(key)' not found - \(context.debugDescription)")
         case .typeMismatch(let type, let context):
-            debugLog("Type '\(type)' mismatch - \(context.debugDescription)")
+            _ = debugLog("Type '\(type)' mismatch - \(context.debugDescription)")
         case .valueNotFound(let type, let context):
-            debugLog("Value of type '\(type)' not found - \(context.debugDescription)")
+            _ = debugLog("Value of type '\(type)' not found - \(context.debugDescription)")
         @unknown default:
-            debugLog("Unknown decoding error")
+            _ = debugLog("Unknown decoding error")
         }
     }
         

@@ -44,7 +44,7 @@ struct ContentView: View {
                 }
             }
             .onOpenURL { url in
-                debugLog("Incoming Link Info - App was opened via URL: \(url)")
+                _ = debugLog("Incoming Link Info - App was opened via URL: \(url)")
                 handleIncomingURL(url)
             }
         }
@@ -55,22 +55,22 @@ struct ContentView: View {
     
     private func handleIncomingURL(_ url: URL) {
         guard url.scheme == "nezha" else {
-            debugLog("Incoming Link Error - Invalid Scheme")
+            _ = debugLog("Incoming Link Error - Invalid Scheme")
             return
         }
         
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            debugLog("Incoming Link Error - Invalid URL")
+            _ = debugLog("Incoming Link Error - Invalid URL")
             return
         }
         
         guard let action = components.host, action == "server-details" else {
-            debugLog("Incoming Link Error - Unknown action")
+            _ = debugLog("Incoming Link Error - Unknown action")
             return
         }
         
         guard let serverID = components.queryItems?.first(where: { $0.name == "serverID" })?.value else {
-            debugLog("Incoming Link Error - Server ID not found")
+            _ = debugLog("Incoming Link Error - Server ID not found")
             return
         }
         
@@ -79,16 +79,16 @@ struct ContentView: View {
                 do {
                     let response = try await RequestHandler.getServerDetail(serverID: serverID)
                     if let server = response.result?.first {
-                        debugLog("Incoming Link Info - Successfully got server info")
+                        _ = debugLog("Incoming Link Info - Successfully got server info")
                         incomingURLCorrespondingServer = server
                         shouldNavigateToServerDetailView = true
                     }
                     else {
-                        debugLog("Incoming Link Error - Invalid serverID")
+                        _ = debugLog("Incoming Link Error - Invalid serverID")
                     }
                 }
                 catch {
-                    debugLog("Incoming Link Error - Unable to get server info")
+                    _ = debugLog("Incoming Link Error - Unable to get server info")
                 }
             }
         }

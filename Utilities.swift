@@ -15,10 +15,11 @@ import SwiftUI
 #endif
 
 // Debug Log
-func debugLog(_ message: String) {
+func debugLog(_ message: String) -> Any? {
     #if DEBUG
     print("Debug - \(message)")
     #endif
+    return nil
 }
 
 // Bytes To Data Amount String

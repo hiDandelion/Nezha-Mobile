@@ -58,7 +58,7 @@
 		CB701A672C670A1D00019344 /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3E2C61B73000019344 /* APIResponseModel.swift */; };
 		CB701A682C670A1F00019344 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */; };
 		CB701A692C670A2100019344 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
-		CB701A6B2C67118500019344 /* DashboardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A6A2C67118500019344 /* DashboardDetailView.swift */; };
+		CB701A6B2C67118500019344 /* ServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A6A2C67118500019344 /* ServerListView.swift */; };
 		CB701A6D2C6711F700019344 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A6C2C6711F700019344 /* SettingView.swift */; };
 		CB701A732C67158600019344 /* ServerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A722C67158600019344 /* ServerDetailView.swift */; };
 		CB9C606B2C5AF76E00DAE1E3 /* NezhaMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C606A2C5AF76E00DAE1E3 /* NezhaMobileApp.swift */; };
@@ -79,7 +79,6 @@
 		CBD2BAF72C68DBCB00BA9A36 /* ServerDetailStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */; };
 		CBD2BAF92C68DC1600BA9A36 /* ServerDetailPingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF82C68DC1600BA9A36 /* ServerDetailPingChartView.swift */; };
 		CBD2BAFB2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
-		CBD2BAFC2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
 		CBD2BAFD2C698D7C00BA9A36 /* iCloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFA2C698D7C00BA9A36 /* iCloudSync.swift */; };
 		CBD2BAFF2C698EDE00BA9A36 /* ServerDetailBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAFE2C698EDE00BA9A36 /* ServerDetailBasicView.swift */; };
 		CBD2BB012C6A22B900BA9A36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BB002C6A22B900BA9A36 /* AppDelegate.swift */; };
@@ -91,6 +90,16 @@
 		CBDAC3CE2C7B5C31002AA675 /* ServerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3CD2C7B5C31002AA675 /* ServerMapView.swift */; };
 		CBDAC3D02C7B63BB002AA675 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3CF2C7B63BB002AA675 /* DashboardView.swift */; };
 		CBDAC3D22C7BFF13002AA675 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = CBDAC3D12C7BFF13002AA675 /* Cache */; };
+		CBDAC3DD2C7CB74B002AA675 /* MatrixGaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3DC2C7CB74B002AA675 /* MatrixGaugeView.swift */; };
+		CBDAC3E32C7CC048002AA675 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB701A1F2C5CF93500019344 /* WidgetKit.framework */; };
+		CBDAC3E42C7CC048002AA675 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB701A212C5CF93500019344 /* SwiftUI.framework */; };
+		CBDAC3E72C7CC048002AA675 /* NezhaWatchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3E62C7CC048002AA675 /* NezhaWatchWidget.swift */; };
+		CBDAC3E92C7CC04A002AA675 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBDAC3E82C7CC04A002AA675 /* Assets.xcassets */; };
+		CBDAC3ED2C7CC04A002AA675 /* Nezha Watch Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CBDAC3E22C7CC048002AA675 /* Nezha Watch Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CBDAC3F22C7D4A7F002AA675 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3F12C7D4A7F002AA675 /* AppIntent.swift */; };
+		CBDAC3F32C7D4A9C002AA675 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C607F2C5B089100DAE1E3 /* RequestHandler.swift */; };
+		CBDAC3F42C7D4AA0002AA675 /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A3E2C61B73000019344 /* APIResponseModel.swift */; };
+		CBDAC3F52C7D4B9D002AA675 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
 		CBF04EE02C7439E700A35505 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF04EDF2C7439E700A35505 /* ThemeStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +125,13 @@
 			remoteGlobalIDString = CB701A4E2C67077400019344;
 			remoteInfo = "Watch App Watch App";
 		};
+		CBDAC3EB2C7CC04A002AA675 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB9C605F2C5AF76E00DAE1E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBDAC3E12C7CC048002AA675;
+			remoteInfo = WidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,6 +152,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CBDAC3ED2C7CC04A002AA675 /* Nezha Watch Widget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +223,7 @@
 		CB701A582C67077600019344 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB701A612C6707CD00019344 /* AddDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDashboardView.swift; sourceTree = "<group>"; };
 		CB701A652C6709BE00019344 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
-		CB701A6A2C67118500019344 /* DashboardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDetailView.swift; sourceTree = "<group>"; };
+		CB701A6A2C67118500019344 /* ServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListView.swift; sourceTree = "<group>"; };
 		CB701A6C2C6711F700019344 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CB701A6E2C67134900019344 /* Nezha Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nezha Watch.entitlements"; sourceTree = "<group>"; };
 		CB701A722C67158600019344 /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
@@ -238,6 +255,13 @@
 		CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nezha Desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDAC3CD2C7B5C31002AA675 /* ServerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMapView.swift; sourceTree = "<group>"; };
 		CBDAC3CF2C7B63BB002AA675 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		CBDAC3DC2C7CB74B002AA675 /* MatrixGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixGaugeView.swift; sourceTree = "<group>"; };
+		CBDAC3E22C7CC048002AA675 /* Nezha Watch Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Nezha Watch Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBDAC3E62C7CC048002AA675 /* NezhaWatchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NezhaWatchWidget.swift; sourceTree = "<group>"; };
+		CBDAC3E82C7CC04A002AA675 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CBDAC3EA2C7CC04A002AA675 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBDAC3F12C7D4A7F002AA675 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		CBDAC3F82C7D55F0002AA675 /* Nezha Watch Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nezha Watch Widget.entitlements"; sourceTree = "<group>"; };
 		CBF04EDF2C7439E700A35505 /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,6 +295,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBDAC3D22C7BFF13002AA675 /* Cache in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBDAC3DF2C7CC048002AA675 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBDAC3E42C7CC048002AA675 /* SwiftUI.framework in Frameworks */,
+				CBDAC3E32C7CC048002AA675 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,8 +424,8 @@
 			children = (
 				CB701A532C67077400019344 /* ContentView.swift */,
 				CB701A612C6707CD00019344 /* AddDashboardView.swift */,
-				CB701A6A2C67118500019344 /* DashboardDetailView.swift */,
-				CB701A722C67158600019344 /* ServerDetailView.swift */,
+				CB701A6A2C67118500019344 /* ServerListView.swift */,
+				CBDAC3DB2C7CB68B002AA675 /* ServerDetail */,
 				CB701A6C2C6711F700019344 /* SettingView.swift */,
 			);
 			path = View;
@@ -421,6 +454,7 @@
 				CB1A51A92C6C272F007FE35F /* Nezha Desktop */,
 				CB701A502C67077400019344 /* Nezha Watch */,
 				CB701A232C5CF93500019344 /* Nezha Widget */,
+				CBDAC3E52C7CC048002AA675 /* Nezha Watch Widget */,
 				CB701A1E2C5CF93500019344 /* Frameworks */,
 				CB9C60682C5AF76E00DAE1E3 /* Products */,
 			);
@@ -433,6 +467,7 @@
 				CB701A1D2C5CF93500019344 /* Nezha Widget.appex */,
 				CB701A4F2C67077400019344 /* Nezha Watch.app */,
 				CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */,
+				CBDAC3E22C7CC048002AA675 /* Nezha Watch Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -501,6 +536,27 @@
 			path = ServerDetail;
 			sourceTree = "<group>";
 		};
+		CBDAC3DB2C7CB68B002AA675 /* ServerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CB701A722C67158600019344 /* ServerDetailView.swift */,
+				CBDAC3DC2C7CB74B002AA675 /* MatrixGaugeView.swift */,
+			);
+			path = ServerDetail;
+			sourceTree = "<group>";
+		};
+		CBDAC3E52C7CC048002AA675 /* Nezha Watch Widget */ = {
+			isa = PBXGroup;
+			children = (
+				CBDAC3E62C7CC048002AA675 /* NezhaWatchWidget.swift */,
+				CBDAC3F12C7D4A7F002AA675 /* AppIntent.swift */,
+				CBDAC3E82C7CC04A002AA675 /* Assets.xcassets */,
+				CBDAC3EA2C7CC04A002AA675 /* Info.plist */,
+				CBDAC3F82C7D55F0002AA675 /* Nezha Watch Widget.entitlements */,
+			);
+			path = "Nezha Watch Widget";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -535,6 +591,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CBDAC3EC2C7CC04A002AA675 /* PBXTargetDependency */,
 			);
 			name = "Nezha Watch";
 			packageProductDependencies = (
@@ -589,6 +646,23 @@
 			productReference = CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CBDAC3E12C7CC048002AA675 /* Nezha Watch Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBDAC3EE2C7CC04A002AA675 /* Build configuration list for PBXNativeTarget "Nezha Watch Widget" */;
+			buildPhases = (
+				CBDAC3DE2C7CC048002AA675 /* Sources */,
+				CBDAC3DF2C7CC048002AA675 /* Frameworks */,
+				CBDAC3E02C7CC048002AA675 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Nezha Watch Widget";
+			productName = WidgetExtension;
+			productReference = CBDAC3E22C7CC048002AA675 /* Nezha Watch Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -609,6 +683,9 @@
 						CreatedOnToolsVersion = 15.4;
 					};
 					CBD2BB102C6C269800BA9A36 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					CBDAC3E12C7CC048002AA675 = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
@@ -635,6 +712,7 @@
 				CBD2BB102C6C269800BA9A36 /* Nezha Desktop */,
 				CB701A4E2C67077400019344 /* Nezha Watch */,
 				CB701A1C2C5CF93500019344 /* Nezha Widget */,
+				CBDAC3E12C7CC048002AA675 /* Nezha Watch Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -680,6 +758,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBDAC3E02C7CC048002AA675 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBDAC3E92C7CC04A002AA675 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -692,7 +778,6 @@
 				CBD2BB042C6A315900BA9A36 /* LiveActivity.swift in Sources */,
 				CB701A432C631D8A00019344 /* RequestHandler.swift in Sources */,
 				CB701A3B2C5DCFD100019344 /* AppIntent.swift in Sources */,
-				CBD2BAFC2C698D7C00BA9A36 /* iCloudSync.swift in Sources */,
 				CB701A372C5DC9B400019344 /* Utilities.swift in Sources */,
 				CB701A3C2C5DD5DD00019344 /* NezhaWidgetApp.swift in Sources */,
 			);
@@ -704,9 +789,10 @@
 			files = (
 				CB701A732C67158600019344 /* ServerDetailView.swift in Sources */,
 				CB701A542C67077400019344 /* ContentView.swift in Sources */,
+				CBDAC3DD2C7CB74B002AA675 /* MatrixGaugeView.swift in Sources */,
 				CB701A622C6707CD00019344 /* AddDashboardView.swift in Sources */,
 				CBD2BAFD2C698D7C00BA9A36 /* iCloudSync.swift in Sources */,
-				CB701A6B2C67118500019344 /* DashboardDetailView.swift in Sources */,
+				CB701A6B2C67118500019344 /* ServerListView.swift in Sources */,
 				CB3179012C748E0E002979E2 /* GeneralViews.swift in Sources */,
 				CB701A6D2C6711F700019344 /* SettingView.swift in Sources */,
 				CB701A692C670A2100019344 /* Utilities.swift in Sources */,
@@ -777,6 +863,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBDAC3DE2C7CC048002AA675 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBDAC3E72C7CC048002AA675 /* NezhaWatchWidget.swift in Sources */,
+				CBDAC3F22C7D4A7F002AA675 /* AppIntent.swift in Sources */,
+				CBDAC3F32C7D4A9C002AA675 /* RequestHandler.swift in Sources */,
+				CBDAC3F52C7D4B9D002AA675 /* Utilities.swift in Sources */,
+				CBDAC3F42C7D4AA0002AA675 /* APIResponseModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -795,6 +893,11 @@
 			target = CB701A4E2C67077400019344 /* Nezha Watch */;
 			targetProxy = CB701A5A2C67077600019344 /* PBXContainerItemProxy */;
 		};
+		CBDAC3EC2C7CC04A002AA675 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CBDAC3E12C7CC048002AA675 /* Nezha Watch Widget */;
+			targetProxy = CBDAC3EB2C7CC04A002AA675 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -805,7 +908,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -840,7 +943,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -877,7 +980,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -911,7 +1014,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1060,7 +1163,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1103,7 +1206,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1146,7 +1249,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1178,7 +1281,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1199,6 +1302,69 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CBDAC3EF2C7CC04A002AA675 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Nezha Watch Widget/Nezha Watch Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 50;
+				DEVELOPMENT_TEAM = C7AS5D38Q8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Nezha Watch Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.5;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.watchkitapp.Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		CBDAC3F02C7CC04A002AA675 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Nezha Watch Widget/Nezha Watch Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 50;
+				DEVELOPMENT_TEAM = C7AS5D38Q8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Nezha Watch Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.5;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.watchkitapp.Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -1246,6 +1412,15 @@
 			buildConfigurations = (
 				CBD2BB1D2C6C269900BA9A36 /* Debug */,
 				CBD2BB1E2C6C269900BA9A36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBDAC3EE2C7CC04A002AA675 /* Build configuration list for PBXNativeTarget "Nezha Watch Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBDAC3EF2C7CC04A002AA675 /* Debug */,
+				CBDAC3F02C7CC04A002AA675 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

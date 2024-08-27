@@ -16,7 +16,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CB1A52022C7183B4007FE35F"
+               BlueprintIdentifier = "CBDAC3E12C7CC048002AA675"
                BuildableName = "Nezha Watch Widget.appex"
                BlueprintName = "Nezha Watch Widget"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
@@ -75,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB1A52022C7183B4007FE35F"
+            BlueprintIdentifier = "CBDAC3E12C7CC048002AA675"
             BuildableName = "Nezha Watch Widget.appex"
             BlueprintName = "Nezha Watch Widget"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
@@ -118,7 +118,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB1A52022C7183B4007FE35F"
+            BlueprintIdentifier = "CBDAC3E12C7CC048002AA675"
             BuildableName = "Nezha Watch Widget.appex"
             BlueprintName = "Nezha Watch Widget"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
