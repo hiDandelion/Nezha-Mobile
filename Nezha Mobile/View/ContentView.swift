@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var notificationState: NotificationState
     @State private var shouldNavigateToServerDetailView: Bool = false
-    @State private var incomingURLCorrespondingServer: Server?
+    @State private var incomingURLServerID: Int?
     @ObservedObject var themeStore: ThemeStore = ThemeStore()
     @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
@@ -44,8 +44,8 @@ struct ContentView: View {
                 NotificationDetailView()
             }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
-                if let incomingURLCorrespondingServer {
-                    ServerDetailView(server: incomingURLCorrespondingServer, isFromIncomingURL: true, themeStore: themeStore)
+                if let incomingURLServerID {
+                    ServerDetailView(serverID: incomingURLServerID, dashboardViewModel: dashboardViewModel, themeStore: themeStore)
                 }
             }
             .onOpenURL { url in
@@ -79,23 +79,7 @@ struct ContentView: View {
             return
         }
         
-        Task {
-            if dashboardLink != "" && dashboardAPIToken != "" {
-                do {
-                    let response = try await RequestHandler.getServerDetail(serverID: serverID)
-                    if let server = response.result?.first {
-                        _ = debugLog("Incoming Link Info - Successfully got server info")
-                        incomingURLCorrespondingServer = server
-                        shouldNavigateToServerDetailView = true
-                    }
-                    else {
-                        _ = debugLog("Incoming Link Error - Invalid serverID")
-                    }
-                }
-                catch {
-                    _ = debugLog("Incoming Link Error - Unable to get server info")
-                }
-            }
-        }
+        incomingURLServerID = Int(serverID)
+        shouldNavigateToServerDetailView = true
     }
 }

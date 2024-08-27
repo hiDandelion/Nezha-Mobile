@@ -100,8 +100,8 @@ func countryFlagEmoji(countryCode: String) -> String {
 }
 
 // Server Online Indicator
-func isServerOnline(timestamp: Int64) -> Bool {
-    let currentTimestamp = Int64(Date().timeIntervalSince1970)
+func isServerOnline(timestamp: Int64, lastUpdateTime: Date = Date()) -> Bool {
+    let currentTimestamp = Int64(lastUpdateTime.timeIntervalSince1970)
     let fiveMinutesInSeconds = 60
     
     return currentTimestamp - timestamp > fiveMinutesInSeconds

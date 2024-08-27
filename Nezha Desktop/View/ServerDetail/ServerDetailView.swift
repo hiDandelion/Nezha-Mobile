@@ -22,61 +22,69 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
-    var server: Server
-    @State var isFromIncomingURL: Bool = false
+    var serverID: Int
+    @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var activeTab: ServerDetailTab = .basic
     
     var body: some View {
         NavigationStack {
-            if server.status.uptime != 0 {
-                VStack {
-                    if isFromIncomingURL {
-                        Text("URL triggered page is not getting updated. If you need live monitoring, please re-enter this page.")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .padding([.horizontal, .top])
+            if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
+                if server.status.uptime != 0 {
+                    VStack {
+                        Image("NezhaLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 5, height: 5)
+                            .background(.red)
+                        switch(activeTab) {
+                        case .basic:
+                            Form {
+                                ServerDetailBasicView(server: server)
+                                ServerDetailHostView(server: server)
+                            }
+                            .formStyle(.grouped)
+                            .tag(ServerDetailTab.basic)
+                        case .status:
+                            Form {
+                                ServerDetailStatusView(server: server)
+                            }
+                            .formStyle(.grouped)
+                            .tag(ServerDetailTab.status)
+                        case .ping:
+                            Form {
+                                ServerDetailPingChartView(server: server)
+                            }
+                            .formStyle(.grouped)
+                            .tag(ServerDetailTab.ping)
+                        }
                     }
-                    
-                    switch(activeTab) {
-                    case .basic:
-                        Form {
-                            ServerDetailBasicView(server: server)
-                            ServerDetailHostView(server: server)
+                    .navigationTitle("Server Details")
+                    .navigationSubtitle(server.name)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Picker("Server Detail Tab", selection: $activeTab) {
+                                ForEach(ServerDetailTab.allCases) { tab in
+                                    Text(tab.localized())
+                                        .tag(tab)
+                                }
+                            }
+                            .pickerStyle(.segmented)
                         }
-                        .formStyle(.grouped)
-                        .tag(ServerDetailTab.basic)
-                    case .status:
-                        Form {
-                            ServerDetailStatusView(server: server)
-                        }
-                        .formStyle(.grouped)
-                        .tag(ServerDetailTab.status)
-                    case .ping:
-                        Form {
-                            ServerDetailPingChartView(server: server)
-                        }
-                        .formStyle(.grouped)
-                        .tag(ServerDetailTab.ping)
                     }
                 }
-                .navigationTitle("Server Details")
-                .navigationSubtitle(server.name)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Picker("Server Detail Tab", selection: $activeTab) {
-                            ForEach(ServerDetailTab.allCases) { tab in
-                                Text(tab.localized())
-                                    .tag(tab)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
+                else {
+                    ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
+                        .navigationTitle("Server Details")
+                        .navigationSubtitle(server.name)
                 }
             }
             else {
-                ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
-                    .navigationTitle("Server Details")
-                    .navigationSubtitle(server.name)
+                ProgressView()
+            }
+        }
+        .onAppear {
+            if !dashboardViewModel.isMonitoringEnabled {
+                dashboardViewModel.startMonitoring()
             }
         }
     }

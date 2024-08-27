@@ -195,6 +195,22 @@
         }
       }
     },
+    "All(%lld)" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべて(%lld)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全部(%lld)"
+          }
+        }
+      }
+    },
     "An error occurred" : {
       "localizations" : {
         "ja" : {
@@ -1703,6 +1719,9 @@
         }
       }
     },
+    "Servers(%lld)" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "ja" : {
@@ -2226,22 +2245,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "运行时间"
-          }
-        }
-      }
-    },
-    "URL triggered page is not getting updated. If you need live monitoring, please re-enter this page." : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URLトリガーされたページが更新されていません。リアルタイムモニタリングが必要な場合は、このページを再度読み込んでください。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL触发的页面不会持续更新。如果你需要持续监测，请离开此页面后重新进入。"
           }
         }
       }

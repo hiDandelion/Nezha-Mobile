@@ -26,8 +26,8 @@ struct ServerDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
-    var server: Server
-    @State var isFromIncomingURL: Bool = false
+    var serverID: Int
+    @ObservedObject var dashboardViewModel: DashboardViewModel
     @ObservedObject var themeStore: ThemeStore
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
@@ -35,97 +35,100 @@ struct ServerDetailView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                if server.status.uptime != 0 {
-                    ZStack {
-                        if themeStore.themeCustomizationEnabled {
-                            themeStore.themeBackgroundColor(scheme: scheme)
-                                .ignoresSafeArea()
-                        }
-                        else {
-                            Color(UIColor.systemGroupedBackground)
-                                .ignoresSafeArea()
-                        }
-                        
-                        VStack(spacing: 15) {
-                            if isFromIncomingURL {
-                                Text("URL triggered page is not getting updated. If you need live monitoring, please re-enter this page.")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                    .padding([.horizontal, .top])
+            if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
+                VStack {
+                    if server.status.uptime != 0 {
+                        ZStack {
+                            if themeStore.themeCustomizationEnabled {
+                                themeStore.themeBackgroundColor(scheme: scheme)
+                                    .ignoresSafeArea()
+                            }
+                            else {
+                                Color(UIColor.systemGroupedBackground)
+                                    .ignoresSafeArea()
                             }
                             
-                            Tabbar(.gray)
-                                .overlay {
-                                    GeometryReader {
-                                        let width = $0.size.width
-                                        let tabCount = CGFloat(ServerDetailTab.allCases.count)
-                                        let capsuleWidth = width / tabCount
-                                        let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
-                                        
-                                        Capsule()
-                                            .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : (scheme == .dark ? .white : .black))
-                                            .frame(width: capsuleWidth)
-                                            .offset(x: progress * capsuleWidth)
-                                        
-                                        Tabbar(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColorDark : (scheme == .dark ? .black : .white), .semibold)
-                                            .mask(alignment: .leading) {
-                                                Capsule()
-                                                    .frame(width: capsuleWidth)
-                                                    .offset(x: progress * capsuleWidth)
-                                            }
+                            VStack(spacing: 15) {
+                                Tabbar(.gray)
+                                    .overlay {
+                                        GeometryReader {
+                                            let width = $0.size.width
+                                            let tabCount = CGFloat(ServerDetailTab.allCases.count)
+                                            let capsuleWidth = width / tabCount
+                                            let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
+                                            
+                                            Capsule()
+                                                .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : (scheme == .dark ? .white : .black))
+                                                .frame(width: capsuleWidth)
+                                                .offset(x: progress * capsuleWidth)
+                                            
+                                            Tabbar(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColorDark : (scheme == .dark ? .black : .white), .semibold)
+                                                .mask(alignment: .leading) {
+                                                    Capsule()
+                                                        .frame(width: capsuleWidth)
+                                                        .offset(x: progress * capsuleWidth)
+                                                }
+                                        }
+                                        .allowsTightening(false)
                                     }
-                                    .allowsTightening(false)
-                                }
-                                .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : Color(red: 1, green: 1, blue: 1))
-                                .clipShape(.capsule)
-                                .padding(.horizontal, 20)
-                                .padding(.top, 5)
-                            
-                            TabView(selection: $activeTab) {
-                                Form {
-                                    ServerDetailBasicView(server: server)
-                                    ServerDetailHostView(server: server)
-                                }
-                                .tag(ServerDetailTab.basic)
-                                .background {
-                                    if !offsetObserver.isObserving {
-                                        FindCollectionView {
-                                            offsetObserver.collectionView = $0
-                                            offsetObserver.observe()
+                                    .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : Color(red: 1, green: 1, blue: 1))
+                                    .clipShape(.capsule)
+                                    .padding(.horizontal, 20)
+                                    .padding(.top, 5)
+                                
+                                TabView(selection: $activeTab) {
+                                    Form {
+                                        ServerDetailBasicView(server: server)
+                                        ServerDetailHostView(server: server)
+                                    }
+                                    .tag(ServerDetailTab.basic)
+                                    .background {
+                                        if !offsetObserver.isObserving {
+                                            FindCollectionView {
+                                                offsetObserver.collectionView = $0
+                                                offsetObserver.observe()
+                                            }
                                         }
                                     }
+                                    
+                                    Form {
+                                        ServerDetailStatusView(server: server)
+                                    }
+                                    .tag(ServerDetailTab.status)
+                                    
+                                    Form {
+                                        ServerDetailPingChartView(server: server)
+                                    }
+                                    .tag(ServerDetailTab.ping)
                                 }
-                                
-                                Form {
-                                    ServerDetailStatusView(server: server)
-                                }
-                                .tag(ServerDetailTab.status)
-                                
-                                Form {
-                                    ServerDetailPingChartView(server: server)
-                                }
-                                .tag(ServerDetailTab.ping)
+                                .scrollContentBackground(.hidden)
+                                .tabViewStyle(.page(indexDisplayMode: .never))
+                                .animation(.easeInOut(duration: 0.3), value: activeTab)
+                                .ignoresSafeArea(.all, edges: .bottom)
                             }
-                            .scrollContentBackground(.hidden)
-                            .tabViewStyle(.page(indexDisplayMode: .never))
-                            .animation(.easeInOut(duration: 0.3), value: activeTab)
-                            .ignoresSafeArea(.all, edges: .bottom)
+                        }
+                    }
+                    else {
+                        if #available(iOS 17.0, *) {
+                            ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
+                        }
+                        else {
+                            // ContentUnavailableView ×
+                            Text("Server Unavailable")
                         }
                     }
                 }
-                else {
-                    if #available(iOS 17.0, *) {
-                        ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
-                    }
-                    else {
-                        // ContentUnavailableView ×
-                        Text("Server Unavailable")
-                    }
-                }
+                .navigationTitle(server.name)
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle(server.name)
-            .navigationBarTitleDisplayMode(.inline)
+            else {
+                ProgressView()
+            }
+        }
+        .onAppear {
+            if !dashboardViewModel.isMonitoringEnabled {
+                dashboardViewModel.startMonitoring()
+            }
         }
     }
     

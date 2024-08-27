@@ -85,9 +85,9 @@ struct ServerListView: View {
             Table(of: Server.self, selection: $selectedServers) {
                 TableColumn("Name") { server in
                     HStack {
-                        if dashboardViewModel.loadingState == .loaded {
+                        if let lastUpdateTime = dashboardViewModel.lastUpdateTime {
                             Image(systemName: "circlebadge.fill")
-                                .foregroundStyle(isServerOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
+                                .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
                         }
                         if server.host.countryCode.uppercased() != "" {
                             Text("\(countryFlagEmoji(countryCode: server.host.countryCode))\(server.name)")
@@ -180,7 +180,7 @@ struct ServerListView: View {
                 }
             }
             .searchable(text: $searchText)
-            .navigationTitle("Dashboard")
+            .navigationTitle("Servers(\(dashboardViewModel.servers.count))")
         }
     }
 }

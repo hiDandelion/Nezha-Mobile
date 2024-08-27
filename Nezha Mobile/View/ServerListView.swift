@@ -137,7 +137,7 @@ struct ServerListView: View {
             
             if #available(iOS 17.0, *) {
                 VStack(spacing: 15 - (progress * 15)) {
-                    Title(progress: progress)
+                    Title(title: "Servers", progress: progress)
                     
                     SearchBar(progress: progress)
                     
@@ -159,7 +159,7 @@ struct ServerListView: View {
             }
             else {
                 VStack(spacing: 15 - (progress * 15)) {
-                    Title(progress: progress)
+                    Title(title: "Servers", progress: progress)
                     
                     SearchBar(progress: progress)
                     
@@ -185,7 +185,7 @@ struct ServerListView: View {
         .padding(.bottom, isSearching ? -65 : 0)
     }
     
-    private func Title(title: String = "Servers", progress: CGFloat) -> some View {
+    private func Title(title: String, progress: CGFloat) -> some View {
         HStack {
             HStack {
                 Text(title)
@@ -319,7 +319,7 @@ struct ServerListView: View {
                 activeTag = tag
             }
         }) {
-            Text(tag == "All" ? String(localized: "All") : (tag == "" ? String(localized: "Uncategorized") : tag))
+            Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
                 .font(.callout)
                 .foregroundStyle(activeTag == tag ? (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColorDark : (scheme == .light ? .white : .black)) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
                 .padding(.vertical, 8)
@@ -357,7 +357,7 @@ struct ServerListView: View {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
                     ForEach(filteredServers) { server in
                         NavigationLink {
-                            ServerDetailView(server: server, themeStore: themeStore)
+                            ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel, themeStore: themeStore)
                         } label: {
                             ServerCard(server: server)
                         }
@@ -398,9 +398,9 @@ struct ServerListView: View {
                     }
                     .frame(width: 20)
                     Text(server.name)
-                    if dashboardViewModel.loadingState == .loaded {
+                    if let lastUpdateTime = dashboardViewModel.lastUpdateTime {
                         Image(systemName: "circlebadge.fill")
-                            .foregroundStyle(isServerOnline(timestamp: server.lastActive) || server.status.uptime == 0 ? .red : .green)
+                            .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
                     }
                 }
                 .font(.callout)

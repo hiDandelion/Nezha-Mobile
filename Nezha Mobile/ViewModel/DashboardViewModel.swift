@@ -22,8 +22,9 @@ class DashboardViewModel: ObservableObject {
     private let session: URLSession
     private var cancellables = Set<AnyCancellable>()
     @Published var loadingState: DashboardLoadingState = .idle
+    @Published var lastUpdateTime: Date?
     @Published var servers: [Server] = []
-    public var isMonitoringEnabled = false
+    @Published var isMonitoringEnabled = false
     
     init() {
         let config = URLSessionConfiguration.default
@@ -104,6 +105,7 @@ class DashboardViewModel: ObservableObject {
                         self.servers = servers
                     }
                     self.loadingState = .loaded
+                    self.lastUpdateTime = Date()
                 }
             }
             completion?(true)

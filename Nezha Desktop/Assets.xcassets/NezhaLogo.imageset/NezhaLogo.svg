@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1005px"
+   height="1096px"
+   viewBox="0 0 1005 1096"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="NezhaLogo.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.21532847"
+     inkscape:cx="503.88135"
+     inkscape:cy="547.99999"
+     inkscape:window-width="1312"
+     inkscape:window-height="449"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <title
+     id="title1">logo</title>
+  <g
+     id="Symbols"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     style="fill:#000000">
+    <g
+       id="Guide---App-Icon"
+       transform="translate(-513, -412)"
+       fill="#FFFFFF"
+       fill-rule="nonzero"
+       style="fill:#000000">
+      <g
+         id="logo"
+         transform="translate(513, 412)"
+         style="fill:#000000">
+        <polygon
+           id="Path"
+           points="0 0 0 399.52809 281.098122 575 948 168.507303 900.690286 165.005618 900.690286 0"
+           style="fill:#000000" />
+        <polygon
+           id="polygon1"
+           points="305.494231 792.036835 0 599.287252 0 873.888691 448.287981 1096 896.556635 873.888691 896.556635 376.492662 1005 200"
+           style="fill:#000000" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var shouldNavigateToServerDetailView: Bool = false
-    @State private var incomingURLCorrespondingServer: Server?
+    @Environment(\.openWindow) var openWindow
     @ObservedObject var dashboardViewModel: DashboardViewModel
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
     @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
@@ -36,11 +35,6 @@ struct ContentView: View {
                 }
                 else {
                     ServerListView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
-                }
-            }
-            .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
-                if let incomingURLCorrespondingServer {
-                    ServerDetailView(server: incomingURLCorrespondingServer, isFromIncomingURL: true)
                 }
             }
             .onOpenURL { url in
@@ -74,23 +68,6 @@ struct ContentView: View {
             return
         }
         
-        Task {
-            if dashboardLink != "" && dashboardAPIToken != "" {
-                do {
-                    let response = try await RequestHandler.getServerDetail(serverID: serverID)
-                    if let server = response.result?.first {
-                        _ = debugLog("Incoming Link Info - Successfully got server info")
-                        incomingURLCorrespondingServer = server
-                        shouldNavigateToServerDetailView = true
-                    }
-                    else {
-                        _ = debugLog("Incoming Link Error - Invalid serverID")
-                    }
-                }
-                catch {
-                    _ = debugLog("Incoming Link Error - Unable to get server info")
-                }
-            }
-        }
+        openWindow(value: serverID)
     }
 }

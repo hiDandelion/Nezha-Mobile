@@ -48,8 +48,8 @@ struct NezhaDesktopApp: App {
         }
         
         WindowGroup("Server Details", for: Server.ID.self) { $serverID in
-            if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
-                ServerDetailView(server: server)
+            if let serverID {
+                ServerDetailView(serverID: serverID, dashboardViewModel: dashboardViewModel)
             }
         }
         .defaultSize(width: 800, height: 700)
@@ -77,13 +77,18 @@ struct NezhaDesktopApp: App {
         } label: {
             if dashboardViewModel.loadingState == .loaded {
                 HStack {
-                    Image(systemName: "server.rack")
+                    let image: NSImage = {
+                        let ratio = $0.size.height / $0.size.width
+                        $0.size.height = 15
+                        $0.size.width = 15 / ratio
+                        return $0
+                    }(NSImage(named: "NezhaLogo")!)
+                    Image(nsImage: image)
                     
                     if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
-                        Text("\(server.status.load1, specifier: "%.2f")")
-                    }
-                    else {
-                        Text("N/A")
+                        let totalCore = Double(getCore(server.host.cpu) ?? 1)
+                        let loadPressure = server.status.load15 / totalCore
+                        Text("\(loadPressure * 100, specifier: "%.0f")%")
                     }
                 }
             }
