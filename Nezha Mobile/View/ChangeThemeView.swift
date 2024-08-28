@@ -10,6 +10,7 @@ import SwiftUI
 struct ChangeThemeView: View {
     @Environment(\.colorScheme) private var scheme
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @Binding var isShowingChangeThemeSheet: Bool
     @Namespace private var animation
 
     var body: some View {
@@ -29,23 +30,26 @@ struct ChangeThemeView: View {
             /// Segmented Picker
             HStack(spacing: 0) {
                 ForEach(NMTheme.allCases, id: \.rawValue) { theme in
-                    Text(theme.localizedString())
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background {
-                            ZStack {
-                                if self.theme == theme {
-                                    Capsule()
-                                        .fill(Color.changeThemeCardBackground)
-                                        .matchedGeometryEffect(id: "ACTIVETHEMETAB", in: animation)
+                    Button {
+                        self.theme = theme
+                    } label: {
+                        Text(theme.localizedString())
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background {
+                                ZStack {
+                                    if self.theme == theme {
+                                        Capsule()
+                                            .fill(Color.changeThemeCardBackground)
+                                            .matchedGeometryEffect(id: "ACTIVETHEMETAB", in: animation)
+                                    }
                                 }
+                                .animation(.snappy, value: self.theme)
                             }
-                            .animation(.snappy, value: self.theme)
-                        }
-                        .contentShape(.rect)
-                        .onTapGesture {
-                            self.theme = theme
-                        }
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(.plain)
+                    .hoverEffect(.lift)
                 }
             }
             .padding(3)
@@ -53,12 +57,16 @@ struct ChangeThemeView: View {
             .padding(.top, 20)
             .padding(.horizontal, 10)
             .frame(maxWidth: 500)
+            
+            Button("OK") {
+                isShowingChangeThemeSheet = false
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .frame(height: safeArea.bottom == .zero ? 395 : 410)
+        .frame(maxWidth: .infinity, maxHeight: 400)
         .background(Color.changeThemeCardBackground)
         .clipShape(.rect(cornerRadius: 30))
         .padding(.horizontal, 15)
+        .padding(.top, safeArea.top == .zero ? 15 : 0)
         .padding(.bottom, safeArea.bottom == .zero ? 15 : 0)
     }
 }

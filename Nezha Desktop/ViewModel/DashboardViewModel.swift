@@ -17,18 +17,13 @@ enum DashboardLoadingState: Equatable {
     case error(String)
 }
 
-class DashboardViewModel: ObservableObject {
+@Observable
+class DashboardViewModel {
     private var timer: Timer?
-    private let session: URLSession
-    @Published var loadingState: DashboardLoadingState = .idle
-    @Published var lastUpdateTime: Date?
-    @Published var servers: [Server] = []
-    @Published var isMonitoringEnabled = false
-    
-    init() {
-        let config = URLSessionConfiguration.default
-        self.session = URLSession(configuration: config)
-    }
+    var loadingState: DashboardLoadingState = .idle
+    var lastUpdateTime: Date?
+    var servers: [Server] = []
+    var isMonitoringEnabled = false
     
     func startMonitoring() {
         stopMonitoring()

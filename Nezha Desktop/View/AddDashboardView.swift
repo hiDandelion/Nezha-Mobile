@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var dashboardViewModel: DashboardViewModel
+    @Bindable var dashboardViewModel: DashboardViewModel
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""

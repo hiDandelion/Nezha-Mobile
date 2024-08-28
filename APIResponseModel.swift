@@ -36,11 +36,12 @@ struct Server: Codable, Identifiable, Hashable {
     }
     
     static func == (lhs: Server, rhs: Server) -> Bool {
-        lhs.id == rhs.id
+        lhs.id == rhs.id && lhs.lastActive == rhs.lastActive
     }
     
-    public func hash(into hasher: inout Hasher) {
-        return hasher.combine(id)
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(lastActive)
     }
 }
 

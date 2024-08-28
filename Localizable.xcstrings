@@ -61,6 +61,22 @@
         }
       }
     },
+    "%lld servers" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldサーバー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld台服务器"
+          }
+        }
+      }
+    },
     "%lld%@" : {
       "comment" : "Short format: 5d",
       "localizations" : {
@@ -1720,7 +1736,20 @@
       }
     },
     "Servers(%lld)" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバー(%lld)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器(%lld)"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {

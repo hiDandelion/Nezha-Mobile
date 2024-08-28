@@ -59,13 +59,13 @@ struct SettingView: View {
                     }
                     .sheet(isPresented: $isShowingChangeThemeSheet) {
                         if #available(iOS 16.4, *) {
-                            ChangeThemeView()
-                                .presentationDetents([.height(410)])
+                            ChangeThemeView(isShowingChangeThemeSheet: $isShowingChangeThemeSheet)
+                                .presentationDetents([.height(400)])
                                 .presentationBackground(.clear)
                         }
                         else {
-                            ChangeThemeView()
-                                .presentationDetents([.height(410)])
+                            ChangeThemeView(isShowingChangeThemeSheet: $isShowingChangeThemeSheet)
+                                .presentationDetents([.height(400)])
                                 // presentationBackground ×
                         }
                     }

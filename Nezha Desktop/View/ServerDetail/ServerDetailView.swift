@@ -22,8 +22,8 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
+    @Bindable var dashboardViewModel: DashboardViewModel
     var serverID: Int
-    @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var activeTab: ServerDetailTab = .basic
     
     var body: some View {
@@ -31,11 +31,6 @@ struct ServerDetailView: View {
             if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
                 if server.status.uptime != 0 {
                     VStack {
-                        Image("NezhaLogo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 5, height: 5)
-                            .background(.red)
                         switch(activeTab) {
                         case .basic:
                             Form {

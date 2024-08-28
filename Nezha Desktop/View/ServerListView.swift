@@ -11,7 +11,7 @@ struct ServerListView: View {
     @Environment(\.openWindow) var openWindow
     var dashboardLink: String
     var dashboardAPIToken: String
-    @ObservedObject var dashboardViewModel: DashboardViewModel
+    @Bindable var dashboardViewModel: DashboardViewModel
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
     @State private var selectedServers: Set<Server.ID> = Set<Server.ID>()
@@ -150,7 +150,7 @@ struct ServerListView: View {
                     Text(formatTimeInterval(seconds: server.status.uptime))
                 }
             } rows: {
-                ForEach(filteredServers) { server in
+                ForEach(filteredServers, id: \.id) { server in
                     TableRow(server)
                         .contextMenu {
                             if server.IPv4 != "" {

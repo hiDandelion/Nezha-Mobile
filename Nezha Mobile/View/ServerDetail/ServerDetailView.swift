@@ -135,18 +135,20 @@ struct ServerDetailView: View {
     func Tabbar(_ tint: Color, _ weight: Font.Weight = .regular) -> some View {
         HStack(spacing: 0) {
             ForEach(ServerDetailTab.allCases, id: \.rawValue) { tab in
-                Text(tab.localized())
-                    .font(.system(size: 14))
-                    .fontWeight(weight)
-                    .foregroundStyle(tint)
-                    .padding(.vertical, 8)
-                    .frame(maxWidth: .infinity)
-                    .contentShape(.rect)
-                    .onTapGesture {
-                        withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
-                            activeTab = tab
-                        }
+                Button {
+                    withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
+                        activeTab = tab
                     }
+                } label: {
+                    Text(tab.localized())
+                        .font(.system(size: 14))
+                        .fontWeight(weight)
+                        .foregroundStyle(tint)
+                        .padding(.vertical, 8)
+                        .frame(maxWidth: .infinity)
+                        .contentShape(.rect)
+                }
+                .buttonStyle(.plain)
             }
         }
     }

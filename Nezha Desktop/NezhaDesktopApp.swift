@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct NezhaDesktopApp: App {
-    @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
     init() {
@@ -49,7 +49,7 @@ struct NezhaDesktopApp: App {
         
         WindowGroup("Server Details", for: Server.ID.self) { $serverID in
             if let serverID {
-                ServerDetailView(serverID: serverID, dashboardViewModel: dashboardViewModel)
+                ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: serverID)
             }
         }
         .defaultSize(width: 800, height: 700)
@@ -68,12 +68,7 @@ struct NezhaDesktopApp: App {
         @AppStorage("NMMenuBarServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarServerID: String = ""
         
         MenuBarExtra(isInserted: $menuBarEnabled) {
-            if dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) != nil {
-                MenuBarView(dashboardViewModel: dashboardViewModel, serverID: $menuBarServerID)
-            }
-            else {
-                ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
-            }
+            MenuBarView(dashboardViewModel: dashboardViewModel, serverID: menuBarServerID)
         } label: {
             if dashboardViewModel.loadingState == .loaded {
                 HStack {
