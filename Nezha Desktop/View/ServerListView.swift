@@ -80,6 +80,15 @@ struct ServerListView: View {
                 List(allTags, id: \.self, selection: $activeTag) { tag in
                     Text("\(tag == "All" ? String(localized: "All") : tag)")
                 }
+                .toolbar {
+                    ToolbarItem(placement: .navigation) {
+                        Button {
+                            openWindow(id: "map-view")
+                        } label: {
+                            Label("Map View", systemImage: "map")
+                        }
+                    }
+                }
             }
         } detail: {
             Table(of: Server.self, selection: $selectedServers) {

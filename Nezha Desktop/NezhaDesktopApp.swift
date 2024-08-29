@@ -47,6 +47,10 @@ struct NezhaDesktopApp: App {
             }
         }
         
+        WindowGroup("Map View", id: "map-view") {
+            ServerMapView(servers: dashboardViewModel.servers)
+        }
+        
         WindowGroup("Server Details", for: Server.ID.self) { $serverID in
             if let serverID {
                 ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: serverID)

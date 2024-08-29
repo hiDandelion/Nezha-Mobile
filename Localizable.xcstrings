@@ -1114,6 +1114,22 @@
         }
       }
     },
+    "Map View" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地図視界"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地图视图"
+          }
+        }
+      }
+    },
     "Maple" : {
       "extractionState" : "manual",
       "localizations" : {
