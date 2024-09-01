@@ -147,6 +147,16 @@
         }
       }
     },
+    "Add" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加"
+          }
+        }
+      }
+    },
     "Add Dashboard" : {
       "localizations" : {
         "ja" : {
@@ -159,6 +169,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加Dashboard"
+          }
+        }
+      }
+    },
+    "Add Identity" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加身份"
           }
         }
       }
@@ -271,6 +291,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "架构"
+          }
+        }
+      }
+    },
+    "Authentication" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "认证"
+          }
+        }
+      }
+    },
+    "Authentication Method" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "认证方式"
           }
         }
       }
@@ -403,6 +443,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "颜色"
+          }
+        }
+      }
+    },
+    "Connect via IPv4" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过IPv4连接"
+          }
+        }
+      }
+    },
+    "Connect via IPv6" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过IPv6连接"
+          }
+        }
+      }
+    },
+    "Connection" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "连接"
           }
         }
       }
@@ -982,6 +1052,26 @@
         }
       }
     },
+    "Identities" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "身份"
+          }
+        }
+      }
+    },
+    "Identity" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "身份"
+          }
+        }
+      }
+    },
     "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Apple logo, macOS logo are trademarks of Apple Inc." : {
 
     },
@@ -1375,6 +1465,16 @@
     "Part of this project is related to Project Nezha by naiba which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
 
     },
+    "Password" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "密码"
+          }
+        }
+      }
+    },
     "Ping" : {
       "localizations" : {
         "ja" : {
@@ -1387,6 +1487,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "延迟"
+          }
+        }
+      }
+    },
+    "Port" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "端口"
           }
         }
       }
@@ -1407,6 +1517,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "主要颜色 浅色模式"
+          }
+        }
+      }
+    },
+    "Private Key Type" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "私钥类型"
           }
         }
       }
@@ -1607,6 +1727,16 @@
         }
       }
     },
+    "Select Identity" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择身份"
+          }
+        }
+      }
+    },
     "Select Server" : {
       "localizations" : {
         "ja" : {
@@ -1795,6 +1925,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示IP"
+          }
+        }
+      }
+    },
+    "SSH" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSH"
           }
         }
       }
@@ -2278,6 +2418,16 @@
         }
       }
     },
+    "Untitled" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未命名"
+          }
+        }
+      }
+    },
     "Up Time" : {
       "localizations" : {
         "ja" : {
@@ -2306,6 +2456,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "用户向导"
+          }
+        }
+      }
+    },
+    "Username" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用户名"
           }
         }
       }

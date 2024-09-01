@@ -10,19 +10,14 @@ import SwiftUI
 struct DashboardView: View {
     var dashboardLink: String
     var dashboardAPIToken: String
-    @ObservedObject var dashboardViewModel: DashboardViewModel
-    @ObservedObject var themeStore: ThemeStore
+    var dashboardViewModel: DashboardViewModel
+    var themeStore: ThemeStore
     @State private var isShowingServerMapView: Bool = false
     
     var body: some View {
         VStack {
             if isShowingServerMapView {
-                if #available(iOS 17.0, *) {
-                    ServerMapView(isShowingServerMapView: $isShowingServerMapView, servers: dashboardViewModel.servers)
-                } else {
-                    // ServerMapView ×
-                    EmptyView()
-                }
+                ServerMapView(isShowingServerMapView: $isShowingServerMapView, servers: dashboardViewModel.servers)
             }
             else {
                 ServerListView(dashboardViewModel: dashboardViewModel, themeStore: themeStore, isShowingServerMapView: $isShowingServerMapView)

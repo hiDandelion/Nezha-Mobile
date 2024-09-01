@@ -75,8 +75,8 @@ struct ServerEntity: AppEntity {
     let name: String
     let displayIndex: Int?
     
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Server"
-    static var defaultQuery = ServerQuery()
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = "Server"
+    static let defaultQuery = ServerQuery()
             
     var displayRepresentation: DisplayRepresentation {
         DisplayRepresentation(title: "\(name)")
@@ -95,7 +95,7 @@ extension WidgetBackgroundColor: AppEnum {
         TypeDisplayRepresentation(name: LocalizedStringResource("Color"))
     }
     
-    static var caseDisplayRepresentations: [WidgetBackgroundColor : DisplayRepresentation] = [
+    static let caseDisplayRepresentations: [WidgetBackgroundColor : DisplayRepresentation] = [
         .blue: DisplayRepresentation(title: "Ocean"),
         .green: DisplayRepresentation(title: "Leaf"),
         .orange: DisplayRepresentation(title: "Maple"),
@@ -105,8 +105,8 @@ extension WidgetBackgroundColor: AppEnum {
 
 @available(iOS 17.0, *)
 struct SpecifyServerIDIntent: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "Select Server"
-    static var description = IntentDescription("Select the server to display details for.")
+    static let title: LocalizedStringResource = "Select Server"
+    static let description = IntentDescription("Select the server to display details for.")
 
     @Parameter(title: "Server")
     var server: ServerEntity?
@@ -124,10 +124,9 @@ struct SpecifyServerIDIntent: WidgetConfigurationIntent {
     }
 }
 
-@available(iOS 17.0, *)
 struct RefreshWidgetIntent: AppIntent {
-    static var title: LocalizedStringResource = "Refresh Widget"
-    static var description = IntentDescription("Get up-to-date details of a server.")
+    static let title: LocalizedStringResource = "Refresh Widget"
+    static let description = IntentDescription("Get up-to-date details of a server.")
     
     func perform() async throws -> some IntentResult {
         return .result()
@@ -135,26 +134,23 @@ struct RefreshWidgetIntent: AppIntent {
 }
 
 #if os(iOS)
-@available(iOS 17.2, *)
 struct RefreshLiveActivityIntent: LiveActivityIntent {
-    static var title: LocalizedStringResource = "Refresh Live Activity"
-    static var description = IntentDescription("Get up-to-date details of a server.")
+    static let title: LocalizedStringResource = "Refresh Live Activity"
+    static let description = IntentDescription("Get up-to-date details of a server.")
     
     func perform() async throws -> some IntentResult {
         let activities = Activity<LiveActivityAttributes>.activities
         for activity in activities {
             let serverID = activity.content.state.id
-            Task {
-                do {
-                    let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
-                    if let server = response.result?.first {
-                        let newContent = ActivityContent(state: LiveActivityAttributes.ContentState(name: server.name, id: server.id, cpu: server.status.cpu, memUsed: server.status.memUsed, diskUsed: server.status.diskUsed, memTotal: server.host.memTotal, diskTotal: server.host.diskTotal, netInTransfer: server.status.netInTransfer, netOutTransfer: server.status.netOutTransfer, load1: server.status.load1, uptime: server.status.uptime), staleDate: Date(timeIntervalSinceNow: 5 * 60))
-                        await activity.update(newContent)
-                    }
+            do {
+                let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
+                if let server = response.result?.first {
+                    let newContent = ActivityContent(state: LiveActivityAttributes.ContentState(name: server.name, id: server.id, cpu: server.status.cpu, memUsed: server.status.memUsed, diskUsed: server.status.diskUsed, memTotal: server.host.memTotal, diskTotal: server.host.diskTotal, netInTransfer: server.status.netInTransfer, netOutTransfer: server.status.netOutTransfer, load1: server.status.load1, uptime: server.status.uptime), staleDate: Date(timeIntervalSinceNow: 5 * 60))
+                    await activity.update(newContent)
                 }
-                catch {
-                    
-                }
+            }
+            catch {
+                
             }
         }
         return .result()

@@ -11,14 +11,14 @@ import UserNotifications
 
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var dashboardViewModel: DashboardViewModel
+    var dashboardViewModel: DashboardViewModel
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
     @State private var isShowSaveDashboardSuccessAlert: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
     @Binding var backgroundImage: UIImage?
-    @ObservedObject var themeStore: ThemeStore
+    var themeStore: ThemeStore
     @State private var isShowCopyTokenSuccessAlert: Bool = false
     
     var body: some View {
@@ -51,6 +51,12 @@ struct SettingView: View {
                     Text("Dashboard Info")
                 } footer: {
                     Text("SSL must be enabled. Dashboard Link Example: server.hidandelion.com")
+                }
+                
+                Section("SSH") {
+                    NavigationLink("Identities") {
+                        IdentityListView()
+                    }
                 }
                 
                 Section("Theme") {

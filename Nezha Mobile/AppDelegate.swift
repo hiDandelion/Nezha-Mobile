@@ -10,12 +10,7 @@ import UserNotifications
 import ActivityKit
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    let notificationState: NotificationState
-    
-    override init() {
-        self.notificationState = NotificationState()
-        super.init()
-    }
+    let notificationState: NotificationState = NotificationState()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         application.registerForRemoteNotifications()
@@ -51,9 +46,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         _ = debugLog("Notification Info - Title: \(title), Body: \(body)")
         
-        DispatchQueue.main.async { [self] in
-            notificationState.notificationData = (title: title, body: body)
-            notificationState.shouldNavigateToNotificationView = true
+        DispatchQueue.main.async {
+            self.notificationState.notificationData = (title: title, body: body)
+            self.notificationState.shouldNavigateToNotificationView = true
         }
     }
     

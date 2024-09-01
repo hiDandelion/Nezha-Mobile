@@ -13,7 +13,7 @@ struct AdvancedCustomizationView: View {
     @AppStorage("NMBackgroundPhotoData", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var backgroundPhotoData: Data?
     @State private var selectedPhoto: PhotosPickerItem?
     @Binding var backgroundImage: UIImage?
-    @ObservedObject var themeStore: ThemeStore
+    @Bindable var themeStore: ThemeStore
     @AppStorage("NMWidgetCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetCustomizationEnabled: Bool = false
     @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var selectedWidgetBackgroundColor: Color = .blue
     @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var selectedWidgetTextColor: Color = .white
@@ -26,9 +26,9 @@ struct AdvancedCustomizationView: View {
                     PhotosPicker(selection: $selectedPhoto, matching: .images) {
                         Text("Select Custom Background")
                     }
-                    .onChange(of: selectedPhoto) { newItem in
+                    .onChange(of: selectedPhoto) {
                         Task {
-                            if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                            if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
                                 backgroundPhotoData = data
                                 backgroundImage = UIImage(data: data)
                             }

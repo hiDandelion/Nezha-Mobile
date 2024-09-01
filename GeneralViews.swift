@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 func pieceOfInfo(systemImage: String?, name: LocalizedStringKey, content: String) -> some View {
     ViewThatFits(in: .horizontal) {
         HStack {
@@ -37,6 +38,7 @@ func pieceOfInfo(systemImage: String?, name: LocalizedStringKey, content: String
     }
 }
 
+@MainActor
 func pieceOfInfo(systemImage: String?, name: LocalizedStringKey, content: some View) -> some View {
     ViewThatFits(in: .horizontal) {
         HStack {

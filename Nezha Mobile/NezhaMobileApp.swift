@@ -31,5 +31,6 @@ struct NezhaMobileApp: App {
             ContentView()
                 .environmentObject(appDelegate.notificationState)
         }
+        .modelContainer(for: Identity.self)
     }
 }

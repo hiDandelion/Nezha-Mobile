@@ -12,9 +12,9 @@ struct ServerListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
-    @ObservedObject var dashboardViewModel: DashboardViewModel
+    var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
-    @ObservedObject var themeStore: ThemeStore
+    var themeStore: ThemeStore
     @State private var backgroundImage: UIImage?
     @State private var navigationBarHeight: CGFloat = 0.0
     @FocusState private var isSearching: Bool
@@ -132,53 +132,28 @@ struct ServerListView: View {
     
     var ExpandableNavigationBar: some View {
         GeometryReader { proxy in
-            let minY = getScrollViewMinY(proxy: proxy)
+            let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
             let progress = isSearching ? 1 : max(min(-minY / 70, 1), 0)
             
-            if #available(iOS 17.0, *) {
-                VStack(spacing: 15 - (progress * 15)) {
-                    Title(title: "Servers", progress: progress)
-                    
-                    SearchBar(progress: progress)
-                    
-                    GroupPicker
-                }
-                .padding(.top, 15)
-                .safeAreaPadding(.horizontal, 15)
-                .offset(y: minY < 0 || isSearching ? -minY : 0)
-                .offset(y: -progress * 65)
-                .overlay(
-                    GeometryReader { proxy in
-                        Color.clear
-                            .preference(key: NavigationBarHeightPreferenceKey.self, value: proxy.size.height)
-                    }
-                )
-                .onPreferenceChange(NavigationBarHeightPreferenceKey.self) { height in
-                    navigationBarHeight = height
-                }
+            VStack(spacing: 15 - (progress * 15)) {
+                Title(title: "Servers", progress: progress)
+                
+                SearchBar(progress: progress)
+                
+                GroupPicker
             }
-            else {
-                VStack(spacing: 15 - (progress * 15)) {
-                    Title(title: "Servers", progress: progress)
-                    
-                    SearchBar(progress: progress)
-                    
-                    GroupPicker
+            .padding(.top, 15)
+            .safeAreaPadding(.horizontal, 15)
+            .offset(y: minY < 0 || isSearching ? -minY : 0)
+            .offset(y: -progress * 65)
+            .overlay(
+                GeometryReader { proxy in
+                    Color.clear
+                        .preference(key: NavigationBarHeightPreferenceKey.self, value: proxy.size.height)
                 }
-                .padding(.top, 15)
-                // safeAreaPadding → padding
-                .padding(.horizontal, 15)
-                .offset(y: minY < 0 || isSearching ? -minY : 0)
-                .offset(y: -progress * 65)
-                .overlay(
-                    GeometryReader { proxy in
-                        Color.clear
-                            .preference(key: NavigationBarHeightPreferenceKey.self, value: proxy.size.height)
-                    }
-                )
-                .onPreferenceChange(NavigationBarHeightPreferenceKey.self) { height in
-                    navigationBarHeight = height
-                }
+            )
+            .onPreferenceChange(NavigationBarHeightPreferenceKey.self) { height in
+                navigationBarHeight = height
             }
         }
         .padding(.bottom, 10)
@@ -210,25 +185,23 @@ struct ServerListView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            if #available(iOS 17.0, *) {
-                Button {
-                    withAnimation {
-                        isShowingServerMapView = true
-                    }
-                } label: {
-                    Image(systemName: "map")
-                        .padding(10)
-                        .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
-                        .if(themeStore.themeCustomizationEnabled) { view in
-                            view.background(themeStore.themeSecondaryColor(scheme: scheme))
-                        }
-                        .if(!themeStore.themeCustomizationEnabled) { view in
-                            view.background(.thinMaterial)
-                        }
-                        .clipShape(Circle())
+            Button {
+                withAnimation {
+                    isShowingServerMapView = true
                 }
-                .hoverEffect(.lift)
+            } label: {
+                Image(systemName: "map")
+                    .padding(10)
+                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
+                    .if(themeStore.themeCustomizationEnabled) { view in
+                        view.background(themeStore.themeSecondaryColor(scheme: scheme))
+                    }
+                    .if(!themeStore.themeCustomizationEnabled) { view in
+                        view.background(.thinMaterial)
+                    }
+                    .clipShape(Circle())
             }
+            .hoverEffect(.lift)
             
             Button {
                 isShowingSettingSheet = true
@@ -368,13 +341,7 @@ struct ServerListView: View {
                 .padding(.horizontal, 15)
             }
             else {
-                if #available(iOS 17.0, *) {
-                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
-                }
-                else {
-                    // ContentUnavailableView ×
-                    Text("No Server")
-                }
+                ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
             }
         }
     }
@@ -534,15 +501,6 @@ struct ServerListView: View {
                 }
             }
         }))
-    }
-    
-    func getScrollViewMinY(proxy: GeometryProxy) -> CGFloat {
-        if #available(iOS 17.0, *) {
-            return proxy.frame(in: .scrollView(axis: .vertical)).minY
-        }
-        else {
-            return proxy.frame(in: .named("scrollView")).minY
-        }
     }
     
     struct NavigationBarHeightPreferenceKey: PreferenceKey {

@@ -36,65 +36,43 @@ struct PingChart: View {
         VStack {
             Text("\(pingData.monitorName)")
                 .padding(.bottom, 15)
-            if #available(iOS 17.0, *) {
-                Chart {
-                    ForEach(pingDataPlots, id: \.id) { data in
-                        LineMark(
-                            x: .value("Time", data.date),
-                            y: .value("Ping", data.delay)
+            Chart {
+                ForEach(pingDataPlots, id: \.id) { data in
+                    LineMark(
+                        x: .value("Time", data.date),
+                        y: .value("Ping", data.delay)
+                    )
+                }
+                
+                if let rawSelectedDate {
+                    RuleMark(
+                        x: .value("Selected", rawSelectedDate)
+                    )
+                    .foregroundStyle(Color.gray.opacity(0.3))
+                    .offset(yStart: -10)
+                    .zIndex(-1)
+                    .annotation(
+                        position: .top, spacing: 0,
+                        overflowResolution: .init(
+                            x: .fit(to: .chart),
+                            y: .disabled
                         )
-                    }
-                    
-                    if let rawSelectedDate {
-                        RuleMark(
-                            x: .value("Selected", rawSelectedDate)
-                        )
-                        .foregroundStyle(Color.gray.opacity(0.3))
-                        .offset(yStart: -10)
-                        .zIndex(-1)
-                        .annotation(
-                            position: .top, spacing: 0,
-                            overflowResolution: .init(
-                                x: .fit(to: .chart),
-                                y: .disabled
-                            )
-                        ) {
-                            valueSelectionPopover
-                        }
+                    ) {
+                        valueSelectionPopover
                     }
                 }
-                .chartXAxis {
-                    AxisMarks() { value in
-                        AxisGridLine()
-                        AxisValueLabel(format: .dateTime.hour())
-                    }
-                }
-                .chartYAxis {
-                    AxisMarks(position: .leading)
-                }
-                .chartXSelection(value: $rawSelectedDate)
-                .frame(minHeight: 200)
             }
-            else {
-                Chart {
-                    ForEach(pingDataPlots, id: \.id) { data in
-                        LineMark(
-                            x: .value("Time", data.date),
-                            y: .value("Ping", data.delay)
-                        )
-                    }
+            .chartXAxis {
+                AxisMarks() { value in
+                    AxisGridLine()
+                    AxisValueLabel(format: .dateTime.hour())
                 }
-                .chartXAxis {
-                    AxisMarks() { value in
-                        AxisGridLine()
-                        AxisValueLabel(format: .dateTime.hour())
-                    }
-                }
-                .chartYAxis {
-                    AxisMarks(position: .leading)
-                }
-                .frame(minHeight: 200)
             }
+            .chartYAxis {
+                AxisMarks(position: .leading)
+            }
+            .chartXSelection(value: $rawSelectedDate)
+            .frame(minHeight: 200)
         }
     }
     

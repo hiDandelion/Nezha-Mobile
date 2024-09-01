@@ -47,48 +47,49 @@ func backgroundGradient(color: NMTheme, scheme: ColorScheme) -> LinearGradient {
     }
 }
 
+@Observable
 class ThemeStore: ObservableObject {
-    @Published var themeCustomizationEnabled: Bool {
+    var themeCustomizationEnabled: Bool {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeCustomizationEnabled, forKey: "NMThemeCustomizationEnabled")
         }
     }
-    @Published var themePrimaryColorLight: Color {
+    var themePrimaryColorLight: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themePrimaryColorLight.base64EncodedString, forKey: "NMThemePrimaryColorLight")
         }
     }
-    @Published var themeSecondaryColorLight: Color {
+    var themeSecondaryColorLight: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeSecondaryColorLight.base64EncodedString, forKey: "NMThemeSecondaryColorLight")
         }
     }
-    @Published var themeTintColorLight: Color {
+    var themeTintColorLight: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeTintColorLight.base64EncodedString, forKey: "NMThemeTintColorLight")
         }
     }
-    @Published var themeBackgroundColorLight: Color {
+    var themeBackgroundColorLight: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeBackgroundColorLight.base64EncodedString, forKey: "NMThemeBackgroundColorLight")
         }
     }
-    @Published var themePrimaryColorDark: Color {
+    var themePrimaryColorDark: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themePrimaryColorDark.base64EncodedString, forKey: "NMThemePrimaryColorDark")
         }
     }
-    @Published var themeSecondaryColorDark: Color {
+    var themeSecondaryColorDark: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeSecondaryColorDark.base64EncodedString, forKey: "NMThemeSecondaryColorDark")
         }
     }
-    @Published var themeTintColorDark: Color {
+    var themeTintColorDark: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeTintColorDark.base64EncodedString, forKey: "NMThemeTintColorDark")
         }
     }
-    @Published var themeBackgroundColorDark: Color {
+    var themeBackgroundColorDark: Color {
         didSet {
             UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeBackgroundColorDark.base64EncodedString, forKey: "NMThemeBackgroundColorDark")
         }

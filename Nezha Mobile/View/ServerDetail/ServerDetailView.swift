@@ -27,11 +27,11 @@ struct ServerDetailView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
     var serverID: Int
-    @ObservedObject var dashboardViewModel: DashboardViewModel
-    @ObservedObject var themeStore: ThemeStore
+    var dashboardViewModel: DashboardViewModel
+    var themeStore: ThemeStore
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
-    @StateObject private var offsetObserver = PageOffsetObserver()
+    var offsetObserver = PageOffsetObserver()
     
     var body: some View {
         NavigationStack {
@@ -109,13 +109,7 @@ struct ServerDetailView: View {
                         }
                     }
                     else {
-                        if #available(iOS 17.0, *) {
-                            ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
-                        }
-                        else {
-                            // ContentUnavailableView ×
-                            Text("Server Unavailable")
-                        }
+                        ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
                     }
                 }
                 .navigationTitle(server.name)
@@ -154,10 +148,11 @@ struct ServerDetailView: View {
     }
 }
 
-class PageOffsetObserver: NSObject, ObservableObject {
-    @Published var collectionView: UICollectionView?
-    @Published var offset: CGFloat = 0
-    @Published private(set) var isObserving: Bool = false
+@Observable
+class PageOffsetObserver: NSObject {
+    var collectionView: UICollectionView?
+    var offset: CGFloat = 0
+    private(set) var isObserving: Bool = false
     
     deinit {
         remove()
@@ -177,10 +172,7 @@ class PageOffsetObserver: NSObject, ObservableObject {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard keyPath == "contentOffset" else { return }
         if let contentOffset = (object as? UICollectionView)?.contentOffset {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.offset = contentOffset.x
-            }
+            offset = contentOffset.x
         }
     }
 }
