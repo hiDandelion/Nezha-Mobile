@@ -31,7 +31,7 @@ struct ServerDetailView: View {
     var themeStore: ThemeStore
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
-    var offsetObserver = PageOffsetObserver()
+    @StateObject var offsetObserver = PageOffsetObserver()
     
     var body: some View {
         NavigationStack {
@@ -148,17 +148,17 @@ struct ServerDetailView: View {
     }
 }
 
-@Observable
-class PageOffsetObserver: NSObject {
-    var collectionView: UICollectionView?
-    var offset: CGFloat = 0
-    private(set) var isObserving: Bool = false
+class PageOffsetObserver: NSObject, ObservableObject {
+    @Published var collectionView: UICollectionView?
+    @Published var offset: CGFloat = 0
+    @Published private(set) var isObserving: Bool = false
     
     deinit {
         remove()
     }
     
     func observe() {
+        /// Safe Method
         guard !isObserving else { return }
         collectionView?.addObserver(self, forKeyPath: "contentOffset", context: nil)
         isObserving = true
@@ -172,7 +172,10 @@ class PageOffsetObserver: NSObject {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard keyPath == "contentOffset" else { return }
         if let contentOffset = (object as? UICollectionView)?.contentOffset {
-            offset = contentOffset.x
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.offset = contentOffset.x
+            }
         }
     }
 }
