@@ -49,6 +49,7 @@ struct ServerDetailBasicView: View {
                         }))
                 }
                 
+                
                 NavigationLink("Connect via IPv4", destination: PrepareConnectionView(host: server.IPv4))
             }
             

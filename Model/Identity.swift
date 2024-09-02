@@ -23,6 +23,7 @@ enum PrivateKeyType: String, CaseIterable, Identifiable, Codable {
 class Identity: Identifiable {
     var id: UUID?
     var name: String?
+    var timestamp: Date?
     var username: String?
     var password: String?
     var privateKeyString: String?
@@ -31,6 +32,7 @@ class Identity: Identifiable {
     init(name: String, username: String, password: String) {
         self.id = UUID()
         self.name = name
+        self.timestamp = Date()
         self.username = username
         self.password = password
     }
@@ -38,6 +40,7 @@ class Identity: Identifiable {
     init(name: String, username: String, privateKeyString: String, privateKeyType: PrivateKeyType) {
         self.id = UUID()
         self.name = name
+        self.timestamp = Date()
         self.username = username
         self.privateKeyString = privateKeyString
         self.privateKeyType = privateKeyType
