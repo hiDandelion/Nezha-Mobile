@@ -22,8 +22,6 @@ struct TerminalView: View {
     let privateKey: String?
     let privateKeyType: PrivateKeyType?
     
-    @State var keyCombination: KeyCombination = .none
-    
     var body: some View {
         VStack {
             switch(terminalViewModel.sshClientStatus) {
@@ -53,22 +51,14 @@ struct TerminalView: View {
                         
                         switch(press.modifiers) {
                         case .control:
-                            sendCtrl(press.characters)
-                            keyCombination = .none
+                            terminalViewModel.sendCtrl(press.characters)
                             return .handled
                         default:
                             ()
                         }
                         
-                        switch(keyCombination) {
-                        case .none:
-                            terminalViewModel.sendCommand(command: press.characters)
-                            return .handled
-                        case .control:
-                            sendCtrl(press.characters)
-                            keyCombination = .none
-                            return .handled
-                        }
+                        write(press.characters)
+                        return .handled
                     }
                     .onAppear {
                         terminalViewModel.setupTerminal(fontSize: 12)
@@ -95,6 +85,32 @@ struct TerminalView: View {
         ScrollView(.horizontal) {
             HStack(alignment: .bottom) {
                 Group {
+                    makeKeyboardFloatingButton("doc.on.clipboard") {
+                        guard let str = UIPasteboard.general.string else {
+                            return
+                        }
+                        write(str)
+                    }
+                }
+                Group {
+                    makeKeyboardFloatingButton("escape") {
+                        writeBase64("Gw==")
+                    }
+                    if [.control].contains(terminalViewModel.keyCombination) {
+                        makeKeyboardFloatingButtonProminent("control") {
+                            terminalViewModel.keyCombination = .none
+                        }
+                    }
+                    else {
+                        makeKeyboardFloatingButton("control") {
+                            terminalViewModel.keyCombination = .control
+                        }
+                    }
+                    makeKeyboardFloatingButton("arrow.right.to.line.compact") {
+                        writeBase64("CQ==")
+                    }
+                }
+                Group {
                     makeKeyboardFloatingButton("arrowtriangle.up.fill") {
                         writeBase64("G1tB")
                     }
@@ -106,18 +122,6 @@ struct TerminalView: View {
                     }
                     makeKeyboardFloatingButton("arrowtriangle.right.fill") {
                         writeBase64("G1tD")
-                    }
-                }
-                Group {
-                    if [.control].contains(keyCombination) {
-                        makeKeyboardFloatingButtonProminent("control") {
-                            keyCombination = .control
-                        }
-                    }
-                    else {
-                        makeKeyboardFloatingButton("control") {
-                            keyCombination = .control
-                        }
                     }
                 }
             }
@@ -148,6 +152,10 @@ struct TerminalView: View {
         .buttonStyle(.borderedProminent)
     }
     
+    func write(_ str: String) {
+        terminalViewModel.sendCommand(command: str)
+    }
+    
     func writeBase64(_ base64: String) {
         guard let data = Data(base64Encoded: base64),
               let command = String(data: data, encoding: .utf8)
@@ -155,25 +163,5 @@ struct TerminalView: View {
             return
         }
         terminalViewModel.sendCommand(command: command)
-    }
-    
-    func sendCtrl(_ key: String) {
-        guard key.count == 1 else { return }
-        let character = Character(key.uppercased())
-        guard let asciiValue = character.asciiValue,
-              let asciiInt = Int(exactly: asciiValue)
-        else {
-            return
-        }
-        let ctrlInt = asciiInt - 64
-        guard ctrlInt > 0, ctrlInt < 65 else {
-            return
-        }
-        guard let unicodeScalar = UnicodeScalar(ctrlInt) else {
-            return
-        }
-        let newCharacter = Character(unicodeScalar)
-        let str = String(newCharacter)
-        terminalViewModel.sendCommand(command: str)
     }
 }

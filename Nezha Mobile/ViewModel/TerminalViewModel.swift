@@ -41,14 +41,45 @@ class TerminalViewModel: ObservableObject, SSHClientDelegate {
     let terminalView: STerminalView = STerminalView()
     private var sshClient: SSHClient?
     @Published var sshClientStatus: SSHClientStatus = .idle
+    @Published var keyCombination: KeyCombination = .none
     
     // MARK: - Terminal View Related
     
     func setupTerminal(fontSize: Int) {
         terminalView.setTerminalFontSize(with: fontSize)
         terminalView.setupBufferChain { [weak self] buffer in
+            if [.control].contains(self?.keyCombination) {
+                self?.sendCtrl(buffer)
+                return
+            }
+                
             self?.sendCommand(command: buffer)
+            return
         }
+    }
+    
+    func sendCtrl(_ key: String) {
+        guard key.count == 1 else { return }
+        let character = Character(key.uppercased())
+        guard let asciiValue = character.asciiValue,
+              let asciiInt = Int(exactly: asciiValue)
+        else {
+            sendCommand(command: key)
+            return
+        }
+        let ctrlInt = asciiInt - 64
+        guard ctrlInt > 0, ctrlInt < 65 else {
+            sendCommand(command: key)
+            return
+        }
+        guard let unicodeScalar = UnicodeScalar(ctrlInt) else {
+            sendCommand(command: key)
+            return
+        }
+        let newCharacter = Character(unicodeScalar)
+        let str = String(newCharacter)
+        self.sendCommand(command: str)
+        self.keyCombination = .none
     }
     
     // MARK: - SSH Related

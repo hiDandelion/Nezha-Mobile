@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "--%" : {
+
+    },
     "%.0f" : {
 
     },
@@ -626,7 +629,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "国家"
+            "value" : "国家/地区"
           }
         }
       }
@@ -646,6 +649,9 @@
           }
         }
       }
+    },
+    "CPU --% MEM --%" : {
+
     },
     "CPU %.0f%% MEM %.0f%%" : {
       "localizations" : {
@@ -1092,6 +1098,16 @@
         }
       }
     },
+    "Import From File" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从文件导入"
+          }
+        }
+      }
+    },
     "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Apple logo, macOS logo are trademarks of Apple Inc." : {
 
     },
@@ -1139,6 +1155,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最后活跃"
+          }
+        }
+      }
+    },
+    "Last viewed server" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最后查看的服务器"
           }
         }
       }
@@ -1365,6 +1391,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "网络流量"
+          }
+        }
+      }
+    },
+    "New Identity" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新身份"
           }
         }
       }

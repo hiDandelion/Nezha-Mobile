@@ -20,6 +20,7 @@ struct PrepareConnectionView: View {
             Form {
                 Section("Port") {
                     TextField("Port", text: $port)
+                        .keyboardType(.numberPad)
                 }
                 
                 Section("Authentication") {
@@ -33,30 +34,31 @@ struct PrepareConnectionView: View {
                         }
                     }
                     
-                    Button("Add Identity") {
+                    Button {
                         isShowAddIdentitySheet = true
+                    } label: {
+                        Label("New Identity", systemImage: "plus")
                     }
                     .sheet(isPresented: $isShowAddIdentitySheet) {
                         AddIdentityView(isShowAddIdentitySheet: $isShowAddIdentitySheet)
                     }
                 }
-                
-                if let host {
-                    Section("Connection") {
-                        if let identity, let password = identity.password {
-                            NavigationLink("Start", destination: TerminalView(host: host, port: Int(port) ?? 22, username: identity.username!, password: password, privateKey: nil, privateKeyType: nil))
-                        }
-                        else if let identity, let privateKey = identity.privateKeyString, let privateKeyType = identity.privateKeyType {
-                            NavigationLink("Start", destination: TerminalView(host: host, port: Int(port) ?? 22, username: identity.username!, password: nil, privateKey: privateKey, privateKeyType: privateKeyType))
-                        }
-                        else {
-                            NavigationLink("Start", destination: EmptyView())
-                                .disabled(true)
-                        }
+            }
+            .navigationTitle("Connection")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    if let host, let port = Int(port), let identity, let password = identity.password {
+                        NavigationLink("Start", destination: TerminalView(host: host, port: port, username: identity.username!, password: password, privateKey: nil, privateKeyType: nil))
+                    }
+                    else if let host, let port = Int(port), let identity, let privateKey = identity.privateKeyString, let privateKeyType = identity.privateKeyType {
+                        NavigationLink("Start", destination: TerminalView(host: host, port: port, username: identity.username!, password: nil, privateKey: privateKey, privateKeyType: privateKeyType))
+                    }
+                    else {
+                        NavigationLink("Start", destination: EmptyView())
+                            .disabled(true)
                     }
                 }
             }
-            .navigationTitle("Connection")
         }
     }
 }

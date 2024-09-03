@@ -3,6 +3,16 @@
     {
       "filename" : "AppleLogo.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "AppleLogo 1.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

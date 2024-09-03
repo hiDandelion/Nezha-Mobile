@@ -17,6 +17,7 @@ struct AddIdentityView: View {
     @State private var password: String = ""
     @State private var privateKeyType: PrivateKeyType = .ed25519
     @State private var privateKeyString: String = ""
+    @State private var isImportingFromFile: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -45,6 +46,34 @@ struct AddIdentityView: View {
                             }
                         }
                         TextEditor(text: $privateKeyString)
+                            .frame(minHeight: 100)
+                        Button("Import From File") {
+                            isImportingFromFile = true
+                        }
+                        .fileImporter(
+                            isPresented: $isImportingFromFile,
+                            allowedContentTypes: [.item],
+                            allowsMultipleSelection: false
+                        ) { result in
+                            do {
+                                guard let selectedFile: URL = try result.get().first else { return }
+                                if selectedFile.startAccessingSecurityScopedResource() {
+                                    defer { selectedFile.stopAccessingSecurityScopedResource() }
+                                    
+                                    if let content = try? String(contentsOf: selectedFile) {
+                                        privateKeyString = content
+                                    } else {
+                                        let attributes = try FileManager.default.attributesOfItem(atPath: selectedFile.path)
+                                        let fileSize = attributes[.size] as? Int64 ?? 0
+                                        _ = debugLog("File Importer Error: Non readable file \(selectedFile.lastPathComponent) (\(fileSize) bytes)")
+                                    }
+                                } else {
+                                    _ = debugLog("File Importer Error: File access declined")
+                                }
+                            } catch {
+                                _ = debugLog("File Importer Error: \(error.localizedDescription)")
+                            }
+                        }
                     }
                 }
             }

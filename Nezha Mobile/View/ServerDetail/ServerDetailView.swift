@@ -71,7 +71,7 @@ struct ServerDetailView: View {
                                         }
                                         .allowsTightening(false)
                                     }
-                                    .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : Color(red: 1, green: 1, blue: 1))
+                                    .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : .white)
                                     .clipShape(.capsule)
                                     .padding(.horizontal, 20)
                                     .padding(.top, 5)
