@@ -40,7 +40,9 @@ struct ServerDetailHostView: View {
             }
             
             pieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.arch)"))
-            pieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization == "" ? String(localized: "Unknown") : server.host.virtualization)"))
+            if server.host.virtualization != "" {
+                pieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization)"))
+            }
             pieceOfInfo(systemImage: "rectangle.2.swap", name: "Agent", content: Text("\(server.host.version)"))
         }
     }

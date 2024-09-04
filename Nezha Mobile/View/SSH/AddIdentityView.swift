@@ -91,6 +91,7 @@ struct AddIdentityView: View {
                         }
                         isShowAddIdentitySheet = false
                     }
+                    .disabled(name == "" || username == "" || (authenticationMethod == .password && password == "") || (authenticationMethod == .privateKey && privateKeyString == ""))
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {

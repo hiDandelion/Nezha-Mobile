@@ -28,29 +28,12 @@ struct ServerDetailBasicView: View {
                         pieceOfInfo(systemImage: nil, name: "City", content: "\(cityData.city)")
                         pieceOfInfo(systemImage: nil, name: "Time Zone", content: "\(cityData.location.timezone)")
                     } label: {
-                        pieceOfInfo(systemImage: "4.circle", name: "IPv4", content: "\(server.IPv4)")
-                            .contextMenu(ContextMenu(menuItems: {
-                                Button {
-                                    UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
-                                } label: {
-                                    Label("Copy", systemImage: "doc.on.doc")
-                                }
-                            }))
+                        IPv4InfoLabel
                     }
                 }
                 else {
-                    pieceOfInfo(systemImage: "4.circle", name: "IPv4", content: "\(server.IPv4)")
-                        .contextMenu(ContextMenu(menuItems: {
-                            Button {
-                                UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
-                            } label: {
-                                Label("Copy", systemImage: "doc.on.doc")
-                            }
-                        }))
+                    IPv4InfoLabel
                 }
-                
-                
-                NavigationLink("Connect via IPv4", destination: PrepareConnectionView(host: server.IPv4))
             }
             
             if server.IPv6 != "" {
@@ -62,28 +45,12 @@ struct ServerDetailBasicView: View {
                         pieceOfInfo(systemImage: nil, name: "City", content: "\(cityData.city)")
                         pieceOfInfo(systemImage: nil, name: "Time Zone", content: "\(cityData.location.timezone)")
                     } label: {
-                        pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
-                            .contextMenu(ContextMenu(menuItems: {
-                                Button {
-                                    UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
-                                } label: {
-                                    Label("Copy", systemImage: "doc.on.doc")
-                                }
-                            }))
+                        IPv6InfoLabel
                     }
                 }
                 else {
-                    pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
-                        .contextMenu(ContextMenu(menuItems: {
-                            Button {
-                                UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
-                            } label: {
-                                Label("Copy", systemImage: "doc.on.doc")
-                            }
-                        }))
+                    IPv6InfoLabel
                 }
-                
-                NavigationLink("Connect via IPv6", destination: PrepareConnectionView(host: server.IPv6))
             }
             
             pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
@@ -101,6 +68,34 @@ struct ServerDetailBasicView: View {
                 }
             }
         }
+    }
+    
+    private var IPv4InfoLabel: some View {
+        pieceOfInfo(systemImage: "4.circle", name: "IPv4", content: "\(server.IPv4)")
+            .contextMenu(ContextMenu(menuItems: {
+                Button {
+                    UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
+                } label: {
+                    Label("Copy", systemImage: "doc.on.doc")
+                }
+                NavigationLink(destination: PrepareConnectionView(host: server.IPv4)) {
+                    Label("Connect", systemImage: "link")
+                }
+            }))
+    }
+    
+    private var IPv6InfoLabel: some View {
+        pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
+            .contextMenu(ContextMenu(menuItems: {
+                Button {
+                    UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
+                } label: {
+                    Label("Copy", systemImage: "doc.on.doc")
+                }
+                NavigationLink(destination: PrepareConnectionView(host: server.IPv6)) {
+                    Label("Connect", systemImage: "link")
+                }
+            }))
     }
     
     private func getIPCityData(IP: String) async -> IPCityData? {

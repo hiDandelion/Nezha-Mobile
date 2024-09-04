@@ -162,6 +162,12 @@
     },
     "Add" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -188,6 +194,12 @@
     },
     "Add Identity" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アイデンティティを追加"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -310,6 +322,12 @@
     },
     "Authentication" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "認証"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -320,6 +338,12 @@
     },
     "Authentication Method" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "認証方法"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -460,28 +484,30 @@
         }
       }
     },
-    "Connect via IPv4" : {
+    "Connect" : {
       "localizations" : {
-        "zh-Hans" : {
+        "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "通过IPv4连接"
+            "value" : "接続"
           }
-        }
-      }
-    },
-    "Connect via IPv6" : {
-      "localizations" : {
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "通过IPv6连接"
+            "value" : "连接"
           }
         }
       }
     },
     "Connection" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "接続"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -677,6 +703,12 @@
     },
     "Credentials" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "認証情報"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -745,6 +777,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dashboard链接"
+          }
+        }
+      }
+    },
+    "Dashboard Settings" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard設定"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard设置"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
           }
         }
       }
@@ -1080,6 +1144,12 @@
     },
     "Identities" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アイデンティティ"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1090,6 +1160,12 @@
     },
     "Identity" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アイデンティティ"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1100,6 +1176,12 @@
     },
     "Import From File" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ファイルからインポート"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1161,6 +1243,12 @@
     },
     "Last viewed server" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最後に閲覧したアイテムサーバー"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1397,10 +1485,32 @@
     },
     "New Identity" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新規アイデンティティ"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "新身份"
+          }
+        }
+      }
+    },
+    "New Name" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しい名前"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新名称"
           }
         }
       }
@@ -1523,6 +1633,12 @@
     },
     "Password" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1549,6 +1665,12 @@
     },
     "Port" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ポート"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1579,6 +1701,12 @@
     },
     "Private Key Type" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秘密鍵の種類"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1679,6 +1807,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "注册国家"
+          }
+        }
+      }
+    },
+    "Rename" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名前を変更"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重命名"
+          }
+        }
+      }
+    },
+    "Rename Identity" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アイデンティティの名前を変更"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重命名身份"
           }
         }
       }
@@ -1785,6 +1945,12 @@
     },
     "Select Identity" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アイデンティティを選択"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1798,7 +1964,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーを選択する"
+            "value" : "サーバーを選択"
           }
         },
         "zh-Hans" : {
@@ -1830,7 +1996,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テーマを選択する"
+            "value" : "テーマを選択"
           }
         },
         "zh-Hans" : {
@@ -1987,6 +2153,12 @@
     },
     "SSH" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSH"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2476,6 +2648,12 @@
     },
     "Untitled" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名前なし"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2518,6 +2696,12 @@
     },
     "Username" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ユーザー名"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
