@@ -926,6 +926,7 @@
       }
     },
     "Enable Menu Bar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1222,9 +1223,6 @@
         }
       }
     },
-    "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Apple logo, macOS logo are trademarks of Apple Inc." : {
-
-    },
     "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, macOS logo are trademarks of Apple Inc." : {
 
     },
@@ -1439,6 +1437,7 @@
       }
     },
     "Menu Bar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1666,9 +1665,6 @@
     "Part of this project is related to Project naiba/nezha which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
 
     },
-    "Part of this project is related to Project Nezha by naiba which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
-
-    },
     "Password" : {
       "localizations" : {
         "ja" : {
@@ -1791,6 +1787,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "更新"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刷新"
           }
         }
       }
@@ -2120,6 +2122,7 @@
       }
     },
     "Server ID" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -2150,6 +2153,9 @@
           }
         }
       }
+    },
+    "Servers" : {
+
     },
     "Servers(%lld)" : {
       "localizations" : {
@@ -2355,6 +2361,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "TCP连接"
+          }
+        }
+      }
+    },
+    "Terminal" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ターミナル"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "终端"
           }
         }
       }

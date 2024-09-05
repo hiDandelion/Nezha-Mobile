@@ -1,8 +1,8 @@
 //
-//  CustomStackView.swift
-//  WeatherAppScrolling (iOS)
+//  CardView.swift
+//  Nezha Mobile
 //
-//  Created by Balaji on 15/06/21.
+//  Created by Junhui Lou on 9/5/24.
 //
 
 import SwiftUI

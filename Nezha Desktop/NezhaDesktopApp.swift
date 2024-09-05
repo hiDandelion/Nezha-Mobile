@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct NezhaDesktopApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
@@ -34,13 +36,7 @@ struct NezhaDesktopApp: App {
             CommandGroup(before: CommandGroupPlacement.help) {
                 Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
                 NavigationLink(destination: {
-                    Form {
-                        Text("This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
-                        Text("Part of this project is related to Project Nezha by naiba which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/")
-                        Text("Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Apple logo, macOS logo are trademarks of Apple Inc.")
-                    }
-                    .navigationTitle("About")
-                    .padding()
+                    AboutView()
                 }) {
                     Text("About")
                 }
@@ -62,36 +58,5 @@ struct NezhaDesktopApp: App {
         Settings {
             SettingView(dashboardViewModel: dashboardViewModel)
         }
-        
-        menuBarExtra()
-    }
-    
-    @SceneBuilder
-    private func menuBarExtra() -> some Scene {
-        @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = false
-        @AppStorage("NMMenuBarServerID", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarServerID: String = ""
-        
-        MenuBarExtra(isInserted: $menuBarEnabled) {
-            MenuBarView(dashboardViewModel: dashboardViewModel, serverID: menuBarServerID)
-        } label: {
-            if dashboardViewModel.loadingState == .loaded {
-                HStack {
-                    let image: NSImage = {
-                        let ratio = $0.size.height / $0.size.width
-                        $0.size.height = 15
-                        $0.size.width = 15 / ratio
-                        return $0
-                    }(NSImage(named: "NezhaLogo")!)
-                    Image(nsImage: image)
-                    
-                    if let server = dashboardViewModel.servers.first(where: { String($0.id) == menuBarServerID }) {
-                        let totalCore = Double(getCore(server.host.cpu) ?? 1)
-                        let loadPressure = server.status.load15 / totalCore
-                        Text("\(loadPressure * 100, specifier: "%.0f")%")
-                    }
-                }
-            }
-        }
-        .menuBarExtraStyle(.window)
     }
 }

@@ -15,7 +15,6 @@ struct ServerListView: View {
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
     @State private var selectedServers: Set<Server.ID> = Set<Server.ID>()
-    @State private var isShowingSettingSheet: Bool = false
     
     private var filteredServers: [Server] {
         dashboardViewModel.servers
@@ -59,9 +58,6 @@ struct ServerListView: View {
                         })
                     }
                     .padding()
-                }
-                .sheet(isPresented: $isShowingSettingSheet) {
-                    SettingView(dashboardViewModel: dashboardViewModel)
                 }
             }
         }

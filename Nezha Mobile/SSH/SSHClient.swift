@@ -231,7 +231,7 @@ class SSHInteractiveHandler: ChannelInboundHandler {
         context.triggerUserOutboundEvent(pseudoTerminalRequest)
             .whenComplete { result in
                 switch result {
-                case .success(let channel):
+                case .success:
                     _ = debugLog("Channel Info - Pseudo Terminal created")
                     self.delegate?.updateStatus(status: .loaded)
                     let shellRequest = SSHChannelRequestEvent.ShellRequest(wantReply: true)

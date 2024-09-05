@@ -24,69 +24,72 @@ struct TerminalView: View {
     let privateKeyType: PrivateKeyType?
     
     var body: some View {
-        VStack {
-            switch(terminalViewModel.sshClientStatus) {
-            case .idle:
-                EmptyView()
-            case .loading:
-                ProgressView()
-            case .loaded:
-                GeometryReader { proxy in
-                    VStack {
-                        terminalViewModel.terminalView
-                            .onChange(of: proxy.size) {
-                                terminalViewModel.updateTerminalSize(width: proxy.size.width * displayScale, height: proxy.size.height * displayScale)
-                            }
-                            .onKeyPress { press in
-                                switch(press.key) {
-                                case .upArrow:
-                                    writeBase64("G1tB")
-                                    return .handled
-                                case .downArrow:
-                                    writeBase64("G1tC")
-                                    return .handled
-                                case .leftArrow:
-                                    writeBase64("G1tE")
-                                    return .handled
-                                case.rightArrow:
-                                    writeBase64("G1tD")
-                                    return .handled
-                                default:
-                                    ()
+        NavigationStack {
+            VStack {
+                switch(terminalViewModel.sshClientStatus) {
+                case .idle:
+                    EmptyView()
+                case .loading:
+                    ProgressView()
+                case .loaded:
+                    GeometryReader { proxy in
+                        VStack {
+                            terminalViewModel.terminalView
+                                .onChange(of: proxy.size) {
+                                    terminalViewModel.updateTerminalSize(width: proxy.size.width * displayScale, height: proxy.size.height * displayScale)
                                 }
-                                
-                                switch(press.modifiers) {
-                                case .control:
-                                    terminalViewModel.sendCtrl(press.characters)
+                                .onKeyPress { press in
+                                    switch(press.key) {
+                                    case .upArrow:
+                                        writeBase64("G1tB")
+                                        return .handled
+                                    case .downArrow:
+                                        writeBase64("G1tC")
+                                        return .handled
+                                    case .leftArrow:
+                                        writeBase64("G1tE")
+                                        return .handled
+                                    case.rightArrow:
+                                        writeBase64("G1tD")
+                                        return .handled
+                                    default:
+                                        ()
+                                    }
+                                    
+                                    switch(press.modifiers) {
+                                    case .control:
+                                        terminalViewModel.sendCtrl(press.characters)
+                                        return .handled
+                                    default:
+                                        ()
+                                    }
+                                    
+                                    write(press.characters)
                                     return .handled
-                                default:
-                                    ()
                                 }
-                                
-                                write(press.characters)
-                                return .handled
-                            }
-                            .onAppear {
-                                terminalViewModel.setupTerminal(fontSize: 12)
-                                terminalViewModel.updateTerminalSize(width: proxy.size.width * displayScale, height: proxy.size.height * displayScale)
-                            }
+                                .onAppear {
+                                    terminalViewModel.setupTerminal(fontSize: 12)
+                                    terminalViewModel.updateTerminalSize(width: proxy.size.width * displayScale, height: proxy.size.height * displayScale)
+                                }
+                        }
                     }
+                    buttonGroup
+                case .error(let message):
+                    Text(message)
                 }
-                buttonGroup
-            case .error(let message):
-                Text(message)
             }
-        }
-        .onAppear {
-            if let password {
-                terminalViewModel.start(host: host, port: port, username: username, password: password)
+            .navigationTitle("Terminal")
+            .onAppear {
+                if let password {
+                    terminalViewModel.start(host: host, port: port, username: username, password: password)
+                }
+                if let privateKey, let privateKeyType {
+                    terminalViewModel.start(host: host, port: port, username: username, privateKey: privateKey, privateKeyType: privateKeyType)
+                }
             }
-            if let privateKey, let privateKeyType {
-                terminalViewModel.start(host: host, port: port, username: username, privateKey: privateKey, privateKeyType: privateKeyType)
+            .onDisappear {
+                terminalViewModel.shutdown()
             }
-        }
-        .onDisappear {
-            terminalViewModel.shutdown()
         }
     }
     
@@ -101,6 +104,22 @@ struct TerminalView: View {
                         write(str)
                     }
                 }
+                
+                Group {
+                    makeKeyboardFloatingButton("arrowtriangle.up.fill") {
+                        writeBase64("G1tB")
+                    }
+                    makeKeyboardFloatingButton("arrowtriangle.down.fill") {
+                        writeBase64("G1tC")
+                    }
+                    makeKeyboardFloatingButton("arrowtriangle.backward.fill") {
+                        writeBase64("G1tE")
+                    }
+                    makeKeyboardFloatingButton("arrowtriangle.right.fill") {
+                        writeBase64("G1tD")
+                    }
+                }
+                
                 Group {
                     makeKeyboardFloatingButton("escape") {
                         writeBase64("Gw==")
@@ -119,22 +138,9 @@ struct TerminalView: View {
                         writeBase64("CQ==")
                     }
                 }
-                Group {
-                    makeKeyboardFloatingButton("arrowtriangle.up.fill") {
-                        writeBase64("G1tB")
-                    }
-                    makeKeyboardFloatingButton("arrowtriangle.down.fill") {
-                        writeBase64("G1tC")
-                    }
-                    makeKeyboardFloatingButton("arrowtriangle.backward.fill") {
-                        writeBase64("G1tE")
-                    }
-                    makeKeyboardFloatingButton("arrowtriangle.right.fill") {
-                        writeBase64("G1tD")
-                    }
-                }
             }
         }
+        .scrollIndicators(.never)
         .padding(.horizontal)
         .padding(.bottom)
     }
