@@ -50,6 +50,12 @@ class DashboardViewModel {
         loadingState = .idle
     }
     
+    func updateImmediately() {
+        Task {
+            await self.getAllServerDetail()
+        }
+    }
+    
     private func setupNotifications() {
         NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
             .sink { [weak self] _ in

@@ -102,7 +102,6 @@ class SSHClient {
             .whenComplete { result in
                 switch result {
                 case .success(let channel):
-                    self.delegate?.updateStatus(status: .loaded)
                     _ = debugLog("Channel Info - \(channel)")
                     if let command {
                         self.run(command: command)
@@ -112,6 +111,29 @@ class SSHClient {
                     _ = debugLog("Channel Error - \(error)")
                 }
             }
+        }
+    }
+    
+    func windowChange(width: Int, height: Int) {
+        if let childChannel, childChannel.isActive {
+            let windowChangeRequest = SSHChannelRequestEvent.WindowChangeRequest(
+                terminalCharacterWidth: 80,
+                terminalRowHeight: 24,
+                terminalPixelWidth: width,
+                terminalPixelHeight: height
+            )
+            childChannel.triggerUserOutboundEvent(windowChangeRequest)
+                .whenComplete{ result in
+                    switch result {
+                    case .success:
+                        _ = debugLog("Channel Info - Window changed successfully")
+                    case .failure(let error):
+                        _ = debugLog("Channel Error - Failed to change window: \(error)")
+                    }
+                }
+        }
+        else {
+            _ = debugLog("No active channel")
         }
     }
 }
@@ -206,10 +228,18 @@ class SSHInteractiveHandler: ChannelInboundHandler {
                 .VSTOP: 19     // Stop character (usually Ctrl-S)
             ])
         )
-        context.triggerUserOutboundEvent(pseudoTerminalRequest, promise: nil)
-        
-        let shellRequest = SSHChannelRequestEvent.ShellRequest(wantReply: true)
-        context.triggerUserOutboundEvent(shellRequest, promise: nil)
+        context.triggerUserOutboundEvent(pseudoTerminalRequest)
+            .whenComplete { result in
+                switch result {
+                case .success(let channel):
+                    _ = debugLog("Channel Info - Pseudo Terminal created")
+                    self.delegate?.updateStatus(status: .loaded)
+                    let shellRequest = SSHChannelRequestEvent.ShellRequest(wantReply: true)
+                    context.triggerUserOutboundEvent(shellRequest, promise: nil)
+                case .failure(let error):
+                    _ = debugLog("Channel Error - \(error)")
+                }
+            }
     }
     
     func channelRead(context: ChannelHandlerContext, data: NIOAny) {

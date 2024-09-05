@@ -14,6 +14,7 @@ enum KeyCombination {
 }
 
 struct TerminalView: View {
+    @Environment(\.displayScale) var displayScale
     @StateObject var terminalViewModel: TerminalViewModel = TerminalViewModel()
     let host: String
     let port: Int
@@ -30,39 +31,47 @@ struct TerminalView: View {
             case .loading:
                 ProgressView()
             case .loaded:
-                terminalViewModel.terminalView
-                    .onKeyPress { press in
-                        switch(press.key) {
-                        case .upArrow:
-                            writeBase64("G1tB")
-                            return .handled
-                        case .downArrow:
-                            writeBase64("G1tC")
-                            return .handled
-                        case .leftArrow:
-                            writeBase64("G1tE")
-                            return .handled
-                        case.rightArrow:
-                            writeBase64("G1tD")
-                            return .handled
-                        default:
-                            ()
-                        }
-                        
-                        switch(press.modifiers) {
-                        case .control:
-                            terminalViewModel.sendCtrl(press.characters)
-                            return .handled
-                        default:
-                            ()
-                        }
-                        
-                        write(press.characters)
-                        return .handled
+                GeometryReader { proxy in
+                    VStack {
+                        terminalViewModel.terminalView
+                            .onChange(of: proxy.size) {
+                                terminalViewModel.updateTerminalSize(width: proxy.size.width * displayScale, height: proxy.size.height * displayScale)
+                            }
+                            .onKeyPress { press in
+                                switch(press.key) {
+                                case .upArrow:
+                                    writeBase64("G1tB")
+                                    return .handled
+                                case .downArrow:
+                                    writeBase64("G1tC")
+                                    return .handled
+                                case .leftArrow:
+                                    writeBase64("G1tE")
+                                    return .handled
+                                case.rightArrow:
+                                    writeBase64("G1tD")
+                                    return .handled
+                                default:
+                                    ()
+                                }
+                                
+                                switch(press.modifiers) {
+                                case .control:
+                                    terminalViewModel.sendCtrl(press.characters)
+                                    return .handled
+                                default:
+                                    ()
+                                }
+                                
+                                write(press.characters)
+                                return .handled
+                            }
+                            .onAppear {
+                                terminalViewModel.setupTerminal(fontSize: 12)
+                                terminalViewModel.updateTerminalSize(width: proxy.size.width * displayScale, height: proxy.size.height * displayScale)
+                            }
                     }
-                    .onAppear {
-                        terminalViewModel.setupTerminal(fontSize: 12)
-                    }
+                }
                 buttonGroup
             case .error(let message):
                 Text(message)

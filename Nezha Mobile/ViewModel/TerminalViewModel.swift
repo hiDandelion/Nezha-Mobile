@@ -88,6 +88,10 @@ class TerminalViewModel: ObservableObject, SSHClientDelegate {
         self.sshClient?.run(command: command)
     }
     
+    func updateTerminalSize(width: CGFloat, height: CGFloat) {
+        self.sshClient?.windowChange(width: Int(width), height: Int(height))
+    }
+    
     func receiveMessage(type: SSHMessageType, content: ByteBuffer) {
         var byteBuffer = content
         if let contentString = byteBuffer.readString(length: content.readableBytes) {

@@ -114,6 +114,34 @@ struct ServerDetailView: View {
                 }
                 .navigationTitle(server.name)
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        Menu {
+                            Section {
+                                Button {
+                                    dashboardViewModel.updateImmediately()
+                                } label: {
+                                    Label("Refresh", systemImage: "arrow.clockwise")
+                                }
+                            }
+                            
+                            Section {
+                                if server.IPv4 != "" {
+                                    NavigationLink(destination: PrepareConnectionView(host: server.IPv4)) {
+                                        Label("Connect via IPv4", systemImage: "link")
+                                    }
+                                }
+                                if server.IPv6 != "" {
+                                    NavigationLink(destination: PrepareConnectionView(host: server.IPv4)) {
+                                        Label("Connect via IPv6", systemImage: "link")
+                                    }
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis.circle")
+                        }
+                    }
+                }
             }
             else {
                 ProgressView()
