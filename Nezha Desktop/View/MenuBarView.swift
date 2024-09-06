@@ -47,7 +47,7 @@ struct MenuBarView: View {
             case .loading:
                 ProgressView("Loading...")
             case .loaded:
-                ScrollView {
+                VStack {
                     VStack {
                         HStack {
                             Label("Servers", systemImage: "server.rack")
@@ -91,7 +91,7 @@ struct MenuBarView: View {
                 }
             }
         }
-        .frame(width: 380, height: 800)
+        .frame(width: 380, height: 810)
         .onAppear {
             if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
@@ -102,15 +102,30 @@ struct MenuBarView: View {
     private var serverList: some View {
         VStack {
             if !dashboardViewModel.servers.isEmpty {
-                VStack(spacing: 10) {
-                    Divider()
+                List {
                     ForEach(filteredServers) { server in
                         ServerCard(server: server)
                         .id(server.id)
-                        Divider()
+                        .contextMenu {
+                            if server.IPv4 != "" {
+                                Button("Copy IPv4") {
+                                    NSPasteboard.general.clearContents()
+                                    NSPasteboard.general.setString(server.IPv4, forType: .string)
+                                }
+                            }
+                            if server.IPv6 != "" {
+                                Button("Copy IPv6") {
+                                    NSPasteboard.general.clearContents()
+                                    NSPasteboard.general.setString(server.IPv6, forType: .string)
+                                }
+                            }
+                            Divider()
+                            Button("View Details") {
+                                openWindow(value: server.id)
+                            }
+                        }
                     }
                 }
-                .padding(.horizontal, 15)
             }
             else {
                 ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")

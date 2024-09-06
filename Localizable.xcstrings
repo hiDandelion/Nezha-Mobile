@@ -370,6 +370,12 @@
     },
     "Background Color Dark Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景色ダークモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -380,6 +386,12 @@
     },
     "Background Color Light Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景色ライトモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -938,6 +950,22 @@
         }
       }
     },
+    "Enable Menu Bar" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メニューバー有効"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用状态栏"
+          }
+        }
+      }
+    },
     "Enable Theme Customization" : {
       "localizations" : {
         "ja" : {
@@ -1448,6 +1476,22 @@
         }
       }
     },
+    "Menu Bar" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メニューバー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "状态栏"
+          }
+        }
+      }
+    },
     "N/A" : {
       "localizations" : {
         "ja" : {
@@ -1726,6 +1770,12 @@
     },
     "Primary Color Dark Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライマリーカラーダークモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1736,6 +1786,12 @@
     },
     "Primary Color Light Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライマリーカラーライトモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1970,6 +2026,12 @@
     },
     "Secondary Color Dark Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "セカンダリーカラーダークモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1980,6 +2042,12 @@
     },
     "Secondary Color Light Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "セカンダリーカラーライトモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2650,6 +2718,12 @@
     },
     "Tint Color Dark Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ティントカラーダークモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2660,6 +2734,12 @@
     },
     "Tint Color Light Mode" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ティントカラーライトモード"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",

@@ -9,8 +9,6 @@ import SwiftUI
 
 @main
 struct NezhaDesktopApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
     @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
@@ -58,5 +56,18 @@ struct NezhaDesktopApp: App {
         Settings {
             SettingView(dashboardViewModel: dashboardViewModel)
         }
+        
+        menuBarExtra
+    }
+    
+    private var menuBarExtra: some Scene {
+        @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = true
+        
+        return MenuBarExtra(isInserted: $menuBarEnabled) {
+            MenuBarView(dashboardViewModel: dashboardViewModel)
+        } label: {
+            Image(systemName: "server.rack")
+        }
+        .menuBarExtraStyle(.window)
     }
 }

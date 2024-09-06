@@ -12,6 +12,7 @@ struct SettingView: View {
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
     @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
+    @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = true
     @State private var isShowSuccessfullySavedAlert: Bool = false
     
     var body: some View {
@@ -42,6 +43,14 @@ struct SettingView: View {
             .padding()
             .tabItem {
                 Label("General", systemImage: "gearshape")
+            }
+            
+            Form {
+                Toggle("Enable Menu Bar", isOn: $menuBarEnabled)
+            }
+            .padding()
+            .tabItem {
+                Label("Menu Bar", systemImage: "menubar.rectangle")
             }
         }
         .frame(width: 600, height: 400)
