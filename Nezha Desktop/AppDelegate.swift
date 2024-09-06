@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate{
+class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
     @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     
     @Published var statusItem: NSStatusItem?

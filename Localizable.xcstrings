@@ -709,7 +709,20 @@
       }
     },
     "CPU --% MEM --%" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU --% メモリ --%"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU --% 内存 --%"
+          }
+        }
+      }
     },
     "CPU %.0f%% MEM %.0f%%" : {
       "localizations" : {
@@ -722,7 +735,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CPU %1$.0f%% MEM %2$.0f%%"
+            "value" : "CPU %1$.0f%% メモリ %2$.0f%%"
           }
         },
         "zh-Hans" : {
@@ -921,23 +934,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "完成"
-          }
-        }
-      }
-    },
-    "Enable Menu Bar" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "メニューバー有効"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启用状态栏"
           }
         }
       }
@@ -1371,6 +1367,22 @@
         }
       }
     },
+    "Main Window" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メインウィンドウ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主页面"
+          }
+        }
+      }
+    },
     "Map View" : {
       "localizations" : {
         "ja" : {
@@ -1432,23 +1444,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "内存"
-          }
-        }
-      }
-    },
-    "Menu Bar" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "メニューバー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "状态栏"
           }
         }
       }
@@ -1545,6 +1540,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "新名称"
+          }
+        }
+      }
+    },
+    "Nezha Desktop" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nezha Desktop"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nezha Desktop"
           }
         }
       }
@@ -2121,23 +2132,6 @@
         }
       }
     },
-    "Server ID" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サーバーID"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "服务器ID"
-          }
-        }
-      }
-    },
     "Server Unavailable" : {
       "localizations" : {
         "ja" : {
@@ -2155,7 +2149,20 @@
       }
     },
     "Servers" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器"
+          }
+        }
+      }
     },
     "Servers(%lld)" : {
       "localizations" : {

@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct MenuBarView: View {
+    @Environment(\.openWindow) var openWindow
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
     @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
     var dashboardViewModel: DashboardViewModel
+    @State private var activeTag: String = "All"
     
     private var filteredServers: [Server] {
         dashboardViewModel.servers
@@ -26,6 +28,15 @@ struct MenuBarView: View {
                     return index1 > index2 || (index1 == index2 && server1.id < server2.id)
                 }
             }
+            .filter { activeTag == "All" || $0.tag == activeTag }
+    }
+    
+    private var tags: [String] {
+        Array(Set(dashboardViewModel.servers.map { $0.tag }))
+    }
+    
+    private var allTags: [String] {
+        ["All"] + tags.sorted()
     }
     
     var body: some View {
@@ -37,13 +48,30 @@ struct MenuBarView: View {
                 ProgressView("Loading...")
             case .loaded:
                 ScrollView {
-                    HStack {
-                        Label("Servers", systemImage: "server.rack")
-                        Spacer()
+                    VStack {
+                        HStack {
+                            Label("Servers", systemImage: "server.rack")
+                            Spacer()
+                            Button("Main Window") {
+                                openWindow(id: "main-view")
+                            }
+                        }
+                        Picker("Tag", selection: $activeTag) {
+                            ForEach(allTags, id: \.self) { tag in
+                                Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
+                                    .id(tag)
+                            }
+                        }
                     }
-                    .padding([.top, .leading])
+                    .padding([.top, .horizontal])
                     serverList
-                        .padding(.bottom)
+                    HStack {
+                        Spacer()
+                        SettingsLink(label: {
+                            Label("Settings", systemImage: "gearshape")
+                        })
+                    }
+                    .padding([.bottom, .horizontal])
                 }
             case .error(let message):
                 ZStack(alignment: .bottomTrailing) {

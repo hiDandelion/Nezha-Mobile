@@ -28,7 +28,7 @@ struct NezhaDesktopApp: App {
     }
     
     var body: some Scene {
-        WindowGroup {
+        WindowGroup("Nezha Desktop", id: "main-view") {
             ContentView(dashboardViewModel: dashboardViewModel)
         }
         .defaultSize(width: 1000, height: 500)
@@ -47,7 +47,7 @@ struct NezhaDesktopApp: App {
             ServerMapView(servers: dashboardViewModel.servers)
         }
         
-        WindowGroup("Server Details", for: Server.ID.self) { $serverID in
+        WindowGroup("Server Details", id: "server-detail-view", for: Server.ID.self) { $serverID in
             if let serverID {
                 ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: serverID)
             }

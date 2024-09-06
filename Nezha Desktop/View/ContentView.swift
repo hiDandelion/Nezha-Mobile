@@ -68,6 +68,6 @@ struct ContentView: View {
             return
         }
         
-        openWindow(value: serverID)
+        openWindow(id: "server-detail-view", value: serverID)
     }
 }
