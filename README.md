@@ -10,4 +10,4 @@ Nezha Mobile is an iOS client for Nezha Dashboard.
 
 For any information related to Nezha Dashboard or Nezha Agent, please visit [Nezha Wiki](https://nezha.wiki)
 
-Nezha Mobile 1.4(current release version) is tested working with Nezha Dashboard v0.19.0.
+Nezha Mobile 1.6(current release version) is tested working with Nezha Dashboard v0.19.10.
