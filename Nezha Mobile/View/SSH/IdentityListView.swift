@@ -73,7 +73,7 @@ struct IdentityListView: View {
                     Button {
                         isShowAddIdentitySheet = true
                     } label: {
-                        Label("Add", systemImage: "plus.circle")
+                        Label("Add", systemImage: "plus")
                     }
                 }
             }

@@ -2008,22 +2008,6 @@
         }
       }
     },
-    "Search Server" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サーバーを検索"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "搜索服务器"
-          }
-        }
-      }
-    },
     "Secondary Color Dark Mode" : {
       "localizations" : {
         "ja" : {

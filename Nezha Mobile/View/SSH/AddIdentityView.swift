@@ -37,7 +37,7 @@ struct AddIdentityView: View {
                     }
                     switch(authenticationMethod) {
                     case .password:
-                        TextField("Password", text: $password)
+                        SecureField("Password", text: $password)
                     case .privateKey:
                         Picker("Private Key Type", selection: $privateKeyType) {
                             ForEach(PrivateKeyType.allCases) { privateKeyType in

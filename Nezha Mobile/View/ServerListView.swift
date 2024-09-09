@@ -23,7 +23,8 @@ struct ServerListView: View {
     @Binding var isShowingServerMapView: Bool
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
-    @Namespace private var animation
+    @Namespace private var tagNamespace
+    @Namespace private var serverNamespace
     
     private var filteredServers: [Server] {
         dashboardViewModel.servers
@@ -50,223 +51,105 @@ struct ServerListView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
                 ZStack {
-                    // Background
-                    if let backgroundImage {
-                        GeometryReader { proxy in
-                            Image(uiImage: backgroundImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: proxy.size.height)
-                                .clipped()
-                        }
-                        .ignoresSafeArea()
-                    }
-                    else {
-                        if themeStore.themeCustomizationEnabled {
-                            themeStore.themeBackgroundColor(scheme: scheme)
-                                .ignoresSafeArea()
-                        }
-                        else {
-                            backgroundGradient(color: theme, scheme: scheme)
-                                .ignoresSafeArea()
-                        }
-                    }
+                    Background
+                        .zIndex(0)
                     
-                    switch(dashboardViewModel.loadingState) {
-                    case .idle:
-                        EmptyView()
-                    case .loading, .loaded:
-                        if dashboardViewModel.servers.isEmpty {
-                            ProgressView("Loading...")
-                        }
-                        else {
-                            GeometryReader { proxy in
-                                let isWideLayout = proxy.size.width > 600
-                                
-                                ScrollView {
-                                    ExpandableNavigationBar
-                                        .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
-                                        .zIndex(1)
-                                    
-                                    ServerList(isWideLayout: isWideLayout)
-                                        .padding(.top, isSearching ?  navigationBarHeight - 50 : navigationBarHeight - 5)
-                                        .zIndex(0)
-                                }
-                                .coordinateSpace(name: "scrollView")
-                                .toolbar(.hidden, for: .navigationBar)
-                                .scrollIndicators(.never)
-                            }
-                        }
-                    case .error(let message):
-                        VStack(spacing: 20) {
-                            Text("An error occurred")
-                                .font(.headline)
-                            Text(message)
-                                .font(.subheadline)
-                            Button("Retry") {
-                                dashboardViewModel.startMonitoring()
-                            }
-                            Button("Settings") {
-                                isShowingSettingSheet.toggle()
-                            }
-                        }
-                        .padding()
-                    }
+                    Content
+                        .zIndex(1)
                 }
-            }
-            .toolbarBackground(.hidden)
             .sheet(isPresented: $isShowingSettingSheet) {
                 SettingView(dashboardViewModel: dashboardViewModel, backgroundImage: $backgroundImage, themeStore: themeStore)
             }
         }
         .onAppear {
             // Set background
-            let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.data(forKey: "NMBackgroundPhotoData")
+            let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
                 backgroundImage = UIImage(data: backgroundPhotoData)
             }
         }
     }
     
-    var ExpandableNavigationBar: some View {
-        GeometryReader { proxy in
-            let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
-            let progress = isSearching ? 1 : max(min(-minY / 70, 1), 0)
-            
-            VStack(spacing: 15 - (progress * 15)) {
-                Title(title: "Servers", progress: progress)
-                
-                SearchBar(progress: progress)
-                
-                GroupPicker
-            }
-            .padding(.top, 15)
-            .safeAreaPadding(.horizontal, 15)
-            .offset(y: minY < 0 || isSearching ? -minY : 0)
-            .offset(y: -progress * 65)
-            .overlay(
+    var Background: some View {
+        ZStack {
+            if let backgroundImage {
                 GeometryReader { proxy in
-                    Color.clear
-                        .preference(key: NavigationBarHeightPreferenceKey.self, value: proxy.size.height)
+                    Image(uiImage: backgroundImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: proxy.size.height)
+                        .clipped()
                 }
-            )
-            .onPreferenceChange(NavigationBarHeightPreferenceKey.self) { height in
-                navigationBarHeight = height
-            }
-        }
-        .padding(.bottom, 10)
-        .padding(.bottom, isSearching ? -65 : 0)
-    }
-    
-    private func Title(title: String, progress: CGFloat) -> some View {
-        HStack {
-            HStack {
-                Text(title)
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
-                    .if(backgroundImage != nil) { view in
-                        view
-                            .padding(.horizontal, 10)
-                            .background {
-                                if themeStore.themeCustomizationEnabled {
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .fill(themeStore.themeSecondaryColor(scheme: scheme))
-                                }
-                                else {
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .fill(.thinMaterial)
-                                }
-                            }
-                    }
-                ProgressView()
-                    .opacity(dashboardViewModel.loadingState == .loading ? 1 : 0)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Button {
-                withAnimation {
-                    isShowingServerMapView = true
-                }
-            } label: {
-                Image(systemName: "map")
-                    .padding(10)
-                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
-                    .if(themeStore.themeCustomizationEnabled) { view in
-                        view.background(themeStore.themeSecondaryColor(scheme: scheme))
-                    }
-                    .if(!themeStore.themeCustomizationEnabled) { view in
-                        view.background(.thinMaterial)
-                    }
-                    .clipShape(Circle())
-            }
-            .hoverEffect(.lift)
-            
-            Button {
-                isShowingSettingSheet = true
-            } label: {
-                Image(systemName: "gear")
-                    .padding(10)
-                    .foregroundStyle(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary)
-                    .if(themeStore.themeCustomizationEnabled) { view in
-                        view.background(themeStore.themeSecondaryColor(scheme: scheme))
-                    }
-                    .if(!themeStore.themeCustomizationEnabled) { view in
-                        view.background(.thinMaterial)
-                    }
-                    .clipShape(Circle())
-            }
-            .hoverEffect(.lift)
-        }
-        .opacity(1 - progress)
-    }
-    
-    private func SearchBar(progress: CGFloat) -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: "magnifyingglass")
-                .font(.title3)
-            
-            TextField("Search Server", text: $searchText)
-                .focused($isSearching)
-            
-            if isSearching || searchText != "" {
-                Button(action: {
-                    withAnimation {
-                        isSearching = false
-                        searchText = ""
-                    }
-                }, label: {
-                    Image(systemName: "xmark")
-                        .font(.title3)
-                })
-                .transition(.asymmetric(insertion: .push(from: .bottom), removal: .push(from: .top)))
-            }
-        }
-        .foregroundStyle(Color.primary)
-        .padding(.horizontal, 15 - (progress * 15))
-        .frame(height: 45)
-        .clipShape(.capsule)
-        .background {
-            if themeStore.themeCustomizationEnabled {
-                RoundedRectangle(cornerRadius: 25 - (progress * 25))
-                    .fill(themeStore.themeSecondaryColor(scheme: scheme))
-                    .if(progress == 1) { view in
-                        view.shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
-                    }
-                    .padding(.top, -progress * 165)
-                    .padding(.bottom, -progress * 45)
-                    .padding(.horizontal, -progress * 15)
+                .ignoresSafeArea()
             }
             else {
-                RoundedRectangle(cornerRadius: 25 - (progress * 25))
-                    .fill(.thinMaterial)
-                    .if(progress == 1) { view in
-                        view.shadow(color: .gray.opacity(0.25), radius: 5, x: 2, y: 2)
+                if themeStore.themeCustomizationEnabled {
+                    themeStore.themeBackgroundColor(scheme: scheme)
+                        .ignoresSafeArea()
+                }
+                else {
+                    backgroundGradient(color: theme, scheme: scheme)
+                        .ignoresSafeArea()
+                }
+            }
+        }
+    }
+    
+    var Content: some View {
+        ZStack {
+            switch(dashboardViewModel.loadingState) {
+            case .idle:
+                EmptyView()
+            case .loading, .loaded:
+                if dashboardViewModel.servers.isEmpty {
+                    ProgressView("Loading...")
+                }
+                else {
+                    GeometryReader { proxy in
+                        let isWideLayout = proxy.size.width > 600
+                        ScrollView {
+                            GroupPicker
+                                .safeAreaPadding(.horizontal, 15)
+                                .padding(.bottom, 5)
+                            
+                            ServerList(isWideLayout: isWideLayout)
+                        }
+                        .navigationTitle("Servers")
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    isShowingServerMapView = true
+                                } label: {
+                                    Label("Map View", systemImage: "map")
+                                }
+                            }
+                            
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button {
+                                    isShowingSettingSheet = true
+                                } label: {
+                                    Label("Settings", systemImage: "gear")
+                                }
+                            }
+                        }
+                        .searchable(text: $searchText)
                     }
-                    .padding(.top, -progress * 165)
-                    .padding(.bottom, -progress * 45)
-                    .padding(.horizontal, -progress * 15)
+                }
+            case .error(let message):
+                VStack(spacing: 20) {
+                    Text("An error occurred")
+                        .font(.headline)
+                    Text(message)
+                        .font(.subheadline)
+                    Button("Retry") {
+                        dashboardViewModel.startMonitoring()
+                    }
+                    Button("Settings") {
+                        isShowingSettingSheet.toggle()
+                    }
+                }
+                .padding()
             }
         }
     }
@@ -302,12 +185,12 @@ struct ServerListView: View {
                         if themeStore.themeCustomizationEnabled {
                             Capsule()
                                 .fill(themeStore.themeTintColor(scheme: scheme))
-                                .matchedGeometryEffect(id: "ACTIVETAG", in: animation)
+                                .matchedGeometryEffect(id: "ACTIVETAG", in: tagNamespace)
                         }
                         else {
                             Capsule()
                                 .fill(Color.primary)
-                                .matchedGeometryEffect(id: "ACTIVETAG", in: animation)
+                                .matchedGeometryEffect(id: "ACTIVETAG", in: tagNamespace)
                         }
                     } else {
                         if themeStore.themeCustomizationEnabled {
@@ -501,12 +384,5 @@ struct ServerListView: View {
                 }
             }
         }))
-    }
-    
-    struct NavigationBarHeightPreferenceKey: PreferenceKey {
-        static var defaultValue: CGFloat = 0
-        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-            value = nextValue()
-        }
     }
 }
