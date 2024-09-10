@@ -12,6 +12,8 @@ struct ServerListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
+    @State private var shouldNavigateToServerDetailView: Bool = false
+    @State private var incomingURLServerID: Int?
     var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
     var themeStore: ThemeStore
@@ -20,8 +22,6 @@ struct ServerListView: View {
     @FocusState private var isSearching: Bool
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
-    @Binding var isShowingServerMapView: Bool
-    @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     @Namespace private var tagNamespace
     @Namespace private var serverNamespace
@@ -51,15 +51,17 @@ struct ServerListView: View {
     
     var body: some View {
         NavigationStack {
-                ZStack {
-                    Background
-                        .zIndex(0)
-                    
-                    Content
-                        .zIndex(1)
+            ZStack {
+                Background
+                    .zIndex(0)
+                
+                Content
+                    .zIndex(1)
+            }
+            .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
+                if let incomingURLServerID {
+                    ServerDetailView(serverID: incomingURLServerID, dashboardViewModel: dashboardViewModel, themeStore: themeStore)
                 }
-            .sheet(isPresented: $isShowingSettingSheet) {
-                SettingView(dashboardViewModel: dashboardViewModel, backgroundImage: $backgroundImage, themeStore: themeStore)
             }
         }
         .onAppear {
@@ -69,10 +71,14 @@ struct ServerListView: View {
                 backgroundImage = UIImage(data: backgroundPhotoData)
             }
         }
+        .onOpenURL { url in
+            _ = debugLog("Incoming Link Info - App was opened via URL: \(url)")
+            handleIncomingURL(url)
+        }
     }
     
     var Background: some View {
-        ZStack {
+        Group {
             if let backgroundImage {
                 GeometryReader { proxy in
                     Image(uiImage: backgroundImage)
@@ -97,7 +103,7 @@ struct ServerListView: View {
     }
     
     var Content: some View {
-        ZStack {
+        Group {
             switch(dashboardViewModel.loadingState) {
             case .idle:
                 EmptyView()
@@ -116,23 +122,6 @@ struct ServerListView: View {
                             ServerList(isWideLayout: isWideLayout)
                         }
                         .navigationTitle("Servers")
-                        .toolbar {
-                            ToolbarItem(placement: .topBarLeading) {
-                                Button {
-                                    isShowingServerMapView = true
-                                } label: {
-                                    Label("Map View", systemImage: "map")
-                                }
-                            }
-                            
-                            ToolbarItem(placement: .topBarTrailing) {
-                                Button {
-                                    isShowingSettingSheet = true
-                                } label: {
-                                    Label("Settings", systemImage: "gear")
-                                }
-                            }
-                        }
                         .searchable(text: $searchText)
                     }
                 }
@@ -146,7 +135,7 @@ struct ServerListView: View {
                         dashboardViewModel.startMonitoring()
                     }
                     Button("Settings") {
-                        isShowingSettingSheet.toggle()
+                        
                     }
                 }
                 .padding()
@@ -208,7 +197,7 @@ struct ServerListView: View {
     }
     
     private func ServerList(isWideLayout: Bool) -> some View {
-        VStack {
+        Group {
             if !dashboardViewModel.servers.isEmpty {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
                     ForEach(filteredServers) { server in
@@ -384,5 +373,30 @@ struct ServerListView: View {
                 }
             }
         }))
+    }
+    
+    private func handleIncomingURL(_ url: URL) {
+        guard url.scheme == "nezha" else {
+            _ = debugLog("Incoming Link Error - Invalid Scheme")
+            return
+        }
+        
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            _ = debugLog("Incoming Link Error - Invalid URL")
+            return
+        }
+        
+        guard let action = components.host, action == "server-details" else {
+            _ = debugLog("Incoming Link Error - Unknown action")
+            return
+        }
+        
+        guard let serverID = components.queryItems?.first(where: { $0.name == "serverID" })?.value else {
+            _ = debugLog("Incoming Link Error - Server ID not found")
+            return
+        }
+        
+        incomingURLServerID = Int(serverID)
+        shouldNavigateToServerDetailView = true
     }
 }

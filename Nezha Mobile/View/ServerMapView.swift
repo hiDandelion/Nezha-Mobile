@@ -18,9 +18,7 @@ struct ServerCoordinate: Identifiable, Hashable {
     let city: String?
 }
 
-@available(iOS 17.0, *)
 struct ServerMapView: View {
-    @Binding var isShowingServerMapView: Bool
     var servers: [Server]
     @State private var serverCoordinates: [ServerCoordinate] = []
     @State private var selectedCoordinate: ServerCoordinate?
@@ -59,27 +57,6 @@ struct ServerMapView: View {
         }
         .toolbar(.hidden)
         .overlay {
-            VStack {
-                HStack {
-                    Spacer()
-                    Button {
-                        withAnimation {
-                            isShowingServerMapView = false
-                        }
-                    } label: {
-                        Image(systemName: "xmark")
-                            .padding(10)
-                            .foregroundStyle(.primary)
-                            .background(.thinMaterial)
-                            .clipShape(Circle())
-                            .padding()
-                            .hoverEffect(.lift)
-                    }
-                    .buttonStyle(.plain)
-                }
-                Spacer()
-            }
-            
             if let selectedCoordinate {
                 VStack {
                     Spacer()
@@ -118,37 +95,44 @@ struct ServerMapView: View {
             }
         }
         .onAppear {
+            if !serverCoordinates.isEmpty {
+                return
+            }
             Task {
-                let storage = try? Storage<String, IPCityData>(
-                    diskConfig: DiskConfig(name: "NMIPCityData"),
-                    memoryConfig: MemoryConfig(expiry: .never),
-                    fileManager: FileManager(),
-                    transformer: TransformerFactory.forCodable(ofType: IPCityData.self)
-                )
-                
-                for server in servers {
-                    if let storage {
-                        if let currentIPCityData = try? storage.object(forKey: server.IPv4), let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
+                await loadCoordinates()
+            }
+        }
+    }
+    
+    private func loadCoordinates() async {
+        let storage = try? Storage<String, IPCityData>(
+            diskConfig: DiskConfig(name: "NMIPCityData"),
+            memoryConfig: MemoryConfig(expiry: .never),
+            fileManager: FileManager(),
+            transformer: TransformerFactory.forCodable(ofType: IPCityData.self)
+        )
+        
+        for server in servers {
+            if let storage {
+                if let currentIPCityData = try? storage.object(forKey: server.IPv4), let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
+                    let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
+                    if let existingServerCoordinateIndex {
+                        serverCoordinates[existingServerCoordinateIndex].servers.append(server)
+                    }
+                    else {
+                        serverCoordinates.append(ServerCoordinate(servers: [server],latitude: latitude, longitude: longitude, country: currentIPCityData.country, city: currentIPCityData.city))
+                    }
+                }
+                else {
+                    if let response = try? await RequestHandler.getIPCityData(IP: server.IPv4, locale: Locale.preferredLanguages[0]), let currentIPCityData = response.result {
+                        try? storage.setObject(currentIPCityData, forKey: server.IPv4)
+                        if let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
                             let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
                             if let existingServerCoordinateIndex {
                                 serverCoordinates[existingServerCoordinateIndex].servers.append(server)
                             }
                             else {
                                 serverCoordinates.append(ServerCoordinate(servers: [server],latitude: latitude, longitude: longitude, country: currentIPCityData.country, city: currentIPCityData.city))
-                            }
-                        }
-                        else {
-                            if let response = try? await RequestHandler.getIPCityData(IP: server.IPv4, locale: Locale.preferredLanguages[0]), let currentIPCityData = response.result {
-                                try? storage.setObject(currentIPCityData, forKey: server.IPv4)
-                                if let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
-                                    let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
-                                    if let existingServerCoordinateIndex {
-                                        serverCoordinates[existingServerCoordinateIndex].servers.append(server)
-                                    }
-                                    else {
-                                        serverCoordinates.append(ServerCoordinate(servers: [server],latitude: latitude, longitude: longitude, country: currentIPCityData.country, city: currentIPCityData.city))
-                                    }
-                                }
                             }
                         }
                     }

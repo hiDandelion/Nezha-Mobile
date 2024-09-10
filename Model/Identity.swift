@@ -22,8 +22,8 @@ enum PrivateKeyType: String, CaseIterable, Identifiable, Codable {
 @Model
 class Identity: Identifiable {
     var id: UUID?
-    var name: String?
     var timestamp: Date?
+    var name: String?
     var username: String?
     var password: String?
     var privateKeyString: String?

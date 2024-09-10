@@ -13,8 +13,8 @@ struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     var dashboardViewModel: DashboardViewModel
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+    @State var isPresentedAsSheet: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
-    @Binding var backgroundImage: UIImage?
     var themeStore: ThemeStore
     @State private var isShowCopyTokenSuccessAlert: Bool = false
     
@@ -51,7 +51,7 @@ struct SettingView: View {
                     }
                     
                     NavigationLink("Advanced Customization") {
-                        AdvancedCustomizationView(backgroundImage: $backgroundImage, themeStore: themeStore)
+                        AdvancedCustomizationView(themeStore: themeStore)
                     }
                 }
                 
@@ -107,9 +107,11 @@ struct SettingView: View {
             }
             .navigationTitle("Settings")
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        dismiss()
+                if isPresentedAsSheet {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Done") {
+                            dismiss()
+                        }
                     }
                 }
             }

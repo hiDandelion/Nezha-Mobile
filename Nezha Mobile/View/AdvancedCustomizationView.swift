@@ -12,7 +12,7 @@ import WidgetKit
 struct AdvancedCustomizationView: View {
     @AppStorage("NMBackgroundPhotoData", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var backgroundPhotoData: Data?
     @State private var selectedPhoto: PhotosPickerItem?
-    @Binding var backgroundImage: UIImage?
+    @State var backgroundImage: UIImage?
     @Bindable var themeStore: ThemeStore
     @AppStorage("NMWidgetCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetCustomizationEnabled: Bool = false
     @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var selectedWidgetBackgroundColor: Color = .blue
@@ -45,6 +45,13 @@ struct AdvancedCustomizationView: View {
                     Text("Background Customization")
                 } footer: {
                     Text("These settings will overwrite theme configurations and custom theme configurations.")
+                }
+                .onAppear {
+                    // Set background
+                    let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.data(forKey: "NMBackgroundPhotoData")
+                    if let backgroundPhotoData {
+                        backgroundImage = UIImage(data: backgroundPhotoData)
+                    }
                 }
                 
                 Section {
