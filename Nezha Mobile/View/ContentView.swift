@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var themeStore: ThemeStore = ThemeStore()
+    @Environment(ThemeStore.self) var themeStore
     var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
     @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
@@ -33,7 +33,7 @@ struct ContentView: View {
                 .padding()
             }
             else {
-                MainTabView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel, themeStore: themeStore)
+                MainTabView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
                     .onAppear {
                         // Start monitoring
                         if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {

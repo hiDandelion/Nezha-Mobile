@@ -23,22 +23,28 @@ enum MainTab: String, CaseIterable {
     }
 }
 
+@Observable
+class TabBarState {
+    var isShowTabBar: Bool = true
+    var activeTab: MainTab = .home
+}
+
 struct MainTabView: View {
+    @Environment(ThemeStore.self) var themeStore
+    @Environment(TabBarState.self) var tabBarState
     var dashboardLink: String
     var dashboardAPIToken: String
     var dashboardViewModel: DashboardViewModel
-    var themeStore: ThemeStore
-    @State private var activeTab: MainTab = .home
-    @State private var isTabBarHidden: Bool = false
+    @State private var isDefaultTabBarHidden: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
             Group {
                 if #available(iOS 18, *) {
-                    TabView(selection: $activeTab) {
+                    TabView(selection: Bindable(tabBarState).activeTab) {
                         Tab.init(value: MainTab.home) {
-                                ServerListView(dashboardViewModel: dashboardViewModel, themeStore: themeStore)
-                                    .toolbarVisibility(.hidden, for: .tabBar)
+                            ServerListView(dashboardViewModel: dashboardViewModel)
+                                .toolbarVisibility(.hidden, for: .tabBar)
                         }
                         
                         Tab.init(value: MainTab.map) {
@@ -52,39 +58,41 @@ struct MainTabView: View {
                         }
                         
                         Tab.init(value: MainTab.settings) {
-                            SettingView(dashboardViewModel: dashboardViewModel, themeStore: themeStore)
+                            SettingsView(dashboardViewModel: dashboardViewModel)
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                     }
                 } else {
-                    TabView(selection: $activeTab) {
-                        ServerListView(dashboardViewModel: dashboardViewModel, themeStore: themeStore)
+                    TabView(selection: Bindable(tabBarState).activeTab) {
+                        ServerListView(dashboardViewModel: dashboardViewModel)
                             .tag(MainTab.home)
+                            .overlay {
+                                if !isDefaultTabBarHidden {
+                                    HideTabBar {
+                                        isDefaultTabBarHidden = true
+                                    }
+                                }
+                            }
                         
                         ServerMapView(servers: dashboardViewModel.servers)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.primary.opacity(0.07))
                             .tag(MainTab.map)
                         
                         AlertListView()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.primary.opacity(0.07))
                             .tag(MainTab.alerts)
                         
-                        SettingView(dashboardViewModel: dashboardViewModel, themeStore: themeStore)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.primary.opacity(0.07))
+                        SettingsView(dashboardViewModel: dashboardViewModel)
                             .tag(MainTab.settings)
                     }
                 }
             }
             
-            CustomTabBar(activeTab: $activeTab)
+            MainTabBar(activeTab: Bindable(tabBarState).activeTab)
+                .opacity(tabBarState.isShowTabBar ? 1 : 0)
         }
     }
 }
 
-struct CustomTabBar: View {
+struct MainTabBar: View {
     var activeForeground: Color = .white
     var activeBackground: Color = .blue
     @Binding var activeTab: MainTab
@@ -147,5 +155,42 @@ struct CustomTabBar: View {
         )
         .animation(.smooth(duration: 0.3, extraBounce: 0), value: activeTab)
         .frame(maxWidth: .infinity)
+    }
+}
+
+struct HideTabBar: UIViewRepresentable {
+    init(result: @escaping () -> Void) {
+        UITabBar.appearance().isHidden = true
+        self.result = result
+    }
+    
+    var result: () -> ()
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+        
+        DispatchQueue.main.async {
+            if let tabController = view.tabController {
+                UITabBar.appearance().isHidden = false
+                tabController.tabBar.isHidden = true
+                result()
+            }
+        }
+        
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {  }
+}
+
+extension UIView {
+    var tabController: UITabBarController? {
+        if let controller = sequence(first: self, next: {
+            $0.next
+        }).first(where: { $0 is UITabBarController }) as? UITabBarController {
+            return controller
+        }
+        
+        return nil
     }
 }

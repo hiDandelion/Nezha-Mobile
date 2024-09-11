@@ -87,11 +87,13 @@ struct ServerMapView: View {
                     }
                     .foregroundStyle(.primary)
                     .padding()
+                    .frame(minWidth: 200)
                     .background {
                         RoundedRectangle(cornerRadius: 25)
                             .fill(.thinMaterial)
                     }
                 }
+                .padding(.bottom, 50)
             }
         }
         .onAppear {

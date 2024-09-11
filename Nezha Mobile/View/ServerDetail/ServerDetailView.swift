@@ -25,9 +25,10 @@ struct ServerDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
+    @Environment(ThemeStore.self) var themeStore
+    @Environment(TabBarState.self) var tabBarState
     var serverID: Int
     var dashboardViewModel: DashboardViewModel
-    var themeStore: ThemeStore
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
     @StateObject var offsetObserver = PageOffsetObserver()
@@ -149,6 +150,10 @@ struct ServerDetailView: View {
         .onAppear {
             if !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
+            }
+            
+            withAnimation {
+                tabBarState.isShowTabBar = false
             }
         }
     }

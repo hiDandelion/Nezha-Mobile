@@ -135,7 +135,7 @@ extension View {
 }
 
 // Color String Unarchiver
-extension Color: RawRepresentable {
+extension Color: @retroactive RawRepresentable {
     public init?(base64EncodedString: String) {
         guard let data = Data(base64Encoded: base64EncodedString) else {
             return nil

@@ -1,5 +1,5 @@
 //
-//  SettingView.swift
+//  SettingsView.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 7/31/24.
@@ -9,13 +9,13 @@ import SwiftUI
 import UniformTypeIdentifiers
 import UserNotifications
 
-struct SettingView: View {
+struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(ThemeStore.self) var themeStore
     var dashboardViewModel: DashboardViewModel
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State var isPresentedAsSheet: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
-    var themeStore: ThemeStore
     @State private var isShowCopyTokenSuccessAlert: Bool = false
     
     var body: some View {
@@ -23,7 +23,7 @@ struct SettingView: View {
             Form {
                 Section("Dashboard") {
                     NavigationLink("Dashboard Settings") {
-                        DashboardSettingView(dashboardViewModel: dashboardViewModel)
+                        DashboardSettingsView(dashboardViewModel: dashboardViewModel)
                     }
                 }
                 
@@ -51,7 +51,7 @@ struct SettingView: View {
                     }
                     
                     NavigationLink("Advanced Customization") {
-                        AdvancedCustomizationView(themeStore: themeStore)
+                        AdvancedCustomizationView()
                     }
                 }
                 
@@ -105,6 +105,7 @@ struct SettingView: View {
                     }
                 }
             }
+            .contentMargins(.bottom, 50)
             .navigationTitle("Settings")
             .toolbar {
                 if isPresentedAsSheet {

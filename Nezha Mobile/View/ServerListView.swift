@@ -12,14 +12,14 @@ struct ServerListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
+    @Environment(ThemeStore.self) var themeStore
+    @Environment(TabBarState.self) var tabBarState
     @State private var shouldNavigateToServerDetailView: Bool = false
     @State private var incomingURLServerID: Int?
     var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
-    var themeStore: ThemeStore
     @State private var backgroundImage: UIImage?
-    @State private var navigationBarHeight: CGFloat = 0.0
-    @FocusState private var isSearching: Bool
+    @State private var navigationPath = NavigationPath()
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
     @State private var newSettingRequireReconnection: Bool? = false
@@ -50,7 +50,7 @@ struct ServerListView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ZStack {
                 Background
                     .zIndex(0)
@@ -60,15 +60,28 @@ struct ServerListView: View {
             }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
                 if let incomingURLServerID {
-                    ServerDetailView(serverID: incomingURLServerID, dashboardViewModel: dashboardViewModel, themeStore: themeStore)
+                    ServerDetailView(serverID: incomingURLServerID, dashboardViewModel: dashboardViewModel)
                 }
             }
+            .onAppear {
+                withAnimation {
+                    tabBarState.isShowTabBar = true
+                }
+            }
+        }
+        .onChange(of: navigationPath) { oldPath, newPath in
+            if !newPath.isEmpty && oldPath.isEmpty {
+                            print(newPath)
+                        }
         }
         .onAppear {
             // Set background
             let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
                 backgroundImage = UIImage(data: backgroundPhotoData)
+            }
+            else {
+                backgroundImage = nil
             }
         }
         .onOpenURL { url in
@@ -121,6 +134,7 @@ struct ServerListView: View {
                             
                             ServerList(isWideLayout: isWideLayout)
                         }
+                        .contentMargins(.bottom, 50)
                         .navigationTitle("Servers")
                         .searchable(text: $searchText)
                     }
@@ -202,7 +216,7 @@ struct ServerListView: View {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
                     ForEach(filteredServers) { server in
                         NavigationLink {
-                            ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel, themeStore: themeStore)
+                            ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel)
                         } label: {
                             ServerCard(server: server)
                         }
@@ -397,6 +411,7 @@ struct ServerListView: View {
         }
         
         incomingURLServerID = Int(serverID)
+        tabBarState.activeTab = .home
         shouldNavigateToServerDetailView = true
     }
 }

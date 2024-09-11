@@ -10,10 +10,10 @@ import PhotosUI
 import WidgetKit
 
 struct AdvancedCustomizationView: View {
+    @Environment(ThemeStore.self) var themeStore
     @AppStorage("NMBackgroundPhotoData", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var backgroundPhotoData: Data?
     @State private var selectedPhoto: PhotosPickerItem?
     @State var backgroundImage: UIImage?
-    @Bindable var themeStore: ThemeStore
     @AppStorage("NMWidgetCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetCustomizationEnabled: Bool = false
     @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var selectedWidgetBackgroundColor: Color = .blue
     @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var selectedWidgetTextColor: Color = .white
@@ -55,16 +55,16 @@ struct AdvancedCustomizationView: View {
                 }
                 
                 Section {
-                    Toggle("Enable Theme Customization", isOn: $themeStore.themeCustomizationEnabled)
+                    Toggle("Enable Theme Customization", isOn: Bindable(themeStore).themeCustomizationEnabled)
                     if themeStore.themeCustomizationEnabled {
-                        ColorPicker("Primary Color Light Mode", selection: $themeStore.themePrimaryColorLight)
-                        ColorPicker("Secondary Color Light Mode", selection: $themeStore.themeSecondaryColorLight)
-                        ColorPicker("Background Color Light Mode", selection: $themeStore.themeBackgroundColorLight)
-                        ColorPicker("Tint Color Light Mode", selection: $themeStore.themeTintColorLight)
-                        ColorPicker("Primary Color Dark Mode", selection: $themeStore.themePrimaryColorDark)
-                        ColorPicker("Secondary Color Dark Mode", selection: $themeStore.themeSecondaryColorDark)
-                        ColorPicker("Background Color Dark Mode", selection: $themeStore.themeBackgroundColorDark)
-                        ColorPicker("Tint Color Dark Mode", selection: $themeStore.themeTintColorDark)
+                        ColorPicker("Primary Color Light Mode", selection: Bindable(themeStore).themePrimaryColorLight)
+                        ColorPicker("Secondary Color Light Mode", selection: Bindable(themeStore).themeSecondaryColorLight)
+                        ColorPicker("Background Color Light Mode", selection: Bindable(themeStore).themeBackgroundColorLight)
+                        ColorPicker("Tint Color Light Mode", selection: Bindable(themeStore).themeTintColorLight)
+                        ColorPicker("Primary Color Dark Mode", selection: Bindable(themeStore).themePrimaryColorDark)
+                        ColorPicker("Secondary Color Dark Mode", selection: Bindable(themeStore).themeSecondaryColorDark)
+                        ColorPicker("Background Color Dark Mode", selection: Bindable(themeStore).themeBackgroundColorDark)
+                        ColorPicker("Tint Color Dark Mode", selection: Bindable(themeStore).themeTintColorDark)
                     }
                 } header: {
                     Text("Theme Customization")

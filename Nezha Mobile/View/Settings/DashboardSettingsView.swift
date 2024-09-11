@@ -1,5 +1,5 @@
 //
-//  DashboardSettingView.swift
+//  DashboardSettingsView.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 9/3/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DashboardSettingView: View {
+struct DashboardSettingsView: View {
     @Environment(\.dismiss) private var dismiss
     var dashboardViewModel: DashboardViewModel
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!

@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct NezhaMobileApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    var themeStore: ThemeStore = ThemeStore()
+    var tabBarState: TabBarState = TabBarState()
     
     init() {
         // Register UserDefaults
@@ -30,7 +32,9 @@ struct NezhaMobileApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appDelegate.notificationState)
+                .environment(themeStore)
+                .environment(tabBarState)
         }
-        .modelContainer(for: Identity.self)
+        .modelContainer(for: [Identity.self, ServerAlert.self])
     }
 }
