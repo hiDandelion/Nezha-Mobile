@@ -19,6 +19,7 @@ struct ServerCoordinate: Identifiable, Hashable {
 }
 
 struct ServerMapView: View {
+    @Environment(TabBarState.self) var tabBarState
     var servers: [Server]
     @State private var serverCoordinates: [ServerCoordinate] = []
     @State private var selectedCoordinate: ServerCoordinate?
@@ -57,6 +58,28 @@ struct ServerMapView: View {
         }
         .toolbar(.hidden)
         .overlay {
+            VStack {
+                            HStack {
+                                Spacer()
+                                Button {
+                                    serverCoordinates.removeAll()
+                                    Task {
+                                        await loadCoordinates()
+                                    }
+                                } label: {
+                                    Image(systemName: "arrow.clockwise")
+                                        .padding(10)
+                                        .foregroundStyle(.primary)
+                                        .background(.thinMaterial)
+                                        .clipShape(Circle())
+                                        .padding()
+                                        .hoverEffect(.lift)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            Spacer()
+                        }
+            
             if let selectedCoordinate {
                 VStack {
                     Spacer()
@@ -102,6 +125,16 @@ struct ServerMapView: View {
             }
             Task {
                 await loadCoordinates()
+            }
+        }
+        .onAppear {
+            withAnimation {
+                tabBarState.isMapViewVisible = true
+            }
+        }
+        .onDisappear {
+            withAnimation {
+                tabBarState.isMapViewVisible = false
             }
         }
     }

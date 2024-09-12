@@ -19,7 +19,6 @@ struct ServerListView: View {
     var dashboardViewModel: DashboardViewModel
     @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
     @State private var backgroundImage: UIImage?
-    @State private var navigationPath = NavigationPath()
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
     @State private var newSettingRequireReconnection: Bool? = false
@@ -50,7 +49,7 @@ struct ServerListView: View {
     }
     
     var body: some View {
-        NavigationStack(path: $navigationPath) {
+        NavigationStack {
             ZStack {
                 Background
                     .zIndex(0)
@@ -65,14 +64,14 @@ struct ServerListView: View {
             }
             .onAppear {
                 withAnimation {
-                    tabBarState.isShowTabBar = true
+                    tabBarState.isServersViewVisible = true
                 }
             }
-        }
-        .onChange(of: navigationPath) { oldPath, newPath in
-            if !newPath.isEmpty && oldPath.isEmpty {
-                            print(newPath)
-                        }
+            .onDisappear {
+                withAnimation {
+                    tabBarState.isServersViewVisible = false
+                }
+            }
         }
         .onAppear {
             // Set background
@@ -180,7 +179,7 @@ struct ServerListView: View {
         }) {
             Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
                 .font(.callout)
-                .foregroundStyle(activeTag == tag ? (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColorDark : (scheme == .light ? .white : .black)) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
+                .foregroundStyle(activeTag == tag ? .white : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 15)
                 .background {
@@ -192,7 +191,7 @@ struct ServerListView: View {
                         }
                         else {
                             Capsule()
-                                .fill(Color.primary)
+                                .fill(themeColor(theme: theme))
                                 .matchedGeometryEffect(id: "ACTIVETAG", in: tagNamespace)
                         }
                     } else {
@@ -215,13 +214,26 @@ struct ServerListView: View {
             if !dashboardViewModel.servers.isEmpty {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
                     ForEach(filteredServers) { server in
-                        NavigationLink {
-                            ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel)
-                        } label: {
-                            ServerCard(server: server)
+                        if #available(iOS 18, *) {
+                            NavigationLink {
+                                ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel)
+                                    .navigationTransition(.zoom(sourceID: server.id, in: serverNamespace))
+                            } label: {
+                                ServerCard(server: server)
+                            }
+                            .matchedTransitionSource(id: server.id, in: serverNamespace)
+                            .buttonStyle(PlainButtonStyle())
+                            .id(server.id)
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .id(server.id)
+                        else {
+                            NavigationLink {
+                                ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel)
+                            } label: {
+                                ServerCard(server: server)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .id(server.id)
+                        }
                     }
                 }
                 .padding(.horizontal, 15)
@@ -411,7 +423,7 @@ struct ServerListView: View {
         }
         
         incomingURLServerID = Int(serverID)
-        tabBarState.activeTab = .home
+        tabBarState.activeTab = .servers
         shouldNavigateToServerDetailView = true
     }
 }

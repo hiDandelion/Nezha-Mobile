@@ -58,11 +58,11 @@ struct ServerDetailView: View {
                                             let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
                                             
                                             Capsule()
-                                                .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : (scheme == .dark ? .white : .black))
+                                                .fill(scheme == .dark ? .white : .black)
                                                 .frame(width: capsuleWidth)
                                                 .offset(x: progress * capsuleWidth)
                                             
-                                            Tabbar(themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColorDark : (scheme == .dark ? .black : .white), .semibold)
+                                            Tabbar(scheme == .dark ? .black : .white, .semibold)
                                                 .mask(alignment: .leading) {
                                                     Capsule()
                                                         .frame(width: capsuleWidth)
@@ -150,10 +150,6 @@ struct ServerDetailView: View {
         .onAppear {
             if !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
-            }
-            
-            withAnimation {
-                tabBarState.isShowTabBar = false
             }
         }
     }

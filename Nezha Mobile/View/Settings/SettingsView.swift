@@ -12,6 +12,7 @@ import UserNotifications
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(ThemeStore.self) var themeStore
+    @Environment(TabBarState.self) var tabBarState
     var dashboardViewModel: DashboardViewModel
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State var isPresentedAsSheet: Bool = false
@@ -38,16 +39,9 @@ struct SettingsView: View {
                         isShowingChangeThemeSheet.toggle()
                     }
                     .sheet(isPresented: $isShowingChangeThemeSheet) {
-                        if #available(iOS 16.4, *) {
-                            ChangeThemeView(isShowingChangeThemeSheet: $isShowingChangeThemeSheet)
-                                .presentationDetents([.height(400)])
-                                .presentationBackground(.clear)
-                        }
-                        else {
-                            ChangeThemeView(isShowingChangeThemeSheet: $isShowingChangeThemeSheet)
-                                .presentationDetents([.height(400)])
-                                // presentationBackground ×
-                        }
+                        ChangeThemeView(isShowingChangeThemeSheet: $isShowingChangeThemeSheet)
+                            .presentationDetents([.height(400)])
+                            .presentationBackground(.clear)
                     }
                     
                     NavigationLink("Advanced Customization") {
@@ -114,6 +108,16 @@ struct SettingsView: View {
                             dismiss()
                         }
                     }
+                }
+            }
+            .onAppear {
+                withAnimation {
+                    tabBarState.isSettingsViewVisible = true
+                }
+            }
+            .onDisappear {
+                withAnimation {
+                    tabBarState.isSettingsViewVisible = false
                 }
             }
         }

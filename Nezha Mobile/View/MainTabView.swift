@@ -8,14 +8,14 @@
 import SwiftUI
 
 enum MainTab: String, CaseIterable {
-    case home = "house"
+    case servers = "server.rack"
     case map = "map"
     case alerts = "bell"
     case settings = "gearshape"
     
     var title: String {
         switch self {
-        case .home: String(localized: "Home")
+        case .servers: String(localized: "Servers")
         case .map: String(localized: "Map")
         case .alerts: String(localized: "Alerts")
         case .settings: String(localized: "Settings")
@@ -25,13 +25,24 @@ enum MainTab: String, CaseIterable {
 
 @Observable
 class TabBarState {
-    var isShowTabBar: Bool = true
-    var activeTab: MainTab = .home
+    var isTabBarHidden: Bool = false
+    var activeTab: MainTab = .servers
+    
+    var isServersViewVisible: Bool = false
+    var isMapViewVisible: Bool = false
+    var isAlertsViewVisible: Bool = false
+    var isSettingsViewVisible: Bool = false
+    
+    var shouldMakeTabBarVisible: Bool {
+        !isTabBarHidden && (isServersViewVisible || isMapViewVisible || isAlertsViewVisible || isSettingsViewVisible)
+    }
 }
 
 struct MainTabView: View {
+    @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
+    @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
     var dashboardLink: String
     var dashboardAPIToken: String
     var dashboardViewModel: DashboardViewModel
@@ -42,7 +53,7 @@ struct MainTabView: View {
             Group {
                 if #available(iOS 18, *) {
                     TabView(selection: Bindable(tabBarState).activeTab) {
-                        Tab.init(value: MainTab.home) {
+                        Tab.init(value: MainTab.servers) {
                             ServerListView(dashboardViewModel: dashboardViewModel)
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
@@ -65,7 +76,7 @@ struct MainTabView: View {
                 } else {
                     TabView(selection: Bindable(tabBarState).activeTab) {
                         ServerListView(dashboardViewModel: dashboardViewModel)
-                            .tag(MainTab.home)
+                            .tag(MainTab.servers)
                             .overlay {
                                 if !isDefaultTabBarHidden {
                                     HideTabBar {
@@ -86,8 +97,14 @@ struct MainTabView: View {
                 }
             }
             
-            MainTabBar(activeTab: Bindable(tabBarState).activeTab)
-                .opacity(tabBarState.isShowTabBar ? 1 : 0)
+            if themeStore.themeCustomizationEnabled {
+                MainTabBar(activeForeground: themeStore.themePrimaryColor(scheme: scheme), activeBackground: themeStore.themeTintColor(scheme: scheme), activeTab: Bindable(tabBarState).activeTab)
+                    .opacity(tabBarState.shouldMakeTabBarVisible ? 1 : 0)
+            }
+            else {
+                MainTabBar(activeBackground: themeColor(theme: theme), activeTab: Bindable(tabBarState).activeTab)
+                    .opacity(tabBarState.shouldMakeTabBarVisible ? 1 : 0)
+            }
         }
     }
 }

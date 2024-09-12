@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct AlertListView: View {
+    @Environment(TabBarState.self) var tabBarState
     @EnvironmentObject var notificationState: NotificationState
     @Query private var serverAlerts: [ServerAlert]
     
@@ -40,6 +41,16 @@ struct AlertListView: View {
             }
             .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {
                 AlertDetailView(title: notificationState.notificationData?.title, content: notificationState.notificationData?.body)
+            }
+            .onAppear {
+                withAnimation {
+                    tabBarState.isAlertsViewVisible = true
+                }
+            }
+            .onDisappear {
+                withAnimation {
+                    tabBarState.isAlertsViewVisible = false
+                }
             }
         }
     }
