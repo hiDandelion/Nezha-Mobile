@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct NezhaWatchApp: App {
+    @WKApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    
     init() {
         // Register UserDefaults
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
@@ -16,7 +18,10 @@ struct NezhaWatchApp: App {
             let defaultValues: [String: Any] = [
                 "NMDashboardLink": "",
                 "NMDashboardAPIToken": "",
-                "NMLastModifyDate": 0
+                "NMLastModifyDate": 0,
+                "NMPushNotificationsToken": "",
+                "NMPushToStartToken": "",
+                "NMWatchPushNotificationsToken": ""
             ]
             userDefaults.register(defaults: defaultValues)
         }

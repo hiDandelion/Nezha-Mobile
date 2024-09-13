@@ -20,11 +20,11 @@ struct ServerDetailView: View {
             MatrixGaugeView(title: "Disk", systemName: "internaldrive", percent: Double(server.status.diskUsed) / Double(server.host.diskTotal) * 100, tintColor: .orange)
                 .containerBackground(.orange.gradient, for: .tabView)
             List {
-                pieceOfInfo(systemImage: "network", name: "Network", content: "↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s")
-                pieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: "↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))")
-                pieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: "\(server.status.TCPConnectionCount)")
-                pieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: "\(server.status.UDPConnectionCount)")
-                pieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: "\(server.status.processCount)")
+                PieceOfInfo(systemImage: "network", name: "Network", content: Text("↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s"))
+                PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: Text("↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))"))
+                PieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: Text("\(server.status.TCPConnectionCount)"))
+                PieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: Text("\(server.status.UDPConnectionCount)"))
+                PieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: Text("\(server.status.processCount)"))
             }
         }
         .tabViewStyle(.verticalPage)

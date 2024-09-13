@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct AlertListView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(TabBarState.self) var tabBarState
     @EnvironmentObject var notificationState: NotificationState
     @Query private var serverAlerts: [ServerAlert]
@@ -28,6 +29,13 @@ struct AlertListView: View {
                                     }
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
+                                }
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button(role: .destructive) {
+                                        modelContext.delete(serverAlert)
+                                    } label: {
+                                        Text("Delete")
+                                    }
                                 }
                             }
                         }

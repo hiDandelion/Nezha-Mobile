@@ -10,7 +10,7 @@ import SwiftUI
 struct ServerListView: View {
     var dashboardLink: String
     var dashboardAPIToken: String
-    var dashboardViewModel: DashboardViewModel
+    @ObservedObject var dashboardViewModel: DashboardViewModel
     @State private var selectedServer: Server?
     @State private var isShowingErrorDetailAlert: Bool = false
     @State private var isShowingSettingSheet: Bool = false

@@ -36,14 +36,14 @@ struct ServerDetailHostView: View {
             }
             
             if let mainGPUInfo = server.host.gpu?.first {
-                pieceOfInfo(systemImage: "cpu.fill", name: "GPU", content: Text("\(mainGPUInfo)"))
+                PieceOfInfo(systemImage: "cpu.fill", name: "GPU", content: Text("\(mainGPUInfo)"))
             }
             
-            pieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.arch)"))
+            PieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.arch)"))
             if server.host.virtualization != "" {
-                pieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization)"))
+                PieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization)"))
             }
-            pieceOfInfo(systemImage: "rectangle.2.swap", name: "Agent", content: Text("\(server.host.version)"))
+            PieceOfInfo(systemImage: "rectangle.2.swap", name: "Agent", content: Text("\(server.host.version)"))
         }
     }
     

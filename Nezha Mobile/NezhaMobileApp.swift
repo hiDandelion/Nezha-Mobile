@@ -22,7 +22,8 @@ struct NezhaMobileApp: App {
                 "NMDashboardAPIToken": "",
                 "NMLastModifyDate": 0,
                 "NMPushNotificationsToken": "",
-                "NMPushToStartToken": ""
+                "NMPushToStartToken": "",
+                "NMWatchPushNotificationsToken": ""
             ]
             userDefaults.register(defaults: defaultValues)
         }

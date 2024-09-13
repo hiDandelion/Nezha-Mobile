@@ -7,62 +7,38 @@
 
 import SwiftUI
 
-func pieceOfInfo(systemImage: String?, name: LocalizedStringKey, content: String) -> some View {
-    ViewThatFits(in: .horizontal) {
-        HStack {
-            if let systemImage {
-                Label(name, systemImage: systemImage)
-            }
-            else {
-                Text(name)
-            }
-            
-            Spacer()
-            
-            Text(content)
-                .foregroundStyle(.secondary)
-        }
-        
-        VStack(alignment: .leading) {
-            if let systemImage {
-                Label(name, systemImage: systemImage)
-            }
-            else {
-                Text(name)
+struct PieceOfInfo<Content: View>: View {
+    let systemImage: String?
+    let name: LocalizedStringKey
+    let content: Content
+    
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack {
+                if let systemImage {
+                    Label(name, systemImage: systemImage)
+                }
+                else {
+                    Text(name)
+                }
+                
+                Spacer()
+                
+                content
+                    .foregroundStyle(.secondary)
             }
             
-            Text(content)
-                .foregroundStyle(.secondary)
-        }
-    }
-}
-
-func pieceOfInfo(systemImage: String?, name: LocalizedStringKey, content: some View) -> some View {
-    ViewThatFits(in: .horizontal) {
-        HStack {
-            if let systemImage {
-                Label(name, systemImage: systemImage)
+            VStack(alignment: .leading) {
+                if let systemImage {
+                    Label(name, systemImage: systemImage)
+                }
+                else {
+                    Text(name)
+                }
+                
+                content
+                    .foregroundStyle(.secondary)
             }
-            else {
-                Text(name)
-            }
-            
-            Spacer()
-            
-            content
-                .foregroundStyle(.secondary)
-        }
-        
-        VStack(alignment: .leading) {
-            if let systemImage {
-                Label(name, systemImage: systemImage)
-            }
-            else {
-                Text(name)
-            }
-            
-            content
-                .foregroundStyle(.secondary)
         }
     }
 }

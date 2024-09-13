@@ -121,8 +121,28 @@
     "↓%@" : {
 
     },
+    "↓%@ ↑%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "↓%1$@ ↑%2$@"
+          }
+        }
+      }
+    },
     "↓%@/s" : {
 
+    },
+    "↓%@/s ↑%@/s" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "↓%1$@/s ↑%2$@/s"
+          }
+        }
+      }
     },
     "🏴‍☠️" : {
       "localizations" : {
@@ -673,6 +693,7 @@
       }
     },
     "Copy Push Notifications Token" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -689,6 +710,7 @@
       }
     },
     "Copy Push To Start Token" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -2292,6 +2314,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
+          }
+        }
+      }
+    },
+    "Share Push Notifications Token" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プッシュ通知トークンを共有"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出推送通知Token"
+          }
+        }
+      }
+    },
+    "Share Push To Start Token" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Push To Startトークンを共有"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出Push To Start Token"
+          }
+        }
+      }
+    },
+    "Share Token" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トークンを共有"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出Token"
           }
         }
       }

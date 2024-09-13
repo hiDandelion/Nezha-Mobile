@@ -1,13 +1,13 @@
 //
-//  SettingView.swift
+//  DashboardSettingsView.swift
 //  Nezha Watch
 //
-//  Created by Junhui Lou on 8/9/24.
+//  Created by Junhui Lou on 9/12/24.
 //
 
 import SwiftUI
 
-struct SettingView: View {
+struct DashboardSettingsView: View {
     @Environment(\.dismiss) private var dismiss
     var dashboardViewModel: DashboardViewModel
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
@@ -49,10 +49,7 @@ struct SettingView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
-                            dismiss()
-                            return
-                        }
+                        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
                         if !dashboardViewModel.isMonitoringEnabled {
                             userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
                             userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")

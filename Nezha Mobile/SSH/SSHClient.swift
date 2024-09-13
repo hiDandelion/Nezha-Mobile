@@ -107,8 +107,10 @@ class SSHClient {
                         self.run(command: command)
                     }
                 case .failure(let error):
-                    self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
                     _ = debugLog("Channel Error - \(error)")
+                    
+                    self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
+                    _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
                 }
             }
         }
@@ -189,6 +191,9 @@ class SSHChannelHandler: ChannelDuplexHandler {
     func errorCaught(context: ChannelHandlerContext, error: Error) {
         _ = debugLog("Channel Handler Error - Error caught: \(error)")
         context.close(promise: nil)
+        
+        self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
+        _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
     }
 }
 
@@ -228,26 +233,38 @@ class SSHInteractiveHandler: ChannelInboundHandler {
                 .VSTOP: 19     // Stop character (usually Ctrl-S)
             ])
         )
-        context.triggerUserOutboundEvent(pseudoTerminalRequest)
-            .whenComplete { result in
-                switch result {
-                case .success:
-                    _ = debugLog("Channel Info - Pseudo Terminal created")
-                    let shellRequest = SSHChannelRequestEvent.ShellRequest(wantReply: true)
-                    context.triggerUserOutboundEvent(shellRequest)
-                        .whenComplete { result in
-                            switch result {
-                            case .success:
-                                _ = debugLog("Channel Info - Shell created")
-                                self.delegate?.updateStatus(status: .loaded)
-                            case .failure(let error):
-                                _ = debugLog("Channel Error - \(error)")
-                            }
-                        }
-                case .failure(let error):
-                    _ = debugLog("Channel Error - \(error)")
+        let shellRequest = SSHChannelRequestEvent.ShellRequest(wantReply: true)
+        
+        let pseudoTerminalRequestPromise = context.channel.eventLoop.makePromise(of: Void.self)
+        context.triggerUserOutboundEvent(pseudoTerminalRequest, promise: pseudoTerminalRequestPromise)
+        let shellRequestPromise = context.channel.eventLoop.makePromise(of: Void.self)
+        context.triggerUserOutboundEvent(shellRequest, promise: shellRequestPromise)
+        
+        pseudoTerminalRequestPromise.futureResult.whenComplete { result in
+            switch result {
+            case .success:
+                _ = debugLog("Channel Info - Pseudo Terminal created")
+                shellRequestPromise.futureResult.whenComplete { result in
+                    switch result {
+                    case .success:
+                        _ = debugLog("Channel Info - Shell created")
+                        
+                        self.delegate?.updateStatus(status: .loaded)
+                        _ = debugLog("SSH Client Info - SSH Client status has been set to .loaded")
+                    case .failure(let error):
+                        _ = debugLog("Channel Error - \(error)")
+                        
+                        self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
+                        _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
+                    }
                 }
+            case .failure(let error):
+                _ = debugLog("Channel Error - \(error)")
+                
+                self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
+                _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
             }
+        }
     }
     
     func channelRead(context: ChannelHandlerContext, data: NIOAny) {

@@ -52,14 +52,8 @@ struct SettingsView: View {
                 Section("Notifications") {
                     let pushNotificationsToken = userDefaults.string(forKey: "NMPushNotificationsToken")!
                     if pushNotificationsToken != "" {
-                        Button("Copy Push Notifications Token") {
-                            UIPasteboard.general.setValue(pushNotificationsToken, forPasteboardType: UTType.plainText.identifier)
-                            isShowCopyTokenSuccessAlert = true
-                        }
-                        .alert("Copied", isPresented: $isShowCopyTokenSuccessAlert) {
-                            Button("OK", role: .cancel) {
-                                isShowCopyTokenSuccessAlert = false
-                            }
+                        ShareLink(item: pushNotificationsToken) {
+                            Text("Share Push Notifications Token")
                         }
                     }
                     else {
@@ -70,20 +64,19 @@ struct SettingsView: View {
                     if #available(iOS 17.2, *) {
                         let pushToStartToken = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMPushToStartToken")!
                         if pushToStartToken != "" {
-                            Button("Copy Push To Start Token") {
-                                UIPasteboard.general.setValue(pushToStartToken, forPasteboardType: UTType.plainText.identifier)
-                                isShowCopyTokenSuccessAlert = true
-                            }
-                            .alert("Copied", isPresented: $isShowCopyTokenSuccessAlert) {
-                                Button("OK", role: .cancel) {
-                                    isShowCopyTokenSuccessAlert = false
-                                }
+                            ShareLink(item: pushToStartToken) {
+                                Text("Share Push To Start Token")
                             }
                         }
                         else {
                             Text("Live Activity Not Available")
                                 .foregroundStyle(.secondary)
                         }
+                    }
+                }
+                .alert("Copied", isPresented: $isShowCopyTokenSuccessAlert) {
+                    Button("OK", role: .cancel) {
+                        isShowCopyTokenSuccessAlert = false
                     }
                 }
                 

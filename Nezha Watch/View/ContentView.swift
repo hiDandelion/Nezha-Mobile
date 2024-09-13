@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
     @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
     @State private var isShowingAddDashboardSheet: Bool = false
