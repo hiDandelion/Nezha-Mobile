@@ -628,22 +628,6 @@
         }
       }
     },
-    "Copied" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コピーしました"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已复制"
-          }
-        }
-      }
-    },
     "Copy" : {
       "localizations" : {
         "ja" : {
@@ -688,40 +672,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "复制IPv6"
-          }
-        }
-      }
-    },
-    "Copy Push Notifications Token" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プッシュ通知トークンをコピー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "复制推送通知Token"
-          }
-        }
-      }
-    },
-    "Copy Push To Start Token" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Push To Startトークンをコピー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "复制Push To Start Token"
           }
         }
       }

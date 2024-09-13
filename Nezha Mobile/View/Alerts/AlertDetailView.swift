@@ -13,15 +13,12 @@ struct AlertDetailView: View {
     let content: String?
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section("Content") {
-                    Text(content ?? "")
-                }
+        Form {
+            Section("Content") {
+                Text(content ?? "")
             }
-            .contentMargins(.bottom, 50)
-            .navigationTitle(title ?? "")
         }
+        .navigationTitle(title ?? "")
         .onDisappear {
             notificationState.shouldNavigateToNotificationView = false
         }

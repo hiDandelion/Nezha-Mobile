@@ -35,6 +35,10 @@ struct NezhaMobileApp: App {
                 .environmentObject(appDelegate.notificationState)
                 .environment(themeStore)
                 .environment(tabBarState)
+                .onAppear {
+                    appDelegate.tabBarState = tabBarState
+                    syncWithiCloud()
+                }
         }
         .modelContainer(for: [Identity.self, ServerAlert.self])
     }

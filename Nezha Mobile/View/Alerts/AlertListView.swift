@@ -9,15 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct AlertListView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) private var modelContext
     @Environment(TabBarState.self) var tabBarState
     @EnvironmentObject var notificationState: NotificationState
-    @Query private var serverAlerts: [ServerAlert]
+    @Query(sort: \ServerAlert.timestamp, order: .reverse) private var serverAlerts: [ServerAlert]
     
     var body: some View {
         NavigationStack {
             Group {
-                if true, !serverAlerts.isEmpty {
+                if !serverAlerts.isEmpty {
                     List {
                         ForEach(serverAlerts) { serverAlert in
                             NavigationLink(destination: AlertDetailView(title: serverAlert.title, content: serverAlert.content)) {
@@ -50,14 +51,37 @@ struct AlertListView: View {
             .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {
                 AlertDetailView(title: notificationState.notificationData?.title, content: notificationState.notificationData?.body)
             }
+            .onChange(of: scenePhase) {
+                if scenePhase == .active {
+                    getServerAlert()
+                }
+            }
             .onAppear {
                 withAnimation {
                     tabBarState.isAlertsViewVisible = true
                 }
+                
+                getServerAlert()
             }
             .onDisappear {
                 withAnimation {
                     tabBarState.isAlertsViewVisible = false
+                }
+            }
+        }
+    }
+    
+    private func getServerAlert() {
+        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+        let pushNotificationsToken = userDefaults.string(forKey: "NMPushNotificationsToken")!
+        if pushNotificationsToken != "" {
+            Task {
+                let getServerAlertResponse = try? await RequestHandler.getServerAlert(deviceToken: pushNotificationsToken)
+                if let getServerAlertResponse {
+                    for serverAlertItem in getServerAlertResponse.data {
+                        let newServerAlert = ServerAlert(timestamp: serverAlertItem.timestamp, title: serverAlertItem.title, content: serverAlertItem.body)
+                        modelContext.insert(newServerAlert)
+                    }
                 }
             }
         }

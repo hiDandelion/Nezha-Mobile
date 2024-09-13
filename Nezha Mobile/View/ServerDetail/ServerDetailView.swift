@@ -34,7 +34,7 @@ struct ServerDetailView: View {
     @StateObject var offsetObserver = PageOffsetObserver()
     
     var body: some View {
-        NavigationStack {
+        Group {
             if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
                 VStack {
                     if server.status.uptime != 0 {

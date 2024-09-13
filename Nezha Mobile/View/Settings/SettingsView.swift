@@ -17,7 +17,6 @@ struct SettingsView: View {
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State var isPresentedAsSheet: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
-    @State private var isShowCopyTokenSuccessAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -72,11 +71,6 @@ struct SettingsView: View {
                             Text("Live Activity Not Available")
                                 .foregroundStyle(.secondary)
                         }
-                    }
-                }
-                .alert("Copied", isPresented: $isShowCopyTokenSuccessAlert) {
-                    Button("OK", role: .cancel) {
-                        isShowCopyTokenSuccessAlert = false
                     }
                 }
                 

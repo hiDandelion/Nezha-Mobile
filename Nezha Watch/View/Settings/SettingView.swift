@@ -25,7 +25,7 @@ struct SettingView: View {
                     let pushNotificationsToken = userDefaults.string(forKey: "NMWatchPushNotificationsToken")!
                     if pushNotificationsToken != "" {
                         ShareLink(item: pushNotificationsToken) {
-                            Label("Share Token", systemImage: "square.and.arrow.up")
+                            Text("Share Token")
                         }
                     }
                     else {

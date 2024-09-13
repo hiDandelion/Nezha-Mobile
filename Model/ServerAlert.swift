@@ -15,9 +15,9 @@ class ServerAlert: Identifiable {
     var title: String?
     var content: String?
     
-    init(title: String?, content: String?) {
+    init(timestamp: Date, title: String?, content: String?) {
         self.id = UUID()
-        self.timestamp = Date()
+        self.timestamp = timestamp
         self.title = title
         self.content = content
     }

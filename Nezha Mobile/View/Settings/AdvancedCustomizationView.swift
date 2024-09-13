@@ -20,81 +20,79 @@ struct AdvancedCustomizationView: View {
     @State var isShowWidgetsSuccessfullyRefreshedAlert: Bool = false
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section {
-                    PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                        Text("Select Custom Background")
-                    }
-                    .onChange(of: selectedPhoto) {
-                        Task {
-                            if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
-                                backgroundPhotoData = data
-                                backgroundImage = UIImage(data: data)
-                            }
-                        }
-                    }
-                    
-                    if backgroundImage != nil {
-                        Button("Delete Custom Background") {
-                            backgroundPhotoData = nil
-                            backgroundImage = nil
-                        }
-                    }
-                } header: {
-                    Text("Background Customization")
-                } footer: {
-                    Text("These settings will overwrite theme configurations and custom theme configurations.")
+        Form {
+            Section {
+                PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                    Text("Select Custom Background")
                 }
-                .onAppear {
-                    // Set background
-                    let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.data(forKey: "NMBackgroundPhotoData")
-                    if let backgroundPhotoData {
-                        backgroundImage = UIImage(data: backgroundPhotoData)
+                .onChange(of: selectedPhoto) {
+                    Task {
+                        if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
+                            backgroundPhotoData = data
+                            backgroundImage = UIImage(data: data)
+                        }
                     }
                 }
                 
-                Section {
-                    Toggle("Enable Theme Customization", isOn: Bindable(themeStore).themeCustomizationEnabled)
-                    if themeStore.themeCustomizationEnabled {
-                        ColorPicker("Primary Color Light Mode", selection: Bindable(themeStore).themePrimaryColorLight)
-                        ColorPicker("Secondary Color Light Mode", selection: Bindable(themeStore).themeSecondaryColorLight)
-                        ColorPicker("Background Color Light Mode", selection: Bindable(themeStore).themeBackgroundColorLight)
-                        ColorPicker("Tint Color Light Mode", selection: Bindable(themeStore).themeTintColorLight)
-                        ColorPicker("Primary Color Dark Mode", selection: Bindable(themeStore).themePrimaryColorDark)
-                        ColorPicker("Secondary Color Dark Mode", selection: Bindable(themeStore).themeSecondaryColorDark)
-                        ColorPicker("Background Color Dark Mode", selection: Bindable(themeStore).themeBackgroundColorDark)
-                        ColorPicker("Tint Color Dark Mode", selection: Bindable(themeStore).themeTintColorDark)
+                if backgroundImage != nil {
+                    Button("Delete Custom Background") {
+                        backgroundPhotoData = nil
+                        backgroundImage = nil
                     }
-                } header: {
-                    Text("Theme Customization")
-                } footer: {
-                    Text("These settings will overwrite theme configurations.")
                 }
-                
-                Section {
-                    Toggle("Enable Widget Customization", isOn: $widgetCustomizationEnabled)
-                    if widgetCustomizationEnabled {
-                        ColorPicker("Background Color", selection: $selectedWidgetBackgroundColor)
-                        ColorPicker("Text Color", selection: $selectedWidgetTextColor)
-                    }
-                    Button("Refresh Widgets") {
-                        WidgetCenter.shared.reloadAllTimelines()
-                        isShowWidgetsSuccessfullyRefreshedAlert = true
-                    }
-                    .alert("Successfuly Refreshed", isPresented: $isShowWidgetsSuccessfullyRefreshedAlert) {
-                        Button("OK", role: .cancel) {
-                            isShowWidgetsSuccessfullyRefreshedAlert = false
-                        }
-                    }
-                } header: {
-                    Text("Widget Customization")
-                } footer: {
-                    Text("These settings will overwrite widget configurations and apply to all widgets.")
+            } header: {
+                Text("Background Customization")
+            } footer: {
+                Text("These settings will overwrite theme configurations and custom theme configurations.")
+            }
+            .onAppear {
+                // Set background
+                let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.data(forKey: "NMBackgroundPhotoData")
+                if let backgroundPhotoData {
+                    backgroundImage = UIImage(data: backgroundPhotoData)
                 }
             }
-            .navigationTitle("Advanced Customization")
-            .navigationBarTitleDisplayMode(.inline)
+            
+            Section {
+                Toggle("Enable Theme Customization", isOn: Bindable(themeStore).themeCustomizationEnabled)
+                if themeStore.themeCustomizationEnabled {
+                    ColorPicker("Primary Color Light Mode", selection: Bindable(themeStore).themePrimaryColorLight)
+                    ColorPicker("Secondary Color Light Mode", selection: Bindable(themeStore).themeSecondaryColorLight)
+                    ColorPicker("Background Color Light Mode", selection: Bindable(themeStore).themeBackgroundColorLight)
+                    ColorPicker("Tint Color Light Mode", selection: Bindable(themeStore).themeTintColorLight)
+                    ColorPicker("Primary Color Dark Mode", selection: Bindable(themeStore).themePrimaryColorDark)
+                    ColorPicker("Secondary Color Dark Mode", selection: Bindable(themeStore).themeSecondaryColorDark)
+                    ColorPicker("Background Color Dark Mode", selection: Bindable(themeStore).themeBackgroundColorDark)
+                    ColorPicker("Tint Color Dark Mode", selection: Bindable(themeStore).themeTintColorDark)
+                }
+            } header: {
+                Text("Theme Customization")
+            } footer: {
+                Text("These settings will overwrite theme configurations.")
+            }
+            
+            Section {
+                Toggle("Enable Widget Customization", isOn: $widgetCustomizationEnabled)
+                if widgetCustomizationEnabled {
+                    ColorPicker("Background Color", selection: $selectedWidgetBackgroundColor)
+                    ColorPicker("Text Color", selection: $selectedWidgetTextColor)
+                }
+                Button("Refresh Widgets") {
+                    WidgetCenter.shared.reloadAllTimelines()
+                    isShowWidgetsSuccessfullyRefreshedAlert = true
+                }
+                .alert("Successfuly Refreshed", isPresented: $isShowWidgetsSuccessfullyRefreshedAlert) {
+                    Button("OK", role: .cancel) {
+                        isShowWidgetsSuccessfullyRefreshedAlert = false
+                    }
+                }
+            } header: {
+                Text("Widget Customization")
+            } footer: {
+                Text("These settings will overwrite widget configurations and apply to all widgets.")
+            }
         }
+        .navigationTitle("Advanced Customization")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

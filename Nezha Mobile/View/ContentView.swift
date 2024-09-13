@@ -42,8 +42,5 @@ struct ContentView: View {
                     }
             }
         }
-        .onAppear {
-            syncWithiCloud()
-        }
     }
 }

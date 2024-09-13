@@ -12,7 +12,6 @@ import ActivityKit
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     let notificationState: NotificationState = NotificationState()
-    let notificationManager: NotificationManager = NotificationManager()
     var tabBarState: TabBarState?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -49,10 +48,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         _ = debugLog("Notification Info - Title: \(title), Body: \(body)")
         
-        notificationManager.handleNotification(title: title, body: body)
-        
         DispatchQueue.main.async {
-            self.tabBarState?.activeTab = .alerts
+            self.tabBarState!.activeTab = .alerts
             self.notificationState.notificationData = (title: title, body: body)
             self.notificationState.shouldNavigateToNotificationView = true
         }
@@ -66,18 +63,4 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 class NotificationState: ObservableObject {
     @Published var shouldNavigateToNotificationView = false
     @Published var notificationData: (title: String, body: String)?
-}
-
-class NotificationManager {
-    private var modelContext: ModelContext?
-    
-    init() {
-        self.modelContext = try? ModelContext(ModelContainer(for: ServerAlert.self))
-    }
-    
-    func handleNotification(title: String?, body: String?) {
-        let newServerAlert = ServerAlert(title: title, content: body)
-        modelContext?.insert(newServerAlert)
-        try? modelContext?.save()
-    }
 }
