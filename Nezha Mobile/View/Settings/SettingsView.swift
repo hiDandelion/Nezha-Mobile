@@ -8,9 +8,11 @@
 import SwiftUI
 import UniformTypeIdentifiers
 import UserNotifications
+import StoreKit
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.requestReview) var requestReview
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
     var dashboardViewModel: DashboardViewModel
@@ -79,6 +81,10 @@ struct SettingsView: View {
                 }
                 
                 Section("About") {
+                    Button("Rate Us") {
+                        requestReview()
+                    }
+                    
                     NavigationLink(destination: {
                         AboutView()
                     }) {

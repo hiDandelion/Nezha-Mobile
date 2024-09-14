@@ -324,6 +324,22 @@
         }
       }
     },
+    "An error occurred when fetching alerts. Please try again." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラートの取得中にエラーが発生しました。もう一度お試しください。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取告警时出错。请再试一次。"
+          }
+        }
+      }
+    },
     "API Token" : {
       "localizations" : {
         "ja" : {
@@ -1071,6 +1087,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无效配置。请检查是否服务器是否已选择且存在。"
+          }
+        }
+      }
+    },
+    "Failed to get alerts" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラートを取得できません"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法获取告警"
           }
         }
       }
@@ -1864,6 +1896,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "推送通知不可用"
+          }
+        }
+      }
+    },
+    "Rate Us" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "評価"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "给我们评分"
           }
         }
       }

@@ -120,9 +120,6 @@ struct ServerMapView: View {
             }
         }
         .onAppear {
-            if !serverCoordinates.isEmpty {
-                return
-            }
             Task {
                 await loadCoordinates()
             }
@@ -140,6 +137,8 @@ struct ServerMapView: View {
     }
     
     private func loadCoordinates() async {
+        serverCoordinates.removeAll()
+        
         let storage = try? Storage<String, IPCityData>(
             diskConfig: DiskConfig(name: "NMIPCityData"),
             memoryConfig: MemoryConfig(expiry: .never),

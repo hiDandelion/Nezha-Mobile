@@ -14,6 +14,8 @@ struct AlertListView: View {
     @Environment(TabBarState.self) var tabBarState
     @EnvironmentObject var notificationState: NotificationState
     @Query(sort: \ServerAlert.timestamp, order: .reverse) private var serverAlerts: [ServerAlert]
+    @State private var isAlertRetrievalFailed: Bool = false
+    @State private var isShowRetryAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -21,15 +23,14 @@ struct AlertListView: View {
                 if !serverAlerts.isEmpty {
                     List {
                         ForEach(serverAlerts) { serverAlert in
-                            NavigationLink(destination: AlertDetailView(title: serverAlert.title, content: serverAlert.content)) {
+                            NavigationLink(destination: AlertDetailView(time: serverAlert.timestamp, title: serverAlert.title, content: serverAlert.content)) {
                                 VStack(alignment: .leading) {
                                     Text(serverAlert.title ?? "Untitled")
-                                    HStack {
-                                        Text(serverAlert.timestamp!, style: .date)
-                                        Text(serverAlert.timestamp!, style: .time)
+                                    if let timestamp = serverAlert.timestamp {
+                                        Text(timestamp.formatted(date: .numeric, time: .shortened))
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
                                     }
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
                                 }
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(role: .destructive) {
@@ -48,8 +49,29 @@ struct AlertListView: View {
                     ContentUnavailableView("No Alert", systemImage: "checkmark.circle.fill")
                 }
             }
+            .toolbar {
+                if isAlertRetrievalFailed {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button {
+                            isShowRetryAlert = true
+                        } label: {
+                            Label("Retry", systemImage: "exclamationmark.triangle")
+                        }
+                    }
+                }
+            }
+            .alert("Failed to get alerts", isPresented: $isShowRetryAlert, actions: {
+                Button("Retry") {
+                    getServerAlert()
+                }
+                Button("Cancel", role: .cancel) {
+                    isShowRetryAlert = false
+                }
+            }, message: {
+                Text("An error occurred when fetching alerts. Please try again.")
+            })
             .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {
-                AlertDetailView(title: notificationState.notificationData?.title, content: notificationState.notificationData?.body)
+                AlertDetailView(time: nil, title: notificationState.notificationData?.title, content: notificationState.notificationData?.body)
             }
             .onChange(of: scenePhase) {
                 if scenePhase == .active {
@@ -82,6 +104,10 @@ struct AlertListView: View {
                         let newServerAlert = ServerAlert(timestamp: serverAlertItem.timestamp, title: serverAlertItem.title, content: serverAlertItem.body)
                         modelContext.insert(newServerAlert)
                     }
+                    isAlertRetrievalFailed = false
+                }
+                else {
+                    isAlertRetrievalFailed = true
                 }
             }
         }

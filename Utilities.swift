@@ -44,8 +44,6 @@ func formatTimeInterval(seconds: Int64, shortened: Bool = false) -> String {
     let minutes = seconds / 60
     let hours = minutes / 60
     let days = hours / 24
-    let months = days / 30
-    let years = months / 12
 
     func formatShort(_ unit: String, _ value: Int64) -> String {
         return String(format: NSLocalizedString("%lld%@", comment: "Short format: 5d"), value, NSLocalizedString(unit, comment: "Time unit"))
@@ -55,10 +53,8 @@ func formatTimeInterval(seconds: Int64, shortened: Bool = false) -> String {
         return String(format: NSLocalizedString("%lld%@%lld%@", comment: "Long format: 5d 3h"), value1, NSLocalizedString(unit1, comment: "Time unit 1"), value2, NSLocalizedString(unit2, comment: "Time unit 2"))
     }
 
-    if years > 0 {
-        return shortened ? formatShort("timeUnitShortened.y", years) : formatLong("timeUnitShortened.y", years, "timeUnitShortened.mo", months % 12)
-    } else if months > 0 {
-        return shortened ? formatShort("timeUnitShortened.mo", months) : formatLong("timeUnitShortened.mo", months, "timeUnitShortened.d", days % 30)
+    if days >= 10 {
+        return formatShort("timeUnitShortened.d", days)
     } else if days > 0 {
         return shortened ? formatShort("timeUnitShortened.d", days) : formatLong("timeUnitShortened.d", days, "timeUnitShortened.h", hours % 24)
     } else if hours > 0 {
