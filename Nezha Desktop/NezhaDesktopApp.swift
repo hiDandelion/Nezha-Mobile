@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct NezhaDesktopApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
@@ -19,7 +20,8 @@ struct NezhaDesktopApp: App {
             let defaultValues: [String: Any] = [
                 "NMDashboardLink": "",
                 "NMDashboardAPIToken": "",
-                "NMLastModifyDate": 0
+                "NMLastModifyDate": 0,
+                "NMMacPushNotificationsToken": ""
             ]
             userDefaults.register(defaults: defaultValues)
         }

@@ -52,6 +52,23 @@ struct SettingView: View {
             .tabItem {
                 Label("Menu Bar", systemImage: "menubar.rectangle")
             }
+            
+            Form {
+                let pushNotificationsToken = userDefaults.string(forKey: "NMMacPushNotificationsToken")!
+                if pushNotificationsToken != "" {
+                    ShareLink(item: pushNotificationsToken) {
+                        Text("Share Push Notifications Token")
+                    }
+                }
+                else {
+                    Text("Push Notifications Not Available")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding()
+            .tabItem {
+                Label("Notifications", systemImage: "app.badge")
+            }
         }
         .frame(width: 600, height: 400)
         .alert("Successfully Saved", isPresented: $isShowSuccessfullySavedAlert) {

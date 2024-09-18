@@ -15,18 +15,18 @@ struct ServerDetailBasicView: View {
     
     var body: some View {
         Section("Basic") {
-            pieceOfInfo(systemImage: "cube", name: "ID", content: "\(server.id)")
-            pieceOfInfo(systemImage: "tag", name: "Tag", content: "\(server.tag)")
+            PieceOfInfo(systemImage: "cube", name: "ID", content: Text("\(server.id)"))
+            PieceOfInfo(systemImage: "tag", name: "Tag", content: Text("\(server.tag)"))
             
             if server.IPv4 != "", let cityData = IPv4CityData {
                 DisclosureGroup {
-                    pieceOfInfo(systemImage: nil, name: "Continent", content: "\(cityData.continent)")
-                    pieceOfInfo(systemImage: nil, name: "Country", content: "\(cityData.country)")
-                    pieceOfInfo(systemImage: nil, name: "Registered Country", content: "\(cityData.registeredCountry)")
-                    pieceOfInfo(systemImage: nil, name: "City", content: "\(cityData.city)")
-                    pieceOfInfo(systemImage: nil, name: "Time Zone", content: "\(cityData.location.timezone)")
+                    PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
+                    PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
+                    PieceOfInfo(systemImage: nil, name: "Registered Country", content: Text("\(cityData.registeredCountry)"))
+                    PieceOfInfo(systemImage: nil, name: "City", content: Text("\(cityData.city)"))
+                    PieceOfInfo(systemImage: nil, name: "Time Zone", content: Text("\(cityData.location.timezone)"))
                 } label: {
-                    pieceOfInfo(systemImage: "4.circle", name: "IPv4", content: "\(server.IPv4)")
+                    PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
                         .contextMenu(ContextMenu(menuItems: {
                             Button {
                                 NSPasteboard.general.clearContents()
@@ -38,7 +38,7 @@ struct ServerDetailBasicView: View {
                 }
             }
             else if server.IPv4 != "" {
-                pieceOfInfo(systemImage: "4.circle", name: "IPv4", content: "\(server.IPv4)")
+                PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
                             NSPasteboard.general.clearContents()
@@ -51,13 +51,13 @@ struct ServerDetailBasicView: View {
             
             if server.IPv6 != "", let cityData = IPv6CityData {
                 DisclosureGroup {
-                    pieceOfInfo(systemImage: nil, name: "Continent", content: "\(cityData.continent)")
-                    pieceOfInfo(systemImage: nil, name: "Country", content: "\(cityData.country)")
-                    pieceOfInfo(systemImage: nil, name: "Registered Country", content: "\(cityData.registeredCountry)")
-                    pieceOfInfo(systemImage: nil, name: "City", content: "\(cityData.city)")
-                    pieceOfInfo(systemImage: nil, name: "Time Zone", content: "\(cityData.location.timezone)")
+                    PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
+                    PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
+                    PieceOfInfo(systemImage: nil, name: "Registered Country", content: Text("\(cityData.registeredCountry)"))
+                    PieceOfInfo(systemImage: nil, name: "City", content: Text("\(cityData.city)"))
+                    PieceOfInfo(systemImage: nil, name: "Time Zone", content: Text("\(cityData.location.timezone)"))
                 } label: {
-                    pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
+                    PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
                         .contextMenu(ContextMenu(menuItems: {
                             Button {
                                 NSPasteboard.general.clearContents()
@@ -69,7 +69,7 @@ struct ServerDetailBasicView: View {
                 }
             }
             else if server.IPv6 != "" {
-                pieceOfInfo(systemImage: "6.circle", name: "IPv6", content: "\(server.IPv6)")
+                PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
                             NSPasteboard.general.clearContents()
@@ -80,8 +80,8 @@ struct ServerDetailBasicView: View {
                     }))
             }
             
-            pieceOfInfo(systemImage: "power", name: "Up Time", content: "\(formatTimeInterval(seconds: server.status.uptime))")
-            pieceOfInfo(systemImage: "clock", name: "Last Active", content: "\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))")
+            PieceOfInfo(systemImage: "power", name: "Up Time", content: Text("\(formatTimeInterval(seconds: server.status.uptime))"))
+            PieceOfInfo(systemImage: "clock", name: "Last Active", content: Text("\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))"))
         }
         .onAppear {
             if server.IPv4 != "" {
