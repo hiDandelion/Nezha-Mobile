@@ -8,7 +8,9 @@
 import SwiftUI
 import UserNotifications
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
+    let notificationState: NotificationState = NotificationState()
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
@@ -29,6 +31,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         userDefaults.set(pushNotificationsToken, forKey: "NMMacPushNotificationsToken")
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        let title = response.notification.request.content.title
+        let body = response.notification.request.content.body
+        
+        _ = debugLog("Notification Info - Title: \(title), Body: \(body)")
+        
+        DispatchQueue.main.async {
+            self.notificationState.notificationData = (title: title, body: body)
+            NSWorkspace.shared.open(URL(string: "nezha://alert-details")!)
+        }
+    }
+    
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
         if userDefaults.bool(forKey: "NMMenuBarEnabled") {
@@ -43,4 +57,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.registerForRemoteNotifications()
         }
     }
+}
+
+class NotificationState: ObservableObject {
+    @Published var notificationData: (title: String, body: String)?
 }

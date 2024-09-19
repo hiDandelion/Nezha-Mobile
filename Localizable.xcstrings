@@ -272,6 +272,22 @@
         }
       }
     },
+    "Alert Details" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラート情報"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "告警信息"
+          }
+        }
+      }
+    },
     "Alerts" : {
       "localizations" : {
         "ja" : {
@@ -1684,6 +1700,22 @@
         }
       }
     },
+    "No alert information" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラート情報なし"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无告警信息"
+          }
+        }
+      }
+    },
     "No data" : {
       "localizations" : {
         "ja" : {
@@ -2599,6 +2631,12 @@
           }
         }
       }
+    },
+    "Test" : {
+
+    },
+    "Test Action" : {
+
     },
     "Text Color" : {
       "localizations" : {

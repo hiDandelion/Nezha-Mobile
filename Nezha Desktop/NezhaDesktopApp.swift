@@ -11,7 +11,7 @@ import SwiftUI
 struct NezhaDesktopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
-    let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+    @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = true
     
     init() {
         // Register UserDefaults
@@ -59,13 +59,19 @@ struct NezhaDesktopApp: App {
             SettingView(dashboardViewModel: dashboardViewModel)
         }
         
-        menuBarExtra
-    }
-    
-    private var menuBarExtra: some Scene {
-        @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = true
+        WindowGroup("Alert Details", id: "alert-detail-view") {
+            if let notificationData = appDelegate.notificationState.notificationData {
+                AlertDetailView(time: nil, title: notificationData.title, content: notificationData.body)
+            }
+            else {
+                ContentUnavailableView("No alert information", systemImage: "exclamationmark.bubble")
+            }
+        }
+        .defaultSize(width: 600, height: 600)
+        .commandsRemoved()
+        .handlesExternalEvents(matching: Set(arrayLiteral: "alert-details"))
         
-        return MenuBarExtra(isInserted: $menuBarEnabled) {
+        MenuBarExtra(isInserted: $menuBarEnabled) {
             MenuBarView(dashboardViewModel: dashboardViewModel)
         } label: {
             Image(systemName: "server.rack")

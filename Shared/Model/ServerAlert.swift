@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class ServerAlert: Identifiable {
-    var id: UUID?
+    @Attribute(.unique) var id: UUID?
     var timestamp: Date?
     var title: String?
     var content: String?
