@@ -146,6 +146,12 @@
     },
     "🏴‍☠️" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏴‍☠️"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -156,6 +162,12 @@
     },
     "🏴‍☠️%@" : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏴‍☠️%@"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -688,6 +700,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "复制IPv6"
+          }
+        }
+      }
+    },
+    "Copy Push Notifications Token" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プッシュ通知トークンをコピー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制推送通知Token"
           }
         }
       }
@@ -1896,6 +1924,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "推送通知不可用"
+          }
+        }
+      }
+    },
+    "Quit" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "終了"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出"
           }
         }
       }

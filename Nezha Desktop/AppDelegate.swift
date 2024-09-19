@@ -29,7 +29,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         userDefaults.set(pushNotificationsToken, forKey: "NMMacPushNotificationsToken")
     }
     
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+        if userDefaults.bool(forKey: "NMMenuBarEnabled") {
+            NSApp.setActivationPolicy(.accessory)
+            return false
+        }
+        return true
+    }
+    
     func registerForPushNotifications() {
-        NSApplication.shared.registerForRemoteNotifications()
+        DispatchQueue.main.async {
+            NSApp.registerForRemoteNotifications()
+        }
     }
 }

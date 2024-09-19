@@ -53,6 +53,7 @@ struct MenuBarView: View {
                             Label("Servers", systemImage: "server.rack")
                             Spacer()
                             Button("Main Window") {
+                                NSApp.setActivationPolicy(.regular)
                                 openWindow(id: "main-view")
                             }
                         }
@@ -65,13 +66,6 @@ struct MenuBarView: View {
                     }
                     .padding([.top, .horizontal])
                     serverList
-                    HStack {
-                        Spacer()
-                        SettingsLink(label: {
-                            Label("Settings", systemImage: "gearshape")
-                        })
-                    }
-                    .padding([.bottom, .horizontal])
                 }
             case .error(let message):
                 ZStack(alignment: .bottomTrailing) {
@@ -83,13 +77,23 @@ struct MenuBarView: View {
                         Button("Retry") {
                             dashboardViewModel.startMonitoring()
                         }
-                        SettingsLink(label: {
-                            Text("Settings")
-                        })
                     }
                     .padding()
                 }
             }
+            
+            HStack {
+                Button {
+                    NSApp.terminate(self)
+                } label: {
+                    Label("Quit", systemImage: "escape")
+                }
+                Spacer()
+                SettingsLink(label: {
+                    Label("Settings", systemImage: "gearshape")
+                })
+            }
+            .padding([.bottom, .horizontal])
         }
         .frame(width: 380, height: 810)
         .onAppear {
@@ -125,6 +129,7 @@ struct MenuBarView: View {
                             }
                         }
                     }
+                    .listSectionSeparator(.hidden)
                 }
             }
             else {

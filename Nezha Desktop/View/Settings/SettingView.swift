@@ -56,8 +56,9 @@ struct SettingView: View {
             Form {
                 let pushNotificationsToken = userDefaults.string(forKey: "NMMacPushNotificationsToken")!
                 if pushNotificationsToken != "" {
-                    ShareLink(item: pushNotificationsToken) {
-                        Text("Share Push Notifications Token")
+                    Button("Copy Push Notifications Token") {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(pushNotificationsToken, forType: .string)
                     }
                 }
                 else {

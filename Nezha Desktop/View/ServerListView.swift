@@ -181,7 +181,7 @@ struct ServerListView: View {
                 
             } primaryAction: { serverIDs in
                 for serverID in serverIDs {
-                    openWindow(value: serverID)
+                    openWindow(id: "server-detail-view", value: serverID)
                 }
             }
             .searchable(text: $searchText)

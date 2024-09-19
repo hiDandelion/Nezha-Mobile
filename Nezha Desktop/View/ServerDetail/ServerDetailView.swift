@@ -22,7 +22,6 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
-    @Environment(\.openWindow) var openWindow
     @Bindable var dashboardViewModel: DashboardViewModel
     var serverID: Int
     @State private var activeTab: ServerDetailTab = .basic
@@ -83,33 +82,5 @@ struct ServerDetailView: View {
                 dashboardViewModel.startMonitoring()
             }
         }
-        .onOpenURL { url in
-            _ = debugLog("Incoming Link Info - App was opened via URL: \(url)")
-            handleIncomingURL(url)
-        }
-    }
-    
-    private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "nezha" else {
-            _ = debugLog("Incoming Link Error - Invalid Scheme")
-            return
-        }
-        
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            _ = debugLog("Incoming Link Error - Invalid URL")
-            return
-        }
-        
-        guard let action = components.host, action == "server-details" else {
-            _ = debugLog("Incoming Link Error - Unknown action")
-            return
-        }
-        
-        guard let serverID = components.queryItems?.first(where: { $0.name == "serverID" })?.value else {
-            _ = debugLog("Incoming Link Error - Server ID not found")
-            return
-        }
-        
-        openWindow(value: serverID)
     }
 }
