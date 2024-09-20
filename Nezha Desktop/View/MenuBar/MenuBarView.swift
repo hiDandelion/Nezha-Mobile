@@ -41,33 +41,34 @@ struct MenuBarView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Label("Servers", systemImage: "server.rack")
+                Spacer()
+                Button("Main Window") {
+                    NSApp.setActivationPolicy(.regular)
+                    openWindow(id: "main-view")
+                }
+            }
+            .padding([.top, .horizontal])
+            
             switch(dashboardViewModel.loadingState) {
             case .idle:
                 EmptyView()
             case .loading:
+                Spacer()
                 ProgressView("Loading...")
+                Spacer()
             case .loaded:
-                VStack {
-                    VStack {
-                        HStack {
-                            Label("Servers", systemImage: "server.rack")
-                            Spacer()
-                            Button("Main Window") {
-                                NSApp.setActivationPolicy(.regular)
-                                openWindow(id: "main-view")
-                            }
-                        }
-                        Picker("Tag", selection: $activeTag) {
-                            ForEach(allTags, id: \.self) { tag in
-                                Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
-                                    .id(tag)
-                            }
-                        }
+                Picker("Tag", selection: $activeTag) {
+                    ForEach(allTags, id: \.self) { tag in
+                        Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
+                            .id(tag)
                     }
-                    .padding([.top, .horizontal])
-                    serverList
                 }
+                .padding(.horizontal)
+                serverList
             case .error(let message):
+                Spacer()
                 ZStack(alignment: .bottomTrailing) {
                     VStack(spacing: 20) {
                         Text("An error occurred")
@@ -80,6 +81,7 @@ struct MenuBarView: View {
                     }
                     .padding()
                 }
+                Spacer()
             }
             
             HStack {
@@ -125,11 +127,12 @@ struct MenuBarView: View {
                             }
                             Divider()
                             Button("View Details") {
-                                openWindow(value: server.id)
+                                NSApp.setActivationPolicy(.regular)
+                                openWindow(id: "server-detail-view", value: server.id)
                             }
                         }
                     }
-                    .listSectionSeparator(.hidden)
+                    .listRowSeparator(.hidden)
                 }
             }
             else {
