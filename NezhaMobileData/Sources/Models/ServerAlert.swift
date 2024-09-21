@@ -9,13 +9,13 @@ import Foundation
 import SwiftData
 
 @Model
-class ServerAlert: Identifiable {
-    @Attribute(.unique) var id: UUID?
-    var timestamp: Date?
-    var title: String?
-    var content: String?
+public final class ServerAlert: Identifiable {
+    public var id: UUID?
+    public var timestamp: Date?
+    public var title: String?
+    public var content: String?
     
-    init(timestamp: Date, title: String?, content: String?) {
+    public init(timestamp: Date, title: String?, content: String?) {
         self.id = UUID()
         self.timestamp = timestamp
         self.title = title

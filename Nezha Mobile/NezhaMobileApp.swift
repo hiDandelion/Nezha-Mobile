@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NezhaMobileData
 
 @main
 struct NezhaMobileApp: App {
@@ -32,6 +33,7 @@ struct NezhaMobileApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                 .environmentObject(appDelegate.notificationState)
                 .environment(themeStore)
                 .environment(tabBarState)
@@ -40,6 +42,6 @@ struct NezhaMobileApp: App {
                     syncWithiCloud()
                 }
         }
-        .modelContainer(for: [Identity.self, ServerAlert.self])
+        .modelContainer(NezhaMobileData.shared.modelContainer)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NezhaMobileData
 
 struct IdentityRowView: View {
     let name: String

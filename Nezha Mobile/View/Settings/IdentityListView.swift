@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import NezhaMobileData
 
 enum IdentityAuthenticationMethod: String, CaseIterable, Identifiable {
     var id: String {
@@ -18,7 +19,7 @@ enum IdentityAuthenticationMethod: String, CaseIterable, Identifiable {
 }
 
 struct IdentityListView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.createDataHandler) private var createDataHandler
     @Query(sort: \Identity.timestamp, order: .reverse) var identities: [Identity]
     @State private var isShowAddIdentitySheet: Bool = false
     @State private var isShowRenameIdentityAlert: Bool = false
@@ -38,7 +39,12 @@ struct IdentityListView: View {
                 }
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .destructive) {
-                        modelContext.delete(identity)
+                        let createDataHandler = createDataHandler
+                        Task {
+                            if let dataHandler = await createDataHandler() {
+                                _ = try await dataHandler.deleteIdentity(id: identity.persistentModelID)
+                            }
+                        }
                     } label: {
                         Text("Delete")
                     }
@@ -58,8 +64,14 @@ struct IdentityListView: View {
                     } label: {
                         Label("Rename", systemImage: "pencil")
                     }
+                    
                     Button(role: .destructive) {
-                        modelContext.delete(identity)
+                        let createDataHandler = createDataHandler
+                        Task {
+                            if let dataHandler = await createDataHandler() {
+                                _ = try await dataHandler.deleteIdentity(id: identity.persistentModelID)
+                            }
+                        }
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
@@ -85,7 +97,14 @@ struct IdentityListView: View {
             actions: {
                 TextField("New Name", text: $newNameForIdentity)
                 Button("OK") {
-                    identityToRename?.name = newNameForIdentity
+                    if let identityToRename {
+                        let createDataHandler = createDataHandler
+                        Task {
+                            if let dataHandler = await createDataHandler() {
+                                _ = try await dataHandler.renameIdentity(id: identityToRename.persistentModelID, name: newNameForIdentity)
+                            }
+                        }
+                    }
                     isShowRenameIdentityAlert = false
                 }
                 Button("Cancel", role: .cancel) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NezhaMobileData
 import NIO
 import CryptoKit
 import XTerminalUI

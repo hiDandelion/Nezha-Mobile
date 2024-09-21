@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import NezhaMobileData
 
 struct PrepareConnectionView: View {
     @Query var identities: [Identity]

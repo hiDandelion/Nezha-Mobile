@@ -7,9 +7,10 @@
 
 import SwiftUI
 import SwiftData
+import NezhaMobileData
 
 struct AddIdentityView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.createDataHandler) private var createDataHandler
     @Binding var isShowAddIdentitySheet: Bool
     @State private var name: String = ""
     @State private var username: String = ""
@@ -83,11 +84,19 @@ struct AddIdentityView: View {
                     Button("Done") {
                         switch(authenticationMethod) {
                         case .password:
-                            let newIdentity = Identity(name: name, username: username, password: password)
-                            modelContext.insert(newIdentity)
+                            let createDataHandler = createDataHandler
+                            Task {
+                                if let dataHandler = await createDataHandler() {
+                                    _ = try await dataHandler.newIdentity(name: name, username: username, password: password)
+                                }
+                            }
                         case .privateKey:
-                            let newIdentity = Identity(name: name, username: username, privateKeyString: privateKeyString, privateKeyType: privateKeyType)
-                            modelContext.insert(newIdentity)
+                            let createDataHandler = createDataHandler
+                            Task {
+                                if let dataHandler = await createDataHandler() {
+                                    _ = try await dataHandler.newIdentity(name: name, username: username, privateKeyString: privateKeyString, privateKeyType: privateKeyType)
+                                }
+                            }
                         }
                         isShowAddIdentitySheet = false
                     }
