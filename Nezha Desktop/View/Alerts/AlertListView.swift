@@ -10,6 +10,7 @@ import SwiftData
 import NezhaMobileData
 
 struct AlertListView: View {
+    @Environment(\.openWindow) var openWindow
     @Environment(\.createDataHandler) private var createDataHandler
     @Query(sort: \ServerAlert.timestamp, order: .reverse) private var serverAlerts: [ServerAlert]
     @State private var searchText: String = ""
@@ -25,7 +26,7 @@ struct AlertListView: View {
                 if !serverAlerts.isEmpty {
                     Form {
                         ForEach(filteredServerAlerts) { serverAlert in
-                            NavigationLink(destination: AlertDetailView(time: serverAlert.timestamp, title: serverAlert.title, content: serverAlert.content)) {
+                            HStack {
                                 VStack(alignment: .leading) {
                                     Text(serverAlert.title ?? "Untitled")
                                     if let timestamp = serverAlert.timestamp {
@@ -34,17 +35,21 @@ struct AlertListView: View {
                                             .foregroundStyle(.secondary)
                                     }
                                 }
-                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    Button(role: .destructive) {
-                                        let createDataHandler = createDataHandler
-                                        Task {
-                                            if let dataHandler = await createDataHandler() {
-                                                _ = try await dataHandler.deleteServerAlert(id: serverAlert.persistentModelID)
-                                            }
+                                
+                                Spacer()
+                                
+                                Button("Details") {
+                                    openWindow(id: "alert-detail-view", value: serverAlert.id)
+                                }
+                                Button(role: .destructive) {
+                                    Task {
+                                        if let dataHandler = await createDataHandler() {
+                                            _ = try await dataHandler.deleteServerAlert(id: serverAlert.persistentModelID)
                                         }
-                                    } label: {
-                                        Text("Delete")
                                     }
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(.red)
                                 }
                             }
                         }
