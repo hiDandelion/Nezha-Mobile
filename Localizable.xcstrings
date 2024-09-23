@@ -2914,22 +2914,6 @@
         }
       }
     },
-    "Title" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "タイトル"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "标题"
-          }
-        }
-      }
-    },
     "UDP Connection" : {
       "localizations" : {
         "ja" : {

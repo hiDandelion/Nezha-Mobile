@@ -61,7 +61,7 @@ struct HomeView: View {
                             ServerTableView(dashboardViewModel: dashboardViewModel, activeTag: activeServerTag)
                         }
                     case .alert:
-                        AlertTableView()
+                        AlertListView()
                     }
                 }
             case .error(let message):

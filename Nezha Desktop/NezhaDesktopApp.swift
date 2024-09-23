@@ -63,20 +63,14 @@ struct NezhaDesktopApp: App {
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
         }
         
-        WindowGroup("Alert Details", id: "alert-detail-view", for: ServerAlert.ID.self) { $alertID in
-            if let alertID {
-                AlertDetailView(alertID: alertID, time: nil, title: nil, content: nil)
+        WindowGroup("Alert Details", id: "alert-detail-view") {
+            if let notificationData = appDelegate.notificationState.notificationData {
+                AlertDetailView(time: nil, title: notificationData.title, content: notificationData.body)
             }
             else {
-                if let notificationData = appDelegate.notificationState.notificationData {
-                    AlertDetailView(alertID: nil, time: nil, title: notificationData.title, content: notificationData.body)
-                }
-                else {
-                    ContentUnavailableView("No alert information", systemImage: "exclamationmark.bubble")
-                }
+                ContentUnavailableView("No alert information", systemImage: "exclamationmark.bubble")
             }
         }
-        .modelContainer(NezhaMobileData.shared.modelContainer)
         .defaultSize(width: 600, height: 600)
         .commandsRemoved()
         .handlesExternalEvents(matching: Set(arrayLiteral: "alert-details"))
