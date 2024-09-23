@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
+import NezhaMobileData
 
 struct AlertDetailView: View {
-    let time: Date?
-    let title: String?
-    let content: String?
+    @Query var serverAlerts: [ServerAlert]
+    @State var alertID: UUID?
+    @State var time: Date?
+    @State var title: String?
+    @State var content: String?
     
     var body: some View {
         Form {
@@ -27,5 +31,13 @@ struct AlertDetailView: View {
         }
         .formStyle(.grouped)
         .navigationTitle(title ?? "")
+        .onAppear {
+            if let alertID {
+                let alert = serverAlerts.first(where: { $0.id == alertID })
+                time = alert?.timestamp
+                title = alert?.title
+                content = alert?.content
+            }
+        }
     }
 }

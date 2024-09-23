@@ -10,13 +10,10 @@ import SwiftData
 import NezhaMobileData
 
 struct AlertListView: View {
-    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.createDataHandler) private var createDataHandler
     @EnvironmentObject var notificationState: NotificationState
     @Environment(TabBarState.self) var tabBarState
     @Query(sort: \ServerAlert.timestamp, order: .reverse) private var serverAlerts: [ServerAlert]
-    @State private var isAlertRetrievalFailed: Bool = false
-    @State private var isShowRetryAlert: Bool = false
     
     var body: some View {
         NavigationStack {

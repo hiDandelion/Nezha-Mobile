@@ -33,7 +33,7 @@ struct ContentView: View {
                     .padding()
                 }
                 else {
-                    ServerListView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
+                    HomeView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
                 }
             }
         }

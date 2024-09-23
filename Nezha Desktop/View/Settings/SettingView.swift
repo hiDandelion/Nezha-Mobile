@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import NezhaMobileData
 
 struct SettingView: View {
+    @Environment(\.createDataHandler) private var createDataHandler
     @Bindable var dashboardViewModel: DashboardViewModel
     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""

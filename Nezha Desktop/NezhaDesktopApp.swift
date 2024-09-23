@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NezhaMobileData
 
 @main
 struct NezhaDesktopApp: App {
@@ -30,7 +31,9 @@ struct NezhaDesktopApp: App {
     var body: some Scene {
         WindowGroup("Nezha Desktop", id: "main-view") {
             ContentView(dashboardViewModel: dashboardViewModel)
+                .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
         }
+        .modelContainer(NezhaMobileData.shared.modelContainer)
         .defaultSize(width: 1000, height: 500)
         .commands {
             CommandGroup(before: CommandGroupPlacement.help) {
@@ -57,16 +60,23 @@ struct NezhaDesktopApp: App {
         
         Settings {
             SettingView(dashboardViewModel: dashboardViewModel)
+                .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
         }
         
-        WindowGroup("Alert Details", id: "alert-detail-view") {
-            if let notificationData = appDelegate.notificationState.notificationData {
-                AlertDetailView(time: nil, title: notificationData.title, content: notificationData.body)
+        WindowGroup("Alert Details", id: "alert-detail-view", for: ServerAlert.ID.self) { $alertID in
+            if let alertID {
+                AlertDetailView(alertID: alertID, time: nil, title: nil, content: nil)
             }
             else {
-                ContentUnavailableView("No alert information", systemImage: "exclamationmark.bubble")
+                if let notificationData = appDelegate.notificationState.notificationData {
+                    AlertDetailView(alertID: nil, time: nil, title: notificationData.title, content: notificationData.body)
+                }
+                else {
+                    ContentUnavailableView("No alert information", systemImage: "exclamationmark.bubble")
+                }
             }
         }
+        .modelContainer(NezhaMobileData.shared.modelContainer)
         .defaultSize(width: 600, height: 600)
         .commandsRemoved()
         .handlesExternalEvents(matching: Set(arrayLiteral: "alert-details"))
