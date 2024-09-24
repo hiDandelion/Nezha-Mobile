@@ -97,7 +97,7 @@ struct MenuBarView: View {
             }
             .padding([.bottom, .horizontal])
         }
-        .frame(width: 380, height: 810)
+        .frame(width: 380, height: 700)
         .onAppear {
             if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()

@@ -13,7 +13,7 @@ public typealias Identity = SchemaV1.Identity
 extension SchemaV1 {
     @Model
     public final class Identity: Identifiable {
-        public var id: UUID?
+        @Attribute(.unique) public var id: UUID?
         public var timestamp: Date?
         public var name: String?
         public var username: String?

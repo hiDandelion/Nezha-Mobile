@@ -38,6 +38,13 @@ public actor NezhaMobileDataHandler {
         try modelContext.save()
     }
     
+    public func newServerAlert(uuid: UUID, timestamp: Date, title: String?, content: String?) throws -> PersistentIdentifier {
+        let serverAlert = ServerAlert(uuid: uuid, timestamp: timestamp, title: title, content: content)
+        modelContext.insert(serverAlert)
+        try modelContext.save()
+        return serverAlert.persistentModelID
+    }
+    
     public func newServerAlert(timestamp: Date, title: String?, content: String?) throws -> PersistentIdentifier {
         let serverAlert = ServerAlert(timestamp: timestamp, title: title, content: content)
         modelContext.insert(serverAlert)

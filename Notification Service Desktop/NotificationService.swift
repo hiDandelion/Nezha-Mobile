@@ -1,8 +1,8 @@
 //
 //  NotificationService.swift
-//  Notification Service
+//  Notification Service Desktop
 //
-//  Created by Junhui Lou on 9/20/24.
+//  Created by Junhui Lou on 9/23/24.
 //
 
 import UserNotifications
