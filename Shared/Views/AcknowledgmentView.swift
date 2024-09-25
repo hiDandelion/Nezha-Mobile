@@ -1,5 +1,5 @@
 //
-//  AboutView.swift
+//  AcknowledgmentView.swift
 //  Nezha Desktop
 //
 //  Created by Junhui Lou on 9/5/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AboutView: View {
+struct AcknowledgmentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {

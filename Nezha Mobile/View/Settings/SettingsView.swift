@@ -29,12 +29,6 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("SSH") {
-                    NavigationLink("Identities") {
-                        IdentityListView()
-                    }
-                }
-                
                 Section("Theme") {
                     Button("Select Theme") {
                         isShowingChangeThemeSheet.toggle()
@@ -86,9 +80,9 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(destination: {
-                        AboutView()
+                        AcknowledgmentView()
                     }) {
-                        Text("About")
+                        Text("Acknowledgments")
                     }
                 }
             }

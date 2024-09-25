@@ -34,8 +34,6 @@ struct PingChart: View {
     
     var body: some View {
         VStack {
-            Text("\(pingData.monitorName)")
-                .padding(.bottom, 15)
             Chart {
                 ForEach(pingDataPlots, id: \.id) { data in
                     LineMark(
@@ -74,6 +72,7 @@ struct PingChart: View {
             .chartXSelection(value: $rawSelectedDate)
             .frame(minHeight: 200)
         }
+        .padding(.top, 20)
     }
     
     var valueSelectionPopover: some View {

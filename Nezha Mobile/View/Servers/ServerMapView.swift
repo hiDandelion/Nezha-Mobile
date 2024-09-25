@@ -59,26 +59,23 @@ struct ServerMapView: View {
         .toolbar(.hidden)
         .overlay {
             VStack {
-                            HStack {
-                                Spacer()
-                                Button {
-                                    serverCoordinates.removeAll()
-                                    Task {
-                                        await loadCoordinates()
-                                    }
-                                } label: {
-                                    Image(systemName: "arrow.clockwise")
-                                        .padding(10)
-                                        .foregroundStyle(.primary)
-                                        .background(.thinMaterial)
-                                        .clipShape(Circle())
-                                        .padding()
-                                        .hoverEffect(.lift)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            Spacer()
-                        }
+                HStack {
+                    Spacer()
+                    Button {
+                        tabBarState.isShowMapView = false
+                    } label: {
+                        Image(systemName: "xmark")
+                            .padding(10)
+                            .foregroundStyle(.primary)
+                            .background(.thinMaterial)
+                            .clipShape(Circle())
+                            .padding()
+                            .hoverEffect(.lift)
+                    }
+                    .buttonStyle(.plain)
+                }
+                Spacer()
+            }
             
             if let selectedCoordinate {
                 VStack {
@@ -116,22 +113,11 @@ struct ServerMapView: View {
                             .fill(.thinMaterial)
                     }
                 }
-                .padding(.bottom, 50)
             }
         }
         .onAppear {
             Task {
                 await loadCoordinates()
-            }
-        }
-        .onAppear {
-            withAnimation {
-                tabBarState.isMapViewVisible = true
-            }
-        }
-        .onDisappear {
-            withAnimation {
-                tabBarState.isMapViewVisible = false
             }
         }
     }

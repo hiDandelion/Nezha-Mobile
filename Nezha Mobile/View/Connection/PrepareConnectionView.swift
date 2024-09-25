@@ -12,13 +12,22 @@ import NezhaMobileData
 struct PrepareConnectionView: View {
     @Query var identities: [Identity]
     let host: String?
-    @State var port: String = "22"
-    @State var identity: Identity?
+    @State private var mannualHost: String = ""
+    @State private var port: String = "22"
+    @State private var identity: Identity?
     @State private var isShowAddIdentitySheet: Bool = false
     
     var body: some View {
         NavigationStack {
             Form {
+                if host == nil {
+                    Section("Host") {
+                        TextField("Host", text: $mannualHost)
+                            .autocorrectionDisabled()
+                            .autocapitalization(.none)
+                    }
+                }
+                
                 Section("Port") {
                     TextField("Port", text: $port)
                         .keyboardType(.numberPad)
@@ -53,6 +62,12 @@ struct PrepareConnectionView: View {
                     }
                     else if let host, let port = Int(port), let identity, let privateKey = identity.privateKeyString, let privateKeyType = identity.privateKeyType {
                         NavigationLink("Start", destination: TerminalView(host: host, port: port, username: identity.username!, password: nil, privateKey: privateKey, privateKeyType: privateKeyType))
+                    }
+                    else if host == nil, mannualHost != "", let port = Int(port), let identity, let password = identity.password {
+                        NavigationLink("Start", destination: TerminalView(host: mannualHost, port: port, username: identity.username!, password: password, privateKey: nil, privateKeyType: nil))
+                    }
+                    else if host == nil, mannualHost != "", let port = Int(port), let identity, let privateKey = identity.privateKeyString, let privateKeyType = identity.privateKeyType {
+                        NavigationLink("Start", destination: TerminalView(host: mannualHost, port: port, username: identity.username!, password: nil, privateKey: privateKey, privateKeyType: privateKeyType))
                     }
                     else {
                         NavigationLink("Start", destination: EmptyView())

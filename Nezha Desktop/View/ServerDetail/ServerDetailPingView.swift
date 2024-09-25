@@ -15,14 +15,21 @@ struct ServerDetailPingChartView: View {
     @State private var isLoadingPingDatas: Bool = false
     
     var body: some View {
-        Section("Ping") {
+        Group {
             if isLoadingPingDatas {
-                ProgressView()
+                Section("Ping") {
+                    ProgressView()
+                }
             }
             else {
                 if let pingDatas {
-                    ForEach(pingDatas) { pingData in
-                        PingChart(pingData: pingData)
+                    List {
+                        ForEach(pingDatas) { pingData in
+                            Section("\(pingData.monitorName)") {
+                                PingChart(pingData: pingData)
+                                    .listRowSeparator(.hidden)
+                            }
+                        }
                     }
                 }
                 else if let errorDescriptionLoadingPingData {

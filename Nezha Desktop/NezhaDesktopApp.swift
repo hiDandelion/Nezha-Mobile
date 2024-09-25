@@ -39,9 +39,9 @@ struct NezhaDesktopApp: App {
             CommandGroup(before: CommandGroupPlacement.help) {
                 Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
                 NavigationLink(destination: {
-                    AboutView()
+                    AcknowledgmentView()
                 }) {
-                    Text("About")
+                    Text("Acknowledgments")
                 }
             }
         }

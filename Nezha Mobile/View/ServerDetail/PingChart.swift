@@ -1,63 +1,12 @@
 //
-//  ServerDetailPingChartView.swift
+//  PingChart.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 8/11/24.
+//  Created by Junhui Lou on 9/25/24.
 //
 
 import SwiftUI
 import Charts
-
-struct ServerDetailPingChartView: View {
-    @Environment(\.scenePhase) private var scenePhase
-    var server: Server
-    @State private var pingDatas: [PingData]?
-    @State private var errorDescriptionLoadingPingData: String?
-    @State private var isLoadingPingDatas: Bool = false
-    
-    var body: some View {
-        Section("Ping") {
-            if isLoadingPingDatas {
-                ProgressView()
-            }
-            else {
-                if let pingDatas {
-                    List {
-                        ForEach(pingDatas) { pingData in
-                            PingChart(pingData: pingData)
-                                .listRowSeparator(.hidden)
-                        }
-                    }
-                }
-                else if let errorDescriptionLoadingPingData {
-                    Text(errorDescriptionLoadingPingData)
-                }
-                else {
-                    Text("No data")
-                }
-            }
-        }
-        .onAppear {
-            if pingDatas == nil {
-                Task {
-                    do {
-                        isLoadingPingDatas = true
-                        let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
-                        withAnimation {
-                            errorDescriptionLoadingPingData = nil
-                            pingDatas = response.result
-                            isLoadingPingDatas = false
-                        }
-                    }
-                    catch {
-                        errorDescriptionLoadingPingData = error.localizedDescription
-                        isLoadingPingDatas = false
-                    }
-                }
-            }
-        }
-    }
-}
 
 struct PingDataPlot: Identifiable {
     let id = UUID()
@@ -86,8 +35,6 @@ struct PingChart: View {
     
     var body: some View {
         VStack {
-            Text("\(pingData.monitorName)")
-                .padding(.bottom, 15)
             Chart {
                 ForEach(pingDataPlots, id: \.id) { data in
                     LineMark(
@@ -126,6 +73,7 @@ struct PingChart: View {
             .chartXSelection(value: $rawSelectedDate)
             .frame(minHeight: 200)
         }
+        .padding(.top, 20)
     }
     
     var valueSelectionPopover: some View {
