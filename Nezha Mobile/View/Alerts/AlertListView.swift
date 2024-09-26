@@ -45,7 +45,7 @@ struct AlertListView: View {
                             }
                         }
                     }
-                    .contentMargins(.bottom, 50)
+                    .contentMargins(.bottom, 60)
                     .navigationTitle("Alerts")
                 }
                 else {

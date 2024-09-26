@@ -17,7 +17,10 @@ struct ServerDetailPingChartView: View {
     var body: some View {
         Group {
             if isLoadingPingDatas {
-                Section("Ping") {
+                if let errorDescriptionLoadingPingData {
+                    Text(errorDescriptionLoadingPingData)
+                }
+                else {
                     ProgressView()
                 }
             }
@@ -32,9 +35,6 @@ struct ServerDetailPingChartView: View {
                         }
                     }
                 }
-                else if let errorDescriptionLoadingPingData {
-                    Text(errorDescriptionLoadingPingData)
-                }
                 else {
                     Text("No data")
                 }
@@ -42,9 +42,9 @@ struct ServerDetailPingChartView: View {
         }
         .onAppear {
             if pingDatas == nil {
+                isLoadingPingDatas = true
                 Task {
                     do {
-                        isLoadingPingDatas = true
                         let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
                         withAnimation {
                             errorDescriptionLoadingPingData = nil
@@ -54,7 +54,6 @@ struct ServerDetailPingChartView: View {
                     }
                     catch {
                         errorDescriptionLoadingPingData = error.localizedDescription
-                        isLoadingPingDatas = false
                     }
                 }
             }

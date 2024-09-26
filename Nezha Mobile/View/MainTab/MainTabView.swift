@@ -192,7 +192,9 @@ struct MainTabBar: View {
             
             Button {
                 if activeTab == .servers {
-                    tabBarState.isShowMapView = true
+                    withAnimation {
+                        tabBarState.isShowMapView = true
+                    }
                 }
             } label: {
                 MorphingSymbolView(

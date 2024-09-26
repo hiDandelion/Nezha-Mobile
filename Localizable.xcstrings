@@ -32,6 +32,16 @@
         }
       }
     },
+    "%@:%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@:%2$@"
+          }
+        }
+      }
+    },
     "%@/%@" : {
       "localizations" : {
         "en" : {
@@ -288,6 +298,12 @@
         }
       }
     },
+    "Agent Parameters" : {
+
+    },
+    "Agent Settings" : {
+
+    },
     "Alert Details" : {
       "localizations" : {
         "ja" : {
@@ -527,6 +543,9 @@
           }
         }
       }
+    },
+    "By using Nezha Mobile as an agent, we will collect matrix of your device including memory usage, disk usage and uptime. These data will only be uploaded to the server you configured. We will not save your data." : {
+
     },
     "Cancel" : {
       "localizations" : {
@@ -869,6 +888,15 @@
           }
         }
       }
+    },
+    "Dashboard GRPC Info" : {
+
+    },
+    "Dashboard GRPC Link" : {
+
+    },
+    "Dashboard GRPC Port" : {
+
     },
     "Dashboard Info" : {
       "localizations" : {
@@ -1928,6 +1956,9 @@
         }
       }
     },
+    "Privacy Notice" : {
+
+    },
     "Private Key Type" : {
       "localizations" : {
         "ja" : {
@@ -2120,6 +2151,12 @@
         }
       }
     },
+    "Report Device Info" : {
+
+    },
+    "Reporting" : {
+
+    },
     "Retry" : {
       "localizations" : {
         "ja" : {
@@ -2199,6 +2236,9 @@
           }
         }
       }
+    },
+    "Secret" : {
+
     },
     "Select Custom Background" : {
       "localizations" : {
@@ -2392,6 +2432,9 @@
         }
       }
     },
+    "Set up Agent" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "ja" : {
@@ -2567,6 +2610,9 @@
           }
         }
       }
+    },
+    "Successfully Reported" : {
+
     },
     "Successfully Saved" : {
       "localizations" : {

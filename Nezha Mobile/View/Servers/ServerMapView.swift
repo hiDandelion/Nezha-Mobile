@@ -62,7 +62,9 @@ struct ServerMapView: View {
                 HStack {
                     Spacer()
                     Button {
-                        tabBarState.isShowMapView = false
+                        withAnimation {
+                            tabBarState.isShowMapView = false
+                        }
                     } label: {
                         Image(systemName: "xmark")
                             .padding(10)

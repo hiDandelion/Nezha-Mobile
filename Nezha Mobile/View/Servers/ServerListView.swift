@@ -133,7 +133,7 @@ struct ServerListView: View {
                             
                             ServerList(isWideLayout: isWideLayout)
                         }
-                        .contentMargins(.bottom, 50)
+                        .contentMargins(.bottom, 60)
                         .navigationTitle("Servers")
                         .searchable(text: $searchText)
                     }

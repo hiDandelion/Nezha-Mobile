@@ -13,6 +13,12 @@ struct ToolListView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section("Agent") {
+                    NavigationLink("Report Device Info") {
+                        ReportDeviceInfoView()
+                    }
+                }
+                
                 Section("SSH") {
                     NavigationLink("Manage Identities") {
                         IdentityListView()
@@ -21,8 +27,8 @@ struct ToolListView: View {
                         PrepareConnectionView(host: nil)
                     }
                 }
-                
             }
+            .contentMargins(.bottom, 60)
             .navigationTitle("Tools")
             .onAppear {
                 withAnimation {

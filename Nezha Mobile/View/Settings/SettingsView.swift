@@ -29,6 +29,12 @@ struct SettingsView: View {
                     }
                 }
                 
+                Section("Agent") {
+                    NavigationLink("Agent Settings") {
+                        AgentSettingsView()
+                    }
+                }
+                
                 Section("Theme") {
                     Button("Select Theme") {
                         isShowingChangeThemeSheet.toggle()
@@ -86,7 +92,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            .contentMargins(.bottom, 50)
+            .contentMargins(.bottom, 60)
             .navigationTitle("Settings")
             .toolbar {
                 if isPresentedAsSheet {

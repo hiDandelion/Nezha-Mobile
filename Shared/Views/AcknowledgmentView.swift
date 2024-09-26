@@ -22,7 +22,7 @@ struct AcknowledgmentView: View {
                 .font(.caption2)
                 .foregroundStyle(.secondary)
             }
-            .navigationTitle("About")
+            .navigationTitle("Acknowledgments")
             .padding()
         }
     }
