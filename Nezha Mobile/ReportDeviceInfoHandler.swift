@@ -20,7 +20,7 @@ struct ReportDeviceInfoResponse: Codable {
 }
 
 extension RequestHandler {
-    static func reportDeviceHost(identifier: String, systemVersion: String, diskTotal: Int64, bootTime: Int64) async throws -> ReportDeviceInfoResponse {
+    static func reportDeviceHost(identifier: String, systemVersion: String, memoryTotal: Int64, diskTotal: Int64, bootTime: Int64, agentVersion: String) async throws -> ReportDeviceInfoResponse {
         guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
               let dashboardGRPCLink = userDefaults.string(forKey: "NMDashboardGRPCLink"),
               let dashboardGRPCPort = userDefaults.string(forKey: "NMDashboardGRPCPort"),
@@ -38,8 +38,10 @@ extension RequestHandler {
             "secret": agentSecret,
             "identifier": identifier,
             "systemVersion": systemVersion,
+            "memoryTotal": memoryTotal,
             "diskTotal": diskTotal,
-            "bootTime": bootTime * 1000
+            "bootTime": bootTime,
+            "agentVersion": agentVersion
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
@@ -57,7 +59,7 @@ extension RequestHandler {
         }
     }
     
-    static func reportDeviceStatus(memoryUsed: Int64, diskUsed: Int64, uptime: Int64) async throws -> ReportDeviceInfoResponse {
+    static func reportDeviceStatus(cpuUsage: Double, memoryUsed: Int64, diskUsed: Int64, uptime: Int64, networkIn: Int64, networkOut: Int64, networkInSpeed: Int64, networkOutSpeed: Int64) async throws -> ReportDeviceInfoResponse {
         guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
               let dashboardGRPCLink = userDefaults.string(forKey: "NMDashboardGRPCLink"),
               let dashboardGRPCPort = userDefaults.string(forKey: "NMDashboardGRPCPort"),
@@ -71,11 +73,16 @@ extension RequestHandler {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let body: [String: Any] = [
+            "cpuUsage": cpuUsage,
             "server": "\(dashboardGRPCLink):\(dashboardGRPCPort)",
             "secret": agentSecret,
             "memoryUsed": memoryUsed,
             "diskUsed": diskUsed,
-            "uptime": uptime
+            "uptime": uptime,
+            "networkIn": networkIn,
+            "networkOut": networkOut,
+            "networkInSpeed": networkInSpeed,
+            "networkOutSpeed": networkOutSpeed
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         

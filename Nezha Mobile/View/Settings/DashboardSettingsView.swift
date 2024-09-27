@@ -23,7 +23,14 @@ struct DashboardSettingsView: View {
                 TextField("API Token", text: $dashboardAPIToken)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
-                Button("Save & Reconnect") {
+            } header: {
+                Text("Dashboard Info")
+            } footer: {
+                Text("SSL must be enabled. Dashboard Link Example: server.hidandelion.com")
+            }
+            
+            Section {
+                Button("Save & Apply") {
                     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
                     userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
                     userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
@@ -34,10 +41,6 @@ struct DashboardSettingsView: View {
                     dashboardViewModel.startMonitoring()
                     dismiss()
                 }
-            } header: {
-                Text("Dashboard Info")
-            } footer: {
-                Text("SSL must be enabled. Dashboard Link Example: server.hidandelion.com")
             }
         }
         .navigationTitle("Dashboard Settings")

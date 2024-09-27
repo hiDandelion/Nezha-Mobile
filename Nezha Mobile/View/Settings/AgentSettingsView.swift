@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AgentSettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("NMDashboardGRPCLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCLink: String = ""
-    @AppStorage("NMDashboardGRPCPort", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCPort: String = "5555"
-    @AppStorage("NMAgentSecret", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var agentSecret: String = ""
+    @State private var dashboardGRPCLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardGRPCLink") ?? ""
+    @State private var dashboardGRPCPort: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardGRPCPort") ?? "5555"
+    @State private var agentSecret: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMAgentSecret") ?? "5555"
     
     var body: some View {
         Form {
@@ -27,6 +27,21 @@ struct AgentSettingsView: View {
                 TextField("Secret", text: $agentSecret)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
+            }
+            
+            Section {
+                Button("Save & Apply") {
+                    let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+                    userDefaults.set(dashboardGRPCLink, forKey: "NMDashboardGRPCLink")
+                    userDefaults.set(dashboardGRPCPort, forKey: "NMDashboardGRPCPort")
+                    userDefaults.set(agentSecret, forKey: "NMAgentSecret")
+                    userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                    NSUbiquitousKeyValueStore().set(dashboardGRPCLink, forKey: "NMDashboardGRPCLink")
+                    NSUbiquitousKeyValueStore().set(dashboardGRPCPort, forKey: "NMDashboardGRPCPort")
+                    NSUbiquitousKeyValueStore().set(agentSecret, forKey: "NMAgentSecret")
+                    NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                    dismiss()
+                }
             }
         }
         .navigationTitle("Agent Settings")

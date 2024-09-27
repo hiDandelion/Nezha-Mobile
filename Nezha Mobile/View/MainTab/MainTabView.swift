@@ -216,7 +216,6 @@ struct MainTabBar: View {
             .padding(.leading, status ? 0 : -42)
             .opacity(status ? 1 : 0)
         }
-        .padding(.bottom, 10)
         .animation(.smooth(duration: 0.3, extraBounce: 0), value: activeTab)
         .frame(maxWidth: .infinity)
     }

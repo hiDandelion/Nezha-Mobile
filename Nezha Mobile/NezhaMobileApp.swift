@@ -19,9 +19,12 @@ struct NezhaMobileApp: App {
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
         if let userDefaults {
             let defaultValues: [String: Any] = [
+                "NMLastModifyDate": 0,
                 "NMDashboardLink": "",
                 "NMDashboardAPIToken": "",
-                "NMLastModifyDate": 0,
+                "NMDashboardGRPCLink": "",
+                "NMDashboardGRPCPort": "",
+                "NMAgentSecret": "",
                 "NMPushNotificationsToken": "",
                 "NMPushToStartToken": "",
                 "NMWatchPushNotificationsToken": ""

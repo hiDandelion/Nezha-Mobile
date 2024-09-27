@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "- OS Version\n- Model Identifier\n- CPU Usage\n- Memory Usage\n- Disk Usage\n- Data Usage\n- Boot Time\n- Uptime" : {
+      "shouldTranslate" : false
+    },
     "--%" : {
 
     },
@@ -155,36 +158,10 @@
       }
     },
     "🏴‍☠️" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🏴‍☠️"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🏴‍☠️"
-          }
-        }
-      }
+
     },
     "🏴‍☠️%@" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🏴‍☠️%@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🏴‍☠️%@"
-          }
-        }
-      }
+
     },
     "About" : {
       "localizations" : {
@@ -299,10 +276,36 @@
       }
     },
     "Agent Parameters" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agentパラメータ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agent参数"
+          }
+        }
+      }
     },
     "Agent Settings" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agent設定"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agent设置"
+          }
+        }
+      }
     },
     "Alert Details" : {
       "localizations" : {
@@ -544,8 +547,8 @@
         }
       }
     },
-    "By using Nezha Mobile as an agent, we will collect matrix of your device including memory usage, disk usage and uptime. These data will only be uploaded to the server you configured. We will not save your data." : {
-
+    "By using Nezha Mobile as an agent, you acknowledge we will collect the following matrix of your device:" : {
+      "shouldTranslate" : false
     },
     "Cancel" : {
       "localizations" : {
@@ -890,13 +893,52 @@
       }
     },
     "Dashboard GRPC Info" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard GRPC情報"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard GRPC信息"
+          }
+        }
+      }
     },
     "Dashboard GRPC Link" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard GRPCリンク"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard GRPC链接"
+          }
+        }
+      }
     },
     "Dashboard GRPC Port" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard GRPCポート"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard GRPC端口"
+          }
+        }
+      }
     },
     "Dashboard Info" : {
       "localizations" : {
@@ -1957,7 +1999,7 @@
       }
     },
     "Privacy Notice" : {
-
+      "shouldTranslate" : false
     },
     "Private Key Type" : {
       "localizations" : {
@@ -2152,10 +2194,36 @@
       }
     },
     "Report Device Info" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本機の情報を報告"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上报设备信息"
+          }
+        }
+      }
     },
     "Reporting" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "報告しています"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在上报"
+          }
+        }
+      }
     },
     "Retry" : {
       "localizations" : {
@@ -2189,18 +2257,18 @@
         }
       }
     },
-    "Save & Reconnect" : {
+    "Save & Apply" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "保存して再接続"
+            "value" : "保存・適用"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "保存并重新连接"
+            "value" : "保存并应用"
           }
         }
       }
@@ -2238,7 +2306,20 @@
       }
     },
     "Secret" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "シークレット"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "密钥"
+          }
+        }
+      }
     },
     "Select Custom Background" : {
       "localizations" : {
@@ -2433,7 +2514,20 @@
       }
     },
     "Set up Agent" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agentをセットアップ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置Agent"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {
@@ -2612,7 +2706,20 @@
       }
     },
     "Successfully Reported" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "報告しました"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上报成功"
+          }
+        }
+      }
     },
     "Successfully Saved" : {
       "localizations" : {
@@ -2763,6 +2870,9 @@
           }
         }
       }
+    },
+    "These data will only be uploaded to the server you configured. We will not save your data." : {
+      "shouldTranslate" : false
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
       "localizations" : {

@@ -36,7 +36,14 @@ struct ServerDetailHostView: View {
             }
             
             if let mainGPUInfo = server.host.gpu?.first {
-                PieceOfInfo(systemImage: "cpu.fill", name: "GPU", content: Text("\(mainGPUInfo)"))
+                VStack(alignment: .leading) {
+                    Label("GPU", systemImage: "cpu.fill")
+                    HStack {
+                        GPUImage(GPUName: mainGPUInfo)
+                        Text(mainGPUInfo)
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
             
             PieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.arch)"))
@@ -48,7 +55,7 @@ struct ServerDetailHostView: View {
     }
     
     func OSImage(OSName: String) -> some View {
-        HStack {
+        Group {
             if OSName.contains("debian") {
                 Image("DebianLogo")
                     .resizable()
@@ -61,14 +68,20 @@ struct ServerDetailHostView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 50)
             }
+            if OSName.contains("Windows") {
+                Image("WindowsLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 50)
+            }
             if OSName.contains("darwin") {
                 Image("macOSLogo")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 50)
             }
-            if OSName.contains("Windows") {
-                Image("WindowsLogo")
+            if OSName.contains("Apple") {
+                Image("AppleLogo")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 50)
@@ -77,7 +90,7 @@ struct ServerDetailHostView: View {
     }
     
     func CPUImage(CPUName: String) -> some View {
-        HStack {
+        Group {
             if CPUName.contains("AMD") {
                 Image("AMDLogo")
                     .resizable()
@@ -97,6 +110,23 @@ struct ServerDetailHostView: View {
                     .frame(width: 100, height: 50)
             }
             if CPUName.contains("Apple") {
+                Image("AppleLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 50)
+            }
+        }
+    }
+    
+    func GPUImage(GPUName: String) -> some View {
+        Group {
+            if GPUName.contains("AMD") {
+                Image("AMDLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 50)
+            }
+            if GPUName.contains("Apple") {
                 Image("AppleLogo")
                     .resizable()
                     .scaledToFit()

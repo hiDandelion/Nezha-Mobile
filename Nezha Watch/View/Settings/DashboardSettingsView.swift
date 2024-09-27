@@ -22,7 +22,7 @@ struct DashboardSettingsView: View {
                 TextField("API Token", text: $dashboardAPIToken)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
-                Button("Save & Reconnect") {
+                Button("Save & Apply") {
                     let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
                     userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
                     userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
