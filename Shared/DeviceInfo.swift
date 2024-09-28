@@ -5,6 +5,7 @@
 //  Created by Junhui Lou on 9/26/24.
 //
 
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -215,3 +216,4 @@ extension DeviceInfo {
         return dataUsageInfo
     }
 }
+#endif

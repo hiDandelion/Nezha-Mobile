@@ -14,17 +14,23 @@ struct ToolListView: View {
         NavigationStack {
             Form {
                 Section("Agent") {
-                    NavigationLink("Report Device Info") {
+                    NavigationLink {
                         ReportDeviceInfoView()
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Report Device Info", systemName: "text.page", color: .blue)
                     }
                 }
                 
                 Section("SSH") {
-                    NavigationLink("Manage Identities") {
+                    NavigationLink {
                         IdentityListView()
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Manage Identities", systemName: "key", color: .gray)
                     }
-                    NavigationLink("Start SSH Connection") {
+                    NavigationLink {
                         PrepareConnectionView(host: nil)
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Start SSH Connection", systemName: "apple.terminal", color: .blue)
                     }
                 }
             }

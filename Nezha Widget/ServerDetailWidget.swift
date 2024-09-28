@@ -1,5 +1,5 @@
 //
-//  NezhaWidgetApp.swift
+//  ServerDetailWidget.swift
 //  Nezha Widget
 //
 //  Created by Junhui Lou on 8/2/24.
@@ -11,13 +11,13 @@ import SwiftUI
 struct ServerDetailProvider: AppIntentTimelineProvider {
     typealias Entry = ServerEntry
     
-    typealias Intent = SpecifyServerIDIntent
+    typealias Intent = ServerDetailConfigurationIntent
     
     func placeholder(in context: Context) -> ServerEntry {
         ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "Placeholder", color: .blue)
     }
     
-    func snapshot(for configuration: SpecifyServerIDIntent, in context: Context) async -> ServerEntry {
+    func snapshot(for configuration: ServerDetailConfigurationIntent, in context: Context) async -> ServerEntry {
         let serverID: Int? = configuration.server?.id
         let isShowIP: Bool = configuration.isShowIP ?? false
         let color: WidgetBackgroundColor = configuration.color ?? .blue
@@ -53,7 +53,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
         }
     }
     
-    func timeline(for configuration: SpecifyServerIDIntent, in context: Context) async -> Timeline<ServerEntry> {
+    func timeline(for configuration: ServerDetailConfigurationIntent, in context: Context) async -> Timeline<ServerEntry> {
         let serverID: Int? = configuration.server?.id
         let isShowIP: Bool = configuration.isShowIP ?? false
         let color: WidgetBackgroundColor = configuration.color ?? .blue
@@ -99,15 +99,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
 }
 
-struct ServerEntry: TimelineEntry {
-    let date: Date
-    let server: Server?
-    let isShowIP: Bool?
-    let message: String
-    let color: WidgetBackgroundColor
-}
-
-struct WidgetEntryView : View {
+struct ServerDetailWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
     var entry: ServerDetailProvider.Entry
     var color: AnyGradient {
@@ -162,7 +154,6 @@ struct WidgetEntryView : View {
                             Text("↑\(formatBytes(server.status.netOutTransfer))")
                         }
                     case .systemSmall:
-#if os(iOS)
                         let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
                         @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
                         @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
@@ -176,13 +167,7 @@ struct WidgetEntryView : View {
                                 .foregroundStyle(.white)
                                 .containerBackground(color, for: .widget)
                         }
-#else
-                        serverDetailViewSystemSmall(server: server)
-                            .foregroundStyle(.white)
-                            .containerBackground(color, for: .widget)
-#endif
                     case .systemMedium:
-#if os(iOS)
                         let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
                         @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
                         @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
@@ -198,12 +183,6 @@ struct WidgetEntryView : View {
                                 .tint(.white)
                                 .containerBackground(color, for: .widget)
                         }
-#else
-                        serverDetailViewSystemMedium(server: server)
-                            .foregroundStyle(.white)
-                            .tint(.white)
-                            .containerBackground(color, for: .widget)
-#endif
                     default:
                         Text("Unsupported family")
                     }
@@ -421,15 +400,23 @@ struct WidgetEntryView : View {
     }
 }
 
-struct NezhaWidgetApp: Widget {
+struct ServerEntry: TimelineEntry {
+    let date: Date
+    let server: Server?
+    let isShowIP: Bool?
+    let message: String
+    let color: WidgetBackgroundColor
+}
+
+struct ServerDetailWidget: Widget {
     init() {
         // Register UserDefaults
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
         if let userDefaults {
             let defaultValues: [String: Any] = [
+                "NMLastModifyDate": 0,
                 "NMDashboardLink": "",
-                "NMDashboardAPIToken": "",
-                "NMLastModifyDate": 0
+                "NMDashboardAPIToken": ""
             ]
             userDefaults.register(defaults: defaultValues)
         }
@@ -438,8 +425,8 @@ struct NezhaWidgetApp: Widget {
     let kind: String = "ServerDetailWidget"
     
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: SpecifyServerIDIntent.self, provider: ServerDetailProvider()) { entry in
-            WidgetEntryView(entry: entry)
+        AppIntentConfiguration(kind: kind, intent: ServerDetailConfigurationIntent.self, provider: ServerDetailProvider()) { entry in
+            ServerDetailWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Server Details")
         .description("View details of your server at a glance.")
@@ -452,11 +439,8 @@ struct NezhaWidgetApp: Widget {
     }
 }
 
-//struct NezhaWidgetApp_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WidgetEntryView(entry: ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "OK", color: .blue))
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
-//        WidgetEntryView(entry: ServerEntry(date: Date(), server: nil, isShowIP: false, message: "Error Description", color: .blue))
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
-//    }
+//#Preview("ServerDetailWidget", as: .systemMedium) {
+//    ServerDetailWidget()
+//} timeline: {
+//    ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "OK", color: .blue)
 //}

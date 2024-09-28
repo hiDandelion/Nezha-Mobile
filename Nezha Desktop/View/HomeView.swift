@@ -42,7 +42,7 @@ struct HomeView: View {
                                 let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
                                 let allTags = ["All"] + tags.sorted()
                                 ForEach(allTags, id: \.self) { tag in
-                                    Text("\(tag == "All" ? String(localized: "All") : tag)")
+                                    Text("\(tag == "All" ? String(localized: "All") : (tag == "" ? String(localized: "Uncategorized") : tag))")
                                         .tag(UserSection(tab: .server, tag: tag))
                                 }
                             }

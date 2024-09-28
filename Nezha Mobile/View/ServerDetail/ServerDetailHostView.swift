@@ -80,8 +80,8 @@ struct ServerDetailHostView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 50)
             }
-            if OSName.contains("Apple") {
-                Image("AppleLogo")
+            if OSName.contains("iOS") {
+                Image("iOSLogo")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 50)

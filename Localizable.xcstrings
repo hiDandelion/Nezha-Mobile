@@ -614,6 +614,15 @@
         }
       }
     },
+    "Configure and customize agent widget" : {
+
+    },
+    "Configure and customize server detail widget" : {
+
+    },
+    "Configure Widget" : {
+
+    },
     "Connect" : {
       "localizations" : {
         "ja" : {
@@ -1269,6 +1278,22 @@
         }
       }
     },
+    "Get up-to-date information." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最新の情報を取得する。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取最新信息。"
+          }
+        }
+      }
+    },
     "GPU" : {
       "localizations" : {
         "ja" : {
@@ -1754,21 +1779,11 @@
         }
       }
     },
+    "Nezha Agent" : {
+      "shouldTranslate" : false
+    },
     "Nezha Desktop" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nezha Desktop"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nezha Desktop"
-          }
-        }
-      }
+      "shouldTranslate" : false
     },
     "No Alert" : {
       "localizations" : {
@@ -2193,6 +2208,22 @@
         }
       }
     },
+    "Report" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "報告"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上报"
+          }
+        }
+      }
+    },
     "Report Device Info" : {
       "localizations" : {
         "ja" : {
@@ -2205,6 +2236,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "上报设备信息"
+          }
+        }
+      }
+    },
+    "Report your device information." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本機の情報を報告する。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上报你的设备信息。"
           }
         }
       }
@@ -3261,6 +3308,9 @@
           }
         }
       }
+    },
+    "View and report your device information." : {
+
     },
     "View Details" : {
       "localizations" : {
