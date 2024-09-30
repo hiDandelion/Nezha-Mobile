@@ -10,10 +10,8 @@ import SwiftUI
 struct ReportDeviceInfoView: View {
     @AppStorage("NMDashboardGRPCLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCLink: String = ""
     @AppStorage("NMDashboardGRPCPort", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCPort: String = "5555"
-    @State private var isShowPrivacyNotice: Bool = false
     @State private var isReportingDeviceInfo: Bool = false
-    @State private var reportDeviceHostResponseSuccess: Bool = false
-    @State private var reportDeviceStatusResponseSuccess: Bool = false
+    @State private var reportDeviceInfoResponseSuccess: Bool = false
     @State private var reportDeviceInfoErrorMessage: String = ""
     
     var body: some View {
@@ -33,7 +31,7 @@ struct ReportDeviceInfoView: View {
                             .foregroundStyle(.green)
                         Text("Successfully Reported")
                     }
-                    .opacity(reportDeviceHostResponseSuccess && reportDeviceHostResponseSuccess ? 1 : 0)
+                    .opacity(reportDeviceInfoResponseSuccess ? 1 : 0)
                     HStack {
                         Image(systemName: "xmark.circle")
                             .foregroundStyle(.red)
@@ -62,35 +60,6 @@ struct ReportDeviceInfoView: View {
                 }
                 
                 Spacer()
-                
-                Button {
-                    isShowPrivacyNotice = true
-                } label: {
-                    Text("Privacy Notice")
-                        .font(.caption)
-                }
-                .sheet(isPresented: $isShowPrivacyNotice) {
-                    NavigationStack {
-                        ScrollView {
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("By using Nezha Mobile as an agent, you acknowledge we will collect the following matrix of your device:")
-                                Text("- OS Version\n- Model Identifier\n- CPU Usage\n- Memory Usage\n- Disk Usage\n- Data Usage\n- Boot Time\n- Uptime")
-                                Text("These data will only be uploaded to the server you configured. We will not save your data.")
-                            }
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                        }
-                        .navigationTitle("Privacy Notice")
-                        .padding()
-                        .toolbar {
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Done") {
-                                    isShowPrivacyNotice = false
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
         else {
@@ -123,6 +92,7 @@ struct ReportDeviceInfoView: View {
 #endif
         
         isReportingDeviceInfo = true
+        
         Task {
             do {
                 let dataUsageFormer = DeviceInfo.getDataUsage()
@@ -135,34 +105,15 @@ struct ReportDeviceInfoView: View {
                 let dataUsageLaterReceived = dataUsageLater.wifiReceived + dataUsageLater.wirelessWanDataReceived
                 let dataUsageLaterSent = dataUsageLater.wifiSent + dataUsageLater.wirelessWanDataSent
                 
-                let reportDeviceHostResponse = try await RequestHandler.reportDeviceHost(identifier: DeviceInfo.getDeviceModelIdentifier(), systemVersion: DeviceInfo.getOSVersionNumber(), memoryTotal: DeviceInfo.getMemoryTotal(), diskTotal: DeviceInfo.getDiskTotal(), bootTime: DeviceInfo.getBootTime(), agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")
+                let reportDeviceHostResponse = try await RequestHandler.reportDeviceInfo(identifier: DeviceInfo.getDeviceModelIdentifier(), systemVersion: DeviceInfo.getOSVersionNumber(), memoryTotal: DeviceInfo.getMemoryTotal(), diskTotal: DeviceInfo.getDiskTotal(), bootTime: DeviceInfo.getBootTime(), agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown", cpuUsage: DeviceInfo.getCPUUsage(), memoryUsed: DeviceInfo.getMemoryUsed(), diskUsed: DeviceInfo.getDiskUsed(), uptime: DeviceInfo.getUptime(), networkIn: dataUsageLaterReceived, networkOut: dataUsageLaterSent, networkInSpeed:  dataUsageLaterReceived - dataUsageFormerReceived, networkOutSpeed: dataUsageLaterSent - dataUsageFormerSent)
+                
                 if reportDeviceHostResponse.success {
                     withAnimation {
-                        reportDeviceHostResponseSuccess = true
+                        reportDeviceInfoResponseSuccess = true
                     }
                 }
                 else {
-                    reportDeviceHostResponseSuccess = false
-                    reportDeviceInfoErrorMessage = reportDeviceHostResponse.error ?? "Unknown Error"
-                }
-                
-                let reportDeviceStatusResponse = try await RequestHandler.reportDeviceStatus(
-                    cpuUsage: DeviceInfo.getCPUUsage(),
-                    memoryUsed: DeviceInfo.getMemoryUsed(),
-                    diskUsed: DeviceInfo.getDiskUsed(),
-                    uptime: DeviceInfo.getUptime(),
-                    networkIn: dataUsageLaterReceived,
-                    networkOut: dataUsageLaterSent,
-                    networkInSpeed:  dataUsageLaterReceived - dataUsageFormerReceived,
-                    networkOutSpeed: dataUsageLaterSent - dataUsageFormerSent
-                )
-                if reportDeviceStatusResponse.success {
-                    withAnimation {
-                        reportDeviceStatusResponseSuccess = true
-                    }
-                }
-                else {
-                    reportDeviceStatusResponseSuccess = false
+                    reportDeviceInfoResponseSuccess = false
                     reportDeviceInfoErrorMessage = reportDeviceHostResponse.error ?? "Unknown Error"
                 }
                 

@@ -17,7 +17,7 @@ struct ToolListView: View {
                     NavigationLink {
                         ReportDeviceInfoView()
                     } label: {
-                        TextWithColorfulIcon(titleKey: "Report Device Info", systemName: "text.page", color: .blue)
+                        TextWithColorfulIcon(titleKey: "Report Device Info", systemName: "square.and.arrow.up.on.square", color: .green)
                     }
                 }
                 
@@ -34,8 +34,12 @@ struct ToolListView: View {
                     }
                 }
             }
-            .contentMargins(.bottom, 60)
             .navigationTitle("Tools")
+            .safeAreaInset(edge: .bottom) {
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height: 50)
+            }
             .onAppear {
                 withAnimation {
                     tabBarState.isToolsViewVisible = true

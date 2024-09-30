@@ -92,7 +92,6 @@ struct SettingsView: View {
                     }
                 }
             }
-            .contentMargins(.bottom, 60)
             .navigationTitle("Settings")
             .toolbar {
                 if isPresentedAsSheet {
@@ -102,6 +101,11 @@ struct SettingsView: View {
                         }
                     }
                 }
+            }
+            .safeAreaInset(edge: .bottom) {
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height: 50)
             }
             .onAppear {
                 withAnimation {

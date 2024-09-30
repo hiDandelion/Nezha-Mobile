@@ -9,7 +9,7 @@ import AppIntents
 
 struct AgentConfigurationContent: WidgetConfigurationIntent {
     static let title: LocalizedStringResource = "Configure Widget"
-    static let description = IntentDescription("Configure and customize agent widget")
+    static let description = IntentDescription("Configure Agent Widget")
 
     @Parameter(title: "Color")
     var color: WidgetBackgroundColor?

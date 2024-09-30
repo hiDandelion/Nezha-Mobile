@@ -22,8 +22,7 @@ struct ReportDeviceInfoIntent: AppIntent {
         let bootTime = DeviceInfo.getBootTime()
         let uptime = DeviceInfo.getUptime()
         
-        _ = try? await RequestHandler.reportDeviceHost(identifier: deviceModelIdentifier, systemVersion: OSVersionNumber, memoryTotal: memoryTotal, diskTotal: diskTotal, bootTime: bootTime, agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")
-        _ = try? await RequestHandler.reportDeviceStatus(cpuUsage: cpuUsage, memoryUsed: memoryUsed, diskUsed: diskUsed, uptime: uptime, networkIn: 0, networkOut: 0, networkInSpeed: 0, networkOutSpeed: 0)
+        _ = try? await RequestHandler.reportDeviceInfo(identifier: deviceModelIdentifier, systemVersion: OSVersionNumber, memoryTotal: memoryTotal, diskTotal: diskTotal, bootTime: bootTime, agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown", cpuUsage: cpuUsage, memoryUsed: memoryUsed, diskUsed: diskUsed, uptime: uptime, networkIn: 0, networkOut: 0, networkInSpeed: 0, networkOutSpeed: 0)
         
         return .result()
     }

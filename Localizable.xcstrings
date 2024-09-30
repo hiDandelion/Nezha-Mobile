@@ -547,7 +547,7 @@
         }
       }
     },
-    "By using Nezha Mobile as an agent, you acknowledge we will collect the following matrix of your device:" : {
+    "By using Nezha Mobile as an agent, you acknowledge the following matrix of your device will be obtained:" : {
       "shouldTranslate" : false
     },
     "Cancel" : {
@@ -614,14 +614,53 @@
         }
       }
     },
-    "Configure and customize agent widget" : {
-
+    "Configure Agent Widget" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agentウィジェットを設定"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配置Agent小组件"
+          }
+        }
+      }
     },
-    "Configure and customize server detail widget" : {
-
+    "Configure Server Detail Widget" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバー詳細ウィジェットを設定"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配置服务器详细信息小组件"
+          }
+        }
+      }
     },
     "Configure Widget" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ウィジェットを設定"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配置小组件"
+          }
+        }
+      }
     },
     "Connect" : {
       "localizations" : {
@@ -1267,7 +1306,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーの最新の詳細情報を取得する。"
+            "value" : "サーバーの最新の詳細情報を取得します。"
           }
         },
         "zh-Hans" : {
@@ -1283,7 +1322,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "最新の情報を取得する。"
+            "value" : "最新の情報を取得します。"
           }
         },
         "zh-Hans" : {
@@ -2014,7 +2053,20 @@
       }
     },
     "Privacy Notice" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシー通知"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐私声明"
+          }
+        }
+      }
     },
     "Private Key Type" : {
       "localizations" : {
@@ -2245,7 +2297,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本機の情報を報告する。"
+            "value" : "本機の情報を報告します。"
           }
         },
         "zh-Hans" : {
@@ -2261,7 +2313,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "報告しています"
+            "value" : "報告中"
           }
         },
         "zh-Hans" : {
@@ -2421,7 +2473,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーを選択して詳細を表示します。"
+            "value" : "詳細を表示するサーバーを選択します。"
           }
         },
         "zh-Hans" : {
@@ -2918,7 +2970,7 @@
         }
       }
     },
-    "These data will only be uploaded to the server you configured. We will not save your data." : {
+    "These data will be sent to the Dashboard server you configured. We will not save any of your data." : {
       "shouldTranslate" : false
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
@@ -3310,7 +3362,20 @@
       }
     },
     "View and report your device information." : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本機の情報を表示および報告します。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "查看并上报你的设备信息。"
+          }
+        }
+      }
     },
     "View Details" : {
       "localizations" : {
@@ -3333,7 +3398,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーの詳細を一目で確認。"
+            "value" : "サーバーの詳細を一目で確認します。"
           }
         },
         "zh-Hans" : {

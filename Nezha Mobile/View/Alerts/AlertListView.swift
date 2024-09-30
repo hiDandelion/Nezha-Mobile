@@ -45,8 +45,12 @@ struct AlertListView: View {
                             }
                         }
                     }
-                    .contentMargins(.bottom, 60)
                     .navigationTitle("Alerts")
+                    .safeAreaInset(edge: .bottom) {
+                        Rectangle()
+                            .fill(.clear)
+                            .frame(height: 50)
+                    }
                 }
                 else {
                     ContentUnavailableView("No Alert", systemImage: "checkmark.circle.fill")

@@ -57,6 +57,11 @@ struct ServerListView: View {
                 Content
                     .zIndex(1)
             }
+            .safeAreaInset(edge: .bottom) {
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height: 50)
+            }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
                 if let incomingURLServerID {
                     ServerDetailView(serverID: incomingURLServerID, dashboardViewModel: dashboardViewModel)
@@ -133,7 +138,6 @@ struct ServerListView: View {
                             
                             ServerList(isWideLayout: isWideLayout)
                         }
-                        .contentMargins(.bottom, 60)
                         .navigationTitle("Servers")
                         .searchable(text: $searchText)
                     }
@@ -262,7 +266,9 @@ struct ServerListView: View {
                         }
                     }
                     .frame(width: 20)
+                    
                     Text(server.name)
+                    
                     if let lastUpdateTime = dashboardViewModel.lastUpdateTime {
                         Image(systemName: "circlebadge.fill")
                             .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)

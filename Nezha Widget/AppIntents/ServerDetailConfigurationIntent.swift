@@ -9,7 +9,7 @@ import AppIntents
 
 struct ServerDetailConfigurationIntent: WidgetConfigurationIntent {
     static let title: LocalizedStringResource = "Configure Widget"
-    static let description = IntentDescription("Configure and customize server detail widget")
+    static let description = IntentDescription("Configure Server Detail Widget")
 
     @Parameter(title: "Server")
     var server: ServerEntity?

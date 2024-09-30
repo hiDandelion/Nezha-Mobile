@@ -12,6 +12,7 @@ struct AgentSettingsView: View {
     @State private var dashboardGRPCLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardGRPCLink") ?? ""
     @State private var dashboardGRPCPort: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardGRPCPort") ?? "5555"
     @State private var agentSecret: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMAgentSecret") ?? "5555"
+    @State private var isShowPrivacyNotice: Bool = false
     
     var body: some View {
         Form {
@@ -45,5 +46,34 @@ struct AgentSettingsView: View {
             }
         }
         .navigationTitle("Agent Settings")
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                Button("Privacy Notice") {
+                    isShowPrivacyNotice = true
+                }
+            }
+        }
+        .sheet(isPresented: $isShowPrivacyNotice) {
+            NavigationStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("By using Nezha Mobile as an agent, you acknowledge the following matrix of your device will be obtained:")
+                        Text("- OS Version\n- Model Identifier\n- CPU Usage\n- Memory Usage\n- Disk Usage\n- Data Usage\n- Boot Time\n- Uptime")
+                        Text("These data will be sent to the Dashboard server you configured. We will not save any of your data.")
+                    }
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                }
+                .navigationTitle("Privacy Notice")
+                .padding()
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Done") {
+                            isShowPrivacyNotice = false
+                        }
+                    }
+                }
+            }
+        }
     }
 }
