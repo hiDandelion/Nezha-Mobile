@@ -40,7 +40,9 @@ struct AgentProvider: AppIntentTimelineProvider {
         
         let color: WidgetBackgroundColor = configuration.color ?? .blue
         
-        _ = try? await RequestHandler.reportDeviceInfo(identifier: deviceModelIdentifier, systemVersion: OSVersionNumber, memoryTotal: memoryTotal, diskTotal: diskTotal, bootTime: bootTime, agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown", cpuUsage: cpuUsage, memoryUsed: memoryUsed, diskUsed: diskUsed, uptime: uptime, networkIn: 0, networkOut: 0, networkInSpeed: 0, networkOutSpeed: 0)
+        if configuration.report == true {
+            _ = try? await RequestHandler.reportDeviceInfo(identifier: deviceModelIdentifier, systemVersion: OSVersionNumber, memoryTotal: memoryTotal, diskTotal: diskTotal, bootTime: bootTime, agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown", cpuUsage: cpuUsage, memoryUsed: memoryUsed, diskUsed: diskUsed, uptime: uptime, networkIn: 0, networkOut: 0, networkInSpeed: 0, networkOutSpeed: 0)
+        }
         
         return AgentEntry(date: Date(), deviceModelIdentifier: deviceModelIdentifier, OSVersionNumber: OSVersionNumber, cpuUsage: cpuUsage, memoryUsed: memoryUsed, memoryTotal: memoryTotal, diskUsed: diskUsed, diskTotal: diskTotal, uptime: uptime, color: color)
     }
@@ -58,7 +60,9 @@ struct AgentProvider: AppIntentTimelineProvider {
         
         let color: WidgetBackgroundColor = configuration.color ?? .blue
         
-        _ = try? await RequestHandler.reportDeviceInfo(identifier: deviceModelIdentifier, systemVersion: OSVersionNumber, memoryTotal: memoryTotal, diskTotal: diskTotal, bootTime: bootTime, agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown", cpuUsage: cpuUsage, memoryUsed: memoryUsed, diskUsed: diskUsed, uptime: uptime, networkIn: 0, networkOut: 0, networkInSpeed: 0, networkOutSpeed: 0)
+        if configuration.report == true {
+            _ = try? await RequestHandler.reportDeviceInfo(identifier: deviceModelIdentifier, systemVersion: OSVersionNumber, memoryTotal: memoryTotal, diskTotal: diskTotal, bootTime: bootTime, agentVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown", cpuUsage: cpuUsage, memoryUsed: memoryUsed, diskUsed: diskUsed, uptime: uptime, networkIn: 0, networkOut: 0, networkInSpeed: 0, networkOutSpeed: 0)
+        }
         
         return Timeline(entries: [AgentEntry(date: Date(), deviceModelIdentifier: deviceModelIdentifier, OSVersionNumber: OSVersionNumber, cpuUsage: cpuUsage, memoryUsed: memoryUsed, memoryTotal: memoryTotal, diskUsed: diskUsed, diskTotal: diskTotal, uptime: uptime, color: color)], policy: .atEnd)
     }

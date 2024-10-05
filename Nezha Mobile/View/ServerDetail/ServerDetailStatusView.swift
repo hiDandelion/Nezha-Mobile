@@ -26,7 +26,7 @@ struct ServerDetailStatusView: View {
                 Gauge(value: cpuUsage) {
                     
                 }
-                .gaugeStyle(AccessoryLinearGaugeStyle())
+                .gaugeStyle(.linearCapacity)
                 .tint(gaugeGradient)
             }
             
@@ -42,7 +42,7 @@ struct ServerDetailStatusView: View {
                 Gauge(value: memUsage) {
                     
                 }
-                .gaugeStyle(AccessoryLinearGaugeStyle())
+                .gaugeStyle(.linearCapacity)
                 .tint(gaugeGradient)
             }
             
@@ -59,11 +59,18 @@ struct ServerDetailStatusView: View {
                     Gauge(value: swapUsage) {
                         
                     }
-                    .gaugeStyle(AccessoryLinearGaugeStyle())
+                    .gaugeStyle(.linearCapacity)
                     .tint(gaugeGradient)
                 }
                 else {
                     PieceOfInfo(systemImage: "doc", name: "Swap", content: Text("Disabled"))
+                    
+                    let swapUsage = 0.0
+                    Gauge(value: swapUsage) {
+                        
+                    }
+                    .gaugeStyle(.linearCapacity)
+                    .tint(gaugeGradient)
                 }
             }
             
@@ -79,7 +86,7 @@ struct ServerDetailStatusView: View {
                 Gauge(value: diskUsage) {
                     
                 }
-                .gaugeStyle(AccessoryLinearGaugeStyle())
+                .gaugeStyle(.linearCapacity)
                 .tint(gaugeGradient)
             }
             

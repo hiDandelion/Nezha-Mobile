@@ -2564,6 +2564,22 @@
         }
       }
     },
+    "Server returned an invalid response." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバーが無効な応答を返しました。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器返回了无效响应。"
+          }
+        }
+      }
+    },
     "Server Unavailable" : {
       "localizations" : {
         "ja" : {
@@ -2970,8 +2986,8 @@
         }
       }
     },
-    "These data will be sent to the Dashboard server you configured. We will not save any of your data." : {
-      "shouldTranslate" : false
+    "These data will be sent to the Dashboard server you configured in Agent Settings. We will not save any of your data." : {
+
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
       "localizations" : {

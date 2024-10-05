@@ -11,12 +11,15 @@ struct AgentConfigurationContent: WidgetConfigurationIntent {
     static let title: LocalizedStringResource = "Configure Widget"
     static let description = IntentDescription("Configure Agent Widget")
 
+    @Parameter(title: "Report")
+    var report: Bool?
     @Parameter(title: "Color")
     var color: WidgetBackgroundColor?
 
     init() {}
 
-    init(color: WidgetBackgroundColor) {
+    init(report: Bool, color: WidgetBackgroundColor) {
+        self.report = report
         self.color = color
     }
 }

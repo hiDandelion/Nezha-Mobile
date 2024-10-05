@@ -140,6 +140,13 @@ struct ServerListView: View {
                         }
                         .navigationTitle("Servers")
                         .searchable(text: $searchText)
+                        .toolbar {
+                            Button {
+                                dashboardViewModel.updateImmediately()
+                            } label: {
+                                Label("Refresh", systemImage: "arrow.clockwise")
+                            }
+                        }
                     }
                 }
             case .error(let message):

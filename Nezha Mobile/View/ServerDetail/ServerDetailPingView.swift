@@ -52,6 +52,22 @@ struct ServerDetailPingChartView: View {
                             isLoadingPingDatas = false
                         }
                     }
+                    catch let error as NezhaDashboardError {
+                        switch error {
+                        case .invalidResponse(let message):
+                            if message == "success" {
+                                errorDescriptionLoadingPingData = String(localized: "No data")
+                            }
+                            else {
+                                errorDescriptionLoadingPingData = String(localized: "Server returned an invalid response.")
+#if DEBUG
+                                _ = debugLog("Nezha Dashboard Handler Error - Invalid response: \(message)")
+#endif
+                            }
+                        default:
+                            errorDescriptionLoadingPingData = error.localizedDescription
+                        }
+                    }
                     catch {
                         errorDescriptionLoadingPingData = error.localizedDescription
                     }
