@@ -11,8 +11,10 @@ struct ReportDeviceInfoView: View {
     @AppStorage("NMDashboardGRPCLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCLink: String = ""
     @AppStorage("NMDashboardGRPCPort", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCPort: String = "5555"
     @State private var isReportingDeviceInfo: Bool = false
-    @State private var reportDeviceInfoResponseSuccess: Bool = false
-    @State private var reportDeviceInfoErrorMessage: String = ""
+    @State private var reportDeviceInfoResponseSuccess: Bool?
+    @State private var reportDeviceInfoErrorMessage: String = String(localized: "An error occurred")
+    @State private var successHapticTrigger = false
+    @State private var errorHapticTrigger = false
     
     var body: some View {
         if dashboardGRPCLink != "", dashboardGRPCPort != "" {
@@ -26,19 +28,23 @@ struct ReportDeviceInfoView: View {
                         .foregroundStyle(.blue)
                         .frame(width: 100, height: 100)
                     Text("\(dashboardGRPCLink):\(dashboardGRPCPort)")
-                    HStack {
-                        Image(systemName: "checkmark.circle")
-                            .foregroundStyle(.green)
-                        Text("Successfully Reported")
+                    ZStack {
+                        HStack {
+                            Image(systemName: "checkmark.circle")
+                                .foregroundStyle(.green)
+                            Text("Successfully Reported")
+                        }
+                        .opacity(reportDeviceInfoResponseSuccess == true ? 1 : 0)
+                        HStack {
+                            Image(systemName: "xmark.circle")
+                                .foregroundStyle(.red)
+                            Text(reportDeviceInfoErrorMessage)
+                        }
+                        .opacity(reportDeviceInfoResponseSuccess == false ? 1 : 0)
                     }
-                    .opacity(reportDeviceInfoResponseSuccess ? 1 : 0)
-                    HStack {
-                        Image(systemName: "xmark.circle")
-                            .foregroundStyle(.red)
-                        Text(reportDeviceInfoErrorMessage)
-                    }
-                    .opacity(reportDeviceInfoErrorMessage != "" ? 1 : 0)
                 }
+                .sensoryFeedback(.success, trigger: successHapticTrigger)
+                .sensoryFeedback(.error, trigger: errorHapticTrigger)
                 
                 Spacer()
                 
@@ -110,19 +116,27 @@ struct ReportDeviceInfoView: View {
                 if reportDeviceHostResponse.success {
                     withAnimation {
                         reportDeviceInfoResponseSuccess = true
+                        successHapticTrigger.toggle()
                     }
                 }
                 else {
-                    reportDeviceInfoResponseSuccess = false
-                    reportDeviceInfoErrorMessage = reportDeviceHostResponse.error ?? "Unknown Error"
+                    withAnimation {
+                        reportDeviceInfoResponseSuccess = false
+                        reportDeviceInfoErrorMessage = reportDeviceHostResponse.error ?? "Unknown Error"
+                        errorHapticTrigger.toggle()
+                    }
                 }
                 
-                isReportingDeviceInfo = false
+                withAnimation {
+                    isReportingDeviceInfo = false
+                }
             }
             catch {
-                reportDeviceInfoErrorMessage = error.localizedDescription
-                
-                isReportingDeviceInfo = false
+                withAnimation {
+                    isReportingDeviceInfo = false
+                    reportDeviceInfoErrorMessage = error.localizedDescription
+                    errorHapticTrigger.toggle()
+                }
             }
         }
     }

@@ -48,8 +48,10 @@ struct AgentSettingsView: View {
         .navigationTitle("Agent Settings")
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                Button("Privacy Notice") {
+                Button {
                     isShowPrivacyNotice = true
+                } label: {
+                    Label("Privacy Notice", systemImage: "hand.raised.fill")
                 }
             }
         }
@@ -59,7 +61,7 @@ struct AgentSettingsView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("By using Nezha Mobile as an agent, you acknowledge the following matrix of your device will be obtained:")
                         Text("- OS Version\n- Model Identifier\n- CPU Usage\n- Memory Usage\n- Disk Usage\n- Data Usage\n- Boot Time\n- Uptime")
-                        Text("These data will be sent to the Dashboard server you configured in Agent Settings. We will not save any of your data.")
+                        Text("These data will be sent to the Dashboard server you configured in Agent Settings. We will not save or share any of your data.")
                     }
                     .font(.caption2)
                     .foregroundStyle(.secondary)

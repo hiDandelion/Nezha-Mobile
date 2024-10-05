@@ -11,7 +11,7 @@ import AppIntents
 
 struct RefreshLiveActivityIntent: LiveActivityIntent {
     static let title: LocalizedStringResource = "Refresh Live Activity"
-    static let description = IntentDescription("Get up-to-date details of a server.")
+    static let description = IntentDescription("Get up-to-date details in your Live Activity.")
     
     func perform() async throws -> some IntentResult {
         let activities = Activity<LiveActivityAttributes>.activities

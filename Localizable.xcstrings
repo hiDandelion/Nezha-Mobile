@@ -1084,6 +1084,22 @@
         }
       }
     },
+    "Device Info" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デバイス情報"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设备信息"
+          }
+        }
+      }
+    },
     "Disabled" : {
       "localizations" : {
         "ja" : {
@@ -1301,34 +1317,34 @@
         }
       }
     },
-    "Get up-to-date details of a server." : {
+    "Get up-to-date details in your Live Activity." : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーの最新の詳細情報を取得します。"
+            "value" : "ライブアクティビティで最新の情報を取得します。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "获取服务器的最新信息。"
+            "value" : "在实时活动中获取服务器的最新信息。"
           }
         }
       }
     },
-    "Get up-to-date information." : {
+    "Get up-to-date information in your Widget." : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "最新の情報を取得します。"
+            "value" : "ウィジェットで最新の情報を取得します。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "获取最新信息。"
+            "value" : "在小组件中获取服务器的最新信息。"
           }
         }
       }
@@ -1646,7 +1662,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "地図視界"
+            "value" : "マップビュー"
           }
         },
         "zh-Hans" : {
@@ -1718,6 +1734,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "状态栏"
+          }
+        }
+      }
+    },
+    "Model Identifier" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モデル識別子"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "机型识别符"
           }
         }
       }
@@ -2281,7 +2313,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本機の情報を報告"
+            "value" : "デバイス情報を報告"
           }
         },
         "zh-Hans" : {
@@ -2292,12 +2324,28 @@
         }
       }
     },
+    "Report your device information via Nezha Agent." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nezha Agent 経由でデバイス情報を報告します。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过 Nezha Agent 上报你的设备信息。"
+          }
+        }
+      }
+    },
     "Report your device information." : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本機の情報を報告します。"
+            "value" : "デバイス情報を報告します。"
           }
         },
         "zh-Hans" : {
@@ -2884,6 +2932,22 @@
         }
       }
     },
+    "System Version" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "システムバージョン"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "系统版本"
+          }
+        }
+      }
+    },
     "Tag" : {
       "localizations" : {
         "ja" : {
@@ -2986,11 +3050,17 @@
         }
       }
     },
-    "These data will be sent to the Dashboard server you configured in Agent Settings. We will not save any of your data." : {
+    "These data will be sent to the Dashboard server you configured in Agent Settings. We will not save or share any of your data." : {
 
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "これらの設定は、テーマ設定とテーマのカスタム設定を上書きします。"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3001,6 +3071,12 @@
     },
     "These settings will overwrite theme configurations." : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "これらの設定は、テーマ設定を上書きします。"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3011,6 +3087,12 @@
     },
     "These settings will overwrite widget configurations and apply to all widgets." : {
       "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "これらの設定は、ウィジェット設定を上書きし、すべてのウィジェットに適用されます。"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3382,7 +3464,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本機の情報を表示および報告します。"
+            "value" : "本機のデバイス情報を表示および報告します。"
           }
         },
         "zh-Hans" : {
@@ -3421,6 +3503,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "快速查看你的服务器信息。"
+          }
+        }
+      }
+    },
+    "View Device Info" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デバイス情報を表示"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "查看设备信息"
           }
         }
       }

@@ -9,7 +9,7 @@ import AppIntents
 
 struct RefreshWidgetIntent: AppIntent {
     static let title: LocalizedStringResource = "Refresh Widget"
-    static let description = IntentDescription("Get up-to-date information.")
+    static let description = IntentDescription("Get up-to-date information in your Widget.")
     
     func perform() async throws -> some IntentResult {
         return .result()

@@ -9,7 +9,8 @@
 import AppIntents
 
 struct ReportDeviceInfoIntent: AppIntent {
-    static var title: LocalizedStringResource { "Report your device information." }
+    static var title: LocalizedStringResource = "Report Device Info"
+    static let description = IntentDescription("Report your device information via Nezha Agent.")
     
     func perform() async throws -> some IntentResult {
         let deviceModelIdentifier = DeviceInfo.getDeviceModelIdentifier()
