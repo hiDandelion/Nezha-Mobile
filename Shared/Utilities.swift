@@ -24,7 +24,7 @@ func debugLog(_ message: String) -> Any? {
 
 // Bytes To Data Amount String
 func formatBytes(_ bytes: Int64) -> String {
-    return ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .memory)
+    return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .memory)
 }
 
 // Timestamp To Date String

@@ -26,7 +26,6 @@ class DeviceInfoViewModel {
     var networkOutSpeed: Int64 = 0
     
     init() {
-        startMonitoring()
         refreshDeviceInfo()
     }
     

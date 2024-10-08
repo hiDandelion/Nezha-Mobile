@@ -34,17 +34,20 @@ class DeviceInfo {
         if status != KERN_SUCCESS {
             return 0.0
         }
-        var thread_list: thread_act_array_t? = UnsafeMutablePointer(mutating: [thread_act_t]())
+        
+        var thread_list: thread_act_array_t?
         var thread_count: mach_msg_type_number_t = 0
         defer {
             if let thread_list = thread_list {
-                vm_deallocate(mach_task_self_, vm_address_t(bitPattern: thread_list), vm_size_t(Int(thread_count) * MemoryLayout<thread_t>.stride) )
+                vm_deallocate(mach_task_self_, vm_address_t(bitPattern: thread_list), vm_size_t(thread_count) * vm_size_t(MemoryLayout<thread_act_t>.stride))
             }
         }
+        
         status = task_threads(mach_task_self_, &thread_list, &thread_count)
         if status != KERN_SUCCESS {
             return 0.0
         }
+        
         var total_cpu: Double = 0
         
         if let thread_list = thread_list {
@@ -52,7 +55,7 @@ class DeviceInfo {
                 var thread_info_count = mach_msg_type_number_t(THREAD_INFO_MAX)
                 var thinfo = [integer_t](repeating: 0, count: Int(thread_info_count))
                 status = thread_info(thread_list[j], thread_flavor_t(THREAD_BASIC_INFO),
-                                 &thinfo, &thread_info_count)
+                                     &thinfo, &thread_info_count)
                 if status != KERN_SUCCESS {
                     return 0.0
                 }

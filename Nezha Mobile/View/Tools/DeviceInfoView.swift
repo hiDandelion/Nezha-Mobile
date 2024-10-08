@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DeviceInfoView: View {
     @Environment(\.scenePhase) private var scenePhase
-    private var deviceInfoViewModel: DeviceInfoViewModel = .init()
+    private var deviceInfoViewModel: DeviceInfoViewModel = DeviceInfoViewModel()
     
     var body: some View {
         Form {
@@ -79,6 +79,9 @@ struct DeviceInfoView: View {
                 }
 
             }
+        }
+        .onAppear {
+            deviceInfoViewModel.startMonitoring()
         }
         .onDisappear {
             deviceInfoViewModel.stopMonitoring()
