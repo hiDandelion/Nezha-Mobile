@@ -66,6 +66,10 @@ struct AgentProvider: AppIntentTimelineProvider {
         
         return Timeline(entries: [AgentEntry(date: Date(), deviceModelIdentifier: deviceModelIdentifier, OSVersionNumber: OSVersionNumber, cpuUsage: cpuUsage, memoryUsed: memoryUsed, memoryTotal: memoryTotal, diskUsed: diskUsed, diskTotal: diskTotal, uptime: uptime, color: color)], policy: .atEnd)
     }
+    
+    func recommendations() -> [AppIntentRecommendation<AgentConfigurationContent>] {
+        return [AppIntentRecommendation(intent: AgentConfigurationContent(report: false, color: .blue), description: "Agent")]
+    }
 }
 
 struct AgentWidgetEntryView: View {

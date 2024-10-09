@@ -30,10 +30,7 @@ struct ServerDetailView: View {
         .tabViewStyle(.verticalPage)
         .navigationTitle(server.name)
         .onAppear {
-            let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-            if let userDefaults {
-                userDefaults.set(server.id, forKey: "NMWatchLastViewedServerID")
-            }
+            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.set(server.id, forKey: "NMWatchLastViewedServerID")
         }
     }
 }

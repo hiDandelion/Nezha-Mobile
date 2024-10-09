@@ -96,15 +96,10 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
         }
     }
     
-    
     func recommendations() -> [AppIntentRecommendation<SpecifyServerIntent>] {
-        if let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") {
-            let lastViewedServerID = userDefaults.integer(forKey: "NMWatchLastViewedServerID")
-            return [AppIntentRecommendation(intent: SpecifyServerIntent(server: ServerEntity(id: lastViewedServerID, name: "Last Viewed", displayIndex: nil)), description: "Last viewed server")]
-        }
-        else {
-            return []
-        }
+        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+        let lastViewedServerID = userDefaults.integer(forKey: "NMWatchLastViewedServerID")
+        return [AppIntentRecommendation(intent: SpecifyServerIntent(server: ServerEntity(id: lastViewedServerID, name: "Last Viewed", displayIndex: nil)), description: "Last viewed server")]
     }
 }
 
@@ -221,9 +216,10 @@ struct NezhaWatchWidgetApp: Widget {
         let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
         if let userDefaults {
             let defaultValues: [String: Any] = [
+                "NMLastModifyDate": 0,
                 "NMDashboardLink": "",
                 "NMDashboardAPIToken": "",
-                "NMLastModifyDate": 0
+                "NMWatchLastViewedServerID": 0
             ]
             userDefaults.register(defaults: defaultValues)
         }

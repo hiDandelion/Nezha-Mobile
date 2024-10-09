@@ -97,6 +97,12 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
             return Timeline(entries: entries, policy: .atEnd)
         }
     }
+    
+    func recommendations() -> [AppIntentRecommendation<ServerDetailConfigurationIntent>] {
+        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+        let lastViewedServerID = userDefaults.integer(forKey: "NMLastViewedServerID")
+        return [AppIntentRecommendation(intent: ServerDetailConfigurationIntent(server: ServerEntity(id: lastViewedServerID, name: "Last Viewed", displayIndex: nil), isShowIP: false, color: .blue), description: "Last viewed server")]
+    }
 }
 
 struct ServerDetailWidgetEntryView: View {
@@ -416,7 +422,8 @@ struct ServerDetailWidget: Widget {
             let defaultValues: [String: Any] = [
                 "NMLastModifyDate": 0,
                 "NMDashboardLink": "",
-                "NMDashboardAPIToken": ""
+                "NMDashboardAPIToken": "",
+                "NMLastViewedServerID": 0
             ]
             userDefaults.register(defaults: defaultValues)
         }

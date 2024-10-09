@@ -27,7 +27,7 @@ struct NezhaMobileApp: App {
                 "NMAgentSecret": "",
                 "NMPushNotificationsToken": "",
                 "NMPushToStartToken": "",
-                "NMWatchPushNotificationsToken": ""
+                "NMLastViewedServerID": 0
             ]
             userDefaults.register(defaults: defaultValues)
         }

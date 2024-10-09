@@ -151,6 +151,9 @@ struct ServerDetailView: View {
             if !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
             }
+            
+            // Save as last viewed server
+            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.set(serverID, forKey: "NMLastViewedServerID")
         }
     }
     
