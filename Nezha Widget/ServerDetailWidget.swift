@@ -157,7 +157,7 @@ struct ServerDetailWidgetEntryView: View {
                                     Text("\(memUsage * 100, specifier: "%.0f")%")
                                 }
                             }
-                            Text("↑\(formatBytes(server.status.netOutTransfer))")
+                            Text("↑ \(formatBytes(server.status.netOutTransfer))")
                         }
                     case .systemSmall:
                         let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
@@ -212,7 +212,15 @@ struct ServerDetailWidgetEntryView: View {
     func serverDetailViewSystemSmall(server: Server) -> some View {
         VStack(spacing: 0) {
             HStack {
-                Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                if server.host.countryCode.uppercased() == "TW" {
+                    Text("🇹🇼")
+                }
+                else if server.host.countryCode.uppercased() != "" {
+                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                }
+                else {
+                    Text("🏴‍☠️")
+                }
                 Text(server.name)
                 Spacer()
                 Button(intent: RefreshWidgetIntent()) {
@@ -251,16 +259,9 @@ struct ServerDetailWidgetEntryView: View {
                 .font(.caption)
                 
                 HStack {
-                    HStack {
-                        Image(systemName: "power")
-                        Text("\(formatTimeInterval(seconds: server.status.uptime, shortened: true))")
-                    }
-                    
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("↑\(formatBytes(server.status.netOutTransfer))")
-                            Text("↓\(formatBytes(server.status.netInTransfer))")
-                        }
+                    VStack(alignment: .leading) {
+                        Text("↑ \(formatBytes(server.status.netOutTransfer))")
+                        Text("↓ \(formatBytes(server.status.netInTransfer))")
                     }
                 }
                 .font(.caption)
@@ -273,14 +274,13 @@ struct ServerDetailWidgetEntryView: View {
         VStack(spacing: 0) {
             HStack {
                 if server.host.countryCode.uppercased() == "TW" {
-                    Image("TWFlag")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20)
+                    Text("🇹🇼")
                 }
                 else if server.host.countryCode.uppercased() != "" {
                     Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                        .frame(width: 20)
+                }
+                else {
+                    Text("🏴‍☠️")
                 }
                 ViewThatFits {
                     HStack {
@@ -294,7 +294,12 @@ struct ServerDetailWidgetEntryView: View {
                 Spacer()
                 Button(intent: RefreshWidgetIntent()) {
                     HStack(spacing: 5) {
-                        Text(entry.date.formatted(date: .omitted, time: .shortened))
+                        HStack {
+                            Image(systemName: "power")
+                                .frame(width: 10)
+                            Text("\(formatTimeInterval(seconds: server.status.uptime))")
+                        }
+                        .font(.caption)
                         Image(systemName: "arrow.clockwise")
                     }
                 }
@@ -307,12 +312,8 @@ struct ServerDetailWidgetEntryView: View {
                     gaugeView(server: server)
                 }
                 Spacer()
-                ViewThatFits {
-                    VStack(spacing: 10) {
-                        infoViewUpperSection(server: server)
-                        infoViewLowerSection(server: server)
-                    }
-                    infoViewUpperSection(server: server)
+                VStack {
+                    infoView(server: server)
                 }
                 .font(.caption2)
                 .frame(maxWidth: 100)
@@ -358,47 +359,14 @@ struct ServerDetailWidgetEntryView: View {
         .gaugeStyle(.accessoryCircularCapacity)
     }
     
-    func infoViewUpperSection(server: Server) -> some View {
+    func infoView(server: Server) -> some View {
         VStack(alignment: .leading) {
-            if let core = getCore(server.host.cpu) {
-                HStack {
-                    Image(systemName: "cpu")
-                        .frame(width: 10)
-                    Text("\(core) Core")
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            
-            HStack {
-                Image(systemName: "memorychip")
-                    .frame(width: 10)
-                Text("\(formatBytes(server.host.memTotal))")
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            HStack {
-                Image(systemName: "internaldrive")
-                    .frame(width: 10)
-                Text("\(formatBytes(server.host.diskTotal))")
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
-    
-    func infoViewLowerSection(server: Server) -> some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "power")
-                    .frame(width: 10)
-                Text("\(formatTimeInterval(seconds: server.status.uptime))")
-            }
-            
             HStack {
                 Image(systemName: "circle.dotted.circle")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑\(formatBytes(server.status.netOutTransfer))")
-                    Text("↓\(formatBytes(server.status.netInTransfer))")
+                    Text("↑ \(formatBytes(server.status.netOutTransfer))")
+                    Text("↓ \(formatBytes(server.status.netInTransfer))")
                 }
             }
         }

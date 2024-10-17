@@ -139,8 +139,8 @@ struct LiveActivity: Widget {
                 Image(systemName: "circle.dotted.circle")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑\(formatBytes(context.state.netOutTransfer))")
-                    Text("↓\(formatBytes(context.state.netInTransfer))")
+                    Text("↑ \(formatBytes(context.state.netOutTransfer))")
+                    Text("↓ \(formatBytes(context.state.netInTransfer))")
                 }
             }
         }

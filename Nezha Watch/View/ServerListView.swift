@@ -48,9 +48,7 @@ struct ServerListView: View {
                         List(sortedServers, selection: $selectedServer) { server in
                             HStack {
                                 if server.host.countryCode.uppercased() == "TW" {
-                                    Image("TWFlag")
-                                        .resizable()
-                                        .scaledToFit()
+                                    Text("🇹🇼")
                                 }
                                 else if server.host.countryCode.uppercased() != "" {
                                     Text(countryFlagEmoji(countryCode: server.host.countryCode))

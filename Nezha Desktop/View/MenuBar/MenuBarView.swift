@@ -237,8 +237,8 @@ struct MenuBarView: View {
                                 Image(systemName: "network")
                                     .frame(width: 10)
                                 VStack(alignment: .leading) {
-                                    Text("↑\(formatBytes(server.status.netOutSpeed))/s")
-                                    Text("↓\(formatBytes(server.status.netInSpeed))/s")
+                                    Text("↑ \(formatBytes(server.status.netOutSpeed))/s")
+                                    Text("↓ \(formatBytes(server.status.netInSpeed))/s")
                                 }
                             }
                         }

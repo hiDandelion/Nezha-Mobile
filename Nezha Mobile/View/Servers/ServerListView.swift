@@ -261,9 +261,7 @@ struct ServerListView: View {
                 HStack {
                     HStack {
                         if server.host.countryCode.uppercased() == "TW" {
-                            Image("TWFlag")
-                                .resizable()
-                                .scaledToFit()
+                            Text("🇹🇼")
                         }
                         else if server.host.countryCode.uppercased() != "" {
                             Text(countryFlagEmoji(countryCode: server.host.countryCode))
@@ -344,8 +342,8 @@ struct ServerListView: View {
                             Image(systemName: "circle.dotted.circle")
                                 .frame(width: 10)
                             VStack(alignment: .leading) {
-                                Text("↑\(formatBytes(server.status.netInTransfer))")
-                                Text("↓\(formatBytes(server.status.netOutTransfer))")
+                                Text("↑ \(formatBytes(server.status.netOutTransfer))")
+                                Text("↓ \(formatBytes(server.status.netInTransfer))")
                             }
                         }
                         .frame(alignment: .leading)
@@ -354,8 +352,8 @@ struct ServerListView: View {
                             Image(systemName: "network")
                                 .frame(width: 10)
                             VStack(alignment: .leading) {
-                                Text("↑\(formatBytes(server.status.netOutSpeed))/s")
-                                Text("↓\(formatBytes(server.status.netInSpeed))/s")
+                                Text("↑ \(formatBytes(server.status.netOutSpeed))/s")
+                                Text("↓ \(formatBytes(server.status.netInSpeed))/s")
                             }
                         }
                         .frame(alignment: .leading)

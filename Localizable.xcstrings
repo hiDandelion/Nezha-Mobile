@@ -125,34 +125,44 @@
         }
       }
     },
-    "↑%@" : {
+    "↑ %@" : {
 
     },
-    "↑%@/s" : {
+    "↑ %@/s" : {
 
     },
-    "↓%@" : {
+    "↓ %@" : {
 
     },
-    "↓%@ ↑%@" : {
+    "↓ %@ ↑ %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "↓%1$@ ↑%2$@"
+            "value" : "↓ %1$@ ↑ %2$@"
           }
         }
       }
     },
-    "↓%@/s" : {
+    "↓ %@/s" : {
 
     },
-    "↓%@/s ↑%@/s" : {
+    "↓ %@/s ↑ %@/s" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "↓%1$@/s ↑%2$@/s"
+            "value" : "↓ %1$@/s ↑ %2$@/s"
+          }
+        }
+      }
+    },
+    "🇹🇼" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇼🇸"
           }
         }
       }
@@ -3051,7 +3061,7 @@
       }
     },
     "These data will be sent to the Dashboard server you configured in Agent Settings. We will not save or share any of your data." : {
-
+      "shouldTranslate" : false
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
       "localizations" : {

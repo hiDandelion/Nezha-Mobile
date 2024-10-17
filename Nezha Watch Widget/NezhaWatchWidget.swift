@@ -160,10 +160,10 @@ struct WidgetEntryView : View {
                             }
                             ViewThatFits(in: .horizontal) {
                                 HStack {
-                                    Text("↓\(formatBytes(server.status.netInTransfer))")
-                                    Text("↑\(formatBytes(server.status.netOutTransfer))")
+                                    Text("↓ \(formatBytes(server.status.netInTransfer))")
+                                    Text("↑ \(formatBytes(server.status.netOutTransfer))")
                                 }
-                                Text("↑\(formatBytes(server.status.netOutTransfer))")
+                                Text("↑ \(formatBytes(server.status.netOutTransfer))")
                             }
                         }
                     case .accessoryInline:

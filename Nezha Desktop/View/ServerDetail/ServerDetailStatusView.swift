@@ -12,8 +12,6 @@ struct ServerDetailStatusView: View {
     
     var body: some View {
         Section("Status") {
-            let gaugeGradient = Gradient(colors: [.green, .pink])
-            
             VStack {
                 HStack {
                     Label("CPU", systemImage: "cpu")
@@ -27,7 +25,6 @@ struct ServerDetailStatusView: View {
                     
                 }
                 .gaugeStyle(.linearCapacity)
-                .tint(gaugeGradient)
             }
             
             VStack {
@@ -43,7 +40,6 @@ struct ServerDetailStatusView: View {
                     
                 }
                 .gaugeStyle(.linearCapacity)
-                .tint(gaugeGradient)
             }
             
             VStack {
@@ -61,7 +57,6 @@ struct ServerDetailStatusView: View {
                         
                     }
                     .gaugeStyle(.linearCapacity)
-                    .tint(gaugeGradient)
                 }
                 else {
                     PieceOfInfo(systemImage: "doc", name: "Swap", content: Text(String(localized: "Disabled")))
@@ -71,7 +66,6 @@ struct ServerDetailStatusView: View {
                         
                     }
                     .gaugeStyle(.linearCapacity)
-                    .tint(gaugeGradient)
                 }
             }
             
@@ -88,11 +82,10 @@ struct ServerDetailStatusView: View {
                     
                 }
                 .gaugeStyle(.linearCapacity)
-                .tint(gaugeGradient)
             }
             
-            PieceOfInfo(systemImage: "network", name: "Network", content: Text("↓\(formatBytes(server.status.netInSpeed))/s ↑\(formatBytes(server.status.netOutSpeed))/s"))
-            PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: Text("↓\(formatBytes(server.status.netInTransfer)) ↑\(formatBytes(server.status.netOutTransfer))"))
+            PieceOfInfo(systemImage: "network", name: "Network", content: Text("↓ \(formatBytes(server.status.netInSpeed))/s ↑ \(formatBytes(server.status.netOutSpeed))/s"))
+            PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: Text("↓ \(formatBytes(server.status.netInTransfer)) ↑ \(formatBytes(server.status.netOutTransfer))"))
             PieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: Text("\(server.status.TCPConnectionCount)"))
             PieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: Text("\(server.status.UDPConnectionCount)"))
             PieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: Text("\(server.status.processCount)"))
