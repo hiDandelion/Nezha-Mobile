@@ -66,8 +66,8 @@ struct DeviceInfoView: View {
                 .tint(gaugeGradient)
             }
             
-            PieceOfInfo(systemImage: "network", name: "Network", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkInSpeed))/s ↑ \(formatBytes(deviceInfoViewModel.networkOutSpeed))/s"))
-            PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Traffic", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkIn)) ↑ \(formatBytes(deviceInfoViewModel.networkOut))"))
+            PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkInSpeed))/s ↑ \(formatBytes(deviceInfoViewModel.networkOutSpeed))/s"))
+            PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkIn)) ↑ \(formatBytes(deviceInfoViewModel.networkOut))"))
         }
         .navigationTitle("Device Info")
         .toolbar {

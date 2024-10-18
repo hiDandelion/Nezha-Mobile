@@ -307,70 +307,92 @@ struct ServerDetailWidgetEntryView: View {
             }
             .font(.subheadline)
             
-            HStack {
-                VStack(spacing: 0) {
-                    gaugeView(server: server)
-                }
-                Spacer()
-                VStack {
-                    infoView(server: server)
-                }
-                .font(.caption2)
-                .frame(maxWidth: 100)
-                .padding(.leading, 20)
+            HStack(spacing: 20) {
+                gaugeView(server: server)
+                
+                infoView(server: server)
+                    .font(.caption2)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
     func gaugeView(server: Server) -> some View {
-        HStack {
+        HStack(spacing: 10) {
             let cpuUsage = server.status.cpu / 100
             let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
             let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
             
-            Gauge(value: cpuUsage) {
-                
-            } currentValueLabel: {
-                VStack {
-                    Text("CPU")
-                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
+            VStack {
+                Gauge(value: cpuUsage) {
+                    
+                } currentValueLabel: {
+                    VStack {
+                        Text("CPU")
+                        Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                    }
                 }
+                Text("\(getCore(server.host.cpu) ?? 0) Core")
+                    .font(.caption2)
+                    .frame(minWidth: 50)
+                    .lineLimit(1)
             }
             
-            Gauge(value: memUsage) {
-                
-            } currentValueLabel: {
-                VStack {
-                    Text("MEM")
-                    Text("\(memUsage * 100, specifier: "%.0f")%")
+            VStack {
+                Gauge(value: memUsage) {
+                    
+                } currentValueLabel: {
+                    VStack {
+                        Text("MEM")
+                        Text("\(memUsage * 100, specifier: "%.0f")%")
+                    }
                 }
+                Text("\(formatBytes(server.host.memTotal, decimals: 0))")
+                    .font(.caption2)
+                    .frame(minWidth: 50)
+                    .lineLimit(1)
             }
             
-            Gauge(value: diskUsage) {
-                
-            } currentValueLabel: {
-                VStack {
-                    Text("DISK")
-                    Text("\(diskUsage * 100, specifier: "%.0f")%")
+            VStack {
+                Gauge(value: diskUsage) {
+                    
+                } currentValueLabel: {
+                    VStack {
+                        Text("DISK")
+                        Text("\(diskUsage * 100, specifier: "%.0f")%")
+                    }
                 }
+                Text("\(formatBytes(server.host.diskTotal, decimals: 0))")
+                    .font(.caption2)
+                    .frame(minWidth: 50)
+                    .lineLimit(1)
             }
         }
         .gaugeStyle(.accessoryCircularCapacity)
     }
     
     func infoView(server: Server) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Image(systemName: "circle.dotted.circle")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.netOutTransfer))")
-                    Text("↓ \(formatBytes(server.status.netInTransfer))")
+                    Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 0))")
+                    Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 0))")
                 }
             }
+            .frame(alignment: .leading)
+            
+            HStack {
+                Image(systemName: "network")
+                    .frame(width: 10)
+                VStack(alignment: .leading) {
+                    Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 0))/s")
+                    Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 0))/s")
+                }
+            }
+            .frame(alignment: .leading)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
