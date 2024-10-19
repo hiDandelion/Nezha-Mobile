@@ -11,18 +11,13 @@ import CloudKit
 func syncWithiCloud() {
     _ = debugLog("Sync Info - Starting iCloud sync")
     
-    guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
-        _ = debugLog("Sync Error - Unable to access UserDefaults")
-        return
-    }
-    
     let cloudStore = NSUbiquitousKeyValueStore.default
     
     _ = debugLog("Sync Info - Starting sync")
     
     let keys = ["NMLastModifyDate", "NMDashboardLink", "NMDashboardAPIToken"]
     
-    let lastModifyDateLocal = userDefaults.object(forKey: "NMLastModifyDate") as? Int
+    let lastModifyDateLocal = NMCore.userDefaults.object(forKey: "NMLastModifyDate") as? Int
     let lastModifyDateRemote = cloudStore.object(forKey: "NMLastModifyDate") as? Int
     
     guard let lastModifyDateLocal, let lastModifyDateRemote else {
@@ -35,7 +30,7 @@ func syncWithiCloud() {
         
         // Sync from local to iCloud
         for key in keys {
-            if let value = userDefaults.object(forKey: key) {
+            if let value = NMCore.userDefaults.object(forKey: key) {
                 _ = debugLog("Sync Info - Syncing from local to iCloud: \(key) = \(value)")
                 cloudStore.set(value, forKey: key)
             } else {
@@ -59,7 +54,7 @@ func syncWithiCloud() {
         for key in keys {
             if let value = cloudStore.object(forKey: key) {
                 _ = debugLog("Sync Info - Syncing from iCloud to local: \(key) = \(value)")
-                userDefaults.set(value, forKey: key)
+                NMCore.userDefaults.set(value, forKey: key)
             } else {
                 _ = debugLog("Sync Error - Key not found in iCloud: \(key)")
             }

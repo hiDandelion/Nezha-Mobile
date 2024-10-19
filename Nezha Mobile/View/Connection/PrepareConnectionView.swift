@@ -35,7 +35,7 @@ struct PrepareConnectionView: View {
                 
                 Section("Authentication") {
                     Picker("Identity", selection: $identity) {
-                        Text("Select Identity")
+                        Text("Select")
                             .tag(nil as Identity?)
                         
                         ForEach(identities) { identity in

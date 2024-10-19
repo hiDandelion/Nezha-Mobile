@@ -12,20 +12,10 @@ import NezhaMobileData
 struct NezhaDesktopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
-    @AppStorage("NMMenuBarEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var menuBarEnabled: Bool = true
+    @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
     
     init() {
-        // Register UserDefaults
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        if let userDefaults {
-            let defaultValues: [String: Any] = [
-                "NMLastModifyDate": 0,
-                "NMDashboardLink": "",
-                "NMDashboardAPIToken": "",
-                "NMMacPushNotificationsToken": ""
-            ]
-            userDefaults.register(defaults: defaultValues)
-        }
+        NMCore.registerUserDefaults()
     }
     
     var body: some Scene {

@@ -15,22 +15,7 @@ struct NezhaMobileApp: App {
     var tabBarState: TabBarState = TabBarState()
     
     init() {
-        // Register UserDefaults
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        if let userDefaults {
-            let defaultValues: [String: Any] = [
-                "NMLastModifyDate": 0,
-                "NMDashboardLink": "",
-                "NMDashboardAPIToken": "",
-                "NMDashboardGRPCLink": "",
-                "NMDashboardGRPCPort": "",
-                "NMAgentSecret": "",
-                "NMPushNotificationsToken": "",
-                "NMPushToStartToken": "",
-                "NMLastViewedServerID": 0
-            ]
-            userDefaults.register(defaults: defaultValues)
-        }
+        NMCore.registerUserDefaults()
     }
     
     var body: some Scene {

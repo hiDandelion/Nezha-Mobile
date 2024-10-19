@@ -21,10 +21,9 @@ struct ReportDeviceInfoResponse: Codable {
 
 extension RequestHandler {
     static func reportDeviceInfo(identifier: String, systemVersion: String, memoryTotal: Int64, diskTotal: Int64, bootTime: Int64, agentVersion: String, cpuUsage: Double, memoryUsed: Int64, diskUsed: Int64, uptime: Int64, networkIn: Int64, networkOut: Int64, networkInSpeed: Int64, networkOutSpeed: Int64) async throws -> ReportDeviceInfoResponse {
-        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
-              let dashboardGRPCLink = userDefaults.string(forKey: "NMDashboardGRPCLink"),
-              let dashboardGRPCPort = userDefaults.string(forKey: "NMDashboardGRPCPort"),
-              let agentSecret = userDefaults.string(forKey: "NMAgentSecret"),
+        guard let dashboardGRPCLink = NMCore.userDefaults.string(forKey: "NMDashboardGRPCLink"),
+              let dashboardGRPCPort = NMCore.userDefaults.string(forKey: "NMDashboardGRPCPort"),
+              let agentSecret = NMCore.userDefaults.string(forKey: "NMAgentSecret"),
               let url = URL(string: "https://nezha-mobile-grpc-bridge.argsment.com/api/report-device-info") else {
             throw ReportDeviceInfoError.invalidAgentConfiguration
         }

@@ -12,20 +12,7 @@ struct NezhaWatchApp: App {
     @WKApplicationDelegateAdaptor private var appDelegate: AppDelegate
     
     init() {
-        // Register UserDefaults
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        if let userDefaults {
-            let defaultValues: [String: Any] = [
-                "NMLastModifyDate": 0,
-                "NMDashboardLink": "",
-                "NMDashboardAPIToken": "",
-                "NMPushNotificationsToken": "",
-                "NMPushToStartToken": "",
-                "NMWatchPushNotificationsToken": "",
-                "NMWatchLastViewedServerID": 0
-            ]
-            userDefaults.register(defaults: defaultValues)
-        }
+        NMCore.registerUserDefaults()
     }
     
     var body: some Scene {

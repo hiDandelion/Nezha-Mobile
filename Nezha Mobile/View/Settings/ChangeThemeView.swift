@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChangeThemeView: View {
     @Environment(\.colorScheme) private var scheme
-    @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     @Binding var isShowingChangeThemeSheet: Bool
     @Namespace private var animation
 

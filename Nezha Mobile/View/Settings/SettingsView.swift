@@ -16,7 +16,6 @@ struct SettingsView: View {
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
     var dashboardViewModel: DashboardViewModel
-    let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     @State var isPresentedAsSheet: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
     
@@ -51,7 +50,7 @@ struct SettingsView: View {
                 }
                 
                 Section("Notifications") {
-                    let pushNotificationsToken = userDefaults.string(forKey: "NMPushNotificationsToken")!
+                    let pushNotificationsToken = NMCore.userDefaults.string(forKey: "NMPushNotificationsToken")!
                     if pushNotificationsToken != "" {
                         ShareLink(item: pushNotificationsToken) {
                             Text("Share Push Notifications Token")
@@ -63,7 +62,7 @@ struct SettingsView: View {
                     }
                     
                     if #available(iOS 17.2, *) {
-                        let pushToStartToken = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMPushToStartToken")!
+                        let pushToStartToken = NMCore.userDefaults.string(forKey: "NMPushToStartToken")!
                         if pushToStartToken != "" {
                             ShareLink(item: pushToStartToken) {
                                 Text("Share Push To Start Token")

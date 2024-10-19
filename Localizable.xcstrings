@@ -1036,6 +1036,22 @@
         }
       }
     },
+    "Dashboard Link Example: server.hidandelion.com" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboardリンクの例: server.hidandelion.com"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard链接示例: server.hidandelion.com"
+          }
+        }
+      }
+    },
     "Dashboard Settings" : {
       "localizations" : {
         "ja" : {
@@ -1192,6 +1208,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用状态栏"
+          }
+        }
+      }
+    },
+    "Enable SSL" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSL有効"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用SSL"
           }
         }
       }
@@ -1413,22 +1445,6 @@
         }
       }
     },
-    "How to get API Token" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "APIトークンの取得方法"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "如何获取API Token"
-          }
-        }
-      }
-    },
     "ID" : {
       "localizations" : {
         "ja" : {
@@ -1493,7 +1509,7 @@
         }
       }
     },
-    "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, macOS logo are trademarks of Apple Inc." : {
+    "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, iOS logo and macOS logo are trademarks of Apple Inc." : {
       "shouldTranslate" : false
     },
     "IPv4" : {
@@ -2404,22 +2420,6 @@
         }
       }
     },
-    "Save" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
-          }
-        }
-      }
-    },
     "Save & Apply" : {
       "localizations" : {
         "ja" : {
@@ -2484,6 +2484,22 @@
         }
       }
     },
+    "Select" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择"
+          }
+        }
+      }
+    },
     "Select Custom Background" : {
       "localizations" : {
         "ja" : {
@@ -2496,22 +2512,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择自定义背景"
-          }
-        }
-      }
-    },
-    "Select Identity" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アイデンティティを選択"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择身份"
           }
         }
       }
@@ -2800,22 +2800,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SSH"
-          }
-        }
-      }
-    },
-    "SSL must be enabled. Dashboard Link Example: server.hidandelion.com" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SSLを有効にする必要があります。Dashboardリンク例: server.hidandelion.com"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "必须启用SSL。Dashboard链接示例: server.hidandelion.com"
           }
         }
       }

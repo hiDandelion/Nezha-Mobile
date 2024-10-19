@@ -92,10 +92,10 @@ struct AgentWidgetEntryView: View {
         Group {
             switch(family) {
             case .systemSmall:
-                let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
-                @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
-                @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
-                if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
+                @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) var selectedWidgetBackgroundColor: Color = .blue
+                @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) var selectedWidgetTextColor: Color = .white
+                if widgetCustomizationEnabled {
                     agentViewSystemSmall
                         .foregroundStyle(selectedWidgetTextColor)
                         .containerBackground(selectedWidgetBackgroundColor, for: .widget)
@@ -107,10 +107,10 @@ struct AgentWidgetEntryView: View {
                 }
                 
             case .systemMedium:
-                let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
-                @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
-                @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
-                if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
+                @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) var selectedWidgetBackgroundColor: Color = .blue
+                @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) var selectedWidgetTextColor: Color = .white
+                if widgetCustomizationEnabled {
                     agentViewSystemSmall
                         .foregroundStyle(selectedWidgetTextColor)
                         .tint(selectedWidgetTextColor)
@@ -293,17 +293,7 @@ struct AgentEntry: TimelineEntry {
 
 struct AgentWidget: Widget {
     init() {
-        // Register UserDefaults
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        if let userDefaults {
-            let defaultValues: [String: Any] = [
-                "NMLastModifyDate": 0,
-                "NMDashboardGRPCLink": "",
-                "NMDashboardGRPCPort": "",
-                "NMAgentSecret": ""
-            ]
-            userDefaults.register(defaults: defaultValues)
-        }
+        NMCore.registerUserDefaults()
     }
     
     let kind: String = "AgentWidget"

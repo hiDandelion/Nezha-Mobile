@@ -11,12 +11,12 @@ import WidgetKit
 
 struct AdvancedCustomizationView: View {
     @Environment(ThemeStore.self) var themeStore
-    @AppStorage("NMBackgroundPhotoData", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var backgroundPhotoData: Data?
+    @AppStorage("NMBackgroundPhotoData", store: NMCore.userDefaults) private var backgroundPhotoData: Data?
     @State private var selectedPhoto: PhotosPickerItem?
     @State var backgroundImage: UIImage?
-    @AppStorage("NMWidgetCustomizationEnabled", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var widgetCustomizationEnabled: Bool = false
-    @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var selectedWidgetBackgroundColor: Color = .blue
-    @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var selectedWidgetTextColor: Color = .white
+    @AppStorage("NMWidgetCustomizationEnabled", store: NMCore.userDefaults) private var widgetCustomizationEnabled: Bool = false
+    @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) private var selectedWidgetBackgroundColor: Color = .blue
+    @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) private var selectedWidgetTextColor: Color = .white
     @State var isShowWidgetsSuccessfullyRefreshedAlert: Bool = false
     
     var body: some View {
@@ -47,7 +47,7 @@ struct AdvancedCustomizationView: View {
             }
             .onAppear {
                 // Set background
-                let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.data(forKey: "NMBackgroundPhotoData")
+                let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")
                 if let backgroundPhotoData {
                     backgroundImage = UIImage(data: backgroundPhotoData)
                 }

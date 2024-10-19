@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ReportDeviceInfoView: View {
-    @AppStorage("NMDashboardGRPCLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCLink: String = ""
-    @AppStorage("NMDashboardGRPCPort", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardGRPCPort: String = "5555"
+    @AppStorage("NMDashboardGRPCLink", store: NMCore.userDefaults) private var dashboardGRPCLink: String = ""
+    @AppStorage("NMDashboardGRPCPort", store: NMCore.userDefaults) private var dashboardGRPCPort: String = "5555"
     @State private var isReportingDeviceInfo: Bool = false
     @State private var reportDeviceInfoResponseSuccess: Bool?
     @State private var reportDeviceInfoErrorMessage: String = String(localized: "An error occurred")

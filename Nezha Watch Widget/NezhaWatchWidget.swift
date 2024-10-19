@@ -18,8 +18,8 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func snapshot(for configuration: SpecifyServerIntent, in context: Context) async -> ServerEntry {
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        let serverID: Int? = userDefaults?.integer(forKey: "NMWatchLastViewedServerID")
+        let userDefaults = NMCore.userDefaults
+        let serverID: Int? = userDefaults.integer(forKey: "NMWatchLastViewedServerID")
         do {
             if let serverID {
                 let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
@@ -53,8 +53,8 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func timeline(for configuration: SpecifyServerIntent, in context: Context) async -> Timeline<ServerEntry> {
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        let serverID: Int? = userDefaults?.integer(forKey: "NMWatchLastViewedServerID")
+        let userDefaults = NMCore.userDefaults
+        let serverID: Int? = userDefaults.integer(forKey: "NMWatchLastViewedServerID")
         do {
             if let serverID {
                 let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
@@ -97,8 +97,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func recommendations() -> [AppIntentRecommendation<SpecifyServerIntent>] {
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-        let lastViewedServerID = userDefaults.integer(forKey: "NMWatchLastViewedServerID")
+        let lastViewedServerID = NMCore.userDefaults.integer(forKey: "NMWatchLastViewedServerID")
         return [AppIntentRecommendation(intent: SpecifyServerIntent(server: ServerEntity(id: lastViewedServerID, name: "Last Viewed", displayIndex: nil)), description: "Last viewed server")]
     }
 }
@@ -212,17 +211,7 @@ struct WidgetEntryView : View {
 @main
 struct NezhaWatchWidgetApp: Widget {
     init() {
-        // Register UserDefaults
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        if let userDefaults {
-            let defaultValues: [String: Any] = [
-                "NMLastModifyDate": 0,
-                "NMDashboardLink": "",
-                "NMDashboardAPIToken": "",
-                "NMWatchLastViewedServerID": 0
-            ]
-            userDefaults.register(defaults: defaultValues)
-        }
+        NMCore.registerUserDefaults()
     }
     
     let kind: String = "ServerDetailWidget"

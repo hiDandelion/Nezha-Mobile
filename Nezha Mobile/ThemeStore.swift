@@ -51,62 +51,61 @@ func backgroundGradient(color: NMTheme, scheme: ColorScheme) -> LinearGradient {
 class ThemeStore: ObservableObject {
     var themeCustomizationEnabled: Bool {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeCustomizationEnabled, forKey: "NMThemeCustomizationEnabled")
+            NMCore.userDefaults.set(themeCustomizationEnabled, forKey: "NMThemeCustomizationEnabled")
         }
     }
     var themePrimaryColorLight: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themePrimaryColorLight.base64EncodedString, forKey: "NMThemePrimaryColorLight")
+            NMCore.userDefaults.set(themePrimaryColorLight.base64EncodedString, forKey: "NMThemePrimaryColorLight")
         }
     }
     var themeSecondaryColorLight: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeSecondaryColorLight.base64EncodedString, forKey: "NMThemeSecondaryColorLight")
+            NMCore.userDefaults.set(themeSecondaryColorLight.base64EncodedString, forKey: "NMThemeSecondaryColorLight")
         }
     }
     var themeTintColorLight: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeTintColorLight.base64EncodedString, forKey: "NMThemeTintColorLight")
+            NMCore.userDefaults.set(themeTintColorLight.base64EncodedString, forKey: "NMThemeTintColorLight")
         }
     }
     var themeBackgroundColorLight: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeBackgroundColorLight.base64EncodedString, forKey: "NMThemeBackgroundColorLight")
+            NMCore.userDefaults.set(themeBackgroundColorLight.base64EncodedString, forKey: "NMThemeBackgroundColorLight")
         }
     }
     var themePrimaryColorDark: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themePrimaryColorDark.base64EncodedString, forKey: "NMThemePrimaryColorDark")
+            NMCore.userDefaults.set(themePrimaryColorDark.base64EncodedString, forKey: "NMThemePrimaryColorDark")
         }
     }
     var themeSecondaryColorDark: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeSecondaryColorDark.base64EncodedString, forKey: "NMThemeSecondaryColorDark")
+            NMCore.userDefaults.set(themeSecondaryColorDark.base64EncodedString, forKey: "NMThemeSecondaryColorDark")
         }
     }
     var themeTintColorDark: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeTintColorDark.base64EncodedString, forKey: "NMThemeTintColorDark")
+            NMCore.userDefaults.set(themeTintColorDark.base64EncodedString, forKey: "NMThemeTintColorDark")
         }
     }
     var themeBackgroundColorDark: Color {
         didSet {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.set(themeBackgroundColorDark.base64EncodedString, forKey: "NMThemeBackgroundColorDark")
+            NMCore.userDefaults.set(themeBackgroundColorDark.base64EncodedString, forKey: "NMThemeBackgroundColorDark")
         }
     }
     
     init() {
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-        themeCustomizationEnabled = userDefaults.bool(forKey: "NMThemeCustomizationEnabled")
+        themeCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMThemeCustomizationEnabled")
         if
-            let themePrimaryColorLightString = userDefaults.string(forKey: "NMThemePrimaryColorLight"),
-            let themeSecondaryColorLightString = userDefaults.string(forKey: "NMThemeSecondaryColorLight"),
-            let themeTintColorLightString = userDefaults.string(forKey: "NMThemeTintColorLight"),
-            let themeBackgroundColorLightString = userDefaults.string(forKey: "NMThemeBackgroundColorLight"),
-            let themePrimaryColorDarkString = userDefaults.string(forKey: "NMThemePrimaryColorDark"),
-            let themeSecondaryColorDarkString = userDefaults.string(forKey: "NMThemeSecondaryColorDark"),
-            let themeTintColorDarkString = userDefaults.string(forKey: "NMThemeTintColorDark"),
-            let themeBackgroundColorDarkString = userDefaults.string(forKey: "NMThemeBackgroundColorDark")
+            let themePrimaryColorLightString = NMCore.userDefaults.string(forKey: "NMThemePrimaryColorLight"),
+            let themeSecondaryColorLightString = NMCore.userDefaults.string(forKey: "NMThemeSecondaryColorLight"),
+            let themeTintColorLightString = NMCore.userDefaults.string(forKey: "NMThemeTintColorLight"),
+            let themeBackgroundColorLightString = NMCore.userDefaults.string(forKey: "NMThemeBackgroundColorLight"),
+            let themePrimaryColorDarkString = NMCore.userDefaults.string(forKey: "NMThemePrimaryColorDark"),
+            let themeSecondaryColorDarkString = NMCore.userDefaults.string(forKey: "NMThemeSecondaryColorDark"),
+            let themeTintColorDarkString = NMCore.userDefaults.string(forKey: "NMThemeTintColorDark"),
+            let themeBackgroundColorDarkString = NMCore.userDefaults.string(forKey: "NMThemeBackgroundColorDark")
         {
             themePrimaryColorLight = Color(base64EncodedString: themePrimaryColorLightString) ?? Color.black
             themeSecondaryColorLight = Color(base64EncodedString: themeSecondaryColorLightString) ?? Color(red: 1, green: 240/255, blue: 243/255)
@@ -126,14 +125,14 @@ class ThemeStore: ObservableObject {
             themeSecondaryColorDark = Color(red: 33/255, green: 25/255, blue: 28/255)
             themeTintColorDark = Color(red: 135/255, green: 14/255, blue: 78/255)
             themeBackgroundColorDark = Color.black
-            userDefaults.set(Color.black.base64EncodedString, forKey: "NMThemePrimaryColorLight")
-            userDefaults.set(Color(red: 1, green: 240/255, blue: 243/255).base64EncodedString, forKey: "NMThemeSecondaryColorLight")
-            userDefaults.set(Color(red: 135/255, green: 14/255, blue: 78/255).base64EncodedString, forKey: "NMThemeTintColorLight")
-            userDefaults.set(Color(red: 1, green: 247/255, blue: 248/255).base64EncodedString, forKey: "NMThemeBackgroundColorLight")
-            userDefaults.set(Color.white.base64EncodedString, forKey: "NMThemePrimaryColorDark")
-            userDefaults.set(Color(red: 33/255, green: 25/255, blue: 28/255).base64EncodedString, forKey: "NMThemeSecondaryColorDark")
-            userDefaults.set(Color(red: 135/255, green: 14/255, blue: 78/255).base64EncodedString, forKey: "NMThemeTintColorDark")
-            userDefaults.set(Color.black.base64EncodedString, forKey: "NMThemeBackgroundColorDark")
+            NMCore.userDefaults.set(Color.black.base64EncodedString, forKey: "NMThemePrimaryColorLight")
+            NMCore.userDefaults.set(Color(red: 1, green: 240/255, blue: 243/255).base64EncodedString, forKey: "NMThemeSecondaryColorLight")
+            NMCore.userDefaults.set(Color(red: 135/255, green: 14/255, blue: 78/255).base64EncodedString, forKey: "NMThemeTintColorLight")
+            NMCore.userDefaults.set(Color(red: 1, green: 247/255, blue: 248/255).base64EncodedString, forKey: "NMThemeBackgroundColorLight")
+            NMCore.userDefaults.set(Color.white.base64EncodedString, forKey: "NMThemePrimaryColorDark")
+            NMCore.userDefaults.set(Color(red: 33/255, green: 25/255, blue: 28/255).base64EncodedString, forKey: "NMThemeSecondaryColorDark")
+            NMCore.userDefaults.set(Color(red: 135/255, green: 14/255, blue: 78/255).base64EncodedString, forKey: "NMThemeTintColorDark")
+            NMCore.userDefaults.set(Color.black.base64EncodedString, forKey: "NMThemeBackgroundColorDark")
         }
     }
     

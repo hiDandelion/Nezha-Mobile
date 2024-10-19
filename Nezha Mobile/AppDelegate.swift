@@ -27,8 +27,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             Task {
                 for await data in Activity<LiveActivityAttributes>.pushToStartTokenUpdates {
                     let pushToStartToken = data.map {String(format: "%02.2hhx", $0)}.joined()
-                    let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-                    userDefaults.set(pushToStartToken, forKey: "NMPushToStartToken")
+                    NMCore.userDefaults.set(pushToStartToken, forKey: "NMPushToStartToken")
                 }
             }
         }
@@ -38,8 +37,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let pushNotificationsToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-        userDefaults.set(pushNotificationsToken, forKey: "NMPushNotificationsToken")
+        NMCore.userDefaults.set(pushNotificationsToken, forKey: "NMPushNotificationsToken")
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {

@@ -34,8 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     
     func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let pushNotificationsToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-        userDefaults.set(pushNotificationsToken, forKey: "NMMacPushNotificationsToken")
+        NMCore.userDefaults.set(pushNotificationsToken, forKey: "NMMacPushNotificationsToken")
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
@@ -55,8 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-        if userDefaults.bool(forKey: "NMMenuBarEnabled") {
+        if NMCore.userDefaults.bool(forKey: "NMMenuBarEnabled") {
             NSApp.setActivationPolicy(.accessory)
             return false
         }

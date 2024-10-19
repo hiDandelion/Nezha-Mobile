@@ -29,7 +29,6 @@ class AppDelegate: NSObject, WKApplicationDelegate {
     
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
         let pushNotificationsToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-        userDefaults.set(pushNotificationsToken, forKey: "NMWatchPushNotificationsToken")
+        NMCore.userDefaults.set(pushNotificationsToken, forKey: "NMWatchPushNotificationsToken")
     }
 }

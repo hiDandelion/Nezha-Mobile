@@ -16,7 +16,7 @@ struct ServerListView: View {
     @State private var shouldNavigateToServerDetailView: Bool = false
     @State private var incomingURLServerID: Int?
     var dashboardViewModel: DashboardViewModel
-    @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     @State private var backgroundImage: UIImage?
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
@@ -79,7 +79,7 @@ struct ServerListView: View {
         }
         .onAppear {
             // Set background
-            let backgroundPhotoData = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.data(forKey: "NMBackgroundPhotoData")
+            let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
                 backgroundImage = UIImage(data: backgroundPhotoData)
             }

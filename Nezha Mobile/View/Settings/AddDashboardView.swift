@@ -10,8 +10,9 @@ import SwiftUI
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
     var dashboardViewModel: DashboardViewModel
-    @State private var dashboardLink: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardLink") ?? ""
-    @State private var dashboardAPIToken: String = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!.string(forKey: "NMDashboardAPIToken") ?? ""
+    @State private var dashboardLink: String = NMCore.userDefaults.string(forKey: "NMDashboardLink") ?? ""
+    @State private var dashboardAPIToken: String = NMCore.userDefaults.string(forKey: "NMDashboardAPIToken") ?? ""
+    @State private var dashboardSSLEnabled: Bool = NMCore.userDefaults.bool(forKey: "NMDashboardSSLEnabled")
     
     var body: some View {
         NavigationStack {
@@ -20,18 +21,24 @@ struct AddDashboardView: View {
                     TextField("Dashboard Link", text: $dashboardLink)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
+                        .onChange(of: dashboardLink) {
+                            dashboardLink = dashboardLink.replacingOccurrences(of: "^(http|https)://", with: "", options: .regularExpression)
+                        }
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
                 } header: {
                     Text("Dashboard Info")
                 } footer: {
-                    Text("SSL must be enabled. Dashboard Link Example: server.hidandelion.com")
+                    Text("Dashboard Link Example: server.hidandelion.com")
                 }
                 
-                Section("Help") {
-                    Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
-                    Link("How to get API Token", destination: URL(string: "https://nezha.wiki/guide/api.html")!)
+                Section {
+                    Toggle("Enable SSL", isOn: $dashboardSSLEnabled)
+                }
+                
+                Section {
+                    Link("User Guide", destination: NMCore.userGuideURL)
                 }
             }
             .navigationTitle("Add Dashboard")
@@ -44,16 +51,7 @@ struct AddDashboardView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile") else {
-                            dismiss()
-                            return
-                        }
-                        userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
-                        userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-                        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
-                        NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
-                        NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-                        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+                        NMCore.saveNewDashboardConfigurations(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardSSLEnabled: dashboardSSLEnabled)
                         dashboardViewModel.startMonitoring()
                         dismiss()
                     }

@@ -30,7 +30,7 @@ struct ServerDetailView: View {
         .tabViewStyle(.verticalPage)
         .navigationTitle(server.name)
         .onAppear {
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.set(server.id, forKey: "NMWatchLastViewedServerID")
+            NMCore.userDefaults.set(server.id, forKey: "NMWatchLastViewedServerID")
         }
     }
 }

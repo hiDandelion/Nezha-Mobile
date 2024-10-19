@@ -99,8 +99,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func recommendations() -> [AppIntentRecommendation<ServerDetailConfigurationIntent>] {
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-        let lastViewedServerID = userDefaults.integer(forKey: "NMLastViewedServerID")
+        let lastViewedServerID = NMCore.userDefaults.integer(forKey: "NMLastViewedServerID")
         return [AppIntentRecommendation(intent: ServerDetailConfigurationIntent(server: ServerEntity(id: lastViewedServerID, name: "Last Viewed", displayIndex: nil), isShowIP: false, color: .blue), description: "Last viewed server")]
     }
 }
@@ -160,10 +159,10 @@ struct ServerDetailWidgetEntryView: View {
                             Text("↑ \(formatBytes(server.status.netOutTransfer))")
                         }
                     case .systemSmall:
-                        let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
-                        @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
-                        @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
-                        if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                        let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
+                        @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) var selectedWidgetBackgroundColor: Color = .blue
+                        @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) var selectedWidgetTextColor: Color = .white
+                        if widgetCustomizationEnabled {
                             serverDetailViewSystemSmall(server: server)
                                 .foregroundStyle(selectedWidgetTextColor)
                                 .containerBackground(selectedWidgetBackgroundColor, for: .widget)
@@ -174,10 +173,10 @@ struct ServerDetailWidgetEntryView: View {
                                 .containerBackground(color, for: .widget)
                         }
                     case .systemMedium:
-                        let widgetCustomizationEnabled = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.bool(forKey: "NMWidgetCustomizationEnabled")
-                        @AppStorage("NMWidgetBackgroundColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetBackgroundColor: Color = .blue
-                        @AppStorage("NMWidgetTextColor", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) var selectedWidgetTextColor: Color = .white
-                        if let widgetCustomizationEnabled, widgetCustomizationEnabled {
+                        let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
+                        @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) var selectedWidgetBackgroundColor: Color = .blue
+                        @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) var selectedWidgetTextColor: Color = .white
+                        if widgetCustomizationEnabled {
                             serverDetailViewSystemMedium(server: server)
                                 .foregroundStyle(selectedWidgetTextColor)
                                 .tint(selectedWidgetTextColor)
@@ -406,17 +405,7 @@ struct ServerEntry: TimelineEntry {
 
 struct ServerDetailWidget: Widget {
     init() {
-        // Register UserDefaults
-        let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")
-        if let userDefaults {
-            let defaultValues: [String: Any] = [
-                "NMLastModifyDate": 0,
-                "NMDashboardLink": "",
-                "NMDashboardAPIToken": "",
-                "NMLastViewedServerID": 0
-            ]
-            userDefaults.register(defaults: defaultValues)
-        }
+        NMCore.registerUserDefaults()
     }
     
     let kind: String = "ServerDetailWidget"

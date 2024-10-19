@@ -44,7 +44,7 @@ struct MainTabView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
-    @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     var dashboardLink: String
     var dashboardAPIToken: String
     var dashboardViewModel: DashboardViewModel

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct MenuBarView: View {
     @Environment(\.openWindow) var openWindow
-    @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
-    @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
+    @AppStorage("NMDashboardLink", store: NMCore.userDefaults) private var dashboardLink: String = ""
+    @AppStorage("NMDashboardAPIToken", store: NMCore.userDefaults) private var dashboardAPIToken: String = ""
     var dashboardViewModel: DashboardViewModel
     @State private var activeTag: String = "All"
     

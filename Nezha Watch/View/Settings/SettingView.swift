@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     var dashboardViewModel: DashboardViewModel
-    let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
     var body: some View {
         NavigationStack {
@@ -22,7 +21,7 @@ struct SettingView: View {
                 }
                 
                 Section("Notifications") {
-                    let pushNotificationsToken = userDefaults.string(forKey: "NMWatchPushNotificationsToken")!
+                    let pushNotificationsToken = NMCore.userDefaults.string(forKey: "NMWatchPushNotificationsToken")!
                     if pushNotificationsToken != "" {
                         ShareLink(item: pushNotificationsToken) {
                             Text("Share Token")

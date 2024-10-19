@@ -17,10 +17,9 @@ enum NezhaDashboardError: Error {
 
 extension RequestHandler {
     static func getAllServerDetail() async throws -> GetServerDetailResponse {
-        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
-              let dashboardLink = userDefaults.string(forKey: "NMDashboardLink"),
-              let dashboardAPIToken = userDefaults.string(forKey: "NMDashboardAPIToken"),
-              let url = URL(string: "https://\(dashboardLink)/api/v1/server/details") else {
+        guard let dashboardLink = NMCore.userDefaults.string(forKey: "NMDashboardLink"),
+              let dashboardAPIToken = NMCore.userDefaults.string(forKey: "NMDashboardAPIToken"),
+              let url = URL(string: "\(NMCore.userDefaults.bool(forKey: "NMDashboardSSLEnabled") ? "https" : "http")://\(dashboardLink)/api/v1/server/details") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -54,10 +53,9 @@ extension RequestHandler {
     }
     
     static func getServerDetail(serverID: String) async throws -> GetServerDetailResponse {
-        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
-              let dashboardLink = userDefaults.string(forKey: "NMDashboardLink"),
-              let dashboardAPIToken = userDefaults.string(forKey: "NMDashboardAPIToken"),
-              let url = URL(string: "https://\(dashboardLink)/api/v1/server/details?id=\(serverID)") else {
+        guard let dashboardLink = NMCore.userDefaults.string(forKey: "NMDashboardLink"),
+              let dashboardAPIToken = NMCore.userDefaults.string(forKey: "NMDashboardAPIToken"),
+              let url = URL(string: "\(NMCore.userDefaults.bool(forKey: "NMDashboardSSLEnabled") ? "https" : "http")://\(dashboardLink)/api/v1/server/details?id=\(serverID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -91,10 +89,9 @@ extension RequestHandler {
     }
     
     static func getServerPingData(serverID: String) async throws -> GetServerPingDataResponse {
-        guard let userDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile"),
-              let dashboardLink = userDefaults.string(forKey: "NMDashboardLink"),
-              let dashboardAPIToken = userDefaults.string(forKey: "NMDashboardAPIToken"),
-              let url = URL(string: "https://\(dashboardLink)/api/v1/monitor/\(serverID)") else {
+        guard let dashboardLink = NMCore.userDefaults.string(forKey: "NMDashboardLink"),
+              let dashboardAPIToken = NMCore.userDefaults.string(forKey: "NMDashboardAPIToken"),
+              let url = URL(string: "\(NMCore.userDefaults.bool(forKey: "NMDashboardSSLEnabled") ? "https" : "http")://\(dashboardLink)/api/v1/monitor/\(serverID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         

@@ -153,7 +153,7 @@ struct ServerDetailView: View {
             }
             
             // Save as last viewed server
-            UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")?.set(serverID, forKey: "NMLastViewedServerID")
+            NMCore.userDefaults.set(serverID, forKey: "NMLastViewedServerID")
         }
     }
     

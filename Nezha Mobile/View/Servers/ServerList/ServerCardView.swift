@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 struct ServerCardView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
-    @AppStorage("NMTheme", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var theme: NMTheme = .blue
+    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     let lastUpdateTime: Date?
     let server: Server
     

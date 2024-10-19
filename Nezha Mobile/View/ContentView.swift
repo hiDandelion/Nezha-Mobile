@@ -10,8 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @Environment(ThemeStore.self) var themeStore
     var dashboardViewModel: DashboardViewModel = DashboardViewModel()
-    @AppStorage("NMDashboardLink", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardLink: String = ""
-    @AppStorage("NMDashboardAPIToken", store: UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")) private var dashboardAPIToken: String = ""
+    @AppStorage("NMDashboardLink", store: NMCore.userDefaults) private var dashboardLink: String = ""
+    @AppStorage("NMDashboardAPIToken", store: NMCore.userDefaults) private var dashboardAPIToken: String = ""
     @State private var isShowingAddDashboardSheet: Bool = false
     
     var body: some View {
