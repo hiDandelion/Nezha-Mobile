@@ -124,6 +124,7 @@ struct MainTabView: View {
 }
 
 struct MainTabBar: View {
+    @Environment(\.colorScheme) private var scheme
     @Environment(TabBarState.self) var tabBarState
     var activeForeground: Color = .white
     var activeBackground: Color = .blue
@@ -182,12 +183,21 @@ struct MainTabBar: View {
             .coordinateSpace(.named("TABBARVIEW"))
             .padding(.horizontal, 5)
             .frame(height: 45)
-            .background(
-                .background
-                    .shadow(.drop(color: .black.opacity(0.08), radius: 5, x: 5, y: 5))
-                    .shadow(.drop(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)),
-                in: .capsule
-            )
+            .if(scheme == .light, transform: { view in
+                view.background(
+                    Capsule()
+                        .fill(.white)
+                        .shadow(color: .black.opacity(0.08), radius: 5, x: 5, y: 5)
+                        .shadow(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)
+                )
+            })
+            .if(scheme == .dark, transform: { view in
+                view.background(
+                    Capsule()
+                        .fill(.black)
+                        .strokeBorder(Color(red: 41/255, green: 41/255, blue: 41/255), lineWidth: 2)
+                )
+            })
             .zIndex(10)
             
             Button {

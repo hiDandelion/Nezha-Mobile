@@ -84,6 +84,18 @@ func formatTimeInterval(seconds: Int64, shortened: Bool = false) -> String {
     }
 }
 
+// Time Interval Determination
+func isTimeDifferenceLessThanHours(from startDate: Date, to endDate: Date, hours: Int) -> Bool {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.hour], from: startDate, to: endDate)
+    
+    guard let hourDifference = components.hour else {
+        return false
+    }
+    
+    return hourDifference < hours
+}
+
 // Extract Core Count From CPU Information
 func getCore(_ str: [String]?) -> Int? {
     guard let firstStr = str?.first else {

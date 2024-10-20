@@ -7,9 +7,26 @@
 
 import SwiftUI
 
+enum PingChartDateRange: Int, CaseIterable {
+    case threeHours = 3
+    case sixHours = 6
+    case twelveHours = 12
+    case oneDay = 24
+    
+    var localizedDateRangeTitle: String {
+        switch self {
+        case .threeHours: String(localized: "PingChartDateRange.threeHours")
+        case .sixHours: String(localized: "PingChartDateRange.sixHours")
+        case .twelveHours: String(localized: "PingChartDateRange.twelveHours")
+        case .oneDay: String(localized: "PingChartDateRange.oneDay")
+        }
+    }
+}
+
 struct ServerDetailPingChartView: View {
     @Environment(\.scenePhase) private var scenePhase
     var server: Server
+    @State private var dateRange: PingChartDateRange = .threeHours
     @State private var pingDatas: [PingData]?
     @State private var errorDescriptionLoadingPingData: String?
     @State private var isLoadingPingDatas: Bool = false
@@ -17,23 +34,32 @@ struct ServerDetailPingChartView: View {
     var body: some View {
         Group {
             if isLoadingPingDatas {
-                Section("Ping") {
+                if let errorDescriptionLoadingPingData {
+                    Text(errorDescriptionLoadingPingData)
+                }
+                else {
                     ProgressView()
                 }
             }
             else {
                 if let pingDatas {
+                    Section {
+                        Picker("Date Range", selection: $dateRange) {
+                            ForEach(PingChartDateRange.allCases, id: \.rawValue) { dateRange in
+                                Text(dateRange.localizedDateRangeTitle)
+                                    .tag(dateRange)
+                            }
+                        }
+                    }
+                    
                     List {
                         ForEach(pingDatas) { pingData in
                             Section("\(pingData.monitorName)") {
-                                PingChart(pingData: pingData)
+                                PingChart(pingData: pingData, dateRange: dateRange)
                                     .listRowSeparator(.hidden)
                             }
                         }
                     }
-                }
-                else if let errorDescriptionLoadingPingData {
-                    Text(errorDescriptionLoadingPingData)
                 }
                 else {
                     Text("No data")
@@ -42,9 +68,9 @@ struct ServerDetailPingChartView: View {
         }
         .onAppear {
             if pingDatas == nil {
+                isLoadingPingDatas = true
                 Task {
                     do {
-                        isLoadingPingDatas = true
                         let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
                         withAnimation {
                             errorDescriptionLoadingPingData = nil
@@ -52,9 +78,24 @@ struct ServerDetailPingChartView: View {
                             isLoadingPingDatas = false
                         }
                     }
+                    catch let error as NezhaDashboardError {
+                        switch error {
+                        case .invalidResponse(let message):
+                            if message == "success" {
+                                errorDescriptionLoadingPingData = String(localized: "No data")
+                            }
+                            else {
+                                errorDescriptionLoadingPingData = String(localized: "Server returned an invalid response.")
+#if DEBUG
+                                _ = debugLog("Nezha Dashboard Handler Error - Invalid response: \(message)")
+#endif
+                            }
+                        default:
+                            errorDescriptionLoadingPingData = error.localizedDescription
+                        }
+                    }
                     catch {
                         errorDescriptionLoadingPingData = error.localizedDescription
-                        isLoadingPingDatas = false
                     }
                 }
             }

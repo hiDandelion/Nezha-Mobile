@@ -7,9 +7,26 @@
 
 import SwiftUI
 
+enum PingChartDateRange: Int, CaseIterable {
+    case threeHours = 3
+    case sixHours = 6
+    case twelveHours = 12
+    case oneDay = 24
+    
+    var localizedDateRangeTitle: String {
+        switch self {
+        case .threeHours: String(localized: "PingChartDateRange.threeHours")
+        case .sixHours: String(localized: "PingChartDateRange.sixHours")
+        case .twelveHours: String(localized: "PingChartDateRange.twelveHours")
+        case .oneDay: String(localized: "PingChartDateRange.oneDay")
+        }
+    }
+}
+
 struct ServerDetailPingChartView: View {
     @Environment(\.scenePhase) private var scenePhase
     var server: Server
+    @State private var dateRange: PingChartDateRange = .threeHours
     @State private var pingDatas: [PingData]?
     @State private var errorDescriptionLoadingPingData: String?
     @State private var isLoadingPingDatas: Bool = false
@@ -26,10 +43,19 @@ struct ServerDetailPingChartView: View {
             }
             else {
                 if let pingDatas {
+                    Section {
+                        Picker("Date Range", selection: $dateRange) {
+                            ForEach(PingChartDateRange.allCases, id: \.rawValue) { dateRange in
+                                Text(dateRange.localizedDateRangeTitle)
+                                    .tag(dateRange)
+                            }
+                        }
+                    }
+                    
                     List {
                         ForEach(pingDatas) { pingData in
                             Section("\(pingData.monitorName)") {
-                                PingChart(pingData: pingData)
+                                PingChart(pingData: pingData, dateRange: dateRange)
                                     .listRowSeparator(.hidden)
                             }
                         }

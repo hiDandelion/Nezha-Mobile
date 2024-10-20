@@ -17,7 +17,15 @@ struct PingDataPlot: Identifiable {
 struct PingChart: View {
     @Environment(\.colorScheme) private var scheme
     let pingData: PingData
-    @State private var pingDataPlots: [PingDataPlot]
+    let dateRange: PingChartDateRange
+    var pingDataPlots: [PingDataPlot] {
+        let plots = zip(pingData.createdAt, pingData.avgDelay)
+            .map { PingDataPlot(date: $0, delay: $1) }
+        let filteredPlots = plots.filter {
+            isTimeDifferenceLessThanHours(from: $0.date, to: Date(), hours: dateRange.rawValue)
+        }
+        return filteredPlots
+    }
     @State private var rawSelectedDate: Date?
     var selectedPingDataPlot: PingDataPlot? {
         guard let rawSelectedDate = rawSelectedDate else { return nil }
@@ -25,12 +33,6 @@ struct PingChart: View {
         return pingDataPlots.first { plot in
             calendar.isDate(plot.date, equalTo: rawSelectedDate, toGranularity: .minute)
         }
-    }
-    
-    init(pingData: PingData) {
-        self.pingData = pingData
-        let plots = zip(pingData.createdAt, pingData.avgDelay).map { PingDataPlot(date: $0, delay: $1) }
-        self._pingDataPlots = State(initialValue: plots)
     }
     
     var body: some View {
