@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NezhaMobileData
+import Cache
 import XTerminalUI
 
 enum KeyCombination {
@@ -23,6 +24,12 @@ struct TerminalView: View {
     let password: String?
     let privateKey: String?
     let privateKeyType: PrivateKeyType?
+    let storage = try? Storage<String, Int>(
+        diskConfig: DiskConfig(name: "NMHostSSHPort"),
+        memoryConfig: MemoryConfig(expiry: .never),
+        fileManager: FileManager(),
+        transformer: TransformerFactory.forCodable(ofType: Int.self)
+    )
     
     var body: some View {
         NavigationStack {
@@ -81,10 +88,13 @@ struct TerminalView: View {
             }
             .navigationTitle("Terminal")
             .onAppear {
+                // Cache corresponding port for the host
+                try? storage?.setObject(port, forKey: host)
+                
                 if let password {
                     terminalViewModel.start(host: host, port: port, username: username, password: password)
                 }
-                if let privateKey, let privateKeyType {
+                else if let privateKey, let privateKeyType {
                     terminalViewModel.start(host: host, port: port, username: username, privateKey: privateKey, privateKeyType: privateKeyType)
                 }
             }

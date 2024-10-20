@@ -12,6 +12,7 @@ struct AgentSettingsView: View {
     @State private var dashboardGRPCLink: String = NMCore.userDefaults.string(forKey: "NMDashboardGRPCLink") ?? ""
     @State private var dashboardGRPCPort: String = NMCore.userDefaults.string(forKey: "NMDashboardGRPCPort") ?? "5555"
     @State private var agentSecret: String = NMCore.userDefaults.string(forKey: "NMAgentSecret") ?? "5555"
+    @State private var agentSSLEnabled: Bool = NMCore.userDefaults.bool(forKey: "NMAgentSSLEnabled")
     @State private var isShowPrivacyNotice: Bool = false
     
     var body: some View {
@@ -31,8 +32,12 @@ struct AgentSettingsView: View {
             }
             
             Section {
+                Toggle("Enable SSL", isOn: $agentSSLEnabled)
+            }
+            
+            Section {
                 Button("Save & Apply") {
-                    NMCore.saveNewAgentConfigurations(dashboardGRPCLink: dashboardGRPCLink, dashboardGRPCPort: dashboardGRPCPort, agentSecret: agentSecret)
+                    NMCore.saveNewAgentConfigurations(dashboardGRPCLink: dashboardGRPCLink, dashboardGRPCPort: dashboardGRPCPort, agentSecret: agentSecret, agentSSLEnabled: agentSSLEnabled)
                     dismiss()
                 }
             }

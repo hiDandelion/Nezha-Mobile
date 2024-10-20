@@ -34,6 +34,7 @@ extension RequestHandler {
         
         let body: [String: Any] = [
             "server": "\(dashboardGRPCLink):\(dashboardGRPCPort)",
+            "ssl": NMCore.userDefaults.bool(forKey: "NMAgentSSLEnabled"),
             "secret": agentSecret,
             "identifier": identifier,
             "systemVersion": systemVersion,

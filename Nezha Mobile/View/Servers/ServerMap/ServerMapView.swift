@@ -23,6 +23,12 @@ struct ServerMapView: View {
     var servers: [Server]
     @State private var serverCoordinates: [ServerCoordinate] = []
     @State private var selectedCoordinate: ServerCoordinate?
+    let storage = try? Storage<String, IPCityData>(
+        diskConfig: DiskConfig(name: "NMIPCityData"),
+        memoryConfig: MemoryConfig(expiry: .never),
+        fileManager: FileManager(),
+        transformer: TransformerFactory.forCodable(ofType: IPCityData.self)
+    )
     
     var body: some View {
         VStack {
@@ -126,13 +132,6 @@ struct ServerMapView: View {
     
     private func loadCoordinates() async {
         serverCoordinates.removeAll()
-        
-        let storage = try? Storage<String, IPCityData>(
-            diskConfig: DiskConfig(name: "NMIPCityData"),
-            memoryConfig: MemoryConfig(expiry: .never),
-            fileManager: FileManager(),
-            transformer: TransformerFactory.forCodable(ofType: IPCityData.self)
-        )
         
         for server in servers {
             if let storage {

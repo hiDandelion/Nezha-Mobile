@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import NezhaMobileData
+import Cache
 
 struct PrepareConnectionView: View {
     @Query var identities: [Identity]
@@ -16,6 +17,12 @@ struct PrepareConnectionView: View {
     @State private var port: String = "22"
     @State private var identity: Identity?
     @State private var isShowAddIdentitySheet: Bool = false
+    let storage = try? Storage<String, Int>(
+        diskConfig: DiskConfig(name: "NMHostSSHPort"),
+        memoryConfig: MemoryConfig(expiry: .never),
+        fileManager: FileManager(),
+        transformer: TransformerFactory.forCodable(ofType: Int.self)
+    )
     
     var body: some View {
         NavigationStack {
@@ -57,22 +64,22 @@ struct PrepareConnectionView: View {
             .navigationTitle("Connection")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    if let host, let port = Int(port), let identity, let password = identity.password {
-                        NavigationLink("Start", destination: TerminalView(host: host, port: port, username: identity.username!, password: password, privateKey: nil, privateKeyType: nil))
-                    }
-                    else if let host, let port = Int(port), let identity, let privateKey = identity.privateKeyString, let privateKeyType = identity.privateKeyType {
-                        NavigationLink("Start", destination: TerminalView(host: host, port: port, username: identity.username!, password: nil, privateKey: privateKey, privateKeyType: privateKeyType))
-                    }
-                    else if host == nil, mannualHost != "", let port = Int(port), let identity, let password = identity.password {
-                        NavigationLink("Start", destination: TerminalView(host: mannualHost, port: port, username: identity.username!, password: password, privateKey: nil, privateKeyType: nil))
-                    }
-                    else if host == nil, mannualHost != "", let port = Int(port), let identity, let privateKey = identity.privateKeyString, let privateKeyType = identity.privateKeyType {
-                        NavigationLink("Start", destination: TerminalView(host: mannualHost, port: port, username: identity.username!, password: nil, privateKey: privateKey, privateKeyType: privateKeyType))
+                    if let port = Int(port),
+                       let identity,
+                       let username = identity.username,
+                       host != nil || (host == nil && mannualHost != "") {
+                        NavigationLink("Start", destination: TerminalView(host: host ?? mannualHost, port: port, username: username, password: identity.password, privateKey: identity.privateKeyString, privateKeyType: identity.privateKeyType))
                     }
                     else {
                         NavigationLink("Start", destination: EmptyView())
                             .disabled(true)
                     }
+                }
+            }
+            .onAppear {
+                // Retrieve corresponding port for the host from cache
+                if let host, let cachedPort = try? storage?.object(forKey: host) {
+                    port = String(cachedPort)
                 }
             }
         }

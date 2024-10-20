@@ -15,7 +15,7 @@ func syncWithiCloud() {
     
     _ = debugLog("Sync Info - Starting sync")
     
-    let keys = ["NMLastModifyDate", "NMDashboardLink", "NMDashboardAPIToken", "NMDashboardGRPCLink", "NMDashboardGRPCPort", "NMAgentSecret"]
+    let keys = ["NMLastModifyDate", "NMDashboardLink", "NMDashboardAPIToken", "NMDashboardSSLEnabled", "NMDashboardGRPCLink", "NMDashboardGRPCPort", "NMAgentSecret", "NMAgentSSLEnabled"]
     
     let lastModifyDateLocal = NMCore.userDefaults.object(forKey: "NMLastModifyDate") as? Int
     let lastModifyDateRemote = cloudStore.object(forKey: "NMLastModifyDate") as? Int

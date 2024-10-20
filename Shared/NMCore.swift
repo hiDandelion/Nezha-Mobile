@@ -27,6 +27,7 @@ class NMCore {
             "NMDashboardGRPCLink": "",
             "NMDashboardGRPCPort": "",
             "NMAgentSecret": "",
+            "NMAgentSSLEnabled": false,
             "NMPushNotificationsToken": "",
             "NMPushToStartToken": "",
             "NMWatchPushNotificationsToken": "",
@@ -38,24 +39,28 @@ class NMCore {
     }
     
     static func saveNewDashboardConfigurations(dashboardLink: String, dashboardAPIToken: String, dashboardSSLEnabled: Bool) {
+        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
         userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
         userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
         userDefaults.set(dashboardSSLEnabled, forKey: "NMDashboardSSLEnabled")
-        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+        
+        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
         NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
         NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
         NSUbiquitousKeyValueStore().set(dashboardSSLEnabled, forKey: "NMDashboardSSLEnabled")
-        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
     }
     
-    static func saveNewAgentConfigurations(dashboardGRPCLink: String, dashboardGRPCPort: String, agentSecret: String) {
+    static func saveNewAgentConfigurations(dashboardGRPCLink: String, dashboardGRPCPort: String, agentSecret: String, agentSSLEnabled: Bool) {
+        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
         userDefaults.set(dashboardGRPCLink, forKey: "NMDashboardGRPCLink")
         userDefaults.set(dashboardGRPCPort, forKey: "NMDashboardGRPCPort")
         userDefaults.set(agentSecret, forKey: "NMAgentSecret")
-        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+        userDefaults.set(agentSSLEnabled, forKey: "NMAgentSSLEnabled")
+        
+        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
         NSUbiquitousKeyValueStore().set(dashboardGRPCLink, forKey: "NMDashboardGRPCLink")
         NSUbiquitousKeyValueStore().set(dashboardGRPCPort, forKey: "NMDashboardGRPCPort")
         NSUbiquitousKeyValueStore().set(agentSecret, forKey: "NMAgentSecret")
-        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
+        NSUbiquitousKeyValueStore().set(agentSSLEnabled, forKey: "NMAgentSSLEnabled")
     }
 }
