@@ -10,6 +10,10 @@ import SwiftUI
 
 @main
 struct WidgetAppBundle: WidgetBundle {
+    init() {
+        NMCore.registerUserDefaults()
+    }
+    
     var body: some Widget {
         ServerDetailWidget()
 #if os(iOS)

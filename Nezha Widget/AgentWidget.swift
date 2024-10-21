@@ -292,10 +292,6 @@ struct AgentEntry: TimelineEntry {
 }
 
 struct AgentWidget: Widget {
-    init() {
-        NMCore.registerUserDefaults()
-    }
-    
     let kind: String = "AgentWidget"
     
     var body: some WidgetConfiguration {

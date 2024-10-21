@@ -26,7 +26,10 @@ struct ServerQuery: EntityQuery {
                         }
                     }
                 }
-                return serverEntitiesSorted
+                let serverEntitiesSortedAndFiltered = serverEntitiesSorted.filter {
+                    identifiers.contains($0.id)
+                }
+                return serverEntitiesSortedAndFiltered
             }
             return []
         }

@@ -404,10 +404,6 @@ struct ServerEntry: TimelineEntry {
 }
 
 struct ServerDetailWidget: Widget {
-    init() {
-        NMCore.registerUserDefaults()
-    }
-    
     let kind: String = "ServerDetailWidget"
     
     var body: some WidgetConfiguration {
