@@ -57,6 +57,11 @@ public actor NezhaMobileDataHandler {
         modelContext.delete(serverAlert)
         try modelContext.save()
     }
+    
+    public func deleteAllServerAlerts() throws {
+        try modelContext.delete(model: ServerAlert.self)
+        try modelContext.save()
+    }
 }
 
 public struct DataHandlerKey: EnvironmentKey {

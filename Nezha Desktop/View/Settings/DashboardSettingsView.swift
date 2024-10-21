@@ -25,8 +25,6 @@ struct DashboardSettingsView: View {
                     }
                 TextField("API Token", text: $dashboardAPIToken)
                     .autocorrectionDisabled()
-            } header: {
-                Text("Dashboard Info")
             } footer: {
                 Text("Dashboard Link Example: server.hidandelion.com")
             }

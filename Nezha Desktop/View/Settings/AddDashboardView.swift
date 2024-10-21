@@ -25,8 +25,6 @@ struct AddDashboardView: View {
                         }
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
-                } header: {
-                    Text("Dashboard Info")
                 } footer: {
                     Text("Dashboard Link Example: server.hidandelion.com")
                 }
@@ -37,6 +35,10 @@ struct AddDashboardView: View {
             }
             .padding()
             .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Link("User Guide", destination: NMCore.userGuideURL)
+                }
+                
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
