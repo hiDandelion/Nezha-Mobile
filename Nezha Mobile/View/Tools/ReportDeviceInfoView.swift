@@ -86,15 +86,15 @@ struct ReportDeviceInfoView: View {
         let bootTime = DeviceInfo.getBootTime()
         let uptime = DeviceInfo.getUptime()
 #if DEBUG
-        _ = debugLog("Get Device Info Info - Model Identifier: \(deviceModelIdentifier)")
-        _ = debugLog("Get Device Info Info - iOS Version: \(OSVersionNumber)")
-        _ = debugLog("Get Device Info Info - CPU Used: \(cpuUsage)")
-        _ = debugLog("Get Device Info Info - Memory Total: \(formatBytes(memoryTotal))")
-        _ = debugLog("Get Device Info Info - Memory Used: \(formatBytes(memoryUsed))")
-        _ = debugLog("Get Device Info Info - Disk Used: \(formatBytes(diskUsed))")
-        _ = debugLog("Get Device Info Info - Disk Total: \(formatBytes(diskTotal))")
-        _ = debugLog("Get Device Info Info - Boot Time: \(bootTime)")
-        _ = debugLog("Get Device Info Info - Up Time: \(uptime)")
+        _ = NMCore.debugLog("Get Device Info Info - Model Identifier: \(deviceModelIdentifier)")
+        _ = NMCore.debugLog("Get Device Info Info - iOS Version: \(OSVersionNumber)")
+        _ = NMCore.debugLog("Get Device Info Info - CPU Used: \(cpuUsage)")
+        _ = NMCore.debugLog("Get Device Info Info - Memory Total: \(formatBytes(memoryTotal))")
+        _ = NMCore.debugLog("Get Device Info Info - Memory Used: \(formatBytes(memoryUsed))")
+        _ = NMCore.debugLog("Get Device Info Info - Disk Used: \(formatBytes(diskUsed))")
+        _ = NMCore.debugLog("Get Device Info Info - Disk Total: \(formatBytes(diskTotal))")
+        _ = NMCore.debugLog("Get Device Info Info - Boot Time: \(bootTime)")
+        _ = NMCore.debugLog("Get Device Info Info - Up Time: \(uptime)")
 #endif
         
         isReportingDeviceInfo = true

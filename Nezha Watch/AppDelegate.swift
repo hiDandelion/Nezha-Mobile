@@ -12,7 +12,7 @@ class AppDelegate: NSObject, WKApplicationDelegate {
     func applicationDidFinishLaunching() {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            _ = debugLog("Push Notification Info - Permission granted: \(granted)")
+            _ = NMCore.debugLog("Push Notification Info - Permission granted: \(granted)")
             if granted {
                 self.registerForPushNotifications()
             }

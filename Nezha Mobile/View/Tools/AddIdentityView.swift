@@ -66,13 +66,13 @@ struct AddIdentityView: View {
                                     } else {
                                         let attributes = try FileManager.default.attributesOfItem(atPath: selectedFile.path)
                                         let fileSize = attributes[.size] as? Int64 ?? 0
-                                        _ = debugLog("File Importer Error: Non readable file \(selectedFile.lastPathComponent) (\(fileSize) bytes)")
+                                        _ = NMCore.debugLog("File Importer Error: Non readable file \(selectedFile.lastPathComponent) (\(fileSize) bytes)")
                                     }
                                 } else {
-                                    _ = debugLog("File Importer Error: File access declined")
+                                    _ = NMCore.debugLog("File Importer Error: File access declined")
                                 }
                             } catch {
-                                _ = debugLog("File Importer Error: \(error.localizedDescription)")
+                                _ = NMCore.debugLog("File Importer Error: \(error.localizedDescription)")
                             }
                         }
                     }

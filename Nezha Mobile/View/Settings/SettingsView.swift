@@ -76,7 +76,7 @@ struct SettingsView: View {
                 }
                 
                 Section("Help") {
-                    Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
+                    Link("User Guide", destination: NMCore.userGuideURL)
                 }
                 
                 Section("About") {

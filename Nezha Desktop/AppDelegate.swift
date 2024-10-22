@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-                _ = debugLog("Push Notification Info - Permission granted: \(granted)")
+                _ = NMCore.debugLog("Push Notification Info - Permission granted: \(granted)")
                 if granted {
                     self.registerForPushNotifications()
                 }
@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         let title = response.notification.request.content.title
         let body = response.notification.request.content.body
         
-        _ = debugLog("Notification Info - Title: \(title), Body: \(body)")
+        _ = NMCore.debugLog("Notification Info - Title: \(title), Body: \(body)")
         
         DispatchQueue.main.async {
             self.notificationState.notificationData = (title: title, body: body)

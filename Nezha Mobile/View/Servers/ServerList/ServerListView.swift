@@ -88,7 +88,7 @@ struct ServerListView: View {
             }
         }
         .onOpenURL { url in
-            _ = debugLog("Incoming Link Info - App was opened via URL: \(url)")
+            _ = NMCore.debugLog("Incoming Link Info - App was opened via URL: \(url)")
             handleIncomingURL(url)
         }
     }
@@ -158,7 +158,7 @@ struct ServerListView: View {
                         dashboardViewModel.startMonitoring()
                     }
                     Button("Settings") {
-                        
+                        tabBarState.activeTab = .settings
                     }
                 }
                 .padding()
@@ -256,22 +256,22 @@ struct ServerListView: View {
     
     private func handleIncomingURL(_ url: URL) {
         guard url.scheme == "nezha" else {
-            _ = debugLog("Incoming Link Error - Invalid Scheme")
+            _ = NMCore.debugLog("Incoming Link Error - Invalid Scheme")
             return
         }
         
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            _ = debugLog("Incoming Link Error - Invalid URL")
+            _ = NMCore.debugLog("Incoming Link Error - Invalid URL")
             return
         }
         
         guard let action = components.host, action == "server-details" else {
-            _ = debugLog("Incoming Link Error - Unknown action")
+            _ = NMCore.debugLog("Incoming Link Error - Unknown action")
             return
         }
         
         guard let serverID = components.queryItems?.first(where: { $0.name == "serverID" })?.value else {
-            _ = debugLog("Incoming Link Error - Server ID not found")
+            _ = NMCore.debugLog("Incoming Link Error - Server ID not found")
             return
         }
         

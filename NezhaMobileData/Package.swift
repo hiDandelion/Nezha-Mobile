@@ -6,8 +6,9 @@ let package = Package(
     name: "NezhaMobileData",
     platforms: [
         .iOS(.v17),
-        .macOS(.v14),
         .watchOS(.v10),
+        .macOS(.v14),
+        .visionOS(.v1)
     ],
     products: [
         .library(

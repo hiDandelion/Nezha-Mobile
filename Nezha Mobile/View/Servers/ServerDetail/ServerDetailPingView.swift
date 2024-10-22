@@ -87,7 +87,7 @@ struct ServerDetailPingChartView: View {
                             else {
                                 errorDescriptionLoadingPingData = String(localized: "Server returned an invalid response.")
 #if DEBUG
-                                _ = debugLog("Nezha Dashboard Handler Error - Invalid response: \(message)")
+                                _ = NMCore.debugLog("Nezha Dashboard Handler Error - Invalid response: \(message)")
 #endif
                             }
                         default:

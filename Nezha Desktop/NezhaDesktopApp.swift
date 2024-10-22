@@ -27,7 +27,7 @@ struct NezhaDesktopApp: App {
         .defaultSize(width: 1000, height: 500)
         .commands {
             CommandGroup(before: CommandGroupPlacement.help) {
-                Link("User Guide", destination: URL(string: "https://nezha.wiki/case/case6.html")!)
+                Link("User Guide", destination: NMCore.userGuideURL)
                 NavigationLink(destination: {
                     AcknowledgmentView()
                 }) {

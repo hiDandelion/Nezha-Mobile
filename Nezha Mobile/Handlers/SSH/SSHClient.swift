@@ -73,9 +73,9 @@ class SSHClient {
                 .whenComplete{ result in
                     switch result {
                     case .success:
-                        _ = debugLog("Channel Info - Command sent successfully")
+                        _ = NMCore.debugLog("Channel Info - Command sent successfully")
                     case .failure(let error):
-                        _ = debugLog("Channel Error - Failed to send command: \(error)")
+                        _ = NMCore.debugLog("Channel Error - Failed to send command: \(error)")
                     }
                 }
         }
@@ -102,15 +102,15 @@ class SSHClient {
             .whenComplete { result in
                 switch result {
                 case .success(let channel):
-                    _ = debugLog("Channel Info - \(channel)")
+                    _ = NMCore.debugLog("Channel Info - \(channel)")
                     if let command {
                         self.run(command: command)
                     }
                 case .failure(let error):
-                    _ = debugLog("Channel Error - \(error)")
+                    _ = NMCore.debugLog("Channel Error - \(error)")
                     
                     self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
-                    _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
+                    _ = NMCore.debugLog("SSH Client Info - SSH Client status has been set to .error")
                 }
             }
         }
@@ -128,14 +128,14 @@ class SSHClient {
                 .whenComplete{ result in
                     switch result {
                     case .success:
-                        _ = debugLog("Channel Info - Window changed successfully")
+                        _ = NMCore.debugLog("Channel Info - Window changed successfully")
                     case .failure(let error):
-                        _ = debugLog("Channel Error - Failed to change window: \(error)")
+                        _ = NMCore.debugLog("Channel Error - Failed to change window: \(error)")
                     }
                 }
         }
         else {
-            _ = debugLog("No active channel")
+            _ = NMCore.debugLog("No active channel")
         }
     }
 }
@@ -160,40 +160,40 @@ class SSHChannelHandler: ChannelDuplexHandler {
     }
     
     func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        _ = debugLog("Channel Handler Info - Channel read start")
+        _ = NMCore.debugLog("Channel Handler Info - Channel read start")
         let channelData = self.unwrapInboundIn(data)
         
         switch channelData.type {
         case .channel:
             guard case .byteBuffer(let buffer) = channelData.data else {
-                _ = debugLog("Channel Handler Error - Unexpected channel data")
+                _ = NMCore.debugLog("Channel Handler Error - Unexpected channel data")
                 return
             }
             context.fireChannelRead(self.wrapInboundOut(buffer))
         case .stdErr:
             guard case .byteBuffer(let buffer) = channelData.data else {
-                _ = debugLog("Channel Handler Error - Unexpected channel data")
+                _ = NMCore.debugLog("Channel Handler Error - Unexpected channel data")
                 return
             }
             self.delegate?.receiveMessage(type: .stderr, content: buffer)
-            _ = debugLog("Channel Handler Info - stderr received")
+            _ = NMCore.debugLog("Channel Handler Info - stderr received")
         default:
-            _ = debugLog("Channel Handler Error - Unexpected SSH channel data type")
+            _ = NMCore.debugLog("Channel Handler Error - Unexpected SSH channel data type")
         }
     }
     
     func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
-        _ = debugLog("Channel Handler Info - Write to outbound data")
+        _ = NMCore.debugLog("Channel Handler Info - Write to outbound data")
         let buffer = self.unwrapOutboundIn(data)
         context.write(self.wrapOutboundOut(.init(type: .channel, data: .byteBuffer(buffer))), promise: promise)
     }
     
     func errorCaught(context: ChannelHandlerContext, error: Error) {
-        _ = debugLog("Channel Handler Error - Error caught: \(error)")
+        _ = NMCore.debugLog("Channel Handler Error - Error caught: \(error)")
         context.close(promise: nil)
         
         self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
-        _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
+        _ = NMCore.debugLog("SSH Client Info - SSH Client status has been set to .error")
     }
 }
 
@@ -243,26 +243,26 @@ class SSHInteractiveHandler: ChannelInboundHandler {
         pseudoTerminalRequestPromise.futureResult.whenComplete { result in
             switch result {
             case .success:
-                _ = debugLog("Channel Info - Pseudo Terminal created")
+                _ = NMCore.debugLog("Channel Info - Pseudo Terminal created")
                 shellRequestPromise.futureResult.whenComplete { result in
                     switch result {
                     case .success:
-                        _ = debugLog("Channel Info - Shell created")
+                        _ = NMCore.debugLog("Channel Info - Shell created")
                         
                         self.delegate?.updateStatus(status: .loaded)
-                        _ = debugLog("SSH Client Info - SSH Client status has been set to .loaded")
+                        _ = NMCore.debugLog("SSH Client Info - SSH Client status has been set to .loaded")
                     case .failure(let error):
-                        _ = debugLog("Channel Error - \(error)")
+                        _ = NMCore.debugLog("Channel Error - \(error)")
                         
                         self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
-                        _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
+                        _ = NMCore.debugLog("SSH Client Info - SSH Client status has been set to .error")
                     }
                 }
             case .failure(let error):
-                _ = debugLog("Channel Error - \(error)")
+                _ = NMCore.debugLog("Channel Error - \(error)")
                 
                 self.delegate?.updateStatus(status: .error("\(error.localizedDescription)"))
-                _ = debugLog("SSH Client Info - SSH Client status has been set to .error")
+                _ = NMCore.debugLog("SSH Client Info - SSH Client status has been set to .error")
             }
         }
     }
@@ -270,10 +270,10 @@ class SSHInteractiveHandler: ChannelInboundHandler {
     func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         let buffer = unwrapInboundIn(data)
         self.delegate?.receiveMessage(type: .stdout, content: buffer)
-        _ = debugLog("Interactive Handler Info - stdout received")
+        _ = NMCore.debugLog("Interactive Handler Info - stdout received")
     }
     
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
-        _ = debugLog("Interactive Handler Info - Event: \(event)")
+        _ = NMCore.debugLog("Interactive Handler Info - Event: \(event)")
     }
 }

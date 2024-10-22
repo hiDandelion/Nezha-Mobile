@@ -38,7 +38,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            syncWithiCloud()
+            NMCore.syncWithiCloud()
         }
     }
 }

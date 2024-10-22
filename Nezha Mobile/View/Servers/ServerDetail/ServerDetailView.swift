@@ -132,7 +132,7 @@ struct ServerDetailView: View {
                                     }
                                 }
                                 if server.IPv6 != "" {
-                                    NavigationLink(destination: PrepareConnectionView(host: server.IPv4)) {
+                                    NavigationLink(destination: PrepareConnectionView(host: server.IPv6)) {
                                         Label("Connect via IPv6", systemImage: "link")
                                     }
                                 }

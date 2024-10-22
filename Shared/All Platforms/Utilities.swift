@@ -14,14 +14,6 @@ import SwiftUI
     import AppKit
 #endif
 
-// Debug Log
-func debugLog(_ message: String) -> Any? {
-    #if DEBUG
-    print("Debug - \(message)")
-    #endif
-    return nil
-}
-
 // Bytes To Data Amount String
 func formatBytes(_ bytes: Int64, decimals: Int = 2) -> String {
     let units = ["B", "KB", "MB", "GB", "TB", "PB"]
@@ -167,7 +159,7 @@ extension Color: @retroactive RawRepresentable {
             return nil
         }
         do {
-#if os(iOS) || os(watchOS)
+#if os(iOS) || os(watchOS) || os(visionOS)
             let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) ?? .white
 #elseif os(macOS)
             let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) ?? .white
@@ -180,7 +172,7 @@ extension Color: @retroactive RawRepresentable {
 
     public var base64EncodedString: String? {
         do {
-#if os(iOS) || os(watchOS)
+#if os(iOS) || os(watchOS) || os(visionOS)
             let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false) as Data
 #elseif os(macOS)
             let data = try NSKeyedArchiver.archivedData(withRootObject: NSColor(self), requiringSecureCoding: false) as Data
@@ -198,7 +190,7 @@ extension Color: @retroactive RawRepresentable {
             return nil
         }
         do {
-#if os(iOS) || os(watchOS)
+#if os(iOS) || os(watchOS) || os(visionOS)
             let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) ?? .white
 #elseif os(macOS)
             let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) ?? .white
@@ -211,7 +203,7 @@ extension Color: @retroactive RawRepresentable {
 
     public var rawValue: String {
         do {
-#if os(iOS) || os(watchOS)
+#if os(iOS) || os(watchOS) || os(visionOS)
             let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false) as Data
 #elseif os(macOS)
             let data = try NSKeyedArchiver.archivedData(withRootObject: NSColor(self), requiringSecureCoding: false) as Data
