@@ -18,7 +18,7 @@ class NMCore {
     static let userGuideURL: URL = URL(string: "https://support.argsment.com/nezha-mobile/user-guide")!
     static let userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
-    static func debugLog(_ message: String) -> Any? {
+    static func debugLog(_ message: Any) -> Any? {
         #if DEBUG
         print("Debug - \(message)")
         #endif

@@ -22,5 +22,6 @@ struct MainTabView: View {
                 SettingsView(dashboardViewModel: dashboardViewModel)
             }
         }
+        .tabViewStyle(.sidebarAdaptable)
     }
 }

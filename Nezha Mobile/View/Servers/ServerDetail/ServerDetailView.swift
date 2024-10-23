@@ -27,8 +27,8 @@ struct ServerDetailView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
-    var serverID: Int
     var dashboardViewModel: DashboardViewModel
+    var serverID: Int
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
     @StateObject var offsetObserver = PageOffsetObserver()

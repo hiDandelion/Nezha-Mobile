@@ -1955,9 +1955,6 @@
     "Nezha Desktop" : {
       "shouldTranslate" : false
     },
-    "Nezha Vision" : {
-
-    },
     "No Alert" : {
       "localizations" : {
         "ja" : {
@@ -2121,6 +2118,9 @@
           }
         }
       }
+    },
+    "Pin View" : {
+
     },
     "Ping" : {
       "localizations" : {

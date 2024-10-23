@@ -63,7 +63,7 @@ struct ServerListView: View {
             }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
                 if let incomingURLServerID {
-                    ServerDetailView(serverID: incomingURLServerID, dashboardViewModel: dashboardViewModel)
+                    ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: incomingURLServerID)
                 }
             }
             .onAppear {
@@ -226,7 +226,7 @@ struct ServerListView: View {
                     ForEach(filteredServers) { server in
                         if #available(iOS 18, *) {
                             NavigationLink {
-                                ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel)
+                                ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: server.id)
                                     .navigationTransition(.zoom(sourceID: server.id, in: serverNamespace))
                             } label: {
                                 ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
@@ -237,7 +237,7 @@ struct ServerListView: View {
                         }
                         else {
                             NavigationLink {
-                                ServerDetailView(serverID: server.id, dashboardViewModel: dashboardViewModel)
+                                ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: server.id)
                             } label: {
                                 ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
                             }

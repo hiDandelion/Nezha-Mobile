@@ -15,6 +15,7 @@ struct ServerDetailBasicView: View {
     
     var body: some View {
         Section("Basic") {
+            PieceOfInfo(systemImage: "bookmark", name: "Name", content: Text("\(server.name)"))
             PieceOfInfo(systemImage: "cube", name: "ID", content: Text("\(server.id)"))
             PieceOfInfo(systemImage: "tag", name: "Tag", content: Text("\(server.tag)"))
             

@@ -9,17 +9,13 @@ import SwiftUI
 
 struct ServerListView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openWindow) var openWindow
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
-    @State private var shouldNavigateToServerDetailView: Bool = false
-    @State private var incomingURLServerID: Int?
     var dashboardViewModel: DashboardViewModel
-    @State private var backgroundImage: UIImage?
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
-    @State private var newSettingRequireReconnection: Bool? = false
     @Namespace private var tagNamespace
-    @Namespace private var serverNamespace
     
     private var filteredServers: [Server] {
         dashboardViewModel.servers
@@ -140,6 +136,15 @@ struct ServerListView: View {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
                     ForEach(filteredServers) { server in
                         ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
+                            .onTapGesture {
+                                openWindow(id: "server-detail-view", value: server.id)
+                            }
+                            .onDrag {
+                                let userActivity = NSUserActivity(activityType: "drag")
+                                userActivity.targetContentIdentifier = "server-pin-view"
+                                userActivity.userInfo = ["serverID": server.id as Int]
+                                return NSItemProvider(object: userActivity)
+                            }
                     }
                 }
                 .padding(.horizontal, 15)
