@@ -27,6 +27,7 @@ struct ServerDetailView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
+    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     var dashboardViewModel: DashboardViewModel
     var serverID: Int
     @State private var selectedSection: Int = 0
@@ -58,11 +59,11 @@ struct ServerDetailView: View {
                                             let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
                                             
                                             Capsule()
-                                                .fill(scheme == .dark ? .white : .black)
+                                                .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
                                                 .frame(width: capsuleWidth)
                                                 .offset(x: progress * capsuleWidth)
                                             
-                                            Tabbar(scheme == .dark ? .black : .white, .semibold)
+                                            Tabbar(scheme == .light ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary), .semibold)
                                                 .mask(alignment: .leading) {
                                                     Capsule()
                                                         .frame(width: capsuleWidth)

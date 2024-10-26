@@ -59,10 +59,12 @@ struct AdvancedCustomizationView: View {
                     ColorPicker("Primary Color Light Mode", selection: Bindable(themeStore).themePrimaryColorLight)
                     ColorPicker("Secondary Color Light Mode", selection: Bindable(themeStore).themeSecondaryColorLight)
                     ColorPicker("Background Color Light Mode", selection: Bindable(themeStore).themeBackgroundColorLight)
+                    ColorPicker("Active Color Light Mode", selection: Bindable(themeStore).themeActiveColorLight)
                     ColorPicker("Tint Color Light Mode", selection: Bindable(themeStore).themeTintColorLight)
                     ColorPicker("Primary Color Dark Mode", selection: Bindable(themeStore).themePrimaryColorDark)
                     ColorPicker("Secondary Color Dark Mode", selection: Bindable(themeStore).themeSecondaryColorDark)
                     ColorPicker("Background Color Dark Mode", selection: Bindable(themeStore).themeBackgroundColorDark)
+                    ColorPicker("Active Color Dark Mode", selection: Bindable(themeStore).themeActiveColorDark)
                     ColorPicker("Tint Color Dark Mode", selection: Bindable(themeStore).themeTintColorDark)
                 }
             } header: {

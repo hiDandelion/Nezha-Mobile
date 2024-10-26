@@ -70,7 +70,7 @@ struct ServerCardView: View {
                             }
                             Text("\(getCore(server.host.cpu) ?? 0) Core")
                                 .font(.caption2)
-                                .frame(minWidth: 50)
+                                .frame(minWidth: 60)
                                 .lineLimit(1)
                         }
                         
@@ -85,7 +85,7 @@ struct ServerCardView: View {
                             }
                             Text("\(formatBytes(server.host.memTotal, decimals: 0))")
                                 .font(.caption2)
-                                .frame(minWidth: 50)
+                                .frame(minWidth: 60)
                                 .lineLimit(1)
                         }
                         
@@ -100,7 +100,7 @@ struct ServerCardView: View {
                             }
                             Text("\(formatBytes(server.host.diskTotal, decimals: 0))")
                                 .font(.caption2)
-                                .frame(minWidth: 50)
+                                .frame(minWidth: 60)
                                 .lineLimit(1)
                         }
                     }
@@ -114,8 +114,8 @@ struct ServerCardView: View {
                             Image(systemName: "circle.dotted.circle")
                                 .frame(width: 10)
                             VStack(alignment: .leading) {
-                                Text("↑ \(formatBytes(server.status.netOutTransfer))")
-                                Text("↓ \(formatBytes(server.status.netInTransfer))")
+                                Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
+                                Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
                             }
                         }
                         .frame(alignment: .leading)
@@ -124,8 +124,8 @@ struct ServerCardView: View {
                             Image(systemName: "network")
                                 .frame(width: 10)
                             VStack(alignment: .leading) {
-                                Text("↑ \(formatBytes(server.status.netOutSpeed))/s")
-                                Text("↓ \(formatBytes(server.status.netInSpeed))/s")
+                                Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 1))/s")
+                                Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 1))/s")
                             }
                         }
                         .frame(alignment: .leading)

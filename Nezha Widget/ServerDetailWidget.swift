@@ -190,6 +190,7 @@ struct ServerDetailWidgetEntryView: View {
                         }
                     default:
                         Text("Unsupported family")
+                            .containerBackground(color, for: .widget)
                     }
                 }
                 .widgetURL(URL(string: "nezha://server-details?serverID=\(server.id)")!)
@@ -204,6 +205,7 @@ struct ServerDetailWidgetEntryView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
                 .foregroundStyle(.white)
+                .containerBackground(color, for: .widget)
             }
         }
     }
@@ -233,6 +235,7 @@ struct ServerDetailWidgetEntryView: View {
                 if let isShowIP = entry.isShowIP, isShowIP {
                     Text(server.IPv4)
                         .font(.callout)
+                        .lineLimit(1)
                 }
                 
                 HStack {
@@ -240,27 +243,48 @@ struct ServerDetailWidgetEntryView: View {
                     let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
                     let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
                     
-                    VStack {
-                        Text("CPU")
-                        Text("\(cpuUsage * 100, specifier: "%.0f")%")
-                    }
-                    
-                    VStack {
-                        Text("MEM")
-                        Text("\(memUsage * 100, specifier: "%.0f")%")
-                    }
-                    
-                    VStack {
-                        Text("DISK")
-                        Text("\(diskUsage * 100, specifier: "%.0f")%")
+                    ViewThatFits {
+                        HStack {
+                            VStack {
+                                Text("CPU")
+                                Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                            }
+                            
+                            VStack {
+                                Text("MEM")
+                                Text("\(memUsage * 100, specifier: "%.0f")%")
+                            }
+                            
+                            VStack {
+                                Text("DISK")
+                                Text("\(diskUsage * 100, specifier: "%.0f")%")
+                            }
+                        }
+                        
+                        HStack {
+                            VStack {
+                                Text("C")
+                                Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                            }
+                            
+                            VStack {
+                                Text("M")
+                                Text("\(memUsage * 100, specifier: "%.0f")%")
+                            }
+                            
+                            VStack {
+                                Text("D")
+                                Text("\(diskUsage * 100, specifier: "%.0f")%")
+                            }
+                        }
                     }
                 }
                 .font(.caption)
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("↑ \(formatBytes(server.status.netOutTransfer))")
-                        Text("↓ \(formatBytes(server.status.netInTransfer))")
+                        Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
+                        Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
                     }
                 }
                 .font(.caption)
@@ -290,6 +314,7 @@ struct ServerDetailWidgetEntryView: View {
                     }
                     Text(server.name)
                 }
+                .lineLimit(1)
                 Spacer()
                 Button(intent: RefreshWidgetIntent()) {
                     HStack(spacing: 5) {
@@ -306,11 +331,16 @@ struct ServerDetailWidgetEntryView: View {
             }
             .font(.subheadline)
             
-            HStack(spacing: 20) {
-                gaugeView(server: server)
+            ViewThatFits {
+                HStack(spacing: 20) {
+                    gaugeView(server: server)
+                    
+                    infoView(server: server)
+                        .font(.caption2)
+                }
                 
-                infoView(server: server)
-                    .font(.caption2)
+                gaugeView(server: server)
+                    
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -333,7 +363,7 @@ struct ServerDetailWidgetEntryView: View {
                 }
                 Text("\(getCore(server.host.cpu) ?? 0) Core")
                     .font(.caption2)
-                    .frame(minWidth: 50)
+                    .frame(minWidth: 60)
                     .lineLimit(1)
             }
             
@@ -348,7 +378,7 @@ struct ServerDetailWidgetEntryView: View {
                 }
                 Text("\(formatBytes(server.host.memTotal, decimals: 0))")
                     .font(.caption2)
-                    .frame(minWidth: 50)
+                    .frame(minWidth: 60)
                     .lineLimit(1)
             }
             
@@ -363,7 +393,7 @@ struct ServerDetailWidgetEntryView: View {
                 }
                 Text("\(formatBytes(server.host.diskTotal, decimals: 0))")
                     .font(.caption2)
-                    .frame(minWidth: 50)
+                    .frame(minWidth: 60)
                     .lineLimit(1)
             }
         }
@@ -376,8 +406,8 @@ struct ServerDetailWidgetEntryView: View {
                 Image(systemName: "circle.dotted.circle")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 0))")
-                    Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 0))")
+                    Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
+                    Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
                 }
             }
             .frame(alignment: .leading)
@@ -386,8 +416,8 @@ struct ServerDetailWidgetEntryView: View {
                 Image(systemName: "network")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 0))/s")
-                    Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 0))/s")
+                    Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 1))/s")
+                    Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 1))/s")
                 }
             }
             .frame(alignment: .leading)

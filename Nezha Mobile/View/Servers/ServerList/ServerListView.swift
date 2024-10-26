@@ -13,11 +13,11 @@ struct ServerListView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
+    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
+    @State private var backgroundImage: UIImage?
     @State private var shouldNavigateToServerDetailView: Bool = false
     @State private var incomingURLServerID: Int?
     var dashboardViewModel: DashboardViewModel
-    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
-    @State private var backgroundImage: UIImage?
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
     @State private var newSettingRequireReconnection: Bool? = false
@@ -189,7 +189,7 @@ struct ServerListView: View {
         }) {
             Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
                 .font(.callout)
-                .foregroundStyle(activeTag == tag ? .white : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
+                .foregroundStyle(activeTag == tag ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 15)
                 .background {

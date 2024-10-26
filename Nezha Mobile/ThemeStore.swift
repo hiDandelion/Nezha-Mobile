@@ -64,6 +64,11 @@ class ThemeStore: ObservableObject {
             NMCore.userDefaults.set(themeSecondaryColorLight.base64EncodedString, forKey: "NMThemeSecondaryColorLight")
         }
     }
+    var themeActiveColorLight: Color {
+        didSet {
+            NMCore.userDefaults.set(themeActiveColorLight.base64EncodedString, forKey: "NMThemeActiveColorLight")
+        }
+    }
     var themeTintColorLight: Color {
         didSet {
             NMCore.userDefaults.set(themeTintColorLight.base64EncodedString, forKey: "NMThemeTintColorLight")
@@ -84,6 +89,11 @@ class ThemeStore: ObservableObject {
             NMCore.userDefaults.set(themeSecondaryColorDark.base64EncodedString, forKey: "NMThemeSecondaryColorDark")
         }
     }
+    var themeActiveColorDark: Color {
+        didSet {
+            NMCore.userDefaults.set(themeActiveColorDark.base64EncodedString, forKey: "NMThemeActiveColorDark")
+        }
+    }
     var themeTintColorDark: Color {
         didSet {
             NMCore.userDefaults.set(themeTintColorDark.base64EncodedString, forKey: "NMThemeTintColorDark")
@@ -100,39 +110,47 @@ class ThemeStore: ObservableObject {
         if
             let themePrimaryColorLightString = NMCore.userDefaults.string(forKey: "NMThemePrimaryColorLight"),
             let themeSecondaryColorLightString = NMCore.userDefaults.string(forKey: "NMThemeSecondaryColorLight"),
+            let themeActiveColorLightString = NMCore.userDefaults.string(forKey: "NMThemeActiveColorLight"),
             let themeTintColorLightString = NMCore.userDefaults.string(forKey: "NMThemeTintColorLight"),
             let themeBackgroundColorLightString = NMCore.userDefaults.string(forKey: "NMThemeBackgroundColorLight"),
             let themePrimaryColorDarkString = NMCore.userDefaults.string(forKey: "NMThemePrimaryColorDark"),
             let themeSecondaryColorDarkString = NMCore.userDefaults.string(forKey: "NMThemeSecondaryColorDark"),
+            let themeActiveColorDarkString = NMCore.userDefaults.string(forKey: "NMThemeActiveColorDark"),
             let themeTintColorDarkString = NMCore.userDefaults.string(forKey: "NMThemeTintColorDark"),
             let themeBackgroundColorDarkString = NMCore.userDefaults.string(forKey: "NMThemeBackgroundColorDark")
         {
             themePrimaryColorLight = Color(base64EncodedString: themePrimaryColorLightString) ?? Color.black
             themeSecondaryColorLight = Color(base64EncodedString: themeSecondaryColorLightString) ?? Color(red: 1, green: 240/255, blue: 243/255)
+            themeActiveColorLight = Color(base64EncodedString: themeActiveColorLightString) ?? Color.white
             themeTintColorLight = Color(base64EncodedString: themeTintColorLightString) ?? Color(red: 135/255, green: 14/255, blue: 78/255)
             themeBackgroundColorLight = Color(base64EncodedString: themeBackgroundColorLightString) ?? Color(red: 1, green: 247/255, blue: 248/255)
             themePrimaryColorDark = Color(base64EncodedString: themePrimaryColorDarkString) ?? Color.white
             themeSecondaryColorDark = Color(base64EncodedString: themeSecondaryColorDarkString) ?? Color(red: 33/255, green: 25/255, blue: 28/255)
+            themeActiveColorDark = Color(base64EncodedString: themeActiveColorDarkString) ?? Color.white
             themeTintColorDark = Color(base64EncodedString: themeTintColorDarkString) ?? Color(red: 135/255, green: 14/255, blue: 78/255)
             themeBackgroundColorDark = Color(base64EncodedString: themeBackgroundColorDarkString) ?? Color.black
         }
         else {
             themePrimaryColorLight = Color.black
             themeSecondaryColorLight = Color(red: 1, green: 240/255, blue: 243/255)
+            themeActiveColorLight = Color.white
             themeTintColorLight = Color(red: 135/255, green: 14/255, blue: 78/255)
             themeBackgroundColorLight = Color(red: 1, green: 247/255, blue: 248/255)
             themePrimaryColorDark = Color.white
             themeSecondaryColorDark = Color(red: 33/255, green: 25/255, blue: 28/255)
+            themeActiveColorDark = Color.white
             themeTintColorDark = Color(red: 135/255, green: 14/255, blue: 78/255)
             themeBackgroundColorDark = Color.black
-            NMCore.userDefaults.set(Color.black.base64EncodedString, forKey: "NMThemePrimaryColorLight")
-            NMCore.userDefaults.set(Color(red: 1, green: 240/255, blue: 243/255).base64EncodedString, forKey: "NMThemeSecondaryColorLight")
-            NMCore.userDefaults.set(Color(red: 135/255, green: 14/255, blue: 78/255).base64EncodedString, forKey: "NMThemeTintColorLight")
-            NMCore.userDefaults.set(Color(red: 1, green: 247/255, blue: 248/255).base64EncodedString, forKey: "NMThemeBackgroundColorLight")
-            NMCore.userDefaults.set(Color.white.base64EncodedString, forKey: "NMThemePrimaryColorDark")
-            NMCore.userDefaults.set(Color(red: 33/255, green: 25/255, blue: 28/255).base64EncodedString, forKey: "NMThemeSecondaryColorDark")
-            NMCore.userDefaults.set(Color(red: 135/255, green: 14/255, blue: 78/255).base64EncodedString, forKey: "NMThemeTintColorDark")
-            NMCore.userDefaults.set(Color.black.base64EncodedString, forKey: "NMThemeBackgroundColorDark")
+            NMCore.userDefaults.set(themePrimaryColorLight.base64EncodedString, forKey: "NMThemePrimaryColorLight")
+            NMCore.userDefaults.set(themeSecondaryColorLight.base64EncodedString, forKey: "NMThemeSecondaryColorLight")
+            NMCore.userDefaults.set(themeActiveColorLight.base64EncodedString, forKey: "NMThemeActiveColorLight")
+            NMCore.userDefaults.set(themeTintColorLight.base64EncodedString, forKey: "NMThemeTintColorLight")
+            NMCore.userDefaults.set(themeBackgroundColorLight.base64EncodedString, forKey: "NMThemeBackgroundColorLight")
+            NMCore.userDefaults.set(themePrimaryColorDark.base64EncodedString, forKey: "NMThemePrimaryColorDark")
+            NMCore.userDefaults.set(themeSecondaryColorDark.base64EncodedString, forKey: "NMThemeSecondaryColorDark")
+            NMCore.userDefaults.set(themeActiveColorDark.base64EncodedString, forKey: "NMThemeActiveColorDark")
+            NMCore.userDefaults.set(themeTintColorDark.base64EncodedString, forKey: "NMThemeTintColorDark")
+            NMCore.userDefaults.set(themeBackgroundColorDark.base64EncodedString, forKey: "NMThemeBackgroundColorDark")
         }
     }
     
@@ -146,6 +164,10 @@ class ThemeStore: ObservableObject {
     
     func themeBackgroundColor(scheme: ColorScheme) -> Color {
         return scheme == .light ? themeBackgroundColorLight : themeBackgroundColorDark
+    }
+    
+    func themeActiveColor(scheme: ColorScheme) -> Color {
+        return scheme == .light ? themeActiveColorLight : themeActiveColorDark
     }
     
     func themeTintColor(scheme: ColorScheme) -> Color {

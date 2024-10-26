@@ -112,7 +112,7 @@ struct MainTabView: View {
             }
             
             if themeStore.themeCustomizationEnabled {
-                MainTabBar(activeForeground: themeStore.themePrimaryColor(scheme: scheme), activeBackground: themeStore.themeTintColor(scheme: scheme), activeTab: Bindable(tabBarState).activeTab)
+                MainTabBar(activeForeground: themeStore.themeActiveColor(scheme: scheme), activeBackground: themeStore.themeTintColor(scheme: scheme), activeTab: Bindable(tabBarState).activeTab)
                     .opacity(tabBarState.shouldMakeTabBarVisible ? 1 : 0)
             }
             else {

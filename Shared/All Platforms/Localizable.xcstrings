@@ -211,6 +211,12 @@
         }
       }
     },
+    "Active Color Dark Mode" : {
+
+    },
+    "Active Color Light Mode" : {
+
+    },
     "Add" : {
       "localizations" : {
         "ja" : {
@@ -583,6 +589,9 @@
       }
     },
     "By using Nezha Mobile as an agent, you acknowledge the following matrix of your device will be obtained:" : {
+      "shouldTranslate" : false
+    },
+    "C" : {
       "shouldTranslate" : false
     },
     "Cancel" : {
@@ -958,6 +967,9 @@
           }
         }
       }
+    },
+    "D" : {
+      "shouldTranslate" : false
     },
     "Dashboard" : {
       "localizations" : {
@@ -1724,6 +1736,9 @@
         }
       }
     },
+    "M" : {
+      "shouldTranslate" : false
+    },
     "Main Window" : {
       "localizations" : {
         "ja" : {
@@ -2120,7 +2135,20 @@
       }
     },
     "Pin View" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ピンビュー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin 视图"
+          }
+        }
+      }
     },
     "Ping" : {
       "localizations" : {
