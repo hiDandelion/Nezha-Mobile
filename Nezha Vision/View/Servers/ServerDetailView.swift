@@ -22,7 +22,6 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) var openWindow
     @Bindable var dashboardViewModel: DashboardViewModel
     var serverID: Int
@@ -67,17 +66,26 @@ struct ServerDetailView: View {
                     .toolbar {
                         ToolbarItem(placement: .automatic) {
                             Menu {
-                                Button {
-                                    dashboardViewModel.updateImmediately()
-                                } label: {
-                                    Label("Refresh", systemImage: "arrow.clockwise")
+                                Section {
+                                    Button {
+                                        dashboardViewModel.updateImmediately()
+                                    } label: {
+                                        Label("Refresh", systemImage: "arrow.clockwise")
+                                    }
                                 }
                                 
-                                Button {
-                                    dismiss()
-                                    openWindow(id: "server-pin-view", value: server.id)
-                                } label: {
-                                    Label("Pin View", systemImage: "arrow.up.forward.and.arrow.down.backward")
+                                Section {
+                                    Button {
+                                        openWindow(id: "main-view")
+                                    } label: {
+                                        Label("Main View", systemImage: "house")
+                                    }
+                                    
+                                    Button {
+                                        openWindow(id: "server-pin-view", value: server.id)
+                                    } label: {
+                                        Label("Pin View", systemImage: "arrow.up.forward.and.arrow.down.backward")
+                                    }
                                 }
                             } label: {
                                 Image(systemName: "ellipsis.circle")

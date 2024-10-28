@@ -212,10 +212,36 @@
       }
     },
     "Active Color Dark Mode" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アクティブカラーダークモード"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "活动颜色 深色模式"
+          }
+        }
+      }
     },
     "Active Color Light Mode" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アクティブカラーライトモード"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "活动颜色 浅色模式"
+          }
+        }
+      }
     },
     "Add" : {
       "localizations" : {
@@ -591,9 +617,6 @@
     "By using Nezha Mobile as an agent, you acknowledge the following matrix of your device will be obtained:" : {
       "shouldTranslate" : false
     },
-    "C" : {
-      "shouldTranslate" : false
-    },
     "Cancel" : {
       "localizations" : {
         "ja" : {
@@ -967,9 +990,6 @@
           }
         }
       }
-    },
-    "D" : {
-      "shouldTranslate" : false
     },
     "Dashboard" : {
       "localizations" : {
@@ -1736,8 +1756,21 @@
         }
       }
     },
-    "M" : {
-      "shouldTranslate" : false
+    "Main View" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メインビュー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主视图"
+          }
+        }
+      }
     },
     "Main Window" : {
       "localizations" : {
@@ -1968,6 +2001,9 @@
       "shouldTranslate" : false
     },
     "Nezha Desktop" : {
+      "shouldTranslate" : false
+    },
+    "Nezha Vision" : {
       "shouldTranslate" : false
     },
     "No Alert" : {

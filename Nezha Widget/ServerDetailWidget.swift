@@ -263,17 +263,20 @@ struct ServerDetailWidgetEntryView: View {
                         
                         HStack {
                             VStack {
-                                Text("C")
+                                Image(systemName: "cpu")
+                                    .frame(width: 10)
                                 Text("\(cpuUsage * 100, specifier: "%.0f")%")
                             }
                             
                             VStack {
-                                Text("M")
+                                Image(systemName: "memorychip")
+                                    .frame(width: 10)
                                 Text("\(memUsage * 100, specifier: "%.0f")%")
                             }
                             
                             VStack {
-                                Text("D")
+                                Image(systemName: "internaldrive")
+                                    .frame(width: 10)
                                 Text("\(diskUsage * 100, specifier: "%.0f")%")
                             }
                         }
@@ -283,8 +286,8 @@ struct ServerDetailWidgetEntryView: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
-                        Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
+                        Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 2))")
+                        Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 2))")
                     }
                 }
                 .font(.caption)
@@ -406,8 +409,8 @@ struct ServerDetailWidgetEntryView: View {
                 Image(systemName: "circle.dotted.circle")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
-                    Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
+                    Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 0))")
+                    Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 0))")
                 }
             }
             .frame(alignment: .leading)
@@ -416,12 +419,13 @@ struct ServerDetailWidgetEntryView: View {
                 Image(systemName: "network")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 1))/s")
-                    Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 1))/s")
+                    Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 0))/s")
+                    Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 0))/s")
                 }
             }
             .frame(alignment: .leading)
         }
+        .lineLimit(1)
     }
 }
 

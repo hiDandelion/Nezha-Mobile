@@ -17,7 +17,7 @@ struct NezhaVisionApp: App {
     }
     
     var body: some Scene {
-        WindowGroup(id: "main-view") {
+        WindowGroup("Nezha Vision", id: "main-view") {
             ContentView(dashboardViewModel: dashboardViewModel)
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                 .onAppear {
@@ -26,13 +26,14 @@ struct NezhaVisionApp: App {
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
         
-        WindowGroup(id: "server-pin-view", for: Server.ID.self) { $serverID in
+        WindowGroup("Pin View", id: "server-pin-view", for: Server.ID.self) { $serverID in
             ServerPinView(dashboardViewModel: dashboardViewModel, serverID: serverID)
+                .frame(minWidth: 400, minHeight: 300)
         }
-        .defaultSize(width: 400, height: 300)
+        .windowResizability(.contentSize)
         .handlesExternalEvents(matching: ["server-pin"])
         
-        WindowGroup(id: "server-detail-view", for: Server.ID.self) { $serverID in
+        WindowGroup("Server Details", id: "server-detail-view", for: Server.ID.self) { $serverID in
             if let serverID {
                 ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: serverID)
             }

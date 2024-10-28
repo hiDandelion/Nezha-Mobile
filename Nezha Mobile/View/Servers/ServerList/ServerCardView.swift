@@ -19,18 +19,15 @@ struct ServerCardView: View {
         CardView {
             HStack {
                 HStack {
-                    HStack {
-                        if server.host.countryCode.uppercased() == "TW" {
-                            Text("🇹🇼")
-                        }
-                        else if server.host.countryCode.uppercased() != "" {
-                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                        }
-                        else {
-                            Text("🏴‍☠️")
-                        }
+                    if server.host.countryCode.uppercased() == "TW" {
+                        Text("🇹🇼")
                     }
-                    .frame(width: 20)
+                    else if server.host.countryCode.uppercased() != "" {
+                        Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                    }
+                    else {
+                        Text("🏴‍☠️")
+                    }
                     
                     Text(server.name)
                     
@@ -51,91 +48,18 @@ struct ServerCardView: View {
             }
         } contentView: {
             VStack {
-                HStack {
-                    Spacer()
-                    
-                    HStack {
-                        let cpuUsage = server.status.cpu / 100
-                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                        let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
+                ViewThatFits {
+                    HStack(spacing: 20) {
+                        gaugeView
                         
-                        VStack {
-                            Gauge(value: cpuUsage) {
-                                
-                            } currentValueLabel: {
-                                VStack {
-                                    Text("CPU")
-                                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
-                                }
-                            }
-                            Text("\(getCore(server.host.cpu) ?? 0) Core")
-                                .font(.caption2)
-                                .frame(minWidth: 60)
-                                .lineLimit(1)
-                        }
-                        
-                        VStack {
-                            Gauge(value: memUsage) {
-                                
-                            } currentValueLabel: {
-                                VStack {
-                                    Text("MEM")
-                                    Text("\(memUsage * 100, specifier: "%.0f")%")
-                                }
-                            }
-                            Text("\(formatBytes(server.host.memTotal, decimals: 0))")
-                                .font(.caption2)
-                                .frame(minWidth: 60)
-                                .lineLimit(1)
-                        }
-                        
-                        VStack {
-                            Gauge(value: diskUsage) {
-                                
-                            } currentValueLabel: {
-                                VStack {
-                                    Text("DISK")
-                                    Text("\(diskUsage * 100, specifier: "%.0f")%")
-                                }
-                            }
-                            Text("\(formatBytes(server.host.diskTotal, decimals: 0))")
-                                .font(.caption2)
-                                .frame(minWidth: 60)
-                                .lineLimit(1)
-                        }
+                        infoView
+                            .font(.caption2)
                     }
-                    .gaugeStyle(.accessoryCircularCapacity)
-                    .tint(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
                     
-                    Spacer()
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Image(systemName: "circle.dotted.circle")
-                                .frame(width: 10)
-                            VStack(alignment: .leading) {
-                                Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
-                                Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
-                            }
-                        }
-                        .frame(alignment: .leading)
+                    gaugeView
                         
-                        HStack {
-                            Image(systemName: "network")
-                                .frame(width: 10)
-                            VStack(alignment: .leading) {
-                                Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 1))/s")
-                                Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 1))/s")
-                            }
-                        }
-                        .frame(alignment: .leading)
-                    }
-                    .font(.caption2)
-                    .lineLimit(1)
-                    .frame(minWidth: 100, alignment: .leading)
-                    
-                    Spacer()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         } footerView: {
             HStack {
@@ -178,5 +102,85 @@ struct ServerCardView: View {
                 }
             }
         }))
+    }
+    
+    private var gaugeView: some View {
+        HStack {
+            let cpuUsage = server.status.cpu / 100
+            let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+            let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
+            
+            VStack {
+                Gauge(value: cpuUsage) {
+                    
+                } currentValueLabel: {
+                    VStack {
+                        Text("CPU")
+                        Text("\(cpuUsage * 100, specifier: "%.0f")%")
+                    }
+                }
+                Text("\(getCore(server.host.cpu) ?? 0) Core")
+                    .font(.caption2)
+                    .frame(minWidth: 60)
+                    .lineLimit(1)
+            }
+            
+            VStack {
+                Gauge(value: memUsage) {
+                    
+                } currentValueLabel: {
+                    VStack {
+                        Text("MEM")
+                        Text("\(memUsage * 100, specifier: "%.0f")%")
+                    }
+                }
+                Text("\(formatBytes(server.host.memTotal, decimals: 0))")
+                    .font(.caption2)
+                    .frame(minWidth: 60)
+                    .lineLimit(1)
+            }
+            
+            VStack {
+                Gauge(value: diskUsage) {
+                    
+                } currentValueLabel: {
+                    VStack {
+                        Text("DISK")
+                        Text("\(diskUsage * 100, specifier: "%.0f")%")
+                    }
+                }
+                Text("\(formatBytes(server.host.diskTotal, decimals: 0))")
+                    .font(.caption2)
+                    .frame(minWidth: 60)
+                    .lineLimit(1)
+            }
+        }
+        .gaugeStyle(.accessoryCircularCapacity)
+        .tint(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
+    }
+    
+    private var infoView: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Image(systemName: "circle.dotted.circle")
+                    .frame(width: 10)
+                VStack(alignment: .leading) {
+                    Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
+                    Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
+                }
+            }
+            .frame(alignment: .leading)
+            
+            HStack {
+                Image(systemName: "network")
+                    .frame(width: 10)
+                VStack(alignment: .leading) {
+                    Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 1))/s")
+                    Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 1))/s")
+                }
+            }
+            .frame(alignment: .leading)
+        }
+        .lineLimit(1)
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ServerPinView: View {
+    @Environment(\.openWindow) var openWindow
     var dashboardViewModel: DashboardViewModel
     @State var serverID: Int?
     
@@ -15,24 +16,35 @@ struct ServerPinView: View {
         Group {
             if let serverID, let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
                 VStack(spacing: 10) {
-                    HStack {
+                    ZStack {
                         HStack {
-                            if server.host.countryCode.uppercased() == "TW" {
-                                Text("🇹🇼")
+                            HStack {
+                                if server.host.countryCode.uppercased() == "TW" {
+                                    Text("🇹🇼")
+                                }
+                                else if server.host.countryCode.uppercased() != "" {
+                                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                                }
+                                else {
+                                    Text("🏴‍☠️")
+                                }
                             }
-                            else if server.host.countryCode.uppercased() != "" {
-                                Text(countryFlagEmoji(countryCode: server.host.countryCode))
-                            }
-                            else {
-                                Text("🏴‍☠️")
+                            .frame(width: 20)
+                            
+                            Text(server.name)
+                            
+                            Image(systemName: "circlebadge.fill")
+                                .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: dashboardViewModel.lastUpdateTime ?? Date()) || server.status.uptime == 0 ? .red : .green)
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            Button {
+                                openWindow(id: "main-view")
+                            } label: {
+                                Image(systemName: "house")
                             }
                         }
-                        .frame(width: 20)
-                        
-                        Text(server.name)
-                        
-                        Image(systemName: "circlebadge.fill")
-                            .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: dashboardViewModel.lastUpdateTime ?? Date()) || server.status.uptime == 0 ? .red : .green)
                     }
                     
                     let gaugeGradient = Gradient(colors: [.green, .pink])
