@@ -11,12 +11,12 @@ struct ServerListView: View {
     var dashboardLink: String
     var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @State private var selectedServer: Server?
+    @State private var selectedServer: GetServerDetailResponse.Server?
     @State private var isShowingErrorDetailAlert: Bool = false
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     
-    private var sortedServers: [Server] {
+    private var sortedServers: [GetServerDetailResponse.Server] {
         dashboardViewModel.servers
             .sorted { server1, server2 in
                 switch (server1.displayIndex, server2.displayIndex) {

@@ -85,7 +85,7 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(destination: {
-                        AcknowledgmentView()
+                        NMUI.AcknowledgmentView()
                     }) {
                         Text("Acknowledgments")
                     }

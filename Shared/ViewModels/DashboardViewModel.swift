@@ -1,12 +1,13 @@
 //
 //  DashboardViewModel.swift
-//  Nezha Watch
+//  Nezha Mobile
 //
-//  Created by Junhui Lou on 8/9/24.
+//  Created by Junhui Lou on 7/31/24.
 //
 
 import Foundation
 import Combine
+import BackgroundTasks
 import SwiftUI
 
 enum DashboardLoadingState: Equatable {
@@ -16,12 +17,15 @@ enum DashboardLoadingState: Equatable {
     case error(String)
 }
 
-class DashboardViewModel: ObservableObject {
+@Observable
+class DashboardViewModel {
+    private var timer: Timer?
     private let session: URLSession
     private var cancellables = Set<AnyCancellable>()
-    @Published var loadingState: DashboardLoadingState = .idle
-    @Published var servers: [GetServerDetailResponse.Server] = []
-    public var isMonitoringEnabled = false
+    var loadingState: DashboardLoadingState = .idle
+    var lastUpdateTime: Date?
+    var servers: [GetServerDetailResponse.Server] = []
+    var isMonitoringEnabled = false
     
     init() {
         let config = URLSessionConfiguration.default
@@ -37,21 +41,29 @@ class DashboardViewModel: ObservableObject {
         Task {
             await getAllServerDetail()
         }
+        startTimer()
     }
     
     func stopMonitoring() {
+        stopTimer()
         isMonitoringEnabled = false
         loadingState = .idle
     }
     
+    func updateImmediately() {
+        Task {
+            await self.getAllServerDetail()
+        }
+    }
+    
     private func setupNotifications() {
-        NotificationCenter.default.publisher(for: WKApplication.willEnterForegroundNotification)
+        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
             .sink { [weak self] _ in
                 self?.handleEnterForeground()
             }
             .store(in: &cancellables)
         
-        NotificationCenter.default.publisher(for: WKApplication.didEnterBackgroundNotification)
+        NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
             .sink { [weak self] _ in
                 self?.handleEnterBackground()
             }
@@ -66,12 +78,29 @@ class DashboardViewModel: ObservableObject {
         Task {
             await getAllServerDetail()
         }
+        startTimer()
     }
     
     private func handleEnterBackground() {
         guard isMonitoringEnabled else {
             return
         }
+        stopTimer()
+    }
+    
+    private func startTimer() {
+        stopTimer()
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+            Task { [weak self] in
+                guard let self = self else { return }
+                await self.getAllServerDetail()
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
     
     private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) async {
@@ -83,6 +112,7 @@ class DashboardViewModel: ObservableObject {
                         self.servers = servers
                     }
                     self.loadingState = .loaded
+                    self.lastUpdateTime = Date()
                 }
             }
             completion?(true)

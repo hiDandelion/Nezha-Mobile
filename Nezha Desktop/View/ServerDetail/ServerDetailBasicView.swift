@@ -15,19 +15,19 @@ struct ServerDetailBasicView: View {
     
     var body: some View {
         Section("Basic") {
-            PieceOfInfo(systemImage: "bookmark", name: "Name", content: Text("\(server.name)"))
-            PieceOfInfo(systemImage: "cube", name: "ID", content: Text("\(server.id)"))
-            PieceOfInfo(systemImage: "tag", name: "Tag", content: Text("\(server.tag)"))
+            NMUI.PieceOfInfo(systemImage: "bookmark", name: "Name", content: Text("\(server.name)"))
+            NMUI.PieceOfInfo(systemImage: "cube", name: "ID", content: Text("\(server.id)"))
+            NMUI.PieceOfInfo(systemImage: "tag", name: "Tag", content: Text("\(server.tag)"))
             
             if server.IPv4 != "", let cityData = IPv4CityData {
                 DisclosureGroup {
-                    PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
-                    PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
-                    PieceOfInfo(systemImage: nil, name: "Registered Country", content: Text("\(cityData.registeredCountry)"))
-                    PieceOfInfo(systemImage: nil, name: "City", content: Text("\(cityData.city)"))
-                    PieceOfInfo(systemImage: nil, name: "Time Zone", content: Text("\(cityData.location.timezone)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Registered Country", content: Text("\(cityData.registeredCountry)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "City", content: Text("\(cityData.city)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Time Zone", content: Text("\(cityData.location.timezone)"))
                 } label: {
-                    PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
+                    NMUI.PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
                         .contextMenu(ContextMenu(menuItems: {
                             Button {
                                 NSPasteboard.general.clearContents()
@@ -39,7 +39,7 @@ struct ServerDetailBasicView: View {
                 }
             }
             else if server.IPv4 != "" {
-                PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
+                NMUI.PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
                             NSPasteboard.general.clearContents()
@@ -52,13 +52,13 @@ struct ServerDetailBasicView: View {
             
             if server.IPv6 != "", let cityData = IPv6CityData {
                 DisclosureGroup {
-                    PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
-                    PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
-                    PieceOfInfo(systemImage: nil, name: "Registered Country", content: Text("\(cityData.registeredCountry)"))
-                    PieceOfInfo(systemImage: nil, name: "City", content: Text("\(cityData.city)"))
-                    PieceOfInfo(systemImage: nil, name: "Time Zone", content: Text("\(cityData.location.timezone)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Registered Country", content: Text("\(cityData.registeredCountry)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "City", content: Text("\(cityData.city)"))
+                    NMUI.PieceOfInfo(systemImage: nil, name: "Time Zone", content: Text("\(cityData.location.timezone)"))
                 } label: {
-                    PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
+                    NMUI.PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
                         .contextMenu(ContextMenu(menuItems: {
                             Button {
                                 NSPasteboard.general.clearContents()
@@ -70,7 +70,7 @@ struct ServerDetailBasicView: View {
                 }
             }
             else if server.IPv6 != "" {
-                PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
+                NMUI.PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
                             NSPasteboard.general.clearContents()
@@ -81,8 +81,8 @@ struct ServerDetailBasicView: View {
                     }))
             }
             
-            PieceOfInfo(systemImage: "power", name: "Up Time", content: Text("\(formatTimeInterval(seconds: server.status.uptime))"))
-            PieceOfInfo(systemImage: "clock", name: "Last Active", content: Text("\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))"))
+            NMUI.PieceOfInfo(systemImage: "power", name: "Up Time", content: Text("\(formatTimeInterval(seconds: server.status.uptime))"))
+            NMUI.PieceOfInfo(systemImage: "clock", name: "Last Active", content: Text("\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))"))
         }
         .onAppear {
             if server.IPv4 != "" {

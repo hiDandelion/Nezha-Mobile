@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ServerDetailStatusView: View {
-    var server: Server
+    var server: GetServerDetailResponse.Server
     
     var body: some View {
         Section("Status") {
+            let gaugeGradient = Gradient(colors: [.green, .pink])
+            
             VStack {
                 HStack {
                     Label("CPU", systemImage: "cpu")
@@ -25,6 +27,7 @@ struct ServerDetailStatusView: View {
                     
                 }
                 .gaugeStyle(.linearCapacity)
+                .tint(gaugeGradient)
             }
             
             VStack {
@@ -40,6 +43,7 @@ struct ServerDetailStatusView: View {
                     
                 }
                 .gaugeStyle(.linearCapacity)
+                .tint(gaugeGradient)
             }
             
             VStack {
@@ -51,21 +55,22 @@ struct ServerDetailStatusView: View {
                             .foregroundStyle(.secondary)
                     }
                     
-                    
                     let swapUsage = Double(server.status.swapUsed) / Double(server.host.swapTotal)
                     Gauge(value: swapUsage) {
                         
                     }
                     .gaugeStyle(.linearCapacity)
+                    .tint(gaugeGradient)
                 }
                 else {
-                    NMUI.PieceOfInfo(systemImage: "doc", name: "Swap", content: Text(String(localized: "Disabled")))
+                    NMUI.PieceOfInfo(systemImage: "doc", name: "Swap", content: Text("Disabled"))
                     
                     let swapUsage = 0.0
                     Gauge(value: swapUsage) {
                         
                     }
                     .gaugeStyle(.linearCapacity)
+                    .tint(gaugeGradient)
                 }
             }
             
@@ -82,6 +87,7 @@ struct ServerDetailStatusView: View {
                     
                 }
                 .gaugeStyle(.linearCapacity)
+                .tint(gaugeGradient)
             }
             
             NMUI.PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(server.status.netInSpeed))/s ↑ \(formatBytes(server.status.netOutSpeed))/s"))

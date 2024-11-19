@@ -13,8 +13,8 @@ struct DeviceInfoView: View {
     
     var body: some View {
         Form {
-            PieceOfInfo(systemImage: "iphone", name: "Model Identifier", content: Text("\(deviceInfoViewModel.deviceModelIdentifier)"))
-            PieceOfInfo(systemImage: "123.rectangle", name: "System Version", content: Text("\(deviceInfoViewModel.OSVersionNumber)"))
+            NMUI.PieceOfInfo(systemImage: "iphone", name: "Model Identifier", content: Text("\(deviceInfoViewModel.deviceModelIdentifier)"))
+            NMUI.PieceOfInfo(systemImage: "123.rectangle", name: "System Version", content: Text("\(deviceInfoViewModel.OSVersionNumber)"))
             
             let gaugeGradient = Gradient(colors: [.green, .pink])
             
@@ -66,8 +66,8 @@ struct DeviceInfoView: View {
                 .tint(gaugeGradient)
             }
             
-            PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkInSpeed))/s ↑ \(formatBytes(deviceInfoViewModel.networkOutSpeed))/s"))
-            PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkIn)) ↑ \(formatBytes(deviceInfoViewModel.networkOut))"))
+            NMUI.PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkInSpeed))/s ↑ \(formatBytes(deviceInfoViewModel.networkOutSpeed))/s"))
+            NMUI.PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkIn)) ↑ \(formatBytes(deviceInfoViewModel.networkOut))"))
         }
         .navigationTitle("Device Info")
         .toolbar {

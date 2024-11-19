@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServerDetailView: View {
-    var server: Server
+    var server: GetServerDetailResponse.Server
     @State var isFromIncomingURL: Bool = false
     
     var body: some View {
@@ -20,11 +20,11 @@ struct ServerDetailView: View {
             MatrixGaugeView(title: "Disk", systemName: "internaldrive", percent: Double(server.status.diskUsed) / Double(server.host.diskTotal) * 100, tintColor: .orange)
                 .containerBackground(.orange.gradient, for: .tabView)
             List {
-                PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(server.status.netInSpeed))/s ↑ \(formatBytes(server.status.netOutSpeed))/s"))
-                PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(server.status.netInTransfer)) ↑ \(formatBytes(server.status.netOutTransfer))"))
-                PieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: Text("\(server.status.TCPConnectionCount)"))
-                PieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: Text("\(server.status.UDPConnectionCount)"))
-                PieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: Text("\(server.status.processCount)"))
+                NMUI.PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(server.status.netInSpeed))/s ↑ \(formatBytes(server.status.netOutSpeed))/s"))
+                NMUI.PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(server.status.netInTransfer)) ↑ \(formatBytes(server.status.netOutTransfer))"))
+                NMUI.PieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: Text("\(server.status.TCPConnectionCount)"))
+                NMUI.PieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: Text("\(server.status.UDPConnectionCount)"))
+                NMUI.PieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: Text("\(server.status.processCount)"))
             }
         }
         .tabViewStyle(.verticalPage)

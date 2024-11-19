@@ -13,7 +13,7 @@ struct ServerCardView: View {
     @Environment(ThemeStore.self) var themeStore
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     let lastUpdateTime: Date?
-    let server: Server
+    let server: GetServerDetailResponse.Server
     
     var body: some View {
         CardView {

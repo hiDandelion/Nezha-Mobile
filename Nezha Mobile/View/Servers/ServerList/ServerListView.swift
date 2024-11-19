@@ -24,7 +24,7 @@ struct ServerListView: View {
     @Namespace private var tagNamespace
     @Namespace private var serverNamespace
     
-    private var filteredServers: [Server] {
+    private var filteredServers: [GetServerDetailResponse.Server] {
         dashboardViewModel.servers
             .sorted { server1, server2 in
                 switch (server1.displayIndex, server2.displayIndex) {
