@@ -14,7 +14,7 @@ struct MenuBarView: View {
     var dashboardViewModel: DashboardViewModel
     @State private var activeTag: String = "All"
     
-    private var filteredServers: [Server] {
+    private var filteredServers: [GetServerDetailResponse.Server] {
         dashboardViewModel.servers
             .sorted { server1, server2 in
                 switch (server1.displayIndex, server2.displayIndex) {
@@ -141,7 +141,7 @@ struct MenuBarView: View {
         }
     }
     
-    private func ServerCard(server: Server) -> some View {
+    private func ServerCard(server: GetServerDetailResponse.Server) -> some View {
         CardView {
             HStack {
                 HStack {

@@ -9,9 +9,9 @@ import SwiftUI
 import Cache
 
 struct ServerDetailBasicView: View {
-    var server: Server
-    @State private var IPv4CityData: IPCityData?
-    @State private var IPv6CityData: IPCityData?
+    var server: GetServerDetailResponse.Server
+    @State private var IPv4CityData: GetIPCityDataResponse.IPCityData?
+    @State private var IPv6CityData: GetIPCityDataResponse.IPCityData?
     
     var body: some View {
         Section("Basic") {
@@ -98,14 +98,14 @@ struct ServerDetailBasicView: View {
         }
     }
     
-    private func getIPCityData(IP: String) async -> IPCityData? {
-        var currentIPCityData: IPCityData?
+    private func getIPCityData(IP: String) async -> GetIPCityDataResponse.IPCityData? {
+        var currentIPCityData: GetIPCityDataResponse.IPCityData?
         
-        let storage = try? Storage<String, IPCityData>(
+        let storage = try? Storage<String, GetIPCityDataResponse.IPCityData>(
             diskConfig: DiskConfig(name: "NMIPCityData"),
             memoryConfig: MemoryConfig(expiry: .never),
             fileManager: FileManager(),
-            transformer: TransformerFactory.forCodable(ofType: IPCityData.self)
+            transformer: TransformerFactory.forCodable(ofType: GetIPCityDataResponse.IPCityData.self)
         )
         
         if let storage {

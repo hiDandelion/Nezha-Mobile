@@ -260,7 +260,20 @@
       }
     },
     "Add Alert" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラートを追加"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加告警"
+          }
+        }
+      }
     },
     "Add Dashboard" : {
       "localizations" : {
@@ -1464,22 +1477,6 @@
         }
       }
     },
-    "Get up-to-date details in your Live Activity." : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ライブアクティビティで最新の情報を取得します。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在实时活动中获取服务器的最新信息。"
-          }
-        }
-      }
-    },
     "Get up-to-date information in your Widget." : {
       "localizations" : {
         "ja" : {
@@ -1688,22 +1685,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "冬青绿"
-          }
-        }
-      }
-    },
-    "Live Activity Not Available" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ライブアクティビティ利用不可"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "实时活动不可用"
           }
         }
       }
@@ -2450,22 +2431,6 @@
         }
       }
     },
-    "Refresh Live Activity" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ライブアクティビティを更新"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "刷新实时活动"
-          }
-        }
-      }
-    },
     "Refresh Widget" : {
       "localizations" : {
         "ja" : {
@@ -2958,22 +2923,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "导出推送通知Token"
-          }
-        }
-      }
-    },
-    "Share Push To Start Token" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Push To Startトークンを共有"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "导出Push To Start Token"
           }
         }
       }

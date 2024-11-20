@@ -11,7 +11,7 @@ import Cache
 
 struct ServerCoordinate: Identifiable, Hashable {
     let id: UUID = UUID()
-    var servers: [Server]
+    var servers: [GetServerDetailResponse.Server]
     let latitude: Double
     let longitude: Double
     let country: String?
@@ -19,7 +19,7 @@ struct ServerCoordinate: Identifiable, Hashable {
 }
 
 struct ServerMapView: View {
-    var servers: [Server]
+    var servers: [GetServerDetailResponse.Server]
     @State private var serverCoordinates: [ServerCoordinate] = []
     @State private var selectedCoordinate: ServerCoordinate?
     
@@ -97,11 +97,11 @@ struct ServerMapView: View {
         }
         .onAppear {
             Task {
-                let storage = try? Storage<String, IPCityData>(
+                let storage = try? Storage<String, GetIPCityDataResponse.IPCityData>(
                     diskConfig: DiskConfig(name: "NMIPCityData"),
                     memoryConfig: MemoryConfig(expiry: .never),
                     fileManager: FileManager(),
-                    transformer: TransformerFactory.forCodable(ofType: IPCityData.self)
+                    transformer: TransformerFactory.forCodable(ofType: GetIPCityDataResponse.IPCityData.self)
                 )
                 
                 for server in servers {

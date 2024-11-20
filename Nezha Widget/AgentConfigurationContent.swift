@@ -5,6 +5,7 @@
 //  Created by Junhui Lou on 9/28/24.
 //
 
+#if os(iOS)
 import AppIntents
 
 struct AgentConfigurationContent: WidgetConfigurationIntent {
@@ -23,3 +24,4 @@ struct AgentConfigurationContent: WidgetConfigurationIntent {
         self.color = color
     }
 }
+#endif

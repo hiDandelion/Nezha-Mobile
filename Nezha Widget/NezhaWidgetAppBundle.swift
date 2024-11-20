@@ -22,10 +22,6 @@ struct WidgetAppBundle: WidgetBundle {
         if #available(iOS 18.0, *) {
             AgentControlWidget()
         }
-        
-        if #available(iOS 17.2, *) {
-            LiveActivity()
-        }
 #endif
     }
 }

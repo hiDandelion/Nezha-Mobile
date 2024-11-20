@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UniformTypeIdentifiers
 import UserNotifications
 import StoreKit
 
@@ -52,6 +51,9 @@ struct SettingsView: View {
                 Section("Notifications") {
                     let pushNotificationsToken = NMCore.userDefaults.string(forKey: "NMPushNotificationsToken")!
                     if pushNotificationsToken != "" {
+                        Button("Copy Push Notifications Token") {
+                            UIPasteboard.general.string = pushNotificationsToken
+                        }
                         ShareLink(item: pushNotificationsToken) {
                             Text("Share Push Notifications Token")
                         }
@@ -59,19 +61,6 @@ struct SettingsView: View {
                     else {
                         Text("Push Notifications Not Available")
                             .foregroundStyle(.secondary)
-                    }
-                    
-                    if #available(iOS 17.2, *) {
-                        let pushToStartToken = NMCore.userDefaults.string(forKey: "NMPushToStartToken")!
-                        if pushToStartToken != "" {
-                            ShareLink(item: pushToStartToken) {
-                                Text("Share Push To Start Token")
-                            }
-                        }
-                        else {
-                            Text("Live Activity Not Available")
-                                .foregroundStyle(.secondary)
-                        }
                     }
                 }
                 

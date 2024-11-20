@@ -12,9 +12,9 @@ struct ServerTableView: View {
     @Bindable var dashboardViewModel: DashboardViewModel
     var activeTag: String = "All"
     @State private var searchText: String = ""
-    @State private var selectedServers: Set<Server.ID> = Set<Server.ID>()
+    @State private var selectedServers: Set<GetServerDetailResponse.Server.ID> = Set<GetServerDetailResponse.Server.ID>()
     
-    private var filteredServers: [Server] {
+    private var filteredServers: [GetServerDetailResponse.Server] {
         dashboardViewModel.servers
             .sorted { server1, server2 in
                 switch (server1.displayIndex, server2.displayIndex) {
@@ -33,7 +33,7 @@ struct ServerTableView: View {
     }
     
     var body: some View {
-        Table(of: Server.self, selection: $selectedServers) {
+        Table(of: GetServerDetailResponse.Server.self, selection: $selectedServers) {
             TableColumn("Name") { server in
                 HStack {
                     if let lastUpdateTime = dashboardViewModel.lastUpdateTime {
@@ -123,7 +123,7 @@ struct ServerTableView: View {
                     }
             }
         }
-        .contextMenu(forSelectionType: Server.ID.self) { items in
+        .contextMenu(forSelectionType: GetServerDetailResponse.Server.ID.self) { items in
             
         } primaryAction: { serverIDs in
             for serverID in serverIDs {

@@ -25,9 +25,9 @@ enum PingChartDateRange: Int, CaseIterable {
 
 struct ServerDetailPingChartView: View {
     @Environment(\.scenePhase) private var scenePhase
-    var server: Server
+    var server: GetServerDetailResponse.Server
     @State private var dateRange: PingChartDateRange = .threeHours
-    @State private var pingDatas: [PingData]?
+    @State private var pingDatas: [GetServerPingDataResponse.PingData]?
     @State private var errorDescriptionLoadingPingData: String?
     @State private var isLoadingPingDatas: Bool = false
     

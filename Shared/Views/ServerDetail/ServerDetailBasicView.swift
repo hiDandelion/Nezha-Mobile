@@ -75,7 +75,7 @@ struct ServerDetailBasicView: View {
         NMUI.PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
             .contextMenu(ContextMenu(menuItems: {
                 Button {
-                    UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
+                    UIPasteboard.general.string = server.IPv4
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
@@ -91,7 +91,7 @@ struct ServerDetailBasicView: View {
         NMUI.PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
             .contextMenu(ContextMenu(menuItems: {
                 Button {
-                    UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
+                    UIPasteboard.general.string = server.IPv6
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }

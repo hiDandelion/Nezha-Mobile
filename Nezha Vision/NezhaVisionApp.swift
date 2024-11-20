@@ -26,14 +26,14 @@ struct NezhaVisionApp: App {
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
         
-        WindowGroup("Pin View", id: "server-pin-view", for: Server.ID.self) { $serverID in
+        WindowGroup("Pin View", id: "server-pin-view", for: GetServerDetailResponse.Server.ID.self) { $serverID in
             ServerPinView(dashboardViewModel: dashboardViewModel, serverID: serverID)
                 .frame(minWidth: 400, minHeight: 300)
         }
         .windowResizability(.contentSize)
         .handlesExternalEvents(matching: ["server-pin"])
         
-        WindowGroup("Server Details", id: "server-detail-view", for: Server.ID.self) { $serverID in
+        WindowGroup("Server Details", id: "server-detail-view", for: GetServerDetailResponse.Server.ID.self) { $serverID in
             if let serverID {
                 ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: serverID)
             }

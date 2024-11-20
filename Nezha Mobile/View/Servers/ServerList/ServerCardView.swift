@@ -89,14 +89,14 @@ struct ServerCardView: View {
         .contextMenu(ContextMenu(menuItems: {
             if server.IPv4 != "" {
                 Button {
-                    UIPasteboard.general.setValue(server.IPv4, forPasteboardType: UTType.plainText.identifier)
+                    UIPasteboard.general.string = server.IPv4
                 } label: {
                     Label("Copy IPv4", systemImage: "4.circle")
                 }
             }
             if server.IPv6 != "" {
                 Button {
-                    UIPasteboard.general.setValue(server.IPv6, forPasteboardType: UTType.plainText.identifier)
+                    UIPasteboard.general.string = server.IPv6
                 } label: {
                     Label("Copy IPv6", systemImage: "6.circle")
                 }

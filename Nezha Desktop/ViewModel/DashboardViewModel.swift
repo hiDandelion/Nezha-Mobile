@@ -22,7 +22,7 @@ class DashboardViewModel {
     private var timer: Timer?
     var loadingState: DashboardLoadingState = .idle
     var lastUpdateTime: Date?
-    var servers: [Server] = []
+    var servers: [GetServerDetailResponse.Server] = []
     var isMonitoringEnabled = false
     
     func startMonitoring() {

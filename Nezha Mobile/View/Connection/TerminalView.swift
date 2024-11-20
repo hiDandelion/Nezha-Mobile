@@ -109,10 +109,10 @@ struct TerminalView: View {
             HStack(alignment: .bottom) {
                 Group {
                     makeKeyboardFloatingButton("doc.on.clipboard") {
-                        guard let str = UIPasteboard.general.string else {
+                        guard let pasteboardString = UIPasteboard.general.string else {
                             return
                         }
-                        write(str)
+                        write(pasteboardString)
                     }
                 }
                 

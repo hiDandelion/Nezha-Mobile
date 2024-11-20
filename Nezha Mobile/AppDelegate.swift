@@ -23,15 +23,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 _ = NMCore.debugLog("Push Notification Info - Permission granted: \(granted)")
             }
         
-        if #available(iOS 17.2, *) {
-            Task {
-                for await data in Activity<LiveActivityAttributes>.pushToStartTokenUpdates {
-                    let pushToStartToken = data.map {String(format: "%02.2hhx", $0)}.joined()
-                    NMCore.userDefaults.set(pushToStartToken, forKey: "NMPushToStartToken")
-                }
-            }
-        }
-        
         return true
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServerDetailStatusView: View {
-    var server: Server
+    var server: GetServerDetailResponse.Server
     
     var body: some View {
         Section("Status") {

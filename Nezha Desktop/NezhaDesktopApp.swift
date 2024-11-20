@@ -29,7 +29,7 @@ struct NezhaDesktopApp: App {
             CommandGroup(before: CommandGroupPlacement.help) {
                 Link("User Guide", destination: NMCore.userGuideURL)
                 NavigationLink(destination: {
-                    AcknowledgmentView()
+                    NMUI.AcknowledgmentView()
                 }) {
                     Text("Acknowledgments")
                 }
@@ -40,7 +40,7 @@ struct NezhaDesktopApp: App {
             ServerMapView(servers: dashboardViewModel.servers)
         }
         
-        WindowGroup("Server Details", id: "server-detail-view", for: Server.ID.self) { $serverID in
+        WindowGroup("Server Details", id: "server-detail-view", for: GetServerDetailResponse.Server.ID.self) { $serverID in
             if let serverID {
                 ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: serverID)
             }
