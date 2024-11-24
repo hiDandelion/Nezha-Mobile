@@ -17,12 +17,16 @@ struct AgentSettingsView: View {
     
     var body: some View {
         Form {
-            Section("Dashboard GRPC Info") {
+            Section {
                 TextField("Dashboard GRPC Link", text: $dashboardGRPCLink)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
                 TextField("Dashboard GRPC Port", text: $dashboardGRPCPort)
                     .keyboardType(.numberPad)
+            } header: {
+                Text("Dashboard GRPC Info")
+            } footer: {
+                Text("Latest Supported Nezha Version: 0.20.5")
             }
             
             Section("Agent Parameters") {

@@ -1672,6 +1672,22 @@
         }
       }
     },
+    "Latest Supported Nezha Version: 0.20.5" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "支持的最新Nezha版本：0.20.5"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サポートされている最新のNezhaバージョン：0.20.5"
+          }
+        }
+      }
+    },
     "Leaf" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3166,12 +3182,6 @@
           }
         }
       }
-    },
-    "Test" : {
-      "shouldTranslate" : false
-    },
-    "Test Action" : {
-      "shouldTranslate" : false
     },
     "Text Color" : {
       "localizations" : {

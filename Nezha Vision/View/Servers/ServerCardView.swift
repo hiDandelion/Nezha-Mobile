@@ -172,5 +172,6 @@ struct ServerCardView: View {
             .frame(alignment: .leading)
         }
         .lineLimit(1)
+        .frame(minWidth: 100)
     }
 }

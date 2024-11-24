@@ -42,18 +42,6 @@ struct SettingView: View {
             .tabItem {
                 Label("Notifications", systemImage: "app.badge")
             }
-            
-#if DEBUG
-            Form {
-                Button("Test Action") {
-                    // Test code here
-                }
-            }
-            .padding()
-            .tabItem {
-                Label("Test", systemImage: "cursorarrow.click")
-            }
-#endif
         }
         .frame(width: 600, height: 400)
     }

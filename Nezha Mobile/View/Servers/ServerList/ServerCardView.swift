@@ -49,7 +49,7 @@ struct ServerCardView: View {
         } contentView: {
             VStack {
                 ViewThatFits {
-                    HStack(spacing: 20) {
+                    HStack {
                         gaugeView
                         
                         infoView
@@ -57,7 +57,6 @@ struct ServerCardView: View {
                     }
                     
                     gaugeView
-                        
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -182,5 +181,6 @@ struct ServerCardView: View {
             .frame(alignment: .leading)
         }
         .lineLimit(1)
+        .frame(minWidth: 100)
     }
 }

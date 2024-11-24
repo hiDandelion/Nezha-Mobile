@@ -26,7 +26,10 @@ struct AddDashboardView: View {
                     TextField("API Token", text: $dashboardAPIToken)
                         .autocorrectionDisabled()
                 } footer: {
-                    Text("Dashboard Link Example: server.hidandelion.com")
+                    VStack(alignment: .leading) {
+                        Text("Dashboard Link Example: server.hidandelion.com")
+                        Text("Latest Supported Nezha Version: 0.20.5")
+                    }
                 }
                 
                 Section {
