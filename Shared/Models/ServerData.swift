@@ -22,7 +22,7 @@ struct ServerData: Codable, Identifiable, Hashable {
     let host: Host
     let status: Status
     
-    struct Host: Codable {
+    struct Host: Codable, Hashable {
         let platform: String
         let platformVersion: String
         let cpu: [String]
@@ -34,7 +34,7 @@ struct ServerData: Codable, Identifiable, Hashable {
         let bootTime: Int64
     }
     
-    struct Status: Codable {
+    struct Status: Codable, Hashable {
         let cpuUsed: Double
         let memoryUsed: Int64
         let swapUsed: Int64
@@ -50,13 +50,5 @@ struct ServerData: Codable, Identifiable, Hashable {
         let tcpConnectionCount: Int64
         let udpConnectionCount: Int64
         let processCount: Int64
-    }
-    
-    static func == (lhs: ServerData, rhs: ServerData) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
     }
 }

@@ -12,7 +12,7 @@ struct ServerTableView: View {
     @Bindable var dashboardViewModel: DashboardViewModel
     var activeTag: String = "All"
     @State private var searchText: String = ""
-    @State private var selectedServers: Set<ServerData.ID> = Set<ServerData.ID>()
+    @State private var selectedServers: Set<ServerData.ID> = .init()
     
     private var filteredServers: [ServerData] {
         dashboardViewModel.servers
@@ -28,8 +28,30 @@ struct ServerTableView: View {
     
     var body: some View {
         table
-            .contextMenu(forSelectionType: ServerData.ID.self) { items in
-                
+            .contextMenu(forSelectionType: ServerData.ID.self) { ids in
+                if ids.count == 1, let server = dashboardViewModel.servers.first(where: { $0.id == ids.first!}) {
+                    if server.ipv4 != "" {
+                        Button("Copy IPv4") {
+                            NSPasteboard.general.setString(server.ipv4, forType: .string)
+                        }
+                    }
+                    if server.ipv6 != "" {
+                        Button("Copy IPv6") {
+                            NSPasteboard.general.setString(server.ipv6, forType: .string)
+                        }
+                    }
+                    Divider()
+                    Button("View Details") {
+                        openWindow(id: "server-detail-view", value: server.id)
+                    }
+                }
+                else {
+                    Button("View Details") {
+                        for id in ids {
+                            openWindow(id: "server-detail-view", value: id)
+                        }
+                    }
+                }
             } primaryAction: { ids in
                 for id in ids {
                     openWindow(id: "server-detail-view", value: id)
@@ -119,22 +141,6 @@ struct ServerTableView: View {
         } rows: {
             ForEach(filteredServers, id: \.id) { server in
                 TableRow(server)
-                    .contextMenu {
-                        if server.ipv4 != "" {
-                            Button("Copy IPv4") {
-                                NSPasteboard.general.setString(server.ipv4, forType: .string)
-                            }
-                        }
-                        if server.ipv6 != "" {
-                            Button("Copy IPv6") {
-                                NSPasteboard.general.setString(server.ipv6, forType: .string)
-                            }
-                        }
-                        Divider()
-                        Button("View Details") {
-                            openWindow(id: "server-detail-view", value: server.id)
-                        }
-                    }
             }
         }
     }
