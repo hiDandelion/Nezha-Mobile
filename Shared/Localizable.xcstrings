@@ -4,9 +4,6 @@
     "- OS Version\n- Model Identifier\n- CPU Usage\n- Memory Usage\n- Disk Usage\n- Data Usage\n- Boot Time\n- Uptime" : {
       "shouldTranslate" : false
     },
-    "--%" : {
-
-    },
     "%.0f" : {
 
     },
@@ -483,22 +480,6 @@
         }
       }
     },
-    "API Token" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "APIトークン"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API Token"
-          }
-        }
-      }
-    },
     "Architecture" : {
       "localizations" : {
         "ja" : {
@@ -934,22 +915,6 @@
         }
       }
     },
-    "CPU --% MEM --%" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CPU --% メモリ --%"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CPU --% 内存 --%"
-          }
-        }
-      }
-    },
     "CPU %.0f%% MEM %.0f%%" : {
       "localizations" : {
         "en" : {
@@ -1377,19 +1342,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentication failed. Please check your Dashboard Link and API Token."
+            "value" : "Dashboard authentication failed."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "認証に失敗しました。DashboardリンクとAPIトークンを確認してください。"
+            "value" : "Dashboard認証に失敗しました。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "认证失败。请检查你的Dashboard域名和API Token是否设置正确。"
+            "value" : "Dashboard认证失败。"
           }
         }
       }
@@ -1422,19 +1387,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invalid configuration. Please ensure your Dashboard Link and API Token are set properly."
+            "value" : "Invalid dashboard configuration."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定が無効です。DashboardリンクとAPIトークンが正しく設定されていることを確認してください。"
+            "value" : "Dashboard設定が無効です。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "无效配置。请检查你的Dashboard域名和API Token是否设置正确。"
+            "value" : "无效的Dashboard配置。"
           }
         }
       }
@@ -1489,22 +1454,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在小组件中获取服务器的最新信息。"
-          }
-        }
-      }
-    },
-    "GPU" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU"
           }
         }
       }
@@ -1656,22 +1605,6 @@
         }
       }
     },
-    "Last viewed server" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最後に閲覧したアイテムサーバー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最后查看的服务器"
-          }
-        }
-      }
-    },
     "Latest Supported Nezha Version: 0.20.5" : {
       "localizations" : {
         "ja" : {
@@ -1749,22 +1682,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "加载中..."
-          }
-        }
-      }
-    },
-    "Main View" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "メインビュー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "主视图"
           }
         }
       }
@@ -2715,38 +2632,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择自定义背景"
-          }
-        }
-      }
-    },
-    "Select Server" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サーバーを選択"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择服务器"
-          }
-        }
-      }
-    },
-    "Select the server to display details for." : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "詳細を表示するサーバーを選択します。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择展示信息的服务器。"
           }
         }
       }

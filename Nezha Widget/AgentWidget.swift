@@ -144,7 +144,7 @@ struct AgentWidgetEntryView: View {
             VStack(spacing: 10) {
                 HStack {
                     let cpuUsage = entry.cpuUsage / 100
-                    let memUsage = Double(entry.memoryUsed) / Double(entry.memoryTotal)
+                    let memoryUsage = Double(entry.memoryUsed) / Double(entry.memoryTotal)
                     let diskUsage = Double(entry.diskUsed) / Double(entry.diskTotal)
                     
                     VStack {
@@ -154,7 +154,7 @@ struct AgentWidgetEntryView: View {
                     
                     VStack {
                         Text("MEM")
-                        Text("\(memUsage * 100, specifier: "%.0f")%")
+                        Text("\(memoryUsage * 100, specifier: "%.0f")%")
                     }
                     
                     VStack {
@@ -212,7 +212,7 @@ struct AgentWidgetEntryView: View {
     func gaugeView(cpuUsage: Double, memoryUsed: Int64, memoryTotal: Int64, diskUsed: Int64, diskTotal: Int64) -> some View {
         HStack {
             let cpuUsage = cpuUsage / 100
-            let memUsage = Double(memoryUsed) / Double(memoryTotal)
+            let memoryUsage = Double(memoryUsed) / Double(memoryTotal)
             let diskUsage = Double(diskUsed) / Double(diskTotal)
             
             Gauge(value: cpuUsage) {
@@ -224,12 +224,12 @@ struct AgentWidgetEntryView: View {
                 }
             }
             
-            Gauge(value: memUsage) {
+            Gauge(value: memoryUsage) {
                 
             } currentValueLabel: {
                 VStack {
                     Text("MEM")
-                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                    Text("\(memoryUsage * 100, specifier: "%.0f")%")
                 }
             }
             

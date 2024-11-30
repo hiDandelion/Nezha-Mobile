@@ -2,7 +2,7 @@
 //  AddDashboardView.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 7/31/24.
+//  Created by Junhui Lou on 10/22/24.
 //
 
 import SwiftUI
@@ -10,34 +10,40 @@ import SwiftUI
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
     var dashboardViewModel: DashboardViewModel
-    @State private var dashboardLink: String = NMCore.userDefaults.string(forKey: "NMDashboardLink") ?? ""
-    @State private var dashboardAPIToken: String = NMCore.userDefaults.string(forKey: "NMDashboardAPIToken") ?? ""
-    @State private var dashboardSSLEnabled: Bool = NMCore.userDefaults.bool(forKey: "NMDashboardSSLEnabled")
+    @State private var link: String = ""
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var isSSLEnabled: Bool = true
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Dashboard Link", text: $dashboardLink)
+                    TextField("Dashboard Link", text: $link)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
-                        .onChange(of: dashboardLink) {
-                            dashboardLink = dashboardLink.replacingOccurrences(of: "^(http|https)://", with: "", options: .regularExpression)
+                        .textInputAutocapitalization(.never)
+                        .onChange(of: link) {
+                            link = link.replacingOccurrences(of: "^(http|https)://", with: "", options: .regularExpression)
                         }
-                    TextField("API Token", text: $dashboardAPIToken)
-                        .autocorrectionDisabled()
-                        .autocapitalization(.none)
                 } header: {
                     Text("Dashboard Info")
                 } footer: {
                     VStack(alignment: .leading) {
                         Text("Dashboard Link Example: server.hidandelion.com")
-                        Text("Latest Supported Nezha Version: 0.20.5")
                     }
                 }
                 
                 Section {
-                    Toggle("Enable SSL", isOn: $dashboardSSLEnabled)
+                    TextField("Username", text: $username)
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                        .textInputAutocapitalization(.never)
+                    SecureField("Password", text: $password)
+                }
+                
+                Section {
+                    Toggle("Enable SSL", isOn: $isSSLEnabled)
                 }
                 
                 Section {
@@ -54,11 +60,11 @@ struct AddDashboardView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        NMCore.saveNewDashboardConfigurations(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardSSLEnabled: dashboardSSLEnabled)
+                        NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
                         dashboardViewModel.startMonitoring()
                         dismiss()
                     }
-                    .disabled(dashboardLink == "" || dashboardAPIToken == "")
+                    .disabled(link == "" || username == "" || password == "")
                 }
             }
         }

@@ -11,7 +11,7 @@ import Cache
 
 struct ServerCoordinate: Identifiable, Hashable {
     let id: UUID = UUID()
-    var servers: [GetServerDetailResponse.Server]
+    var servers: [ServerData]
     let latitude: Double
     let longitude: Double
     let country: String?
@@ -20,7 +20,7 @@ struct ServerCoordinate: Identifiable, Hashable {
 
 struct ServerMapView: View {
     @Environment(TabBarState.self) var tabBarState
-    var servers: [GetServerDetailResponse.Server]
+    var servers: [ServerData]
     @State private var serverCoordinates: [ServerCoordinate] = []
     @State private var selectedCoordinate: ServerCoordinate?
     let storage = try? Storage<String, GetIPCityDataResponse.IPCityData>(
@@ -37,17 +37,11 @@ struct ServerMapView: View {
                     Marker(
                         serverCoordinate.servers.count <= 3 ?
                         serverCoordinate.servers
-                            .sorted { server1, server2 in
-                                switch (server1.displayIndex, server2.displayIndex) {
-                                case (.none, .none):
-                                    return server1.id < server2.id
-                                case (.none, .some):
-                                    return false
-                                case (.some, .none):
-                                    return true
-                                case let (.some(index1), .some(index2)):
-                                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+                            .sorted {
+                                if $0.displayIndex == $1.displayIndex {
+                                    return $0.serverID < $1.serverID
                                 }
+                                return $0.displayIndex < $1.displayIndex
                             }
                             .compactMap { $0.name }
                             .joined(separator: "\n")
@@ -91,17 +85,11 @@ struct ServerMapView: View {
                     VStack {
                         Text(
                             selectedCoordinate.servers
-                                .sorted { server1, server2 in
-                                    switch (server1.displayIndex, server2.displayIndex) {
-                                    case (.none, .none):
-                                        return server1.id < server2.id
-                                    case (.none, .some):
-                                        return false
-                                    case (.some, .none):
-                                        return true
-                                    case let (.some(index1), .some(index2)):
-                                        return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+                                .sorted {
+                                    if $0.displayIndex == $1.displayIndex {
+                                        return $0.serverID < $1.serverID
                                     }
+                                    return $0.displayIndex < $1.displayIndex
                                 }
                                 .compactMap { $0.name }
                                 .joined(separator: ", ")
@@ -135,7 +123,7 @@ struct ServerMapView: View {
         
         for server in servers {
             if let storage {
-                if let currentIPCityData = try? storage.object(forKey: server.IPv4), let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
+                if let currentIPCityData = try? storage.object(forKey: server.ipv4), let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
                     let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
                     if let existingServerCoordinateIndex {
                         serverCoordinates[existingServerCoordinateIndex].servers.append(server)
@@ -145,8 +133,8 @@ struct ServerMapView: View {
                     }
                 }
                 else {
-                    if let response = try? await RequestHandler.getIPCityData(IP: server.IPv4, locale: Locale.preferredLanguages[0]), let currentIPCityData = response.result {
-                        try? storage.setObject(currentIPCityData, forKey: server.IPv4)
+                    if let response = try? await RequestHandler.getIPCityData(IP: server.ipv4, locale: Locale.preferredLanguages[0]), let currentIPCityData = response.result {
+                        try? storage.setObject(currentIPCityData, forKey: server.ipv4)
                         if let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
                             let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
                             if let existingServerCoordinateIndex {

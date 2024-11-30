@@ -10,18 +10,17 @@ import UniformTypeIdentifiers
 import Cache
 
 struct ServerDetailBasicView: View {
-    var server: GetServerDetailResponse.Server
-    @State private var IPv4CityData: GetIPCityDataResponse.IPCityData?
-    @State private var IPv6CityData: GetIPCityDataResponse.IPCityData?
+    var server: ServerData
+    @State private var ipv4CityData: GetIPCityDataResponse.IPCityData?
+    @State private var ipv6CityData: GetIPCityDataResponse.IPCityData?
     
     var body: some View {
         Section("Basic") {
             NMUI.PieceOfInfo(systemImage: "bookmark", name: "Name", content: Text("\(server.name)"))
-            NMUI.PieceOfInfo(systemImage: "cube", name: "ID", content: Text("\(server.id)"))
-            NMUI.PieceOfInfo(systemImage: "tag", name: "Tag", content: Text("\(server.tag)"))
+            NMUI.PieceOfInfo(systemImage: "cube", name: "ID", content: Text("\(server.serverID)"))
             
-            if server.IPv4 != "" {
-                if let cityData = IPv4CityData {
+            if server.ipv4 != "" {
+                if let cityData = ipv4CityData {
                     DisclosureGroup {
                         NMUI.PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
                         NMUI.PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
@@ -37,8 +36,8 @@ struct ServerDetailBasicView: View {
                 }
             }
             
-            if server.IPv6 != "" {
-                if let cityData = IPv6CityData {
+            if server.ipv6 != "" {
+                if let cityData = ipv6CityData {
                     DisclosureGroup {
                         NMUI.PieceOfInfo(systemImage: nil, name: "Continent", content: Text("\(cityData.continent)"))
                         NMUI.PieceOfInfo(systemImage: nil, name: "Country", content: Text("\(cityData.country)"))
@@ -55,32 +54,37 @@ struct ServerDetailBasicView: View {
             }
             
             NMUI.PieceOfInfo(systemImage: "power", name: "Up Time", content: Text("\(formatTimeInterval(seconds: server.status.uptime))"))
-            NMUI.PieceOfInfo(systemImage: "clock", name: "Last Active", content: Text("\(convertTimestampToLocalizedDateString(timestamp: server.lastActive))"))
+            NMUI.PieceOfInfo(systemImage: "clock", name: "Last Active", content: Text(server.lastActive, format: Date.FormatStyle(date: .complete, time: .standard)))
         }
         .onAppear {
-            if server.IPv4 != "" {
+            if server.ipv4 != "" {
                 Task {
-                    IPv4CityData = await getIPCityData(IP: server.IPv4)
+                    ipv4CityData = await getIPCityData(IP: server.ipv4)
                 }
             }
-            if server.IPv6 != "" {
+            if server.ipv6 != "" {
                 Task {
-                    IPv6CityData = await getIPCityData(IP: server.IPv6)
+                    ipv6CityData = await getIPCityData(IP: server.ipv6)
                 }
             }
         }
     }
     
     private var IPv4InfoLabel: some View {
-        NMUI.PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.IPv4)"))
+        NMUI.PieceOfInfo(systemImage: "4.circle", name: "IPv4", content: Text("\(server.ipv4)"))
             .contextMenu(ContextMenu(menuItems: {
                 Button {
-                    UIPasteboard.general.string = server.IPv4
+#if os(iOS) || os(visionOS)
+                    UIPasteboard.general.string = server.ipv4
+#endif
+#if os(macOS)
+                    NSPasteboard.general.setString(server.ipv4, forType: .string)
+#endif
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
 #if os(iOS)
-                NavigationLink(destination: PrepareConnectionView(host: server.IPv4)) {
+                NavigationLink(destination: PrepareConnectionView(host: server.ipv4)) {
                     Label("Connect", systemImage: "link")
                 }
 #endif
@@ -88,15 +92,20 @@ struct ServerDetailBasicView: View {
     }
     
     private var IPv6InfoLabel: some View {
-        NMUI.PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.IPv6)"))
+        NMUI.PieceOfInfo(systemImage: "6.circle", name: "IPv6", content: Text("\(server.ipv6)"))
             .contextMenu(ContextMenu(menuItems: {
                 Button {
-                    UIPasteboard.general.string = server.IPv6
+#if os(iOS) || os(visionOS)
+                    UIPasteboard.general.string = server.ipv6
+#endif
+#if os(macOS)
+                    NSPasteboard.general.setString(server.ipv6, forType: .string)
+#endif
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
 #if os(iOS)
-                NavigationLink(destination: PrepareConnectionView(host: server.IPv6)) {
+                NavigationLink(destination: PrepareConnectionView(host: server.ipv6)) {
                     Label("Connect", systemImage: "link")
                 }
 #endif

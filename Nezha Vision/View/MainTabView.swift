@@ -9,8 +9,6 @@ import SwiftUI
 
 struct MainTabView: View {
     var dashboardViewModel: DashboardViewModel
-    var dashboardLink: String
-    var dashboardAPIToken: String
     
     var body: some View {
         TabView {

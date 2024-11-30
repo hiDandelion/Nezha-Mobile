@@ -19,8 +19,6 @@ struct UserSection: Hashable {
 
 struct HomeView: View {
     @Environment(\.openWindow) var openWindow
-    var dashboardLink: String
-    var dashboardAPIToken: String
     var dashboardViewModel: DashboardViewModel
     @State private var activeUserSection: UserSection = UserSection(tab: .server, tag: "All")
     private var activeServerTag: String? {
@@ -80,11 +78,6 @@ struct HomeView: View {
                     }
                     .padding()
                 }
-            }
-        }
-        .onAppear {
-            if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
             }
         }
     }

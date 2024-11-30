@@ -12,6 +12,8 @@ import NezhaMobileData
 struct NezhaDesktopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
+    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
     
     init() {
@@ -40,9 +42,9 @@ struct NezhaDesktopApp: App {
             ServerMapView(servers: dashboardViewModel.servers)
         }
         
-        WindowGroup("Server Details", id: "server-detail-view", for: GetServerDetailResponse.Server.ID.self) { $serverID in
-            if let serverID {
-                ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: serverID)
+        WindowGroup("Server Details", id: "server-detail-view", for: ServerData.ID.self) { $id in
+            if let id {
+                ServerDetailView(dashboardViewModel: dashboardViewModel, id: id)
             }
         }
         .defaultSize(width: 800, height: 700)
@@ -73,6 +75,11 @@ struct NezhaDesktopApp: App {
         
         MenuBarExtra(isInserted: $menuBarEnabled) {
             MenuBarView(dashboardViewModel: dashboardViewModel)
+                .onAppear {
+                    if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
+                        dashboardViewModel.startMonitoring()
+                    }
+                }
         } label: {
             Image(systemName: "server.rack")
         }

@@ -23,12 +23,12 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 
 struct ServerDetailView: View {
     @Bindable var dashboardViewModel: DashboardViewModel
-    var serverID: Int
+    var id: String
     @State private var activeTab: ServerDetailTab = .basic
     
     var body: some View {
         NavigationStack {
-            if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
+            if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
                 if server.status.uptime != 0 {
                     VStack {
                         switch(activeTab) {

@@ -9,24 +9,16 @@ import SwiftUI
 
 struct MenuBarView: View {
     @Environment(\.openWindow) var openWindow
-    @AppStorage("NMDashboardLink", store: NMCore.userDefaults) private var dashboardLink: String = ""
-    @AppStorage("NMDashboardAPIToken", store: NMCore.userDefaults) private var dashboardAPIToken: String = ""
     var dashboardViewModel: DashboardViewModel
     @State private var activeTag: String = "All"
     
-    private var filteredServers: [GetServerDetailResponse.Server] {
+    private var filteredServers: [ServerData] {
         dashboardViewModel.servers
-            .sorted { server1, server2 in
-                switch (server1.displayIndex, server2.displayIndex) {
-                case (.none, .none):
-                    return server1.id < server2.id
-                case (.none, .some):
-                    return false
-                case (.some, .none):
-                    return true
-                case let (.some(index1), .some(index2)):
-                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+            .sorted {
+                if $0.displayIndex == $1.displayIndex {
+                    return $0.serverID < $1.serverID
                 }
+                return $0.displayIndex < $1.displayIndex
             }
             .filter { activeTag == "All" || $0.tag == activeTag }
     }
@@ -98,11 +90,6 @@ struct MenuBarView: View {
             .padding([.bottom, .horizontal])
         }
         .frame(width: 380, height: 700)
-        .onAppear {
-            if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
-            }
-        }
     }
     
     private var serverList: some View {
@@ -110,19 +97,17 @@ struct MenuBarView: View {
             if !dashboardViewModel.servers.isEmpty {
                 List {
                     ForEach(filteredServers) { server in
-                        ServerCard(server: server)
+                        serverItem(server: server)
                         .id(server.id)
                         .contextMenu {
-                            if server.IPv4 != "" {
+                            if server.ipv4 != "" {
                                 Button("Copy IPv4") {
-                                    NSPasteboard.general.clearContents()
-                                    NSPasteboard.general.setString(server.IPv4, forType: .string)
+                                    NSPasteboard.general.setString(server.ipv4, forType: .string)
                                 }
                             }
-                            if server.IPv6 != "" {
+                            if server.ipv6 != "" {
                                 Button("Copy IPv6") {
-                                    NSPasteboard.general.clearContents()
-                                    NSPasteboard.general.setString(server.IPv6, forType: .string)
+                                    NSPasteboard.general.setString(server.ipv6, forType: .string)
                                 }
                             }
                             Divider()
@@ -141,13 +126,13 @@ struct MenuBarView: View {
         }
     }
     
-    private func ServerCard(server: GetServerDetailResponse.Server) -> some View {
+    private func serverItem(server: ServerData) -> some View {
         CardView {
             HStack {
                 HStack {
                     HStack {
-                        if server.host.countryCode.uppercased() != "" {
-                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                        if server.countryCode.uppercased() != "" {
+                            Text(countryFlagEmoji(countryCode: server.countryCode))
                         }
                         else {
                             Text("🏴‍☠️")
@@ -176,8 +161,8 @@ struct MenuBarView: View {
                     Spacer()
                     
                     HStack {
-                        let cpuUsage = server.status.cpu / 100
-                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                        let cpuUsage = server.status.cpuUsed / 100
+                        let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
                         let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
                         
                         VStack {
@@ -196,15 +181,15 @@ struct MenuBarView: View {
                         }
                         
                         VStack {
-                            Gauge(value: memUsage) {
+                            Gauge(value: memoryUsage) {
                                 
                             } currentValueLabel: {
                                 VStack {
                                     Text("MEM")
-                                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                                    Text("\(memoryUsage * 100, specifier: "%.0f")%")
                                 }
                             }
-                            Text("\(formatBytes(server.host.memTotal, decimals: 0))")
+                            Text("\(formatBytes(server.host.memoryTotal, decimals: 0))")
                                 .font(.caption2)
                                 .frame(minWidth: 50)
                                 .lineLimit(1)
@@ -235,8 +220,8 @@ struct MenuBarView: View {
                             Image(systemName: "circle.dotted.circle")
                                 .frame(width: 10)
                             VStack(alignment: .leading) {
-                                Text("↑ \(formatBytes(server.status.netOutTransfer))")
-                                Text("↓ \(formatBytes(server.status.netInTransfer))")
+                                Text("↑ \(formatBytes(server.status.networkOut, decimals: 1))")
+                                Text("↓ \(formatBytes(server.status.networkIn, decimals: 1))")
                             }
                         }
                         .frame(alignment: .leading)
@@ -245,8 +230,8 @@ struct MenuBarView: View {
                             Image(systemName: "network")
                                 .frame(width: 10)
                             VStack(alignment: .leading) {
-                                Text("↑ \(formatBytes(server.status.netOutSpeed))/s")
-                                Text("↓ \(formatBytes(server.status.netInSpeed))/s")
+                                Text("↑ \(formatBytes(server.status.networkOutSpeed, decimals: 1))/s")
+                                Text("↓ \(formatBytes(server.status.networkInSpeed, decimals: 1))/s")
                             }
                         }
                         .frame(alignment: .leading)

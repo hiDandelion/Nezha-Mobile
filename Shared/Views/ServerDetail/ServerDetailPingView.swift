@@ -25,9 +25,9 @@ enum PingChartDateRange: Int, CaseIterable {
 
 struct ServerDetailPingChartView: View {
     @Environment(\.scenePhase) private var scenePhase
-    var server: GetServerDetailResponse.Server
+    var server: ServerData
     @State private var dateRange: PingChartDateRange = .threeHours
-    @State private var pingDatas: [GetServerPingDataResponse.PingData]?
+    @State private var pingDatas: [ServiceData]?
     @State private var errorDescriptionLoadingPingData: String?
     @State private var isLoadingPingDatas: Bool = false
     
@@ -71,10 +71,22 @@ struct ServerDetailPingChartView: View {
                 isLoadingPingDatas = true
                 Task {
                     do {
-                        let response = try await RequestHandler.getServerPingData(serverID: String(server.id))
+                        let response = try await RequestHandler.getService(serverID: String(server.serverID))
                         withAnimation {
                             errorDescriptionLoadingPingData = nil
-                            pingDatas = response.result
+                            if let services = response.data {
+                                pingDatas = services.map({
+                                    ServiceData(
+                                        id: UUID().uuidString,
+                                        monitorID: $0.monitor_id,
+                                        serverID: $0.server_id,
+                                        monitorName: $0.monitor_name,
+                                        serverName: $0.server_name,
+                                        dates: $0.created_at,
+                                        delays: $0.avg_delay
+                                    )
+                                })
+                            }
                             isLoadingPingDatas = false
                         }
                     }

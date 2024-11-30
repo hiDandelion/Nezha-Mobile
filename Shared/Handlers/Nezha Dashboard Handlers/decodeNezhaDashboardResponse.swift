@@ -13,15 +13,11 @@ extension RequestHandler {
             let decoder = JSONDecoder()
             let response = try decoder.decode(T.self, from: data)
             
-            if response.code == 403 {
-                throw NezhaDashboardError.dashboardAuthenticationFailed
-            }
-            
-            if response.code == 0 {
+            if response.success == true {
                 return response
             }
             
-            throw NezhaDashboardError.invalidResponse(response.message)
+            throw NezhaDashboardError.invalidResponse(response.error ?? "Unknown error")
         } catch let error as DecodingError {
             handleDecodingError(error: error)
             throw error

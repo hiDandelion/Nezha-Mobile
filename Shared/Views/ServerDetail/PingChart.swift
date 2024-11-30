@@ -16,10 +16,10 @@ struct PingDataPlot: Identifiable {
 
 struct PingChart: View {
     @Environment(\.colorScheme) private var scheme
-    let pingData: GetServerPingDataResponse.PingData
+    let pingData: ServiceData
     let dateRange: PingChartDateRange
     var pingDataPlots: [PingDataPlot] {
-        let plots = zip(pingData.createdAt, pingData.avgDelay)
+        let plots = zip(pingData.dates, pingData.delays)
             .map { PingDataPlot(date: $0, delay: $1) }
         let filteredPlots = plots.filter {
             isTimeDifferenceLessThanHours(from: $0.date, to: Date(), hours: dateRange.rawValue)

@@ -17,19 +17,13 @@ struct ServerListView: View {
     @State private var activeTag: String = "All"
     @Namespace private var tagNamespace
     
-    private var filteredServers: [GetServerDetailResponse.Server] {
+    private var filteredServers: [ServerData] {
         dashboardViewModel.servers
-            .sorted { server1, server2 in
-                switch (server1.displayIndex, server2.displayIndex) {
-                case (.none, .none):
-                    return server1.id < server2.id
-                case (.none, .some):
-                    return false
-                case (.some, .none):
-                    return true
-                case let (.some(index1), .some(index2)):
-                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+            .sorted {
+                if $0.displayIndex == $1.displayIndex {
+                    return $0.serverID < $1.serverID
                 }
+                return $0.displayIndex < $1.displayIndex
             }
             .filter { activeTag == "All" || $0.tag == activeTag }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
@@ -42,28 +36,29 @@ struct ServerListView: View {
     
     var body: some View {
         NavigationStack {
-            Content
+            content
         }
     }
     
-    var Content: some View {
+    var content: some View {
         Group {
             switch(dashboardViewModel.loadingState) {
             case .idle:
                 EmptyView()
-            case .loading, .loaded:
+            case .loading:
+                ProgressView("Loading...")
+            case .loaded:
                 if dashboardViewModel.servers.isEmpty {
-                    ProgressView("Loading...")
+                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
                 else {
                     GeometryReader { proxy in
                         let isWideLayout = proxy.size.width > 600
                         ScrollView {
-                            GroupPicker
+                            groupPicker
                                 .safeAreaPadding(.horizontal, 15)
-                                .padding(.bottom, 5)
                             
-                            ServerList(isWideLayout: isWideLayout)
+                            serverList(isWideLayout: isWideLayout)
                         }
                         .navigationTitle("Servers")
                         .searchable(text: $searchText)
@@ -91,22 +86,23 @@ struct ServerListView: View {
         }
     }
     
-    var GroupPicker: some View {
+    var groupPicker: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
                 if !dashboardViewModel.servers.isEmpty {
                     let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
                     let allTags = ["All"] + tags.sorted()
                     ForEach(allTags, id: \.self) { tag in
-                        GroupTag(tag: tag)
+                        groupTag(tag: tag)
                     }
                 }
             }
+            .padding(.vertical)
         }
         .scrollIndicators(.never)
     }
     
-    private func GroupTag(tag: String) -> some View {
+    private func groupTag(tag: String) -> some View {
         Button(action: {
             withAnimation(.snappy) {
                 activeTag = tag
@@ -130,7 +126,7 @@ struct ServerListView: View {
         .buttonStyle(.plain)
     }
     
-    private func ServerList(isWideLayout: Bool) -> some View {
+    private func serverList(isWideLayout: Bool) -> some View {
         Group {
             if !dashboardViewModel.servers.isEmpty {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
@@ -138,12 +134,6 @@ struct ServerListView: View {
                         ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
                             .onTapGesture {
                                 openWindow(id: "server-detail-view", value: server.id)
-                            }
-                            .onDrag {
-                                let userActivity = NSUserActivity(activityType: "drag")
-                                userActivity.targetContentIdentifier = "server-pin-view"
-                                userActivity.userInfo = ["serverID": server.id as Int]
-                                return NSItemProvider(object: userActivity)
                             }
                     }
                 }

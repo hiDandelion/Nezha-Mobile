@@ -16,10 +16,10 @@ extension NMCore {
         
         _ = NMCore.debugLog("Sync Info - Starting sync")
         
-        let keys = ["NMLastModifyDate", "NMDashboardLink", "NMDashboardAPIToken", "NMDashboardSSLEnabled", "NMDashboardGRPCLink", "NMDashboardGRPCPort", "NMAgentSecret", "NMAgentSSLEnabled"]
+        let keys = [NMLastModifyDate, NMDashboardLink, NMDashboardUsername, NMDashboardSSLEnabled, NMDashboardGRPCLink, NMDashboardGRPCPort, NMAgentSecret, NMAgentSSLEnabled]
         
-        let lastModifyDateLocal = NMCore.userDefaults.object(forKey: "NMLastModifyDate") as? Int
-        let lastModifyDateRemote = cloudStore.object(forKey: "NMLastModifyDate") as? Int
+        let lastModifyDateLocal = NMCore.userDefaults.object(forKey: NMLastModifyDate) as? Int
+        let lastModifyDateRemote = cloudStore.object(forKey: NMLastModifyDate) as? Int
         
         guard let lastModifyDateLocal, let lastModifyDateRemote else {
             _ = NMCore.debugLog("Sync Error - Unknown error")
@@ -75,35 +75,5 @@ extension NMCore {
         }
         
         _ = NMCore.debugLog("Sync Info - iCloud sync process completed")
-    }
-    
-    static func saveNewDashboardConfigurations(dashboardLink: String, dashboardAPIToken: String, dashboardSSLEnabled: Bool) {
-        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
-        userDefaults.set(dashboardLink, forKey: "NMDashboardLink")
-        userDefaults.set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-        userDefaults.set(dashboardSSLEnabled, forKey: "NMDashboardSSLEnabled")
-        
-        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
-        NSUbiquitousKeyValueStore().set(dashboardLink, forKey: "NMDashboardLink")
-        NSUbiquitousKeyValueStore().set(dashboardAPIToken, forKey: "NMDashboardAPIToken")
-        NSUbiquitousKeyValueStore().set(dashboardSSLEnabled, forKey: "NMDashboardSSLEnabled")
-        
-        syncWithiCloud()
-    }
-    
-    static func saveNewAgentConfigurations(dashboardGRPCLink: String, dashboardGRPCPort: String, agentSecret: String, agentSSLEnabled: Bool) {
-        userDefaults.set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
-        userDefaults.set(dashboardGRPCLink, forKey: "NMDashboardGRPCLink")
-        userDefaults.set(dashboardGRPCPort, forKey: "NMDashboardGRPCPort")
-        userDefaults.set(agentSecret, forKey: "NMAgentSecret")
-        userDefaults.set(agentSSLEnabled, forKey: "NMAgentSSLEnabled")
-        
-        NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: "NMLastModifyDate")
-        NSUbiquitousKeyValueStore().set(dashboardGRPCLink, forKey: "NMDashboardGRPCLink")
-        NSUbiquitousKeyValueStore().set(dashboardGRPCPort, forKey: "NMDashboardGRPCPort")
-        NSUbiquitousKeyValueStore().set(agentSecret, forKey: "NMAgentSecret")
-        NSUbiquitousKeyValueStore().set(agentSSLEnabled, forKey: "NMAgentSSLEnabled")
-        
-        syncWithiCloud()
     }
 }

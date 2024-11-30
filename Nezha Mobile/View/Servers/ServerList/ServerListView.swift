@@ -16,7 +16,7 @@ struct ServerListView: View {
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     @State private var backgroundImage: UIImage?
     @State private var shouldNavigateToServerDetailView: Bool = false
-    @State private var incomingURLServerID: Int?
+    @State private var incomingURLServerUUID: String?
     var dashboardViewModel: DashboardViewModel
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
@@ -24,19 +24,13 @@ struct ServerListView: View {
     @Namespace private var tagNamespace
     @Namespace private var serverNamespace
     
-    private var filteredServers: [GetServerDetailResponse.Server] {
+    private var filteredServers: [ServerData] {
         dashboardViewModel.servers
-            .sorted { server1, server2 in
-                switch (server1.displayIndex, server2.displayIndex) {
-                case (.none, .none):
-                    return server1.id < server2.id
-                case (.none, .some):
-                    return false
-                case (.some, .none):
-                    return true
-                case let (.some(index1), .some(index2)):
-                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+            .sorted {
+                if $0.displayIndex == $1.displayIndex {
+                    return $0.serverID < $1.serverID
                 }
+                return $0.displayIndex < $1.displayIndex
             }
             .filter { activeTag == "All" || $0.tag == activeTag }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
@@ -62,8 +56,8 @@ struct ServerListView: View {
                     .frame(height: 50)
             }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
-                if let incomingURLServerID {
-                    ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: incomingURLServerID)
+                if let incomingURLServerUUID {
+                    ServerDetailView(dashboardViewModel: dashboardViewModel, id: incomingURLServerUUID)
                 }
             }
             .onAppear {
@@ -226,7 +220,7 @@ struct ServerListView: View {
                     ForEach(filteredServers) { server in
                         if #available(iOS 18, *) {
                             NavigationLink {
-                                ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: server.id)
+                                ServerDetailView(dashboardViewModel: dashboardViewModel, id: server.id)
                                     .navigationTransition(.zoom(sourceID: server.id, in: serverNamespace))
                             } label: {
                                 ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
@@ -237,7 +231,7 @@ struct ServerListView: View {
                         }
                         else {
                             NavigationLink {
-                                ServerDetailView(dashboardViewModel: dashboardViewModel, serverID: server.id)
+                                ServerDetailView(dashboardViewModel: dashboardViewModel, id: server.id)
                             } label: {
                                 ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
                             }
@@ -270,12 +264,12 @@ struct ServerListView: View {
             return
         }
         
-        guard let serverID = components.queryItems?.first(where: { $0.name == "serverID" })?.value else {
-            _ = NMCore.debugLog("Incoming Link Error - Server ID not found")
+        guard let id = components.queryItems?.first(where: { $0.name == "id" })?.value else {
+            _ = NMCore.debugLog("Incoming Link Error - id is missing")
             return
         }
         
-        incomingURLServerID = Int(serverID)
+        incomingURLServerUUID = id
         tabBarState.activeTab = .servers
         shouldNavigateToServerDetailView = true
     }

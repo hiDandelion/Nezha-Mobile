@@ -8,27 +8,19 @@
 import SwiftUI
 
 struct ServerListView: View {
-    var dashboardLink: String
-    var dashboardAPIToken: String
     @ObservedObject var dashboardViewModel: DashboardViewModel
-    @State private var selectedServer: GetServerDetailResponse.Server?
+    @State private var selectedServer: ServerData?
     @State private var isShowingErrorDetailAlert: Bool = false
     @State private var isShowingSettingSheet: Bool = false
     @State private var newSettingRequireReconnection: Bool? = false
     
-    private var sortedServers: [GetServerDetailResponse.Server] {
+    private var sortedServers: [ServerData] {
         dashboardViewModel.servers
-            .sorted { server1, server2 in
-                switch (server1.displayIndex, server2.displayIndex) {
-                case (.none, .none):
-                    return server1.id < server2.id
-                case (.none, .some):
-                    return false
-                case (.some, .none):
-                    return true
-                case let (.some(index1), .some(index2)):
-                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+            .sorted {
+                if $0.displayIndex == $1.displayIndex {
+                    return $0.serverID < $1.serverID
                 }
+                return $0.displayIndex < $1.displayIndex
             }
     }
     
@@ -47,11 +39,11 @@ struct ServerListView: View {
                     NavigationSplitView {
                         List(sortedServers, selection: $selectedServer) { server in
                             HStack {
-                                if server.host.countryCode.uppercased() == "TW" {
+                                if server.countryCode.uppercased() == "TW" {
                                     Text("🇹🇼")
                                 }
-                                else if server.host.countryCode.uppercased() != "" {
-                                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                                else if server.countryCode.uppercased() != "" {
+                                    Text(countryFlagEmoji(countryCode: server.countryCode))
                                 }
                                 else {
                                     Text("🏴‍☠️")
@@ -110,11 +102,6 @@ struct ServerListView: View {
         }
         .sheet(isPresented: $isShowingSettingSheet) {
             SettingView(dashboardViewModel: dashboardViewModel)
-        }
-        .onAppear {
-            if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
-            }
         }
     }
 }

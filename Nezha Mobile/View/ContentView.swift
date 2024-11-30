@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
     @Environment(ThemeStore.self) var themeStore
     var dashboardViewModel: DashboardViewModel = DashboardViewModel()
-    @AppStorage("NMDashboardLink", store: NMCore.userDefaults) private var dashboardLink: String = ""
-    @AppStorage("NMDashboardAPIToken", store: NMCore.userDefaults) private var dashboardAPIToken: String = ""
+    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
+    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @State private var isShowingAddDashboardSheet: Bool = false
     
     var body: some View {
         Group {
-            if dashboardLink == "" || dashboardAPIToken == "" || isShowingAddDashboardSheet {
+            if dashboardLink == "" || dashboardUsername == "" || isShowingAddDashboardSheet {
                 VStack {
                     Text("Start your journey with Nezha Mobile")
                         .font(.title3)
@@ -33,10 +33,9 @@ struct ContentView: View {
                 .padding()
             }
             else {
-                MainTabView(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardViewModel: dashboardViewModel)
+                MainTabView(dashboardViewModel: dashboardViewModel)
                     .onAppear {
-                        // Start monitoring
-                        if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
+                        if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
                             dashboardViewModel.startMonitoring()
                         }
                     }

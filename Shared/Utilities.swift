@@ -124,6 +124,10 @@ func isServerOnline(timestamp: Int64, lastUpdateTime: Date = Date()) -> Bool {
     return lastUpdateTimestamp - timestamp > 60
 }
 
+func isServerOnline(timestamp: Date, lastUpdateTime: Date = Date()) -> Bool {
+    return lastUpdateTime.timeIntervalSince(timestamp) > 60
+}
+
 // Capitalizer
 extension String {
     func extractFirstNumber() -> Int? {

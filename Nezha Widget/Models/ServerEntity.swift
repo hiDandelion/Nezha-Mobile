@@ -8,9 +8,10 @@
 import AppIntents
 
 struct ServerEntity: AppEntity {
-    let id: Int
+    let id: String
+    let serverID: Int64
     let name: String
-    let displayIndex: Int?
+    let displayIndex: Int64?
     
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Server"
     static let defaultQuery = ServerQuery()

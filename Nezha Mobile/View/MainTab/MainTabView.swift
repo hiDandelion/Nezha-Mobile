@@ -45,8 +45,6 @@ struct MainTabView: View {
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
-    var dashboardLink: String
-    var dashboardAPIToken: String
     var dashboardViewModel: DashboardViewModel
     @State private var isDefaultTabBarHidden: Bool = false
     

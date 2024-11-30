@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ServerDetailHostView: View {
-    var server: GetServerDetailResponse.Server
+    var server: ServerData
     
     var body: some View {
         Section("Host") {
             VStack(alignment: .leading) {
                 Label("Operating System", systemImage: "opticaldisc")
                 HStack {
-                    let OSName = server.host.platform
-                    let OSVersion = server.host.platformVersion
-                    NMUI.getOSLogo(OSName: OSName)
-                    Text(OSName == "" ? String(localized: "Unknown") : "\(OSName.capitalizeFirstLetter()) \(OSVersion)")
+                    let osName = server.host.platform
+                    let osVersion = server.host.platformVersion
+                    NMUI.getOSLogo(OSName: osName)
+                    Text(osName == "" ? String(localized: "Unknown") : "\(osName.capitalizeFirstLetter()) \(osVersion)")
                         .foregroundStyle(.secondary)
                 }
             }
@@ -26,7 +26,7 @@ struct ServerDetailHostView: View {
             VStack(alignment: .leading) {
                 Label("CPU", systemImage: "cpu")
                 HStack {
-                    let mainCPUInfo = server.host.cpu?.first
+                    let mainCPUInfo = server.host.cpu.first
                     if let mainCPUInfo {
                         NMUI.getCPULogo(CPUName: mainCPUInfo)
                     }
@@ -35,22 +35,10 @@ struct ServerDetailHostView: View {
                 }
             }
             
-            if let mainGPUInfo = server.host.gpu?.first {
-                VStack(alignment: .leading) {
-                    Label("GPU", systemImage: "cpu.fill")
-                    HStack {
-                        NMUI.getGPULogo(GPUName: mainGPUInfo)
-                        Text(mainGPUInfo)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-            }
-            
-            NMUI.PieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.arch)"))
+            NMUI.PieceOfInfo(systemImage: "triangle", name: "Architecture", content: Text("\(server.host.architecture)"))
             if server.host.virtualization != "" {
                 NMUI.PieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization)"))
             }
-            NMUI.PieceOfInfo(systemImage: "rectangle.2.swap", name: "Agent", content: Text("\(server.host.version)"))
         }
     }
 }

@@ -23,83 +23,22 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 
 struct ServerDetailView: View {
     @Environment(\.openWindow) var openWindow
-    @Bindable var dashboardViewModel: DashboardViewModel
-    var serverID: Int
+    var id: String
+    var dashboardViewModel: DashboardViewModel
     @State private var activeTab: ServerDetailTab = .basic
     
     var body: some View {
         NavigationStack {
-            if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
+            if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
                 if server.status.uptime != 0 {
-                    VStack {
-                        Picker("Server Detail Tab", selection: $activeTab) {
-                            ForEach(ServerDetailTab.allCases) { tab in
-                                Text(tab.localized())
-                                    .tag(tab)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .padding()
-                        
-                        Form {
-                            switch(activeTab) {
-                            case .basic:
-                                Group {
-                                    ServerDetailBasicView(server: server)
-                                    ServerDetailHostView(server: server)
-                                }
-                                .tag(ServerDetailTab.basic)
-                            case .status:
-                                Group {
-                                    ServerDetailStatusView(server: server)
-                                }
-                                .tag(ServerDetailTab.status)
-                            case .ping:
-                                Group {
-                                    ServerDetailPingChartView(server: server)
-                                }
-                                .tag(ServerDetailTab.ping)
-                            }
-                        }
-                    }
-                    .navigationTitle(server.name)
-                    .toolbar {
-                        ToolbarItem(placement: .automatic) {
-                            Menu {
-                                Section {
-                                    Button {
-                                        dashboardViewModel.updateImmediately()
-                                    } label: {
-                                        Label("Refresh", systemImage: "arrow.clockwise")
-                                    }
-                                }
-                                
-                                Section {
-                                    Button {
-                                        openWindow(id: "main-view")
-                                    } label: {
-                                        Label("Main View", systemImage: "house")
-                                    }
-                                    
-                                    Button {
-                                        openWindow(id: "server-pin-view", value: server.id)
-                                    } label: {
-                                        Label("Pin View", systemImage: "arrow.up.forward.and.arrow.down.backward")
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "ellipsis.circle")
-                            }
-                        }
-                    }
+                    content(server: server)
                 }
                 else {
-                    ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
-                        .navigationTitle(server.name)
+                    serverUnavailable(server: server)
                 }
             }
             else {
-                ProgressView()
+                ProgressView("Loading...")
             }
         }
         .onAppear {
@@ -107,5 +46,79 @@ struct ServerDetailView: View {
                 dashboardViewModel.startMonitoring()
             }
         }
+    }
+    
+    private func content(server: ServerData) -> some View {
+        VStack {
+            picker
+            form(server: server)
+        }
+        .navigationTitle(server.name)
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                toolbarMenu(server: server)
+            }
+        }
+    }
+    
+    private var picker: some View {
+        Picker("Server Detail Tab", selection: $activeTab) {
+            ForEach(ServerDetailTab.allCases) { tab in
+                Text(tab.localized())
+                    .tag(tab)
+            }
+        }
+        .pickerStyle(.segmented)
+        .padding()
+    }
+    
+    private func form(server: ServerData) -> some View {
+        Form {
+            switch(activeTab) {
+            case .basic:
+                Group {
+                    ServerDetailBasicView(server: server)
+                    ServerDetailHostView(server: server)
+                }
+                .tag(ServerDetailTab.basic)
+            case .status:
+                Group {
+                    ServerDetailStatusView(server: server)
+                }
+                .tag(ServerDetailTab.status)
+            case .ping:
+                Group {
+                    ServerDetailPingChartView(server: server)
+                }
+                .tag(ServerDetailTab.ping)
+            }
+        }
+    }
+    
+    private func toolbarMenu(server: ServerData) -> some View {
+        Menu {
+            Section {
+                Button {
+                    dashboardViewModel.updateImmediately()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
+            }
+            
+            Section {
+                Button {
+                    openWindow(id: "server-pin-view", value: server.id)
+                } label: {
+                    Label("Pin View", systemImage: "arrow.up.forward.and.arrow.down.backward")
+                }
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+    }
+    
+    private func serverUnavailable(server: ServerData) -> some View {
+        ContentUnavailableView("Server Unavailable", systemImage: "square.slash")
+            .navigationTitle(server.name)
     }
 }

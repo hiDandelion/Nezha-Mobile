@@ -11,18 +11,18 @@ import UniformTypeIdentifiers
 struct ServerCardView: View {
     @Environment(\.colorScheme) private var scheme
     let lastUpdateTime: Date?
-    let server: GetServerDetailResponse.Server
+    let server: ServerData
     
     var body: some View {
         CardView {
             HStack {
                 HStack {
                     HStack {
-                        if server.host.countryCode.uppercased() == "TW" {
+                        if server.countryCode.uppercased() == "TW" {
                             Text("🇹🇼")
                         }
-                        else if server.host.countryCode.uppercased() != "" {
-                            Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                        else if server.countryCode.uppercased() != "" {
+                            Text(countryFlagEmoji(countryCode: server.countryCode))
                         }
                         else {
                             Text("🏴‍☠️")
@@ -49,7 +49,7 @@ struct ServerCardView: View {
         } contentView: {
             VStack {
                 ViewThatFits {
-                    HStack(spacing: 20) {
+                    HStack {
                         gaugeView
                         
                         infoView
@@ -57,7 +57,6 @@ struct ServerCardView: View {
                     }
                     
                     gaugeView
-                        
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -78,16 +77,16 @@ struct ServerCardView: View {
         .background(.thinMaterial)
         .cornerRadius(12)
         .contextMenu(ContextMenu(menuItems: {
-            if server.IPv4 != "" {
+            if server.ipv4 != "" {
                 Button {
-                    UIPasteboard.general.string = server.IPv4
+                    UIPasteboard.general.string = server.ipv4
                 } label: {
                     Label("Copy IPv4", systemImage: "4.circle")
                 }
             }
-            if server.IPv6 != "" {
+            if server.ipv6 != "" {
                 Button {
-                    UIPasteboard.general.string = server.IPv6
+                    UIPasteboard.general.string = server.ipv6
                 } label: {
                     Label("Copy IPv6", systemImage: "6.circle")
                 }
@@ -97,8 +96,8 @@ struct ServerCardView: View {
     
     private var gaugeView: some View {
         HStack {
-            let cpuUsage = server.status.cpu / 100
-            let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+            let cpuUsage = server.status.cpuUsed / 100
+            let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
             let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
             
             VStack {
@@ -117,15 +116,15 @@ struct ServerCardView: View {
             }
             
             VStack {
-                Gauge(value: memUsage) {
+                Gauge(value: memoryUsage) {
                     
                 } currentValueLabel: {
                     VStack {
                         Text("MEM")
-                        Text("\(memUsage * 100, specifier: "%.0f")%")
+                        Text("\(memoryUsage * 100, specifier: "%.0f")%")
                     }
                 }
-                Text("\(formatBytes(server.host.memTotal, decimals: 0))")
+                Text("\(formatBytes(server.host.memoryTotal, decimals: 0))")
                     .font(.caption2)
                     .frame(minWidth: 60)
                     .lineLimit(1)
@@ -155,8 +154,8 @@ struct ServerCardView: View {
                 Image(systemName: "circle.dotted.circle")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
-                    Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
+                    Text("↑ \(formatBytes(server.status.networkOut, decimals: 1))")
+                    Text("↓ \(formatBytes(server.status.networkIn, decimals: 1))")
                 }
             }
             .frame(alignment: .leading)
@@ -165,8 +164,8 @@ struct ServerCardView: View {
                 Image(systemName: "network")
                     .frame(width: 10)
                 VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.netOutSpeed, decimals: 1))/s")
-                    Text("↓ \(formatBytes(server.status.netInSpeed, decimals: 1))/s")
+                    Text("↑ \(formatBytes(server.status.networkOutSpeed, decimals: 1))/s")
+                    Text("↓ \(formatBytes(server.status.networkInSpeed, decimals: 1))/s")
                 }
             }
             .frame(alignment: .leading)

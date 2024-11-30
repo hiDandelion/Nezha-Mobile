@@ -14,33 +14,129 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     typealias Intent = ServerDetailConfigurationIntent
     
     func placeholder(in context: Context) -> ServerEntry {
-        ServerEntry(date: Date(), server: GetServerDetailResponse.Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: GetServerDetailResponse.ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: GetServerDetailResponse.ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "Placeholder", color: .blue)
+        ServerEntry(
+            date: Date(),
+            server: ServerData(
+                id: UUID().uuidString,
+                serverID: 0,
+                name: "Demo",
+                tag: "Group",
+                displayIndex: 0,
+                lastActive: Date(),
+                ipv4: "255.255.255.255",
+                ipv6: "::1",
+                countryCode: "us",
+                host: ServerData.Host(
+                    platform: "debian",
+                    platformVersion: "12",
+                    cpu: ["Intel 4 Virtual Core"],
+                    memoryTotal: 1024000,
+                    swapTotal: 1024000,
+                    diskTotal: 1024000,
+                    architecture: "x86_64",
+                    virtualization: "kvm",
+                    bootTime: 0
+                ),
+                status: ServerData.Status(
+                    cpuUsed: 100,
+                    memoryUsed: 1024000,
+                    swapUsed: 1024000,
+                    diskUsed: 1024000,
+                    networkIn: 1024000,
+                    networkOut: 1024000,
+                    networkInSpeed: 1024000,
+                    networkOutSpeed: 1024000,
+                    uptime: 600,
+                    load1: 0.30,
+                    load5: 0.20,
+                    load15: 0.10,
+                    tcpConnectionCount: 100,
+                    udpConnectionCount: 100,
+                    processCount: 100)
+            ),
+            isShowIP: true,
+            message: "Placeholder",
+            color: .blue
+        )
     }
     
     func snapshot(for configuration: ServerDetailConfigurationIntent, in context: Context) async -> ServerEntry {
-        let serverID: Int? = configuration.server?.id
-        let isShowIP: Bool = configuration.isShowIP ?? false
-        let color: WidgetBackgroundColor = configuration.color ?? .blue
+        let serverID = configuration.server?.serverID
+        let isShowIP = configuration.isShowIP ?? false
+        let color = configuration.color ?? .blue
+        
+        let entry = await getServerEntry(serverID: serverID, isShowIP: isShowIP, color: color)
+        
+        return entry
+    }
+    
+    func timeline(for configuration: ServerDetailConfigurationIntent, in context: Context) async -> Timeline<ServerEntry> {
+        let serverID = configuration.server?.serverID
+        let isShowIP = configuration.isShowIP ?? false
+        let color = configuration.color ?? .blue
+        
+        let entry = await getServerEntry(serverID: serverID, isShowIP: isShowIP, color: color)
+        
+        return Timeline(entries: [entry], policy: .atEnd)
+    }
+    
+    func getServerEntry(serverID: Int64?, isShowIP: Bool?, color: WidgetBackgroundColor) async -> ServerEntry {
         do {
-            if let serverID {
-                let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
-                if let server = response.result?.first {
-                    return ServerEntry(date: Date(), server: server, isShowIP: isShowIP, message: "OK", color: color)
-                }
-                else {
-                    return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidServerConfiguration"), color: color)
-                }
+            let response = try await RequestHandler.getAllServer()
+            if let server = response.data?.first(where: {
+                serverID == nil || $0.id == serverID
+            }) {
+                return ServerEntry(
+                    date: Date(),
+                    server: ServerData(
+                        id: server.uuid,
+                        serverID: server.id,
+                        name: server.name,
+                        tag: "Default",
+                        displayIndex: server.display_index,
+                        lastActive: server.last_active,
+                        ipv4: server.geoip?.ip?.ipv4_addr ?? "",
+                        ipv6: server.geoip?.ip?.ipv6_addr ?? "",
+                        countryCode: server.geoip?.country_code ?? "",
+                        host: ServerData.Host(
+                            platform: server.host.platform ?? "",
+                            platformVersion: server.host.platform_version ?? "",
+                            cpu: server.host.cpu ?? [""],
+                            memoryTotal: server.host.mem_total ?? 0,
+                            swapTotal: server.host.swap_total ?? 0,
+                            diskTotal: server.host.disk_total ?? 0,
+                            architecture: server.host.arch ?? "",
+                            virtualization: server.host.virtualization ?? "",
+                            bootTime: server.host.boot_time ?? 0
+                        ),
+                        status: ServerData.Status(
+                            cpuUsed: server.state.cpu ?? 0,
+                            memoryUsed: server.state.mem_used ?? 0,
+                            swapUsed: server.state.swap_used ?? 0,
+                            diskUsed: server.state.disk_used ?? 0,
+                            networkIn: server.state.net_in_transfer ?? 0,
+                            networkOut: server.state.net_out_speed ?? 0,
+                            networkInSpeed: server.state.net_in_speed ?? 0,
+                            networkOutSpeed: server.state.net_out_speed ?? 0,
+                            uptime: server.state.uptime ?? 0,
+                            load1: server.state.load_1 ?? 0,
+                            load5: server.state.load_5 ?? 0,
+                            load15: server.state.load_15 ?? 0,
+                            tcpConnectionCount: server.state.tcp_conn_count ?? 0,
+                            udpConnectionCount: server.state.udp_conn_count ?? 0,
+                            processCount: server.state.process_count ?? 0
+                        )
+                    ),
+                    isShowIP: isShowIP,
+                    message: "OK",
+                    color: color
+                )
             }
             else {
-                let response = try await RequestHandler.getAllServerDetail()
-                if let server = response.result?.first {
-                    return ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: color)
-                }
-                else {
-                    return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidServerConfiguration"), color: color)
-                }
+                return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: color)
             }
-        } catch NezhaDashboardError.invalidDashboardConfiguration {
+        }
+        catch NezhaDashboardError.invalidDashboardConfiguration {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidDashboardConfiguration"), color: color)
         } catch NezhaDashboardError.dashboardAuthenticationFailed {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.dashboardAuthenticationFailed"), color: color)
@@ -51,56 +147,6 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
         } catch {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: error.localizedDescription, color: color)
         }
-    }
-    
-    func timeline(for configuration: ServerDetailConfigurationIntent, in context: Context) async -> Timeline<ServerEntry> {
-        let serverID: Int? = configuration.server?.id
-        let isShowIP: Bool = configuration.isShowIP ?? false
-        let color: WidgetBackgroundColor = configuration.color ?? .blue
-        do {
-            if let serverID {
-                let response = try await RequestHandler.getServerDetail(serverID: String(serverID))
-                if let server = response.result?.first {
-                    let entries = [ServerEntry(date: Date(), server: server, isShowIP: isShowIP, message: "OK", color: color)]
-                    return Timeline(entries: entries, policy: .atEnd)
-                }
-                else {
-                    let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidServerConfiguration"), color: color)]
-                    return Timeline(entries: entries, policy: .atEnd)
-                }
-            }
-            else {
-                let response = try await RequestHandler.getAllServerDetail()
-                if let server = response.result?.first {
-                    let entries = [ServerEntry(date: Date(), server: server, isShowIP: configuration.isShowIP, message: "OK", color: color)]
-                    return Timeline(entries: entries, policy: .atEnd)
-                }
-                else {
-                    let entries = [ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: color)]
-                    return Timeline(entries: entries, policy: .atEnd)
-                }
-            }
-        } catch NezhaDashboardError.invalidDashboardConfiguration {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidDashboardConfiguration"), color: color)]
-            return Timeline(entries: entries, policy: .atEnd)
-        } catch NezhaDashboardError.dashboardAuthenticationFailed {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.dashboardAuthenticationFailed"), color: color)]
-            return Timeline(entries: entries, policy: .atEnd)
-        } catch NezhaDashboardError.invalidResponse(let message) {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: message, color: color)]
-            return Timeline(entries: entries, policy: .atEnd)
-        } catch NezhaDashboardError.decodingError {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.errorDecodingData"), color: color)]
-            return Timeline(entries: entries, policy: .atEnd)
-        } catch {
-            let entries = [ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: error.localizedDescription, color: color)]
-            return Timeline(entries: entries, policy: .atEnd)
-        }
-    }
-    
-    func recommendations() -> [AppIntentRecommendation<ServerDetailConfigurationIntent>] {
-        let lastViewedServerID = NMCore.userDefaults.integer(forKey: "NMLastViewedServerID")
-        return [AppIntentRecommendation(intent: ServerDetailConfigurationIntent(server: ServerEntity(id: lastViewedServerID, name: "Last Viewed", displayIndex: nil), isShowIP: false, color: .blue), description: "Last viewed server")]
     }
 }
 
@@ -137,12 +183,12 @@ struct ServerDetailWidgetEntryView: View {
                     }
                     .gaugeStyle(.accessoryCircular)
                     case .accessoryInline:
-                        let cpuUsage = server.status.cpu / 100
-                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                        Text("CPU \(cpuUsage * 100, specifier: "%.0f")% MEM \(memUsage * 100, specifier: "%.0f")%")
+                        let cpuUsage = server.status.cpuUsed / 100
+                        let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
+                        Text("CPU \(cpuUsage * 100, specifier: "%.0f")% MEM \(memoryUsage * 100, specifier: "%.0f")%")
                     case .accessoryRectangular:
-                        let cpuUsage = server.status.cpu / 100
-                        let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                        let cpuUsage = server.status.cpuUsed / 100
+                        let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
                         VStack {
                             Text(server.name)
                                 .widgetAccentable()
@@ -153,10 +199,10 @@ struct ServerDetailWidgetEntryView: View {
                                 }
                                 HStack(spacing: 0) {
                                     Image(systemName: "memorychip")
-                                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                                    Text("\(memoryUsage * 100, specifier: "%.0f")%")
                                 }
                             }
-                            Text("↑ \(formatBytes(server.status.netOutTransfer))")
+                            Text("↑ \(formatBytes(server.status.networkOut))")
                         }
                     case .systemSmall:
                         let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
@@ -210,19 +256,20 @@ struct ServerDetailWidgetEntryView: View {
         }
     }
     
-    func serverDetailViewSystemSmall(server: GetServerDetailResponse.Server) -> some View {
+    func serverDetailViewSystemSmall(server: ServerData) -> some View {
         Group {
             HStack {
-                if server.host.countryCode.uppercased() == "TW" {
+                if server.countryCode.uppercased() == "TW" {
                     Text("🇹🇼")
                 }
-                else if server.host.countryCode.uppercased() != "" {
-                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                else if server.countryCode.uppercased() != "" {
+                    Text(countryFlagEmoji(countryCode: server.countryCode))
                 }
                 else {
                     Text("🏴‍☠️")
                 }
                 Text(server.name)
+                    .lineLimit(1)
                 Spacer()
                 Button(intent: RefreshWidgetIntent()) {
                     Image(systemName: "arrow.clockwise")
@@ -233,13 +280,13 @@ struct ServerDetailWidgetEntryView: View {
             
             VStack(spacing: (entry.isShowIP ?? false) ? 5 : 10) {
                 if let isShowIP = entry.isShowIP, isShowIP {
-                    Text(server.IPv4)
+                    Text(server.ipv4)
                         .font(.callout)
                         .lineLimit(1)
                 }
                 
-                let cpuUsage = server.status.cpu / 100
-                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                let cpuUsage = server.status.cpuUsed / 100
+                let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
                 let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
                 
                 HStack {
@@ -250,7 +297,7 @@ struct ServerDetailWidgetEntryView: View {
                     
                     VStack {
                         Text("MEM")
-                        Text("\(memUsage * 100, specifier: "%.0f")%")
+                        Text("\(memoryUsage * 100, specifier: "%.0f")%")
                     }
                     
                     VStack {
@@ -262,8 +309,8 @@ struct ServerDetailWidgetEntryView: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
-                        Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
+                        Text("↑ \(formatBytes(server.status.networkOut, decimals: 1))")
+                        Text("↓ \(formatBytes(server.status.networkIn, decimals: 1))")
                     }
                 }
                 .font(.system(size: 14))
@@ -272,14 +319,14 @@ struct ServerDetailWidgetEntryView: View {
         }
     }
     
-    func serverDetailViewSystemMedium(server: GetServerDetailResponse.Server) -> some View {
+    func serverDetailViewSystemMedium(server: ServerData) -> some View {
         Group {
             HStack {
-                if server.host.countryCode.uppercased() == "TW" {
+                if server.countryCode.uppercased() == "TW" {
                     Text("🇹🇼")
                 }
-                else if server.host.countryCode.uppercased() != "" {
-                    Text(countryFlagEmoji(countryCode: server.host.countryCode))
+                else if server.countryCode.uppercased() != "" {
+                    Text(countryFlagEmoji(countryCode: server.countryCode))
                 }
                 else {
                     Text("🏴‍☠️")
@@ -288,10 +335,12 @@ struct ServerDetailWidgetEntryView: View {
                     HStack {
                         Text(server.name)
                         if let isShowIP = entry.isShowIP, isShowIP {
-                            Text(server.IPv4)
+                            Text(server.ipv4)
                         }
                     }
+                    .lineLimit(1)
                     Text(server.name)
+                        .lineLimit(1)
                 }
                 .lineLimit(1)
                 Spacer()
@@ -316,8 +365,8 @@ struct ServerDetailWidgetEntryView: View {
                     
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("↑ \(formatBytes(server.status.netOutTransfer, decimals: 1))")
-                            Text("↓ \(formatBytes(server.status.netInTransfer, decimals: 1))")
+                            Text("↑ \(formatBytes(server.status.networkOut, decimals: 1))")
+                            Text("↓ \(formatBytes(server.status.networkIn, decimals: 1))")
                         }
                     }
                     .font(.system(size: 14))
@@ -329,10 +378,10 @@ struct ServerDetailWidgetEntryView: View {
         }
     }
     
-    func gaugeView(server: GetServerDetailResponse.Server) -> some View {
+    func gaugeView(server: ServerData) -> some View {
         HStack(spacing: 10) {
-            let cpuUsage = server.status.cpu / 100
-            let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+            let cpuUsage = server.status.cpuUsed / 100
+            let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
             let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
             
             Gauge(value: cpuUsage) {
@@ -344,12 +393,12 @@ struct ServerDetailWidgetEntryView: View {
                 }
             }
             
-            Gauge(value: memUsage) {
+            Gauge(value: memoryUsage) {
                 
             } currentValueLabel: {
                 VStack {
                     Text("MEM")
-                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                    Text("\(memoryUsage * 100, specifier: "%.0f")%")
                 }
             }
             
@@ -368,7 +417,7 @@ struct ServerDetailWidgetEntryView: View {
 
 struct ServerEntry: TimelineEntry {
     let date: Date
-    let server: GetServerDetailResponse.Server?
+    let server: ServerData?
     let isShowIP: Bool?
     let message: String
     let color: WidgetBackgroundColor

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServerDetailStatusView: View {
-    var server: GetServerDetailResponse.Server
+    var server: ServerData
     
     var body: some View {
         Section("Status") {
@@ -18,11 +18,11 @@ struct ServerDetailStatusView: View {
                 HStack {
                     Label("CPU", systemImage: "cpu")
                     Spacer()
-                    Text("\(server.status.cpu, specifier: "%.2f")%")
+                    Text("\(server.status.cpuUsed, specifier: "%.2f")%")
                         .foregroundStyle(.secondary)
                 }
                 
-                let cpuUsage = server.status.cpu / 100
+                let cpuUsage = server.status.cpuUsed / 100
                 Gauge(value: cpuUsage) {
                     
                 }
@@ -34,12 +34,12 @@ struct ServerDetailStatusView: View {
                 HStack {
                     Label("Memory", systemImage: "memorychip")
                     Spacer()
-                    Text("\(formatBytes(server.status.memUsed))/\(formatBytes(server.host.memTotal))")
+                    Text("\(formatBytes(server.status.memoryUsed))/\(formatBytes(server.host.memoryTotal))")
                         .foregroundStyle(.secondary)
                 }
                 
-                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
-                Gauge(value: memUsage) {
+                let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
+                Gauge(value: memoryUsage) {
                     
                 }
                 .gaugeStyle(.linearCapacity)
@@ -90,10 +90,10 @@ struct ServerDetailStatusView: View {
                 .tint(gaugeGradient)
             }
             
-            NMUI.PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(server.status.netInSpeed))/s ↑ \(formatBytes(server.status.netOutSpeed))/s"))
-            NMUI.PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(server.status.netInTransfer)) ↑ \(formatBytes(server.status.netOutTransfer))"))
-            NMUI.PieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: Text("\(server.status.TCPConnectionCount)"))
-            NMUI.PieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: Text("\(server.status.UDPConnectionCount)"))
+            NMUI.PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(server.status.networkIn)) ↑ \(formatBytes(server.status.networkOut))"))
+            NMUI.PieceOfInfo(systemImage: "network", name: "Network Send/Receive", content: Text("↓ \(formatBytes(server.status.networkInSpeed))/s ↑ \(formatBytes(server.status.networkOutSpeed))/s"))
+            NMUI.PieceOfInfo(systemImage: "point.3.filled.connected.trianglepath.dotted", name: "TCP Connection", content: Text("\(server.status.tcpConnectionCount)"))
+            NMUI.PieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: Text("\(server.status.udpConnectionCount)"))
             NMUI.PieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: Text("\(server.status.processCount)"))
         }
     }

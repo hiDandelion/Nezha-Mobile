@@ -42,8 +42,8 @@ struct DeviceInfoView: View {
                         .foregroundStyle(.secondary)
                 }
                 
-                let memUsage = (deviceInfoViewModel.memoryTotal == 0 ? 0 : Double(deviceInfoViewModel.memoryUsed) / Double(deviceInfoViewModel.memoryTotal))
-                Gauge(value: memUsage) {
+                let memoryUsage = (deviceInfoViewModel.memoryTotal == 0 ? 0 : Double(deviceInfoViewModel.memoryUsed) / Double(deviceInfoViewModel.memoryTotal))
+                Gauge(value: memoryUsage) {
                     
                 }
                 .gaugeStyle(.linearCapacity)

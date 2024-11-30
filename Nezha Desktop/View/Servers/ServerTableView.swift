@@ -12,36 +12,52 @@ struct ServerTableView: View {
     @Bindable var dashboardViewModel: DashboardViewModel
     var activeTag: String = "All"
     @State private var searchText: String = ""
-    @State private var selectedServers: Set<GetServerDetailResponse.Server.ID> = Set<GetServerDetailResponse.Server.ID>()
+    @State private var selectedServers: Set<ServerData.ID> = Set<ServerData.ID>()
     
-    private var filteredServers: [GetServerDetailResponse.Server] {
+    private var filteredServers: [ServerData] {
         dashboardViewModel.servers
-            .sorted { server1, server2 in
-                switch (server1.displayIndex, server2.displayIndex) {
-                case (.none, .none):
-                    return server1.id < server2.id
-                case (.none, .some):
-                    return false
-                case (.some, .none):
-                    return true
-                case let (.some(index1), .some(index2)):
-                    return index1 > index2 || (index1 == index2 && server1.id < server2.id)
+            .sorted {
+                if $0.displayIndex == $1.displayIndex {
+                    return $0.serverID < $1.serverID
                 }
+                return $0.displayIndex < $1.displayIndex
             }
             .filter { activeTag == "All" || $0.tag == activeTag }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
     var body: some View {
-        Table(of: GetServerDetailResponse.Server.self, selection: $selectedServers) {
+        table
+            .contextMenu(forSelectionType: ServerData.ID.self) { items in
+                
+            } primaryAction: { ids in
+                for id in ids {
+                    openWindow(id: "server-detail-view", value: id)
+                }
+            }
+            .searchable(text: $searchText)
+            .navigationTitle("Servers(\(dashboardViewModel.servers.count))")
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Button {
+                        openWindow(id: "map-view")
+                    } label: {
+                        Label("Map View", systemImage: "map")
+                    }
+                }
+            }
+    }
+    
+    private var table: some View {
+        Table(of: ServerData.self, selection: $selectedServers) {
             TableColumn("Name") { server in
                 HStack {
                     if let lastUpdateTime = dashboardViewModel.lastUpdateTime {
                         Image(systemName: "circlebadge.fill")
                             .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
                     }
-                    if server.host.countryCode.uppercased() != "" {
-                        Text("\(countryFlagEmoji(countryCode: server.host.countryCode))\(server.name)")
+                    if server.countryCode.uppercased() != "" {
+                        Text("\(countryFlagEmoji(countryCode: server.countryCode))\(server.name)")
                     }
                     else {
                         Text("🏴‍☠️\(server.name)")
@@ -50,7 +66,7 @@ struct ServerTableView: View {
             }
             TableColumn("Tag", value: \.tag)
             TableColumn("CPU") { server in
-                let cpuUsage = server.status.cpu / 100
+                let cpuUsage = server.status.cpuUsed / 100
                 HStack {
                     Text("\(cpuUsage * 100, specifier: "%.0f")%")
                         .font(.system(size: 12))
@@ -62,12 +78,12 @@ struct ServerTableView: View {
                 }
             }
             TableColumn("Memory") { server in
-                let memUsage = (server.host.memTotal == 0 ? 0 : Double(server.status.memUsed) / Double(server.host.memTotal))
+                let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
                 HStack {
-                    Text("\(memUsage * 100, specifier: "%.0f")%")
+                    Text("\(memoryUsage * 100, specifier: "%.0f")%")
                         .font(.system(size: 12))
                         .frame(minWidth: 30)
-                    Gauge(value: memUsage) {
+                    Gauge(value: memoryUsage) {
                         
                     }
                     .gaugeStyle(LinearCapacityGaugeStyle())
@@ -104,41 +120,21 @@ struct ServerTableView: View {
             ForEach(filteredServers, id: \.id) { server in
                 TableRow(server)
                     .contextMenu {
-                        if server.IPv4 != "" {
+                        if server.ipv4 != "" {
                             Button("Copy IPv4") {
-                                NSPasteboard.general.clearContents()
-                                NSPasteboard.general.setString(server.IPv4, forType: .string)
+                                NSPasteboard.general.setString(server.ipv4, forType: .string)
                             }
                         }
-                        if server.IPv6 != "" {
+                        if server.ipv6 != "" {
                             Button("Copy IPv6") {
-                                NSPasteboard.general.clearContents()
-                                NSPasteboard.general.setString(server.IPv6, forType: .string)
+                                NSPasteboard.general.setString(server.ipv6, forType: .string)
                             }
                         }
                         Divider()
                         Button("View Details") {
-                            openWindow(value: server.id)
+                            openWindow(id: "server-detail-view", value: server.id)
                         }
                     }
-            }
-        }
-        .contextMenu(forSelectionType: GetServerDetailResponse.Server.ID.self) { items in
-            
-        } primaryAction: { serverIDs in
-            for serverID in serverIDs {
-                openWindow(id: "server-detail-view", value: serverID)
-            }
-        }
-        .searchable(text: $searchText)
-        .navigationTitle("Servers(\(dashboardViewModel.servers.count))")
-        .toolbar {
-            ToolbarItem(placement: .navigation) {
-                Button {
-                    openWindow(id: "map-view")
-                } label: {
-                    Label("Map View", systemImage: "map")
-                }
             }
         }
     }

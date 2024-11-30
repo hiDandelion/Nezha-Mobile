@@ -29,85 +29,17 @@ struct ServerDetailView: View {
     @Environment(TabBarState.self) var tabBarState
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     var dashboardViewModel: DashboardViewModel
-    var serverID: Int
+    var id: String
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
     @StateObject var offsetObserver = PageOffsetObserver()
     
     var body: some View {
         Group {
-            if let server = dashboardViewModel.servers.first(where: { $0.id == serverID }) {
+            if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
                 VStack {
                     if server.status.uptime != 0 {
-                        ZStack {
-                            if themeStore.themeCustomizationEnabled {
-                                themeStore.themeBackgroundColor(scheme: scheme)
-                                    .ignoresSafeArea()
-                            }
-                            else {
-                                Color(UIColor.systemGroupedBackground)
-                                    .ignoresSafeArea()
-                            }
-                            
-                            VStack(spacing: 15) {
-                                Tabbar(.gray)
-                                    .overlay {
-                                        GeometryReader {
-                                            let width = $0.size.width
-                                            let tabCount = CGFloat(ServerDetailTab.allCases.count)
-                                            let capsuleWidth = width / tabCount
-                                            let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
-                                            
-                                            Capsule()
-                                                .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
-                                                .frame(width: capsuleWidth)
-                                                .offset(x: progress * capsuleWidth)
-                                            
-                                            Tabbar(scheme == .light ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary), .semibold)
-                                                .mask(alignment: .leading) {
-                                                    Capsule()
-                                                        .frame(width: capsuleWidth)
-                                                        .offset(x: progress * capsuleWidth)
-                                                }
-                                        }
-                                        .allowsTightening(false)
-                                    }
-                                    .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : .white)
-                                    .clipShape(.capsule)
-                                    .padding(.horizontal, 20)
-                                    .padding(.top, 5)
-                                
-                                TabView(selection: $activeTab) {
-                                    Form {
-                                        ServerDetailBasicView(server: server)
-                                        ServerDetailHostView(server: server)
-                                    }
-                                    .tag(ServerDetailTab.basic)
-                                    .background {
-                                        if !offsetObserver.isObserving {
-                                            FindCollectionView {
-                                                offsetObserver.collectionView = $0
-                                                offsetObserver.observe()
-                                            }
-                                        }
-                                    }
-                                    
-                                    Form {
-                                        ServerDetailStatusView(server: server)
-                                    }
-                                    .tag(ServerDetailTab.status)
-                                    
-                                    Form {
-                                        ServerDetailPingChartView(server: server)
-                                    }
-                                    .tag(ServerDetailTab.ping)
-                                }
-                                .scrollContentBackground(.hidden)
-                                .tabViewStyle(.page(indexDisplayMode: .never))
-                                .animation(.easeInOut(duration: 0.3), value: activeTab)
-                                .ignoresSafeArea(.all, edges: .bottom)
-                            }
-                        }
+                        content(server: server)
                     }
                     else {
                         ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
@@ -117,30 +49,7 @@ struct ServerDetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .automatic) {
-                        Menu {
-                            Section {
-                                Button {
-                                    dashboardViewModel.updateImmediately()
-                                } label: {
-                                    Label("Refresh", systemImage: "arrow.clockwise")
-                                }
-                            }
-                            
-                            Section {
-                                if server.IPv4 != "" {
-                                    NavigationLink(destination: PrepareConnectionView(host: server.IPv4)) {
-                                        Label("Connect via IPv4", systemImage: "link")
-                                    }
-                                }
-                                if server.IPv6 != "" {
-                                    NavigationLink(destination: PrepareConnectionView(host: server.IPv6)) {
-                                        Label("Connect via IPv6", systemImage: "link")
-                                    }
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis.circle")
-                        }
+                        toolbarMenu(server: server)
                     }
                 }
             }
@@ -152,13 +61,87 @@ struct ServerDetailView: View {
             if !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
             }
-            
-            // Save as last viewed server
-            NMCore.userDefaults.set(serverID, forKey: "NMLastViewedServerID")
         }
     }
     
-    func Tabbar(_ tint: Color, _ weight: Font.Weight = .regular) -> some View {
+    private func content(server: ServerData) -> some View {
+        ZStack {
+            background
+            VStack(spacing: 15) {
+                tabbar
+                tabView(server: server)
+            }
+        }
+    }
+    
+    private var background: some View {
+        if themeStore.themeCustomizationEnabled {
+            themeStore.themeBackgroundColor(scheme: scheme)
+                .ignoresSafeArea()
+        }
+        else {
+            Color(UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
+        }
+    }
+    
+    private func toolbarMenu(server: ServerData) -> some View {
+        Menu {
+            Section {
+                Button {
+                    dashboardViewModel.updateImmediately()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
+            }
+            
+            Section {
+                if server.ipv4 != "" {
+                    NavigationLink(destination: PrepareConnectionView(host: server.ipv4)) {
+                        Label("Connect via IPv4", systemImage: "link")
+                    }
+                }
+                if server.ipv6 != "" {
+                    NavigationLink(destination: PrepareConnectionView(host: server.ipv6)) {
+                        Label("Connect via IPv6", systemImage: "link")
+                    }
+                }
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+    }
+    
+    private var tabbar: some View {
+        tabbarComponent(.gray)
+            .overlay {
+                GeometryReader {
+                    let width = $0.size.width
+                    let tabCount = CGFloat(ServerDetailTab.allCases.count)
+                    let capsuleWidth = width / tabCount
+                    let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
+                    
+                    Capsule()
+                        .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
+                        .frame(width: capsuleWidth)
+                        .offset(x: progress * capsuleWidth)
+                    
+                    tabbarComponent(scheme == .light ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary), .semibold)
+                        .mask(alignment: .leading) {
+                            Capsule()
+                                .frame(width: capsuleWidth)
+                                .offset(x: progress * capsuleWidth)
+                        }
+                }
+                .allowsTightening(false)
+            }
+            .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : .white)
+            .clipShape(.capsule)
+            .padding(.horizontal, 20)
+            .padding(.top, 5)
+    }
+    
+    private func tabbarComponent(_ tint: Color, _ weight: Font.Weight = .regular) -> some View {
         HStack(spacing: 0) {
             ForEach(ServerDetailTab.allCases, id: \.rawValue) { tab in
                 Button {
@@ -177,6 +160,38 @@ struct ServerDetailView: View {
                 .buttonStyle(.plain)
             }
         }
+    }
+    
+    private func tabView(server: ServerData) -> some View {
+        TabView(selection: $activeTab) {
+            Form {
+                ServerDetailBasicView(server: server)
+                ServerDetailHostView(server: server)
+            }
+            .tag(ServerDetailTab.basic)
+            .background {
+                if !offsetObserver.isObserving {
+                    FindCollectionView {
+                        offsetObserver.collectionView = $0
+                        offsetObserver.observe()
+                    }
+                }
+            }
+            
+            Form {
+                ServerDetailStatusView(server: server)
+            }
+            .tag(ServerDetailTab.status)
+            
+            Form {
+                ServerDetailPingChartView(server: server)
+            }
+            .tag(ServerDetailTab.ping)
+        }
+        .scrollContentBackground(.hidden)
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .animation(.easeInOut(duration: 0.3), value: activeTab)
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
 

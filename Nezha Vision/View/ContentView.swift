@@ -9,37 +9,44 @@ import SwiftUI
 
 struct ContentView: View {
     var dashboardViewModel: DashboardViewModel
-    @AppStorage("NMDashboardLink", store: NMCore.userDefaults) private var dashboardLink: String = ""
-    @AppStorage("NMDashboardAPIToken", store: NMCore.userDefaults) private var dashboardAPIToken: String = ""
+    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
+    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @State private var isShowingAddDashboardSheet: Bool = false
     
     var body: some View {
         Group {
-            if dashboardLink == "" || dashboardAPIToken == "" || isShowingAddDashboardSheet {
-                VStack {
-                    Text("Start your journey with Nezha Mobile")
-                        .font(.title3)
-                        .frame(alignment: .center)
-                    Button("Start", systemImage: "arrow.right.circle") {
-                        isShowingAddDashboardSheet = true
-                    }
-                    .font(.headline)
-                    .padding(.top, 20)
-                    .sheet(isPresented: $isShowingAddDashboardSheet) {
-                        AddDashboardView(dashboardViewModel: dashboardViewModel)
-                    }
-                }
-                .padding()
+            if dashboardLink == "" || dashboardUsername == "" || isShowingAddDashboardSheet {
+                dashboardUnconfigured
             }
             else {
-                MainTabView(dashboardViewModel: dashboardViewModel, dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken)
-                    .onAppear {
-                        // Start monitoring
-                        if dashboardLink != "" && dashboardAPIToken != "" && !dashboardViewModel.isMonitoringEnabled {
-                            dashboardViewModel.startMonitoring()
-                        }
-                    }
+                dashboardConfigured
             }
         }
+    }
+    
+    private var dashboardUnconfigured: some View {
+        VStack {
+            Text("Start your journey with Nezha Mobile")
+                .font(.title3)
+                .frame(alignment: .center)
+            Button("Start", systemImage: "arrow.right.circle") {
+                isShowingAddDashboardSheet = true
+            }
+            .font(.headline)
+            .padding(.top, 20)
+            .sheet(isPresented: $isShowingAddDashboardSheet) {
+                AddDashboardView(dashboardViewModel: dashboardViewModel)
+            }
+        }
+        .padding()
+    }
+    
+    private var dashboardConfigured: some View {
+        MainTabView(dashboardViewModel: dashboardViewModel)
+            .onAppear {
+                if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
+                    dashboardViewModel.startMonitoring()
+                }
+            }
     }
 }

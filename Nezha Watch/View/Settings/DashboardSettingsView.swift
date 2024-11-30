@@ -10,38 +10,40 @@ import SwiftUI
 struct DashboardSettingsView: View {
     @Environment(\.dismiss) private var dismiss
     var dashboardViewModel: DashboardViewModel
-    @State private var dashboardLink: String = NMCore.userDefaults.string(forKey: "NMDashboardLink") ?? ""
-    @State private var dashboardAPIToken: String = NMCore.userDefaults.string(forKey: "NMDashboardAPIToken") ?? ""
-    @State private var dashboardSSLEnabled: Bool = NMCore.userDefaults.bool(forKey: "NMDashboardSSLEnabled")
+    @State private var link: String = NMCore.getNezhaDashboardLink()
+    @State private var username: String = NMCore.getNezhaDashboardUsername()
+    @State private var password: String = NMCore.getNezhaDashboardPassword()
+    @State private var isSSLEnabled: Bool = NMCore.getIsNezhaDashboardSSLEnabled()
     
     var body: some View {
         Form {
             Section {
-                TextField("Dashboard Link", text: $dashboardLink)
+                TextField("Dashboard Link", text: $link)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
-                    .onChange(of: dashboardLink) {
-                        dashboardLink = dashboardLink.replacingOccurrences(of: "^(http|https)://", with: "", options: .regularExpression)
+                    .onChange(of: link) {
+                        link = link.replacingOccurrences(of: "^(http|https)://", with: "", options: .regularExpression)
                     }
-                TextField("API Token", text: $dashboardAPIToken)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
             } header: {
                 Text("Dashboard Info")
             } footer: {
-                VStack(alignment: .leading) {
-                    Text("Dashboard Link Example: server.hidandelion.com")
-                    Text("Latest Supported Nezha Version: 0.20.5")
-                }
+                Text("Dashboard Link Example: server.hidandelion.com")
             }
             
             Section {
-                Toggle("Enable SSL", isOn: $dashboardSSLEnabled)
+                TextField("Username", text: $username)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                SecureField("Password", text: $password)
+            }
+            
+            Section {
+                Toggle("Enable SSL", isOn: $isSSLEnabled)
             }
             
             Section {
                 Button("Save & Apply") {
-                    NMCore.saveNewDashboardConfigurations(dashboardLink: dashboardLink, dashboardAPIToken: dashboardAPIToken, dashboardSSLEnabled: dashboardSSLEnabled)
+                    NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
                     dashboardViewModel.startMonitoring()
                     dismiss()
                 }

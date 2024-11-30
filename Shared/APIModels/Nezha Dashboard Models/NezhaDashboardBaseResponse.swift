@@ -6,6 +6,6 @@
 //
 
 protocol NezhaDashboardBaseResponse {
-    var code: Int { get }
-    var message: String { get }
+    var success: Bool? { get }
+    var error: String? { get }
 }
