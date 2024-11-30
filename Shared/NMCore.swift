@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 class NMCore {
     static let NMLastModifyDate = "NMLastModifyDate"
