@@ -32,7 +32,8 @@ struct ServerListView: View {
                 }
                 return $0.displayIndex < $1.displayIndex
             }
-            .filter { activeTag == "All" || $0.tag == activeTag }
+            .filter { server in
+                return activeTag == "All" || dashboardViewModel.serverGroups.first(where: { $0.name == activeTag && $0.serverIDs.contains(server.serverID) }) != nil }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
@@ -44,10 +45,13 @@ struct ServerListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Background
+                background
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
                     .zIndex(0)
                 
-                Content
+                dashboard
                     .zIndex(1)
             }
             .safeAreaInset(edge: .bottom) {
@@ -72,7 +76,6 @@ struct ServerListView: View {
             }
         }
         .onAppear {
-            // Set background
             let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
                 backgroundImage = UIImage(data: backgroundPhotoData)
@@ -87,7 +90,7 @@ struct ServerListView: View {
         }
     }
     
-    var Background: some View {
+    var background: some View {
         Group {
             if let backgroundImage {
                 GeometryReader { proxy in
@@ -112,24 +115,26 @@ struct ServerListView: View {
         }
     }
     
-    var Content: some View {
+    var dashboard: some View {
         Group {
             switch(dashboardViewModel.loadingState) {
             case .idle:
                 EmptyView()
-            case .loading, .loaded:
+            case .loading:
+                ProgressView("Loading...")
+            case .loaded:
                 if dashboardViewModel.servers.isEmpty {
-                    ProgressView("Loading...")
+                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
                 else {
                     GeometryReader { proxy in
                         let isWideLayout = proxy.size.width > 600
                         ScrollView {
-                            GroupPicker
+                            groupPicker
                                 .safeAreaPadding(.horizontal, 15)
                                 .padding(.bottom, 5)
                             
-                            ServerList(isWideLayout: isWideLayout)
+                            serverList(isWideLayout: isWideLayout)
                         }
                         .navigationTitle("Servers")
                         .searchable(text: $searchText)
@@ -160,14 +165,14 @@ struct ServerListView: View {
         }
     }
     
-    var GroupPicker: some View {
+    var groupPicker: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
                 if !dashboardViewModel.servers.isEmpty {
-                    let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
+                    let tags = Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
                     let allTags = ["All"] + tags.sorted()
                     ForEach(allTags, id: \.self) { tag in
-                        GroupTag(tag: tag)
+                        groupTag(tag: tag)
                     }
                 }
             }
@@ -175,7 +180,7 @@ struct ServerListView: View {
         .scrollIndicators(.never)
     }
     
-    private func GroupTag(tag: String) -> some View {
+    private func groupTag(tag: String) -> some View {
         Button(action: {
             withAnimation(.snappy) {
                 activeTag = tag
@@ -213,7 +218,7 @@ struct ServerListView: View {
         .buttonStyle(.plain)
     }
     
-    private func ServerList(isWideLayout: Bool) -> some View {
+    private func serverList(isWideLayout: Bool) -> some View {
         Group {
             if !dashboardViewModel.servers.isEmpty {
                 LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {

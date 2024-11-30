@@ -76,7 +76,7 @@ class DashboardViewModel: ObservableObject {
     
     private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) async {
         do {
-            let response = try await RequestHandler.getAllServer()
+            let response = try await RequestHandler.getServer()
             DispatchQueue.main.async {
                 withAnimation {
                     if let servers = response.data {
@@ -85,7 +85,6 @@ class DashboardViewModel: ObservableObject {
                                 id: $0.uuid,
                                 serverID: $0.id,
                                 name: $0.name,
-                                tag: "Default",
                                 displayIndex: $0.display_index,
                                 lastActive: $0.last_active,
                                 ipv4: $0.geoip?.ip?.ipv4_addr ?? "",

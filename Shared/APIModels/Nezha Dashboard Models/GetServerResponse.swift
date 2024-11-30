@@ -1,5 +1,5 @@
 //
-//  GetAllServerResponse.swift
+//  GetServerResponse.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 10/20/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetAllServerResponse: Codable, NezhaDashboardBaseResponse {
+struct GetServerResponse: Codable, NezhaDashboardBaseResponse {
     let success: Bool?
     let error: String?
     let data: [Server]?

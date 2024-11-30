@@ -24,7 +24,8 @@ class DashboardViewModel {
     private var cancellables = Set<AnyCancellable>()
     var loadingState: DashboardLoadingState = .idle
     var lastUpdateTime: Date?
-    var servers: [ServerData] = []
+    var servers: [ServerData] = .init()
+    var serverGroups: [ServerGroup] = .init()
     var isMonitoringEnabled = false
     
     init() {
@@ -38,7 +39,8 @@ class DashboardViewModel {
         isMonitoringEnabled = true
         loadingState = .loading
         Task {
-            await getAllServerDetail()
+            await getServer()
+            await getServerGroup()
         }
         startTimer()
     }
@@ -51,7 +53,8 @@ class DashboardViewModel {
     
     func updateImmediately() {
         Task {
-            await self.getAllServerDetail()
+            await getServer()
+            await getServerGroup()
         }
     }
     
@@ -77,7 +80,7 @@ class DashboardViewModel {
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
             Task { [weak self] in
                 guard let self = self else { return }
-                await self.getAllServerDetail()
+                await self.getServer()
             }
         }
     }
@@ -87,9 +90,9 @@ class DashboardViewModel {
         timer = nil
     }
     
-    private func getAllServerDetail(completion: ((Bool) -> Void)? = nil) async {
+    private func getServer() async {
         do {
-            let response = try await RequestHandler.getAllServer()
+            let response = try await RequestHandler.getServer()
             DispatchQueue.main.async {
                 withAnimation {
                     if let servers = response.data {
@@ -98,7 +101,6 @@ class DashboardViewModel {
                                 id: $0.uuid,
                                 serverID: $0.id,
                                 name: $0.name,
-                                tag: "Default",
                                 displayIndex: $0.display_index,
                                 lastActive: $0.last_active,
                                 ipv4: $0.geoip?.ip?.ipv4_addr ?? "",
@@ -139,7 +141,6 @@ class DashboardViewModel {
                     self.lastUpdateTime = Date()
                 }
             }
-            completion?(true)
         }
         catch {
             DispatchQueue.main.async {
@@ -147,7 +148,19 @@ class DashboardViewModel {
                     self.loadingState = .error(error.localizedDescription)
                 }
             }
-            completion?(false)
+        }
+    }
+    
+    private func getServerGroup() async {
+        let response = try? await RequestHandler.getServerGroup()
+        DispatchQueue.main.async {
+            withAnimation {
+                if let serverGroups = response?.data {
+                    self.serverGroups = serverGroups.map({
+                        ServerGroup(id: UUID().uuidString, name: $0.group.name, serverIDs: $0.servers ?? .init())
+                    })
+                }
+            }
         }
     }
 }

@@ -11,7 +11,6 @@ struct ServerData: Codable, Identifiable, Hashable {
     let id: String
     let serverID: Int64
     let name: String
-    let tag: String
     let displayIndex: Int64
     let lastActive: Date
     

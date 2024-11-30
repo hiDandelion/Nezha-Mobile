@@ -22,7 +22,8 @@ struct ServerTableView: View {
                 }
                 return $0.displayIndex < $1.displayIndex
             }
-            .filter { activeTag == "All" || $0.tag == activeTag }
+            .filter { server in
+                return activeTag == "All" || dashboardViewModel.serverGroups.first(where: { $0.name == activeTag && $0.serverIDs.contains(server.serverID) }) != nil }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
@@ -32,11 +33,13 @@ struct ServerTableView: View {
                 if ids.count == 1, let server = dashboardViewModel.servers.first(where: { $0.id == ids.first!}) {
                     if server.ipv4 != "" {
                         Button("Copy IPv4") {
+                            NSPasteboard.general.clearContents()
                             NSPasteboard.general.setString(server.ipv4, forType: .string)
                         }
                     }
                     if server.ipv6 != "" {
                         Button("Copy IPv6") {
+                            NSPasteboard.general.clearContents()
                             NSPasteboard.general.setString(server.ipv6, forType: .string)
                         }
                     }
@@ -86,7 +89,7 @@ struct ServerTableView: View {
                     }
                 }
             }
-            TableColumn("Tag", value: \.tag)
+            TableColumn("IPv4", value: \.ipv4)
             TableColumn("CPU") { server in
                 let cpuUsage = server.status.cpuUsed / 100
                 HStack {

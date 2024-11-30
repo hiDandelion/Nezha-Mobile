@@ -20,7 +20,6 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                 id: UUID().uuidString,
                 serverID: 0,
                 name: "Demo",
-                tag: "Group",
                 displayIndex: 0,
                 lastActive: Date(),
                 ipv4: "255.255.255.255",
@@ -82,7 +81,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     
     func getServerEntry(serverID: Int64?, isShowIP: Bool?, color: WidgetBackgroundColor) async -> ServerEntry {
         do {
-            let response = try await RequestHandler.getAllServer()
+            let response = try await RequestHandler.getServer()
             if let server = response.data?.first(where: {
                 serverID == nil || $0.id == serverID
             }) {
@@ -92,7 +91,6 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                         id: server.uuid,
                         serverID: server.id,
                         name: server.name,
-                        tag: "Default",
                         displayIndex: server.display_index,
                         lastActive: server.last_active,
                         ipv4: server.geoip?.ip?.ipv4_addr ?? "",

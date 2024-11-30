@@ -78,6 +78,7 @@ struct ServerDetailBasicView: View {
                     UIPasteboard.general.string = server.ipv4
 #endif
 #if os(macOS)
+                    NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(server.ipv4, forType: .string)
 #endif
                 } label: {
@@ -99,6 +100,7 @@ struct ServerDetailBasicView: View {
                     UIPasteboard.general.string = server.ipv6
 #endif
 #if os(macOS)
+                    NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(server.ipv6, forType: .string)
 #endif
                 } label: {

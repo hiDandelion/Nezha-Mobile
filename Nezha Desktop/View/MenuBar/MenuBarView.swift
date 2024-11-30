@@ -20,11 +20,12 @@ struct MenuBarView: View {
                 }
                 return $0.displayIndex < $1.displayIndex
             }
-            .filter { activeTag == "All" || $0.tag == activeTag }
+            .filter { server in
+                return activeTag == "All" || dashboardViewModel.serverGroups.first(where: { $0.name == activeTag && $0.serverIDs.contains(server.serverID) }) != nil }
     }
     
     private var tags: [String] {
-        Array(Set(dashboardViewModel.servers.map { $0.tag }))
+        Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
     }
     
     private var allTags: [String] {
@@ -102,11 +103,13 @@ struct MenuBarView: View {
                         .contextMenu {
                             if server.ipv4 != "" {
                                 Button("Copy IPv4") {
+                                    NSPasteboard.general.clearContents()
                                     NSPasteboard.general.setString(server.ipv4, forType: .string)
                                 }
                             }
                             if server.ipv6 != "" {
                                 Button("Copy IPv6") {
+                                    NSPasteboard.general.clearContents()
                                     NSPasteboard.general.setString(server.ipv6, forType: .string)
                                 }
                             }

@@ -1,5 +1,5 @@
 //
-//  getAllServer.swift
+//  getServer.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 11/19/24.
@@ -8,7 +8,7 @@
 import Foundation
 
 extension RequestHandler {
-    static func getAllServer() async throws -> GetAllServerResponse {
+    static func getServer() async throws -> GetServerResponse {
         guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/server") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }

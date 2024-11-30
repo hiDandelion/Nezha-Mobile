@@ -25,7 +25,8 @@ struct ServerListView: View {
                 }
                 return $0.displayIndex < $1.displayIndex
             }
-            .filter { activeTag == "All" || $0.tag == activeTag }
+            .filter { server in
+                return activeTag == "All" || dashboardViewModel.serverGroups.first(where: { $0.name == activeTag && $0.serverIDs.contains(server.serverID) }) != nil }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
@@ -36,11 +37,11 @@ struct ServerListView: View {
     
     var body: some View {
         NavigationStack {
-            content
+            dashboard
         }
     }
     
-    var content: some View {
+    var dashboard: some View {
         Group {
             switch(dashboardViewModel.loadingState) {
             case .idle:
@@ -90,7 +91,7 @@ struct ServerListView: View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
                 if !dashboardViewModel.servers.isEmpty {
-                    let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
+                    let tags = Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
                     let allTags = ["All"] + tags.sorted()
                     ForEach(allTags, id: \.self) { tag in
                         groupTag(tag: tag)

@@ -37,7 +37,7 @@ struct HomeView: View {
                     List(selection: $activeUserSection) {
                         Section("Servers") {
                             if !dashboardViewModel.servers.isEmpty {
-                                let tags = Array(Set(dashboardViewModel.servers.map { $0.tag }))
+                                let tags = Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
                                 let allTags = ["All"] + tags.sorted()
                                 ForEach(allTags, id: \.self) { tag in
                                     Text("\(tag == "All" ? String(localized: "All") : (tag == "" ? String(localized: "Uncategorized") : tag))")
