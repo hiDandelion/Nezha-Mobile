@@ -14,7 +14,6 @@ struct SettingsView: View {
     @Environment(\.requestReview) var requestReview
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
-    var dashboardViewModel: DashboardViewModel
     @State var isPresentedAsSheet: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
     
@@ -23,19 +22,19 @@ struct SettingsView: View {
             Form {
                 Section("Dashboard") {
                     NavigationLink {
-                        DashboardSettingsView(dashboardViewModel: dashboardViewModel)
+                        DashboardSettingsView()
                     } label: {
                         TextWithColorfulIcon(titleKey: "General", systemName: "gear", color: .gray)
                     }
                     
                     NavigationLink {
-                        ServerGroupListView(dashboardViewModel: dashboardViewModel)
+                        ServerGroupListView()
                     } label: {
                         TextWithColorfulIcon(titleKey: "Server Groups", systemName: "square.grid.3x2", color: .blue)
                     }
                     
                     NavigationLink {
-                        EmptyView()
+                        NotificationListView()
                     } label: {
                         TextWithColorfulIcon(titleKey: "Notifications", systemName: "bell.badge", color: .red)
                     }

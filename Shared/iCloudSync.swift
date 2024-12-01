@@ -16,7 +16,7 @@ extension NMCore {
         
         _ = NMCore.debugLog("Sync Info - Starting sync")
         
-        let keys = [NMLastModifyDate, NMDashboardLink, NMDashboardUsername, NMDashboardSSLEnabled, NMDashboardGRPCLink, NMDashboardGRPCPort, NMAgentSecret, NMAgentSSLEnabled]
+        let keys = [NMLastModifyDate, NMDashboardLink, NMDashboardUsername, NMDashboardPassword, NMDashboardSSLEnabled, NMDashboardGRPCLink, NMDashboardGRPCPort, NMAgentSecret, NMAgentSSLEnabled]
         
         let lastModifyDateLocal = NMCore.userDefaults.object(forKey: NMLastModifyDate) as? Int
         let lastModifyDateRemote = cloudStore.object(forKey: NMLastModifyDate) as? Int

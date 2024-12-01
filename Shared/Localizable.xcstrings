@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%.0f" : {
 
     },
@@ -281,6 +284,22 @@
         }
       }
     },
+    "Add" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加"
+          }
+        }
+      }
+    },
     "Add Alert" : {
       "localizations" : {
         "ja" : {
@@ -309,6 +328,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加Dashboard"
+          }
+        }
+      }
+    },
+    "Add Server Group" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバーグルプを追加"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加服务器分组"
           }
         }
       }
@@ -357,6 +392,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "告警信息"
+          }
+        }
+      }
+    },
+    "Alert Rules" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラートルール"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "告警规则"
           }
         }
       }
@@ -1183,6 +1234,22 @@
         }
       }
     },
+    "Enter a name for the new server group" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しいサーバーグループの名前を入力してください"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入新服务器分组的名称"
+          }
+        }
+      }
+    },
     "error.dashboardAuthenticationFailed" : {
       "localizations" : {
         "en" : {
@@ -1686,6 +1753,22 @@
         }
       }
     },
+    "No Alert Rule" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラートルールなし"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无告警规则"
+          }
+        }
+      }
+    },
     "No data" : {
       "localizations" : {
         "ja" : {
@@ -1702,6 +1785,22 @@
         }
       }
     },
+    "No Notification Method" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知方法なし"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无通知方式"
+          }
+        }
+      }
+    },
     "No Server" : {
       "localizations" : {
         "ja" : {
@@ -1714,6 +1813,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无服务器"
+          }
+        }
+      }
+    },
+    "Notification Methods" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知方法"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知方式"
           }
         }
       }
@@ -2638,6 +2753,122 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "这些设置会覆盖小组件配置并应用于所有小组件。"
+          }
+        }
+      }
+    },
+    "This device is enrolled" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "device" : {
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This iPhone is enrolled"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "This device is enrolled"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "device" : {
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このiPhoneは登録されています"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このデバイスは登録されています"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans" : {
+          "variations" : {
+            "device" : {
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此iPhone已注册"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此设备已注册"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "This device is not enrolled" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "device" : {
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This iPhone is not enrolled"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "This device is not enrolled"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "device" : {
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このiPhoneは登録されていません"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このデバイスは登録されていません"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans" : {
+          "variations" : {
+            "device" : {
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此iPhone未注册"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此设备未注册"
+                }
+              }
+            }
           }
         }
       }

@@ -11,8 +11,11 @@ import NezhaMobileData
 @main
 struct NezhaMobileApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-    var themeStore: ThemeStore = ThemeStore()
-    var tabBarState: TabBarState = TabBarState()
+    var themeStore: ThemeStore = .init()
+    var tabBarState: TabBarState = .init()
+    var dashboardViewModel: DashboardViewModel = .init()
+    var serverGroupViewModel: ServerGroupViewModel = .init()
+    var notificationViewModel: NotificationViewModel = .init()
     
     init() {
         NMCore.registerUserDefaults()
@@ -25,6 +28,9 @@ struct NezhaMobileApp: App {
                 .environmentObject(appDelegate.notificationState)
                 .environment(themeStore)
                 .environment(tabBarState)
+                .environment(dashboardViewModel)
+                .environment(serverGroupViewModel)
+                .environment(notificationViewModel)
                 .onAppear {
                     appDelegate.tabBarState = tabBarState
                     NMCore.syncWithiCloud()

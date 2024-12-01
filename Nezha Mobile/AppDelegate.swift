@@ -28,7 +28,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let pushNotificationsToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        NMCore.userDefaults.set(pushNotificationsToken, forKey: "NMPushNotificationsToken")
+        NMCore.userDefaults.set(pushNotificationsToken, forKey: NMCore.NMPushNotificationsToken)
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {

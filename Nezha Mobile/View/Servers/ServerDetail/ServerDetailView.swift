@@ -28,7 +28,7 @@ struct ServerDetailView: View {
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     var id: String
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
@@ -89,9 +89,7 @@ struct ServerDetailView: View {
         Menu {
             Section {
                 Button {
-                    Task {
-                        await dashboardViewModel.updateMannually()
-                    }
+                    dashboardViewModel.updateAsync()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }

@@ -44,8 +44,10 @@ struct MainTabView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
-    var dashboardViewModel: DashboardViewModel
+    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
+    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @State private var isDefaultTabBarHidden: Bool = false
     
     var body: some View {
@@ -55,11 +57,11 @@ struct MainTabView: View {
                     TabView(selection: Bindable(tabBarState).activeTab) {
                         Tab.init(value: MainTab.servers) {
                             if tabBarState.isShowMapView {
-                                ServerMapView(servers: dashboardViewModel.servers)
+                                ServerMapView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
                             else {
-                                ServerListView(dashboardViewModel: dashboardViewModel)
+                                ServerListView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
                         }
@@ -75,18 +77,18 @@ struct MainTabView: View {
                         }
                         
                         Tab.init(value: MainTab.settings) {
-                            SettingsView(dashboardViewModel: dashboardViewModel)
+                            SettingsView()
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                     }
                 } else {
                     TabView(selection: Bindable(tabBarState).activeTab) {
                         if tabBarState.isShowMapView {
-                            ServerMapView(servers: dashboardViewModel.servers)
+                            ServerMapView()
                                 .tag(MainTab.servers)
                         }
                         else {
-                            ServerListView(dashboardViewModel: dashboardViewModel)
+                            ServerListView()
                                 .tag(MainTab.servers)
                                 .overlay {
                                     if !isDefaultTabBarHidden {
@@ -103,7 +105,7 @@ struct MainTabView: View {
                         AlertListView()
                             .tag(MainTab.alerts)
                         
-                        SettingsView(dashboardViewModel: dashboardViewModel)
+                        SettingsView()
                             .tag(MainTab.settings)
                     }
                 }
@@ -116,6 +118,11 @@ struct MainTabView: View {
             else {
                 MainTabBar(activeBackground: themeColor(theme: theme), activeTab: Bindable(tabBarState).activeTab)
                     .opacity(tabBarState.shouldMakeTabBarVisible ? 1 : 0)
+            }
+        }
+        .onAppear {
+            if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
+                dashboardViewModel.startMonitoring()
             }
         }
     }

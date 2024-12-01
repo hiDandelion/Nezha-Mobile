@@ -13,11 +13,11 @@ struct ServerListView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
     @State private var backgroundImage: UIImage?
     @State private var shouldNavigateToServerDetailView: Bool = false
     @State private var incomingURLServerUUID: String?
-    var dashboardViewModel: DashboardViewModel
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
     @State private var newSettingRequireReconnection: Bool? = false
@@ -61,7 +61,7 @@ struct ServerListView: View {
             }
             .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
                 if let incomingURLServerUUID {
-                    ServerDetailView(dashboardViewModel: dashboardViewModel, id: incomingURLServerUUID)
+                    ServerDetailView(id: incomingURLServerUUID)
                 }
             }
             .onAppear {
@@ -117,15 +117,8 @@ struct ServerListView: View {
     
     var dashboard: some View {
         Group {
-            switch(dashboardViewModel.loadingState) {
-            case .idle:
-                EmptyView()
-            case .loading:
-                ProgressView("Loading...")
-                    .transaction { transaction in
-                        transaction.animation = nil
-                    }
-            case .loaded:
+            @Bindable var dashboardViewModel = dashboardViewModel
+            Group {
                 if dashboardViewModel.servers.isEmpty {
                     ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
@@ -143,29 +136,16 @@ struct ServerListView: View {
                         .searchable(text: $searchText)
                         .toolbar {
                             Button {
-                                Task {
-                                    await dashboardViewModel.updateMannually()
-                                }
+                                dashboardViewModel.updateAsync()
                             } label: {
                                 Label("Refresh", systemImage: "arrow.clockwise")
                             }
                         }
                     }
                 }
-            case .error(let message):
-                VStack(spacing: 20) {
-                    Text("An error occurred")
-                        .font(.headline)
-                    Text(message)
-                        .font(.subheadline)
-                    Button("Retry") {
-                        dashboardViewModel.startMonitoring()
-                    }
-                    Button("Settings") {
-                        tabBarState.activeTab = .settings
-                    }
-                }
-                .padding()
+            }
+            .canInLoadingStateModifier(loadingState: $dashboardViewModel.loadingState) {
+                dashboardViewModel.startMonitoring()
             }
         }
     }
@@ -230,7 +210,7 @@ struct ServerListView: View {
                     ForEach(filteredServers) { server in
                         if #available(iOS 18, *) {
                             NavigationLink {
-                                ServerDetailView(dashboardViewModel: dashboardViewModel, id: server.id)
+                                ServerDetailView(id: server.id)
                                     .navigationTransition(.zoom(sourceID: server.id, in: serverNamespace))
                             } label: {
                                 ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
@@ -241,7 +221,7 @@ struct ServerListView: View {
                         }
                         else {
                             NavigationLink {
-                                ServerDetailView(dashboardViewModel: dashboardViewModel, id: server.id)
+                                ServerDetailView(id: server.id)
                             } label: {
                                 ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
                             }

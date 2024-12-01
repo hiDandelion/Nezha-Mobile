@@ -8,139 +8,185 @@
 import SwiftUI
 
 struct ServerGroupListView: View {
-    var dashboardViewModel: DashboardViewModel
+    @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
+    @State private var editMode: EditMode = .inactive
+    @State private var isShowAddServerGroupAlert: Bool = false
+    @State private var nameOfNewServerGroup: String = ""
+    @State private var isLoading: Bool = false
+    
+    var body: some View {
+        @Bindable var serverGroupViewModel = serverGroupViewModel
+        List {
+            ForEach(serverGroupViewModel.serverGroups) { serverGroup in
+                NavigationLink {
+                    ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(serverGroup.name)
+                        Text("\(serverGroup.serverIDs.count) server(s)")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        
+                    }
+                    .lineLimit(1)
+                }
+            }
+            .onDelete { indexSet in
+                let serverGroupIDs = indexSet.map { serverGroupViewModel.serverGroups[$0].serverGroupID }
+                Task {
+                    isLoading = true
+                    do {
+                        let _ = try await RequestHandler.deleteServerGroup(serverGroupIDs: serverGroupIDs)
+                        await serverGroupViewModel.updateSync()
+                        isLoading = false
+                    } catch {
+                        
+                    }
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                EditButton()
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isShowAddServerGroupAlert = true
+                } label: {
+                    Label("Add Server Group", systemImage: "plus")
+                }
+                .alert("Add Server Group", isPresented: $isShowAddServerGroupAlert) {
+                    TextField("Name", text: $nameOfNewServerGroup)
+                    Button("Cancel", role: .cancel) { }
+                    Button("Add") {
+                        isLoading = true
+                        Task {
+                            do {
+                                let _ = try await RequestHandler.addServerGroup(name: nameOfNewServerGroup)
+                                await serverGroupViewModel.updateSync()
+                                isLoading = false
+                                nameOfNewServerGroup = ""
+                            } catch {
+                                
+                            }
+                        }
+                    }
+                } message: {
+                    Text("Enter a name for the new server group")
+                }
+            }
+        }
+        .environment(\.editMode, $editMode)
+        .canBeLoading(isLoading: $isLoading)
+        .canInLoadingStateModifier(loadingState: $serverGroupViewModel.loadingState) {
+            serverGroupViewModel.loadData()
+        }
+        .navigationTitle("Server Groups")
+        .onAppear {
+            serverGroupViewModel.loadData()
+        }
+    }
+}
+
+struct ServerGroupDetailView: View {
+    @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
+    let serverGroupID: Int64
+    var serverGroup: ServerGroup? {
+        serverGroupViewModel.serverGroups.first(where: { $0.serverGroupID == serverGroupID })
+    }
+    @State private var editMode: EditMode = .inactive
+    @State private var selectedServerIDs: Set<Int64> = .init()
+    @State private var isLoading: Bool = false
     
     var body: some View {
         NavigationStack {
-            Form {
-                ForEach(dashboardViewModel.serverGroups) { serverGroup in
-                    NavigationLink {
-                        ServerGroupDetailView(dashboardViewModel: dashboardViewModel, serverGroupID: serverGroup.serverGroupID)
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text(serverGroup.name)
-                            Text("\(serverGroup.serverIDs.count) server(s)")
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                                
+            Group {
+                if let serverGroup = serverGroup {
+                    ServerGroupServerListView(serverGroup: serverGroup, selectedServerIDs: $selectedServerIDs)
+                        .navigationTitle(serverGroup.name)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                editButton(serverGroup: serverGroup)
+                            }
                         }
-                        .lineLimit(1)
-                    }
+                        .environment(\.editMode, $editMode)
+                        .onChange(of: editMode) {
+                            if editMode == .active {
+                                selectedServerIDs = Set(serverGroup.serverIDs)
+                            }
+                        }
                 }
             }
-            .navigationTitle("Server Groups")
+            .canBeLoading(isLoading: $isLoading)
         }
     }
     
-    struct ServerGroupDetailView: View {
-        var dashboardViewModel: DashboardViewModel
-        let serverGroupID: Int64
-        var serverGroup: ServerGroup? {
-            dashboardViewModel.serverGroups.first(where: { $0.serverGroupID == serverGroupID })
-        }
-        @State private var editMode: EditMode = .inactive
-        @State private var selectedServerIDs: Set<Int64> = .init()
-        @State private var isUpdatingServerGroup: Bool = false
-        
-        var body: some View {
-            NavigationStack {
-                ZStack {
-                    if let serverGroup = serverGroup {
-                        ServerListView(dashboardViewModel: dashboardViewModel, serverGroup: serverGroup, selectedServerIDs: $selectedServerIDs)
-                            .navigationTitle(serverGroup.name)
-                            .toolbar {
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    editButton(serverGroup: serverGroup)
-                                }
-                            }
-                            .environment(\.editMode, $editMode)
-                            .onChange(of: editMode) {
-                                if editMode == .active {
-                                    selectedServerIDs = Set(serverGroup.serverIDs)
-                                }
-                            }
+    private func editButton(serverGroup: ServerGroup) -> some View {
+        Group {
+            if editMode == .inactive {
+                Button {
+                    withAnimation {
+                        editMode = .active
                     }
-                    
-                    if isUpdatingServerGroup {
-                        ProgressViewWithBackground()
-                    }
+                } label: {
+                    Text("Edit")
                 }
             }
-        }
-        
-        private func editButton(serverGroup: ServerGroup) -> some View {
-            Group {
-                if editMode == .inactive {
-                    Button {
-                        withAnimation {
-                            editMode = .active
-                        }
-                    } label: {
-                        Text("Edit")
-                    }
-                }
-                if editMode == .active {
-                    Button {
-                        if selectedServerIDs != Set(serverGroup.serverIDs) {
-                            isUpdatingServerGroup = true
-                            Task {
-                                do {
-                                    let _ = try await RequestHandler.updateServerGroup(serverGroupID: serverGroup.serverGroupID, name: serverGroup.name, serverIDs: Array(selectedServerIDs))
-                                    await dashboardViewModel.updateMannually()
-                                    withAnimation {
-                                        editMode = .inactive
-                                    }
-                                } catch {
-                                    
-                                }
-                                isUpdatingServerGroup = false
-                            }
-                        }
-                        else {
+            if editMode == .active {
+                Button {
+                    isLoading = true
+                    Task {
+                        do {
+                            let _ = try await RequestHandler.updateServerGroup(serverGroupID: serverGroup.serverGroupID, name: serverGroup.name, serverIDs: Array(selectedServerIDs))
+                            await serverGroupViewModel.updateSync()
                             withAnimation {
                                 editMode = .inactive
                             }
+                        } catch {
+                            
                         }
-                    } label: {
-                        Text("Done")
-                            .fontWeight(.bold)
+                        isLoading = false
                     }
+                } label: {
+                    Text("Done")
+                        .fontWeight(.bold)
                 }
             }
         }
     }
-    
-    struct ServerListView: View {
-        @Environment(\.editMode) var editMode
-        var dashboardViewModel: DashboardViewModel
-        var serverGroup: ServerGroup
-        var serverInGroup: [ServerData] {
-            dashboardViewModel.servers.filter {
-                serverGroup.serverIDs.contains($0.serverID)
-            }
+}
+
+struct ServerGroupServerListView: View {
+    @Environment(\.editMode) var editMode
+    @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
+    var serverGroup: ServerGroup
+    var serverInGroup: [ServerData] {
+        serverGroupViewModel.servers.filter {
+            serverGroup.serverIDs.contains($0.serverID)
         }
-        @Binding var selectedServerIDs: Set<Int64>
-        
-        var body: some View {
-            if (!serverGroup.serverIDs.isEmpty && editMode?.wrappedValue == .inactive) || (!dashboardViewModel.servers.isEmpty && editMode?.wrappedValue == .active) {
-                List(selection: $selectedServerIDs) {
-                    if editMode?.wrappedValue == .inactive {
-                        ForEach(serverInGroup) { server in
-                            ServerTitle(server: server, lastUpdateTime: dashboardViewModel.lastUpdateTime)
-                                .tag(server.serverID)
-                        }
+    }
+    @Binding var selectedServerIDs: Set<Int64>
+    
+    var body: some View {
+        if (!serverGroup.serverIDs.isEmpty && editMode?.wrappedValue == .inactive) || (!serverGroupViewModel.servers.isEmpty && editMode?.wrappedValue == .active) {
+            List(selection: $selectedServerIDs) {
+                if editMode?.wrappedValue == .inactive {
+                    ForEach(serverInGroup) { server in
+                        ServerTitle(server: server, lastUpdateTime: nil)
+                            .tag(server.serverID)
                     }
-                    if editMode?.wrappedValue == .active {
-                        ForEach(dashboardViewModel.servers) { server in
-                            ServerTitle(server: server, lastUpdateTime: dashboardViewModel.lastUpdateTime)
-                                .tag(server.serverID)
-                        }
+                }
+                if editMode?.wrappedValue == .active {
+                    ForEach(serverGroupViewModel.servers) { server in
+                        ServerTitle(server: server, lastUpdateTime: nil)
+                            .tag(server.serverID)
                     }
                 }
             }
-            else {
-                ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
-            }
+        }
+        else {
+            ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
         }
     }
 }

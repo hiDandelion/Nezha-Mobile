@@ -1,47 +1,34 @@
 //
-//  DashboardViewModel.swift
+//  ServerGroupViewModel.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 7/31/24.
+//  Created by Junhui Lou on 12/1/24.
 //
 
 import Foundation
 import SwiftUI
-import Combine
 import Observation
-import BackgroundTasks
+
+enum ServerGroupLoadingState: Equatable {
+    case idle
+    case loading
+    case loaded
+    case error(String)
+}
 
 @Observable
-class DashboardViewModel {
-    private var timer: Timer?
-    private var cancellables = Set<AnyCancellable>()
+class ServerGroupViewModel {
     var loadingState: LoadingState = .idle
-    var lastUpdateTime: Date?
     var servers: [ServerData] = .init()
     var serverGroups: [ServerGroup] = .init()
-    var isMonitoringEnabled = false
     
-    init() {
-#if os(iOS) || os(visionOS)
-        setupNotifications()
-#endif
-    }
-    
-    func startMonitoring() {
-        stopMonitoring()
-        isMonitoringEnabled = true
+    func loadData() {
         loadingState = .loading
         Task {
             await getServer()
             await getServerGroup()
+            loadingState = .loaded
         }
-        startTimer()
-    }
-    
-    func stopMonitoring() {
-        stopTimer()
-        isMonitoringEnabled = false
-        loadingState = .idle
     }
     
     func updateSync() async {
@@ -54,38 +41,6 @@ class DashboardViewModel {
             await getServer()
             await getServerGroup()
         }
-    }
-    
-#if os(iOS) || os(visionOS)
-    private func setupNotifications() {
-        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-            .sink { [weak self] _ in
-                self?.handleEnterForeground()
-            }
-            .store(in: &cancellables)
-    }
-#endif
-    
-    private func handleEnterForeground() {
-        guard isMonitoringEnabled else {
-            return
-        }
-        startMonitoring()
-    }
-    
-    private func startTimer() {
-        stopTimer()
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
-            Task { [weak self] in
-                guard let self = self else { return }
-                await self.getServer()
-            }
-        }
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
     }
     
     private func getServer() async {
@@ -135,8 +90,6 @@ class DashboardViewModel {
                             )
                         })
                     }
-                    self.loadingState = .loaded
-                    self.lastUpdateTime = Date()
                 }
             }
         }
@@ -150,13 +103,21 @@ class DashboardViewModel {
     }
     
     private func getServerGroup() async {
-        let response = try? await RequestHandler.getServerGroup()
-        DispatchQueue.main.async {
-            withAnimation {
-                if let serverGroups = response?.data {
-                    self.serverGroups = serverGroups.map({
-                        ServerGroup(id: UUID().uuidString, serverGroupID: $0.group.id, name: $0.group.name, serverIDs: $0.servers ?? .init())
-                    })
+        do {
+            let response = try await RequestHandler.getServerGroup()
+            DispatchQueue.main.async {
+                withAnimation {
+                    if let serverGroups = response.data {
+                        self.serverGroups = serverGroups.map({
+                            ServerGroup(id: UUID().uuidString, serverGroupID: $0.group.id, name: $0.group.name, serverIDs: $0.servers ?? .init())
+                        })
+                    }
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.loadingState = .error(error.localizedDescription)
                 }
             }
         }
