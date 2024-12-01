@@ -23,8 +23,8 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 
 struct ServerDetailView: View {
     @Environment(\.openWindow) var openWindow
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     var id: String
-    var dashboardViewModel: DashboardViewModel
     @State private var activeTab: ServerDetailTab = .basic
     
     var body: some View {
@@ -99,7 +99,7 @@ struct ServerDetailView: View {
         Menu {
             Section {
                 Button {
-                    dashboardViewModel.updateImmediately()
+                    dashboardViewModel.updateAsync()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }

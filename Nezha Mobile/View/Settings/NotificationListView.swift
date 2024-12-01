@@ -75,6 +75,7 @@ struct NotificationListView: View {
                             Text(alertRule.name)
                                 .lineLimit(1)
                         }
+                        .disabled(true)
                     }
                 }
                 else {

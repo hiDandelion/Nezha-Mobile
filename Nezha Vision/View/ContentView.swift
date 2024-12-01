@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
     @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @State private var isShowingAddDashboardSheet: Bool = false
@@ -35,14 +35,14 @@ struct ContentView: View {
             .font(.headline)
             .padding(.top, 20)
             .sheet(isPresented: $isShowingAddDashboardSheet) {
-                AddDashboardView(dashboardViewModel: dashboardViewModel)
+                AddDashboardView()
             }
         }
         .padding()
     }
     
     private var dashboardConfigured: some View {
-        MainTabView(dashboardViewModel: dashboardViewModel)
+        MainTabView()
             .onAppear {
                 if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
                     dashboardViewModel.startMonitoring()

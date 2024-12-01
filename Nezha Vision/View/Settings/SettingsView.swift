@@ -13,7 +13,7 @@ import StoreKit
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.requestReview) var requestReview
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @State var isPresentedAsSheet: Bool = false
     
     var body: some View {
@@ -21,7 +21,7 @@ struct SettingsView: View {
             Form {
                 Section("Dashboard") {
                     NavigationLink("Dashboard Settings") {
-                        DashboardSettingsView(dashboardViewModel: dashboardViewModel)
+                        DashboardSettingsView()
                     }
                 }
                 

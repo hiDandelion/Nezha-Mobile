@@ -19,7 +19,7 @@ struct ServerCoordinate: Identifiable, Hashable {
 }
 
 struct ServerMapView: View {
-    var servers: [ServerData]
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @State private var serverCoordinates: [ServerCoordinate] = []
     @State private var selectedCoordinate: ServerCoordinate?
     
@@ -92,7 +92,7 @@ struct ServerMapView: View {
                     transformer: TransformerFactory.forCodable(ofType: GetIPCityDataResponse.IPCityData.self)
                 )
                 
-                for server in servers {
+                for server in dashboardViewModel.servers {
                     if let storage {
                         if let currentIPCityData = try? storage.object(forKey: server.ipv4), let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
                             let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })

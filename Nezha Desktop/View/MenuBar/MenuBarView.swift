@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MenuBarView: View {
     @Environment(\.openWindow) var openWindow
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @State private var activeTag: String = "All"
     
     private var filteredServers: [ServerData] {

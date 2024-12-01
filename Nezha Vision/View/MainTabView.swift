@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct MainTabView: View {
-    var dashboardViewModel: DashboardViewModel
-    
     var body: some View {
         TabView {
             Tab("Servers", systemImage: "server.rack") {
-                ServerListView(dashboardViewModel: dashboardViewModel)
+                ServerListView()
             }
             
             Tab("Settings", systemImage: "gearshape") {
-                SettingsView(dashboardViewModel: dashboardViewModel)
+                SettingsView()
             }
         }
         .tabViewStyle(.sidebarAdaptable)

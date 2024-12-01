@@ -19,65 +19,51 @@ struct UserSection: Hashable {
 
 struct HomeView: View {
     @Environment(\.openWindow) var openWindow
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
+    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @State private var activeUserSection: UserSection = UserSection(tab: .server, tag: "All")
     private var activeServerTag: String? {
         activeUserSection.tab == .server ? activeUserSection.tag : nil
     }
     
     var body: some View {
-        VStack {
-            switch(dashboardViewModel.loadingState) {
-            case .idle:
-                EmptyView()
-            case .loading:
-                ProgressView("Loading...")
-            case .loaded:
-                NavigationSplitView {
-                    List(selection: $activeUserSection) {
-                        Section("Servers") {
-                            if !dashboardViewModel.servers.isEmpty {
-                                let tags = Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
-                                let allTags = ["All"] + tags.sorted()
-                                ForEach(allTags, id: \.self) { tag in
-                                    Text("\(tag == "All" ? String(localized: "All") : (tag == "" ? String(localized: "Uncategorized") : tag))")
-                                        .tag(UserSection(tab: .server, tag: tag))
-                                }
-                            }
+        @Bindable var dashboardViewModel = dashboardViewModel
+        NavigationSplitView {
+            List(selection: $activeUserSection) {
+                Section("Servers") {
+                    if !dashboardViewModel.servers.isEmpty {
+                        let tags = Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
+                        let allTags = ["All"] + tags.sorted()
+                        ForEach(allTags, id: \.self) { tag in
+                            Text("\(tag == "All" ? String(localized: "All") : (tag == "" ? String(localized: "Uncategorized") : tag))")
+                                .tag(UserSection(tab: .server, tag: tag))
                         }
-                        
-                        Section("Alerts") {
-                            Text("All")
-                                .tag(UserSection(tab: .alert, tag: "All"))
-                        }
-                    }
-                    .listStyle(.sidebar)
-                } detail: {
-                    switch(activeUserSection.tab) {
-                    case .server:
-                        if let activeServerTag {
-                            ServerTableView(dashboardViewModel: dashboardViewModel, activeTag: activeServerTag)
-                        }
-                    case .alert:
-                        AlertListView()
                     }
                 }
-            case .error(let message):
-                ZStack(alignment: .bottomTrailing) {
-                    VStack(spacing: 20) {
-                        Text("An error occurred")
-                            .font(.headline)
-                        Text(message)
-                            .font(.subheadline)
-                        Button("Retry") {
-                            dashboardViewModel.startMonitoring()
-                        }
-                        SettingsLink(label: {
-                            Text("Settings")
-                        })
-                    }
-                    .padding()
+                
+                Section("Alerts") {
+                    Text("All")
+                        .tag(UserSection(tab: .alert, tag: "All"))
                 }
+            }
+            .listStyle(.sidebar)
+        } detail: {
+            switch(activeUserSection.tab) {
+            case .server:
+                if let activeServerTag {
+                    ServerTableView(activeTag: activeServerTag)
+                }
+            case .alert:
+                AlertListView()
+            }
+        }
+        .canInLoadingStateModifier(loadingState: $dashboardViewModel.loadingState, retryAction: {
+            dashboardViewModel.startMonitoring()
+        })
+        .onAppear {
+            if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
+                dashboardViewModel.startMonitoring()
             }
         }
     }

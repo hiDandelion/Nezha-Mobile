@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ServerPinView: View {
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     var id: String
-    var dashboardViewModel: DashboardViewModel
     
     var body: some View {
         Group {

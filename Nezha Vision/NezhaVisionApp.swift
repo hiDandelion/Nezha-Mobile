@@ -10,7 +10,7 @@ import NezhaMobileData
 
 @main
 struct NezhaVisionApp: App {
-    @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    var dashboardViewModel: DashboardViewModel = .init()
     
     init() {
         NMCore.registerUserDefaults()
@@ -18,8 +18,9 @@ struct NezhaVisionApp: App {
     
     var body: some Scene {
         WindowGroup("Nezha Vision", id: "main-view") {
-            ContentView(dashboardViewModel: dashboardViewModel)
+            ContentView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
+                .environment(dashboardViewModel)
                 .onAppear {
                     NMCore.syncWithiCloud()
                 }
@@ -28,8 +29,9 @@ struct NezhaVisionApp: App {
         
         WindowGroup("Pin View", id: "server-pin-view", for: ServerData.ID.self) { $id in
             if let id {
-                ServerPinView(id: id, dashboardViewModel: dashboardViewModel)
+                ServerPinView(id: id)
                     .frame(width: 400, height: 300)
+                    .environment(dashboardViewModel)
                     .handlesExternalEvents(preferring: [], allowing: [])
             }
         }
@@ -37,7 +39,8 @@ struct NezhaVisionApp: App {
         
         WindowGroup("Server Details", id: "server-detail-view", for: ServerData.ID.self) { $id in
             if let id {
-                ServerDetailView(id: id, dashboardViewModel: dashboardViewModel)
+                ServerDetailView(id: id)
+                    .environment(dashboardViewModel)
                     .handlesExternalEvents(preferring: [], allowing: [])
             }
         }

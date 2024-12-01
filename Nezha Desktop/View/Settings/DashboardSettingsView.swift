@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DashboardSettingsView: View {
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @State private var link: String = NMCore.getNezhaDashboardLink()
     @State private var username: String = NMCore.getNezhaDashboardUsername()
     @State private var password: String = NMCore.getNezhaDashboardPassword()

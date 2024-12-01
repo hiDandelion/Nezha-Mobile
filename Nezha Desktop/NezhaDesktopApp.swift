@@ -11,7 +11,7 @@ import NezhaMobileData
 @main
 struct NezhaDesktopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @Bindable var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    var dashboardViewModel: DashboardViewModel = .init()
     @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
     @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
@@ -22,8 +22,9 @@ struct NezhaDesktopApp: App {
     
     var body: some Scene {
         WindowGroup("Nezha Desktop", id: "main-view") {
-            ContentView(dashboardViewModel: dashboardViewModel)
+            ContentView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
+                .environment(dashboardViewModel)
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
         .defaultSize(width: 1000, height: 500)
@@ -39,20 +40,22 @@ struct NezhaDesktopApp: App {
         }
         
         WindowGroup("Map View", id: "map-view") {
-            ServerMapView(servers: dashboardViewModel.servers)
+            ServerMapView()
         }
         
         WindowGroup("Server Details", id: "server-detail-view", for: ServerData.ID.self) { $id in
             if let id {
-                ServerDetailView(dashboardViewModel: dashboardViewModel, id: id)
+                ServerDetailView(id: id)
+                    .environment(dashboardViewModel)
             }
         }
         .defaultSize(width: 800, height: 700)
         .commandsRemoved()
         
         Settings {
-            SettingView(dashboardViewModel: dashboardViewModel)
+            SettingView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
+                .environment(dashboardViewModel)
         }
         
         WindowGroup("Alert Details", id: "alert-detail-view", for: ServerAlert.ID.self) { $alertID in
@@ -74,7 +77,8 @@ struct NezhaDesktopApp: App {
         .handlesExternalEvents(matching: Set(arrayLiteral: "alert-details"))
         
         MenuBarExtra(isInserted: $menuBarEnabled) {
-            MenuBarView(dashboardViewModel: dashboardViewModel)
+            MenuBarView()
+                .environment(dashboardViewModel)
                 .onAppear {
                     if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
                         dashboardViewModel.startMonitoring()

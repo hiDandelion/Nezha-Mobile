@@ -12,7 +12,7 @@ struct ServerListView: View {
     @Environment(\.openWindow) var openWindow
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @State private var searchText: String = ""
     @State private var activeTag: String = "All"
     @Namespace private var tagNamespace
@@ -43,16 +43,9 @@ struct ServerListView: View {
     
     var dashboard: some View {
         Group {
-            switch(dashboardViewModel.loadingState) {
-            case .idle:
-                EmptyView()
-            case .loading:
-                ProgressView("Loading...")
-            case .loaded:
-                if dashboardViewModel.servers.isEmpty {
-                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
-                }
-                else {
+            @Bindable var dashboardViewModel = dashboardViewModel
+            Group {
+                if !dashboardViewModel.servers.isEmpty {
                     GeometryReader { proxy in
                         let isWideLayout = proxy.size.width > 600
                         ScrollView {
@@ -65,24 +58,19 @@ struct ServerListView: View {
                         .searchable(text: $searchText)
                         .toolbar {
                             Button {
-                                dashboardViewModel.updateImmediately()
+                                dashboardViewModel.updateAsync()
                             } label: {
                                 Label("Refresh", systemImage: "arrow.clockwise")
                             }
                         }
                     }
                 }
-            case .error(let message):
-                VStack(spacing: 20) {
-                    Text("An error occurred")
-                        .font(.headline)
-                    Text(message)
-                        .font(.subheadline)
-                    Button("Retry") {
-                        dashboardViewModel.startMonitoring()
-                    }
+                else {
+                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
-                .padding()
+            }
+            .canInLoadingStateModifier(loadingState: $dashboardViewModel.loadingState) {
+                dashboardViewModel.startMonitoring()
             }
         }
     }

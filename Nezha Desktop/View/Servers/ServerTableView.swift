@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ServerTableView: View {
     @Environment(\.openWindow) var openWindow
-    @Bindable var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     var activeTag: String = "All"
     @State private var searchText: String = ""
     @State private var selectedServers: Set<ServerData.ID> = .init()

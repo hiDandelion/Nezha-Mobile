@@ -10,12 +10,12 @@ import NezhaMobileData
 
 struct SettingView: View {
     @Environment(\.createDataHandler) private var createDataHandler
-    var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
     
     var body: some View {
         TabView {
-            DashboardSettingsView(dashboardViewModel: dashboardViewModel)
+            DashboardSettingsView()
             
             Form {
                 Toggle("Enable Menu Bar", isOn: $menuBarEnabled)

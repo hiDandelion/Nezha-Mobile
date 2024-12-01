@@ -22,7 +22,7 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
-    @Bindable var dashboardViewModel: DashboardViewModel
+    @Environment(DashboardViewModel.self) private var dashboardViewModel
     var id: String
     @State private var activeTab: ServerDetailTab = .basic
     
