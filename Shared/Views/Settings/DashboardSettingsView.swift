@@ -30,7 +30,7 @@ struct DashboardSettingsView: View {
                 Text("Dashboard Link Example: server.hidandelion.com")
             }
             
-            Section {
+            Section("Credentials") {
                 TextField("Username", text: $username)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
@@ -49,6 +49,6 @@ struct DashboardSettingsView: View {
                 }
             }
         }
-        .navigationTitle("Dashboard Settings")
+        .navigationTitle("General")
     }
 }

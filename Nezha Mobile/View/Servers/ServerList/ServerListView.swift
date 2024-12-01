@@ -122,6 +122,9 @@ struct ServerListView: View {
                 EmptyView()
             case .loading:
                 ProgressView("Loading...")
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
             case .loaded:
                 if dashboardViewModel.servers.isEmpty {
                     ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
@@ -140,7 +143,9 @@ struct ServerListView: View {
                         .searchable(text: $searchText)
                         .toolbar {
                             Button {
-                                dashboardViewModel.updateImmediately()
+                                Task {
+                                    await dashboardViewModel.updateMannually()
+                                }
                             } label: {
                                 Label("Refresh", systemImage: "arrow.clockwise")
                             }

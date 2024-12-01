@@ -84,11 +84,6 @@ struct ServerDetailBasicView: View {
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
-#if os(iOS)
-                NavigationLink(destination: PrepareConnectionView(host: server.ipv4)) {
-                    Label("Connect", systemImage: "link")
-                }
-#endif
             }))
     }
     
@@ -106,11 +101,6 @@ struct ServerDetailBasicView: View {
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
-#if os(iOS)
-                NavigationLink(destination: PrepareConnectionView(host: server.ipv6)) {
-                    Label("Connect", systemImage: "link")
-                }
-#endif
             }))
     }
     

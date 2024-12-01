@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "- OS Version\n- Model Identifier\n- CPU Usage\n- Memory Usage\n- Disk Usage\n- Data Usage\n- Boot Time\n- Uptime" : {
-      "shouldTranslate" : false
-    },
     "%.0f" : {
 
     },
@@ -21,26 +18,6 @@
     },
     "%@" : {
 
-    },
-    "%@ (%@)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ (%2$@)"
-          }
-        }
-      }
-    },
-    "%@:%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@:%2$@"
-          }
-        }
-      }
     },
     "%@/%@" : {
       "localizations" : {
@@ -80,6 +57,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld核心"
+          }
+        }
+      }
+    },
+    "%lld server(s)" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld server"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld servers"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "No server"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lldサーバー"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "サーバーなし"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld台服务器"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "无服务器"
+                }
+              }
+            }
           }
         }
       }
@@ -240,22 +281,6 @@
         }
       }
     },
-    "Add" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "追加"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加"
-          }
-        }
-      }
-    },
     "Add Alert" : {
       "localizations" : {
         "ja" : {
@@ -288,22 +313,6 @@
         }
       }
     },
-    "Add Identity" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アイデンティティを追加"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加身份"
-          }
-        }
-      }
-    },
     "Advanced Customization" : {
       "localizations" : {
         "ja" : {
@@ -332,38 +341,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agent"
-          }
-        }
-      }
-    },
-    "Agent Parameters" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agentパラメータ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agent参数"
-          }
-        }
-      }
-    },
-    "Agent Settings" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agent設定"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agent设置"
           }
         }
       }
@@ -496,38 +473,6 @@
         }
       }
     },
-    "Authentication" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "認証"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "认证"
-          }
-        }
-      }
-    },
-    "Authentication Method" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "認証方法"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "认证方式"
-          }
-        }
-      }
-    },
     "Background Color" : {
       "localizations" : {
         "ja" : {
@@ -607,9 +552,6 @@
           }
         }
       }
-    },
-    "By using Nezha Mobile as an agent, you acknowledge the following matrix of your device will be obtained:" : {
-      "shouldTranslate" : false
     },
     "Cancel" : {
       "localizations" : {
@@ -719,70 +661,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "配置小组件"
-          }
-        }
-      }
-    },
-    "Connect" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "接続"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "连接"
-          }
-        }
-      }
-    },
-    "Connect via IPv4" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IPv4で接続"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "通过IPv4连接"
-          }
-        }
-      }
-    },
-    "Connect via IPv6" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IPv6で接続"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "通过IPv6连接"
-          }
-        }
-      }
-    },
-    "Connection" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "接続"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "连接"
           }
         }
       }
@@ -981,54 +859,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dashboard"
-          }
-        }
-      }
-    },
-    "Dashboard GRPC Info" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard GRPC情報"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard GRPC信息"
-          }
-        }
-      }
-    },
-    "Dashboard GRPC Link" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard GRPCリンク"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard GRPC链接"
-          }
-        }
-      }
-    },
-    "Dashboard GRPC Port" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard GRPCポート"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard GRPC端口"
           }
         }
       }
@@ -1273,6 +1103,22 @@
         }
       }
     },
+    "Edit" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "編集"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑"
+          }
+        }
+      }
+    },
     "Enable Menu Bar" : {
       "localizations" : {
         "ja" : {
@@ -1506,54 +1352,6 @@
         }
       }
     },
-    "Identities" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アイデンティティ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "身份"
-          }
-        }
-      }
-    },
-    "Identity" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アイデンティティ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "身份"
-          }
-        }
-      }
-    },
-    "Import From File" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ファイルからインポート"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "从文件导入"
-          }
-        }
-      }
-    },
     "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, iOS logo and macOS logo are trademarks of Apple Inc." : {
       "shouldTranslate" : false
     },
@@ -1601,22 +1399,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最后活跃"
-          }
-        }
-      }
-    },
-    "Latest Supported Nezha Version: 0.20.5" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "支持的最新Nezha版本：0.20.5"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サポートされている最新のNezhaバージョン：0.20.5"
           }
         }
       }
@@ -1698,22 +1480,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "主页面"
-          }
-        }
-      }
-    },
-    "Manage Identities" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アイデンティティを管理"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "管理身份"
           }
         }
       }
@@ -1875,38 +1641,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "网络速度"
-          }
-        }
-      }
-    },
-    "New Identity" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "新規アイデンティティ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "新身份"
-          }
-        }
-      }
-    },
-    "New Name" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "新しい名前"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "新名称"
           }
         }
       }
@@ -2204,22 +1938,6 @@
         }
       }
     },
-    "Port" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ポート"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "端口"
-          }
-        }
-      }
-    },
     "Primary Color Dark Mode" : {
       "localizations" : {
         "ja" : {
@@ -2248,38 +1966,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "主要颜色 浅色模式"
-          }
-        }
-      }
-    },
-    "Privacy Notice" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プライバシー通知"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隐私声明"
-          }
-        }
-      }
-    },
-    "Private Key Type" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "秘密鍵の種類"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "私钥类型"
           }
         }
       }
@@ -2412,118 +2098,6 @@
         }
       }
     },
-    "Rename" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "名前を変更"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重命名"
-          }
-        }
-      }
-    },
-    "Rename Identity" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アイデンティティの名前を変更"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重命名身份"
-          }
-        }
-      }
-    },
-    "Report" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "報告"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "上报"
-          }
-        }
-      }
-    },
-    "Report Device Info" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "デバイス情報を報告"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "上报设备信息"
-          }
-        }
-      }
-    },
-    "Report your device information via Nezha Agent." : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nezha Agent 経由でデバイス情報を報告します。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "通过 Nezha Agent 上报你的设备信息。"
-          }
-        }
-      }
-    },
-    "Report your device information." : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "デバイス情報を報告します。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "上报你的设备信息。"
-          }
-        }
-      }
-    },
-    "Reporting" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "報告中"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在上报"
-          }
-        }
-      }
-    },
     "Retry" : {
       "localizations" : {
         "ja" : {
@@ -2584,38 +2158,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "次要颜色 浅色模式"
-          }
-        }
-      }
-    },
-    "Secret" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "シークレット"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "密钥"
-          }
-        }
-      }
-    },
-    "Select" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "選択"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择"
           }
         }
       }
@@ -2716,6 +2258,22 @@
         }
       }
     },
+    "Server Groups" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバーグルプ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器分组"
+          }
+        }
+      }
+    },
     "Server returned an invalid response." : {
       "localizations" : {
         "ja" : {
@@ -2780,22 +2338,6 @@
         }
       }
     },
-    "Set up Agent" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agentをセットアップ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "设置Agent"
-          }
-        }
-      }
-    },
     "Settings" : {
       "localizations" : {
         "ja" : {
@@ -2808,22 +2350,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
-          }
-        }
-      }
-    },
-    "Share Push Notifications Token" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プッシュ通知トークンを共有"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "导出推送通知Token"
           }
         }
       }
@@ -2860,22 +2386,6 @@
         }
       }
     },
-    "SSH" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SSH"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SSH"
-          }
-        }
-      }
-    },
     "Start" : {
       "localizations" : {
         "ja" : {
@@ -2888,22 +2398,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "开始"
-          }
-        }
-      }
-    },
-    "Start SSH Connection" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SSH接続をスタート"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启动SSH连接"
           }
         }
       }
@@ -2936,22 +2430,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "状态"
-          }
-        }
-      }
-    },
-    "Successfully Reported" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "報告しました"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "上报成功"
           }
         }
       }
@@ -3115,9 +2593,6 @@
           }
         }
       }
-    },
-    "These data will be sent to the Dashboard server you configured in Agent Settings. We will not save or share any of your data." : {
-      "shouldTranslate" : false
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
       "localizations" : {

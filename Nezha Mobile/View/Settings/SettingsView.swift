@@ -22,14 +22,22 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section("Dashboard") {
-                    NavigationLink("Dashboard Settings") {
+                    NavigationLink {
                         DashboardSettingsView(dashboardViewModel: dashboardViewModel)
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "General", systemName: "gear", color: .gray)
                     }
-                }
-                
-                Section("Agent") {
-                    NavigationLink("Agent Settings") {
-                        AgentSettingsView()
+                    
+                    NavigationLink {
+                        ServerGroupListView(dashboardViewModel: dashboardViewModel)
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Server Groups", systemName: "square.grid.3x2", color: .blue)
+                    }
+                    
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Notifications", systemName: "bell.badge", color: .red)
                     }
                 }
                 
@@ -45,22 +53,6 @@ struct SettingsView: View {
                     
                     NavigationLink("Advanced Customization") {
                         AdvancedCustomizationView()
-                    }
-                }
-                
-                Section("Notifications") {
-                    let pushNotificationsToken = NMCore.userDefaults.string(forKey: "NMPushNotificationsToken")!
-                    if pushNotificationsToken != "" {
-                        Button("Copy Push Notifications Token") {
-                            UIPasteboard.general.string = pushNotificationsToken
-                        }
-                        ShareLink(item: pushNotificationsToken) {
-                            Text("Share Push Notifications Token")
-                        }
-                    }
-                    else {
-                        Text("Push Notifications Not Available")
-                            .foregroundStyle(.secondary)
                     }
                 }
                 

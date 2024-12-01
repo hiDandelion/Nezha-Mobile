@@ -9,6 +9,7 @@ import Foundation
 
 struct ServerGroup: Codable, Identifiable, Hashable {
     let id: String
+    let serverGroupID: Int64
     let name: String
     let serverIDs: [Int64]
 }

@@ -18,10 +18,6 @@ struct WidgetAppBundle: WidgetBundle {
         ServerDetailWidget()
 #if os(iOS)
         AgentWidget()
-
-        if #available(iOS 18.0, *) {
-            AgentControlWidget()
-        }
 #endif
     }
 }

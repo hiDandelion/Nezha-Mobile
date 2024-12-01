@@ -17,6 +17,7 @@ struct GetServerGroupResponse: Codable, NezhaDashboardBaseResponse {
         let servers: [Int64]?
         
         struct Group: Codable {
+            let id: Int64
             let name: String
         }
     }

@@ -89,22 +89,17 @@ struct ServerDetailView: View {
         Menu {
             Section {
                 Button {
-                    dashboardViewModel.updateImmediately()
+                    Task {
+                        await dashboardViewModel.updateMannually()
+                    }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
             }
             
             Section {
-                if server.ipv4 != "" {
-                    NavigationLink(destination: PrepareConnectionView(host: server.ipv4)) {
-                        Label("Connect via IPv4", systemImage: "link")
-                    }
-                }
-                if server.ipv6 != "" {
-                    NavigationLink(destination: PrepareConnectionView(host: server.ipv6)) {
-                        Label("Connect via IPv6", systemImage: "link")
-                    }
+                NavigationLink(destination: EmptyView()) {
+                    Label("Terminal", systemImage: "apple.terminal")
                 }
             }
         } label: {

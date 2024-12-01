@@ -8,7 +8,7 @@
 import Foundation
 
 extension RequestHandler {
-    static func getService(serverID: String) async throws -> GetServiceResponse {
+    static func getService(serverID: Int64) async throws -> GetServiceResponse {
         guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/service/\(serverID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }

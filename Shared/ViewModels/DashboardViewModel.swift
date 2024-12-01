@@ -51,11 +51,9 @@ class DashboardViewModel {
         loadingState = .idle
     }
     
-    func updateImmediately() {
-        Task {
-            await getServer()
-            await getServerGroup()
-        }
+    func updateMannually() async {
+        await getServer()
+        await getServerGroup()
     }
     
 #if os(iOS) || os(visionOS)
@@ -157,7 +155,7 @@ class DashboardViewModel {
             withAnimation {
                 if let serverGroups = response?.data {
                     self.serverGroups = serverGroups.map({
-                        ServerGroup(id: UUID().uuidString, name: $0.group.name, serverIDs: $0.servers ?? .init())
+                        ServerGroup(id: UUID().uuidString, serverGroupID: $0.group.id, name: $0.group.name, serverIDs: $0.servers ?? .init())
                     })
                 }
             }

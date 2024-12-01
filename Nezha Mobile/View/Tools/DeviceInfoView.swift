@@ -70,16 +70,6 @@ struct DeviceInfoView: View {
             NMUI.PieceOfInfo(systemImage: "circle.dotted.circle", name: "Network Data", content: Text("↓ \(formatBytes(deviceInfoViewModel.networkIn)) ↑ \(formatBytes(deviceInfoViewModel.networkOut))"))
         }
         .navigationTitle("Device Info")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    ReportDeviceInfoView()
-                } label: {
-                    Label("Report Device Info", systemImage: "square.and.arrow.up.on.square")
-                }
-
-            }
-        }
         .onAppear {
             deviceInfoViewModel.startMonitoring()
         }

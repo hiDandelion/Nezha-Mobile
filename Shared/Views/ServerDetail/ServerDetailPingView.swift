@@ -71,7 +71,7 @@ struct ServerDetailPingChartView: View {
                 isLoadingPingDatas = true
                 Task {
                     do {
-                        let response = try await RequestHandler.getService(serverID: String(server.serverID))
+                        let response = try await RequestHandler.getService(serverID: server.serverID)
                         withAnimation {
                             errorDescriptionLoadingPingData = nil
                             if let services = response.data {

@@ -19,24 +19,6 @@ struct ToolListView: View {
                     } label: {
                         TextWithColorfulIcon(titleKey: "View Device Info", systemName: "info.circle", color: .blue)
                     }
-                    NavigationLink {
-                        ReportDeviceInfoView()
-                    } label: {
-                        TextWithColorfulIcon(titleKey: "Report Device Info", systemName: "square.and.arrow.up.on.square", color: .green)
-                    }
-                }
-                
-                Section("SSH") {
-                    NavigationLink {
-                        IdentityListView()
-                    } label: {
-                        TextWithColorfulIcon(titleKey: "Manage Identities", systemName: "key", color: .gray)
-                    }
-                    NavigationLink {
-                        PrepareConnectionView(host: nil)
-                    } label: {
-                        TextWithColorfulIcon(titleKey: "Start SSH Connection", systemName: "apple.terminal", color: .black)
-                    }
                 }
             }
             .navigationTitle("Tools")

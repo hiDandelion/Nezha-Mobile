@@ -18,25 +18,8 @@ struct ServerCardView: View {
     var body: some View {
         CardView {
             HStack {
-                HStack {
-                    if server.countryCode.uppercased() == "TW" {
-                        Text("🇹🇼")
-                    }
-                    else if server.countryCode.uppercased() != "" {
-                        Text(countryFlagEmoji(countryCode: server.countryCode))
-                    }
-                    else {
-                        Text("🏴‍☠️")
-                    }
-                    
-                    Text(server.name)
-                    
-                    if let lastUpdateTime {
-                        Image(systemName: "circlebadge.fill")
-                            .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
-                    }
-                }
-                .font(.callout)
+                ServerTitle(server: server, lastUpdateTime: lastUpdateTime)
+                    .font(.callout)
                 
                 Spacer()
                 
