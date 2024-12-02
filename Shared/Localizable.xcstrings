@@ -410,6 +410,22 @@
         }
       }
     },
+    "Alert" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラート"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "告警"
+          }
+        }
+      }
+    },
     "Alert Details" : {
       "localizations" : {
         "ja" : {
@@ -1264,6 +1280,22 @@
         }
       }
     },
+    "Enroll Automatically" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動的に登録"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动注册"
+          }
+        }
+      }
+    },
     "Enter a name for the new server group" : {
       "localizations" : {
         "ja" : {
@@ -1843,6 +1875,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无服务器"
+          }
+        }
+      }
+    },
+    "No Server Group" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバーグルプなし"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无服务器分组"
           }
         }
       }
@@ -3142,22 +3190,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "UDP连接"
-          }
-        }
-      }
-    },
-    "Uncategorized" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未分類"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未分类"
           }
         }
       }

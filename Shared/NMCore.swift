@@ -21,6 +21,8 @@ class NMCore {
     static let NMWatchPushNotificationsToken = "NMWatchPushNotificationsToken"
     static let NMMacPushNotificationsToken = "NMMacPushNotificationsToken"
     
+    static let NMAPNServiceURLString: String = "https://nezha-mobile-apns.argsment.com/api/send-alert"
+    
     static let userGuideURL: URL = URL(string: "https://support.argsment.com/nezha-mobile/user-guide")!
     static let userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     

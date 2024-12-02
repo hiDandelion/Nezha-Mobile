@@ -171,7 +171,7 @@ struct ServerListView: View {
                 activeTag = tag
             }
         }) {
-            Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
+            Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Untitled") : tag))
                 .font(.callout)
                 .foregroundStyle(activeTag == tag ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
                 .padding(.vertical, 8)

@@ -17,35 +17,41 @@ struct ServerGroupListView: View {
     var body: some View {
         @Bindable var serverGroupViewModel = serverGroupViewModel
         List {
-            ForEach(serverGroupViewModel.serverGroups) { serverGroup in
-                NavigationLink {
-                    ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
-                } label: {
-                    VStack(alignment: .leading) {
-                        Text(serverGroup.name != "" ? serverGroup.name : "Untitled")
-                        Text("\(serverGroup.serverIDs.count) server(s)")
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                        
+            if !serverGroupViewModel.serverGroups.isEmpty {
+                ForEach(serverGroupViewModel.serverGroups) { serverGroup in
+                    NavigationLink {
+                        ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(serverGroup.name != "" ? serverGroup.name : "Untitled")
+                            Text("\(serverGroup.serverIDs.count) server(s)")
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                            
+                        }
+                        .lineLimit(1)
                     }
-                    .lineLimit(1)
+                }
+                .onDelete { indexSet in
+                    let serverGroupIDs = indexSet.map { serverGroupViewModel.serverGroups[$0].serverGroupID }
+                    Task {
+                        isLoading = true
+                        do {
+                            let _ = try await RequestHandler.deleteServerGroup(serverGroupIDs: serverGroupIDs)
+                            await serverGroupViewModel.updateSync()
+                            isLoading = false
+                        } catch {
+                            isLoading = false
+#if DEBUG
+                            let _ = NMCore.debugLog(error)
+#endif
+                        }
+                    }
                 }
             }
-            .onDelete { indexSet in
-                let serverGroupIDs = indexSet.map { serverGroupViewModel.serverGroups[$0].serverGroupID }
-                Task {
-                    isLoading = true
-                    do {
-                        let _ = try await RequestHandler.deleteServerGroup(serverGroupIDs: serverGroupIDs)
-                        await serverGroupViewModel.updateSync()
-                        isLoading = false
-                    } catch {
-                        isLoading = false
-#if DEBUG
-                        let _ = NMCore.debugLog(error)
-#endif
-                    }
-                }
+            else {
+                Text("No Server Group")
+                    .foregroundStyle(.secondary)
             }
         }
         .toolbar {

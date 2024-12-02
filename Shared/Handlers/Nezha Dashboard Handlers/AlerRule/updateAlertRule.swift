@@ -24,17 +24,17 @@ extension RequestHandler {
         request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
         
         let body: [String: Any] = [
-            "enable": alertRule.isEnabled,
+            "enable": isEnabled,
             "trigger_mode": alertRule.triggerOption,
             "notification_group_id": alertRule.notificationGroupID,
             "rules": alertRule.triggerRules.map({
-                GetAlertRuleResponse.Rule(
-                    type: $0.type,
-                    duration: $0.duration,
-                    min: $0.min,
-                    max: $0.max,
-                    cover: $0.coverageOption
-                )
+                [
+                    "type": $0.type as Any,
+                    "duration": $0.duration as Any,
+                    "min": $0.min as Any,
+                    "max": $0.max as Any,
+                    "cover": $0.coverageOption as Any
+                ]
             }),
             "fail_trigger_tasks": alertRule.taskIDs,
             "recover_trigger_tasks": alertRule.recoverTaskIDs

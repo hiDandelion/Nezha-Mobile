@@ -97,7 +97,7 @@ struct ServerListView: View {
                 activeTag = tag
             }
         }) {
-            Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
+            Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Untitled") : tag))
                 .font(.callout)
                 .foregroundStyle(Color.primary)
                 .padding(.vertical, 8)

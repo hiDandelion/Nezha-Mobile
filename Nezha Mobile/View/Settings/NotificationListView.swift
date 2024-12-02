@@ -33,9 +33,24 @@ struct NotificationListView: View {
                         }
                     }
                     if !isThisDeviceSetUpAsRecipient {
-                        Button("Copy Push Notifications Token") {
-                            UIPasteboard.general.string = pushNotificationsToken
+                        Button("Enroll Automatically") {
+                            isLoading = true
+                            Task {
+                                do {
+                                    let _ = try await RequestHandler.addNotification(name: UIDevice.current.name, pushNotificationsToken: pushNotificationsToken)
+                                    await notificationViewModel.updateSync()
+                                    isLoading = false
+                                } catch {
+                                    isLoading = false
+#if DEBUG
+                                    let _ = NMCore.debugLog(error)
+#endif
+                                }
+                            }
                         }
+                    }
+                    Button("Copy Push Notifications Token") {
+                        UIPasteboard.general.string = pushNotificationsToken
                     }
                 }
                 else {
@@ -59,6 +74,7 @@ struct NotificationListView: View {
                 }
                 else {
                     Text("No Notification Method")
+                        .foregroundStyle(.secondary)
                 }
             }
             
@@ -98,6 +114,7 @@ struct NotificationListView: View {
                 }
                 else {
                     Text("No Alert Rule")
+                        .foregroundStyle(.secondary)
                 }
             }
         }

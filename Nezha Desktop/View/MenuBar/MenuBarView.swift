@@ -54,7 +54,7 @@ struct MenuBarView: View {
             case .loaded:
                 Picker("Tag", selection: $activeTag) {
                     ForEach(allTags, id: \.self) { tag in
-                        Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Uncategorized") : tag))
+                        Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Untitled") : tag))
                             .id(tag)
                     }
                 }
