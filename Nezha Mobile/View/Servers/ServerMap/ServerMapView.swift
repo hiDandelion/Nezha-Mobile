@@ -46,7 +46,7 @@ struct ServerMapView: View {
                             .compactMap { $0.name }
                             .joined(separator: "\n")
                         :
-                            String(localized: "\(serverCoordinate.servers.count) servers")
+                            String(localized: "\(serverCoordinate.servers.count) server(s)")
                         ,
                         systemImage: "server.rack",
                         coordinate: CLLocationCoordinate2D(latitude: serverCoordinate.latitude, longitude: serverCoordinate.longitude)

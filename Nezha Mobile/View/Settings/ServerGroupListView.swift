@@ -22,7 +22,7 @@ struct ServerGroupListView: View {
                     ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
                 } label: {
                     VStack(alignment: .leading) {
-                        Text(serverGroup.name)
+                        Text(serverGroup.name != "" ? serverGroup.name : "Untitled")
                         Text("\(serverGroup.serverIDs.count) server(s)")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
@@ -40,7 +40,10 @@ struct ServerGroupListView: View {
                         await serverGroupViewModel.updateSync()
                         isLoading = false
                     } catch {
-                        
+                        isLoading = false
+#if DEBUG
+                        let _ = NMCore.debugLog(error)
+#endif
                     }
                 }
             }
@@ -68,7 +71,10 @@ struct ServerGroupListView: View {
                                 isLoading = false
                                 nameOfNewServerGroup = ""
                             } catch {
-                                
+                                isLoading = false
+#if DEBUG
+                                let _ = NMCore.debugLog(error)
+#endif
                             }
                         }
                     }
@@ -138,15 +144,17 @@ struct ServerGroupDetailView: View {
                     isLoading = true
                     Task {
                         do {
-                            let _ = try await RequestHandler.updateServerGroup(serverGroupID: serverGroup.serverGroupID, name: serverGroup.name, serverIDs: Array(selectedServerIDs))
+                            let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: Array(selectedServerIDs))
                             await serverGroupViewModel.updateSync()
                             withAnimation {
                                 editMode = .inactive
                             }
                         } catch {
-                            
+                            isLoading = false
+#if DEBUG
+                            let _ = NMCore.debugLog(error)
+#endif
                         }
-                        isLoading = false
                     }
                 } label: {
                     Text("Done")

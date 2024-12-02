@@ -18,6 +18,9 @@ struct CanInLoadingStateModifier: ViewModifier {
                 EmptyView()
             case .loading:
                 ProgressView("Loading...")
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
             case .loaded:
                 content
             case .error(let message):

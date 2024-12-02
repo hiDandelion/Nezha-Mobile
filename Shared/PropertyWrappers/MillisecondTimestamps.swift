@@ -8,15 +8,13 @@
 import Foundation
 
 @propertyWrapper
-struct MillisecondTimestamps {
+struct MillisecondTimestamps: Codable {
     var wrappedValue: [Date]
     
     init(wrappedValue: [Date]) {
         self.wrappedValue = wrappedValue
     }
-}
-
-extension MillisecondTimestamps: Codable {
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let timestamps = try container.decode([Int64].self)

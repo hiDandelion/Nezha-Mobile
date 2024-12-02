@@ -13,6 +13,7 @@ struct NotificationListView: View {
     var isThisDeviceSetUpAsRecipient: Bool {
         pushNotificationsToken != "" && notificationViewModel.notifications.first(where: { $0.requestBody.contains(pushNotificationsToken) }) != nil
     }
+    @State private var isLoading: Bool = false
     
     var body: some View {
         @Bindable var notificationViewModel = notificationViewModel
@@ -47,7 +48,7 @@ struct NotificationListView: View {
                 if !notificationViewModel.notifications.isEmpty {
                     ForEach(notificationViewModel.notifications) { notification in
                         VStack(alignment: .leading) {
-                            Text(notification.name)
+                            Text(notification.name != "" ? notification.name : "Untitled")
                             Text(notification.url)
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
@@ -69,13 +70,30 @@ struct NotificationListView: View {
                                 alertRule.isEnabled
                             },
                             set: { newValue in
-                                
+                                isLoading = true
+                                Task {
+                                    do {
+                                        let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, isEnabled: newValue)
+                                        await notificationViewModel.updateSync()
+                                        isLoading = false
+                                    } catch {
+                                        isLoading = false
+#if DEBUG
+                                        let _ = NMCore.debugLog(error)
+#endif
+                                    }
+                                }
                             })
                         ) {
-                            Text(alertRule.name)
-                                .lineLimit(1)
+                            VStack(alignment: .leading) {
+                                Text(alertRule.name != "" ? alertRule.name : "Untitled")
+                                Text("\(alertRule.triggerRules.count) rule(s)")
+                                    .font(.footnote)
+                                    .foregroundStyle(.secondary)
+                                
+                            }
+                            .lineLimit(1)
                         }
-                        .disabled(true)
                     }
                 }
                 else {
@@ -83,6 +101,7 @@ struct NotificationListView: View {
                 }
             }
         }
+        .canBeLoading(isLoading: $isLoading)
         .canInLoadingStateModifier(loadingState: $notificationViewModel.loadingState, retryAction: {
             notificationViewModel.loadData()
         })

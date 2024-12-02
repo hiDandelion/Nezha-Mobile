@@ -8,8 +8,8 @@
 import Foundation
 
 extension RequestHandler {
-    static func updateServerGroup(serverGroupID: Int64, name: String, serverIDs: [Int64]) async throws -> UpdateServerGroupResponse {
-        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/server-group/\(serverGroupID)") else {
+    static func updateServerGroup(serverGroup: ServerGroup, serverIDs: [Int64]) async throws -> UpdateServerGroupResponse {
+        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/server-group/\(serverGroup.serverGroupID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -24,7 +24,7 @@ extension RequestHandler {
         request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
         
         let body: [String: Any] = [
-            "name": name,
+            "name": serverGroup.name,
             "servers": serverIDs
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)

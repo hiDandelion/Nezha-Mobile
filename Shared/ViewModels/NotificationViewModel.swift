@@ -71,8 +71,26 @@ class NotificationViewModel {
             DispatchQueue.main.async {
                 withAnimation {
                     if let alertRules = response.data {
-                        self.alertRules = alertRules.map({
-                            AlertRuleData(id: UUID().uuidString, alertRuleID: $0.id, notificationGroupID: $0.notification_group_id, name: $0.name, isEnabled: $0.enable)
+                        self.alertRules = alertRules.map({ alertRule in
+                            AlertRuleData(
+                                id: UUID().uuidString,
+                                alertRuleID: alertRule.id,
+                                notificationGroupID: alertRule.notification_group_id,
+                                name: alertRule.name,
+                                isEnabled: alertRule.enable,
+                                triggerOption: alertRule.trigger_mode,
+                                triggerRules: alertRule.rules.map({
+                                    AlertRuleData.TriggerRule(
+                                        type: $0.type,
+                                        duration: $0.duration,
+                                        min: $0.min,
+                                        max: $0.max,
+                                        coverageOption: $0.cover
+                                    )
+                                }),
+                                taskIDs: alertRule.fail_trigger_tasks,
+                                recoverTaskIDs: alertRule.recover_trigger_tasks
+                            )
                         })
                     }
                 }
