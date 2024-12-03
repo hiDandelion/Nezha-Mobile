@@ -65,6 +65,7 @@
       }
     },
     "%lld rule(s)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -1297,6 +1298,7 @@
       }
     },
     "Enter a name for the new server group" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1311,6 +1313,9 @@
           }
         }
       }
+    },
+    "Enter a name for the new server group." : {
+
     },
     "error.dashboardAuthenticationFailed" : {
       "localizations" : {

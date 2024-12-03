@@ -14,6 +14,11 @@ import SwiftUI
     import AppKit
 #endif
 
+// Handle empty name
+func nameCanBeUntitled(_ name: String) -> String {
+    return name != "" ? name : String(localized: "Untitled")
+}
+
 // Bytes To Data Amount String
 func formatBytes(_ bytes: Int64, decimals: Int = 2) -> String {
     let units = ["B", "KB", "MB", "GB", "TB", "PB"]

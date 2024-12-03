@@ -21,22 +21,8 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section("Dashboard") {
-                    NavigationLink {
+                    NavigationLink("Dashboard Settings") {
                         DashboardSettingsView()
-                    } label: {
-                        TextWithColorfulIcon(titleKey: "General", systemName: "gear", color: .gray)
-                    }
-                    
-                    NavigationLink {
-                        ServerGroupListView()
-                    } label: {
-                        TextWithColorfulIcon(titleKey: "Server Groups", systemName: "square.grid.3x2", color: .blue)
-                    }
-                    
-                    NavigationLink {
-                        NotificationListView()
-                    } label: {
-                        TextWithColorfulIcon(titleKey: "Notifications", systemName: "bell.badge", color: .red)
                     }
                 }
                 

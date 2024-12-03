@@ -10,7 +10,7 @@ import SwiftUI
 struct ServerTableView: View {
     @Environment(\.openWindow) var openWindow
     @Environment(DashboardViewModel.self) private var dashboardViewModel
-    var activeTag: String = "All"
+    var selectedServerGroup: ServerGroup?
     @State private var searchText: String = ""
     @State private var selectedServers: Set<ServerData.ID> = .init()
     
@@ -22,8 +22,14 @@ struct ServerTableView: View {
                 }
                 return $0.displayIndex < $1.displayIndex
             }
-            .filter { server in
-                return activeTag == "All" || dashboardViewModel.serverGroups.first(where: { $0.name == activeTag && $0.serverIDs.contains(server.serverID) }) != nil }
+            .filter {
+                if let selectedServerGroup {
+                    return selectedServerGroup.serverIDs.contains($0.serverID)
+                }
+                else {
+                    return true
+                }
+            }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     

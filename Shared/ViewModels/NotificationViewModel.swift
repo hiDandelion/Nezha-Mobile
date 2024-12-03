@@ -79,15 +79,7 @@ class NotificationViewModel {
                                 name: alertRule.name,
                                 isEnabled: alertRule.enable,
                                 triggerOption: alertRule.trigger_mode,
-                                triggerRules: alertRule.rules.map({
-                                    AlertRuleData.TriggerRule(
-                                        type: $0.type,
-                                        duration: $0.duration,
-                                        min: $0.min,
-                                        max: $0.max,
-                                        coverageOption: $0.cover
-                                    )
-                                }),
+                                triggerRule: alertRule.rules,
                                 taskIDs: alertRule.fail_trigger_tasks,
                                 recoverTaskIDs: alertRule.recover_trigger_tasks
                             )

@@ -10,7 +10,7 @@ import SwiftUI
 struct MenuBarView: View {
     @Environment(\.openWindow) var openWindow
     @Environment(DashboardViewModel.self) private var dashboardViewModel
-    @State private var activeTag: String = "All"
+    @State private var selectedServerGroup: ServerGroup?
     
     private var filteredServers: [ServerData] {
         dashboardViewModel.servers
@@ -20,16 +20,14 @@ struct MenuBarView: View {
                 }
                 return $0.displayIndex < $1.displayIndex
             }
-            .filter { server in
-                return activeTag == "All" || dashboardViewModel.serverGroups.first(where: { $0.name == activeTag && $0.serverIDs.contains(server.serverID) }) != nil }
-    }
-    
-    private var tags: [String] {
-        Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
-    }
-    
-    private var allTags: [String] {
-        ["All"] + tags.sorted()
+            .filter {
+                if let selectedServerGroup {
+                    return selectedServerGroup.serverIDs.contains($0.serverID)
+                }
+                else {
+                    return true
+                }
+            }
     }
     
     var body: some View {
@@ -52,10 +50,12 @@ struct MenuBarView: View {
                 ProgressView("Loading...")
                 Spacer()
             case .loaded:
-                Picker("Tag", selection: $activeTag) {
-                    ForEach(allTags, id: \.self) { tag in
-                        Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Untitled") : tag))
-                            .id(tag)
+                Picker("Tag", selection: $selectedServerGroup) {
+                    Text("All")
+                        .tag(nil as ServerGroup?)
+                    ForEach(dashboardViewModel.serverGroups) { serverGroup in
+                        Text(nameCanBeUntitled(serverGroup.name))
+                            .tag(serverGroup)
                     }
                 }
                 .padding(.horizontal)

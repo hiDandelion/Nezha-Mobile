@@ -12,7 +12,7 @@ struct DeviceInfoView: View {
     private var deviceInfoViewModel: DeviceInfoViewModel = DeviceInfoViewModel()
     
     var body: some View {
-        Form {
+        List {
             NMUI.PieceOfInfo(systemImage: "iphone", name: "Model Identifier", content: Text("\(deviceInfoViewModel.deviceModelIdentifier)"))
             NMUI.PieceOfInfo(systemImage: "123.rectangle", name: "System Version", content: Text("\(deviceInfoViewModel.OSVersionNumber)"))
             

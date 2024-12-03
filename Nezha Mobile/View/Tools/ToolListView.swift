@@ -12,7 +12,21 @@ struct ToolListView: View {
     
     var body: some View {
         NavigationStack {
-            Form {
+            List {
+                Section("Dashboard") {
+                    NavigationLink {
+                        ServerGroupListView()
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Server Groups", systemName: "square.grid.3x2", color: .blue)
+                    }
+                    
+                    NavigationLink {
+                        NotificationView()
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Notifications", systemName: "bell.badge", color: .red)
+                    }
+                }
+                
                 Section("Agent") {
                     NavigationLink {
                         DeviceInfoView()

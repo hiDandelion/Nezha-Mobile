@@ -9,7 +9,7 @@ import SwiftUI
 
 enum MainTab: String, CaseIterable {
     case servers = "server.rack"
-    case tools = "wrench.and.screwdriver"
+    case tools = "briefcase"
     case alerts = "bell"
     case settings = "gearshape"
     

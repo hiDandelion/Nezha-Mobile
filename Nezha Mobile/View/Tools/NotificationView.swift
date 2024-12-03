@@ -1,5 +1,5 @@
 //
-//  NotificationListView.swift
+//  NotificationView.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 12/1/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotificationListView: View {
+struct NotificationView: View {
     @Environment(NotificationViewModel.self) private var notificationViewModel
     @AppStorage(NMCore.NMPushNotificationsToken, store: NMCore.userDefaults) private var pushNotificationsToken: String = ""
     var isThisDeviceSetUpAsRecipient: Bool {
@@ -63,7 +63,7 @@ struct NotificationListView: View {
                 if !notificationViewModel.notifications.isEmpty {
                     ForEach(notificationViewModel.notifications) { notification in
                         VStack(alignment: .leading) {
-                            Text(notification.name != "" ? notification.name : "Untitled")
+                            Text(nameCanBeUntitled(notification.name))
                             Text(notification.url)
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
@@ -102,8 +102,8 @@ struct NotificationListView: View {
                             })
                         ) {
                             VStack(alignment: .leading) {
-                                Text(alertRule.name != "" ? alertRule.name : "Untitled")
-                                Text("\(alertRule.triggerRules.count) rule(s)")
+                                Text(nameCanBeUntitled(alertRule.name))
+                                Text(alertRule.triggerRule ?? "No Rule")
                                     .font(.footnote)
                                     .foregroundStyle(.secondary)
                                 

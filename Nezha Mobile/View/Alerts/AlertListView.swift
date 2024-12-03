@@ -52,35 +52,7 @@ struct AlertListView: View {
                     }
                     .navigationTitle("Alerts")
                     .toolbar {
-#if DEBUG
-                        ToolbarItem(placement: .topBarLeading) {
-                            addAlertButton
-                        }
-#endif
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button(role: .destructive) {
-                                isShowingDeleteAllConfirmationDialog = true
-                            } label: {
-                                Label("Delete All", systemImage: "trash")
-                            }
-                            .confirmationDialog(
-                                Text("Delete All Alerts"),
-                                isPresented: $isShowingDeleteAllConfirmationDialog,
-                                actions: {
-                                    Button("Delete", role: .destructive) {
-                                        let createDataHandler = createDataHandler
-                                        Task {
-                                            if let dataHandler = await createDataHandler() {
-                                                _ = try await dataHandler.deleteAllServerAlerts()
-                                            }
-                                        }
-                                    }
-                                },
-                                message: {
-                                    Text("All alerts will be deleted. Are you sure?")
-                                }
-                            )
-                        }
+                        toolbarMenu
                     }
                     .safeAreaInset(edge: .bottom) {
                         Rectangle()
@@ -89,10 +61,9 @@ struct AlertListView: View {
                     }
                 }
                 else {
+                    ContentUnavailableView("No Alert", systemImage: "checkmark.circle.fill")
 #if DEBUG
                     addAlertButton
-#else
-                    ContentUnavailableView("No Alert", systemImage: "checkmark.circle.fill")
 #endif
                 }
             }
@@ -112,18 +83,47 @@ struct AlertListView: View {
         }
     }
     
+    private var toolbarMenu: some View {
+        Menu {
+            Button(role: .destructive) {
+                isShowingDeleteAllConfirmationDialog = true
+            } label: {
+                Label("Delete All", systemImage: "trash")
+            }
+            .confirmationDialog(
+                Text("Delete All Alerts"),
+                isPresented: $isShowingDeleteAllConfirmationDialog,
+                actions: {
+                    Button("Delete", role: .destructive) {
+                        let createDataHandler = createDataHandler
+                        Task {
+                            if let dataHandler = await createDataHandler() {
+                                _ = try await dataHandler.deleteAllServerAlerts()
+                            }
+                        }
+                    }
+                },
+                message: {
+                    Text("All alerts will be deleted. Are you sure?")
+                }
+            )
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+    }
+    
 #if DEBUG
     private var addAlertButton: some View {
-        Button {
-            let createDataHandler = createDataHandler
-            Task {
-                if let dataHandler = await createDataHandler() {
-                    _ = try await dataHandler.newServerAlert(uuid: UUID(), timestamp: Date(), title: "New Alert", content: "Alert Content")
+            Button {
+                let createDataHandler = createDataHandler
+                Task {
+                    if let dataHandler = await createDataHandler() {
+                        _ = try await dataHandler.newServerAlert(uuid: UUID(), timestamp: Date(), title: "New Alert", content: "Alert Content")
+                    }
                 }
+            } label: {
+                Label("Add Alert", systemImage: "plus")
             }
-        } label: {
-            Label("Add Alert", systemImage: "plus")
-        }
     }
 #endif
 }

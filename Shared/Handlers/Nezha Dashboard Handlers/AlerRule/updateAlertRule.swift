@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 extension RequestHandler {
     static func updateAlertRule(alertRule: AlertRuleData, isEnabled: Bool) async throws -> UpdateAlertRuleResponse {
@@ -23,19 +24,15 @@ extension RequestHandler {
         request.httpMethod = "PATCH"
         request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
         
+        let triggerRuleData = alertRule.triggerRule!.data(using: .utf8)
+        let triggerRuleJSONObject = try! JSONSerialization.jsonObject(with: triggerRuleData!)
+        
         let body: [String: Any] = [
+            "name": alertRule.name,
             "enable": isEnabled,
             "trigger_mode": alertRule.triggerOption,
             "notification_group_id": alertRule.notificationGroupID,
-            "rules": alertRule.triggerRules.map({
-                [
-                    "type": $0.type as Any,
-                    "duration": $0.duration as Any,
-                    "min": $0.min as Any,
-                    "max": $0.max as Any,
-                    "cover": $0.coverageOption as Any
-                ]
-            }),
+            "rules": triggerRuleJSONObject,
             "fail_trigger_tasks": alertRule.taskIDs,
             "recover_trigger_tasks": alertRule.recoverTaskIDs
         ]

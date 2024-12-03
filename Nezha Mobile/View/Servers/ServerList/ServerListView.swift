@@ -19,7 +19,7 @@ struct ServerListView: View {
     @State private var shouldNavigateToServerDetailView: Bool = false
     @State private var incomingURLServerUUID: String?
     @State private var searchText: String = ""
-    @State private var activeTag: String = "All"
+    @State private var selectedServerGroup: ServerGroup?
     @State private var newSettingRequireReconnection: Bool? = false
     @Namespace private var tagNamespace
     @Namespace private var serverNamespace
@@ -32,8 +32,14 @@ struct ServerListView: View {
                 }
                 return $0.displayIndex < $1.displayIndex
             }
-            .filter { server in
-                return activeTag == "All" || dashboardViewModel.serverGroups.first(where: { $0.name == activeTag && $0.serverIDs.contains(server.serverID) }) != nil }
+            .filter {
+                if let selectedServerGroup {
+                    return selectedServerGroup.serverIDs.contains($0.serverID)
+                }
+                else {
+                    return true
+                }
+            }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
@@ -153,31 +159,28 @@ struct ServerListView: View {
     var groupPicker: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
-                if !dashboardViewModel.servers.isEmpty {
-                    let tags = Array(Set(dashboardViewModel.serverGroups.map { $0.name }))
-                    let allTags = ["All"] + tags.sorted()
-                    ForEach(allTags, id: \.self) { tag in
-                        groupTag(tag: tag)
-                    }
+                groupTag(serverGroup: nil)
+                ForEach(dashboardViewModel.serverGroups) { serverGroup in
+                    groupTag(serverGroup: serverGroup)
                 }
             }
         }
         .scrollIndicators(.never)
     }
     
-    private func groupTag(tag: String) -> some View {
+    private func groupTag(serverGroup: ServerGroup?) -> some View {
         Button(action: {
             withAnimation(.snappy) {
-                activeTag = tag
+                selectedServerGroup = serverGroup
             }
         }) {
-            Text(tag == "All" ? String(localized: "All(\(dashboardViewModel.servers.count))") : (tag == "" ? String(localized: "Untitled") : tag))
+            Text(serverGroup == nil ? String(localized: "All(\(dashboardViewModel.servers.count))") : nameCanBeUntitled(serverGroup!.name))
                 .font(.callout)
-                .foregroundStyle(activeTag == tag ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
+                .foregroundStyle(selectedServerGroup == serverGroup ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 15)
                 .background {
-                    if activeTag == tag {
+                    if selectedServerGroup == serverGroup {
                         if themeStore.themeCustomizationEnabled {
                             Capsule()
                                 .fill(themeStore.themeTintColor(scheme: scheme))

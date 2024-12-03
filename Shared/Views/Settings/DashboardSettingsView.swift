@@ -49,6 +49,6 @@ struct DashboardSettingsView: View {
                 }
             }
         }
-        .navigationTitle("General")
+        .navigationTitle("Dashboard Settings")
     }
 }
