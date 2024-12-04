@@ -31,10 +31,7 @@ class DashboardViewModel {
         stopMonitoring()
         isMonitoringEnabled = true
         loadingState = .loading
-        Task {
-            await getServer()
-            await getServerGroup()
-        }
+        refreshAsync()
         startTimer()
     }
     
@@ -44,14 +41,34 @@ class DashboardViewModel {
         loadingState = .idle
     }
     
-    func updateSync() async {
+    func refreshSync() async {
         await getServer()
         await getServerGroup()
     }
     
-    func updateAsync() {
+    func refreshAsync() {
         Task {
             await getServer()
+            await getServerGroup()
+        }
+    }
+    
+    func refreshServerSync() async {
+        await getServerGroup()
+    }
+    
+    func refreshServerAsync() {
+        Task {
+            await getServerGroup()
+        }
+    }
+    
+    func refreshServerGroupSync() async {
+        await getServerGroup()
+    }
+    
+    func refreshServerGroupAsync() {
+        Task {
             await getServerGroup()
         }
     }
@@ -78,7 +95,7 @@ class DashboardViewModel {
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
             Task { [weak self] in
                 guard let self = self else { return }
-                await self.getServer()
+                await self.refreshServerSync()
             }
         }
     }

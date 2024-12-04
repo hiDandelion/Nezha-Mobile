@@ -13,7 +13,8 @@ struct NotificationView: View {
     var isThisDeviceSetUpAsRecipient: Bool {
         pushNotificationsToken != "" && notificationViewModel.notifications.first(where: { $0.requestBody.contains(pushNotificationsToken) }) != nil
     }
-    @State private var isLoading: Bool = false
+    @State private var isEnrolling: Bool = false
+    @State private var idOfAlertRuleToggling: String?
     
     var body: some View {
         @Bindable var notificationViewModel = notificationViewModel
@@ -33,20 +34,25 @@ struct NotificationView: View {
                         }
                     }
                     if !isThisDeviceSetUpAsRecipient {
-                        Button("Enroll Automatically") {
-                            isLoading = true
-                            Task {
-                                do {
-                                    let _ = try await RequestHandler.addNotification(name: UIDevice.current.name, pushNotificationsToken: pushNotificationsToken)
-                                    await notificationViewModel.updateSync()
-                                    isLoading = false
-                                } catch {
-                                    isLoading = false
-#if DEBUG
-                                    let _ = NMCore.debugLog(error)
-#endif
+                        if !isEnrolling {
+                            Button("Enroll Automatically") {
+                                isEnrolling = true
+                                Task {
+                                    do {
+                                        let _ = try await RequestHandler.addNotification(name: UIDevice.current.name, pushNotificationsToken: pushNotificationsToken)
+                                        await notificationViewModel.refreshNotificationSync()
+                                        isEnrolling = false
+                                    } catch {
+                                        isEnrolling = false
+    #if DEBUG
+                                        let _ = NMCore.debugLog(error)
+    #endif
+                                    }
                                 }
                             }
+                        }
+                        else {
+                            ProgressView()
                         }
                     }
                     Button("Copy Push Notifications Token") {
@@ -62,14 +68,7 @@ struct NotificationView: View {
             Section("Notification Methods") {
                 if !notificationViewModel.notifications.isEmpty {
                     ForEach(notificationViewModel.notifications) { notification in
-                        VStack(alignment: .leading) {
-                            Text(nameCanBeUntitled(notification.name))
-                            Text(notification.url)
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                            
-                        }
-                        .lineLimit(1)
+                        notificationLabel(notification: notification)
                     }
                 }
                 else {
@@ -81,34 +80,36 @@ struct NotificationView: View {
             Section("Alert Rules") {
                 if !notificationViewModel.alertRules.isEmpty {
                     ForEach(notificationViewModel.alertRules) { alertRule in
-                        Toggle(isOn: Binding(
-                            get: {
-                                alertRule.isEnabled
-                            },
-                            set: { newValue in
-                                isLoading = true
-                                Task {
-                                    do {
-                                        let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, isEnabled: newValue)
-                                        await notificationViewModel.updateSync()
-                                        isLoading = false
-                                    } catch {
-                                        isLoading = false
-#if DEBUG
-                                        let _ = NMCore.debugLog(error)
-#endif
+                        if idOfAlertRuleToggling != alertRule.id {
+                            Toggle(isOn: Binding(
+                                get: {
+                                    alertRule.isEnabled
+                                },
+                                set: { newValue in
+                                    idOfAlertRuleToggling = alertRule.id
+                                    Task {
+                                        do {
+                                            let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, isEnabled: newValue)
+                                            await notificationViewModel.refreshAlertRuleSync()
+                                            idOfAlertRuleToggling = nil
+                                        } catch {
+                                            idOfAlertRuleToggling = nil
+    #if DEBUG
+                                            let _ = NMCore.debugLog(error)
+    #endif
+                                        }
                                     }
-                                }
-                            })
-                        ) {
-                            VStack(alignment: .leading) {
-                                Text(nameCanBeUntitled(alertRule.name))
-                                Text(alertRule.triggerRule ?? "No Rule")
-                                    .font(.footnote)
-                                    .foregroundStyle(.secondary)
-                                
+                                })
+                            ) {
+                                alertRuleLabel(alertRule: alertRule)
                             }
-                            .lineLimit(1)
+                        }
+                        else {
+                            HStack {
+                                alertRuleLabel(alertRule: alertRule)
+                                Spacer()
+                                ProgressView()
+                            }
                         }
                     }
                 }
@@ -118,13 +119,36 @@ struct NotificationView: View {
                 }
             }
         }
-        .canBeLoading(isLoading: $isLoading)
         .canInLoadingStateModifier(loadingState: $notificationViewModel.loadingState, retryAction: {
             notificationViewModel.loadData()
         })
         .navigationTitle("Notifications")
         .onAppear {
-            notificationViewModel.loadData()
+            if notificationViewModel.loadingState == .idle {
+                notificationViewModel.loadData()
+            }
         }
+    }
+    
+    private func notificationLabel(notification: NotificationData) -> some View {
+        VStack(alignment: .leading) {
+            Text(nameCanBeUntitled(notification.name))
+            Text(notification.url)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+            
+        }
+        .lineLimit(1)
+    }
+    
+    private func alertRuleLabel(alertRule: AlertRuleData) -> some View {
+        VStack(alignment: .leading) {
+            Text(nameCanBeUntitled(alertRule.name))
+            Text(alertRule.triggerRule ?? "No Rule")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+            
+        }
+        .lineLimit(1)
     }
 }

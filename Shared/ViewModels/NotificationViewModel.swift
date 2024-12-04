@@ -26,20 +26,40 @@ class NotificationViewModel {
         loadingState = .loading
         Task {
             await getNotification()
-            await getAlertRules()
+            await getAlertRule()
             loadingState = .loaded
         }
     }
     
-    func updateSync() async {
+    func refreshSync() async {
         await getNotification()
-        await getAlertRules()
+        await getAlertRule()
     }
     
-    func updateAsync() {
+    func refreshAsync() {
         Task {
             await getNotification()
-            await getAlertRules()
+            await getAlertRule()
+        }
+    }
+    
+    func refreshNotificationSync() async {
+        await getNotification()
+    }
+    
+    func refreshNotificationAsync() {
+        Task {
+            await getNotification()
+        }
+    }
+    
+    func refreshAlertRuleSync() async {
+        await getAlertRule()
+    }
+    
+    func refreshNotificationAsync() async {
+        Task {
+            await getAlertRule()
         }
     }
     
@@ -65,7 +85,7 @@ class NotificationViewModel {
         }
     }
     
-    private func getAlertRules() async {
+    private func getAlertRule() async {
         do {
             let response = try await RequestHandler.getAlertRule()
             DispatchQueue.main.async {

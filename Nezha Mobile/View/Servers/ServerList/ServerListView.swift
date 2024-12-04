@@ -43,10 +43,7 @@ struct ServerListView: View {
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
-    private func columns(isWideLayout: Bool) -> [GridItem] {
-        isWideLayout ? [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)]
-        : [GridItem(.flexible())]
-    }
+    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 300, maximum: 400))]
     
     var body: some View {
         NavigationStack {
@@ -124,30 +121,20 @@ struct ServerListView: View {
     var dashboard: some View {
         Group {
             @Bindable var dashboardViewModel = dashboardViewModel
-            Group {
-                if dashboardViewModel.servers.isEmpty {
-                    ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
-                }
-                else {
-                    GeometryReader { proxy in
-                        let isWideLayout = proxy.size.width > 600
-                        ScrollView {
-                            groupPicker
-                                .safeAreaPadding(.horizontal, 15)
-                                .padding(.bottom, 5)
-                            
-                            serverList(isWideLayout: isWideLayout)
-                        }
-                        .navigationTitle("Servers")
-                        .searchable(text: $searchText)
-                        .toolbar {
-                            Button {
-                                dashboardViewModel.updateAsync()
-                            } label: {
-                                Label("Refresh", systemImage: "arrow.clockwise")
-                            }
-                        }
-                    }
+            ScrollView {
+                groupPicker
+                    .safeAreaPadding(.horizontal, 15)
+                    .padding(.bottom, 5)
+                
+                serverList
+            }
+            .navigationTitle("Servers")
+            .searchable(text: $searchText)
+            .toolbar {
+                Button {
+                    dashboardViewModel.refreshAsync()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
                 }
             }
             .canInLoadingStateModifier(loadingState: $dashboardViewModel.loadingState) {
@@ -206,10 +193,10 @@ struct ServerListView: View {
         .buttonStyle(.plain)
     }
     
-    private func serverList(isWideLayout: Bool) -> some View {
+    private var serverList: some View {
         Group {
             if !dashboardViewModel.servers.isEmpty {
-                LazyVGrid(columns: columns(isWideLayout: isWideLayout), spacing: 10) {
+                LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(filteredServers) { server in
                         if #available(iOS 18, *) {
                             NavigationLink {

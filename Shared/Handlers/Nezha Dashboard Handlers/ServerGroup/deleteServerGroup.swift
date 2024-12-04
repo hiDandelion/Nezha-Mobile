@@ -8,7 +8,7 @@
 import Foundation
 
 extension RequestHandler {
-    static func deleteServerGroup(serverGroupIDs: [Int64]) async throws -> DeleteServerGroupResponse {
+    static func deleteServerGroup(serverGroups: [ServerGroup]) async throws -> DeleteServerGroupResponse {
         guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/batch-delete/server-group") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
@@ -23,7 +23,7 @@ extension RequestHandler {
         request.httpMethod = "POST"
         request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
         
-        let body: [Int64] = serverGroupIDs
+        let body: [Int64] = serverGroups.map({ $0.serverGroupID })
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         let (data, _) = try await URLSession.shared.data(for: request)

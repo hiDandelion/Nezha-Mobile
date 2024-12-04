@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ServerGroupListView: View {
     @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
+    
     @State private var isShowAddServerGroupAlert: Bool = false
     @State private var nameOfNewServerGroup: String = ""
-    @State private var isLoading: Bool = false
+    @State private var isAddingServerGroup: Bool = false
+    
+    @State private var isShowRenameServerGroupAlert: Bool = false
+    @State private var serverGroupToRename: ServerGroup?
+    @State private var newNameOfServerGroup: String = ""
     
     var body: some View {
         @Bindable var serverGroupViewModel = serverGroupViewModel
@@ -21,29 +26,25 @@ struct ServerGroupListView: View {
                     NavigationLink {
                         ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
                     } label: {
-                        VStack(alignment: .leading) {
-                            Text(nameCanBeUntitled(serverGroup.name))
-                            Text("\(serverGroup.serverIDs.count) server(s)")
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                            
-                        }
-                        .lineLimit(1)
+                        serverGroupLabel(serverGroup: serverGroup)
                     }
-                }
-                .onDelete { indexSet in
-                    let serverGroupIDs = indexSet.map { serverGroupViewModel.serverGroups[$0].serverGroupID }
-                    Task {
-                        isLoading = true
-                        do {
-                            let _ = try await RequestHandler.deleteServerGroup(serverGroupIDs: serverGroupIDs)
-                            await serverGroupViewModel.updateSync()
-                            isLoading = false
-                        } catch {
-                            isLoading = false
+                    .swipeActions(edge: .trailing) {
+                        Button("Delete", role: .destructive) {
+                            Task {
+                                do {
+                                    let _ = try await RequestHandler.deleteServerGroup(serverGroups: [serverGroup])
+                                    await serverGroupViewModel.refreshServerGroupSync()
+                                } catch {
 #if DEBUG
-                            let _ = NMCore.debugLog(error)
+                                    let _ = NMCore.debugLog(error)
 #endif
+                                }
+                            }
+                        }
+                        Button("Rename") {
+                            serverGroupToRename = serverGroup
+                            newNameOfServerGroup = serverGroup.name
+                            isShowRenameServerGroupAlert = true
                         }
                     }
                 }
@@ -55,42 +56,78 @@ struct ServerGroupListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    isShowAddServerGroupAlert = true
-                } label: {
-                    Label("Add Server Group", systemImage: "plus")
-                }
-                .alert("Add Server Group", isPresented: $isShowAddServerGroupAlert) {
-                    TextField("Name", text: $nameOfNewServerGroup)
-                    Button("Cancel", role: .cancel) { }
-                    Button("Add") {
-                        isLoading = true
-                        Task {
-                            do {
-                                let _ = try await RequestHandler.addServerGroup(name: nameOfNewServerGroup)
-                                await serverGroupViewModel.updateSync()
-                                isLoading = false
-                                nameOfNewServerGroup = ""
-                            } catch {
-                                isLoading = false
-#if DEBUG
-                                let _ = NMCore.debugLog(error)
-#endif
-                            }
-                        }
+                if !isAddingServerGroup {
+                    Button {
+                        isShowAddServerGroupAlert = true
+                    } label: {
+                        Label("Add Server Group", systemImage: "plus")
                     }
-                } message: {
-                    Text("Enter a name for the new server group.")
+                }
+                else {
+                    ProgressView()
                 }
             }
         }
-        .canBeLoading(isLoading: $isLoading)
         .canInLoadingStateModifier(loadingState: $serverGroupViewModel.loadingState) {
             serverGroupViewModel.loadData()
         }
         .navigationTitle("Server Groups")
         .onAppear {
-            serverGroupViewModel.loadData()
+            if serverGroupViewModel.loadingState == .idle {
+                serverGroupViewModel.loadData()
+            }
         }
+        .alert("Add Server Group", isPresented: $isShowAddServerGroupAlert) {
+            TextField("Name", text: $nameOfNewServerGroup)
+            Button("Cancel", role: .cancel) { }
+            Button("Add") {
+                isAddingServerGroup = true
+                Task {
+                    do {
+                        let _ = try await RequestHandler.addServerGroup(name: nameOfNewServerGroup)
+                        await serverGroupViewModel.refreshServerGroupSync()
+                        isAddingServerGroup = false
+                        nameOfNewServerGroup = ""
+                    } catch {
+                        isAddingServerGroup = false
+#if DEBUG
+                        let _ = NMCore.debugLog(error)
+#endif
+                    }
+                }
+            }
+        } message: {
+            Text("Enter a name for the new server group.")
+        }
+        .alert("Rename Server Group", isPresented: $isShowRenameServerGroupAlert) {
+            TextField("Name", text: $newNameOfServerGroup)
+            Button("Cancel", role: .cancel) { }
+            Button("OK") {
+                Task {
+                    do {
+                        let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroupToRename!, name: newNameOfServerGroup)
+                        await serverGroupViewModel.refreshServerGroupSync()
+                        newNameOfServerGroup = ""
+                    } catch {
+#if DEBUG
+                        let _ = NMCore.debugLog(error)
+#endif
+                    }
+                }
+            }
+        } message: {
+            Text("Enter a new name for the server group.")
+        }
+    }
+    
+    private func serverGroupLabel(serverGroup: ServerGroup) -> some View {
+        VStack(alignment: .leading) {
+            Text(nameCanBeUntitled(serverGroup.name))
+            Text("\(serverGroup.serverIDs.count) server(s)")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+            
+        }
+        .lineLimit(1)
     }
 }

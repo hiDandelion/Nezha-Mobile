@@ -31,14 +31,34 @@ class ServerGroupViewModel {
         }
     }
     
-    func updateSync() async {
+    func refreshSync() async {
         await getServer()
         await getServerGroup()
     }
     
-    func updateAsync() {
+    func refreshAsync() {
         Task {
             await getServer()
+            await getServerGroup()
+        }
+    }
+    
+    func refreshServerSync() async {
+        await getServerGroup()
+    }
+    
+    func refreshServerAsync() {
+        Task {
+            await getServerGroup()
+        }
+    }
+    
+    func refreshServerGroupSync() async {
+        await getServerGroup()
+    }
+    
+    func refreshServerGroupAsync() {
+        Task {
             await getServerGroup()
         }
     }

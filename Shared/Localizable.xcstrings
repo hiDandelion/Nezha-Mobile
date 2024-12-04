@@ -64,53 +64,6 @@
         }
       }
     },
-    "%lld rule(s)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld rule"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld rules"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "variations" : {
-            "plural" : {
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lldルール"
-                }
-              }
-            }
-          }
-        },
-        "zh-Hans" : {
-          "variations" : {
-            "plural" : {
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld条规则"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "%lld server(s)" : {
       "localizations" : {
         "en" : {
@@ -1297,25 +1250,37 @@
         }
       }
     },
-    "Enter a name for the new server group" : {
-      "extractionState" : "stale",
+    "Enter a name for the new server group." : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新しいサーバーグループの名前を入力してください"
+            "value" : "新しいサーバーグループの名前を入力してください。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "输入新服务器分组的名称"
+            "value" : "输入新服务器分组的名称。"
           }
         }
       }
     },
-    "Enter a name for the new server group." : {
-
+    "Enter a new name for the server group." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバーグループの新しい名前を入力してください。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入服务器分组的新名称。"
+          }
+        }
+      }
     },
     "error.dashboardAuthenticationFailed" : {
       "localizations" : {
@@ -2295,6 +2260,12 @@
           }
         }
       }
+    },
+    "Rename" : {
+
+    },
+    "Rename Server Group" : {
+
     },
     "Retry" : {
       "localizations" : {

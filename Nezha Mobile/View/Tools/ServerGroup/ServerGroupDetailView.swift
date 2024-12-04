@@ -15,7 +15,7 @@ struct ServerGroupDetailView: View {
     }
     @State private var editMode: EditMode = .inactive
     @State private var selectedServerIDs: Set<Int64> = .init()
-    @State private var isLoading: Bool = false
+    @State private var isUpdatingServerGroup: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -36,7 +36,6 @@ struct ServerGroupDetailView: View {
                         }
                 }
             }
-            .canBeLoading(isLoading: $isLoading)
         }
     }
     
@@ -52,25 +51,31 @@ struct ServerGroupDetailView: View {
                 }
             }
             if editMode == .active {
-                Button {
-                    isLoading = true
-                    Task {
-                        do {
-                            let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: Array(selectedServerIDs))
-                            await serverGroupViewModel.updateSync()
-                            withAnimation {
-                                editMode = .inactive
-                            }
-                        } catch {
-                            isLoading = false
+                if !isUpdatingServerGroup {
+                    Button {
+                        isUpdatingServerGroup = true
+                        Task {
+                            do {
+                                let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: Array(selectedServerIDs))
+                                await serverGroupViewModel.refreshServerGroupSync()
+                                isUpdatingServerGroup = false
+                                withAnimation {
+                                    editMode = .inactive
+                                }
+                            } catch {
+                                isUpdatingServerGroup = false
 #if DEBUG
-                            let _ = NMCore.debugLog(error)
+                                let _ = NMCore.debugLog(error)
 #endif
+                            }
                         }
+                    } label: {
+                        Text("Done")
+                            .fontWeight(.bold)
                     }
-                } label: {
-                    Text("Done")
-                        .fontWeight(.bold)
+                }
+                else {
+                    ProgressView()
                 }
             }
         }
