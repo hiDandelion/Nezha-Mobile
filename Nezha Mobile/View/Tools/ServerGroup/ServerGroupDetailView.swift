@@ -57,7 +57,7 @@ struct ServerGroupDetailView: View {
                         Task {
                             do {
                                 let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: Array(selectedServerIDs))
-                                await serverGroupViewModel.refreshServerGroupSync()
+                                await serverGroupViewModel.refreshServerGroup()
                                 isUpdatingServerGroup = false
                                 withAnimation {
                                     editMode = .inactive

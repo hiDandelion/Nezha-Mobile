@@ -132,7 +132,9 @@ struct ServerListView: View {
             .searchable(text: $searchText)
             .toolbar {
                 Button {
-                    dashboardViewModel.refreshAsync()
+                    Task {
+                        await dashboardViewModel.refresh()
+                    }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }

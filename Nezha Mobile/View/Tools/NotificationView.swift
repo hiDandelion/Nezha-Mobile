@@ -19,7 +19,7 @@ struct NotificationView: View {
     @State private var notificationToRename: NotificationData?
     @State private var newNameOfNotification: String = ""
     
-    @State private var idOfAlertRuleToggling: String?
+    @State private var alertRuleToggling: AlertRuleData?
     
     var body: some View {
         List {
@@ -44,13 +44,13 @@ struct NotificationView: View {
                                 Task {
                                     do {
                                         let _ = try await RequestHandler.addNotification(name: UIDevice.current.name, pushNotificationsToken: pushNotificationsToken)
-                                        await notificationViewModel.refreshNotificationSync()
+                                        await notificationViewModel.refreshNotification()
                                         isEnrolling = false
                                     } catch {
                                         isEnrolling = false
-    #if DEBUG
+#if DEBUG
                                         let _ = NMCore.debugLog(error)
-    #endif
+#endif
                                     }
                                 }
                             }
@@ -78,7 +78,7 @@ struct NotificationView: View {
                                     Task {
                                         do {
                                             let _ = try await RequestHandler.deleteNotification(notifications: [notification])
-                                            await notificationViewModel.refreshNotificationSync()
+                                            await notificationViewModel.refreshNotification()
                                         } catch {
 #if DEBUG
                                             let _ = NMCore.debugLog(error)
@@ -103,23 +103,23 @@ struct NotificationView: View {
             Section("Alert Rules") {
                 if !notificationViewModel.alertRules.isEmpty {
                     ForEach(notificationViewModel.alertRules) { alertRule in
-                        if idOfAlertRuleToggling != alertRule.id {
+                        if alertRuleToggling?.id != alertRule.id {
                             Toggle(isOn: Binding(
                                 get: {
                                     alertRule.isEnabled
                                 },
                                 set: { newValue in
-                                    idOfAlertRuleToggling = alertRule.id
+                                    alertRuleToggling = alertRule
                                     Task {
                                         do {
                                             let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, isEnabled: newValue)
-                                            await notificationViewModel.refreshAlertRuleSync()
-                                            idOfAlertRuleToggling = nil
+                                            await notificationViewModel.refreshAlertRule()
+                                            alertRuleToggling = nil
                                         } catch {
-                                            idOfAlertRuleToggling = nil
-    #if DEBUG
+                                            alertRuleToggling = nil
+#if DEBUG
                                             let _ = NMCore.debugLog(error)
-    #endif
+#endif
                                         }
                                     }
                                 })
@@ -167,7 +167,7 @@ struct NotificationView: View {
                 Task {
                     do {
                         let _ = try await RequestHandler.updateNotification(notification: notificationToRename!, name: newNameOfNotification)
-                        await notificationViewModel.refreshNotificationSync()
+                        await notificationViewModel.refreshNotification()
                         newNameOfNotification = ""
                     } catch {
 #if DEBUG

@@ -33,7 +33,7 @@ struct ServerGroupListView: View {
                             Task {
                                 do {
                                     let _ = try await RequestHandler.deleteServerGroup(serverGroups: [serverGroup])
-                                    await serverGroupViewModel.refreshServerGroupSync()
+                                    await serverGroupViewModel.refreshServerGroup()
                                 } catch {
 #if DEBUG
                                     let _ = NMCore.debugLog(error)
@@ -59,13 +59,15 @@ struct ServerGroupListView: View {
         }
         .navigationTitle("Server Groups")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem {
                 Button {
                     serverGroupViewModel.loadData()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
-                
+            }
+            
+            ToolbarItem {
                 if !isAddingServerGroup {
                     Button {
                         isShowAddServerGroupAlert = true
@@ -91,7 +93,7 @@ struct ServerGroupListView: View {
                 Task {
                     do {
                         let _ = try await RequestHandler.addServerGroup(name: nameOfNewServerGroup)
-                        await serverGroupViewModel.refreshServerGroupSync()
+                        await serverGroupViewModel.refreshServerGroup()
                         isAddingServerGroup = false
                         nameOfNewServerGroup = ""
                     } catch {
@@ -112,7 +114,7 @@ struct ServerGroupListView: View {
                 Task {
                     do {
                         let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroupToRename!, name: newNameOfServerGroup)
-                        await serverGroupViewModel.refreshServerGroupSync()
+                        await serverGroupViewModel.refreshServerGroup()
                         newNameOfServerGroup = ""
                     } catch {
 #if DEBUG

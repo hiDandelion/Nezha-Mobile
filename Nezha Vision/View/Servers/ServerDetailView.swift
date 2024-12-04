@@ -99,7 +99,9 @@ struct ServerDetailView: View {
         Menu {
             Section {
                 Button {
-                    dashboardViewModel.refreshAsync()
+                    Task {
+                        await dashboardViewModel.refresh()
+                    }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
