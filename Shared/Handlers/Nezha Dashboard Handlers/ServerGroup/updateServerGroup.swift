@@ -21,6 +21,7 @@ extension RequestHandler {
         
         var request = URLRequest(url: configuration.url)
         request.httpMethod = "PATCH"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [

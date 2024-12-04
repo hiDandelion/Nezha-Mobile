@@ -316,6 +316,18 @@
 		CBED10782D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */; };
 		CBED107A2D0005A6004DAD8D /* deleteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10792D0005A0004DAD8D /* deleteNotification.swift */; };
 		CBED107C2D0005B0004DAD8D /* updateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED107B2D0005AB004DAD8D /* updateNotification.swift */; };
+		CBED10852D00508D004DAD8D /* getTerminalSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10842D00508B004DAD8D /* getTerminalSession.swift */; };
+		CBED10862D00508D004DAD8D /* getTerminalSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10842D00508B004DAD8D /* getTerminalSession.swift */; };
+		CBED10872D00508D004DAD8D /* getTerminalSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10842D00508B004DAD8D /* getTerminalSession.swift */; };
+		CBED10882D00508D004DAD8D /* getTerminalSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10842D00508B004DAD8D /* getTerminalSession.swift */; };
+		CBED10892D00508D004DAD8D /* getTerminalSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10842D00508B004DAD8D /* getTerminalSession.swift */; };
+		CBED108B2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED108A2D0050C8004DAD8D /* GetTerminalSessionResponse.swift */; };
+		CBED108C2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED108A2D0050C8004DAD8D /* GetTerminalSessionResponse.swift */; };
+		CBED108D2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED108A2D0050C8004DAD8D /* GetTerminalSessionResponse.swift */; };
+		CBED108E2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED108A2D0050C8004DAD8D /* GetTerminalSessionResponse.swift */; };
+		CBED108F2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED108A2D0050C8004DAD8D /* GetTerminalSessionResponse.swift */; };
+		CBED10912D0051A6004DAD8D /* TerminalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10902D0051A1004DAD8D /* TerminalViewModel.swift */; };
+		CBED10932D0054BF004DAD8D /* TerminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10922D0054BC004DAD8D /* TerminalView.swift */; };
 		CBF04EE02C7439E700A35505 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF04EDF2C7439E700A35505 /* ThemeStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -553,6 +565,10 @@
 		CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationResponse.swift; sourceTree = "<group>"; };
 		CBED10792D0005A0004DAD8D /* deleteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteNotification.swift; sourceTree = "<group>"; };
 		CBED107B2D0005AB004DAD8D /* updateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateNotification.swift; sourceTree = "<group>"; };
+		CBED10842D00508B004DAD8D /* getTerminalSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getTerminalSession.swift; sourceTree = "<group>"; };
+		CBED108A2D0050C8004DAD8D /* GetTerminalSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTerminalSessionResponse.swift; sourceTree = "<group>"; };
+		CBED10902D0051A1004DAD8D /* TerminalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewModel.swift; sourceTree = "<group>"; };
+		CBED10922D0054BC004DAD8D /* TerminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalView.swift; sourceTree = "<group>"; };
 		CBF04EDF2C7439E700A35505 /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -704,6 +720,7 @@
 				CB9C60812C5B11D800DAE1E3 /* DashboardViewModel.swift */,
 				CBED10072CFC2487004DAD8D /* ServerGroupViewModel.swift */,
 				CBED0FE92CFC0A31004DAD8D /* NotificationViewModel.swift */,
+				CBED10902D0051A1004DAD8D /* TerminalViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -754,6 +771,7 @@
 				CBED10432CFD8775004DAD8D /* AlertRule */,
 				CB0D2B972CC4F6E20075FAB7 /* GetServerResponse.swift */,
 				CB0D2B9D2CC4F7010075FAB7 /* GetServiceResponse.swift */,
+				CBED108A2D0050C8004DAD8D /* GetTerminalSessionResponse.swift */,
 			);
 			path = "Nezha Dashboard Models";
 			sourceTree = "<group>";
@@ -769,6 +787,7 @@
 				CBED10352CFD5D66004DAD8D /* AlerRule */,
 				CB1172742CEC3E22000B780D /* getServer.swift */,
 				CB1172822CEC3E69000B780D /* getService.swift */,
+				CBED10842D00508B004DAD8D /* getTerminalSession.swift */,
 			);
 			path = "Nezha Dashboard Handlers";
 			sourceTree = "<group>";
@@ -1148,6 +1167,7 @@
 				CB0D2B842CC259D20075FAB7 /* ServerList */,
 				CB0D2B852CC259E10075FAB7 /* ServerMap */,
 				CB695D5A2CC8C56F003426F7 /* ServerDetail */,
+				CBED10922D0054BC004DAD8D /* TerminalView.swift */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -1561,11 +1581,13 @@
 				CBED100A2CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */,
 				CBED0FBE2CFB4AA3004DAD8D /* ServerTitle.swift in Sources */,
 				CBED0F862CFAA87B004DAD8D /* MillisecondTimestamps.swift in Sources */,
+				CBED108F2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */,
 				CBED10752D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */,
 				CB1172FC2CF93DE8000B780D /* login.swift in Sources */,
 				CB695D5C2CC8C5AD003426F7 /* ServerDetailView.swift in Sources */,
 				CB1172952CEC3EDC000B780D /* GeoIPError.swift in Sources */,
 				CB0D2C552CC7953E0075FAB7 /* SettingsView.swift in Sources */,
+				CBED10862D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CB1172572CEC30C3000B780D /* getGPULogo.swift in Sources */,
 				CB0D2C232CC7823D0075FAB7 /* AddDashboardView.swift in Sources */,
 				CB0D2C492CC78FAA0075FAB7 /* PieceOfInfo.swift in Sources */,
@@ -1629,12 +1651,14 @@
 				CB701A432C631D8A00019344 /* RequestHandler.swift in Sources */,
 				CB0D2B9A2CC4F6E40075FAB7 /* GetServerResponse.swift in Sources */,
 				CB3174F22CA6B71F00186028 /* WidgetBackgroundColor.swift in Sources */,
+				CBED10852D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CBED0FDB2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */,
 				CB3174F02CA6B6FF00186028 /* ServerEntity.swift in Sources */,
 				CB0D2BA42CC4F72A0075FAB7 /* GetIPCityDataResponse.swift in Sources */,
 				CBED10722D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */,
 				CB3175092CA8052100186028 /* AgentConfigurationContent.swift in Sources */,
 				CB701A3C2C5DD5DD00019344 /* ServerDetailWidget.swift in Sources */,
+				CBED108C2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */,
 				CB3174F62CA6B74C00186028 /* RefreshWidgetIntent.swift in Sources */,
 				CBED0F8A2CFAA87B004DAD8D /* MillisecondTimestamps.swift in Sources */,
 				CBED0F7B2CFAA62B004DAD8D /* ServiceData.swift in Sources */,
@@ -1651,6 +1675,7 @@
 				CB701A732C67158600019344 /* ServerDetailView.swift in Sources */,
 				CB701A542C67077400019344 /* ContentView.swift in Sources */,
 				CBDAC3DD2C7CB74B002AA675 /* MatrixGaugeView.swift in Sources */,
+				CBED108E2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */,
 				CBED106E2D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */,
 				CBC5106B2C93C8100086E7B9 /* AppDelegate.swift in Sources */,
 				CB11728D2CEC3E93000B780D /* NezhaDashboardError.swift in Sources */,
@@ -1674,6 +1699,7 @@
 				CB0D2BA82CC4F72A0075FAB7 /* GetIPCityDataResponse.swift in Sources */,
 				CB1172792CEC3E22000B780D /* getServer.swift in Sources */,
 				CBC6C2DB2C89B1F60059031E /* AcknowledgmentView.swift in Sources */,
+				CBED10872D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CB1172F82CF7FBFC000B780D /* LoginResponse.swift in Sources */,
 				CBED0FB42CFB176B004DAD8D /* ServerGroup.swift in Sources */,
 				CBC5106E2C93CABE0086E7B9 /* DashboardSettingsView.swift in Sources */,
@@ -1737,6 +1763,7 @@
 				CB1172532CEC30B9000B780D /* getCPULogo.swift in Sources */,
 				CB11725A2CEC30C3000B780D /* getGPULogo.swift in Sources */,
 				CB1172E62CF5A5EA000B780D /* ISO8601Date.swift in Sources */,
+				CBED10932D0054BF004DAD8D /* TerminalView.swift in Sources */,
 				CBED0FEE2CFC0AD6004DAD8D /* getNotification.swift in Sources */,
 				CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */,
 				CBED0FE72CFC09E5004DAD8D /* NotificationData.swift in Sources */,
@@ -1746,15 +1773,18 @@
 				CBED10662CFE8EED004DAD8D /* ServerGroupServerListView.swift in Sources */,
 				CBD2BB0C2C6B375000BA9A36 /* AlertDetailView.swift in Sources */,
 				CB3174E92CA65E0200186028 /* DeviceInfo.swift in Sources */,
+				CBED10912D0051A6004DAD8D /* TerminalViewModel.swift in Sources */,
 				CBF04EE02C7439E700A35505 /* ThemeStore.swift in Sources */,
 				CB0D2B982CC4F6E40075FAB7 /* GetServerResponse.swift in Sources */,
 				CBED103F2CFD874A004DAD8D /* UpdateAlertRuleResponse.swift in Sources */,
 				CBC6C2D92C89B1E30059031E /* AcknowledgmentView.swift in Sources */,
 				CBED10092CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */,
+				CBED10882D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CBDAC3D02C7B63BB002AA675 /* MainTabView.swift in Sources */,
 				CBD2BAF52C68DB7800BA9A36 /* PieceOfInfo.swift in Sources */,
 				CB9C606B2C5AF76E00DAE1E3 /* NezhaMobileApp.swift in Sources */,
 				CBED0F902CFAAE35004DAD8D /* DashboardSettingsView.swift in Sources */,
+				CBED108B2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */,
 				CB1172A12CEC403D000B780D /* NezhaDashboardBaseResponse.swift in Sources */,
 				CBED0F792CFAA62B004DAD8D /* ServiceData.swift in Sources */,
 				CBED0FB72CFB4714004DAD8D /* ServerGroupListView.swift in Sources */,
@@ -1798,6 +1828,7 @@
 			files = (
 				CB1172E22CF5A5EA000B780D /* ISO8601Date.swift in Sources */,
 				CBED0F9C2CFAD886004DAD8D /* ServerDetailPingView.swift in Sources */,
+				CBED108D2D0050D8004DAD8D /* GetTerminalSessionResponse.swift in Sources */,
 				CB74A0AA2C9AC65200DA3A10 /* AppDelegate.swift in Sources */,
 				CBED0FB02CFB176B004DAD8D /* ServerGroup.swift in Sources */,
 				CBED0FDC2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */,
@@ -1817,6 +1848,7 @@
 				CBED0F9E2CFAD8B3004DAD8D /* DashboardViewModel.swift in Sources */,
 				CB0D2B9C2CC4F6E40075FAB7 /* GetServerResponse.swift in Sources */,
 				CBED10332CFC97F7004DAD8D /* CanInLoadingStateModifier.swift in Sources */,
+				CBED10892D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CB1172612CEC30D1000B780D /* NMUI.swift in Sources */,
 				CBED0F892CFAA87B004DAD8D /* MillisecondTimestamps.swift in Sources */,
 				CBED0FAE2CFB16DF004DAD8D /* getServerGroup.swift in Sources */,

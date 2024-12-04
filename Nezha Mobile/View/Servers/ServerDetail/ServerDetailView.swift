@@ -98,7 +98,9 @@ struct ServerDetailView: View {
             }
             
             Section {
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink {
+                    TerminalView(serverID: server.serverID)
+                } label: {
                     Label("Terminal", systemImage: "apple.terminal")
                 }
             }

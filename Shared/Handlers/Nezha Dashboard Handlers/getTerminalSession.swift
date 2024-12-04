@@ -1,16 +1,15 @@
 //
-//  updateAlertRule.swift
+//  getTerminalSession.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 12/2/24.
+//  Created by Junhui Lou on 12/4/24.
 //
 
 import Foundation
-import SwiftyJSON
 
 extension RequestHandler {
-    static func updateAlertRule(alertRule: AlertRuleData, isEnabled: Bool) async throws -> UpdateAlertRuleResponse {
-        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/alert-rule/\(alertRule.alertRuleID)") else {
+    static func getTerminalSession(serverID: Int64) async throws -> (GetTerminalSessionResponse, String) {
+        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/terminal") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -21,23 +20,18 @@ extension RequestHandler {
         }
         
         var request = URLRequest(url: configuration.url)
-        request.httpMethod = "PATCH"
+        request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [
-            "name": alertRule.name,
-            "enable": isEnabled,
-            "trigger_mode": alertRule.triggerOption,
-            "notification_group_id": alertRule.notificationGroupID,
-            "rules": alertRule.triggerRule.object,
-            "fail_trigger_tasks": alertRule.taskIDs,
-            "recover_trigger_tasks": alertRule.recoverTaskIDs
+            "server_id": serverID
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         let (data, _) = try await URLSession.shared.data(for: request)
         
-        return try decodeNezhaDashboardResponse(data: data)
+        let getTerminalSessionResponse: GetTerminalSessionResponse = try decodeNezhaDashboardResponse(data: data)
+        return (getTerminalSessionResponse, token)
     }
 }

@@ -21,6 +21,7 @@ extension RequestHandler {
         
         var request = URLRequest(url: configuration.url)
         request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [Int64] = notifications.map({ $0.notificationID })
