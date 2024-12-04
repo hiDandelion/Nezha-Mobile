@@ -268,20 +268,12 @@
 		CBED0FDA2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FD72CFC0961004DAD8D /* GetNotificationResponse.swift */; };
 		CBED0FDB2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FD72CFC0961004DAD8D /* GetNotificationResponse.swift */; };
 		CBED0FDC2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FD72CFC0961004DAD8D /* GetNotificationResponse.swift */; };
-		CBED0FE42CFC09E5004DAD8D /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FE32CFC09E3004DAD8D /* NotificationData.swift */; };
-		CBED0FE52CFC09E5004DAD8D /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FE32CFC09E3004DAD8D /* NotificationData.swift */; };
-		CBED0FE62CFC09E5004DAD8D /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FE32CFC09E3004DAD8D /* NotificationData.swift */; };
 		CBED0FE72CFC09E5004DAD8D /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FE32CFC09E3004DAD8D /* NotificationData.swift */; };
-		CBED0FE82CFC09E5004DAD8D /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FE32CFC09E3004DAD8D /* NotificationData.swift */; };
 		CBED0FEA2CFC0A3B004DAD8D /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FE92CFC0A31004DAD8D /* NotificationViewModel.swift */; };
 		CBED0FEE2CFC0AD6004DAD8D /* getNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FED2CFC0AD3004DAD8D /* getNotification.swift */; };
 		CBED0FF42CFC0BA9004DAD8D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FF32CFC0BA2004DAD8D /* NotificationView.swift */; };
 		CBED0FFA2CFC1BE2004DAD8D /* GetAlertRuleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FF52CFC1BCB004DAD8D /* GetAlertRuleResponse.swift */; };
 		CBED0FFC2CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FFB2CFC1CCF004DAD8D /* AlertRuleData.swift */; };
-		CBED0FFD2CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FFB2CFC1CCF004DAD8D /* AlertRuleData.swift */; };
-		CBED0FFE2CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FFB2CFC1CCF004DAD8D /* AlertRuleData.swift */; };
-		CBED0FFF2CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FFB2CFC1CCF004DAD8D /* AlertRuleData.swift */; };
-		CBED10002CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FFB2CFC1CCF004DAD8D /* AlertRuleData.swift */; };
 		CBED10052CFC1E25004DAD8D /* getAlertRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10012CFC1E20004DAD8D /* getAlertRule.swift */; };
 		CBED10082CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10072CFC2487004DAD8D /* ServerGroupViewModel.swift */; };
 		CBED10092CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10072CFC2487004DAD8D /* ServerGroupViewModel.swift */; };
@@ -312,6 +304,18 @@
 		CBED105B2CFE7FEB004DAD8D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = CBED105A2CFE7FEB004DAD8D /* SwiftyJSON */; };
 		CBED10642CFE8ED6004DAD8D /* ServerGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10632CFE8ED4004DAD8D /* ServerGroupDetailView.swift */; };
 		CBED10662CFE8EED004DAD8D /* ServerGroupServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10652CFE8EEC004DAD8D /* ServerGroupServerListView.swift */; };
+		CBED106E2D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED106D2D00054E004DAD8D /* DeleteNotificationResponse.swift */; };
+		CBED106F2D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED106D2D00054E004DAD8D /* DeleteNotificationResponse.swift */; };
+		CBED10702D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED106D2D00054E004DAD8D /* DeleteNotificationResponse.swift */; };
+		CBED10712D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED106D2D00054E004DAD8D /* DeleteNotificationResponse.swift */; };
+		CBED10722D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED106D2D00054E004DAD8D /* DeleteNotificationResponse.swift */; };
+		CBED10742D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */; };
+		CBED10752D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */; };
+		CBED10762D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */; };
+		CBED10772D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */; };
+		CBED10782D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */; };
+		CBED107A2D0005A6004DAD8D /* deleteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10792D0005A0004DAD8D /* deleteNotification.swift */; };
+		CBED107C2D0005B0004DAD8D /* updateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED107B2D0005AB004DAD8D /* updateNotification.swift */; };
 		CBF04EE02C7439E700A35505 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF04EDF2C7439E700A35505 /* ThemeStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -545,6 +549,10 @@
 		CBED10532CFDA6A6004DAD8D /* addNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNotification.swift; sourceTree = "<group>"; };
 		CBED10632CFE8ED4004DAD8D /* ServerGroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroupDetailView.swift; sourceTree = "<group>"; };
 		CBED10652CFE8EEC004DAD8D /* ServerGroupServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroupServerListView.swift; sourceTree = "<group>"; };
+		CBED106D2D00054E004DAD8D /* DeleteNotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNotificationResponse.swift; sourceTree = "<group>"; };
+		CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationResponse.swift; sourceTree = "<group>"; };
+		CBED10792D0005A0004DAD8D /* deleteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteNotification.swift; sourceTree = "<group>"; };
+		CBED107B2D0005AB004DAD8D /* updateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateNotification.swift; sourceTree = "<group>"; };
 		CBF04EDF2C7439E700A35505 /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1246,7 +1254,9 @@
 			isa = PBXGroup;
 			children = (
 				CBED104C2CFDA607004DAD8D /* AddNotificationResponse.swift */,
+				CBED106D2D00054E004DAD8D /* DeleteNotificationResponse.swift */,
 				CBED0FD72CFC0961004DAD8D /* GetNotificationResponse.swift */,
+				CBED10732D00056D004DAD8D /* UpdateNotificationResponse.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -1255,7 +1265,9 @@
 			isa = PBXGroup;
 			children = (
 				CBED10532CFDA6A6004DAD8D /* addNotification.swift */,
+				CBED10792D0005A0004DAD8D /* deleteNotification.swift */,
 				CBED0FED2CFC0AD3004DAD8D /* getNotification.swift */,
+				CBED107B2D0005AB004DAD8D /* updateNotification.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -1541,6 +1553,7 @@
 				CB695D542CC8AD0A003426F7 /* ServerDetailHostView.swift in Sources */,
 				CBED10292CFC72EA004DAD8D /* LoadingState.swift in Sources */,
 				CB1172E52CF5A5EA000B780D /* ISO8601Date.swift in Sources */,
+				CBED106F2D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */,
 				CB1172752CEC3E22000B780D /* getServer.swift in Sources */,
 				CBED0F7C2CFAA62B004DAD8D /* ServiceData.swift in Sources */,
 				CB0D2C4B2CC78FB60075FAB7 /* AcknowledgmentView.swift in Sources */,
@@ -1548,10 +1561,10 @@
 				CBED100A2CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */,
 				CBED0FBE2CFB4AA3004DAD8D /* ServerTitle.swift in Sources */,
 				CBED0F862CFAA87B004DAD8D /* MillisecondTimestamps.swift in Sources */,
+				CBED10752D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */,
 				CB1172FC2CF93DE8000B780D /* login.swift in Sources */,
 				CB695D5C2CC8C5AD003426F7 /* ServerDetailView.swift in Sources */,
 				CB1172952CEC3EDC000B780D /* GeoIPError.swift in Sources */,
-				CBED10002CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */,
 				CB0D2C552CC7953E0075FAB7 /* SettingsView.swift in Sources */,
 				CB1172572CEC30C3000B780D /* getGPULogo.swift in Sources */,
 				CB0D2C232CC7823D0075FAB7 /* AddDashboardView.swift in Sources */,
@@ -1580,7 +1593,6 @@
 				CB11728A2CEC3E93000B780D /* NezhaDashboardError.swift in Sources */,
 				CBED0FD82CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */,
 				CBED0F8D2CFAAA66004DAD8D /* getService.swift in Sources */,
-				CBED0FE52CFC09E5004DAD8D /* NotificationData.swift in Sources */,
 				CB0D2C572CC795880075FAB7 /* DashboardSettingsView.swift in Sources */,
 				CB0D2C4D2CC78FEA0075FAB7 /* getIPCityData.swift in Sources */,
 				CBED0FA72CFB1643004DAD8D /* GetServerGroupResponse.swift in Sources */,
@@ -1600,11 +1612,11 @@
 				CB1172FD2CF93DE8000B780D /* login.swift in Sources */,
 				CB701A252C5CF93500019344 /* NezhaWidgetAppBundle.swift in Sources */,
 				CBED0FB32CFB176B004DAD8D /* ServerGroup.swift in Sources */,
-				CBED0FFF2CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */,
 				CB0D2C472CC78DF10075FAB7 /* Utilities.swift in Sources */,
 				CB3174F42CA6B73300186028 /* ServerDetailConfigurationIntent.swift in Sources */,
 				CB1172982CEC3F38000B780D /* decodeNezhaDashboardResponse.swift in Sources */,
 				CB3174FD2CA6BBFB00186028 /* DeviceInfo.swift in Sources */,
+				CBED10742D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */,
 				CBED104D2CFDA610004DAD8D /* AddNotificationResponse.swift in Sources */,
 				CBED0F972CFAB95A004DAD8D /* iCloudSync.swift in Sources */,
 				CB1172F52CF7FBFC000B780D /* LoginResponse.swift in Sources */,
@@ -1620,13 +1632,13 @@
 				CBED0FDB2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */,
 				CB3174F02CA6B6FF00186028 /* ServerEntity.swift in Sources */,
 				CB0D2BA42CC4F72A0075FAB7 /* GetIPCityDataResponse.swift in Sources */,
+				CBED10722D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */,
 				CB3175092CA8052100186028 /* AgentConfigurationContent.swift in Sources */,
 				CB701A3C2C5DD5DD00019344 /* ServerDetailWidget.swift in Sources */,
 				CB3174F62CA6B74C00186028 /* RefreshWidgetIntent.swift in Sources */,
 				CBED0F8A2CFAA87B004DAD8D /* MillisecondTimestamps.swift in Sources */,
 				CBED0F7B2CFAA62B004DAD8D /* ServiceData.swift in Sources */,
 				CB1172762CEC3E22000B780D /* getServer.swift in Sources */,
-				CBED0FE42CFC09E5004DAD8D /* NotificationData.swift in Sources */,
 				CB3174EB2CA6B52D00186028 /* AgentWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1635,12 +1647,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBED0FFE2CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */,
 				CB1172A32CEC403D000B780D /* NezhaDashboardBaseResponse.swift in Sources */,
 				CB701A732C67158600019344 /* ServerDetailView.swift in Sources */,
 				CB701A542C67077400019344 /* ContentView.swift in Sources */,
-				CBED0FE82CFC09E5004DAD8D /* NotificationData.swift in Sources */,
 				CBDAC3DD2C7CB74B002AA675 /* MatrixGaugeView.swift in Sources */,
+				CBED106E2D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */,
 				CBC5106B2C93C8100086E7B9 /* AppDelegate.swift in Sources */,
 				CB11728D2CEC3E93000B780D /* NezhaDashboardError.swift in Sources */,
 				CB1172972CEC3F38000B780D /* decodeNezhaDashboardResponse.swift in Sources */,
@@ -1652,6 +1663,7 @@
 				CB701A6B2C67118500019344 /* ServerListView.swift in Sources */,
 				CBED0FD92CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */,
 				CB1172592CEC30C3000B780D /* getGPULogo.swift in Sources */,
+				CBED10762D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */,
 				CB3179012C748E0E002979E2 /* PieceOfInfo.swift in Sources */,
 				CB0D2B992CC4F6E40075FAB7 /* GetServerResponse.swift in Sources */,
 				CB1172E42CF5A5EA000B780D /* ISO8601Date.swift in Sources */,
@@ -1702,11 +1714,13 @@
 				CBED0FB12CFB176B004DAD8D /* ServerGroup.swift in Sources */,
 				CBD2BAFF2C698EDE00BA9A36 /* ServerDetailBasicView.swift in Sources */,
 				CB701A412C63131F00019344 /* ChangeThemeView.swift in Sources */,
+				CBED10702D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */,
 				CBE3EB432CA3E8540065163B /* MorphingSymbolView.swift in Sources */,
 				CB31750E2CAA4DAA00186028 /* getIPCityData.swift in Sources */,
 				CBED0FA42CFB1643004DAD8D /* GetServerGroupResponse.swift in Sources */,
 				CBED0FDA2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */,
 				CBE3EB4D2CA3F64B0065163B /* PingChart.swift in Sources */,
+				CBED107C2D0005B0004DAD8D /* updateNotification.swift in Sources */,
 				CBED104F2CFDA610004DAD8D /* AddNotificationResponse.swift in Sources */,
 				CBED101C2CFC6DB8004DAD8D /* DeleteServerGroupResponse.swift in Sources */,
 				CBED10262CFC72EA004DAD8D /* LoadingState.swift in Sources */,
@@ -1716,6 +1730,7 @@
 				CBE3EB492CA3ED3E0065163B /* ToolListView.swift in Sources */,
 				CBED10542CFDA6AB004DAD8D /* addNotification.swift in Sources */,
 				CBDAC3CE2C7B5C31002AA675 /* ServerMapView.swift in Sources */,
+				CBED107A2D0005A6004DAD8D /* deleteNotification.swift in Sources */,
 				CB0D2B882CC35AB70075FAB7 /* NMCore.swift in Sources */,
 				CBED0FC42CFBC9D8004DAD8D /* UpdateServerGroupResponse.swift in Sources */,
 				CB3175222CB113D800186028 /* DeviceInfoViewModel.swift in Sources */,
@@ -1745,6 +1760,7 @@
 				CBED0FB72CFB4714004DAD8D /* ServerGroupListView.swift in Sources */,
 				CBD2BAF32C68DB2700BA9A36 /* ServerDetailHostView.swift in Sources */,
 				CBED10102CFC4B96004DAD8D /* addServerGroup.swift in Sources */,
+				CBED10782D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */,
 				CBED10182CFC4F81004DAD8D /* CanBeLoadingModifier.swift in Sources */,
 				CB11725C2CEC30D1000B780D /* NMUI.swift in Sources */,
 				CB0D2C3A2CC78C9F0075FAB7 /* iCloudSync.swift in Sources */,
@@ -1792,6 +1808,7 @@
 				CB11729E2CEC403D000B780D /* NezhaDashboardBaseResponse.swift in Sources */,
 				CBC6C2D82C89B1980059031E /* AcknowledgmentView.swift in Sources */,
 				CB0D2BA12CC4F7030075FAB7 /* GetServiceResponse.swift in Sources */,
+				CBED10772D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */,
 				CB1A51D52C6C882C007FE35F /* AddDashboardView.swift in Sources */,
 				CB1A51AC2C6C2792007FE35F /* NezhaDesktopApp.swift in Sources */,
 				CB0D2B8E2CC394980075FAB7 /* DashboardSettingsView.swift in Sources */,
@@ -1808,7 +1825,6 @@
 				CB1A51B72C6C2A7B007FE35F /* ServerTableView.swift in Sources */,
 				CB1A51E22C6D80D1007FE35F /* MenuBarView.swift in Sources */,
 				CB11728B2CEC3E93000B780D /* NezhaDashboardError.swift in Sources */,
-				CBED0FE62CFC09E5004DAD8D /* NotificationData.swift in Sources */,
 				CBED10312CFC97ED004DAD8D /* TextWithColorfulIcon.swift in Sources */,
 				CB1A51BB2C6C380D007FE35F /* SettingView.swift in Sources */,
 				CB0D2BA62CC4F72A0075FAB7 /* GetIPCityDataResponse.swift in Sources */,
@@ -1830,8 +1846,8 @@
 				CBED0FBF2CFB4AA3004DAD8D /* ServerTitle.swift in Sources */,
 				CB11729A2CEC3F38000B780D /* decodeNezhaDashboardResponse.swift in Sources */,
 				CB1172552CEC30B9000B780D /* getCPULogo.swift in Sources */,
-				CBED0FFD2CFC1CD9004DAD8D /* AlertRuleData.swift in Sources */,
 				CB6864AD2C800E530052727A /* ServerMapView.swift in Sources */,
+				CBED10712D000560004DAD8D /* DeleteNotificationResponse.swift in Sources */,
 				CBED10282CFC72EA004DAD8D /* LoadingState.swift in Sources */,
 				CBED10502CFDA610004DAD8D /* AddNotificationResponse.swift in Sources */,
 				CBD3277B2C9EE73600F0B5A4 /* HomeView.swift in Sources */,
@@ -1875,7 +1891,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1906,7 +1922,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -1938,7 +1954,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -1974,7 +1990,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2011,7 +2027,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2044,7 +2060,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2076,7 +2092,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2111,7 +2127,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2267,7 +2283,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2310,7 +2326,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2354,7 +2370,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2387,7 +2403,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 115;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;

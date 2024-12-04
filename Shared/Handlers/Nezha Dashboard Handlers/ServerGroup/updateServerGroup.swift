@@ -21,7 +21,7 @@ extension RequestHandler {
         
         var request = URLRequest(url: configuration.url)
         request.httpMethod = "PATCH"
-        request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [
             "name": serverGroup.name,
@@ -47,7 +47,7 @@ extension RequestHandler {
         
         var request = URLRequest(url: configuration.url)
         request.httpMethod = "PATCH"
-        request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [
             "name": name,

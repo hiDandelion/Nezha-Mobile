@@ -19,7 +19,7 @@ struct GetAlertRuleResponse: Codable, NezhaDashboardBaseResponse {
         let enable: Bool
         let trigger_mode: Int64
         let notification_group_id: Int64
-        var rules: String?
+        let rules: JSON
         let fail_trigger_tasks: [Int64]
         let recover_trigger_tasks: [Int64]
         
@@ -42,12 +42,9 @@ struct GetAlertRuleResponse: Codable, NezhaDashboardBaseResponse {
             enable = try container.decode(Bool.self, forKey: .enable)
             trigger_mode = try container.decode(Int64.self, forKey: .trigger_mode)
             notification_group_id = try container.decode(Int64.self, forKey: .notification_group_id)
+            rules = try container.decode(JSON.self, forKey: .rules)
             fail_trigger_tasks = try container.decode([Int64].self, forKey: .fail_trigger_tasks)
             recover_trigger_tasks = try container.decode([Int64].self, forKey: .recover_trigger_tasks)
-            
-            // Handle decoding rules
-            let rulesValue = try container.decode(JSON.self, forKey: .rules)
-            rules = rulesValue.rawString()?.components(separatedBy: .whitespacesAndNewlines).joined()
         }
         
         func encode(to encoder: Encoder) throws {

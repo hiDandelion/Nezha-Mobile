@@ -54,8 +54,18 @@ struct ServerGroupListView: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .canInLoadingStateModifier(loadingState: serverGroupViewModel.loadingState) {
+            serverGroupViewModel.loadData()
+        }
+        .navigationTitle("Server Groups")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    serverGroupViewModel.loadData()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
+                
                 if !isAddingServerGroup {
                     Button {
                         isShowAddServerGroupAlert = true
@@ -68,10 +78,6 @@ struct ServerGroupListView: View {
                 }
             }
         }
-        .canInLoadingStateModifier(loadingState: $serverGroupViewModel.loadingState) {
-            serverGroupViewModel.loadData()
-        }
-        .navigationTitle("Server Groups")
         .onAppear {
             if serverGroupViewModel.loadingState == .idle {
                 serverGroupViewModel.loadData()

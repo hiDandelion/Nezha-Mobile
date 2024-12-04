@@ -51,7 +51,7 @@ struct HomeView: View {
                 AlertListView()
             }
         }
-        .canInLoadingStateModifier(loadingState: $dashboardViewModel.loadingState, retryAction: {
+        .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState, retryAction: {
             dashboardViewModel.startMonitoring()
         })
         .onAppear {

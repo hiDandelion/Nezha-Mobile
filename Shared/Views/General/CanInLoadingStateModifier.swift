@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CanInLoadingStateModifier: ViewModifier {
-    @Binding var loadingState: LoadingState
+    let loadingState: LoadingState
     let retryAction: () -> Void
     
     func body(content: Content) -> some View {
@@ -40,7 +40,7 @@ struct CanInLoadingStateModifier: ViewModifier {
 }
 
 extension View {
-    func canInLoadingStateModifier(loadingState: Binding<LoadingState>, retryAction: @escaping () -> Void) -> some View {
+    func canInLoadingStateModifier(loadingState: LoadingState, retryAction: @escaping () -> Void) -> some View {
         modifier(CanInLoadingStateModifier(loadingState: loadingState, retryAction: retryAction))
     }
 }

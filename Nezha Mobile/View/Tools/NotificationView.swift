@@ -14,10 +14,14 @@ struct NotificationView: View {
         pushNotificationsToken != "" && notificationViewModel.notifications.first(where: { $0.requestBody.contains(pushNotificationsToken) }) != nil
     }
     @State private var isEnrolling: Bool = false
+    
+    @State private var isShowRenameNotificationAlert: Bool = false
+    @State private var notificationToRename: NotificationData?
+    @State private var newNameOfNotification: String = ""
+    
     @State private var idOfAlertRuleToggling: String?
     
     var body: some View {
-        @Bindable var notificationViewModel = notificationViewModel
         List {
             Section {
                 if pushNotificationsToken != "" {
@@ -69,6 +73,25 @@ struct NotificationView: View {
                 if !notificationViewModel.notifications.isEmpty {
                     ForEach(notificationViewModel.notifications) { notification in
                         notificationLabel(notification: notification)
+                            .swipeActions(edge: .trailing) {
+                                Button("Delete", role: .destructive) {
+                                    Task {
+                                        do {
+                                            let _ = try await RequestHandler.deleteNotification(notifications: [notification])
+                                            await notificationViewModel.refreshNotificationSync()
+                                        } catch {
+#if DEBUG
+                                            let _ = NMCore.debugLog(error)
+#endif
+                                        }
+                                    }
+                                }
+                                Button("Rename") {
+                                    notificationToRename = notification
+                                    newNameOfNotification = notification.name
+                                    isShowRenameNotificationAlert = true
+                                }
+                            }
                     }
                 }
                 else {
@@ -119,14 +142,42 @@ struct NotificationView: View {
                 }
             }
         }
-        .canInLoadingStateModifier(loadingState: $notificationViewModel.loadingState, retryAction: {
+        .canInLoadingStateModifier(loadingState: notificationViewModel.loadingState, retryAction: {
             notificationViewModel.loadData()
         })
         .navigationTitle("Notifications")
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    notificationViewModel.loadData()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
+            }
+        }
         .onAppear {
             if notificationViewModel.loadingState == .idle {
                 notificationViewModel.loadData()
             }
+        }
+        .alert("Rename Notification Method", isPresented: $isShowRenameNotificationAlert) {
+            TextField("Name", text: $newNameOfNotification)
+            Button("Cancel", role: .cancel) { }
+            Button("OK") {
+                Task {
+                    do {
+                        let _ = try await RequestHandler.updateNotification(notification: notificationToRename!, name: newNameOfNotification)
+                        await notificationViewModel.refreshNotificationSync()
+                        newNameOfNotification = ""
+                    } catch {
+#if DEBUG
+                        let _ = NMCore.debugLog(error)
+#endif
+                    }
+                }
+            }
+        } message: {
+            Text("Enter a new name for the notification method.")
         }
     }
     
@@ -144,9 +195,11 @@ struct NotificationView: View {
     private func alertRuleLabel(alertRule: AlertRuleData) -> some View {
         VStack(alignment: .leading) {
             Text(nameCanBeUntitled(alertRule.name))
-            Text(alertRule.triggerRule ?? "No Rule")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            if let ruleCount = alertRule.triggerRule.array?.count {
+                Text("\(ruleCount) rule(s)")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
             
         }
         .lineLimit(1)

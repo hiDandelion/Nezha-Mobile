@@ -64,7 +64,7 @@ struct ServerListView: View {
                         .searchable(text: $searchText)
                         .toolbar {
                             Button {
-                                dashboardViewModel.updateAsync()
+                                dashboardViewModel.refreshAsync()
                             } label: {
                                 Label("Refresh", systemImage: "arrow.clockwise")
                             }
@@ -75,7 +75,7 @@ struct ServerListView: View {
                     ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
             }
-            .canInLoadingStateModifier(loadingState: $dashboardViewModel.loadingState) {
+            .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState) {
                 dashboardViewModel.startMonitoring()
             }
         }

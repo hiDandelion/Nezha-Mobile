@@ -12,5 +12,9 @@ struct NotificationData: Codable, Identifiable, Hashable {
     let notificationID: Int64
     let name: String
     let url: String
+    let requestMethod: Int64
+    let requestType: Int64
+    let requestHeader: String
     let requestBody: String
+    let isVerifyTLS: Bool
 }

@@ -21,7 +21,7 @@ extension RequestHandler {
         
         var request = URLRequest(url: configuration.url)
         request.httpMethod = "POST"
-        request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [
             "name": name,

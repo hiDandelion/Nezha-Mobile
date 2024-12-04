@@ -137,7 +137,7 @@ struct ServerListView: View {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
             }
-            .canInLoadingStateModifier(loadingState: $dashboardViewModel.loadingState) {
+            .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState) {
                 dashboardViewModel.startMonitoring()
             }
         }

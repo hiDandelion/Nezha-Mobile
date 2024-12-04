@@ -1,15 +1,15 @@
 //
-//  addServerGroup.swift
+//  updateNotification.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 12/1/24.
+//  Created by Junhui Lou on 12/4/24.
 //
 
 import Foundation
 
 extension RequestHandler {
-    static func addServerGroup(name: String) async throws -> AddServerGroupResponse {
-        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/server-group") else {
+    static func updateNotification(notification: NotificationData, name: String) async throws -> UpdateNotificationResponse {
+        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/notification/\(notification.notificationID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -20,12 +20,18 @@ extension RequestHandler {
         }
         
         var request = URLRequest(url: configuration.url)
-        request.httpMethod = "POST"
+        request.httpMethod = "PATCH"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [
             "name": name,
-            "servers": []
+            "url": notification.url,
+            "request_method": notification.requestMethod,
+            "request_type": notification.requestType,
+            "request_header": notification.requestHeader,
+            "request_body": notification.requestBody,
+            "verify_tls": notification.isVerifyTLS,
+            "skip_check": true
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         

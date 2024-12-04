@@ -16,6 +16,10 @@ struct GetNotificationResponse: Codable, NezhaDashboardBaseResponse {
         let id: Int64
         let name: String
         let url: String
+        let request_method: Int64
+        let request_type: Int64
+        let request_header: String
         let request_body: String
+        let verify_tls: Bool
     }
 }

@@ -22,17 +22,14 @@ extension RequestHandler {
         
         var request = URLRequest(url: configuration.url)
         request.httpMethod = "PATCH"
-        request.setValue("nz-jwt=\(token)", forHTTPHeaderField: "Cookie")
-        
-        let triggerRuleData = alertRule.triggerRule!.data(using: .utf8)
-        let triggerRuleJSONObject = try! JSONSerialization.jsonObject(with: triggerRuleData!)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [
             "name": alertRule.name,
             "enable": isEnabled,
             "trigger_mode": alertRule.triggerOption,
             "notification_group_id": alertRule.notificationGroupID,
-            "rules": triggerRuleJSONObject,
+            "rules": alertRule.triggerRule.object,
             "fail_trigger_tasks": alertRule.taskIDs,
             "recover_trigger_tasks": alertRule.recoverTaskIDs
         ]

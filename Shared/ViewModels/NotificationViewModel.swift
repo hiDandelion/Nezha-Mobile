@@ -70,7 +70,17 @@ class NotificationViewModel {
                 withAnimation {
                     if let notifications = response.data {
                         self.notifications = notifications.map({
-                            NotificationData(id: UUID().uuidString, notificationID: $0.id, name: $0.name, url: $0.url, requestBody: $0.request_body)
+                            NotificationData(
+                                id: UUID().uuidString,
+                                notificationID: $0.id,
+                                name: $0.name,
+                                url: $0.url,
+                                requestMethod: $0.request_method,
+                                requestType: $0.request_type,
+                                requestHeader: $0.request_header,
+                                requestBody: $0.request_body,
+                                isVerifyTLS: $0.verify_tls
+                            )
                         })
                     }
                 }

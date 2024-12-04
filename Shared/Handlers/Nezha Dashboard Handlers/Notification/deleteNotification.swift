@@ -1,15 +1,15 @@
 //
-//  addServerGroup.swift
+//  deleteNotification.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 12/1/24.
+//  Created by Junhui Lou on 12/4/24.
 //
 
 import Foundation
 
 extension RequestHandler {
-    static func addServerGroup(name: String) async throws -> AddServerGroupResponse {
-        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/server-group") else {
+    static func deleteNotification(notifications: [NotificationData]) async throws -> DeleteNotificationResponse {
+        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/batch-delete/notification") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -23,10 +23,7 @@ extension RequestHandler {
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
-        let body: [String: Any] = [
-            "name": name,
-            "servers": []
-        ]
+        let body: [Int64] = notifications.map({ $0.notificationID })
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         let (data, _) = try await URLSession.shared.data(for: request)
