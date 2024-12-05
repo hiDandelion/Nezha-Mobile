@@ -23,7 +23,8 @@ class TerminalViewModel: NSObject, URLSessionWebSocketDelegate {
         Task {
             do {
                 let (response, token) = try await RequestHandler.getTerminalSession(serverID: serverID)
-                let url = URL(string: "wss://\(NMCore.getNezhaDashboardLink())/api/v1/ws/terminal/\(response.data.session_id)")!
+                let sessionID = response.data!.session_id
+                let url = URL(string: "wss://\(NMCore.getNezhaDashboardLink())/api/v1/ws/terminal/\(sessionID)")!
                 
                 var websocketRequest = URLRequest(url: url)
                 websocketRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -36,10 +37,8 @@ class TerminalViewModel: NSObject, URLSessionWebSocketDelegate {
                 loadingState = .loaded
             }
             catch {
-                DispatchQueue.main.async {
-                    withAnimation {
-                        self.loadingState = .error(error.localizedDescription)
-                    }
+                withAnimation {
+                    self.loadingState = .error(error.localizedDescription)
                 }
                 return
             }
@@ -55,8 +54,8 @@ class TerminalViewModel: NSObject, URLSessionWebSocketDelegate {
     
     func setupTerminal(fontSize: Int) {
         terminalView = STerminalView()
-        terminalView!.setTerminalFontSize(with: fontSize)
-        terminalView!.setupBufferChain { [weak self] buffer in
+        terminalView?.setTerminalFontSize(with: fontSize)
+        terminalView?.setupBufferChain { [weak self] buffer in
             if [.control].contains(self?.keyCombination) {
                 self?.sendCtrl(buffer)
                 return
@@ -119,7 +118,7 @@ class TerminalViewModel: NSObject, URLSessionWebSocketDelegate {
     
     private func handleBinaryMessage(_ data: Data) {
         if let string = String(data: data, encoding: .utf8) {
-            self.terminalView!.write(string)
+            self.terminalView?.write(string)
             return
         }
         

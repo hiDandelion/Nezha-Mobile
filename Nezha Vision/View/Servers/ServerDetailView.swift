@@ -31,7 +31,16 @@ struct ServerDetailView: View {
         NavigationStack {
             if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
                 if server.status.uptime != 0 {
-                    content(server: server)
+                    VStack {
+                        picker
+                        form(server: server)
+                    }
+                    .navigationTitle(server.name)
+                    .toolbar {
+                        ToolbarItem(placement: .automatic) {
+                            toolbarMenu(server: server)
+                        }
+                    }
                 }
                 else {
                     serverUnavailable(server: server)
@@ -44,19 +53,6 @@ struct ServerDetailView: View {
         .onAppear {
             if !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
-            }
-        }
-    }
-    
-    private func content(server: ServerData) -> some View {
-        VStack {
-            picker
-            form(server: server)
-        }
-        .navigationTitle(server.name)
-        .toolbar {
-            ToolbarItem(placement: .automatic) {
-                toolbarMenu(server: server)
             }
         }
     }
@@ -104,6 +100,12 @@ struct ServerDetailView: View {
                     }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
+                }
+                
+                NavigationLink {
+                    TerminalView(server: server)
+                } label: {
+                    Label("Terminal", systemImage: "apple.terminal")
                 }
             }
             

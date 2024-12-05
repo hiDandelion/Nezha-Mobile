@@ -41,6 +41,7 @@ struct NezhaDesktopApp: App {
         
         WindowGroup("Map View", id: "map-view") {
             ServerMapView()
+                .environment(dashboardViewModel)
         }
         
         WindowGroup("Server Details", id: "server-detail-view", for: ServerData.ID.self) { $id in

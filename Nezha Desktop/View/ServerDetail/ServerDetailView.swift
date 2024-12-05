@@ -65,6 +65,10 @@ struct ServerDetailView: View {
                             }
                             .pickerStyle(.segmented)
                         }
+                        
+                        ToolbarItem {
+                            toolbarMenu(server: server)
+                        }
                     }
                 }
                 else {
@@ -81,6 +85,30 @@ struct ServerDetailView: View {
             if !dashboardViewModel.isMonitoringEnabled {
                 dashboardViewModel.startMonitoring()
             }
+        }
+    }
+    
+    private func toolbarMenu(server: ServerData) -> some View {
+        Menu {
+            Section {
+                Button {
+                    Task {
+                        await dashboardViewModel.refresh()
+                    }
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
+            }
+            
+            Section {
+                NavigationLink {
+                    TerminalView(server: server)
+                } label: {
+                    Label("Terminal", systemImage: "apple.terminal")
+                }
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
         }
     }
 }

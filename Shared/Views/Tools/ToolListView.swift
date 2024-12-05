@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ToolListView: View {
+#if os(iOS)
     @Environment(TabBarState.self) var tabBarState
+#endif
     
     var body: some View {
         NavigationStack {
@@ -41,6 +43,7 @@ struct ToolListView: View {
                     .fill(.clear)
                     .frame(height: 50)
             }
+#if os(iOS)
             .onAppear {
                 withAnimation {
                     tabBarState.isToolsViewVisible = true
@@ -51,6 +54,7 @@ struct ToolListView: View {
                     tabBarState.isToolsViewVisible = false
                 }
             }
+#endif
         }
     }
 }

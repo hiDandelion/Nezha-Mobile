@@ -28,24 +28,10 @@ struct ServerGroupListView: View {
                     } label: {
                         serverGroupLabel(serverGroup: serverGroup)
                     }
-                    .swipeActions(edge: .trailing) {
-                        Button("Delete", role: .destructive) {
-                            Task {
-                                do {
-                                    let _ = try await RequestHandler.deleteServerGroup(serverGroups: [serverGroup])
-                                    await serverGroupViewModel.refreshServerGroup()
-                                } catch {
-#if DEBUG
-                                    let _ = NMCore.debugLog(error)
-#endif
-                                }
-                            }
-                        }
-                        Button("Rename") {
-                            serverGroupToRename = serverGroup
-                            newNameOfServerGroup = serverGroup.name
-                            isShowRenameServerGroupAlert = true
-                        }
+                    .renamableAndDeletable {
+                        renameServerGroup(serverGroup: serverGroup)
+                    } deleteAction: {
+                        deleteServerGroup(serverGroup: serverGroup)
                     }
                 }
             }
@@ -137,5 +123,24 @@ struct ServerGroupListView: View {
             
         }
         .lineLimit(1)
+    }
+    
+    private func deleteServerGroup(serverGroup: ServerGroup) {
+        Task {
+            do {
+                let _ = try await RequestHandler.deleteServerGroup(serverGroups: [serverGroup])
+                await serverGroupViewModel.refreshServerGroup()
+            } catch {
+#if DEBUG
+                let _ = NMCore.debugLog(error)
+#endif
+            }
+        }
+    }
+    
+    private func renameServerGroup(serverGroup: ServerGroup) {
+        serverGroupToRename = serverGroup
+        newNameOfServerGroup = serverGroup.name
+        isShowRenameServerGroupAlert = true
     }
 }

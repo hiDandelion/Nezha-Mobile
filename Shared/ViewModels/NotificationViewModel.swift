@@ -24,10 +24,8 @@ class NotificationViewModel {
                 loadingState = .loaded
             }
             catch {
-                DispatchQueue.main.async {
-                    withAnimation {
-                        self.loadingState = .error(error.localizedDescription)
-                    }
+                withAnimation {
+                    self.loadingState = .error(error.localizedDescription)
                 }
                 return
             }
@@ -49,53 +47,39 @@ class NotificationViewModel {
     
     private func getNotification() async throws {
         let response = try await RequestHandler.getNotification()
-        DispatchQueue.main.async {
-            withAnimation {
-                if let notifications = response.data {
-                    self.notifications = notifications.map({
-                        NotificationData(
-                            id: UUID().uuidString,
-                            notificationID: $0.id,
-                            name: $0.name,
-                            url: $0.url,
-                            requestMethod: $0.request_method,
-                            requestType: $0.request_type,
-                            requestHeader: $0.request_header,
-                            requestBody: $0.request_body,
-                            isVerifyTLS: $0.verify_tls
-                        )
-                    })
-                }
-                else {
-                    self.notifications = []
-                }
-            }
+        withAnimation {
+            self.notifications = response.data?.map({
+                NotificationData(
+                    id: UUID().uuidString,
+                    notificationID: $0.id,
+                    name: $0.name,
+                    url: $0.url,
+                    requestMethod: $0.request_method,
+                    requestType: $0.request_type,
+                    requestHeader: $0.request_header,
+                    requestBody: $0.request_body,
+                    isVerifyTLS: $0.verify_tls
+                )
+            }) ?? []
         }
     }
     
     private func getAlertRule() async throws {
         let response = try await RequestHandler.getAlertRule()
-        DispatchQueue.main.async {
-            withAnimation {
-                if let alertRules = response.data {
-                    self.alertRules = alertRules.map({ alertRule in
-                        AlertRuleData(
-                            id: UUID().uuidString,
-                            alertRuleID: alertRule.id,
-                            notificationGroupID: alertRule.notification_group_id,
-                            name: alertRule.name,
-                            isEnabled: alertRule.enable,
-                            triggerOption: alertRule.trigger_mode,
-                            triggerRule: alertRule.rules,
-                            taskIDs: alertRule.fail_trigger_tasks,
-                            recoverTaskIDs: alertRule.recover_trigger_tasks
-                        )
-                    })
-                }
-                else {
-                    self.notifications = []
-                }
-            }
+        withAnimation {
+            alertRules = response.data?.map({ alertRule in
+                AlertRuleData(
+                    id: UUID().uuidString,
+                    alertRuleID: alertRule.id,
+                    notificationGroupID: alertRule.notification_group_id,
+                    name: alertRule.name,
+                    isEnabled: alertRule.enable,
+                    triggerOption: alertRule.trigger_mode,
+                    triggerRule: alertRule.rules,
+                    taskIDs: alertRule.fail_trigger_tasks,
+                    recoverTaskIDs: alertRule.recover_trigger_tasks
+                )
+            }) ?? []
         }
     }
 }

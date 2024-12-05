@@ -99,7 +99,7 @@ struct ServerDetailView: View {
             
             Section {
                 NavigationLink {
-                    TerminalView(serverID: server.serverID)
+                    TerminalView(server: server)
                 } label: {
                     Label("Terminal", systemImage: "apple.terminal")
                 }

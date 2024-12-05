@@ -20,7 +20,7 @@ struct ServerTableView: View {
                 if $0.displayIndex == $1.displayIndex {
                     return $0.serverID < $1.serverID
                 }
-                return $0.displayIndex < $1.displayIndex
+                return $0.displayIndex > $1.displayIndex
             }
             .filter {
                 if let selectedServerGroup {
@@ -95,7 +95,6 @@ struct ServerTableView: View {
                     }
                 }
             }
-            TableColumn("IPv4", value: \.ipv4)
             TableColumn("CPU") { server in
                 let cpuUsage = server.status.cpuUsed / 100
                 HStack {

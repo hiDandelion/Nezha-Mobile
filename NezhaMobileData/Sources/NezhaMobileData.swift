@@ -11,7 +11,7 @@ public final class NezhaMobileData: Sendable {
     public static let shared = NezhaMobileData()
     
     public let modelContainer: ModelContainer = {
-        let schema = Schema([ServerAlert.self, Identity.self])
+        let schema = Schema(CurrentSchema.models)
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         
         do {

@@ -20,7 +20,7 @@ struct ServerListView: View {
                 if $0.displayIndex == $1.displayIndex {
                     return $0.serverID < $1.serverID
                 }
-                return $0.displayIndex < $1.displayIndex
+                return $0.displayIndex > $1.displayIndex
             }
     }
     

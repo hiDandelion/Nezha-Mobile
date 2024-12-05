@@ -25,26 +25,25 @@ struct AlertListView: View {
                             NavigationLink(destination: AlertDetailView(time: serverAlert.timestamp, title: serverAlert.title, content: serverAlert.content)) {
                                 VStack(alignment: .leading) {
                                     Text(serverAlert.title ?? "Untitled")
-                                        .lineLimit(1)
                                     Text(serverAlert.content ?? "No Content")
                                         .font(.footnote)
-                                        .lineLimit(1)
                                     if let timestamp = serverAlert.timestamp {
                                         Text(timestamp.formatted(date: .numeric, time: .shortened))
                                             .font(.caption)
                                             .foregroundStyle(.secondary)
                                     }
                                 }
+                                .lineLimit(1)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button("Delete", role: .destructive) {
+                                        deleteAlert(serverAlert: serverAlert)
+                                    }
+                                }
+                                .contextMenu {
                                     Button(role: .destructive) {
-                                        let createDataHandler = createDataHandler
-                                        Task {
-                                            if let dataHandler = await createDataHandler() {
-                                                _ = try await dataHandler.deleteServerAlert(id: serverAlert.persistentModelID)
-                                            }
-                                        }
+                                        deleteAlert(serverAlert: serverAlert)
                                     } label: {
-                                        Text("Delete")
+                                        Label("Delete", systemImage: "trash")
                                     }
                                 }
                             }
@@ -63,7 +62,10 @@ struct AlertListView: View {
                 else {
                     ContentUnavailableView("No Alert", systemImage: "checkmark.circle.fill")
 #if DEBUG
-                    addAlertButton
+                        .toolbar {
+                            addAlertButton
+                        }
+                    
 #endif
                 }
             }
@@ -79,16 +81,6 @@ struct AlertListView: View {
                 withAnimation {
                     tabBarState.isAlertsViewVisible = false
                 }
-            }
-        }
-    }
-    
-    private var toolbarMenu: some View {
-        Menu {
-            Button(role: .destructive) {
-                isShowingDeleteAllConfirmationDialog = true
-            } label: {
-                Label("Delete All", systemImage: "trash")
             }
             .confirmationDialog(
                 Text("Delete All Alerts"),
@@ -107,8 +99,27 @@ struct AlertListView: View {
                     Text("All alerts will be deleted. Are you sure?")
                 }
             )
+        }
+    }
+    
+    private var toolbarMenu: some View {
+        Menu {
+            Button(role: .destructive) {
+                isShowingDeleteAllConfirmationDialog = true
+            } label: {
+                Label("Delete All", systemImage: "trash")
+            }
         } label: {
             Image(systemName: "ellipsis.circle")
+        }
+    }
+    
+    private func deleteAlert(serverAlert: ServerAlert) {
+        let createDataHandler = createDataHandler
+        Task {
+            if let dataHandler = await createDataHandler() {
+                _ = try await dataHandler.deleteServerAlert(id: serverAlert.persistentModelID)
+            }
         }
     }
     

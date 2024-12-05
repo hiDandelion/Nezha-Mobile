@@ -34,7 +34,7 @@ struct ServerMapView: View {
                                 if $0.displayIndex == $1.displayIndex {
                                     return $0.serverID < $1.serverID
                                 }
-                                return $0.displayIndex < $1.displayIndex
+                                return $0.displayIndex > $1.displayIndex
                             }
                             .compactMap { $0.name }
                             .joined(separator: "\n")
@@ -61,7 +61,7 @@ struct ServerMapView: View {
                                     if $0.displayIndex == $1.displayIndex {
                                         return $0.serverID < $1.serverID
                                     }
-                                    return $0.displayIndex < $1.displayIndex
+                                    return $0.displayIndex > $1.displayIndex
                                 }
                                 .compactMap { $0.name }
                                 .joined(separator: ", ")

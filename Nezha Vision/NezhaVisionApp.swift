@@ -11,6 +11,8 @@ import NezhaMobileData
 @main
 struct NezhaVisionApp: App {
     var dashboardViewModel: DashboardViewModel = .init()
+    var serverGroupViewModel: ServerGroupViewModel = .init()
+    var notificationViewModel: NotificationViewModel = .init()
     
     init() {
         NMCore.registerUserDefaults()
@@ -21,6 +23,8 @@ struct NezhaVisionApp: App {
             ContentView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                 .environment(dashboardViewModel)
+                .environment(serverGroupViewModel)
+                .environment(notificationViewModel)
                 .onAppear {
                     NMCore.syncWithiCloud()
                 }

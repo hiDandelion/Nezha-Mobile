@@ -5,7 +5,7 @@
 //  Created by Junhui Lou on 9/26/24.
 //
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 import Foundation
 import UIKit
 

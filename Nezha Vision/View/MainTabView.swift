@@ -14,6 +14,10 @@ struct MainTabView: View {
                 ServerListView()
             }
             
+            Tab("Tools", systemImage: "briefcase") {
+                ToolListView()
+            }
+            
             Tab("Settings", systemImage: "gearshape") {
                 SettingsView()
             }

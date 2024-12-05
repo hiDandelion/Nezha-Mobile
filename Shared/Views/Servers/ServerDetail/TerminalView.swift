@@ -17,7 +17,7 @@ enum KeyCombination {
 
 struct TerminalView: View {
     var terminalViewModel: TerminalViewModel = .init()
-    var serverID: Int64
+    var server: ServerData
     
     var body: some View {
         NavigationStack {
@@ -55,12 +55,15 @@ struct TerminalView: View {
                 buttonGroup
             }
             .canInLoadingStateModifier(loadingState: terminalViewModel.loadingState) {
-                terminalViewModel.connect(serverID: serverID)
+                terminalViewModel.connect(serverID: server.serverID)
             }
             .navigationTitle("Terminal")
+#if os(macOS)
+            .navigationSubtitle(server.name)
+#endif
             .onAppear {
                 terminalViewModel.setupTerminal(fontSize: 12)
-                terminalViewModel.connect(serverID: serverID)
+                terminalViewModel.connect(serverID: server.serverID)
             }
             .onDisappear {
                 terminalViewModel.disconnect()
@@ -73,9 +76,16 @@ struct TerminalView: View {
             HStack(alignment: .bottom) {
                 Group {
                     makeKeyboardFloatingButton("doc.on.clipboard") {
+#if os(iOS) || os(visionOS)
                         guard let str = UIPasteboard.general.string else {
                             return
                         }
+#endif
+#if os(macOS)
+                        guard let str = NSPasteboard.general.string(forType: .string) else {
+                            return
+                        }
+#endif
                         write(str)
                     }
                 }

@@ -10,7 +10,7 @@ import Foundation
 struct GetTerminalSessionResponse: Codable, NezhaDashboardBaseResponse {
     let success: Bool?
     let error: String?
-    let data: Session
+    let data: Session?
     
     struct Session: Codable {
         let session_id: String
