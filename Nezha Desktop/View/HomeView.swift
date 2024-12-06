@@ -9,12 +9,19 @@ import SwiftUI
 
 enum UserTab {
     case server
-    case alert
+    case tools
+    case alerts
+}
+
+enum Tool {
+    case serverGroups
+    case notifications
 }
 
 struct UserSection: Hashable {
     let tab: UserTab
     let serverGroup: ServerGroup?
+    let tool: Tool?
 }
 
 struct HomeView: View {
@@ -22,7 +29,7 @@ struct HomeView: View {
     @Environment(DashboardViewModel.self) private var dashboardViewModel
     @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
     @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
-    @State private var activeUserSection: UserSection = .init(tab: .server, serverGroup: nil)
+    @State private var activeUserSection: UserSection = .init(tab: .server, serverGroup: nil, tool: nil)
     
     var body: some View {
         @Bindable var dashboardViewModel = dashboardViewModel
@@ -30,16 +37,23 @@ struct HomeView: View {
             List(selection: $activeUserSection) {
                 Section("Servers") {
                     Text("All")
-                        .tag(UserSection(tab: .server, serverGroup: nil))
+                        .tag(UserSection(tab: .server, serverGroup: nil, tool: nil))
                     ForEach(dashboardViewModel.serverGroups) { serverGroup in
                         Text(nameCanBeUntitled(serverGroup.name))
-                            .tag(UserSection(tab: .server, serverGroup: serverGroup))
+                            .tag(UserSection(tab: .server, serverGroup: serverGroup, tool: nil))
                     }
                 }
                 
+                Section("Tools") {
+                    Text("Server Groups")
+                        .tag(UserSection(tab: .tools, serverGroup: nil, tool: .serverGroups))
+                    Text("Notifications")
+                        .tag(UserSection(tab: .tools, serverGroup: nil, tool: .notifications))
+                }
+                
                 Section("Alerts") {
-                    Text("All")
-                        .tag(UserSection(tab: .alert, serverGroup: nil))
+                    Text("Alerts")
+                        .tag(UserSection(tab: .alerts, serverGroup: nil, tool: nil))
                 }
             }
             .listStyle(.sidebar)
@@ -47,7 +61,20 @@ struct HomeView: View {
             switch(activeUserSection.tab) {
             case .server:
                 ServerTableView(selectedServerGroup: activeUserSection.serverGroup)
-            case .alert:
+            case .tools:
+                switch(activeUserSection.tool) {
+                case .serverGroups:
+                    NavigationStack {
+                        ServerGroupListView()
+                    }
+                case .notifications:
+                    NavigationStack {
+                        NotificationView()
+                    }
+                case .none:
+                    EmptyView()
+                }
+            case .alerts:
                 AlertListView()
             }
         }

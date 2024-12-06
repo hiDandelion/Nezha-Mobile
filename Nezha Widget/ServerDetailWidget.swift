@@ -17,7 +17,6 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
         ServerEntry(
             date: Date(),
             server: ServerData(
-                id: UUID().uuidString,
                 serverID: 0,
                 name: "Demo",
                 displayIndex: 0,
@@ -88,7 +87,6 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                 return ServerEntry(
                     date: Date(),
                     server: ServerData(
-                        id: server.uuid,
                         serverID: server.id,
                         name: server.name,
                         displayIndex: server.display_index,

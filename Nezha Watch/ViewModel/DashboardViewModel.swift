@@ -82,7 +82,6 @@ class DashboardViewModel: ObservableObject {
                     if let servers = response.data {
                         self.servers = servers.map({
                             ServerData(
-                                id: $0.uuid,
                                 serverID: $0.id,
                                 name: $0.name,
                                 displayIndex: $0.display_index,

@@ -12,6 +12,8 @@ import NezhaMobileData
 struct NezhaDesktopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var dashboardViewModel: DashboardViewModel = .init()
+    var serverGroupViewModel: ServerGroupViewModel = .init()
+    var notificationViewModel: NotificationViewModel = .init()
     @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
     @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
@@ -25,6 +27,8 @@ struct NezhaDesktopApp: App {
             ContentView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                 .environment(dashboardViewModel)
+                .environment(serverGroupViewModel)
+                .environment(notificationViewModel)
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
         .defaultSize(width: 1000, height: 500)

@@ -8,7 +8,9 @@
 import AppIntents
 
 struct ServerEntity: AppEntity {
-    let id: String
+    var id: String {
+        String(serverID)
+    }
     let serverID: Int64
     let name: String
     let displayIndex: Int64?

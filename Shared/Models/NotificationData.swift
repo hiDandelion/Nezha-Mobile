@@ -8,7 +8,9 @@
 import Foundation
 
 struct NotificationData: Codable, Identifiable, Hashable {
-    let id: String
+    var id: String {
+        String(notificationID)
+    }
     let notificationID: Int64
     let name: String
     let url: String

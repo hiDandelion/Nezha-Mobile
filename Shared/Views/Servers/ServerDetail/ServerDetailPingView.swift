@@ -77,7 +77,6 @@ struct ServerDetailPingChartView: View {
                             if let services = response.data {
                                 pingDatas = services.map({
                                     ServiceData(
-                                        id: UUID().uuidString,
                                         monitorID: $0.monitor_id,
                                         serverID: $0.server_id,
                                         monitorName: $0.monitor_name,

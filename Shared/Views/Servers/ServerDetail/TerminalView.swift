@@ -20,54 +20,52 @@ struct TerminalView: View {
     var server: ServerData
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                terminalViewModel.terminalView
-                    .onKeyPress { press in
-                        switch(press.key) {
-                        case .upArrow:
-                            writeBase64("G1tB")
-                            return .handled
-                        case .downArrow:
-                            writeBase64("G1tC")
-                            return .handled
-                        case .leftArrow:
-                            writeBase64("G1tE")
-                            return .handled
-                        case.rightArrow:
-                            writeBase64("G1tD")
-                            return .handled
-                        default:
-                            ()
-                        }
-                        
-                        switch(press.modifiers) {
-                        case .control:
-                            terminalViewModel.sendCtrl(press.characters)
-                            return .handled
-                        default:
-                            ()
-                        }
-                        
-                        write(press.characters)
+        VStack {
+            terminalViewModel.terminalView
+                .onKeyPress { press in
+                    switch(press.key) {
+                    case .upArrow:
+                        writeBase64("G1tB")
                         return .handled
+                    case .downArrow:
+                        writeBase64("G1tC")
+                        return .handled
+                    case .leftArrow:
+                        writeBase64("G1tE")
+                        return .handled
+                    case.rightArrow:
+                        writeBase64("G1tD")
+                        return .handled
+                    default:
+                        ()
                     }
-                buttonGroup
-            }
-            .canInLoadingStateModifier(loadingState: terminalViewModel.loadingState) {
-                terminalViewModel.connect(serverID: server.serverID)
-            }
-            .navigationTitle("Terminal")
+                    
+                    switch(press.modifiers) {
+                    case .control:
+                        terminalViewModel.sendCtrl(press.characters)
+                        return .handled
+                    default:
+                        ()
+                    }
+                    
+                    write(press.characters)
+                    return .handled
+                }
+            buttonGroup
+        }
+        .canInLoadingStateModifier(loadingState: terminalViewModel.loadingState) {
+            terminalViewModel.connect(serverID: server.serverID)
+        }
+        .navigationTitle("Terminal")
 #if os(macOS)
-            .navigationSubtitle(server.name)
+        .navigationSubtitle(server.name)
 #endif
-            .onAppear {
-                terminalViewModel.setupTerminal(fontSize: 12)
-                terminalViewModel.connect(serverID: server.serverID)
-            }
-            .onDisappear {
-                terminalViewModel.disconnect()
-            }
+        .onAppear {
+            terminalViewModel.setupTerminal(fontSize: 12)
+            terminalViewModel.connect(serverID: server.serverID)
+        }
+        .onDisappear {
+            terminalViewModel.disconnect()
         }
     }
     

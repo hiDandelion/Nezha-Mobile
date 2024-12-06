@@ -9,7 +9,9 @@ import Foundation
 import SwiftyJSON
 
 struct AlertRuleData: Codable, Identifiable, Hashable {
-    let id: String
+    var id: String {
+        String(alertRuleID)
+    }
     let alertRuleID: Int64
     let notificationGroupID: Int64
     let name: String

@@ -50,7 +50,6 @@ class NotificationViewModel {
         withAnimation {
             self.notifications = response.data?.map({
                 NotificationData(
-                    id: UUID().uuidString,
                     notificationID: $0.id,
                     name: $0.name,
                     url: $0.url,
@@ -69,7 +68,6 @@ class NotificationViewModel {
         withAnimation {
             alertRules = response.data?.map({ alertRule in
                 AlertRuleData(
-                    id: UUID().uuidString,
                     alertRuleID: alertRule.id,
                     notificationGroupID: alertRule.notification_group_id,
                     name: alertRule.name,

@@ -8,7 +8,9 @@
 import Foundation
 
 struct ServiceData: Codable, Identifiable, Hashable {
-    let id: String
+    var id: String {
+        String(monitorID)
+    }
     let monitorID: Int64
     let serverID: Int64
     let monitorName: String

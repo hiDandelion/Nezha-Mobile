@@ -12,10 +12,12 @@ struct ServerQuery: EntityQuery {
         do {
             let response = try await RequestHandler.getServer()
             if let servers = response.data {
-                let serverEntities = servers.map { ServerEntity(id: $0.uuid, serverID: $0.id, name: $0.name, displayIndex: $0.display_index) }
+                let serverEntities = servers.map {
+                    ServerEntity(serverID: $0.id, name: $0.name, displayIndex: $0.display_index)
+                }
                 let serverEntitiesSorted = serverEntities.sorted {
                     if $0.displayIndex == $1.displayIndex {
-                        return $0.id < $1.id
+                        return $0.serverID < $1.serverID
                     }
                     else {
                         return $0.displayIndex! > $1.displayIndex!
@@ -37,10 +39,12 @@ struct ServerQuery: EntityQuery {
         do {
             let response = try await RequestHandler.getServer()
             if let servers = response.data {
-                let serverEntities = servers.map { ServerEntity(id: $0.uuid, serverID: $0.id, name: $0.name, displayIndex: $0.display_index) }
+                let serverEntities = servers.map {
+                    ServerEntity(serverID: $0.id, name: $0.name, displayIndex: $0.display_index)
+                }
                 let serverEntitiesSorted = serverEntities.sorted {
                     if $0.displayIndex == $1.displayIndex {
-                        return $0.id < $1.id
+                        return $0.serverID < $1.serverID
                     }
                     else {
                         return $0.displayIndex! > $1.displayIndex!

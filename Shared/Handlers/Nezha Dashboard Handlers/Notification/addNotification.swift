@@ -26,7 +26,7 @@ extension RequestHandler {
         
         let body: [String: Any] = [
             "name": name,
-            "url": NMCore.NMAPNServiceURLString,
+            "url": NMCore.apnsSendAlertURLString,
             "request_method": 2,
             "request_type": 1,
             "request_header": "",

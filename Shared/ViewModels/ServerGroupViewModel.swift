@@ -50,7 +50,6 @@ class ServerGroupViewModel {
         withAnimation {
             servers = response.data?.map({
                 ServerData(
-                    id: $0.uuid,
                     serverID: $0.id,
                     name: $0.name,
                     displayIndex: $0.display_index,
@@ -95,7 +94,11 @@ class ServerGroupViewModel {
         let response = try await RequestHandler.getServerGroup()
         withAnimation {
             serverGroups = response.data?.map({
-                ServerGroup(id: UUID().uuidString, serverGroupID: $0.group.id, name: $0.group.name, serverIDs: $0.servers ?? .init())
+                ServerGroup(
+                    serverGroupID: $0.group.id,
+                    name: $0.group.name,
+                    serverIDs: $0.servers ?? .init()
+                )
             }) ?? []
         }
     }

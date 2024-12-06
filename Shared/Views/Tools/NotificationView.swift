@@ -25,7 +25,7 @@ struct NotificationView: View {
     @State private var alertRuleToggling: AlertRuleData?
     
     var body: some View {
-        List {
+        Form {
             Section {
                 if pushNotificationsToken != "" {
                     HStack {
@@ -46,7 +46,12 @@ struct NotificationView: View {
                                 isEnrolling = true
                                 Task {
                                     do {
+#if os(iOS) || os(visionOS)
                                         let _ = try await RequestHandler.addNotification(name: UIDevice.current.name, pushNotificationsToken: pushNotificationsToken)
+#endif
+#if os(macOS)
+                                        let _ = try await RequestHandler.addNotification(name: Host.current().name ?? "Mac", pushNotificationsToken: pushNotificationsToken)
+#endif
                                         await notificationViewModel.refreshNotification()
                                         isEnrolling = false
                                     } catch {
@@ -63,7 +68,13 @@ struct NotificationView: View {
                         }
                     }
                     Button("Copy Push Notifications Token") {
+#if os(iOS) || os(visionOS)
                         UIPasteboard.general.string = pushNotificationsToken
+#endif
+#if os(macOS)
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(pushNotificationsToken, forType: .string)
+#endif
                     }
                 }
                 else {
@@ -138,6 +149,7 @@ struct NotificationView: View {
                 }
             }
         }
+        .formStyle(.grouped)
         .canInLoadingStateModifier(loadingState: notificationViewModel.loadingState, retryAction: {
             notificationViewModel.loadData()
         })

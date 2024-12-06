@@ -8,7 +8,9 @@
 import Foundation
 
 struct ServerGroup: Codable, Identifiable, Hashable {
-    let id: String
+    var id: String {
+        String(serverGroupID)
+    }
     let serverGroupID: Int64
     let name: String
     let serverIDs: [Int64]

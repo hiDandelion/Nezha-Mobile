@@ -1307,7 +1307,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "输入新服务器分组的名称。"
+            "value" : "为新服务器分组输入名称。"
           }
         }
       }
@@ -1317,13 +1317,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラートルールの新しい名前を入力してください。"
+            "value" : "このアラートルールの新しい名前を入力してください。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "输入告警规则的新名称。"
+            "value" : "为此告警规则输入新名称。"
           }
         }
       }
@@ -1339,7 +1339,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "输入新通知方式的名称。"
+            "value" : "为新通知方式输入名称。"
           }
         }
       }
@@ -1349,13 +1349,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーグループの新しい名前を入力してください。"
+            "value" : "このサーバーグループの新しい名前を入力してください。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "输入服务器分组的新名称。"
+            "value" : "为此服务器分组输入新名称。"
           }
         }
       }
@@ -2019,7 +2019,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "好"
           }
         }
       }
@@ -2344,13 +2344,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "リネーム"
+            "value" : "名称変更"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重命名"
+            "value" : "重新命名"
           }
         }
       }
@@ -2360,13 +2360,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラートルールをリネーム"
+            "value" : "アラートルールの名称を変更"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重命名告警规则"
+            "value" : "重新命名告警规则"
           }
         }
       }
@@ -2376,13 +2376,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "通知方法をリネーム"
+            "value" : "通知方法の名称を変更"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重命名通知方式"
+            "value" : "重新命名通知方式"
           }
         }
       }
@@ -2392,13 +2392,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーグルプをリネーム"
+            "value" : "サーバーグルプの名称を変更"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重命名服务器分组"
+            "value" : "重新命名服务器分组"
           }
         }
       }
@@ -2952,10 +2952,34 @@
         "en" : {
           "variations" : {
             "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This Apple Vision is enrolled"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This iPad is enrolled"
+                }
+              },
               "iphone" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "This iPhone is enrolled"
+                }
+              },
+              "ipod" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This iPod is enrolled"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This Mac is enrolled"
                 }
               },
               "other" : {
@@ -2970,10 +2994,34 @@
         "ja" : {
           "variations" : {
             "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このApple Visionは登録されています"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このiPadは登録されています"
+                }
+              },
               "iphone" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "このiPhoneは登録されています"
+                }
+              },
+              "ipod" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このiPodは登録されています"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このMacは登録されています"
                 }
               },
               "other" : {
@@ -2988,10 +3036,34 @@
         "zh-Hans" : {
           "variations" : {
             "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此Apple Vision已注册"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此iPad已注册"
+                }
+              },
               "iphone" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "此iPhone已注册"
+                }
+              },
+              "ipod" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此iPod已注册"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此Mac已注册"
                 }
               },
               "other" : {
@@ -3010,10 +3082,34 @@
         "en" : {
           "variations" : {
             "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This Apple Vision is not enrolled"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This iPad is not enrolled"
+                }
+              },
               "iphone" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "This iPhone is not enrolled"
+                }
+              },
+              "ipod" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This iPod is not enrolled"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "This Mac is not enrolled"
                 }
               },
               "other" : {
@@ -3028,10 +3124,34 @@
         "ja" : {
           "variations" : {
             "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このApple Visionは登録されていません"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このiPadは登録されていません"
+                }
+              },
               "iphone" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "このiPhoneは登録されていません"
+                }
+              },
+              "ipod" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このiPodは登録されていません"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "このMacは登録されていません"
                 }
               },
               "other" : {
@@ -3046,10 +3166,34 @@
         "zh-Hans" : {
           "variations" : {
             "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此Apple Vision未注册"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此iPad未注册"
+                }
+              },
               "iphone" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "此iPhone未注册"
+                }
+              },
+              "ipod" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此iPod未注册"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "此Mac未注册"
                 }
               },
               "other" : {

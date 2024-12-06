@@ -24,7 +24,7 @@ struct ServerGroupDetailView: View {
                     ServerGroupServerListView(serverGroup: serverGroup, selectedServerIDs: $selectedServerIDs)
                         .navigationTitle(nameCanBeUntitled(serverGroup.name))
                         .toolbar {
-                            ToolbarItem(placement: .navigationBarTrailing) {
+                            ToolbarItem {
                                 editButton(serverGroup: serverGroup)
                             }
                         }
@@ -53,10 +53,17 @@ struct ServerGroupDetailView: View {
             if editMode == .active {
                 if !isUpdatingServerGroup {
                     Button {
+                        let selectedServerIDArray = Array(selectedServerIDs)
+                        guard selectedServerIDArray != serverGroup.serverIDs else {
+                            withAnimation {
+                                editMode = .inactive
+                            }
+                            return
+                        }
                         isUpdatingServerGroup = true
                         Task {
                             do {
-                                let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: Array(selectedServerIDs))
+                                let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: selectedServerIDArray)
                                 await serverGroupViewModel.refreshServerGroup()
                                 isUpdatingServerGroup = false
                                 withAnimation {
