@@ -9,44 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(DashboardViewModel.self) private var dashboardViewModel
-    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
-    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
+    @State private var isShowingOnboarding: Bool = false
     @State private var isShowingAddDashboardSheet: Bool = false
     
     var body: some View {
         Group {
-            if dashboardLink == "" || dashboardUsername == "" || isShowingAddDashboardSheet {
-                dashboardUnconfigured
+            if isShowingOnboarding {
+                VStack {
+                    Text("Start your journey with Nezha Mobile")
+                        .font(.title3)
+                        .frame(alignment: .center)
+                    Button("Start", systemImage: "arrow.right.circle") {
+                        isShowingAddDashboardSheet = true
+                    }
+                    .font(.headline)
+                    .padding(.top, 20)
+                    .sheet(isPresented: $isShowingAddDashboardSheet) {
+                        AddDashboardView(isShowingOnboarding: $isShowingOnboarding)
+                    }
+                }
+                .padding()
             }
             else {
-                dashboardConfigured
+                MainTabView()
             }
         }
-    }
-    
-    private var dashboardUnconfigured: some View {
-        VStack {
-            Text("Start your journey with Nezha Mobile")
-                .font(.title3)
-                .frame(alignment: .center)
-            Button("Start", systemImage: "arrow.right.circle") {
-                isShowingAddDashboardSheet = true
-            }
-            .font(.headline)
-            .padding(.top, 20)
-            .sheet(isPresented: $isShowingAddDashboardSheet) {
-                AddDashboardView()
+        .onAppear {
+            NMCore.syncWithiCloud()
+            
+            if NMCore.isNezhaDashboardConfigured {
+                dashboardViewModel.startMonitoring()
+            } else {
+                isShowingOnboarding = true
             }
         }
-        .padding()
-    }
-    
-    private var dashboardConfigured: some View {
-        MainTabView()
-            .onAppear {
-                if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
-                    dashboardViewModel.startMonitoring()
-                }
-            }
     }
 }

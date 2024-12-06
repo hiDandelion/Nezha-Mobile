@@ -81,11 +81,6 @@ struct ServerDetailView: View {
                 ProgressView()
             }
         }
-        .onAppear {
-            if !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
-            }
-        }
     }
     
     private func toolbarMenu(server: ServerData) -> some View {

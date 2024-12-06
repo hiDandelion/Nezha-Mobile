@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum UserTab {
-    case server
+    case servers
     case tools
     case alerts
 }
@@ -29,7 +29,7 @@ struct HomeView: View {
     @Environment(DashboardViewModel.self) private var dashboardViewModel
     @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
     @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
-    @State private var activeUserSection: UserSection = .init(tab: .server, serverGroup: nil, tool: nil)
+    @State private var activeUserSection: UserSection = .init(tab: .servers, serverGroup: nil, tool: nil)
     
     var body: some View {
         @Bindable var dashboardViewModel = dashboardViewModel
@@ -37,10 +37,10 @@ struct HomeView: View {
             List(selection: $activeUserSection) {
                 Section("Servers") {
                     Text("All")
-                        .tag(UserSection(tab: .server, serverGroup: nil, tool: nil))
+                        .tag(UserSection(tab: .servers, serverGroup: nil, tool: nil))
                     ForEach(dashboardViewModel.serverGroups) { serverGroup in
                         Text(nameCanBeUntitled(serverGroup.name))
-                            .tag(UserSection(tab: .server, serverGroup: serverGroup, tool: nil))
+                            .tag(UserSection(tab: .servers, serverGroup: serverGroup, tool: nil))
                     }
                 }
                 
@@ -59,7 +59,7 @@ struct HomeView: View {
             .listStyle(.sidebar)
         } detail: {
             switch(activeUserSection.tab) {
-            case .server:
+            case .servers:
                 ServerTableView(selectedServerGroup: activeUserSection.serverGroup)
             case .tools:
                 switch(activeUserSection.tool) {
@@ -81,10 +81,5 @@ struct HomeView: View {
         .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState, retryAction: {
             dashboardViewModel.startMonitoring()
         })
-        .onAppear {
-            if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
-            }
-        }
     }
 }

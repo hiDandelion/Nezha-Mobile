@@ -2,10 +2,15 @@
 //  ServerGroupDetailView.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 12/3/24.
+//  Created by Junhui Lou on 12/6/24.
 //
 
 import SwiftUI
+
+enum ServerGroupEditMode {
+    case inactive
+    case active
+}
 
 struct ServerGroupDetailView: View {
     @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
@@ -13,20 +18,19 @@ struct ServerGroupDetailView: View {
     var serverGroup: ServerGroup? {
         serverGroupViewModel.serverGroups.first(where: { $0.serverGroupID == serverGroupID })
     }
-    @State private var editMode: EditMode = .inactive
+    @State private var editMode: ServerGroupEditMode = .inactive
     @State private var selectedServerIDs: Set<Int64> = .init()
     @State private var isUpdatingServerGroup: Bool = false
     
     var body: some View {
         if let serverGroup = serverGroup {
-            ServerGroupServerListView(serverGroup: serverGroup, selectedServerIDs: $selectedServerIDs)
+            ServerGroupServerListView(editMode: editMode, serverGroup: serverGroup, selectedServerIDs: $selectedServerIDs)
                 .navigationTitle(nameCanBeUntitled(serverGroup.name))
                 .toolbar {
                     ToolbarItem {
                         editButton(serverGroup: serverGroup)
                     }
                 }
-                .environment(\.editMode, $editMode)
                 .onChange(of: editMode) {
                     if editMode == .active {
                         selectedServerIDs = Set(serverGroup.serverIDs)

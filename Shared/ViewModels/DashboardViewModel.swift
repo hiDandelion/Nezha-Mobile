@@ -19,18 +19,18 @@ class DashboardViewModel {
     var lastUpdateTime: Date?
     var servers: [ServerData] = .init()
     var serverGroups: [ServerGroup] = .init()
-    var isMonitoringEnabled = false
-    
-    init() {
-#if os(iOS) || os(visionOS)
-        setupNotifications()
-#endif
-    }
     
     func startMonitoring() {
-        stopMonitoring()
-        isMonitoringEnabled = true
+        guard NMCore.getNezhaDashboardLink() != "",
+              NMCore.getNezhaDashboardUsername() != "",
+              NMCore.getNezhaDashboardPassword() != ""
+        else {
+            self.loadingState = .error("Dashboard is not properly configured.")
+            return
+        }
+        
         loadingState = .loading
+        
         Task {
             do {
                 try await getServer()
@@ -45,12 +45,12 @@ class DashboardViewModel {
                 return
             }
         }
+        
         startTimer()
     }
     
     func stopMonitoring() {
         stopTimer()
-        isMonitoringEnabled = false
         loadingState = .idle
     }
     
@@ -65,23 +65,6 @@ class DashboardViewModel {
     
     func refreshServerGroup() async {
         try? await getServerGroup()
-    }
-    
-#if os(iOS) || os(visionOS)
-    private func setupNotifications() {
-        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-            .sink { [weak self] _ in
-                self?.handleEnterForeground()
-            }
-            .store(in: &cancellables)
-    }
-#endif
-    
-    private func handleEnterForeground() {
-        guard isMonitoringEnabled else {
-            return
-        }
-        startMonitoring()
     }
     
     private func startTimer() {

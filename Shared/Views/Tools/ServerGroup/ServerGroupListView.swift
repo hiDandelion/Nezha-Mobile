@@ -20,11 +20,9 @@ struct ServerGroupListView: View {
     
     var body: some View {
         @Bindable var serverGroupViewModel = serverGroupViewModel
-        Form {
-            
+        List {
             if !serverGroupViewModel.serverGroups.isEmpty {
                 ForEach(serverGroupViewModel.serverGroups) { serverGroup in
-#if os(iOS) || os(visionOS)
                     NavigationLink {
                         ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
                     } label: {
@@ -35,15 +33,6 @@ struct ServerGroupListView: View {
                     } deleteAction: {
                         deleteServerGroup(serverGroup: serverGroup)
                     }
-#endif
-#if os(macOS)
-                    serverGroupLabel(serverGroup: serverGroup)
-                        .renamableAndDeletable {
-                            renameServerGroup(serverGroup: serverGroup)
-                        } deleteAction: {
-                            deleteServerGroup(serverGroup: serverGroup)
-                        }
-#endif
                 }
             }
             else {
@@ -51,7 +40,6 @@ struct ServerGroupListView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .formStyle(.grouped)
         .canInLoadingStateModifier(loadingState: serverGroupViewModel.loadingState) {
             serverGroupViewModel.loadData()
         }

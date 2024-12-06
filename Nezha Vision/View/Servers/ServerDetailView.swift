@@ -47,12 +47,7 @@ struct ServerDetailView: View {
                 }
             }
             else {
-                ProgressView("Loading...")
-            }
-        }
-        .onAppear {
-            if !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
+                ProgressView()
             }
         }
     }

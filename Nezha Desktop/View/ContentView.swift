@@ -9,36 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(DashboardViewModel.self) private var dashboardViewModel
-    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
-    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
+    @State private var isShowingOnboarding: Bool = false
     @State private var isShowingAddDashboardSheet: Bool = false
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                if dashboardLink == "" || dashboardUsername == "" || isShowingAddDashboardSheet {
-                    VStack {
-                        Text("Start your journey with Nezha Mobile")
-                            .font(.title3)
-                            .frame(alignment: .center)
-                        Button("Start", systemImage: "arrow.right.circle") {
-                            isShowingAddDashboardSheet = true
-                        }
-                        .font(.headline)
-                        .padding(.top, 20)
-                        .sheet(isPresented: $isShowingAddDashboardSheet) {
-                            AddDashboardView()
-                        }
+        Group {
+            if isShowingOnboarding {
+                VStack {
+                    Text("Start your journey with Nezha Mobile")
+                        .font(.title3)
+                        .frame(alignment: .center)
+                    Button("Start", systemImage: "arrow.right.circle") {
+                        isShowingAddDashboardSheet = true
                     }
-                    .padding()
+                    .font(.headline)
+                    .padding(.top, 20)
+                    .sheet(isPresented: $isShowingAddDashboardSheet) {
+                        AddDashboardView()
+                    }
                 }
-                else {
-                    HomeView()
-                }
+                .padding()
+            }
+            else {
+                HomeView()
             }
         }
         .onAppear {
             NMCore.syncWithiCloud()
+            
+            if NMCore.isNezhaDashboardConfigured {
+                dashboardViewModel.startMonitoring()
+            } else {
+                isShowingOnboarding = true
+            }
         }
     }
 }

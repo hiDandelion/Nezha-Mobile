@@ -14,8 +14,6 @@ struct NezhaDesktopApp: App {
     var dashboardViewModel: DashboardViewModel = .init()
     var serverGroupViewModel: ServerGroupViewModel = .init()
     var notificationViewModel: NotificationViewModel = .init()
-    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
-    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
     
     init() {
@@ -23,7 +21,7 @@ struct NezhaDesktopApp: App {
     }
     
     var body: some Scene {
-        WindowGroup("Nezha Desktop", id: "main-view") {
+        Window("Nezha Desktop", id: "main-view") {
             ContentView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                 .environment(dashboardViewModel)
@@ -43,7 +41,7 @@ struct NezhaDesktopApp: App {
             }
         }
         
-        WindowGroup("Map View", id: "map-view") {
+        Window("Map View", id: "map-view") {
             ServerMapView()
                 .environment(dashboardViewModel)
         }
@@ -56,12 +54,6 @@ struct NezhaDesktopApp: App {
         }
         .defaultSize(width: 800, height: 700)
         .commandsRemoved()
-        
-        Settings {
-            SettingView()
-                .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
-                .environment(dashboardViewModel)
-        }
         
         WindowGroup("Alert Details", id: "alert-detail-view", for: ServerAlert.ID.self) { $alertID in
             if let alertID {
@@ -84,14 +76,15 @@ struct NezhaDesktopApp: App {
         MenuBarExtra(isInserted: $menuBarEnabled) {
             MenuBarView()
                 .environment(dashboardViewModel)
-                .onAppear {
-                    if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
-                        dashboardViewModel.startMonitoring()
-                    }
-                }
         } label: {
             Image(systemName: "server.rack")
         }
         .menuBarExtraStyle(.window)
+        
+        Settings {
+            SettingView()
+                .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
+                .environment(dashboardViewModel)
+        }
     }
 }

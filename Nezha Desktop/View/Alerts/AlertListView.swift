@@ -25,7 +25,7 @@ struct AlertListView: View {
         NavigationStack {
             Group {
                 if !serverAlerts.isEmpty {
-                    Form {
+                    List {
                         ForEach(filteredServerAlerts) { serverAlert in
                             HStack {
                                 VStack(alignment: .leading) {
@@ -59,7 +59,6 @@ struct AlertListView: View {
                             }
                         }
                     }
-                    .formStyle(.grouped)
                     .searchable(text: $searchText)
                     .navigationTitle("Alerts(\(serverAlerts.count))")
                     .toolbar {

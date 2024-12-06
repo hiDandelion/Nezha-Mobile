@@ -25,9 +25,6 @@ struct NezhaVisionApp: App {
                 .environment(dashboardViewModel)
                 .environment(serverGroupViewModel)
                 .environment(notificationViewModel)
-                .onAppear {
-                    NMCore.syncWithiCloud()
-                }
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
         

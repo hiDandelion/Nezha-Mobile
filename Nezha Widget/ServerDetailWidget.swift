@@ -235,7 +235,7 @@ struct ServerDetailWidgetEntryView: View {
                             .containerBackground(color, for: .widget)
                     }
                 }
-                .widgetURL(URL(string: "nezha://server-details?serverID=\(server.id)")!)
+                .widgetURL(URL(string: "nezha://server-details?id=\(server.id)")!)
             }
             else {
                 VStack {

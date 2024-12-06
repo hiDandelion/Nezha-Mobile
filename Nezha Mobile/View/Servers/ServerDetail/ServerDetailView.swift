@@ -35,32 +35,25 @@ struct ServerDetailView: View {
     @StateObject var offsetObserver = PageOffsetObserver()
     
     var body: some View {
-        Group {
-            if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
-                VStack {
-                    if server.status.uptime != 0 {
-                        content(server: server)
-                    }
-                    else {
-                        ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
-                    }
+        if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
+            VStack {
+                if server.status.uptime != 0 {
+                    content(server: server)
                 }
-                .navigationTitle(server.name)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .automatic) {
-                        toolbarMenu(server: server)
-                    }
+                else {
+                    ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
                 }
             }
-            else {
-                ProgressView()
+            .navigationTitle(server.name)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    toolbarMenu(server: server)
+                }
             }
         }
-        .onAppear {
-            if !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
-            }
+        else {
+            ProgressView()
         }
     }
     

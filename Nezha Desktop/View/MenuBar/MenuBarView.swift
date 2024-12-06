@@ -42,14 +42,7 @@ struct MenuBarView: View {
             }
             .padding([.top, .horizontal])
             
-            switch(dashboardViewModel.loadingState) {
-            case .idle:
-                EmptyView()
-            case .loading:
-                Spacer()
-                ProgressView("Loading...")
-                Spacer()
-            case .loaded:
+            Group {
                 Picker("Tag", selection: $selectedServerGroup) {
                     Text("All")
                         .tag(nil as ServerGroup?)
@@ -60,21 +53,9 @@ struct MenuBarView: View {
                 }
                 .padding(.horizontal)
                 serverList
-            case .error(let message):
-                Spacer()
-                ZStack(alignment: .bottomTrailing) {
-                    VStack(spacing: 20) {
-                        Text("An error occurred")
-                            .font(.headline)
-                        Text(message)
-                            .font(.subheadline)
-                        Button("Retry") {
-                            dashboardViewModel.startMonitoring()
-                        }
-                    }
-                    .padding()
-                }
-                Spacer()
+            }
+            .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState) {
+                dashboardViewModel.startMonitoring()
             }
             
             HStack {
@@ -91,6 +72,9 @@ struct MenuBarView: View {
             .padding([.bottom, .horizontal])
         }
         .frame(width: 380, height: 700)
+        .onAppear {
+            dashboardViewModel.startMonitoring()
+        }
     }
     
     private var serverList: some View {

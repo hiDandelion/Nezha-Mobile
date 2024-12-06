@@ -44,10 +44,7 @@ struct MainTabView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(ThemeStore.self) var themeStore
     @Environment(TabBarState.self) var tabBarState
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
     @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
-    @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
-    @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @State private var isDefaultTabBarHidden: Bool = false
     
     var body: some View {
@@ -118,11 +115,6 @@ struct MainTabView: View {
             else {
                 MainTabBar(activeBackground: themeColor(theme: theme), activeTab: Bindable(tabBarState).activeTab)
                     .opacity(tabBarState.shouldMakeTabBarVisible ? 1 : 0)
-            }
-        }
-        .onAppear {
-            if dashboardLink != "" && dashboardUsername != "" && !dashboardViewModel.isMonitoringEnabled {
-                dashboardViewModel.startMonitoring()
             }
         }
     }

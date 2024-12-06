@@ -26,6 +26,13 @@ class NMCore {
     static let userGuideURL: URL = URL(string: "https://support.argsment.com/nezha-mobile/user-guide")!
     static let userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
     
+    static var isNezhaDashboardConfigured: Bool {
+        if getNezhaDashboardLink() == "" { return false }
+        if getNezhaDashboardUsername() == "" { return false }
+        if getNezhaDashboardPassword() == "" { return false }
+        return true
+    }
+    
     static func debugLog(_ message: Any) -> Any? {
         #if DEBUG
         print("Debug - \(message)")

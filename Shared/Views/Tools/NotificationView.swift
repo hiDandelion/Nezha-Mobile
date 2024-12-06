@@ -50,7 +50,7 @@ struct NotificationView: View {
                                         let _ = try await RequestHandler.addNotification(name: UIDevice.current.name, pushNotificationsToken: pushNotificationsToken)
 #endif
 #if os(macOS)
-                                        let _ = try await RequestHandler.addNotification(name: Host.current().name ?? "Mac", pushNotificationsToken: pushNotificationsToken)
+                                        let _ = try await RequestHandler.addNotification(name: ProcessInfo.processInfo.hostName, pushNotificationsToken: pushNotificationsToken)
 #endif
                                         await notificationViewModel.refreshNotification()
                                         isEnrolling = false

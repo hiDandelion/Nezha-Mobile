@@ -33,7 +33,6 @@ struct NezhaMobileApp: App {
                 .environment(notificationViewModel)
                 .onAppear {
                     appDelegate.tabBarState = tabBarState
-                    NMCore.syncWithiCloud()
                 }
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
