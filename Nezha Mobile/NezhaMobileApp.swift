@@ -14,6 +14,7 @@ struct NezhaMobileApp: App {
     var themeStore: ThemeStore = .init()
     var tabBarState: TabBarState = .init()
     var dashboardViewModel: DashboardViewModel = .init()
+    var serviceViewModel: ServiceViewModel = .init()
     var serverGroupViewModel: ServerGroupViewModel = .init()
     var notificationViewModel: NotificationViewModel = .init()
     
@@ -30,6 +31,7 @@ struct NezhaMobileApp: App {
                 .environment(tabBarState)
                 .environment(dashboardViewModel)
                 .environment(serverGroupViewModel)
+                .environment(serviceViewModel)
                 .environment(notificationViewModel)
                 .onAppear {
                     appDelegate.tabBarState = tabBarState

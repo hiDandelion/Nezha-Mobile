@@ -196,6 +196,9 @@
         }
       }
     },
+    "%llds" : {
+
+    },
     "↑ %@" : {
 
     },
@@ -358,6 +361,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加Dashboard"
+          }
+        }
+      }
+    },
+    "Add Monitor" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モニターを追加"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加监控"
           }
         }
       }
@@ -1216,6 +1235,22 @@
         }
       }
     },
+    "Edit Monitor" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モニターを編集"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑监控"
+          }
+        }
+      }
+    },
     "Enable Menu Bar" : {
       "localizations" : {
         "ja" : {
@@ -1324,6 +1359,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "为此告警规则输入新名称。"
+          }
+        }
+      }
+    },
+    "Enter a new name for the monitor." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このモニターの新しい名前を入力してください。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为此监控输入新名称。"
           }
         }
       }
@@ -1513,6 +1564,12 @@
         }
       }
     },
+    "HTTP GET" : {
+      "shouldTranslate" : false
+    },
+    "ICMP Ping" : {
+      "shouldTranslate" : false
+    },
     "ID" : {
       "localizations" : {
         "ja" : {
@@ -1531,6 +1588,38 @@
     },
     "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, iOS logo and macOS logo are trademarks of Apple Inc." : {
       "shouldTranslate" : false
+    },
+    "Interval" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "間隔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "间隔"
+          }
+        }
+      }
+    },
+    "Interval(Second)" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "間隔（秒）"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "间隔（秒）"
+          }
+        }
+      }
     },
     "IPv4" : {
       "localizations" : {
@@ -1758,6 +1847,22 @@
         }
       }
     },
+    "Monitors" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モニター"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "监控"
+          }
+        }
+      }
+    },
     "N/A" : {
       "localizations" : {
         "ja" : {
@@ -1891,6 +1996,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无数据"
+          }
+        }
+      }
+    },
+    "No Monitor" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モニターなし"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无监控"
           }
         }
       }
@@ -2371,6 +2492,22 @@
         }
       }
     },
+    "Rename Monitor" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モニターの名称を変更"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重命名监控"
+          }
+        }
+      }
+    },
     "Rename Notification Method" : {
       "localizations" : {
         "ja" : {
@@ -2819,6 +2956,22 @@
         }
       }
     },
+    "Target" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ターゲット"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目标"
+          }
+        }
+      }
+    },
     "TCP Connection" : {
       "localizations" : {
         "ja" : {
@@ -2834,6 +2987,9 @@
           }
         }
       }
+    },
+    "TCPing" : {
+      "shouldTranslate" : false
     },
     "Terminal" : {
       "localizations" : {
@@ -3433,6 +3589,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "工具"
+          }
+        }
+      }
+    },
+    "Type" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイプ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "类型"
           }
         }
       }

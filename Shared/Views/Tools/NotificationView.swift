@@ -88,7 +88,7 @@ struct NotificationView: View {
                     ForEach(notificationViewModel.notifications) { notification in
                         notificationLabel(notification: notification)
                             .renamableAndDeletable {
-                                renameNotification(notification: notification)
+                                showRenameNotificationAlert(notification: notification)
                             } deleteAction: {
                                 deleteNotification(notification: notification)
                             }
@@ -137,7 +137,7 @@ struct NotificationView: View {
                             }
                         }
                         .renamableAndDeletable {
-                            renameAlertRule(alertRule: alertRule)
+                            showRenameAlertRuleAlert(alertRule: alertRule)
                         } deleteAction: {
                             deleteAlertRule(alertRule: alertRule)
                         }
@@ -172,17 +172,7 @@ struct NotificationView: View {
             TextField("Name", text: $newNameOfNotification)
             Button("Cancel", role: .cancel) { }
             Button("OK") {
-                Task {
-                    do {
-                        let _ = try await RequestHandler.updateNotification(notification: notificationToRename!, name: newNameOfNotification)
-                        await notificationViewModel.refreshNotification()
-                        newNameOfNotification = ""
-                    } catch {
-#if DEBUG
-                        let _ = NMCore.debugLog(error)
-#endif
-                    }
-                }
+                renameNotification(notification: notificationToRename!, name: newNameOfNotification)
             }
         } message: {
             Text("Enter a new name for the notification method.")
@@ -191,17 +181,7 @@ struct NotificationView: View {
             TextField("Name", text: $newNameOfAlertRule)
             Button("Cancel", role: .cancel) { }
             Button("OK") {
-                Task {
-                    do {
-                        let _ = try await RequestHandler.updateAlertRule(alertRule: alertRuleToRename!, name: newNameOfAlertRule)
-                        await notificationViewModel.refreshAlertRule()
-                        newNameOfAlertRule = ""
-                    } catch {
-#if DEBUG
-                        let _ = NMCore.debugLog(error)
-#endif
-                    }
-                }
+                renameAlertRule(alertRule: alertRuleToRename!, name: newNameOfAlertRule)
             }
         } message: {
             Text("Enter a new name for the alert rule.")
@@ -245,10 +225,24 @@ struct NotificationView: View {
         }
     }
     
-    private func renameNotification(notification: NotificationData) {
+    private func showRenameNotificationAlert(notification: NotificationData) {
         notificationToRename = notification
         newNameOfNotification = notification.name
         isShowRenameNotificationAlert = true
+    }
+    
+    private func renameNotification(notification: NotificationData, name: String) {
+        Task {
+            do {
+                let _ = try await RequestHandler.updateNotification(notification: notification, name: name)
+                await notificationViewModel.refreshNotification()
+                newNameOfNotification = ""
+            } catch {
+#if DEBUG
+                let _ = NMCore.debugLog(error)
+#endif
+            }
+        }
     }
     
     private func deleteAlertRule(alertRule: AlertRuleData) {
@@ -264,9 +258,23 @@ struct NotificationView: View {
         }
     }
     
-    private func renameAlertRule(alertRule: AlertRuleData) {
+    private func showRenameAlertRuleAlert(alertRule: AlertRuleData) {
         alertRuleToRename = alertRule
         newNameOfAlertRule = alertRule.name
         isShowRenameAlertRuleAlert = true
+    }
+    
+    private func renameAlertRule(alertRule: AlertRuleData, name: String) {
+        Task {
+            do {
+                let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, name: name)
+                await notificationViewModel.refreshAlertRule()
+                newNameOfAlertRule = ""
+            } catch {
+#if DEBUG
+                let _ = NMCore.debugLog(error)
+#endif
+            }
+        }
     }
 }

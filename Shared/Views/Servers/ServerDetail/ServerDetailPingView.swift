@@ -27,7 +27,7 @@ struct ServerDetailPingChartView: View {
     @Environment(\.scenePhase) private var scenePhase
     var server: ServerData
     @State private var dateRange: PingChartDateRange = .threeHours
-    @State private var pingDatas: [ServiceData]?
+    @State private var pingDatas: [MonitorData]?
     @State private var errorDescriptionLoadingPingData: String?
     @State private var isLoadingPingDatas: Bool = false
     
@@ -71,12 +71,12 @@ struct ServerDetailPingChartView: View {
                 isLoadingPingDatas = true
                 Task {
                     do {
-                        let response = try await RequestHandler.getService(serverID: server.serverID)
+                        let response = try await RequestHandler.getMonitor(serverID: server.serverID)
                         withAnimation {
                             errorDescriptionLoadingPingData = nil
                             if let services = response.data {
                                 pingDatas = services.map({
-                                    ServiceData(
+                                    MonitorData(
                                         monitorID: $0.monitor_id,
                                         serverID: $0.server_id,
                                         monitorName: $0.monitor_name,

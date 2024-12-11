@@ -19,7 +19,6 @@ struct ServerGroupListView: View {
     @State private var newNameOfServerGroup: String = ""
     
     var body: some View {
-        @Bindable var serverGroupViewModel = serverGroupViewModel
         List {
             if !serverGroupViewModel.serverGroups.isEmpty {
                 ForEach(serverGroupViewModel.serverGroups) { serverGroup in

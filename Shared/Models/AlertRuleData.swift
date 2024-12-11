@@ -18,7 +18,7 @@ struct AlertRuleData: Codable, Identifiable, Hashable {
     let isEnabled: Bool
     let triggerOption: Int64
     let triggerRule: JSON
-    let taskIDs: [Int64]
+    let failureTaskIDs: [Int64]
     let recoverTaskIDs: [Int64]
     
     func hash(into hasher: inout Hasher) {
@@ -29,7 +29,7 @@ struct AlertRuleData: Codable, Identifiable, Hashable {
         hasher.combine(isEnabled)
         hasher.combine(triggerOption)
         hasher.combine(triggerRule.rawString())
-        hasher.combine(taskIDs)
+        hasher.combine(failureTaskIDs)
         hasher.combine(recoverTaskIDs)
     }
 }

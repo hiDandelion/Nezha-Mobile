@@ -14,7 +14,7 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
     
     case basic = "Basic"
     case status = "Status"
-    case ping = "Ping"
+    case monitors = "Monitors"
     
     func localized() -> String {
         return NSLocalizedString(self.rawValue, comment: "")
@@ -77,11 +77,11 @@ struct ServerDetailView: View {
                     ServerDetailStatusView(server: server)
                 }
                 .tag(ServerDetailTab.status)
-            case .ping:
+            case .monitors:
                 Group {
                     ServerDetailPingChartView(server: server)
                 }
-                .tag(ServerDetailTab.ping)
+                .tag(ServerDetailTab.monitors)
             }
         }
     }

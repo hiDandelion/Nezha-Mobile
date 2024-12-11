@@ -1,16 +1,16 @@
 //
-//  updateAlertRule.swift
+//  updateService.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 12/2/24.
+//  Created by Junhui Lou on 12/9/24.
 //
 
 import Foundation
 import SwiftyJSON
 
 extension RequestHandler {
-    static func updateAlertRule(alertRule: AlertRuleData, name: String) async throws -> UpdateAlertRuleResponse {
-        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/alert-rule/\(alertRule.alertRuleID)") else {
+    static func updateService(service: ServiceData, name: String) async throws -> UpdateServiceResponse {
+        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/service/\(service.serviceID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -27,12 +27,16 @@ extension RequestHandler {
         
         let body: [String: Any] = [
             "name": name,
-            "enable": alertRule.isEnabled,
-            "trigger_mode": alertRule.triggerOption,
-            "notification_group_id": alertRule.notificationGroupID,
-            "rules": alertRule.triggerRule.object,
-            "fail_trigger_tasks": alertRule.failureTaskIDs,
-            "recover_trigger_tasks": alertRule.recoverTaskIDs
+            "type": service.type,
+            "target": service.target,
+            "duration": service.interval,
+            "notification_group_id": service.notificationGroupID,
+            "cover": service.coverageOption,
+            "fail_trigger_tasks": service.failureTaskIDs ?? [],
+            "recover_trigger_tasks": service.recoverTaskIDs ?? [],
+            "min_latency": service.minimumLatency,
+            "max_latency": service.maximumLatency,
+            "skip_servers": service.excludeRule.object
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
@@ -41,8 +45,8 @@ extension RequestHandler {
         return try decodeNezhaDashboardResponse(data: data)
     }
     
-    static func updateAlertRule(alertRule: AlertRuleData, isEnabled: Bool) async throws -> UpdateAlertRuleResponse {
-        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/alert-rule/\(alertRule.alertRuleID)") else {
+    static func updateService(service: ServiceData, name: String, type: Int64, target: String, interval: Int64) async throws -> UpdateServiceResponse {
+        guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/service/\(service.serviceID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
@@ -58,13 +62,17 @@ extension RequestHandler {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let body: [String: Any] = [
-            "name": alertRule.name,
-            "enable": isEnabled,
-            "trigger_mode": alertRule.triggerOption,
-            "notification_group_id": alertRule.notificationGroupID,
-            "rules": alertRule.triggerRule.object,
-            "fail_trigger_tasks": alertRule.failureTaskIDs,
-            "recover_trigger_tasks": alertRule.recoverTaskIDs
+            "name": name,
+            "type": type,
+            "target": target,
+            "duration": interval,
+            "notification_group_id": service.notificationGroupID,
+            "cover": service.coverageOption,
+            "fail_trigger_tasks": service.failureTaskIDs ?? [],
+            "recover_trigger_tasks": service.recoverTaskIDs ?? [],
+            "min_latency": service.minimumLatency,
+            "max_latency": service.maximumLatency,
+            "skip_servers": service.excludeRule.object
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         

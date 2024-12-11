@@ -13,6 +13,7 @@ struct NezhaDesktopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var dashboardViewModel: DashboardViewModel = .init()
     var serverGroupViewModel: ServerGroupViewModel = .init()
+    var serviceViewModel: ServiceViewModel = .init()
     var notificationViewModel: NotificationViewModel = .init()
     @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
     
@@ -26,6 +27,7 @@ struct NezhaDesktopApp: App {
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                 .environment(dashboardViewModel)
                 .environment(serverGroupViewModel)
+                .environment(serviceViewModel)
                 .environment(notificationViewModel)
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)

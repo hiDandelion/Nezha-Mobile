@@ -74,7 +74,7 @@ class NotificationViewModel {
                     isEnabled: alertRule.enable,
                     triggerOption: alertRule.trigger_mode,
                     triggerRule: alertRule.rules,
-                    taskIDs: alertRule.fail_trigger_tasks,
+                    failureTaskIDs: alertRule.fail_trigger_tasks,
                     recoverTaskIDs: alertRule.recover_trigger_tasks
                 )
             }) ?? []

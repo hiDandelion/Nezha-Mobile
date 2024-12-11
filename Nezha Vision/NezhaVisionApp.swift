@@ -12,6 +12,7 @@ import NezhaMobileData
 struct NezhaVisionApp: App {
     var dashboardViewModel: DashboardViewModel = .init()
     var serverGroupViewModel: ServerGroupViewModel = .init()
+    var serviceViewModel: ServiceViewModel = .init()
     var notificationViewModel: NotificationViewModel = .init()
     
     init() {
@@ -24,6 +25,7 @@ struct NezhaVisionApp: App {
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                 .environment(dashboardViewModel)
                 .environment(serverGroupViewModel)
+                .environment(serviceViewModel)
                 .environment(notificationViewModel)
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)

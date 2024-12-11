@@ -15,6 +15,7 @@ enum UserTab {
 
 enum Tool {
     case serverGroups
+    case monitors
     case notifications
 }
 
@@ -47,12 +48,14 @@ struct HomeView: View {
                 Section("Tools") {
                     Text("Server Groups")
                         .tag(UserSection(tab: .tools, serverGroup: nil, tool: .serverGroups))
+                    Text("Monitors")
+                        .tag(UserSection(tab: .tools, serverGroup: nil, tool: .monitors))
                     Text("Notifications")
                         .tag(UserSection(tab: .tools, serverGroup: nil, tool: .notifications))
                 }
                 
                 Section("Alerts") {
-                    Text("Alerts")
+                    Text("All")
                         .tag(UserSection(tab: .alerts, serverGroup: nil, tool: nil))
                 }
             }
@@ -66,6 +69,10 @@ struct HomeView: View {
                 case .serverGroups:
                     NavigationStack {
                         ServerGroupListView()
+                    }
+                case .monitors:
+                    NavigationStack {
+                        ServiceListView()
                     }
                 case .notifications:
                     NavigationStack {

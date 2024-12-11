@@ -23,6 +23,12 @@ struct ToolListView: View {
                     }
                     
                     NavigationLink {
+                        ServiceListView()
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Monitors", systemName: "chart.xyaxis.line", color: .purple)
+                    }
+                    
+                    NavigationLink {
                         NotificationView()
                     } label: {
                         TextWithColorfulIcon(titleKey: "Notifications", systemName: "bell.badge", color: .red)

@@ -16,7 +16,7 @@ struct PingDataPlot: Identifiable {
 
 struct PingChart: View {
     @Environment(\.colorScheme) private var scheme
-    let pingData: ServiceData
+    let pingData: MonitorData
     let dateRange: PingChartDateRange
     var pingDataPlots: [PingDataPlot] {
         let plots = zip(pingData.dates, pingData.delays)
