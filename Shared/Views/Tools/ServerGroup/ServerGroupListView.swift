@@ -28,7 +28,7 @@ struct ServerGroupListView: View {
                         serverGroupLabel(serverGroup: serverGroup)
                     }
                     .renamableAndDeletable {
-                        renameServerGroup(serverGroup: serverGroup)
+                        showRenameServerGroupAlert(serverGroup: serverGroup)
                     } deleteAction: {
                         deleteServerGroup(serverGroup: serverGroup)
                     }
@@ -96,17 +96,7 @@ struct ServerGroupListView: View {
             TextField("Name", text: $newNameOfServerGroup)
             Button("Cancel", role: .cancel) { }
             Button("OK") {
-                Task {
-                    do {
-                        let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroupToRename!, name: newNameOfServerGroup)
-                        await serverGroupViewModel.refreshServerGroup()
-                        newNameOfServerGroup = ""
-                    } catch {
-#if DEBUG
-                        let _ = NMCore.debugLog(error)
-#endif
-                    }
-                }
+                renameServerGroup(serverGroup: serverGroupToRename!)
             }
         } message: {
             Text("Enter a new name for the server group.")
@@ -137,9 +127,22 @@ struct ServerGroupListView: View {
         }
     }
     
-    private func renameServerGroup(serverGroup: ServerGroup) {
+    private func showRenameServerGroupAlert(serverGroup: ServerGroup) {
         serverGroupToRename = serverGroup
         newNameOfServerGroup = serverGroup.name
         isShowRenameServerGroupAlert = true
+    }
+    
+    private func renameServerGroup(serverGroup: ServerGroup) {
+        Task {
+            do {
+                let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroupToRename!, name: newNameOfServerGroup)
+                await serverGroupViewModel.refreshServerGroup()
+            } catch {
+#if DEBUG
+                let _ = NMCore.debugLog(error)
+#endif
+            }
+        }
     }
 }

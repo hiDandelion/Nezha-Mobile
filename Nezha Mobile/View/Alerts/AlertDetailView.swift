@@ -26,7 +26,7 @@ struct AlertDetailView: View {
                 Text(content ?? "")
             }
         }
-        .navigationTitle(title ?? "")
+        .navigationTitle(nameCanBeUntitled(title))
         .onDisappear {
             notificationState.shouldNavigateToNotificationView = false
         }

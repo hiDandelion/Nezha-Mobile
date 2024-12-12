@@ -246,6 +246,9 @@
 		CBAC671A2D0918030055F4CA /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC67192D0917FF0055F4CA /* ServiceType.swift */; };
 		CBAC671B2D0918030055F4CA /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC67192D0917FF0055F4CA /* ServiceType.swift */; };
 		CBAC671C2D0918030055F4CA /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC67192D0917FF0055F4CA /* ServiceType.swift */; };
+		CBB6A0A82D0A6567007CFF99 /* SnippetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB6A0A62D0A655E007CFF99 /* SnippetListView.swift */; };
+		CBB6A0AB2D0A6C74007CFF99 /* SnippetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB6A0AA2D0A6C6F007CFF99 /* SnippetDetailView.swift */; };
+		CBB6A0AD2D0A7B96007CFF99 /* EditSnippetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB6A0AC2D0A7B91007CFF99 /* EditSnippetView.swift */; };
 		CBBDDF682D02E9260068AD5E /* ServerGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FB62CFB4714004DAD8D /* ServerGroupListView.swift */; };
 		CBBDDF6B2D02E9380068AD5E /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED0FF32CFC0BA2004DAD8D /* NotificationView.swift */; };
 		CBBDDF6C2D02E9530068AD5E /* AddServerGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10112CFC4BC8004DAD8D /* AddServerGroupResponse.swift */; };
@@ -618,6 +621,9 @@
 		CBAC67112D07F0230055F4CA /* ServiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailView.swift; sourceTree = "<group>"; };
 		CBAC67152D07F0310055F4CA /* EditServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditServiceView.swift; sourceTree = "<group>"; };
 		CBAC67192D0917FF0055F4CA /* ServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
+		CBB6A0A62D0A655E007CFF99 /* SnippetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetListView.swift; sourceTree = "<group>"; };
+		CBB6A0AA2D0A6C6F007CFF99 /* SnippetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetDetailView.swift; sourceTree = "<group>"; };
+		CBB6A0AC2D0A7B91007CFF99 /* EditSnippetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSnippetView.swift; sourceTree = "<group>"; };
 		CBC5106A2C93C8100086E7B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBC5106D2C93CABE0086E7B9 /* DashboardSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSettingsView.swift; sourceTree = "<group>"; };
 		CBC6C2D52C89A9C70059031E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -1277,6 +1283,16 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		CBB6A0A92D0A6C61007CFF99 /* Snippet */ = {
+			isa = PBXGroup;
+			children = (
+				CBB6A0A62D0A655E007CFF99 /* SnippetListView.swift */,
+				CBB6A0AA2D0A6C6F007CFF99 /* SnippetDetailView.swift */,
+				CBB6A0AC2D0A7B91007CFF99 /* EditSnippetView.swift */,
+			);
+			path = Snippet;
+			sourceTree = "<group>";
+		};
 		CBBDDF762D02E9960068AD5E /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -1358,6 +1374,7 @@
 				CBAC66F42D067E680055F4CA /* Service */,
 				CBED0FF32CFC0BA2004DAD8D /* NotificationView.swift */,
 				CB31751F2CB1139C00186028 /* DeviceInfoView.swift */,
+				CBB6A0A92D0A6C61007CFF99 /* Snippet */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1976,6 +1993,7 @@
 				CBE3EB432CA3E8540065163B /* MorphingSymbolView.swift in Sources */,
 				CB31750E2CAA4DAA00186028 /* getIPCityData.swift in Sources */,
 				CBAC66EC2D0679A60055F4CA /* ServiceData.swift in Sources */,
+				CBB6A0AB2D0A6C74007CFF99 /* SnippetDetailView.swift in Sources */,
 				CBED0FA42CFB1643004DAD8D /* GetServerGroupResponse.swift in Sources */,
 				CBED0FDA2CFC096B004DAD8D /* GetNotificationResponse.swift in Sources */,
 				CBE3EB4D2CA3F64B0065163B /* PingChart.swift in Sources */,
@@ -2002,6 +2020,7 @@
 				CBED10932D0054BF004DAD8D /* TerminalView.swift in Sources */,
 				CBAC67172D07F0500055F4CA /* EditServiceView.swift in Sources */,
 				CBAC66FA2D06C36F0055F4CA /* AddServiceResponse.swift in Sources */,
+				CBB6A0A82D0A6567007CFF99 /* SnippetListView.swift in Sources */,
 				CBED0FEE2CFC0AD6004DAD8D /* getNotification.swift in Sources */,
 				CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */,
 				CBED10D32D012A6A004DAD8D /* DeleteAlertRuleResponse.swift in Sources */,
@@ -2066,6 +2085,7 @@
 				CBED0F882CFAA87B004DAD8D /* MillisecondTimestamps.swift in Sources */,
 				CB11729C2CEC3F38000B780D /* decodeNezhaDashboardResponse.swift in Sources */,
 				CB9C60822C5B11D800DAE1E3 /* DashboardViewModel.swift in Sources */,
+				CBB6A0AD2D0A7B96007CFF99 /* EditSnippetView.swift in Sources */,
 				CB1172932CEC3EDC000B780D /* GeoIPError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2211,7 +2231,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2242,7 +2262,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2274,7 +2294,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2310,7 +2330,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2347,7 +2367,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2380,7 +2400,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2412,7 +2432,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2447,7 +2467,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2603,7 +2623,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2646,7 +2666,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2690,7 +2710,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2723,7 +2743,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 123;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;

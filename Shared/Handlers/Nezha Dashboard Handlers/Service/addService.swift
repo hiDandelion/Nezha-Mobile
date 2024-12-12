@@ -8,7 +8,7 @@
 import Foundation
 
 extension RequestHandler {
-    static func addService(name: String, type: Int64, target: String, interval: Int64) async throws -> AddServiceResponse {
+    static func addService(name: String, type: ServiceType, target: String, interval: Int64) async throws -> AddServiceResponse {
         guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/service") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
@@ -26,7 +26,7 @@ extension RequestHandler {
         
         let body: [String: Any] = [
             "name": name,
-            "type": type,
+            "type": type.rawValue,
             "target": target,
             "duration": interval
         ]

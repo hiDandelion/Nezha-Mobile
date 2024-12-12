@@ -103,15 +103,18 @@ struct ServerListView: View {
                         .frame(height: proxy.size.height)
                         .clipped()
                 }
+                .clipShape(RoundedRectangle(cornerRadius: 16))
                 .ignoresSafeArea()
             }
             else {
                 if themeStore.themeCustomizationEnabled {
                     themeStore.themeBackgroundColor(scheme: scheme)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
                         .ignoresSafeArea()
                 }
                 else {
                     backgroundGradient(color: theme, scheme: scheme)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
                         .ignoresSafeArea()
                 }
             }

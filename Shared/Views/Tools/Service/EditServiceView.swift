@@ -33,10 +33,15 @@ struct EditServiceView: View {
                         }
                     }
                     TextField("Target", text: $target)
+                        .autocorrectionDisabled()
+#if os(iOS) || os(visionOS)
+                        .autocapitalization(.none)
+                        .keyboardType(.URL)
+#endif
                 }
                 
                 Section("Interval") {
-                    TextField("Interval(Second)", value: $interval, format: .number)
+                    TextField("Seconds", value: $interval, format: .number)
 #if os(iOS) || os(visionOS)
                         .keyboardType(.numberPad)
 #endif
@@ -61,7 +66,7 @@ struct EditServiceView: View {
                             if let service {
                                 Task {
                                     do {
-                                        let _ = try await RequestHandler.updateService(service: service, name: name, type: type.rawValue, target: target, interval: Int64(interval))
+                                        let _ = try await RequestHandler.updateService(service: service, name: name, type: type, target: target, interval: Int64(interval))
                                         await serviceViewModel.refresh()
                                         isProcessing = false
                                         dismiss()
@@ -76,7 +81,7 @@ struct EditServiceView: View {
                             else {
                                 Task {
                                     do {
-                                        let _ = try await RequestHandler.addService(name: name, type: type.rawValue, target: target, interval: interval)
+                                        let _ = try await RequestHandler.addService(name: name, type: type, target: target, interval: interval)
                                         await serviceViewModel.refresh()
                                         isProcessing = false
                                         dismiss()

@@ -42,6 +42,14 @@ struct ToolListView: View {
                         TextWithColorfulIcon(titleKey: "View Device Info", systemName: "info.circle", color: .blue)
                     }
                 }
+                
+                Section("Terminal") {
+                    NavigationLink {
+                        SnippetListView()
+                    } label: {
+                        TextWithColorfulIcon(titleKey: "Snippets", systemName: "text.page", color: .orange)
+                    }
+                }
             }
             .navigationTitle("Tools")
             .safeAreaInset(edge: .bottom) {

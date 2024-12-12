@@ -15,7 +15,8 @@ import SwiftUI
 #endif
 
 // Handle empty name
-func nameCanBeUntitled(_ name: String) -> String {
+func nameCanBeUntitled(_ name: String?) -> String {
+    guard let name = name else { return String(localized: "Untitled") }
     return name != "" ? name : String(localized: "Untitled")
 }
 

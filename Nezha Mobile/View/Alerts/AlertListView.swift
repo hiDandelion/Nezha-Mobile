@@ -24,7 +24,7 @@ struct AlertListView: View {
                         ForEach(serverAlerts) { serverAlert in
                             NavigationLink(destination: AlertDetailView(time: serverAlert.timestamp, title: serverAlert.title, content: serverAlert.content)) {
                                 VStack(alignment: .leading) {
-                                    Text(serverAlert.title ?? "Untitled")
+                                    Text(nameCanBeUntitled(serverAlert.title))
                                     Text(serverAlert.content ?? "No Content")
                                         .font(.footnote)
                                     if let timestamp = serverAlert.timestamp {

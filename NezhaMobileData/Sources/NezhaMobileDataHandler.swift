@@ -36,6 +36,39 @@ public actor NezhaMobileDataHandler {
         try modelContext.delete(model: ServerAlert.self)
         try modelContext.save()
     }
+    
+    public func newTerminalSnippet(uuid: UUID, timestamp: Date, title: String?, content: String?) throws -> PersistentIdentifier {
+        let terminalSnippet = TerminalSnippet(uuid: uuid, timestamp: timestamp, title: title, content: content)
+        modelContext.insert(terminalSnippet)
+        try modelContext.save()
+        return terminalSnippet.persistentModelID
+    }
+    
+    public func newTerminalSnippet(timestamp: Date, title: String?, content: String?) throws -> PersistentIdentifier {
+        let terminalSnippet = TerminalSnippet(timestamp: timestamp, title: title, content: content)
+        modelContext.insert(terminalSnippet)
+        try modelContext.save()
+        return terminalSnippet.persistentModelID
+    }
+    
+    public func updateTerminalSnippet(id: PersistentIdentifier, title: String) throws {
+        guard let terminalSnippet = self[id, as: TerminalSnippet.self] else { return }
+        terminalSnippet.title = title
+        try modelContext.save()
+    }
+    
+    public func updateTerminalSnippet(id: PersistentIdentifier, title: String, content: String) throws {
+        guard let terminalSnippet = self[id, as: TerminalSnippet.self] else { return }
+        terminalSnippet.title = title
+        terminalSnippet.content = content
+        try modelContext.save()
+    }
+    
+    public func deleteTerminalSnippet(id: PersistentIdentifier) throws {
+        guard let terminalSnippet = self[id, as: TerminalSnippet.self] else { return }
+        modelContext.delete(terminalSnippet)
+        try modelContext.save()
+    }
 }
 
 public struct DataHandlerKey: EnvironmentKey {

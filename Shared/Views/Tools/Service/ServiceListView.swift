@@ -115,7 +115,6 @@ struct ServiceListView: View {
             do {
                 let _ = try await RequestHandler.updateService(service: service, name: name)
                 await serviceViewModel.refresh()
-                newNameOfService = ""
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)

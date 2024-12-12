@@ -236,7 +236,6 @@ struct NotificationView: View {
             do {
                 let _ = try await RequestHandler.updateNotification(notification: notification, name: name)
                 await notificationViewModel.refreshNotification()
-                newNameOfNotification = ""
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)
@@ -269,7 +268,6 @@ struct NotificationView: View {
             do {
                 let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, name: name)
                 await notificationViewModel.refreshAlertRule()
-                newNameOfAlertRule = ""
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)

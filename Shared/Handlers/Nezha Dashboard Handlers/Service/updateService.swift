@@ -27,7 +27,7 @@ extension RequestHandler {
         
         let body: [String: Any] = [
             "name": name,
-            "type": service.type,
+            "type": service.type.rawValue,
             "target": service.target,
             "duration": service.interval,
             "notification_group_id": service.notificationGroupID,
@@ -45,7 +45,7 @@ extension RequestHandler {
         return try decodeNezhaDashboardResponse(data: data)
     }
     
-    static func updateService(service: ServiceData, name: String, type: Int64, target: String, interval: Int64) async throws -> UpdateServiceResponse {
+    static func updateService(service: ServiceData, name: String, type: ServiceType, target: String, interval: Int64) async throws -> UpdateServiceResponse {
         guard let configuration = NMCore.getNezhaDashboardConfiguration(endpoint: "/api/v1/service/\(service.serviceID)") else {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
@@ -63,7 +63,7 @@ extension RequestHandler {
         
         let body: [String: Any] = [
             "name": name,
-            "type": type,
+            "type": type.rawValue,
             "target": target,
             "duration": interval,
             "notification_group_id": service.notificationGroupID,

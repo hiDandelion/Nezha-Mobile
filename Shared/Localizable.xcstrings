@@ -397,6 +397,22 @@
         }
       }
     },
+    "Add Snippet" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snippetを追加"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加Snippet"
+          }
+        }
+      }
+    },
     "Advanced Customization" : {
       "localizations" : {
         "ja" : {
@@ -877,6 +893,22 @@
         }
       }
     },
+    "Copy Script" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scriptをコピー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制脚本"
+          }
+        }
+      }
+    },
     "Country" : {
       "localizations" : {
         "ja" : {
@@ -1251,6 +1283,22 @@
         }
       }
     },
+    "Edit Snippet" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snippetを編集"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑Snippet"
+          }
+        }
+      }
+    },
     "Enable Menu Bar" : {
       "localizations" : {
         "ja" : {
@@ -1601,22 +1649,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "间隔"
-          }
-        }
-      }
-    },
-    "Interval(Second)" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "間隔（秒）"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "间隔（秒）"
           }
         }
       }
@@ -2060,6 +2092,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无服务器分组"
+          }
+        }
+      }
+    },
+    "No Snippet" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snippetなし"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无Snippet"
           }
         }
       }
@@ -2572,6 +2620,22 @@
         }
       }
     },
+    "Script" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スクリプト"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "脚本"
+          }
+        }
+      }
+    },
     "Secondary Color Dark Mode" : {
       "localizations" : {
         "ja" : {
@@ -2600,6 +2664,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "次要颜色 浅色模式"
+          }
+        }
+      }
+    },
+    "Seconds" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秒"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秒"
           }
         }
       }
@@ -2824,6 +2904,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示IP"
+          }
+        }
+      }
+    },
+    "Snippets" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snippets"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snippets"
           }
         }
       }
