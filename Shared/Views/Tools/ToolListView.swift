@@ -45,7 +45,7 @@ struct ToolListView: View {
                 
                 Section("Terminal") {
                     NavigationLink {
-                        SnippetListView()
+                        SnippetListView(executeAction: nil)
                     } label: {
                         TextWithColorfulIcon(titleKey: "Snippets", systemName: "text.page", color: .orange)
                     }

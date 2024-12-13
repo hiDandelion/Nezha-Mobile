@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "·" : {
+
+    },
     "%.0f" : {
 
     },
@@ -505,22 +508,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "告警"
-          }
-        }
-      }
-    },
-    "Alerts(%lld)" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アラート(%lld)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "告警(%lld)"
           }
         }
       }
@@ -1155,22 +1142,6 @@
         }
       }
     },
-    "Details" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "詳細"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "详细信息"
-          }
-        }
-      }
-    },
     "Device Info" : {
       "localizations" : {
         "ja" : {
@@ -1544,6 +1515,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无效配置。请检查是否服务器是否已选择且存在。"
+          }
+        }
+      }
+    },
+    "Execute" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "実行"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "执行"
           }
         }
       }

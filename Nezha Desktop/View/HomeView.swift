@@ -9,14 +9,15 @@ import SwiftUI
 
 enum UserTab {
     case servers
-    case tools
-    case alerts
+    case dashboard
+    case terminal
 }
 
 enum Tool {
     case serverGroups
     case monitors
     case notifications
+    case snippets
 }
 
 struct UserSection: Hashable {
@@ -45,18 +46,18 @@ struct HomeView: View {
                     }
                 }
                 
-                Section("Tools") {
+                Section("Dashboard") {
                     Text("Server Groups")
-                        .tag(UserSection(tab: .tools, serverGroup: nil, tool: .serverGroups))
+                        .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .serverGroups))
                     Text("Monitors")
-                        .tag(UserSection(tab: .tools, serverGroup: nil, tool: .monitors))
+                        .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .monitors))
                     Text("Notifications")
-                        .tag(UserSection(tab: .tools, serverGroup: nil, tool: .notifications))
+                        .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .notifications))
                 }
                 
-                Section("Alerts") {
-                    Text("All")
-                        .tag(UserSection(tab: .alerts, serverGroup: nil, tool: nil))
+                Section("Terminal") {
+                    Text("Snippets")
+                        .tag(UserSection(tab: .terminal, serverGroup: nil, tool: .snippets))
                 }
             }
             .listStyle(.sidebar)
@@ -64,7 +65,7 @@ struct HomeView: View {
             switch(activeUserSection.tab) {
             case .servers:
                 ServerTableView(selectedServerGroup: activeUserSection.serverGroup)
-            case .tools:
+            case .dashboard, .terminal:
                 switch(activeUserSection.tool) {
                 case .serverGroups:
                     NavigationStack {
@@ -78,11 +79,13 @@ struct HomeView: View {
                     NavigationStack {
                         NotificationView()
                     }
+                case .snippets:
+                    NavigationStack {
+                        SnippetListView(executeAction: nil)
+                    }
                 case .none:
                     EmptyView()
                 }
-            case .alerts:
-                AlertListView()
             }
         }
         .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState, retryAction: {

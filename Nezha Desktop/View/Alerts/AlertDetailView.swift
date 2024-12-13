@@ -1,17 +1,13 @@
 //
 //  AlertDetailView.swift
-//  Nezha Desktop
+//  Nezha Mobile
 //
-//  Created by Junhui Lou on 9/18/24.
+//  Created by Junhui Lou on 12/13/24.
 //
 
 import SwiftUI
-import SwiftData
-import NezhaMobileData
 
 struct AlertDetailView: View {
-    @Query var serverAlerts: [ServerAlert]
-    var alertID: UUID?
     @State var time: Date?
     @State var title: String?
     @State var content: String?
@@ -31,13 +27,5 @@ struct AlertDetailView: View {
         }
         .formStyle(.grouped)
         .navigationTitle(title ?? "")
-        .onAppear {
-            if let alertID {
-                let alert = serverAlerts.first(where: { $0.id == alertID })
-                time = alert?.timestamp
-                title = alert?.title
-                content = alert?.content
-            }
-        }
     }
 }

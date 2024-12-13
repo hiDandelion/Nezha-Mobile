@@ -24,17 +24,22 @@ struct SnippetDetailView: View {
             Section {
                 Button {
 #if os(iOS) || os(visionOS)
-                    UIPasteboard.general.string = terminalSnippet.content
+                    if let content = terminalSnippet.content {
+                        UIPasteboard.general.string = content
+                    }
 #endif
 #if os(macOS)
-                    NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString(terminalSnippet.content, forType: .string)
+                    if let content = terminalSnippet.content {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(content, forType: .string)
+                    }
 #endif
                 } label: {
                     Label("Copy Script", systemImage: "doc.on.doc")
                 }
             }
         }
+        .formStyle(.grouped)
         .navigationTitle(nameCanBeUntitled(terminalSnippet.title))
         .toolbar {
             ToolbarItem {

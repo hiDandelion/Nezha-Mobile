@@ -19,6 +19,8 @@ struct TerminalView: View {
     var terminalViewModel: TerminalViewModel = .init()
     var server: ServerData
     
+    @State private var isShowSnippetListSheet: Bool = false
+    
     var body: some View {
         VStack {
             terminalViewModel.terminalView
@@ -67,59 +69,67 @@ struct TerminalView: View {
         .onDisappear {
             terminalViewModel.disconnect()
         }
+        .sheet(isPresented: $isShowSnippetListSheet, content: {
+            SnippetListView { terminalSnippet in
+                if let content = terminalSnippet.content {
+                    write(content)
+                }
+            }
+        })
     }
     
     var buttonGroup: some View {
         ScrollView(.horizontal) {
-            HStack(alignment: .bottom) {
-                Group {
-                    makeKeyboardFloatingButton("doc.on.clipboard") {
+            HStack(alignment: .center) {
+                makeKeyboardFloatingButton("doc.on.clipboard") {
 #if os(iOS) || os(visionOS)
-                        guard let str = UIPasteboard.general.string else {
-                            return
-                        }
+                    guard let str = UIPasteboard.general.string else {
+                        return
+                    }
 #endif
 #if os(macOS)
-                        guard let str = NSPasteboard.general.string(forType: .string) else {
-                            return
-                        }
+                    guard let str = NSPasteboard.general.string(forType: .string) else {
+                        return
+                    }
 #endif
-                        write(str)
-                    }
+                    write(str)
+                }
+                makeKeyboardFloatingButton("text.page") {
+                    isShowSnippetListSheet = true
                 }
                 
-                Group {
-                    makeKeyboardFloatingButton("arrowtriangle.up.fill") {
-                        writeBase64("G1tB")
-                    }
-                    makeKeyboardFloatingButton("arrowtriangle.down.fill") {
-                        writeBase64("G1tC")
-                    }
-                    makeKeyboardFloatingButton("arrowtriangle.backward.fill") {
-                        writeBase64("G1tE")
-                    }
-                    makeKeyboardFloatingButton("arrowtriangle.right.fill") {
-                        writeBase64("G1tD")
-                    }
+                Text("·")
+                
+                makeKeyboardFloatingButton("arrowtriangle.up.fill") {
+                    writeBase64("G1tB")
+                }
+                makeKeyboardFloatingButton("arrowtriangle.down.fill") {
+                    writeBase64("G1tC")
+                }
+                makeKeyboardFloatingButton("arrowtriangle.backward.fill") {
+                    writeBase64("G1tE")
+                }
+                makeKeyboardFloatingButton("arrowtriangle.right.fill") {
+                    writeBase64("G1tD")
                 }
                 
-                Group {
-                    makeKeyboardFloatingButton("escape") {
-                        writeBase64("Gw==")
+                Text("·")
+                
+                makeKeyboardFloatingButton("escape") {
+                    writeBase64("Gw==")
+                }
+                if [.control].contains(terminalViewModel.keyCombination) {
+                    makeKeyboardFloatingButtonProminent("control") {
+                        terminalViewModel.keyCombination = .none
                     }
-                    if [.control].contains(terminalViewModel.keyCombination) {
-                        makeKeyboardFloatingButtonProminent("control") {
-                            terminalViewModel.keyCombination = .none
-                        }
+                }
+                else {
+                    makeKeyboardFloatingButton("control") {
+                        terminalViewModel.keyCombination = .control
                     }
-                    else {
-                        makeKeyboardFloatingButton("control") {
-                            terminalViewModel.keyCombination = .control
-                        }
-                    }
-                    makeKeyboardFloatingButton("arrow.right.to.line.compact") {
-                        writeBase64("CQ==")
-                    }
+                }
+                makeKeyboardFloatingButton("arrow.right.to.line.compact") {
+                    writeBase64("CQ==")
                 }
             }
         }
