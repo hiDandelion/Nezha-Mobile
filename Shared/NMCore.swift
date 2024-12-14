@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KeychainSwift
 
 class NMCore {
     static let NMLastModifyDate = "NMLastModifyDate"
@@ -25,6 +26,7 @@ class NMCore {
     
     static let userGuideURL: URL = URL(string: "https://support.argsment.com/nezha-mobile/user-guide")!
     static let userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+    static let keychain = KeychainSwift()
     
     static var isNezhaDashboardConfigured: Bool {
         if getNezhaDashboardLink() == "" { return false }
@@ -45,7 +47,6 @@ class NMCore {
             NMLastModifyDate: 0,
             NMDashboardLink: "",
             NMDashboardUsername: "",
-            NMDashboardPassword: "",
             NMDashboardSSLEnabled: "",
             NMDashboardGRPCPort: "",
             NMAgentSecret: "",
@@ -57,21 +58,30 @@ class NMCore {
         userDefaults.register(defaults: defaultValues)
     }
     
+    static func registerKeychain() {
+        keychain.accessGroup = "C7AS5D38Q8.com.argsment.Nezha-Mobile"
+        keychain.synchronizable = true
+        
+        if keychain.get(NMDashboardPassword) == nil {
+            keychain.set("", forKey: NMDashboardPassword)
+        }
+    }
+    
     // Save dashboard configuration
     static func saveNewDashboardConfigurations(dashboardLink: String, dashboardUsername: String, dashboardPassword: String, dashboardSSLEnabled: Bool) {
         userDefaults.set(Int(Date().timeIntervalSince1970), forKey: NMLastModifyDate)
         userDefaults.set(dashboardLink, forKey: NMDashboardLink)
         userDefaults.set(dashboardUsername, forKey: NMDashboardUsername)
-        userDefaults.set(dashboardPassword, forKey: NMDashboardPassword)
         userDefaults.set(dashboardSSLEnabled, forKey: NMDashboardSSLEnabled)
         
         NSUbiquitousKeyValueStore().set(Int(Date().timeIntervalSince1970), forKey: NMLastModifyDate)
         NSUbiquitousKeyValueStore().set(dashboardLink, forKey: NMDashboardLink)
         NSUbiquitousKeyValueStore().set(dashboardUsername, forKey: NMDashboardUsername)
-        NSUbiquitousKeyValueStore().set(dashboardPassword, forKey: NMDashboardPassword)
         NSUbiquitousKeyValueStore().set(dashboardSSLEnabled, forKey: NMDashboardSSLEnabled)
         
         syncWithiCloud()
+        
+        keychain.set(dashboardPassword, forKey: NMDashboardPassword)
     }
     
     // Save agent configuration
@@ -134,18 +144,18 @@ class NMCore {
     
     // Helper functions
     static func getNezhaDashboardLink() -> String {
-        return NMCore.userDefaults.string(forKey: NMDashboardLink)!
+        return userDefaults.string(forKey: NMDashboardLink)!
     }
     
     static func getNezhaDashboardUsername() -> String {
-        return NMCore.userDefaults.string(forKey: NMDashboardUsername)!
+        return userDefaults.string(forKey: NMDashboardUsername)!
     }
     
     static func getNezhaDashboardPassword() -> String {
-        return NMCore.userDefaults.string(forKey: NMDashboardPassword)!
+        return keychain.get(NMDashboardPassword)!
     }
     
     static func getIsNezhaDashboardSSLEnabled() -> Bool {
-        return NMCore.userDefaults.bool(forKey: NMDashboardSSLEnabled)
+        return userDefaults.bool(forKey: NMDashboardSSLEnabled)
     }
 }

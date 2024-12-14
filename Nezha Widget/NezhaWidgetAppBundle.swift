@@ -12,6 +12,7 @@ import SwiftUI
 struct WidgetAppBundle: WidgetBundle {
     init() {
         NMCore.registerUserDefaults()
+        NMCore.registerKeychain()
     }
     
     var body: some Widget {

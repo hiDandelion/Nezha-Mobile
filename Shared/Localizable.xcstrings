@@ -3446,6 +3446,9 @@
         }
       }
     },
+    "This project has dependency evgenyneu/keychain-swift which is subject to\nMIT License" : {
+
+    },
     "This project has dependency hyperoslo/Cache which is subject to\nMIT License" : {
       "shouldTranslate" : false
     },

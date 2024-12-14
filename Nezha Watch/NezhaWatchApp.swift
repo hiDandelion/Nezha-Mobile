@@ -13,6 +13,7 @@ struct NezhaWatchApp: App {
     
     init() {
         NMCore.registerUserDefaults()
+        NMCore.registerKeychain()
     }
     
     var body: some Scene {

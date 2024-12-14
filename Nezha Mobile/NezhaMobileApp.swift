@@ -20,6 +20,7 @@ struct NezhaMobileApp: App {
     
     init() {
         NMCore.registerUserDefaults()
+        NMCore.registerKeychain()
     }
     
     var body: some Scene {

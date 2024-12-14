@@ -42,7 +42,7 @@ struct MenuBarView: View {
             }
             .padding([.top, .horizontal])
             
-            Group {
+            VStack {
                 Picker("Tag", selection: $selectedServerGroup) {
                     Text("All")
                         .tag(nil as ServerGroup?)
@@ -53,9 +53,6 @@ struct MenuBarView: View {
                 }
                 .padding(.horizontal)
                 serverList
-            }
-            .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState) {
-                dashboardViewModel.startMonitoring()
             }
             
             HStack {
@@ -71,9 +68,14 @@ struct MenuBarView: View {
             }
             .padding([.bottom, .horizontal])
         }
+        .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState) {
+            dashboardViewModel.startMonitoring()
+        }
         .frame(width: 380, height: 700)
         .onAppear {
-            dashboardViewModel.startMonitoring()
+            if dashboardViewModel.loadingState != .loaded {
+                dashboardViewModel.startMonitoring()
+            }
         }
     }
     

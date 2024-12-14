@@ -19,6 +19,7 @@ struct NezhaDesktopApp: App {
     
     init() {
         NMCore.registerUserDefaults()
+        NMCore.registerKeychain()
     }
     
     var body: some Scene {

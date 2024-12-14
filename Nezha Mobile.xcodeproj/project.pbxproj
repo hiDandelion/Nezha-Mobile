@@ -52,6 +52,11 @@
 		CB0D2C5B2CC797DA0075FAB7 /* ServerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D2C5A2CC797D50075FAB7 /* ServerCardView.swift */; };
 		CB0D2C5E2CC798240075FAB7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB701A122C5C5DA500019344 /* CardView.swift */; };
 		CB0D2C602CC799010075FAB7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
+		CB1142012D0D17DC00A63CE7 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB1142002D0D17DC00A63CE7 /* KeychainSwift */; };
+		CB1142032D0D17F100A63CE7 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB1142022D0D17F100A63CE7 /* KeychainSwift */; };
+		CB1142052D0D17FB00A63CE7 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB1142042D0D17FB00A63CE7 /* KeychainSwift */; };
+		CB1142072D0D180D00A63CE7 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB1142062D0D180D00A63CE7 /* KeychainSwift */; };
+		CB1142092D0D181C00A63CE7 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB1142082D0D181C00A63CE7 /* KeychainSwift */; };
 		CB11724D2CEC30B2000B780D /* getOSLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB11724C2CEC30AF000B780D /* getOSLogo.swift */; };
 		CB11724E2CEC30B2000B780D /* getOSLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB11724C2CEC30AF000B780D /* getOSLogo.swift */; };
 		CB11724F2CEC30B2000B780D /* getOSLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB11724C2CEC30AF000B780D /* getOSLogo.swift */; };
@@ -680,6 +685,7 @@
 			files = (
 				CB0D2C192CC780C90075FAB7 /* NezhaMobileData in Frameworks */,
 				CBED109C2D0074B4004DAD8D /* XTerminalUI in Frameworks */,
+				CB1142072D0D180D00A63CE7 /* KeychainSwift in Frameworks */,
 				CBED10B62D00788C004DAD8D /* SwiftyJSON in Frameworks */,
 				CB0D2C512CC794400075FAB7 /* Cache in Frameworks */,
 			);
@@ -689,6 +695,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB1142092D0D181C00A63CE7 /* KeychainSwift in Frameworks */,
 				CB701A222C5CF93500019344 /* SwiftUI.framework in Frameworks */,
 				CB701A202C5CF93500019344 /* WidgetKit.framework in Frameworks */,
 			);
@@ -698,6 +705,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB1142032D0D17F100A63CE7 /* KeychainSwift in Frameworks */,
 				CB7B9D002C9E9675004383C7 /* NezhaMobileData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,6 +724,7 @@
 			files = (
 				CB1D68442C847B6E00D81526 /* XTerminalUI in Frameworks */,
 				CBDAC3CA2C7B2DCE002AA675 /* Cache in Frameworks */,
+				CB1142012D0D17DC00A63CE7 /* KeychainSwift in Frameworks */,
 				CBED105B2CFE7FEB004DAD8D /* SwiftyJSON in Frameworks */,
 				CB7B9CFE2C9E965F004383C7 /* NezhaMobileData in Frameworks */,
 			);
@@ -727,6 +736,7 @@
 			files = (
 				CBDAC3D22C7BFF13002AA675 /* Cache in Frameworks */,
 				CBED10982D00728E004DAD8D /* XTerminalUI in Frameworks */,
+				CB1142052D0D17FB00A63CE7 /* KeychainSwift in Frameworks */,
 				CBBDDF832D02EA200068AD5E /* SwiftyJSON in Frameworks */,
 				CB7B9D022C9E967B004383C7 /* NezhaMobileData in Frameworks */,
 			);
@@ -1521,6 +1531,7 @@
 				CB0D2C502CC794400075FAB7 /* Cache */,
 				CBED109B2D0074B4004DAD8D /* XTerminalUI */,
 				CBED10B52D00788C004DAD8D /* SwiftyJSON */,
+				CB1142062D0D180D00A63CE7 /* KeychainSwift */,
 			);
 			productName = "Nezha Vision";
 			productReference = CB0D2C012CC77E1E0075FAB7 /* Nezha Vision.app */;
@@ -1540,6 +1551,7 @@
 			);
 			name = "Nezha Widget";
 			packageProductDependencies = (
+				CB1142082D0D181C00A63CE7 /* KeychainSwift */,
 			);
 			productName = WidgetAppExtension;
 			productReference = CB701A1D2C5CF93500019344 /* Nezha Widget.appex */;
@@ -1560,6 +1572,7 @@
 			name = "Nezha Watch";
 			packageProductDependencies = (
 				CB7B9CFF2C9E9675004383C7 /* NezhaMobileData */,
+				CB1142022D0D17F100A63CE7 /* KeychainSwift */,
 			);
 			productName = "Watch App Watch App";
 			productReference = CB701A4F2C67077400019344 /* Nezha Watch.app */;
@@ -1608,6 +1621,7 @@
 				CB1D68432C847B6E00D81526 /* XTerminalUI */,
 				CB7B9CFD2C9E965F004383C7 /* NezhaMobileData */,
 				CBED105A2CFE7FEB004DAD8D /* SwiftyJSON */,
+				CB1142002D0D17DC00A63CE7 /* KeychainSwift */,
 			);
 			productName = "Nezha Mobile";
 			productReference = CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */;
@@ -1631,6 +1645,7 @@
 				CB7B9D012C9E967B004383C7 /* NezhaMobileData */,
 				CBED10972D00728E004DAD8D /* XTerminalUI */,
 				CBBDDF822D02EA200068AD5E /* SwiftyJSON */,
+				CB1142042D0D17FB00A63CE7 /* KeychainSwift */,
 			);
 			productName = "Nezha-Mobile";
 			productReference = CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */;
@@ -1681,6 +1696,7 @@
 				CBDAC3C82C7B2DCE002AA675 /* XCRemoteSwiftPackageReference "Cache" */,
 				CB1D68422C847B6E00D81526 /* XCRemoteSwiftPackageReference "XTerminalUI" */,
 				CBED10592CFE7FEB004DAD8D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = CB9C60682C5AF76E00DAE1E3 /* Products */;
 			projectDirPath = "";
@@ -2213,7 +2229,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2244,7 +2260,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2276,7 +2292,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2312,7 +2328,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2349,7 +2365,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2382,7 +2398,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2414,7 +2430,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2449,7 +2465,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2605,7 +2621,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2648,7 +2664,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2692,7 +2708,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2725,7 +2741,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 124;
+				CURRENT_PROJECT_VERSION = 125;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2819,6 +2835,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.0.0;
+			};
+		};
 		CB1D68422C847B6E00D81526 /* XCRemoteSwiftPackageReference "XTerminalUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Lakr233/XTerminalUI.git";
@@ -2854,6 +2878,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CBDAC3C82C7B2DCE002AA675 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		CB1142002D0D17DC00A63CE7 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		CB1142022D0D17F100A63CE7 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		CB1142042D0D17FB00A63CE7 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		CB1142062D0D180D00A63CE7 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		CB1142082D0D181C00A63CE7 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		CB1D68432C847B6E00D81526 /* XTerminalUI */ = {
 			isa = XCSwiftPackageProductDependency;
