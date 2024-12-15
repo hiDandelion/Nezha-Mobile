@@ -25,7 +25,7 @@ struct ContentView: View {
                     .font(.headline)
                     .padding(.top, 20)
                     .sheet(isPresented: $isShowingAddDashboardSheet) {
-                        AddDashboardView()
+                        AddDashboardView(isShowingOnboarding: $isShowingOnboarding)
                     }
                 }
                 .padding()

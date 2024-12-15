@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddDashboardView: View {
     @Environment(\.dismiss) private var dismiss
+    @Binding var isShowingOnboarding: Bool
     var dashboardViewModel: DashboardViewModel
     @State private var link: String = ""
     @State private var username: String = ""
@@ -55,6 +56,7 @@ struct AddDashboardView: View {
                     Button {
                         NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
                         dashboardViewModel.startMonitoring()
+                        isShowingOnboarding = false
                         dismiss()
                     } label: {
                         Label("Done", systemImage: "checkmark")
