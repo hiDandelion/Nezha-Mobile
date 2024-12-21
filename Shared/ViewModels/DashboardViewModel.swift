@@ -111,7 +111,7 @@ class DashboardViewModel {
                         swapUsed: $0.state.swap_used ?? 0,
                         diskUsed: $0.state.disk_used ?? 0,
                         networkIn: $0.state.net_in_transfer ?? 0,
-                        networkOut: $0.state.net_out_speed ?? 0,
+                        networkOut: $0.state.net_out_transfer ?? 0,
                         networkInSpeed: $0.state.net_in_speed ?? 0,
                         networkOutSpeed: $0.state.net_out_speed ?? 0,
                         uptime: $0.state.uptime ?? 0,
