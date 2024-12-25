@@ -2,19 +2,19 @@
 //  ServerListView.swift
 //  Nezha Mobile
 //
-//  Created by Junhui Lou on 7/31/24.
+//  Created by Junhui Lou on 12/25/24.
 //
 
 import SwiftUI
 
 struct ServerListView: View {
+    @Environment(\.openWindow) private var openWindow
     @Environment(\.colorScheme) private var scheme
     @Environment(NMTheme.self) var theme
     @Environment(NMState.self) var state
-    @State private var backgroundImage: UIImage?
+    @State private var backgroundImage: NSImage?
     @State private var searchText: String = ""
-    @State private var selectedServerGroup: ServerGroup?
-    @Namespace private var tagNamespace
+    @State var selectedServerGroup: ServerGroup?
     
     private var filteredServers: [ServerData] {
         state.servers
@@ -61,15 +61,11 @@ struct ServerListView: View {
         .onAppear {
             let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
-                backgroundImage = UIImage(data: backgroundPhotoData)
+                backgroundImage = NSImage(data: backgroundPhotoData)
             }
             else {
                 backgroundImage = nil
             }
-        }
-        .onOpenURL { url in
-            _ = NMCore.debugLog("Incoming Link Info - App was opened via URL: \(url)")
-            handleIncomingURL(url)
         }
     }
     
@@ -77,7 +73,7 @@ struct ServerListView: View {
         Group {
             if let backgroundImage {
                 GeometryReader { proxy in
-                    Image(uiImage: backgroundImage)
+                    Image(nsImage: backgroundImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(height: proxy.size.height)
@@ -95,10 +91,6 @@ struct ServerListView: View {
     var dashboard: some View {
         Group {
             ScrollView {
-                groupPicker
-                    .safeAreaPadding(.horizontal, 15)
-                    .padding(.bottom, 5)
-                
                 serverList
             }
             .navigationTitle("Servers")
@@ -118,43 +110,6 @@ struct ServerListView: View {
         }
     }
     
-    var groupPicker: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 12) {
-                groupTag(serverGroup: nil)
-                ForEach(state.serverGroups) { serverGroup in
-                    groupTag(serverGroup: serverGroup)
-                }
-            }
-        }
-        .scrollIndicators(.never)
-    }
-    
-    private func groupTag(serverGroup: ServerGroup?) -> some View {
-        Button(action: {
-            withAnimation(.snappy) {
-                selectedServerGroup = serverGroup
-            }
-        }) {
-            Text(serverGroup == nil ? String(localized: "All(\(state.servers.count))") : nameCanBeUntitled(serverGroup!.name))
-                .font(.callout)
-                .foregroundStyle(selectedServerGroup == serverGroup ? theme.themeActiveColor(scheme: scheme) : theme.themePrimaryColor(scheme: scheme))
-                .padding(.vertical, 8)
-                .padding(.horizontal, 15)
-                .background {
-                    if selectedServerGroup == serverGroup {
-                        Capsule()
-                            .fill(theme.themeTintColor(scheme: scheme))
-                            .matchedGeometryEffect(id: "ACTIVETAG", in: tagNamespace)
-                    } else {
-                        Capsule()
-                            .fill(theme.themeSecondaryColor(scheme: scheme))
-                    }
-                }
-        }
-        .buttonStyle(.plain)
-    }
-    
     private var serverList: some View {
         Group {
             if !state.servers.isEmpty {
@@ -162,43 +117,16 @@ struct ServerListView: View {
                     ForEach(filteredServers) { server in
                         ServerCardView(server: server, lastUpdateTime: state.dashboardLastUpdateTime)
                             .onTapGesture {
-                                state.path.append(server)
+                                openWindow(id: "server-detail-view", value: server.id)
                             }
                     }
                 }
                 .padding(.horizontal, 15)
+                .padding(.vertical, 15)
             }
             else {
                 ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
             }
-        }
-    }
-    
-    private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "nezha" else {
-            _ = NMCore.debugLog("Incoming Link Error - Invalid Scheme")
-            return
-        }
-        
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            _ = NMCore.debugLog("Incoming Link Error - Invalid URL")
-            return
-        }
-        
-        guard let action = components.host, action == "server-details" else {
-            _ = NMCore.debugLog("Incoming Link Error - Unknown action")
-            return
-        }
-        
-        guard let id = components.queryItems?.first(where: { $0.name == "id" })?.value else {
-            _ = NMCore.debugLog("Incoming Link Error - id is missing")
-            return
-        }
-        
-        let server = state.servers.first(where: { $0.id == id })
-        state.tab = .alerts
-        if let server {
-            state.path.append(server)
         }
     }
 }

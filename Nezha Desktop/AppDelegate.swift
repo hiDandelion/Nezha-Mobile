@@ -9,7 +9,7 @@ import SwiftUI
 import UserNotifications
 
 class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
-    let notificationState: NotificationState = NotificationState()
+    let state: NMState = .init()
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         UNUserNotificationCenter.current().delegate = self
@@ -43,8 +43,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         
         _ = NMCore.debugLog("Notification Info - Title: \(title), Body: \(body)")
         
-        DispatchQueue.main.async {
-            self.notificationState.notificationData = (title: title, body: body)
+        DispatchQueue.main.async { [self] in
+            state.incomingAlert = (title: title, body: body)
             NSWorkspace.shared.open(URL(string: "nezha://alert-details")!)
         }
     }

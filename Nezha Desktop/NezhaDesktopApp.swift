@@ -11,10 +11,7 @@ import NezhaMobileData
 @main
 struct NezhaDesktopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    var dashboardViewModel: DashboardViewModel = .init()
-    var serverGroupViewModel: ServerGroupViewModel = .init()
-    var serviceViewModel: ServiceViewModel = .init()
-    var notificationViewModel: NotificationViewModel = .init()
+    var theme: NMTheme = .init()
     @AppStorage("NMMenuBarEnabled", store: NMCore.userDefaults) var menuBarEnabled: Bool = true
     
     init() {
@@ -26,10 +23,8 @@ struct NezhaDesktopApp: App {
         Window("Nezha Desktop", id: "main-view") {
             ContentView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
-                .environment(dashboardViewModel)
-                .environment(serverGroupViewModel)
-                .environment(serviceViewModel)
-                .environment(notificationViewModel)
+                .environment(appDelegate.state)
+                .environment(theme)
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
         .defaultSize(width: 1000, height: 500)
@@ -46,14 +41,14 @@ struct NezhaDesktopApp: App {
         
         Window("Map View", id: "map-view") {
             ServerMapView()
-                .environment(dashboardViewModel)
+                .environment(appDelegate.state)
         }
         
         WindowGroup("Server Details", id: "server-detail-view", for: ServerData.ID.self) { $id in
             if let id {
                 ServerDetailView(id: id)
                     .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
-                    .environment(dashboardViewModel)
+                    .environment(appDelegate.state)
             }
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
@@ -61,8 +56,8 @@ struct NezhaDesktopApp: App {
         .commandsRemoved()
         
         WindowGroup("Alert Details", id: "alert-detail-view") {
-            if let notificationData = appDelegate.notificationState.notificationData {
-                AlertDetailView(time: nil, title: notificationData.title, content: notificationData.body)
+            if let incomingAlert = appDelegate.state.incomingAlert {
+                AlertDetailView(time: nil, title: incomingAlert.title, content: incomingAlert.body)
             }
             else {
                 ContentUnavailableView("No alert information", systemImage: "exclamationmark.bubble")
@@ -74,7 +69,7 @@ struct NezhaDesktopApp: App {
         
         MenuBarExtra(isInserted: $menuBarEnabled) {
             MenuBarView()
-                .environment(dashboardViewModel)
+                .environment(appDelegate.state)
         } label: {
             Image(systemName: "server.rack")
         }
@@ -83,7 +78,8 @@ struct NezhaDesktopApp: App {
         Settings {
             SettingView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
-                .environment(dashboardViewModel)
+                .environment(appDelegate.state)
+                .environment(theme)
         }
     }
 }

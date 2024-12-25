@@ -49,7 +49,7 @@ struct SettingsView: View {
                 case "dashboard-settings":
                     DashboardSettingsView()
                 case "theme-settings":
-                    AdvancedCustomizationView()
+                    ThemeSettingsView()
                 case "acknowledgments":
                     NMUI.AcknowledgmentView()
                 default:

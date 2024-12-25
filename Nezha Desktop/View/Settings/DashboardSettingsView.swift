@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DashboardSettingsView: View {
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     @State private var link: String = NMCore.getNezhaDashboardLink()
     @State private var username: String = NMCore.getNezhaDashboardUsername()
     @State private var password: String = NMCore.getNezhaDashboardPassword()
@@ -40,7 +40,7 @@ struct DashboardSettingsView: View {
             Section {
                 Button("Save & Apply") {
                     NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
-                    dashboardViewModel.startMonitoring()
+                    state.loadDashboard()
                     isShowSuccessfullySavedAlert.toggle()
                 }
                 .alert("Successfully Saved", isPresented: $isShowSuccessfullySavedAlert) {
@@ -51,6 +51,7 @@ struct DashboardSettingsView: View {
             }
         }
         .padding()
+        .frame(width: 600, height: 400)
         .tabItem {
             Label("General", systemImage: "gearshape")
         }

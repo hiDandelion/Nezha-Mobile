@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ServerGroupServerListView: View {
-    @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
+    @Environment(NMState.self) private var state
     let editMode: ServerGroupEditMode
     let serverGroup: ServerGroup
     var serverInGroup: [ServerData] {
-        serverGroupViewModel.servers.filter {
+        state.servers.filter {
             serverGroup.serverIDs.contains($0.serverID)
         }
     }
     @Binding var selectedServerIDs: Set<Int64>
     
     var body: some View {
-        if (!serverGroup.serverIDs.isEmpty && editMode == .inactive) || (!serverGroupViewModel.servers.isEmpty && editMode == .active) {
+        if (!serverGroup.serverIDs.isEmpty && editMode == .inactive) || (!state.servers.isEmpty && editMode == .active) {
             List(selection: $selectedServerIDs) {
                 if editMode == .inactive {
                     ForEach(serverInGroup) { server in
@@ -28,7 +28,7 @@ struct ServerGroupServerListView: View {
                     }
                 }
                 if editMode == .active {
-                    ForEach(serverGroupViewModel.servers) { server in
+                    ForEach(state.servers) { server in
                         ServerTitle(server: server, lastUpdateTime: nil)
                             .tag(server.serverID)
                     }

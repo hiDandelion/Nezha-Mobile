@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ServerListView: View {
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) var openWindow
-    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
     @Environment(NMState.self) private var state
     @State private var searchText: String = ""
@@ -36,7 +34,7 @@ struct ServerListView: View {
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
-    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 350, maximum: 450))]
+    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 320, maximum: 450))]
     
     var body: some View {
         NavigationStack {

@@ -24,18 +24,32 @@ struct ServerCardView: View {
                     .shadow(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)
             )
             .tint(theme.themeTintColor(scheme: scheme))
+#if os(iOS) || os(visionOS)
             .hoverEffect(.automatic)
+#endif
             .contextMenu(ContextMenu(menuItems: {
                 if server.ipv4 != "" {
                     Button {
-                        UIPasteboard.general.string = server.ipv4
+#if os(iOS) || os(visionOS)
+                    UIPasteboard.general.string = server.ipv4
+#endif
+#if os(macOS)
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(server.ipv4, forType: .string)
+#endif
                     } label: {
                         Label("Copy IPv4", systemImage: "4.circle")
                     }
                 }
                 if server.ipv6 != "" {
                     Button {
-                        UIPasteboard.general.string = server.ipv6
+#if os(iOS) || os(visionOS)
+                    UIPasteboard.general.string = server.ipv6
+#endif
+#if os(macOS)
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(server.ipv6, forType: .string)
+#endif
                     } label: {
                         Label("Copy IPv6", systemImage: "6.circle")
                     }

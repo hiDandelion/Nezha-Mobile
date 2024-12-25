@@ -22,13 +22,13 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     var id: String
     @State private var activeTab: ServerDetailTab = .basic
     
     var body: some View {
         NavigationStack {
-            if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
+            if let server = state.servers.first(where: { $0.id == id }) {
                 if server.status.uptime != 0 {
                     VStack {
                         switch(activeTab) {
@@ -88,7 +88,7 @@ struct ServerDetailView: View {
             Section {
                 Button {
                     Task {
-                        await dashboardViewModel.refresh()
+                        await state.refreshServerAndServerGroup()
                     }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")

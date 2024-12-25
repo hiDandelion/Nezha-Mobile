@@ -9,11 +9,11 @@ import SwiftUI
 
 struct MenuBarView: View {
     @Environment(\.openWindow) var openWindow
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     @State private var selectedServerGroup: ServerGroup?
     
     private var filteredServers: [ServerData] {
-        dashboardViewModel.servers
+        state.servers
             .sorted {
                 if $0.displayIndex == $1.displayIndex {
                     return $0.serverID < $1.serverID
@@ -46,7 +46,7 @@ struct MenuBarView: View {
                 Picker("Tag", selection: $selectedServerGroup) {
                     Text("All")
                         .tag(nil as ServerGroup?)
-                    ForEach(dashboardViewModel.serverGroups) { serverGroup in
+                    ForEach(state.serverGroups) { serverGroup in
                         Text(nameCanBeUntitled(serverGroup.name))
                             .tag(serverGroup)
                     }
@@ -68,20 +68,20 @@ struct MenuBarView: View {
             }
             .padding([.bottom, .horizontal])
         }
-        .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState) {
-            dashboardViewModel.startMonitoring()
+        .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+            state.loadDashboard()
         }
         .frame(width: 380, height: 700)
         .onAppear {
-            if dashboardViewModel.loadingState != .loaded {
-                dashboardViewModel.startMonitoring()
+            if state.dashboardLoadingState != .loaded {
+                state.loadDashboard()
             }
         }
     }
     
     private var serverList: some View {
         VStack {
-            if !dashboardViewModel.servers.isEmpty {
+            if !state.servers.isEmpty {
                 List {
                     ForEach(filteredServers) { server in
                         serverItem(server: server)
@@ -129,7 +129,7 @@ struct MenuBarView: View {
                     }
                     .frame(width: 20)
                     Text(server.name)
-                    if let lastUpdateTime = dashboardViewModel.lastUpdateTime {
+                    if let lastUpdateTime = state.dashboardLastUpdateTime {
                         Image(systemName: "circlebadge.fill")
                             .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
                     }

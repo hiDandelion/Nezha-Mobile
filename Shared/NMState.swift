@@ -13,9 +13,16 @@ import BackgroundTasks
 
 @Observable
 class NMState {
-    var tab: MainTab = .servers
     var path: NavigationPath = .init()
+    
+#if os(iOS) || os(visionOS)
+    var tab: MainTab = .servers
     var isShowMapView: Bool = false
+#endif
+    
+#if os(macOS)
+    var incomingAlert: (title: String, body: String)?
+#endif
     
     var dashboardLoadingState: LoadingState = .idle
     var dashboardLastUpdateTime: Date?

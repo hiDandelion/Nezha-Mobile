@@ -13,10 +13,10 @@ enum ServerGroupEditMode {
 }
 
 struct ServerGroupDetailView: View {
-    @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
+    @Environment(NMState.self) private var state
     let serverGroupID: Int64
     var serverGroup: ServerGroup? {
-        serverGroupViewModel.serverGroups.first(where: { $0.serverGroupID == serverGroupID })
+        state.serverGroups.first(where: { $0.serverGroupID == serverGroupID })
     }
     @State private var editMode: ServerGroupEditMode = .inactive
     @State private var selectedServerIDs: Set<Int64> = .init()
@@ -64,7 +64,7 @@ struct ServerGroupDetailView: View {
                         Task {
                             do {
                                 let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: selectedServerIDArray)
-                                await serverGroupViewModel.refreshServerGroup()
+                                await state.refreshServerGroup()
                                 isUpdatingServerGroup = false
                                 withAnimation {
                                     editMode = .inactive

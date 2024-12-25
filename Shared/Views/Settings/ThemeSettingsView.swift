@@ -1,5 +1,5 @@
 //
-//  AdvancedCustomizationView.swift
+//  ThemeSettingsView.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 8/15/24.
@@ -7,13 +7,20 @@
 
 import SwiftUI
 import PhotosUI
+#if os(iOS)
 import WidgetKit
+#endif
 
-struct AdvancedCustomizationView: View {
+struct ThemeSettingsView: View {
     @Environment(NMTheme.self) var theme
     @AppStorage("NMBackgroundPhotoData", store: NMCore.userDefaults) private var backgroundPhotoData: Data?
     @State private var selectedPhoto: PhotosPickerItem?
+#if os(iOS) || os(visionOS)
     @State var backgroundImage: UIImage?
+#endif
+#if os(macOS)
+    @State var backgroundImage: NSImage?
+#endif
     @AppStorage("NMWidgetCustomizationEnabled", store: NMCore.userDefaults) private var widgetCustomizationEnabled: Bool = false
     @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) private var selectedWidgetBackgroundColor: Color = .blue
     @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) private var selectedWidgetTextColor: Color = .white
@@ -29,7 +36,12 @@ struct AdvancedCustomizationView: View {
                     Task {
                         if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
                             backgroundPhotoData = data
+#if os(iOS) || os(visionOS)
                             backgroundImage = UIImage(data: data)
+#endif
+#if os(macOS)
+                            backgroundImage = NSImage(data: data)
+#endif
                         }
                     }
                 }
@@ -42,14 +54,17 @@ struct AdvancedCustomizationView: View {
                 }
             } header: {
                 Text("Background Customization")
-            } footer: {
-                Text("These settings will overwrite theme configurations and custom theme configurations.")
             }
             .onAppear {
                 // Set background
                 let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")
                 if let backgroundPhotoData {
+#if os(iOS) || os(visionOS)
                     backgroundImage = UIImage(data: backgroundPhotoData)
+#endif
+#if os(macOS)
+                    backgroundImage = NSImage(data: backgroundPhotoData)
+#endif
                 }
             }
             
@@ -66,10 +81,9 @@ struct AdvancedCustomizationView: View {
                 ColorPicker("Tint Color Dark Mode", selection: Bindable(theme).themeTintColorDark)
             } header: {
                 Text("Theme Customization")
-            } footer: {
-                Text("These settings will overwrite theme configurations.")
             }
             
+#if os(iOS)
             Section {
                 Toggle("Enable Widget Customization", isOn: $widgetCustomizationEnabled)
                 if widgetCustomizationEnabled {
@@ -90,8 +104,18 @@ struct AdvancedCustomizationView: View {
             } footer: {
                 Text("These settings will overwrite widget configurations and apply to all widgets.")
             }
+#endif
         }
-        .navigationTitle("Advanced Customization")
+        .navigationTitle("Theme Settings")
+#if os(iOS) || os(visionOS)
         .navigationBarTitleDisplayMode(.inline)
+#endif
+#if os(macOS)
+        .padding()
+        .frame(width: 600, height: 600)
+        .tabItem {
+            Label("Theme", systemImage: "paintbrush")
+        }
+#endif
     }
 }

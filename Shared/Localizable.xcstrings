@@ -35,16 +35,6 @@
         }
       }
     },
-    "%@%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@%2$@"
-          }
-        }
-      }
-    },
     "%lf" : {
 
     },
@@ -253,9 +243,6 @@
     "🏴‍☠️" : {
 
     },
-    "🏴‍☠️%@" : {
-
-    },
     "About" : {
       "localizations" : {
         "ja" : {
@@ -417,6 +404,7 @@
       }
     },
     "Advanced Customization" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -2838,6 +2826,7 @@
       }
     },
     "Servers(%lld)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3113,7 +3102,6 @@
       }
     },
     "Theme" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3146,9 +3134,23 @@
       }
     },
     "Theme Settings" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テーマ設定"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主题设置"
+          }
+        }
+      }
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3165,6 +3167,7 @@
       }
     },
     "These settings will overwrite theme configurations." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3457,7 +3460,7 @@
       }
     },
     "This project has dependency evgenyneu/keychain-swift which is subject to\nMIT License" : {
-
+      "shouldTranslate" : false
     },
     "This project has dependency hyperoslo/Cache which is subject to\nMIT License" : {
       "shouldTranslate" : false

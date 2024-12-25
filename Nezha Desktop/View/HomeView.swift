@@ -28,19 +28,18 @@ struct UserSection: Hashable {
 
 struct HomeView: View {
     @Environment(\.openWindow) var openWindow
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     @AppStorage(NMCore.NMDashboardLink, store: NMCore.userDefaults) private var dashboardLink: String = ""
     @AppStorage(NMCore.NMDashboardUsername, store: NMCore.userDefaults) private var dashboardUsername: String = ""
     @State private var activeUserSection: UserSection = .init(tab: .servers, serverGroup: nil, tool: nil)
     
     var body: some View {
-        @Bindable var dashboardViewModel = dashboardViewModel
         NavigationSplitView {
             List(selection: $activeUserSection) {
                 Section("Servers") {
                     Text("All")
                         .tag(UserSection(tab: .servers, serverGroup: nil, tool: nil))
-                    ForEach(dashboardViewModel.serverGroups) { serverGroup in
+                    ForEach(state.serverGroups) { serverGroup in
                         Text(nameCanBeUntitled(serverGroup.name))
                             .tag(UserSection(tab: .servers, serverGroup: serverGroup, tool: nil))
                     }
@@ -64,7 +63,7 @@ struct HomeView: View {
         } detail: {
             switch(activeUserSection.tab) {
             case .servers:
-                ServerTableView(selectedServerGroup: activeUserSection.serverGroup)
+                ServerListView(selectedServerGroup: activeUserSection.serverGroup)
             case .dashboard, .terminal:
                 switch(activeUserSection.tool) {
                 case .serverGroups:
@@ -77,7 +76,7 @@ struct HomeView: View {
                     }
                 case .notifications:
                     NavigationStack {
-                        NotificationView()
+                        NotificationListView()
                     }
                 case .snippets:
                     NavigationStack {
@@ -88,8 +87,8 @@ struct HomeView: View {
                 }
             }
         }
-        .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState, retryAction: {
-            dashboardViewModel.startMonitoring()
+        .canInLoadingStateModifier(loadingState: state.dashboardLoadingState, retryAction: {
+            state.loadDashboard()
         })
     }
 }
