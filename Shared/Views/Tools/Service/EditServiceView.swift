@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditServiceView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(ServiceViewModel.self) private var serviceViewModel
+    @Environment(NMState.self) private var state
     let service: ServiceData?
     
     @State private var isProcessing: Bool = false
@@ -67,7 +67,7 @@ struct EditServiceView: View {
                                 Task {
                                     do {
                                         let _ = try await RequestHandler.updateService(service: service, name: name, type: type, target: target, interval: Int64(interval))
-                                        await serviceViewModel.refresh()
+                                        await state.refreshServices()
                                         isProcessing = false
                                         dismiss()
                                     } catch {
@@ -82,7 +82,7 @@ struct EditServiceView: View {
                                 Task {
                                     do {
                                         let _ = try await RequestHandler.addService(name: name, type: type, target: target, interval: interval)
-                                        await serviceViewModel.refresh()
+                                        await state.refreshServices()
                                         isProcessing = false
                                         dismiss()
                                     } catch {

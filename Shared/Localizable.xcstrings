@@ -689,6 +689,7 @@
       }
     },
     "Choose Style" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -967,6 +968,7 @@
       }
     },
     "Customize your interface" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1303,6 +1305,7 @@
       }
     },
     "Enable Theme Customization" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1568,6 +1571,7 @@
       }
     },
     "Help" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1584,6 +1588,7 @@
       }
     },
     "Host" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -2688,6 +2693,7 @@
       }
     },
     "Select Theme" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3107,6 +3113,7 @@
       }
     },
     "Theme" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3137,6 +3144,9 @@
           }
         }
       }
+    },
+    "Theme Settings" : {
+
     },
     "These settings will overwrite theme configurations and custom theme configurations." : {
       "localizations" : {

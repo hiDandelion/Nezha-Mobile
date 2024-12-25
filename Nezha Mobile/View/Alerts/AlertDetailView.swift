@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
+import NezhaMobileData
 
 struct AlertDetailView: View {
-    @EnvironmentObject var notificationState: NotificationState
-    let time: Date?
-    let title: String?
-    let content: String?
+    @Environment(NMState.self) var state
+    let alert: ServerAlert
     
     var body: some View {
         Form {
-            if let time = time {
+            if let time = alert.timestamp {
                 Section("Time") {
                     Text(time.formatted(date: .long, time: .standard))
                         .foregroundStyle(.secondary)
@@ -23,12 +22,9 @@ struct AlertDetailView: View {
             }
             
             Section("Content") {
-                Text(content ?? "")
+                Text(alert.content ?? "")
             }
         }
-        .navigationTitle(nameCanBeUntitled(title))
-        .onDisappear {
-            notificationState.shouldNavigateToNotificationView = false
-        }
+        .navigationTitle(nameCanBeUntitled(alert.title))
     }
 }

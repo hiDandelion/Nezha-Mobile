@@ -7,12 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import NezhaMobileData
 import UserNotifications
 import ActivityKit
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    let notificationState: NotificationState = NotificationState()
-    var tabBarState: TabBarState?
+    let state: NMState = .init()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         application.registerForRemoteNotifications()
@@ -37,19 +37,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         _ = NMCore.debugLog("Notification Info - Title: \(title), Body: \(body)")
         
-        DispatchQueue.main.async {
-            self.tabBarState!.activeTab = .alerts
-            self.notificationState.notificationData = (title: title, body: body)
-            self.notificationState.shouldNavigateToNotificationView = true
+        DispatchQueue.main.async { [self] in
+            state.tab = .alerts
+            state.path.append(ServerAlert(timestamp: Date(), title: title, content: body))
         }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         return [.badge, .banner, .list, .sound]
     }
-}
-
-class NotificationState: ObservableObject {
-    @Published var shouldNavigateToNotificationView = false
-    @Published var notificationData: (title: String, body: String)?
 }

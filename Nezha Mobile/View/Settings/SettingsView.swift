@@ -12,52 +12,50 @@ import StoreKit
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.requestReview) var requestReview
-    @Environment(ThemeStore.self) var themeStore
-    @Environment(TabBarState.self) var tabBarState
+    @Environment(NMTheme.self) var theme
+    @Environment(NMState.self) var state
     @State var isPresentedAsSheet: Bool = false
     @State private var isShowingChangeThemeSheet: Bool = false
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: Bindable(state).path) {
             Form {
-                Section("Dashboard") {
-                    NavigationLink("Dashboard Settings") {
-                        DashboardSettingsView()
+                Section {
+                    NavigationLink(value: "dashboard-settings") {
+                        Text("Dashboard Settings")
                     }
                 }
                 
-                Section("Theme") {
-                    Button("Select Theme") {
-                        isShowingChangeThemeSheet.toggle()
+                Section {
+                    NavigationLink(value: "theme-settings") {
+                        Text("Theme Settings")
                     }
-                    .sheet(isPresented: $isShowingChangeThemeSheet) {
-                        ChangeThemeView(isShowingChangeThemeSheet: $isShowingChangeThemeSheet)
-                            .presentationDetents([.height(400)])
-                            .presentationBackground(.clear)
-                    }
-                    
-                    NavigationLink("Advanced Customization") {
-                        AdvancedCustomizationView()
-                    }
-                }
-                
-                Section("Help") {
-                    Link("User Guide", destination: NMCore.userGuideURL)
                 }
                 
                 Section("About") {
+                    Link("User Guide", destination: NMCore.userGuideURL)
                     Button("Rate Us") {
                         requestReview()
                     }
                     
-                    NavigationLink(destination: {
-                        NMUI.AcknowledgmentView()
-                    }) {
+                    NavigationLink(value: "acknowledgments") {
                         Text("Acknowledgments")
                     }
                 }
             }
             .navigationTitle("Settings")
+            .navigationDestination(for: String.self) { target in
+                switch(target) {
+                case "dashboard-settings":
+                    DashboardSettingsView()
+                case "theme-settings":
+                    AdvancedCustomizationView()
+                case "acknowledgments":
+                    NMUI.AcknowledgmentView()
+                default:
+                    EmptyView()
+                }
+            }
             .toolbar {
                 if isPresentedAsSheet {
                     ToolbarItem(placement: .confirmationAction) {
@@ -71,16 +69,6 @@ struct SettingsView: View {
                 Rectangle()
                     .fill(.clear)
                     .frame(height: 50)
-            }
-            .onAppear {
-                withAnimation {
-                    tabBarState.isSettingsViewVisible = true
-                }
-            }
-            .onDisappear {
-                withAnimation {
-                    tabBarState.isSettingsViewVisible = false
-                }
             }
         }
     }

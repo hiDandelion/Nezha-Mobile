@@ -6,69 +6,71 @@
 //
 
 import SwiftUI
+import NezhaMobileData
 
 struct ToolListView: View {
-#if os(iOS)
-    @Environment(TabBarState.self) var tabBarState
-#endif
+    @Environment(NMState.self) var state
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: Bindable(state).path) {
             List {
                 Section("Dashboard") {
-                    NavigationLink {
-                        ServerGroupListView()
-                    } label: {
+                    NavigationLink(value: "server-group-list") {
                         TextWithColorfulIcon(titleKey: "Server Groups", systemName: "square.grid.3x2", color: .blue)
                     }
                     
-                    NavigationLink {
-                        ServiceListView()
-                    } label: {
+                    NavigationLink(value: "service-list") {
                         TextWithColorfulIcon(titleKey: "Monitors", systemName: "chart.xyaxis.line", color: .purple)
                     }
                     
-                    NavigationLink {
-                        NotificationView()
-                    } label: {
+                    NavigationLink(value: "notification-list") {
                         TextWithColorfulIcon(titleKey: "Notifications", systemName: "bell.badge", color: .red)
                     }
                 }
                 
                 Section("Agent") {
-                    NavigationLink {
-                        DeviceInfoView()
-                    } label: {
+                    NavigationLink(value: "device-info") {
                         TextWithColorfulIcon(titleKey: "View Device Info", systemName: "info.circle", color: .blue)
                     }
                 }
                 
                 Section("Terminal") {
-                    NavigationLink {
-                        SnippetListView(executeAction: nil)
-                    } label: {
+                    NavigationLink(value: "snippet-list") {
                         TextWithColorfulIcon(titleKey: "Snippets", systemName: "text.page", color: .orange)
                     }
                 }
             }
             .navigationTitle("Tools")
+            .navigationDestination(for: String.self) { target in
+                switch target {
+                case "server-group-list":
+                    ServerGroupListView()
+                case "service-list":
+                    ServiceListView()
+                case "notification-list":
+                    NotificationListView()
+                case "device-info":
+                    DeviceInfoView()
+                case "snippet-list":
+                    SnippetListView(executeAction: nil)
+                default:
+                    EmptyView()
+                }
+            }
+            .navigationDestination(for: ServerGroup.self) { serverGroup in
+                ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
+            }
+            .navigationDestination(for: ServiceData.self) { service in
+                ServiceDetailView(service: service)
+            }
+            .navigationDestination(for: TerminalSnippet.self) { terminalSnippet in
+                SnippetDetailView(terminalSnippet: terminalSnippet)
+            }
             .safeAreaInset(edge: .bottom) {
                 Rectangle()
                     .fill(.clear)
                     .frame(height: 50)
             }
-#if os(iOS)
-            .onAppear {
-                withAnimation {
-                    tabBarState.isToolsViewVisible = true
-                }
-            }
-            .onDisappear {
-                withAnimation {
-                    tabBarState.isToolsViewVisible = false
-                }
-            }
-#endif
         }
     }
 }

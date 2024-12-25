@@ -13,35 +13,40 @@ import StoreKit
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.requestReview) var requestReview
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     @State var isPresentedAsSheet: Bool = false
     
     var body: some View {
         NavigationStack {
             Form {
-                Section("Dashboard") {
-                    NavigationLink("Dashboard Settings") {
-                        DashboardSettingsView()
+                Section {
+                    NavigationLink(value: "dashboard-settings") {
+                        Text("Dashboard Settings")
                     }
                 }
                 
-                Section("Help") {
-                    Link("User Guide", destination: NMCore.userGuideURL)
-                }
-                
                 Section("About") {
+                    Link("User Guide", destination: NMCore.userGuideURL)
                     Button("Rate Us") {
                         requestReview()
                     }
                     
-                    NavigationLink(destination: {
-                        NMUI.AcknowledgmentView()
-                    }) {
+                    NavigationLink(value: "acknowledgments") {
                         Text("Acknowledgments")
                     }
                 }
             }
             .navigationTitle("Settings")
+            .navigationDestination(for: String.self) { target in
+                switch(target) {
+                case "dashboard-settings":
+                    DashboardSettingsView()
+                case "acknowledgments":
+                    NMUI.AcknowledgmentView()
+                default:
+                    EmptyView()
+                }
+            }
             .toolbar {
                 if isPresentedAsSheet {
                     ToolbarItem(placement: .confirmationAction) {

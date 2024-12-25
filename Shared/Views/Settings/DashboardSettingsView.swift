@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DashboardSettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     @State private var link: String = NMCore.getNezhaDashboardLink()
     @State private var username: String = NMCore.getNezhaDashboardUsername()
     @State private var password: String = NMCore.getNezhaDashboardPassword()
@@ -44,7 +44,7 @@ struct DashboardSettingsView: View {
             Section {
                 Button("Save & Apply") {
                     NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
-                    dashboardViewModel.startMonitoring()
+                    state.loadDashboard()
                     dismiss()
                 }
             }

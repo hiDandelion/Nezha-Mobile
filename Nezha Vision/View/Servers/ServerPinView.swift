@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ServerPinView: View {
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     var id: String
     
     var body: some View {
         Group {
-            if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
+            if let server = state.servers.first(where: { $0.id == id }) {
                 content(server: server)
             }
             else {
@@ -49,7 +49,7 @@ struct ServerPinView: View {
             Text(server.name)
             
             Image(systemName: "circlebadge.fill")
-                .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: dashboardViewModel.lastUpdateTime ?? Date()) || server.status.uptime == 0 ? .red : .green)
+                .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: state.dashboardLastUpdateTime ?? Date()) || server.status.uptime == 0 ? .red : .green)
         }
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMState.self) private var state
     @State private var isShowingOnboarding: Bool = false
     @State private var isShowingAddDashboardSheet: Bool = false
     
@@ -38,7 +38,7 @@ struct ContentView: View {
             NMCore.syncWithiCloud()
             
             if NMCore.isNezhaDashboardConfigured {
-                dashboardViewModel.startMonitoring()
+                state.loadDashboard()
             } else {
                 isShowingOnboarding = true
             }

@@ -11,7 +11,7 @@ struct ServerDetailHostView: View {
     var server: ServerData
     
     var body: some View {
-        Section("Host") {
+        Section {
             VStack(alignment: .leading) {
                 Label("Operating System", systemImage: "opticaldisc")
                 HStack {

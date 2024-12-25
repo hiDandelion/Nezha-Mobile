@@ -10,10 +10,7 @@ import NezhaMobileData
 
 @main
 struct NezhaVisionApp: App {
-    var dashboardViewModel: DashboardViewModel = .init()
-    var serverGroupViewModel: ServerGroupViewModel = .init()
-    var serviceViewModel: ServiceViewModel = .init()
-    var notificationViewModel: NotificationViewModel = .init()
+    var state: NMState = .init()
     
     init() {
         NMCore.registerUserDefaults()
@@ -24,10 +21,7 @@ struct NezhaVisionApp: App {
         WindowGroup("Nezha Vision", id: "main-view") {
             ContentView()
                 .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
-                .environment(dashboardViewModel)
-                .environment(serverGroupViewModel)
-                .environment(serviceViewModel)
-                .environment(notificationViewModel)
+                .environment(state)
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
         
@@ -35,7 +29,7 @@ struct NezhaVisionApp: App {
             if let id {
                 ServerPinView(id: id)
                     .frame(width: 400, height: 300)
-                    .environment(dashboardViewModel)
+                    .environment(state)
                     .handlesExternalEvents(preferring: [], allowing: [])
             }
         }
@@ -44,7 +38,7 @@ struct NezhaVisionApp: App {
         WindowGroup("Server Details", id: "server-detail-view", for: ServerData.ID.self) { $id in
             if let id {
                 ServerDetailView(id: id)
-                    .environment(dashboardViewModel)
+                    .environment(state)
                     .handlesExternalEvents(preferring: [], allowing: [])
             }
         }

@@ -8,10 +8,19 @@
 import SwiftUI
 
 enum MainTab: String, CaseIterable {
-    case servers = "server.rack"
-    case tools = "briefcase"
-    case alerts = "bell"
-    case settings = "gearshape"
+    case servers = "servers"
+    case tools = "tools"
+    case alerts = "alerts"
+    case settings = "settings"
+    
+    var systemName: String {
+        switch self {
+        case .servers: "server.rack"
+        case .tools: "briefcase"
+        case .alerts: "bell"
+        case .settings: "gearshape"
+        }
+    }
     
     var title: String {
         switch self {
@@ -23,37 +32,19 @@ enum MainTab: String, CaseIterable {
     }
 }
 
-@Observable
-class TabBarState {
-    var isTabBarHidden: Bool = false
-    var activeTab: MainTab = .servers
-    
-    var isShowMapView: Bool = false
-    
-    var isServersViewVisible: Bool = false
-    var isToolsViewVisible: Bool = false
-    var isAlertsViewVisible: Bool = false
-    var isSettingsViewVisible: Bool = false
-    
-    var shouldMakeTabBarVisible: Bool {
-        !isTabBarHidden && (isServersViewVisible || isToolsViewVisible || isAlertsViewVisible || isSettingsViewVisible)
-    }
-}
-
 struct MainTabView: View {
     @Environment(\.colorScheme) private var scheme
-    @Environment(ThemeStore.self) var themeStore
-    @Environment(TabBarState.self) var tabBarState
-    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
+    @Environment(NMTheme.self) var theme
+    @Environment(NMState.self) var state
     @State private var isDefaultTabBarHidden: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
             Group {
                 if #available(iOS 18, *) {
-                    TabView(selection: Bindable(tabBarState).activeTab) {
-                        Tab.init(value: MainTab.servers) {
-                            if tabBarState.isShowMapView {
+                    TabView(selection: Bindable(state).tab) {
+                        Tab(value: MainTab.servers) {
+                            if state.isShowMapView {
                                 ServerMapView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
@@ -63,24 +54,24 @@ struct MainTabView: View {
                             }
                         }
                         
-                        Tab.init(value: MainTab.tools) {
+                        Tab(value: MainTab.tools) {
                             ToolListView()
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                         
-                        Tab.init(value: MainTab.alerts) {
+                        Tab(value: MainTab.alerts) {
                             AlertListView()
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                         
-                        Tab.init(value: MainTab.settings) {
+                        Tab(value: MainTab.settings) {
                             SettingsView()
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                     }
                 } else {
-                    TabView(selection: Bindable(tabBarState).activeTab) {
-                        if tabBarState.isShowMapView {
+                    TabView(selection: Bindable(state).tab) {
+                        if state.isShowMapView {
                             ServerMapView()
                                 .tag(MainTab.servers)
                         }
@@ -108,21 +99,16 @@ struct MainTabView: View {
                 }
             }
             
-            if themeStore.themeCustomizationEnabled {
-                MainTabBar(activeForeground: themeStore.themeActiveColor(scheme: scheme), activeBackground: themeStore.themeTintColor(scheme: scheme), activeTab: Bindable(tabBarState).activeTab)
-                    .opacity(tabBarState.shouldMakeTabBarVisible ? 1 : 0)
-            }
-            else {
-                MainTabBar(activeBackground: themeColor(theme: theme), activeTab: Bindable(tabBarState).activeTab)
-                    .opacity(tabBarState.shouldMakeTabBarVisible ? 1 : 0)
-            }
+            MainTabBar(activeBackground: theme.themeTintColor(scheme: scheme), activeTab: Bindable(state).tab)
+                .opacity(state.path.count == 1 ? 0 : 1)
+                .animation(.easeInOut, value: state.path.count)
         }
     }
 }
 
 struct MainTabBar: View {
     @Environment(\.colorScheme) private var scheme
-    @Environment(TabBarState.self) var tabBarState
+    @Environment(NMState.self) var state
     var activeForeground: Color = .white
     var activeBackground: Color = .blue
     @Binding var activeTab: MainTab
@@ -139,7 +125,7 @@ struct MainTabBar: View {
                         activeTab = tab
                     } label: {
                         HStack(spacing: 5) {
-                            Image(systemName: tab.rawValue)
+                            Image(systemName: tab.systemName)
                                 .font(.title3)
                                 .frame(width: 30, height: 30)
                             
@@ -200,7 +186,7 @@ struct MainTabBar: View {
             Button {
                 if activeTab == .servers {
                     withAnimation {
-                        tabBarState.isShowMapView = true
+                        state.isShowMapView = true
                     }
                 }
             } label: {

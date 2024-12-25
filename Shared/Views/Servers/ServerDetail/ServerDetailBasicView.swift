@@ -15,7 +15,7 @@ struct ServerDetailBasicView: View {
     @State private var ipv6CityData: GetIPCityDataResponse.IPCityData?
     
     var body: some View {
-        Section("Basic") {
+        Section {
             NMUI.PieceOfInfo(systemImage: "bookmark", name: "Name", content: Text("\(server.name)"))
             NMUI.PieceOfInfo(systemImage: "cube", name: "ID", content: Text("\(server.serverID)"))
             

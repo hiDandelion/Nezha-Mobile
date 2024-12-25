@@ -25,17 +25,15 @@ struct ServerDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
-    @Environment(ThemeStore.self) var themeStore
-    @Environment(TabBarState.self) var tabBarState
-    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
+    @Environment(NMTheme.self) var theme
+    @Environment(NMState.self) var state
     var id: String
     @State private var selectedSection: Int = 0
     @State private var activeTab: ServerDetailTab = .basic
     @StateObject var offsetObserver = PageOffsetObserver()
     
     var body: some View {
-        if let server = dashboardViewModel.servers.first(where: { $0.id == id }) {
+        if let server = state.servers.first(where: { $0.id == id }) {
             VStack {
                 if server.status.uptime != 0 {
                     content(server: server)
@@ -68,14 +66,8 @@ struct ServerDetailView: View {
     }
     
     private var background: some View {
-        if themeStore.themeCustomizationEnabled {
-            themeStore.themeBackgroundColor(scheme: scheme)
-                .ignoresSafeArea()
-        }
-        else {
-            Color(UIColor.systemGroupedBackground)
-                .ignoresSafeArea()
-        }
+        theme.themeBackgroundColor(scheme: scheme)
+            .ignoresSafeArea()
     }
     
     private func toolbarMenu(server: ServerData) -> some View {
@@ -83,7 +75,7 @@ struct ServerDetailView: View {
             Section {
                 Button {
                     Task {
-                        await dashboardViewModel.refresh()
+                        await state.refreshServerAndServerGroup()
                     }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
@@ -103,7 +95,7 @@ struct ServerDetailView: View {
     }
     
     private var tabbar: some View {
-        tabbarComponent(.gray)
+        tabbarComponent(theme.themePrimaryColor(scheme: scheme))
             .overlay {
                 GeometryReader {
                     let width = $0.size.width
@@ -112,11 +104,11 @@ struct ServerDetailView: View {
                     let progress = offsetObserver.offset / (offsetObserver.collectionView?.bounds.width ?? 1)
                     
                     Capsule()
-                        .fill(themeStore.themeCustomizationEnabled ? themeStore.themeTintColor(scheme: scheme) : themeColor(theme: theme))
+                        .fill(theme.themeTintColor(scheme: scheme))
                         .frame(width: capsuleWidth)
                         .offset(x: progress * capsuleWidth)
                     
-                    tabbarComponent(scheme == .light ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary), .semibold)
+                    tabbarComponent(scheme == .light ? theme.themeActiveColor(scheme: scheme) : theme.themePrimaryColor(scheme: scheme), .semibold)
                         .mask(alignment: .leading) {
                             Capsule()
                                 .frame(width: capsuleWidth)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServerGroupListView: View {
-    @Environment(ServerGroupViewModel.self) private var serverGroupViewModel
+    @Environment(NMState.self) private var state
     
     @State private var isShowAddServerGroupAlert: Bool = false
     @State private var nameOfNewServerGroup: String = ""
@@ -20,11 +20,9 @@ struct ServerGroupListView: View {
     
     var body: some View {
         List {
-            if !serverGroupViewModel.serverGroups.isEmpty {
-                ForEach(serverGroupViewModel.serverGroups) { serverGroup in
-                    NavigationLink {
-                        ServerGroupDetailView(serverGroupID: serverGroup.serverGroupID)
-                    } label: {
+            if !state.serverGroups.isEmpty {
+                ForEach(state.serverGroups) { serverGroup in
+                    NavigationLink(value: serverGroup) {
                         serverGroupLabel(serverGroup: serverGroup)
                     }
                     .renamableAndDeletable {
@@ -39,14 +37,16 @@ struct ServerGroupListView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .canInLoadingStateModifier(loadingState: serverGroupViewModel.loadingState) {
-            serverGroupViewModel.loadData()
+        .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+            state.loadDashboard()
         }
         .navigationTitle("Server Groups")
         .toolbar {
             ToolbarItem {
                 Button {
-                    serverGroupViewModel.loadData()
+                    Task {
+                        await state.refreshServerGroup()
+                    }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
@@ -65,11 +65,6 @@ struct ServerGroupListView: View {
                 }
             }
         }
-        .onAppear {
-            if serverGroupViewModel.loadingState == .idle {
-                serverGroupViewModel.loadData()
-            }
-        }
         .alert("Add Server Group", isPresented: $isShowAddServerGroupAlert) {
             TextField("Name", text: $nameOfNewServerGroup)
             Button("Cancel", role: .cancel) { }
@@ -78,7 +73,7 @@ struct ServerGroupListView: View {
                 Task {
                     do {
                         let _ = try await RequestHandler.addServerGroup(name: nameOfNewServerGroup)
-                        await serverGroupViewModel.refreshServerGroup()
+                        await state.refreshServerGroup()
                         isAddingServerGroup = false
                         nameOfNewServerGroup = ""
                     } catch {
@@ -118,7 +113,7 @@ struct ServerGroupListView: View {
         Task {
             do {
                 let _ = try await RequestHandler.deleteServerGroup(serverGroups: [serverGroup])
-                await serverGroupViewModel.refreshServerGroup()
+                await state.refreshServerGroup()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)
@@ -137,7 +132,7 @@ struct ServerGroupListView: View {
         Task {
             do {
                 let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroupToRename!, name: newNameOfServerGroup)
-                await serverGroupViewModel.refreshServerGroup()
+                await state.refreshServerGroup()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)

@@ -11,18 +11,17 @@ import NezhaMobileData
 
 struct AlertListView: View {
     @Environment(\.createDataHandler) private var createDataHandler
-    @EnvironmentObject var notificationState: NotificationState
-    @Environment(TabBarState.self) var tabBarState
+    @Environment(NMState.self) var state
     @Query(sort: \ServerAlert.timestamp, order: .reverse) private var serverAlerts: [ServerAlert]
     @State private var isShowingDeleteAllConfirmationDialog: Bool = false
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: Bindable(state).path) {
             Group {
                 if !serverAlerts.isEmpty {
                     List {
                         ForEach(serverAlerts) { serverAlert in
-                            NavigationLink(destination: AlertDetailView(time: serverAlert.timestamp, title: serverAlert.title, content: serverAlert.content)) {
+                            NavigationLink(value: serverAlert) {
                                 VStack(alignment: .leading) {
                                     Text(nameCanBeUntitled(serverAlert.title))
                                     Text(serverAlert.content ?? "No Content")
@@ -69,18 +68,8 @@ struct AlertListView: View {
 #endif
                 }
             }
-            .navigationDestination(isPresented: $notificationState.shouldNavigateToNotificationView) {
-                AlertDetailView(time: nil, title: notificationState.notificationData?.title, content: notificationState.notificationData?.body)
-            }
-            .onAppear {
-                withAnimation {
-                    tabBarState.isAlertsViewVisible = true
-                }
-            }
-            .onDisappear {
-                withAnimation {
-                    tabBarState.isAlertsViewVisible = false
-                }
+            .navigationDestination(for: ServerAlert.self) { alert in
+                AlertDetailView(alert: alert)
             }
             .confirmationDialog(
                 Text("Delete All Alerts"),

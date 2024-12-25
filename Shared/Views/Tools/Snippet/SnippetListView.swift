@@ -18,67 +18,63 @@ struct SnippetListView: View {
     @State private var isShowEditSnippetSheet: Bool = false
     
     var body: some View {
-        NavigationStack {
-            List {
-                if !terminalSnippets.isEmpty {
-                    ForEach(terminalSnippets) { terminalSnippet in
-                        NavigationLink {
-                            SnippetDetailView(terminalSnippet: terminalSnippet)
-                        } label: {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(nameCanBeUntitled(terminalSnippet.title))
-                                    Text(terminalSnippet.content ?? "No Content")
-                                        .font(.footnote)
-                                        .monospaced()
-                                }
-                                .lineLimit(1)
-                                
-                                if executeAction != nil {
-                                    Spacer()
-                                    Button("Execute") {
-                                        executeAction?(terminalSnippet)
-                                        dismiss()
-                                    }
-                                    .buttonStyle(.borderedProminent)
-                                }
+        List {
+            if !terminalSnippets.isEmpty {
+                ForEach(terminalSnippets) { terminalSnippet in
+                    NavigationLink(value: terminalSnippet) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(nameCanBeUntitled(terminalSnippet.title))
+                                Text(terminalSnippet.content ?? "No Content")
+                                    .font(.footnote)
+                                    .monospaced()
                             }
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button("Delete", role: .destructive) {
-                                    deleteSnippet(terminalSnippet: terminalSnippet)
+                            .lineLimit(1)
+                            
+                            if executeAction != nil {
+                                Spacer()
+                                Button("Execute") {
+                                    executeAction?(terminalSnippet)
+                                    dismiss()
                                 }
+                                .buttonStyle(.borderedProminent)
                             }
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    deleteSnippet(terminalSnippet: terminalSnippet)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button("Delete", role: .destructive) {
+                                deleteSnippet(terminalSnippet: terminalSnippet)
+                            }
+                        }
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                deleteSnippet(terminalSnippet: terminalSnippet)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
                             }
                         }
                     }
-                }
-                else {
-                    Text("No Snippet")
-                        .foregroundStyle(.secondary)
                 }
             }
-            .frame(minHeight: 300)
-            .navigationTitle("Snippets")
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        isShowEditSnippetSheet = true
-                    } label: {
-                        Label("Add Snippet", systemImage: "plus")
-                    }
+            else {
+                Text("No Snippet")
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(minHeight: 300)
+        .navigationTitle("Snippets")
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    isShowEditSnippetSheet = true
+                } label: {
+                    Label("Add Snippet", systemImage: "plus")
                 }
-                
-                if executeAction != nil {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") {
-                            dismiss()
-                        }
+            }
+            
+            if executeAction != nil {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") {
+                        dismiss()
                     }
                 }
             }

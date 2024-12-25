@@ -1,5 +1,5 @@
 //
-//  NotificationView.swift
+//  NotificationListView.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 12/1/24.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct NotificationView: View {
-    @Environment(NotificationViewModel.self) private var notificationViewModel
+struct NotificationListView: View {
+    @Environment(NMState.self) private var state
     @AppStorage(NMCore.NMPushNotificationsToken, store: NMCore.userDefaults) private var pushNotificationsToken: String = ""
     var isThisDeviceSetUpAsRecipient: Bool {
-        pushNotificationsToken != "" && notificationViewModel.notifications.first(where: { $0.requestBody.contains(pushNotificationsToken) }) != nil
+        pushNotificationsToken != "" && state.notifications.first(where: { $0.requestBody.contains(pushNotificationsToken) }) != nil
     }
     @State private var isEnrolling: Bool = false
     
@@ -52,7 +52,7 @@ struct NotificationView: View {
 #if os(macOS)
                                         let _ = try await RequestHandler.addNotification(name: ProcessInfo.processInfo.hostName, pushNotificationsToken: pushNotificationsToken)
 #endif
-                                        await notificationViewModel.refreshNotification()
+                                        await state.refreshNotifications()
                                         isEnrolling = false
                                     } catch {
                                         isEnrolling = false
@@ -72,8 +72,8 @@ struct NotificationView: View {
                         UIPasteboard.general.string = pushNotificationsToken
 #endif
 #if os(macOS)
-                    NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString(pushNotificationsToken, forType: .string)
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(pushNotificationsToken, forType: .string)
 #endif
                     }
                 }
@@ -84,8 +84,8 @@ struct NotificationView: View {
             }
             
             Section("Notification Methods") {
-                if !notificationViewModel.notifications.isEmpty {
-                    ForEach(notificationViewModel.notifications) { notification in
+                if !state.notifications.isEmpty {
+                    ForEach(state.notifications) { notification in
                         notificationLabel(notification: notification)
                             .renamableAndDeletable {
                                 showRenameNotificationAlert(notification: notification)
@@ -101,8 +101,8 @@ struct NotificationView: View {
             }
             
             Section("Alert Rules") {
-                if !notificationViewModel.alertRules.isEmpty {
-                    ForEach(notificationViewModel.alertRules) { alertRule in
+                if !state.alertRules.isEmpty {
+                    ForEach(state.alertRules) { alertRule in
                         Group {
                             if alertRuleToggling?.id != alertRule.id {
                                 Toggle(isOn: Binding(
@@ -114,7 +114,7 @@ struct NotificationView: View {
                                         Task {
                                             do {
                                                 let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, isEnabled: newValue)
-                                                await notificationViewModel.refreshAlertRule()
+                                                await state.refreshAlertRules()
                                                 alertRuleToggling = nil
                                             } catch {
                                                 alertRuleToggling = nil
@@ -150,22 +150,24 @@ struct NotificationView: View {
             }
         }
         .formStyle(.grouped)
-        .canInLoadingStateModifier(loadingState: notificationViewModel.loadingState, retryAction: {
-            notificationViewModel.loadData()
+        .canInLoadingStateModifier(loadingState: state.notificationLoadingState, retryAction: {
+            state.loadNotifications()
         })
         .navigationTitle("Notifications")
         .toolbar {
             ToolbarItem {
                 Button {
-                    notificationViewModel.loadData()
+                    Task {
+                        await state.refreshNotifications()
+                    }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
             }
         }
         .onAppear {
-            if notificationViewModel.loadingState == .idle {
-                notificationViewModel.loadData()
+            if state.notificationLoadingState == .idle {
+                state.loadNotifications()
             }
         }
         .alert("Rename Notification Method", isPresented: $isShowRenameNotificationAlert) {
@@ -216,7 +218,7 @@ struct NotificationView: View {
         Task {
             do {
                 let _ = try await RequestHandler.deleteNotification(notifications: [notification])
-                await notificationViewModel.refreshNotification()
+                await state.refreshNotifications()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)
@@ -235,7 +237,7 @@ struct NotificationView: View {
         Task {
             do {
                 let _ = try await RequestHandler.updateNotification(notification: notification, name: name)
-                await notificationViewModel.refreshNotification()
+                await state.refreshNotifications()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)
@@ -248,7 +250,7 @@ struct NotificationView: View {
         Task {
             do {
                 let _ = try await RequestHandler.deleteAlertRule(alertRules: [alertRule])
-                await notificationViewModel.refreshAlertRule()
+                await state.refreshAlertRules()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)
@@ -267,7 +269,7 @@ struct NotificationView: View {
         Task {
             do {
                 let _ = try await RequestHandler.updateAlertRule(alertRule: alertRule, name: name)
-                await notificationViewModel.refreshAlertRule()
+                await state.refreshAlertRules()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)

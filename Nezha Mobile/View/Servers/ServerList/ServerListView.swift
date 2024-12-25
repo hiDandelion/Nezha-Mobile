@@ -11,13 +11,9 @@ struct ServerListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
-    @Environment(ThemeStore.self) var themeStore
-    @Environment(TabBarState.self) var tabBarState
-    @Environment(DashboardViewModel.self) private var dashboardViewModel
-    @AppStorage("NMTheme", store: NMCore.userDefaults) private var theme: NMTheme = .blue
+    @Environment(NMTheme.self) var theme
+    @Environment(NMState.self) var state
     @State private var backgroundImage: UIImage?
-    @State private var shouldNavigateToServerDetailView: Bool = false
-    @State private var incomingURLServerUUID: String?
     @State private var searchText: String = ""
     @State private var selectedServerGroup: ServerGroup?
     @State private var newSettingRequireReconnection: Bool? = false
@@ -25,7 +21,7 @@ struct ServerListView: View {
     @Namespace private var serverNamespace
     
     private var filteredServers: [ServerData] {
-        dashboardViewModel.servers
+        state.servers
             .sorted {
                 if $0.displayIndex == $1.displayIndex {
                     return $0.serverID < $1.serverID
@@ -43,10 +39,10 @@ struct ServerListView: View {
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
     }
     
-    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 300, maximum: 400))]
+    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 320, maximum: 450))]
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: Bindable(state).path) {
             ZStack {
                 background
                     .transaction { transaction in
@@ -62,20 +58,8 @@ struct ServerListView: View {
                     .fill(.clear)
                     .frame(height: 50)
             }
-            .navigationDestination(isPresented: $shouldNavigateToServerDetailView) {
-                if let incomingURLServerUUID {
-                    ServerDetailView(id: incomingURLServerUUID)
-                }
-            }
-            .onAppear {
-                withAnimation {
-                    tabBarState.isServersViewVisible = true
-                }
-            }
-            .onDisappear {
-                withAnimation {
-                    tabBarState.isServersViewVisible = false
-                }
+            .navigationDestination(for: ServerData.self) { server in
+                ServerDetailView(id: server.id)
             }
         }
         .onAppear {
@@ -103,27 +87,17 @@ struct ServerListView: View {
                         .frame(height: proxy.size.height)
                         .clipped()
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 16))
                 .ignoresSafeArea()
             }
             else {
-                if themeStore.themeCustomizationEnabled {
-                    themeStore.themeBackgroundColor(scheme: scheme)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .ignoresSafeArea()
-                }
-                else {
-                    backgroundGradient(color: theme, scheme: scheme)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .ignoresSafeArea()
-                }
+                theme.themeBackgroundColor(scheme: scheme)
+                    .ignoresSafeArea()
             }
         }
     }
     
     var dashboard: some View {
         Group {
-            @Bindable var dashboardViewModel = dashboardViewModel
             ScrollView {
                 groupPicker
                     .safeAreaPadding(.horizontal, 15)
@@ -136,14 +110,14 @@ struct ServerListView: View {
             .toolbar {
                 Button {
                     Task {
-                        await dashboardViewModel.refresh()
+                        await state.refreshServerAndServerGroup()
                     }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
             }
-            .canInLoadingStateModifier(loadingState: dashboardViewModel.loadingState) {
-                dashboardViewModel.startMonitoring()
+            .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+                state.loadDashboard()
             }
         }
     }
@@ -152,7 +126,7 @@ struct ServerListView: View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
                 groupTag(serverGroup: nil)
-                ForEach(dashboardViewModel.serverGroups) { serverGroup in
+                ForEach(state.serverGroups) { serverGroup in
                     groupTag(serverGroup: serverGroup)
                 }
             }
@@ -166,32 +140,19 @@ struct ServerListView: View {
                 selectedServerGroup = serverGroup
             }
         }) {
-            Text(serverGroup == nil ? String(localized: "All(\(dashboardViewModel.servers.count))") : nameCanBeUntitled(serverGroup!.name))
+            Text(serverGroup == nil ? String(localized: "All(\(state.servers.count))") : nameCanBeUntitled(serverGroup!.name))
                 .font(.callout)
-                .foregroundStyle(selectedServerGroup == serverGroup ? (themeStore.themeCustomizationEnabled ? themeStore.themeActiveColor(scheme: scheme) : Color.white) : (themeStore.themeCustomizationEnabled ? themeStore.themePrimaryColor(scheme: scheme) : Color.primary))
+                .foregroundStyle(selectedServerGroup == serverGroup ? theme.themeActiveColor(scheme: scheme) : theme.themePrimaryColor(scheme: scheme))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 15)
                 .background {
                     if selectedServerGroup == serverGroup {
-                        if themeStore.themeCustomizationEnabled {
-                            Capsule()
-                                .fill(themeStore.themeTintColor(scheme: scheme))
-                                .matchedGeometryEffect(id: "ACTIVETAG", in: tagNamespace)
-                        }
-                        else {
-                            Capsule()
-                                .fill(themeColor(theme: theme))
-                                .matchedGeometryEffect(id: "ACTIVETAG", in: tagNamespace)
-                        }
+                        Capsule()
+                            .fill(theme.themeTintColor(scheme: scheme))
+                            .matchedGeometryEffect(id: "ACTIVETAG", in: tagNamespace)
                     } else {
-                        if themeStore.themeCustomizationEnabled {
-                            Capsule()
-                                .fill(themeStore.themeSecondaryColor(scheme: scheme))
-                        }
-                        else {
-                            Capsule()
-                                .fill(.thinMaterial)
-                        }
+                        Capsule()
+                            .fill(theme.themeSecondaryColor(scheme: scheme))
                     }
                 }
         }
@@ -200,29 +161,13 @@ struct ServerListView: View {
     
     private var serverList: some View {
         Group {
-            if !dashboardViewModel.servers.isEmpty {
+            if !state.servers.isEmpty {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(filteredServers) { server in
-                        if #available(iOS 18, *) {
-                            NavigationLink {
-                                ServerDetailView(id: server.id)
-                                    .navigationTransition(.zoom(sourceID: server.id, in: serverNamespace))
-                            } label: {
-                                ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
+                        ServerCardView(server: server, lastUpdateTime: state.dashboardLastUpdateTime)
+                            .onTapGesture {
+                                state.path.append(server)
                             }
-                            .matchedTransitionSource(id: server.id, in: serverNamespace)
-                            .buttonStyle(PlainButtonStyle())
-                            .id(server.id)
-                        }
-                        else {
-                            NavigationLink {
-                                ServerDetailView(id: server.id)
-                            } label: {
-                                ServerCardView(lastUpdateTime: dashboardViewModel.lastUpdateTime, server: server)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .id(server.id)
-                        }
                     }
                 }
                 .padding(.horizontal, 15)
@@ -254,8 +199,10 @@ struct ServerListView: View {
             return
         }
         
-        incomingURLServerUUID = id
-        tabBarState.activeTab = .servers
-        shouldNavigateToServerDetailView = true
+        let server = state.servers.first(where: { $0.id == id })
+        state.tab = .alerts
+        if let server {
+            state.path.append(server)
+        }
     }
 }

@@ -11,7 +11,7 @@ struct ServerDetailStatusView: View {
     var server: ServerData
     
     var body: some View {
-        Section("Status") {
+        Section {
             let gaugeGradient = Gradient(colors: [.green, .pink])
             
             VStack {

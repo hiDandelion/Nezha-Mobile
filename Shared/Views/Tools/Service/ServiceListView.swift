@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServiceListView: View {
-    @Environment(ServiceViewModel.self) private var serviceViewModel
+    @Environment(NMState.self) private var state
     
     @State private var isShowAddServiceSheet: Bool = false
     
@@ -18,11 +18,9 @@ struct ServiceListView: View {
     
     var body: some View {
         List {
-            if !serviceViewModel.services.isEmpty {
-                ForEach(serviceViewModel.services) { service in
-                    NavigationLink {
-                        ServiceDetailView(service: service)
-                    } label: {
+            if !state.services.isEmpty {
+                ForEach(state.services) { service in
+                    NavigationLink(value: service) {
                         serviceLabel(service: service)
                     }
                     .renamableAndDeletable {
@@ -37,14 +35,16 @@ struct ServiceListView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .canInLoadingStateModifier(loadingState: serviceViewModel.loadingState) {
-            serviceViewModel.loadData()
+        .canInLoadingStateModifier(loadingState: state.serviceLoadingState) {
+            state.loadServices()
         }
         .navigationTitle("Monitors")
         .toolbar {
             ToolbarItem {
                 Button {
-                    serviceViewModel.loadData()
+                    Task {
+                        await state.refreshServices()
+                    }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
@@ -59,8 +59,8 @@ struct ServiceListView: View {
             }
         }
         .onAppear {
-            if serviceViewModel.loadingState == .idle {
-                serviceViewModel.loadData()
+            if state.serviceLoadingState == .idle {
+                state.loadServices()
             }
         }
         .sheet(isPresented: $isShowAddServiceSheet, content: {
@@ -95,7 +95,7 @@ struct ServiceListView: View {
         Task {
             do {
                 let _ = try await RequestHandler.deleteService(services: [service])
-                await serviceViewModel.refresh()
+                await state.refreshServices()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)
@@ -114,7 +114,7 @@ struct ServiceListView: View {
         Task {
             do {
                 let _ = try await RequestHandler.updateService(service: service, name: name)
-                await serviceViewModel.refresh()
+                await state.refreshServices()
             } catch {
 #if DEBUG
                 let _ = NMCore.debugLog(error)
