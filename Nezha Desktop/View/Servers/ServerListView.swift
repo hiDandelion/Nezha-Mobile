@@ -14,7 +14,7 @@ struct ServerListView: View {
     @Environment(NMState.self) var state
     @State private var backgroundImage: NSImage?
     @State private var searchText: String = ""
-    @State var selectedServerGroup: ServerGroup?
+    var selectedServerGroup: ServerGroup?
     
     private var filteredServers: [ServerData] {
         state.servers
@@ -48,11 +48,6 @@ struct ServerListView: View {
                 
                 dashboard
                     .zIndex(1)
-            }
-            .safeAreaInset(edge: .bottom) {
-                Rectangle()
-                    .fill(.clear)
-                    .frame(height: 50)
             }
             .navigationDestination(for: ServerData.self) { server in
                 ServerDetailView(id: server.id)

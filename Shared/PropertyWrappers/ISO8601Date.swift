@@ -29,6 +29,11 @@ struct ISO8601Date: Codable {
         let container = try decoder.singleValueContainer()
         let dateString = try container.decode(String.self)
         
+        if dateString == "0001-01-01T00:00:00Z" {
+            self.wrappedValue = Date(timeIntervalSinceReferenceDate: 0)
+            return
+        }
+        
         guard let date = Self.formatter.date(from: dateString) else {
             throw DecodingError.dataCorruptedError(
                 in: container,

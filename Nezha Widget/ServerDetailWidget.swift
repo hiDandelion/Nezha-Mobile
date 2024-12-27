@@ -80,57 +80,56 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     
     func getServerEntry(serverID: Int64?, isShowIP: Bool?, color: WidgetBackgroundColor) async -> ServerEntry {
         do {
-            let response = try await RequestHandler.getServer()
-            if let server = response.data?.first(where: {
-                serverID == nil || $0.id == serverID
-            }) {
-                return ServerEntry(
-                    date: Date(),
-                    server: ServerData(
-                        serverID: server.id,
-                        name: server.name,
-                        displayIndex: server.display_index,
-                        lastActive: server.last_active,
-                        ipv4: server.geoip?.ip?.ipv4_addr ?? "",
-                        ipv6: server.geoip?.ip?.ipv6_addr ?? "",
-                        countryCode: server.geoip?.country_code ?? "",
-                        host: ServerData.Host(
-                            platform: server.host.platform ?? "",
-                            platformVersion: server.host.platform_version ?? "",
-                            cpu: server.host.cpu ?? [""],
-                            memoryTotal: server.host.mem_total ?? 0,
-                            swapTotal: server.host.swap_total ?? 0,
-                            diskTotal: server.host.disk_total ?? 0,
-                            architecture: server.host.arch ?? "",
-                            virtualization: server.host.virtualization ?? "",
-                            bootTime: server.host.boot_time ?? 0
-                        ),
-                        status: ServerData.Status(
-                            cpuUsed: server.state.cpu ?? 0,
-                            memoryUsed: server.state.mem_used ?? 0,
-                            swapUsed: server.state.swap_used ?? 0,
-                            diskUsed: server.state.disk_used ?? 0,
-                            networkIn: server.state.net_in_transfer ?? 0,
-                            networkOut: server.state.net_out_speed ?? 0,
-                            networkInSpeed: server.state.net_in_speed ?? 0,
-                            networkOutSpeed: server.state.net_out_speed ?? 0,
-                            uptime: server.state.uptime ?? 0,
-                            load1: server.state.load_1 ?? 0,
-                            load5: server.state.load_5 ?? 0,
-                            load15: server.state.load_15 ?? 0,
-                            tcpConnectionCount: server.state.tcp_conn_count ?? 0,
-                            udpConnectionCount: server.state.udp_conn_count ?? 0,
-                            processCount: server.state.process_count ?? 0
-                        )
-                    ),
-                    isShowIP: isShowIP,
-                    message: "OK",
-                    color: color
-                )
-            }
-            else {
+            guard let serverID else {
                 return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: color)
             }
+            let response = try await RequestHandler.getServer(serverID: serverID)
+            guard let server = response.data?.first else {
+                return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: color)
+            }
+            return ServerEntry(
+                date: Date(),
+                server: ServerData(
+                    serverID: server.id,
+                    name: server.name,
+                    displayIndex: server.display_index,
+                    lastActive: server.last_active,
+                    ipv4: server.geoip?.ip?.ipv4_addr ?? "",
+                    ipv6: server.geoip?.ip?.ipv6_addr ?? "",
+                    countryCode: server.geoip?.country_code ?? "",
+                    host: ServerData.Host(
+                        platform: server.host.platform ?? "",
+                        platformVersion: server.host.platform_version ?? "",
+                        cpu: server.host.cpu ?? [""],
+                        memoryTotal: server.host.mem_total ?? 0,
+                        swapTotal: server.host.swap_total ?? 0,
+                        diskTotal: server.host.disk_total ?? 0,
+                        architecture: server.host.arch ?? "",
+                        virtualization: server.host.virtualization ?? "",
+                        bootTime: server.host.boot_time ?? 0
+                    ),
+                    status: ServerData.Status(
+                        cpuUsed: server.state.cpu ?? 0,
+                        memoryUsed: server.state.mem_used ?? 0,
+                        swapUsed: server.state.swap_used ?? 0,
+                        diskUsed: server.state.disk_used ?? 0,
+                        networkIn: server.state.net_in_transfer ?? 0,
+                        networkOut: server.state.net_out_speed ?? 0,
+                        networkInSpeed: server.state.net_in_speed ?? 0,
+                        networkOutSpeed: server.state.net_out_speed ?? 0,
+                        uptime: server.state.uptime ?? 0,
+                        load1: server.state.load_1 ?? 0,
+                        load5: server.state.load_5 ?? 0,
+                        load15: server.state.load_15 ?? 0,
+                        tcpConnectionCount: server.state.tcp_conn_count ?? 0,
+                        udpConnectionCount: server.state.udp_conn_count ?? 0,
+                        processCount: server.state.process_count ?? 0
+                    )
+                ),
+                isShowIP: isShowIP,
+                message: "OK",
+                color: color
+            )
         }
         catch NezhaDashboardError.invalidDashboardConfiguration {
             return ServerEntry(date: Date(), server: nil, isShowIP: isShowIP, message: String(localized: "error.invalidDashboardConfiguration"), color: color)
@@ -174,10 +173,10 @@ struct ServerDetailWidgetEntryView: View {
                         Gauge(value: loadPressure) {
                             Text("Load")
                         }
-                    currentValueLabel: {
-                        Text("\(loadPressure * 100, specifier: "%.1f")%")
-                    }
-                    .gaugeStyle(.accessoryCircular)
+                        currentValueLabel: {
+                            Text("\(loadPressure * 100, specifier: "%.1f")%")
+                        }
+                        .gaugeStyle(.accessoryCircular)
                     case .accessoryInline:
                         let cpuUsage = server.status.cpuUsed / 100
                         let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))

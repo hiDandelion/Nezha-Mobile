@@ -52,7 +52,11 @@ struct MenuBarView: View {
                     }
                 }
                 .padding(.horizontal)
+                
                 serverList
+                    .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+                        state.loadDashboard()
+                    }
             }
             
             HStack {
@@ -67,9 +71,6 @@ struct MenuBarView: View {
                 })
             }
             .padding([.bottom, .horizontal])
-        }
-        .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
-            state.loadDashboard()
         }
         .frame(width: 380, height: 700)
         .onAppear {
