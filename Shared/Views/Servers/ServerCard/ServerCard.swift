@@ -44,24 +44,6 @@ struct ServerCard: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            HStack {
-                Spacer()
-                HStack {
-                    let totalCore = Double(getCore(server.host.cpu) ?? 1)
-                    let loadPressure = server.status.load1 / totalCore
-                    
-                    Text("Load \(server.status.load1, specifier: "%.2f")")
-                        .font(.caption2)
-                    
-                    Gauge(value: loadPressure <= 1 ? loadPressure : 1) {
-                        
-                    }
-                    .gaugeStyle(.accessoryLinearCapacity)
-                }
-            }
-            .padding(.bottom, 5)
-            .padding(.horizontal, 10)
         }
         .frame(maxWidth: .infinity, minHeight: 160)
     }

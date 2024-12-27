@@ -22,7 +22,6 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
     @Environment(NMTheme.self) var theme
@@ -117,7 +116,7 @@ struct ServerDetailView: View {
                 }
                 .allowsTightening(false)
             }
-            .background(scheme == .dark ? Color(red: 28/255, green: 28/255, blue: 30/255) : .white)
+            .background(theme.themeSecondaryColor(scheme: scheme))
             .clipShape(.capsule)
             .padding(.horizontal, 20)
             .padding(.top, 5)

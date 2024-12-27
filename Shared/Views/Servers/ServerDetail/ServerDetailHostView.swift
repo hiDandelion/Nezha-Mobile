@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ServerDetailHostView: View {
+#if os(iOS)
+    @Environment(\.colorScheme) private var scheme
+    @Environment(NMTheme.self) var theme
+#endif
     var server: ServerData
     
     var body: some View {
@@ -40,5 +44,8 @@ struct ServerDetailHostView: View {
                 NMUI.PieceOfInfo(systemImage: "cube.transparent", name: "Virtualization", content: Text("\(server.host.virtualization)"))
             }
         }
+#if os(iOS)
+        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
+#endif
     }
 }

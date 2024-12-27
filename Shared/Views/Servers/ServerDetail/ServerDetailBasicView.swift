@@ -10,6 +10,10 @@ import UniformTypeIdentifiers
 import Cache
 
 struct ServerDetailBasicView: View {
+#if os(iOS)
+    @Environment(\.colorScheme) private var scheme
+    @Environment(NMTheme.self) var theme
+#endif
     var server: ServerData
     @State private var ipv4CityData: GetIPCityDataResponse.IPCityData?
     @State private var ipv6CityData: GetIPCityDataResponse.IPCityData?
@@ -56,6 +60,9 @@ struct ServerDetailBasicView: View {
             NMUI.PieceOfInfo(systemImage: "power", name: "Up Time", content: Text("\(formatTimeInterval(seconds: server.status.uptime))"))
             NMUI.PieceOfInfo(systemImage: "clock", name: "Last Active", content: Text(server.lastActive, format: Date.FormatStyle(date: .complete, time: .standard)))
         }
+#if os(iOS)
+        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
+#endif
         .onAppear {
             if server.ipv4 != "" {
                 Task {

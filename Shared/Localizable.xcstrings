@@ -1715,6 +1715,7 @@
       }
     },
     "Load %.2f" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {

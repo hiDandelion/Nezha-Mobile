@@ -62,7 +62,7 @@ struct ServerMapView: View {
                     Spacer()
                     Button {
                         withAnimation {
-                            //tabBarState.isShowMapView = false
+                            state.isShowMapView = false
                         }
                     } label: {
                         Image(systemName: "xmark")

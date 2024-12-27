@@ -24,7 +24,10 @@ enum PingChartDateRange: Int, CaseIterable {
 }
 
 struct ServerDetailPingChartView: View {
-    @Environment(\.scenePhase) private var scenePhase
+#if os(iOS)
+    @Environment(\.colorScheme) private var scheme
+    @Environment(NMTheme.self) var theme
+#endif
     var server: ServerData
     @State private var dateRange: PingChartDateRange = .threeHours
     @State private var pingDatas: [MonitorData]?
@@ -51,6 +54,9 @@ struct ServerDetailPingChartView: View {
                             }
                         }
                     }
+#if os(iOS)
+        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
+#endif
                     
                     List {
                         ForEach(pingDatas) { pingData in
@@ -60,6 +66,9 @@ struct ServerDetailPingChartView: View {
                             }
                         }
                     }
+#if os(iOS)
+        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
+#endif
                 }
                 else {
                     Text("No data")

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ServerDetailStatusView: View {
+#if os(iOS)
+    @Environment(\.colorScheme) private var scheme
+    @Environment(NMTheme.self) var theme
+#endif
     var server: ServerData
     
     var body: some View {
@@ -96,5 +100,8 @@ struct ServerDetailStatusView: View {
             NMUI.PieceOfInfo(systemImage: "point.3.connected.trianglepath.dotted", name: "UDP Connection", content: Text("\(server.status.udpConnectionCount)"))
             NMUI.PieceOfInfo(systemImage: "square.split.2x2", name: "Process", content: Text("\(server.status.processCount)"))
         }
+#if os(iOS)
+        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
+#endif
     }
 }
