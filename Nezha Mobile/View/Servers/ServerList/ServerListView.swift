@@ -41,9 +41,6 @@ struct ServerListView: View {
         NavigationStack(path: Bindable(state).path) {
             ZStack {
                 background
-                    .transaction { transaction in
-                        transaction.animation = nil
-                    }
                     .zIndex(0)
                 
                 dashboard
@@ -86,7 +83,7 @@ struct ServerListView: View {
                 .ignoresSafeArea()
             }
             else {
-                theme.themeBackgroundColor(scheme: scheme)
+                NMUI.ColorfulView(theme: theme, scheme: scheme)
                     .ignoresSafeArea()
             }
         }
@@ -112,7 +109,7 @@ struct ServerListView: View {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
             }
-            .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+            .loadingState(loadingState: state.dashboardLoadingState) {
                 state.loadDashboard()
             }
         }

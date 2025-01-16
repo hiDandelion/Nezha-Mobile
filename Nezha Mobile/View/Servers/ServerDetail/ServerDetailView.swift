@@ -56,17 +56,14 @@ struct ServerDetailView: View {
     
     private func content(server: ServerData) -> some View {
         ZStack {
-            background
+            NMUI.ColorfulView(theme: theme, scheme: scheme)
+                .ignoresSafeArea()
+            
             VStack(spacing: 15) {
                 tabbar
                 tabView(server: server)
             }
         }
-    }
-    
-    private var background: some View {
-        theme.themeBackgroundColor(scheme: scheme)
-            .ignoresSafeArea()
     }
     
     private func toolbarMenu(server: ServerData) -> some View {

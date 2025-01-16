@@ -212,6 +212,12 @@
 		CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
 		CB9C608A2C5B5CC700DAE1E3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60892C5B5CC700DAE1E3 /* SettingsView.swift */; };
 		CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
+		CB9E96B52D389604001AD713 /* ColorfulX in Frameworks */ = {isa = PBXBuildFile; productRef = CB9E96B42D389604001AD713 /* ColorfulX */; };
+		CB9E96B92D389A6B001AD713 /* ColorfulX in Frameworks */ = {isa = PBXBuildFile; productRef = CB9E96B82D389A6B001AD713 /* ColorfulX */; };
+		CB9E96BB2D389A77001AD713 /* ColorfulX in Frameworks */ = {isa = PBXBuildFile; productRef = CB9E96BA2D389A77001AD713 /* ColorfulX */; };
+		CB9E96BD2D389ABC001AD713 /* ColorfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E96BC2D389AB8001AD713 /* ColorfulView.swift */; };
+		CB9E96BF2D389ABC001AD713 /* ColorfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E96BC2D389AB8001AD713 /* ColorfulView.swift */; };
+		CB9E96C02D389ABC001AD713 /* ColorfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E96BC2D389AB8001AD713 /* ColorfulView.swift */; };
 		CBAC66DC2D02F25B0055F4CA /* ServerGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC66DB2D02F25A0055F4CA /* ServerGroupDetailView.swift */; };
 		CBAC66DE2D02F27F0055F4CA /* ServerGroupServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAC66DD2D02F27E0055F4CA /* ServerGroupServerListView.swift */; };
 		CBAC66DF2D03278B0055F4CA /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10252CFC72E3004DAD8D /* LoadingState.swift */; };
@@ -366,19 +372,16 @@
 		CBED100A2CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10072CFC2487004DAD8D /* ServerGroupViewModel.swift */; };
 		CBED10102CFC4B96004DAD8D /* addServerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED100B2CFC4B90004DAD8D /* addServerGroup.swift */; };
 		CBED10152CFC4BCF004DAD8D /* AddServerGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10112CFC4BC8004DAD8D /* AddServerGroupResponse.swift */; };
-		CBED10182CFC4F81004DAD8D /* CanBeLoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10172CFC4F7C004DAD8D /* CanBeLoadingModifier.swift */; };
 		CBED101C2CFC6DB8004DAD8D /* DeleteServerGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10192CFC6DB0004DAD8D /* DeleteServerGroupResponse.swift */; };
 		CBED10232CFC6DD0004DAD8D /* deleteServerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED101F2CFC6DC8004DAD8D /* deleteServerGroup.swift */; };
 		CBED10262CFC72EA004DAD8D /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10252CFC72E3004DAD8D /* LoadingState.swift */; };
 		CBED10282CFC72EA004DAD8D /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10252CFC72E3004DAD8D /* LoadingState.swift */; };
 		CBED10292CFC72EA004DAD8D /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10252CFC72E3004DAD8D /* LoadingState.swift */; };
-		CBED102C2CFC7362004DAD8D /* CanInLoadingStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED102B2CFC7356004DAD8D /* CanInLoadingStateModifier.swift */; };
+		CBED102C2CFC7362004DAD8D /* LoadingStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED102B2CFC7356004DAD8D /* LoadingStateModifier.swift */; };
 		CBED102D2CFC958C004DAD8D /* TextWithColorfulIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3175062CA8016000186028 /* TextWithColorfulIcon.swift */; };
-		CBED102E2CFC959C004DAD8D /* CanBeLoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10172CFC4F7C004DAD8D /* CanBeLoadingModifier.swift */; };
-		CBED102F2CFC95A0004DAD8D /* CanInLoadingStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED102B2CFC7356004DAD8D /* CanInLoadingStateModifier.swift */; };
+		CBED102F2CFC95A0004DAD8D /* LoadingStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED102B2CFC7356004DAD8D /* LoadingStateModifier.swift */; };
 		CBED10312CFC97ED004DAD8D /* TextWithColorfulIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3175062CA8016000186028 /* TextWithColorfulIcon.swift */; };
-		CBED10322CFC97F2004DAD8D /* CanBeLoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10172CFC4F7C004DAD8D /* CanBeLoadingModifier.swift */; };
-		CBED10332CFC97F7004DAD8D /* CanInLoadingStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED102B2CFC7356004DAD8D /* CanInLoadingStateModifier.swift */; };
+		CBED10332CFC97F7004DAD8D /* LoadingStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED102B2CFC7356004DAD8D /* LoadingStateModifier.swift */; };
 		CBED10382CFD869D004DAD8D /* updateAlertRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED10362CFD8696004DAD8D /* updateAlertRule.swift */; };
 		CBED103F2CFD874A004DAD8D /* UpdateAlertRuleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED103C2CFD8740004DAD8D /* UpdateAlertRuleResponse.swift */; };
 		CBED104E2CFDA610004DAD8D /* AddNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED104C2CFDA607004DAD8D /* AddNotificationResponse.swift */; };
@@ -605,6 +608,7 @@
 		CB9C60852C5B293100DAE1E3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		CB9C60892C5B5CC700DAE1E3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		CB9E96BC2D389AB8001AD713 /* ColorfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulView.swift; sourceTree = "<group>"; };
 		CBAC66DB2D02F25A0055F4CA /* ServerGroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroupDetailView.swift; sourceTree = "<group>"; };
 		CBAC66DD2D02F27E0055F4CA /* ServerGroupServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroupServerListView.swift; sourceTree = "<group>"; };
 		CBAC66E12D0678620055F4CA /* GetServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetServiceResponse.swift; sourceTree = "<group>"; };
@@ -663,11 +667,10 @@
 		CBED10072CFC2487004DAD8D /* ServerGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroupViewModel.swift; sourceTree = "<group>"; };
 		CBED100B2CFC4B90004DAD8D /* addServerGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addServerGroup.swift; sourceTree = "<group>"; };
 		CBED10112CFC4BC8004DAD8D /* AddServerGroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServerGroupResponse.swift; sourceTree = "<group>"; };
-		CBED10172CFC4F7C004DAD8D /* CanBeLoadingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanBeLoadingModifier.swift; sourceTree = "<group>"; };
 		CBED10192CFC6DB0004DAD8D /* DeleteServerGroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServerGroupResponse.swift; sourceTree = "<group>"; };
 		CBED101F2CFC6DC8004DAD8D /* deleteServerGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteServerGroup.swift; sourceTree = "<group>"; };
 		CBED10252CFC72E3004DAD8D /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
-		CBED102B2CFC7356004DAD8D /* CanInLoadingStateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanInLoadingStateModifier.swift; sourceTree = "<group>"; };
+		CBED102B2CFC7356004DAD8D /* LoadingStateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateModifier.swift; sourceTree = "<group>"; };
 		CBED10362CFD8696004DAD8D /* updateAlertRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateAlertRule.swift; sourceTree = "<group>"; };
 		CBED103C2CFD8740004DAD8D /* UpdateAlertRuleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAlertRuleResponse.swift; sourceTree = "<group>"; };
 		CBED104C2CFDA607004DAD8D /* AddNotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotificationResponse.swift; sourceTree = "<group>"; };
@@ -694,6 +697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB0D2C192CC780C90075FAB7 /* NezhaMobileData in Frameworks */,
+				CB9E96BB2D389A77001AD713 /* ColorfulX in Frameworks */,
 				CBED109C2D0074B4004DAD8D /* XTerminalUI in Frameworks */,
 				CB1142072D0D180D00A63CE7 /* KeychainSwift in Frameworks */,
 				CBED10B62D00788C004DAD8D /* SwiftyJSON in Frameworks */,
@@ -733,6 +737,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB1D68442C847B6E00D81526 /* XTerminalUI in Frameworks */,
+				CB9E96B52D389604001AD713 /* ColorfulX in Frameworks */,
 				CBDAC3CA2C7B2DCE002AA675 /* Cache in Frameworks */,
 				CB1142012D0D17DC00A63CE7 /* KeychainSwift in Frameworks */,
 				CBED105B2CFE7FEB004DAD8D /* SwiftyJSON in Frameworks */,
@@ -745,6 +750,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBDAC3D22C7BFF13002AA675 /* Cache in Frameworks */,
+				CB9E96B92D389A6B001AD713 /* ColorfulX in Frameworks */,
 				CBED10982D00728E004DAD8D /* XTerminalUI in Frameworks */,
 				CB1142052D0D17FB00A63CE7 /* KeychainSwift in Frameworks */,
 				CBBDDF832D02EA200068AD5E /* SwiftyJSON in Frameworks */,
@@ -1420,6 +1426,7 @@
 		CBED10302CFC9613004DAD8D /* General */ = {
 			isa = PBXGroup;
 			children = (
+				CB9E96BC2D389AB8001AD713 /* ColorfulView.swift */,
 				CBD2BAF42C68DB7800BA9A36 /* PieceOfInfo.swift */,
 				CB3175062CA8016000186028 /* TextWithColorfulIcon.swift */,
 			);
@@ -1523,8 +1530,7 @@
 			isa = PBXGroup;
 			children = (
 				CBED10C72D0128B5004DAD8D /* RenamableAndDeletable.swift */,
-				CBED10172CFC4F7C004DAD8D /* CanBeLoadingModifier.swift */,
-				CBED102B2CFC7356004DAD8D /* CanInLoadingStateModifier.swift */,
+				CBED102B2CFC7356004DAD8D /* LoadingStateModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -1551,6 +1557,7 @@
 				CBED109B2D0074B4004DAD8D /* XTerminalUI */,
 				CBED10B52D00788C004DAD8D /* SwiftyJSON */,
 				CB1142062D0D180D00A63CE7 /* KeychainSwift */,
+				CB9E96BA2D389A77001AD713 /* ColorfulX */,
 			);
 			productName = "Nezha Vision";
 			productReference = CB0D2C012CC77E1E0075FAB7 /* Nezha Vision.app */;
@@ -1641,6 +1648,7 @@
 				CB7B9CFD2C9E965F004383C7 /* NezhaMobileData */,
 				CBED105A2CFE7FEB004DAD8D /* SwiftyJSON */,
 				CB1142002D0D17DC00A63CE7 /* KeychainSwift */,
+				CB9E96B42D389604001AD713 /* ColorfulX */,
 			);
 			productName = "Nezha Mobile";
 			productReference = CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */;
@@ -1665,6 +1673,7 @@
 				CBED10972D00728E004DAD8D /* XTerminalUI */,
 				CBBDDF822D02EA200068AD5E /* SwiftyJSON */,
 				CB1142042D0D17FB00A63CE7 /* KeychainSwift */,
+				CB9E96B82D389A6B001AD713 /* ColorfulX */,
 			);
 			productName = "Nezha-Mobile";
 			productReference = CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */;
@@ -1716,6 +1725,7 @@
 				CB1D68422C847B6E00D81526 /* XCRemoteSwiftPackageReference "XTerminalUI" */,
 				CBED10592CFE7FEB004DAD8D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				CB9E96B32D389604001AD713 /* XCRemoteSwiftPackageReference "ColorfulX" */,
 			);
 			productRefGroup = CB9C60682C5AF76E00DAE1E3 /* Products */;
 			projectDirPath = "";
@@ -1850,7 +1860,6 @@
 				CB0D2C492CC78FAA0075FAB7 /* PieceOfInfo.swift in Sources */,
 				CB1172A22CEC403D000B780D /* NezhaDashboardBaseResponse.swift in Sources */,
 				CB11725E2CEC30D1000B780D /* NMUI.swift in Sources */,
-				CBED102E2CFC959C004DAD8D /* CanBeLoadingModifier.swift in Sources */,
 				CBED10B72D0078CC004DAD8D /* DeviceInfo.swift in Sources */,
 				CBED10A92D00769F004DAD8D /* UpdateServerGroupResponse.swift in Sources */,
 				CBED10AA2D0076C9004DAD8D /* GetAlertRuleResponse.swift in Sources */,
@@ -1860,7 +1869,7 @@
 				CBED0FB22CFB176B004DAD8D /* ServerGroup.swift in Sources */,
 				CB695D562CC8AD14003426F7 /* ServerDetailPingView.swift in Sources */,
 				CBED10A42D007640004DAD8D /* NotificationViewModel.swift in Sources */,
-				CBED102F2CFC95A0004DAD8D /* CanInLoadingStateModifier.swift in Sources */,
+				CBED102F2CFC95A0004DAD8D /* LoadingStateModifier.swift in Sources */,
 				CBED10A22D00760B004DAD8D /* DeviceInfoView.swift in Sources */,
 				CBED10AC2D0077CF004DAD8D /* addServerGroup.swift in Sources */,
 				CB0D2C3C2CC78C9F0075FAB7 /* iCloudSync.swift in Sources */,
@@ -1870,6 +1879,7 @@
 				CBED10A52D00767D004DAD8D /* NotificationData.swift in Sources */,
 				CB11729B2CEC3F38000B780D /* decodeNezhaDashboardResponse.swift in Sources */,
 				CBED102D2CFC958C004DAD8D /* TextWithColorfulIcon.swift in Sources */,
+				CB9E96BF2D389ABC001AD713 /* ColorfulView.swift in Sources */,
 				CB695D552CC8AD0F003426F7 /* ServerDetailStatusView.swift in Sources */,
 				CB1172522CEC30B9000B780D /* getCPULogo.swift in Sources */,
 				CBED10A02D007600004DAD8D /* ServerGroupServerListView.swift in Sources */,
@@ -1998,7 +2008,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB3175202CB1139C00186028 /* DeviceInfoView.swift in Sources */,
-				CBED102C2CFC7362004DAD8D /* CanInLoadingStateModifier.swift in Sources */,
+				CBED102C2CFC7362004DAD8D /* LoadingStateModifier.swift in Sources */,
 				CB701A132C5C5DA500019344 /* CardView.swift in Sources */,
 				CBED10382CFD869D004DAD8D /* updateAlertRule.swift in Sources */,
 				CB9C607E2C5AFB4E00DAE1E3 /* ServerListView.swift in Sources */,
@@ -2062,6 +2072,7 @@
 				CBC6C2D92C89B1E30059031E /* AcknowledgmentView.swift in Sources */,
 				CBED10092CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */,
 				CBAC67132D07F02A0055F4CA /* ServiceDetailView.swift in Sources */,
+				CB9E96BD2D389ABC001AD713 /* ColorfulView.swift in Sources */,
 				CBED10882D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CBDAC3D02C7B63BB002AA675 /* MainTabView.swift in Sources */,
 				CBAC67082D06C3C90055F4CA /* addService.swift in Sources */,
@@ -2077,7 +2088,6 @@
 				CBD2BAF32C68DB2700BA9A36 /* ServerDetailHostView.swift in Sources */,
 				CBED10102CFC4B96004DAD8D /* addServerGroup.swift in Sources */,
 				CBED10782D000570004DAD8D /* UpdateNotificationResponse.swift in Sources */,
-				CBED10182CFC4F81004DAD8D /* CanBeLoadingModifier.swift in Sources */,
 				CB11725C2CEC30D1000B780D /* NMUI.swift in Sources */,
 				CB0D2C3A2CC78C9F0075FAB7 /* iCloudSync.swift in Sources */,
 				CBED0FEA2CFC0A3B004DAD8D /* NotificationViewModel.swift in Sources */,
@@ -2150,6 +2160,7 @@
 				CB1A51D52C6C882C007FE35F /* AddDashboardView.swift in Sources */,
 				CBBDDF6E2D02E9600068AD5E /* UpdateServerGroupResponse.swift in Sources */,
 				CB1A51AC2C6C2792007FE35F /* NezhaDesktopApp.swift in Sources */,
+				CB9E96C02D389ABC001AD713 /* ColorfulView.swift in Sources */,
 				CB0D2B8E2CC394980075FAB7 /* DashboardSettingsView.swift in Sources */,
 				CB1172842CEC3E6B000B780D /* getMonitor.swift in Sources */,
 				CB1172942CEC3EDC000B780D /* GeoIPError.swift in Sources */,
@@ -2160,7 +2171,7 @@
 				CBBDDF6C2D02E9530068AD5E /* AddServerGroupResponse.swift in Sources */,
 				CBED0F9E2CFAD8B3004DAD8D /* DashboardViewModel.swift in Sources */,
 				CB0D2B9C2CC4F6E40075FAB7 /* GetServerResponse.swift in Sources */,
-				CBED10332CFC97F7004DAD8D /* CanInLoadingStateModifier.swift in Sources */,
+				CBED10332CFC97F7004DAD8D /* LoadingStateModifier.swift in Sources */,
 				CBBDDF862D02EA8A0068AD5E /* ServerGroupViewModel.swift in Sources */,
 				CBED10892D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CB1172612CEC30D1000B780D /* NMUI.swift in Sources */,
@@ -2199,7 +2210,6 @@
 				CBBDDF6B2D02E9380068AD5E /* NotificationListView.swift in Sources */,
 				CBED10962D007254004DAD8D /* TerminalViewModel.swift in Sources */,
 				CB1A51AD2C6C28BC007FE35F /* RequestHandler.swift in Sources */,
-				CBED10322CFC97F2004DAD8D /* CanBeLoadingModifier.swift in Sources */,
 				CBB6A0B02D0A8625007CFF99 /* EditSnippetView.swift in Sources */,
 				CBAC67042D06C3890055F4CA /* UpdateServiceResponse.swift in Sources */,
 				CBBDDF682D02E9260068AD5E /* ServerGroupListView.swift in Sources */,
@@ -2257,7 +2267,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2288,7 +2298,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2320,7 +2330,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2356,7 +2366,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2393,7 +2403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2426,7 +2436,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2458,7 +2468,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2493,7 +2503,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2649,7 +2659,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2692,7 +2702,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2736,7 +2746,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2769,7 +2779,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2879,6 +2889,14 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		CB9E96B32D389604001AD713 /* XCRemoteSwiftPackageReference "ColorfulX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Lakr233/ColorfulX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.5.3;
+			};
+		};
 		CBDAC3C82C7B2DCE002AA675 /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hyperoslo/Cache.git";
@@ -2952,6 +2970,19 @@
 		CB7B9D092C9E9F14004383C7 /* NezhaMobileData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NezhaMobileData;
+		};
+		CB9E96B42D389604001AD713 /* ColorfulX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB9E96B32D389604001AD713 /* XCRemoteSwiftPackageReference "ColorfulX" */;
+			productName = ColorfulX;
+		};
+		CB9E96B82D389A6B001AD713 /* ColorfulX */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ColorfulX;
+		};
+		CB9E96BA2D389A77001AD713 /* ColorfulX */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ColorfulX;
 		};
 		CBBDDF822D02EA200068AD5E /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;

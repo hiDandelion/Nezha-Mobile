@@ -54,7 +54,7 @@ struct MenuBarView: View {
                 .padding(.horizontal)
                 
                 serverList
-                    .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+                    .loadingState(loadingState: state.dashboardLoadingState) {
                         state.loadDashboard()
                     }
             }

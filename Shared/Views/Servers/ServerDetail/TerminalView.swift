@@ -55,7 +55,7 @@ struct TerminalView: View {
                 }
             buttonGroup
         }
-        .canInLoadingStateModifier(loadingState: terminalViewModel.loadingState) {
+        .loadingState(loadingState: terminalViewModel.loadingState) {
             terminalViewModel.connect(serverID: server.serverID)
         }
         .navigationTitle("Terminal")

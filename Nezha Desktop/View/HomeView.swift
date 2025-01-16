@@ -87,7 +87,7 @@ struct HomeView: View {
                 }
             }
         }
-        .canInLoadingStateModifier(loadingState: state.dashboardLoadingState, retryAction: {
+        .loadingState(loadingState: state.dashboardLoadingState, retryAction: {
             state.loadDashboard()
         })
     }

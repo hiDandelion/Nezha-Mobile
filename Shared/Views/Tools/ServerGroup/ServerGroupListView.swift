@@ -37,7 +37,7 @@ struct ServerGroupListView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+        .loadingState(loadingState: state.dashboardLoadingState) {
             state.loadDashboard()
         }
         .navigationTitle("Server Groups")

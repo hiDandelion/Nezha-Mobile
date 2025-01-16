@@ -597,6 +597,7 @@
       }
     },
     "Background Color Dark Mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -613,6 +614,7 @@
       }
     },
     "Background Color Light Mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -624,6 +626,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "背景颜色 浅色模式"
+          }
+        }
+      }
+    },
+    "Background Color Set Dark" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景色セットダークモード"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景颜色集 深色模式"
+          }
+        }
+      }
+    },
+    "Background Color Set Light" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景色セットライトモード"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景颜色集 浅色模式"
           }
         }
       }

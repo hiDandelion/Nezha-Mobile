@@ -35,7 +35,7 @@ struct ServiceListView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .canInLoadingStateModifier(loadingState: state.serviceLoadingState) {
+        .loadingState(loadingState: state.serviceLoadingState) {
             state.loadServices()
         }
         .navigationTitle("Monitors")

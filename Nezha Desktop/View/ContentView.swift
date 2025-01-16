@@ -8,11 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) private var scheme
+    @Environment(NMTheme.self) var theme
     @Environment(NMState.self) private var state
     @State private var isShowingOnboarding: Bool = false
     @State private var isShowingAddDashboardSheet: Bool = false
     
     var body: some View {
+        ZStack {
+            background
+                .zIndex(0)
+            
+            content
+                .zIndex(1)
+        }
+        .onAppear {
+            NMCore.syncWithiCloud()
+            
+            if NMCore.isNezhaDashboardConfigured {
+                state.loadDashboard()
+            } else {
+                isShowingOnboarding = true
+            }
+        }
+    }
+    
+    private var background: some View {
+        NMUI.ColorfulView(theme: theme, scheme: scheme)
+            .ignoresSafeArea()
+    }
+    
+    private var content: some View {
         Group {
             if isShowingOnboarding {
                 VStack {
@@ -32,15 +58,6 @@ struct ContentView: View {
             }
             else {
                 HomeView()
-            }
-        }
-        .onAppear {
-            NMCore.syncWithiCloud()
-            
-            if NMCore.isNezhaDashboardConfigured {
-                state.loadDashboard()
-            } else {
-                isShowingOnboarding = true
             }
         }
     }

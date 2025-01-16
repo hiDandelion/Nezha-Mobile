@@ -71,7 +71,7 @@ struct ServerListView: View {
                     ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
                 }
             }
-            .canInLoadingStateModifier(loadingState: state.dashboardLoadingState) {
+            .loadingState(loadingState: state.dashboardLoadingState) {
                 state.loadDashboard()
             }
         }

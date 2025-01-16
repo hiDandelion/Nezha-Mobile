@@ -10,6 +10,7 @@ import PhotosUI
 #if os(iOS)
 import WidgetKit
 #endif
+import ColorfulX
 
 struct ThemeSettingsView: View {
     @Environment(NMTheme.self) var theme
@@ -29,6 +30,18 @@ struct ThemeSettingsView: View {
     var body: some View {
         Form {
             Section {
+                Picker("Background Color Set Light", selection: Bindable(theme).themeBackgroundColorLight) {
+                    ForEach(ColorfulX.ColorfulPreset.allCases, id: \.self) {
+                        Text($0.hint)
+                            .tag($0)
+                    }
+                }
+                Picker("Background Color Set Dark", selection: Bindable(theme).themeBackgroundColorDark) {
+                    ForEach(ColorfulX.ColorfulPreset.allCases, id: \.self) {
+                        Text($0.hint)
+                            .tag($0)
+                    }
+                }
                 PhotosPicker(selection: $selectedPhoto, matching: .images) {
                     Text("Select Custom Background")
                 }
@@ -71,12 +84,10 @@ struct ThemeSettingsView: View {
             Section {
                 ColorPicker("Primary Color Light Mode", selection: Bindable(theme).themePrimaryColorLight)
                 ColorPicker("Secondary Color Light Mode", selection: Bindable(theme).themeSecondaryColorLight)
-                ColorPicker("Background Color Light Mode", selection: Bindable(theme).themeBackgroundColorLight)
                 ColorPicker("Active Color Light Mode", selection: Bindable(theme).themeActiveColorLight)
                 ColorPicker("Tint Color Light Mode", selection: Bindable(theme).themeTintColorLight)
                 ColorPicker("Primary Color Dark Mode", selection: Bindable(theme).themePrimaryColorDark)
                 ColorPicker("Secondary Color Dark Mode", selection: Bindable(theme).themeSecondaryColorDark)
-                ColorPicker("Background Color Dark Mode", selection: Bindable(theme).themeBackgroundColorDark)
                 ColorPicker("Active Color Dark Mode", selection: Bindable(theme).themeActiveColorDark)
                 ColorPicker("Tint Color Dark Mode", selection: Bindable(theme).themeTintColorDark)
             } header: {

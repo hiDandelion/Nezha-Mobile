@@ -150,7 +150,7 @@ struct NotificationListView: View {
             }
         }
         .formStyle(.grouped)
-        .canInLoadingStateModifier(loadingState: state.notificationLoadingState, retryAction: {
+        .loadingState(loadingState: state.notificationLoadingState, retryAction: {
             state.loadNotifications()
         })
         .navigationTitle("Notifications")
