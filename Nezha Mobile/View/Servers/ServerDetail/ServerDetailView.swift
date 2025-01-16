@@ -12,7 +12,6 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
         self.rawValue
     }
     
-    case basic = "Basic"
     case status = "Status"
     case monitors = "Monitors"
     
@@ -22,13 +21,12 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
-    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var scheme
     @Environment(NMTheme.self) var theme
     @Environment(NMState.self) var state
     var id: String
     @State private var selectedSection: Int = 0
-    @State private var activeTab: ServerDetailTab = .basic
+    @State private var activeTab: ServerDetailTab = .status
     @StateObject var offsetObserver = PageOffsetObserver()
     
     var body: some View {
@@ -56,7 +54,7 @@ struct ServerDetailView: View {
     
     private func content(server: ServerData) -> some View {
         ZStack {
-            NMUI.ColorfulView(theme: theme, scheme: scheme)
+            theme.themeBackgroundColor(scheme: scheme)
                 .ignoresSafeArea()
             
             VStack(spacing: 15) {
@@ -142,24 +140,16 @@ struct ServerDetailView: View {
     
     private func tabView(server: ServerData) -> some View {
         TabView(selection: $activeTab) {
-            Form {
-                ServerDetailBasicView(server: server)
-                ServerDetailHostView(server: server)
-            }
-            .tag(ServerDetailTab.basic)
-            .background {
-                if !offsetObserver.isObserving {
-                    FindCollectionView {
-                        offsetObserver.collectionView = $0
-                        offsetObserver.observe()
+            ServerDetailStatusView(server: server)
+                .tag(ServerDetailTab.status)
+                .background {
+                    if !offsetObserver.isObserving {
+                        FindCollectionView {
+                            offsetObserver.collectionView = $0
+                            offsetObserver.observe()
+                        }
                     }
                 }
-            }
-            
-            Form {
-                ServerDetailStatusView(server: server)
-            }
-            .tag(ServerDetailTab.status)
             
             Form {
                 ServerDetailPingChartView(server: server)

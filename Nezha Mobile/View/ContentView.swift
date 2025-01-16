@@ -34,7 +34,7 @@ struct ContentView: View {
     }
     
     private var background: some View {
-        NMUI.ColorfulView(theme: theme, scheme: scheme)
+        theme.themeBackgroundColor(scheme: scheme)
             .ignoresSafeArea()
     }
     

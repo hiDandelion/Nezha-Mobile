@@ -12,7 +12,6 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
         self.rawValue
     }
     
-    case basic = "Basic"
     case status = "Status"
     case monitors = "Monitors"
     
@@ -22,54 +21,34 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
 }
 
 struct ServerDetailView: View {
+    @Environment(\.colorScheme) private var scheme
+    @Environment(NMTheme.self) var theme
     @Environment(NMState.self) private var state
     var id: String
-    @State private var activeTab: ServerDetailTab = .basic
+    @State private var activeTab: ServerDetailTab = .status
     
     var body: some View {
         NavigationStack {
             if let server = state.servers.first(where: { $0.id == id }) {
                 if server.status.uptime != 0 {
-                    VStack {
-                        switch(activeTab) {
-                        case .basic:
-                            Form {
-                                ServerDetailBasicView(server: server)
-                                ServerDetailHostView(server: server)
-                            }
-                            .formStyle(.grouped)
-                            .tag(ServerDetailTab.basic)
-                        case .status:
-                            Form {
-                                ServerDetailStatusView(server: server)
-                            }
-                            .formStyle(.grouped)
-                            .tag(ServerDetailTab.status)
-                        case .monitors:
-                            Form {
-                                ServerDetailPingChartView(server: server)
-                            }
-                            .formStyle(.grouped)
-                            .tag(ServerDetailTab.monitors)
-                        }
-                    }
-                    .navigationTitle("Server Details")
-                    .navigationSubtitle(server.name)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            Picker("Server Detail Tab", selection: $activeTab) {
-                                ForEach(ServerDetailTab.allCases) { tab in
-                                    Text(tab.localized())
-                                        .tag(tab)
+                    content(server: server)
+                        .navigationTitle("Server Details")
+                        .navigationSubtitle(server.name)
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                Picker("Server Detail Tab", selection: $activeTab) {
+                                    ForEach(ServerDetailTab.allCases) { tab in
+                                        Text(tab.localized())
+                                            .tag(tab)
+                                    }
                                 }
+                                .pickerStyle(.segmented)
                             }
-                            .pickerStyle(.segmented)
+                            
+                            ToolbarItem {
+                                toolbarMenu(server: server)
+                            }
                         }
-                        
-                        ToolbarItem {
-                            toolbarMenu(server: server)
-                        }
-                    }
                 }
                 else {
                     ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
@@ -79,6 +58,25 @@ struct ServerDetailView: View {
             }
             else {
                 ProgressView()
+            }
+        }
+    }
+    
+    private func content(server: ServerData) -> some View {
+        ZStack {
+            theme.themeBackgroundColor(scheme: scheme)
+                .ignoresSafeArea()
+            
+            switch(activeTab) {
+            case .status:
+                ServerDetailStatusView(server: server)
+                .tag(ServerDetailTab.status)
+            case .monitors:
+                Form {
+                    ServerDetailPingChartView(server: server)
+                }
+                .formStyle(.grouped)
+                .tag(ServerDetailTab.monitors)
             }
         }
     }

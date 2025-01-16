@@ -14,25 +14,25 @@ extension NMUI {
                 Image("AMDLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
             if CPUName.contains("Intel") {
                 Image("IntelLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
             if CPUName.contains("Neoverse") {
                 Image("ARMLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
             if CPUName.contains("Apple") {
                 Image("AppleLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
         }
     }

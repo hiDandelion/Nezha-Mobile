@@ -14,31 +14,31 @@ extension NMUI {
                 Image("DebianLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
             if OSName.contains("ubuntu") {
                 Image("UbuntuLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
             if OSName.contains("Windows") {
                 Image("WindowsLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
             if OSName.contains("darwin") {
                 Image("macOSLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
             if OSName.contains("iOS") {
                 Image("iOSLogo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 50)
+                    .frame(height: 50)
             }
         }
     }

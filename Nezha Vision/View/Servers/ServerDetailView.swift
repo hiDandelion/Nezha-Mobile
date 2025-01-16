@@ -12,7 +12,6 @@ enum ServerDetailTab: String, CaseIterable, Identifiable {
         self.rawValue
     }
     
-    case basic = "Basic"
     case status = "Status"
     case monitors = "Monitors"
     
@@ -25,7 +24,7 @@ struct ServerDetailView: View {
     @Environment(\.openWindow) var openWindow
     @Environment(NMState.self) private var state
     var id: String
-    @State private var activeTab: ServerDetailTab = .basic
+    @State private var activeTab: ServerDetailTab = .status
     
     var body: some View {
         NavigationStack {
@@ -33,7 +32,16 @@ struct ServerDetailView: View {
                 if server.status.uptime != 0 {
                     VStack {
                         picker
-                        form(server: server)
+                        switch(activeTab) {
+                        case .status:
+                            ServerDetailStatusView(server: server)
+                                .tag(ServerDetailTab.status)
+                        case .monitors:
+                            Form {
+                                ServerDetailPingChartView(server: server)
+                            }
+                            .tag(ServerDetailTab.monitors)
+                        }
                     }
                     .navigationTitle(server.name)
                     .toolbar {
@@ -61,29 +69,6 @@ struct ServerDetailView: View {
         }
         .pickerStyle(.segmented)
         .padding()
-    }
-    
-    private func form(server: ServerData) -> some View {
-        Form {
-            switch(activeTab) {
-            case .basic:
-                Group {
-                    ServerDetailBasicView(server: server)
-                    ServerDetailHostView(server: server)
-                }
-                .tag(ServerDetailTab.basic)
-            case .status:
-                Group {
-                    ServerDetailStatusView(server: server)
-                }
-                .tag(ServerDetailTab.status)
-            case .monitors:
-                Group {
-                    ServerDetailPingChartView(server: server)
-                }
-                .tag(ServerDetailTab.monitors)
-            }
-        }
     }
     
     private func toolbarMenu(server: ServerData) -> some View {

@@ -83,7 +83,7 @@ struct ServerListView: View {
                 .ignoresSafeArea()
             }
             else {
-                NMUI.ColorfulView(theme: theme, scheme: scheme)
+                theme.themeBackgroundColor(scheme: scheme)
                     .ignoresSafeArea()
             }
         }

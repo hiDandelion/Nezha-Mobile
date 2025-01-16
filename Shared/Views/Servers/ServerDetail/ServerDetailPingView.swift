@@ -42,6 +42,9 @@ struct ServerDetailPingChartView: View {
                 }
                 else {
                     ProgressView()
+#if os(iOS)
+        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
+#endif
                 }
             }
             else {

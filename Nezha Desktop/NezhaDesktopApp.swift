@@ -49,6 +49,7 @@ struct NezhaDesktopApp: App {
                 ServerDetailView(id: id)
                     .environment(\.createDataHandler, NezhaMobileData.shared.dataHandlerCreator())
                     .environment(appDelegate.state)
+                    .environment(theme)
             }
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
