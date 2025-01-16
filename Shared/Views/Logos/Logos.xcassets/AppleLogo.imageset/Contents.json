@@ -1,8 +1,9 @@
 {
   "images" : [
     {
-      "filename" : "AppleLogo.svg",
-      "idiom" : "universal"
+      "filename" : "AppleLogo_Black.png",
+      "idiom" : "universal",
+      "scale" : "1x"
     },
     {
       "appearances" : [
@@ -11,8 +12,37 @@
           "value" : "dark"
         }
       ],
-      "filename" : "AppleLogo 1.svg",
-      "idiom" : "universal"
+      "filename" : "AppleLogo_White.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

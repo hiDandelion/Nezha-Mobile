@@ -604,7 +604,6 @@
       }
     },
     "Background Color Dark Mode" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -621,7 +620,6 @@
       }
     },
     "Background Color Light Mode" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -638,6 +636,7 @@
       }
     },
     "Background Color Set Dark" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -654,6 +653,7 @@
       }
     },
     "Background Color Set Light" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {

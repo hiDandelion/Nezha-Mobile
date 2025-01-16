@@ -14,9 +14,11 @@ struct ServerDetailStatusView: View {
 #endif
     var server: ServerData
     
+    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 320, maximum: 450))]
+    
     var body: some View {
         ScrollView {
-            VStack(spacing: 10) {
+            LazyVGrid(columns: columns, spacing: 10) {
                 osCard
                 cpuCard
                 memoryCard
@@ -127,6 +129,8 @@ struct ServerDetailStatusView: View {
             .padding(10)
             
             HStack {
+                Image(systemName: "memorychip")
+                    .font(.title)
                 Text(formatBytes(server.status.memoryUsed, decimals: 2))
                     .font(.title3)
                     .fontDesign(.rounded)
@@ -162,6 +166,8 @@ struct ServerDetailStatusView: View {
             .padding(10)
             
             HStack {
+                Image(systemName: "internaldrive")
+                    .font(.title)
                 Text(formatBytes(server.status.diskUsed, decimals: 2))
                     .font(.title3)
                     .fontDesign(.rounded)
@@ -204,8 +210,18 @@ struct ServerDetailStatusView: View {
             .padding(10)
             
             VStack {
-                Text(server.ipv4)
-                Text(server.ipv6)
+                if server.ipv4 != "" {
+                    HStack {
+                        Image(systemName: "4.circle")
+                        Text(server.ipv4)
+                    }
+                }
+                if server.ipv6 != "" {
+                    HStack {
+                        Image(systemName: "6.circle")
+                        Text(server.ipv6)
+                    }
+                }
             }
             .padding(.horizontal)
             

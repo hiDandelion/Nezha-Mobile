@@ -91,7 +91,7 @@ class NMTheme {
             themeActiveColorLight = Color(base64EncodedString: themeActiveColorLightString) ?? Color.white
             themeTintColorLight = Color(base64EncodedString: themeTintColorLightString) ?? Color.blue
             themePrimaryColorDark = Color(base64EncodedString: themePrimaryColorDarkString) ?? Color.white
-            themeSecondaryColorDark = Color(base64EncodedString: themeSecondaryColorDarkString) ?? Color(red: 0/255, green: 0/255, blue: 0/255, opacity: 0.5)
+            themeSecondaryColorDark = Color(base64EncodedString: themeSecondaryColorDarkString) ?? Color(red: 28/255, green: 28/255, blue: 28/255, opacity: 0.5)
             themeBackgroundColorDark = Color(base64EncodedString: themeBackgroundColorDarkString) ?? Color.black
             themeActiveColorDark = Color(base64EncodedString: themeActiveColorDarkString) ?? Color.white
             themeTintColorDark = Color(base64EncodedString: themeTintColorDarkString) ?? Color.blue
@@ -103,7 +103,7 @@ class NMTheme {
             themeActiveColorLight = Color.white
             themeTintColorLight = Color.blue
             themePrimaryColorDark = Color.white
-            themeSecondaryColorDark = Color(red: 0/255, green: 0/255, blue: 0/255, opacity: 0.5)
+            themeSecondaryColorDark = Color(red: 28/255, green: 28/255, blue: 28/255, opacity: 0.5)
             themeBackgroundColorDark = Color.black
             themeActiveColorDark = Color.white
             themeTintColorDark = Color.blue
