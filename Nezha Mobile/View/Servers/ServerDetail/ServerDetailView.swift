@@ -151,10 +151,8 @@ struct ServerDetailView: View {
                     }
                 }
             
-            Form {
-                ServerDetailPingChartView(server: server)
-            }
-            .tag(ServerDetailTab.monitors)
+            ServerDetailPingChartView(server: server)
+                .tag(ServerDetailTab.monitors)
         }
         .scrollContentBackground(.hidden)
         .tabViewStyle(.page(indexDisplayMode: .never))

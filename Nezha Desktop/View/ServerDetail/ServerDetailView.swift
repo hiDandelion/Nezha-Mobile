@@ -30,30 +30,32 @@ struct ServerDetailView: View {
     var body: some View {
         NavigationStack {
             if let server = state.servers.first(where: { $0.id == id }) {
-                if server.status.uptime != 0 {
-                    content(server: server)
-                        .navigationTitle("Server Details")
-                        .navigationSubtitle(server.name)
-                        .toolbar {
-                            ToolbarItem(placement: .principal) {
-                                Picker("Server Detail Tab", selection: $activeTab) {
-                                    ForEach(ServerDetailTab.allCases) { tab in
-                                        Text(tab.localized())
-                                            .tag(tab)
-                                    }
-                                }
-                                .pickerStyle(.segmented)
-                            }
-                            
-                            ToolbarItem {
-                                toolbarMenu(server: server)
+                VStack {
+                    if server.status.uptime != 0 {
+                        content(server: server)
+                    }
+                    else {
+                        ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
+                            .navigationTitle("Server Details")
+                            .navigationSubtitle(server.name)
+                    }
+                }
+                .navigationTitle("Server Details")
+                .navigationSubtitle(server.name)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Picker("Server Detail Tab", selection: $activeTab) {
+                            ForEach(ServerDetailTab.allCases) { tab in
+                                Text(tab.localized())
+                                    .tag(tab)
                             }
                         }
-                }
-                else {
-                    ContentUnavailableView("Server Unavailable", systemImage: "square.stack.3d.up.slash.fill")
-                        .navigationTitle("Server Details")
-                        .navigationSubtitle(server.name)
+                        .pickerStyle(.segmented)
+                    }
+                    
+                    ToolbarItem {
+                        toolbarMenu(server: server)
+                    }
                 }
             }
             else {
@@ -70,13 +72,10 @@ struct ServerDetailView: View {
             switch(activeTab) {
             case .status:
                 ServerDetailStatusView(server: server)
-                .tag(ServerDetailTab.status)
+                    .tag(ServerDetailTab.status)
             case .monitors:
-                Form {
-                    ServerDetailPingChartView(server: server)
-                }
-                .formStyle(.grouped)
-                .tag(ServerDetailTab.monitors)
+                ServerDetailPingChartView(server: server)
+                    .tag(ServerDetailTab.monitors)
             }
         }
     }

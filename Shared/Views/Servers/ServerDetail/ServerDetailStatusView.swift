@@ -30,7 +30,7 @@ struct ServerDetailStatusView: View {
     }
     
     @ViewBuilder
-    func cardView<Content: View>(@ViewBuilder _ content: @escaping () -> Content) -> some View {
+    private func cardView<Content: View>(@ViewBuilder _ content: @escaping () -> Content) -> some View {
         VStack(spacing: 10) {
             content()
         }

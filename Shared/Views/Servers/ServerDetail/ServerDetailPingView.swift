@@ -24,102 +24,118 @@ enum PingChartDateRange: Int, CaseIterable {
 }
 
 struct ServerDetailPingChartView: View {
-#if os(iOS)
+#if os(iOS) || os(macOS)
     @Environment(\.colorScheme) private var scheme
     @Environment(NMTheme.self) var theme
 #endif
     var server: ServerData
     @State private var dateRange: PingChartDateRange = .threeHours
-    @State private var pingDatas: [MonitorData]?
-    @State private var errorDescriptionLoadingPingData: String?
-    @State private var isLoadingPingDatas: Bool = false
+    @State private var pingDatas: [MonitorData] = []
+    @State private var loadingState: LoadingState = .idle
     
     var body: some View {
-        Group {
-            if isLoadingPingDatas {
-                if let errorDescriptionLoadingPingData {
-                    Text(errorDescriptionLoadingPingData)
-                }
-                else {
-                    ProgressView()
-#if os(iOS)
-        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
-#endif
+        ScrollView {
+            if !pingDatas.isEmpty {
+                VStack(spacing: 0) {
+                    Picker("Date Range", selection: $dateRange) {
+                        ForEach(PingChartDateRange.allCases, id: \.rawValue) { dateRange in
+                            Text(dateRange.localizedDateRangeTitle)
+                                .tag(dateRange)
+                        }
+                    }
+                    .padding()
+                    
+                    VStack(spacing: 10) {
+                        ForEach(pingDatas) { pingData in
+                            cardView {
+                                VStack {
+                                    HStack {
+                                        Text(pingData.monitorName)
+                                        Spacer()
+                                    }
+                                    .foregroundStyle(.secondary)
+                                    .padding(10)
+                                    
+                                    PingChart(pingData: pingData, dateRange: dateRange)
+                                        .padding()
+                                }
+                            }
+                        }
+                    }
+                    .padding()
                 }
             }
             else {
-                if let pingDatas {
-                    Section {
-                        Picker("Date Range", selection: $dateRange) {
-                            ForEach(PingChartDateRange.allCases, id: \.rawValue) { dateRange in
-                                Text(dateRange.localizedDateRangeTitle)
-                                    .tag(dateRange)
-                            }
-                        }
-                    }
-#if os(iOS)
-        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
-#endif
-                    
-                    List {
-                        ForEach(pingDatas) { pingData in
-                            Section("\(pingData.monitorName)") {
-                                PingChart(pingData: pingData, dateRange: dateRange)
-                                    .listRowSeparator(.hidden)
-                            }
-                        }
-                    }
-#if os(iOS)
-        .listRowBackground(theme.themeSecondaryColor(scheme: scheme))
-#endif
-                }
-                else {
-                    Text("No data")
-                }
+                Text("No data")
             }
         }
+        .loadingState(loadingState: loadingState) {
+            fetchData()
+        }
         .onAppear {
-            if pingDatas == nil {
-                isLoadingPingDatas = true
-                Task {
-                    do {
-                        let response = try await RequestHandler.getMonitor(serverID: server.serverID)
-                        withAnimation {
-                            errorDescriptionLoadingPingData = nil
-                            if let services = response.data {
-                                pingDatas = services.map({
-                                    MonitorData(
-                                        monitorID: $0.monitor_id,
-                                        serverID: $0.server_id,
-                                        monitorName: $0.monitor_name,
-                                        serverName: $0.server_name,
-                                        dates: $0.created_at,
-                                        delays: $0.avg_delay
-                                    )
-                                })
-                            }
-                            isLoadingPingDatas = false
+            fetchData()
+        }
+    }
+    
+    @ViewBuilder
+    private func cardView<Content: View>(@ViewBuilder _ content: @escaping () -> Content) -> some View {
+        VStack(spacing: 10) {
+            content()
+        }
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+            #if os(iOS) || os(macOS)
+                .fill(theme.themeSecondaryColor(scheme: scheme))
+            #endif
+            #if os(visionOS)
+                .fill(.thinMaterial)
+            #endif
+                .shadow(color: .black.opacity(0.08), radius: 5, x: 5, y: 5)
+                .shadow(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)
+        )
+    }
+    
+    private func fetchData() {
+        if pingDatas.isEmpty {
+            loadingState = .loading
+            Task {
+                do {
+                    let response = try await RequestHandler.getMonitor(serverID: server.serverID)
+                    withAnimation {
+                        if let services = response.data {
+                            pingDatas = services.map({
+                                MonitorData(
+                                    monitorID: $0.monitor_id,
+                                    serverID: $0.server_id,
+                                    monitorName: $0.monitor_name,
+                                    serverName: $0.server_name,
+                                    dates: $0.created_at,
+                                    delays: $0.avg_delay
+                                )
+                            })
                         }
+                        loadingState = .loaded
                     }
-                    catch let error as NezhaDashboardError {
-                        switch error {
-                        case .invalidResponse(let message):
-                            if message == "success" {
-                                errorDescriptionLoadingPingData = String(localized: "No data")
-                            }
-                            else {
-                                errorDescriptionLoadingPingData = String(localized: "Server returned an invalid response.")
+                }
+                catch let error as NezhaDashboardError {
+                    switch error {
+                    case .invalidResponse(let message):
+                        if message == "success" {
+                            loadingState = .error(String(localized: "No data"))
+                        }
+                        else {
+                            loadingState = .error(String(localized: "Server returned an invalid response."))
 #if DEBUG
-                                _ = NMCore.debugLog("Nezha Dashboard Handler Error - Invalid response: \(message)")
+                            _ = NMCore.debugLog("Nezha Dashboard Handler Error - Invalid response: \(message)")
 #endif
-                            }
-                        default:
-                            errorDescriptionLoadingPingData = error.localizedDescription
                         }
+                    default:
+                        loadingState = .error(error.localizedDescription)
                     }
-                    catch {
-                        errorDescriptionLoadingPingData = error.localizedDescription
-                    }
+                }
+                catch {
+                    loadingState = .error(error.localizedDescription)
                 }
             }
         }

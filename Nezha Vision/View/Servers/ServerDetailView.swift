@@ -29,29 +29,31 @@ struct ServerDetailView: View {
     var body: some View {
         NavigationStack {
             if let server = state.servers.first(where: { $0.id == id }) {
-                if server.status.uptime != 0 {
-                    VStack {
-                        picker
-                        switch(activeTab) {
-                        case .status:
-                            ServerDetailStatusView(server: server)
-                                .tag(ServerDetailTab.status)
-                        case .monitors:
-                            Form {
+                VStack {
+                    if server.status.uptime != 0 {
+                        VStack {
+                            picker
+                            Spacer()
+                            switch(activeTab) {
+                            case .status:
+                                ServerDetailStatusView(server: server)
+                                    .tag(ServerDetailTab.status)
+                            case .monitors:
                                 ServerDetailPingChartView(server: server)
+                                    .tag(ServerDetailTab.monitors)
                             }
-                            .tag(ServerDetailTab.monitors)
+                            Spacer()
                         }
                     }
-                    .navigationTitle(server.name)
-                    .toolbar {
-                        ToolbarItem(placement: .automatic) {
-                            toolbarMenu(server: server)
-                        }
+                    else {
+                        serverUnavailable(server: server)
                     }
                 }
-                else {
-                    serverUnavailable(server: server)
+                .navigationTitle(server.name)
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        toolbarMenu(server: server)
+                    }
                 }
             }
             else {
