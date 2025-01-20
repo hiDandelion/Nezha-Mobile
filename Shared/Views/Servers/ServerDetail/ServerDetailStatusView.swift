@@ -57,7 +57,9 @@ struct ServerDetailStatusView: View {
             }
             .font(.caption)
             .foregroundStyle(.secondary)
-            .padding(10)
+            .padding([.horizontal, .top], 10)
+            
+            Spacer()
             
             HStack {
                 let osName = server.host.platform
@@ -67,13 +69,15 @@ struct ServerDetailStatusView: View {
             }
             .padding(.horizontal)
             
+            Spacer()
+            
             HStack {
                 Text("Load \(server.status.load1, specifier: "%.2f") \(server.status.load5, specifier: "%.2f") \(server.status.load15, specifier: "%.2f")")
                 Spacer()
                 Text("\(server.status.processCount) Processes")
             }
             .font(.caption)
-            .padding(10)
+            .padding([.horizontal, .bottom], 10)
         }
     }
     
@@ -86,15 +90,19 @@ struct ServerDetailStatusView: View {
             }
             .font(.caption)
             .foregroundStyle(.secondary)
-            .padding(10)
+            .padding([.horizontal, .top], 10)
             
-            ForEach(server.host.cpu, id: \.self) { cpu in
-                HStack {
-                    NMUI.getCPULogo(CPUName: cpu)
-                    Text(cpu)
+            Spacer()
+            
+            HStack {
+                if let cpuName = server.host.cpu.first {
+                    NMUI.getCPULogo(CPUName: cpuName)
+                    Text(cpuName)
                 }
             }
             .padding(.horizontal)
+            
+            Spacer()
             
             HStack {
                 let cpuUsage = server.status.cpuUsed / 100
@@ -105,7 +113,7 @@ struct ServerDetailStatusView: View {
                 Text("\(cpuUsage * 100, specifier: "%.0f")%")
             }
             .font(.caption)
-            .padding(10)
+            .padding([.horizontal, .bottom], 10)
         }
     }
     
@@ -126,7 +134,9 @@ struct ServerDetailStatusView: View {
             }
             .font(.caption)
             .foregroundStyle(.secondary)
-            .padding(10)
+            .padding([.horizontal, .top], 10)
+            
+            Spacer()
             
             HStack {
                 Image(systemName: "memorychip")
@@ -141,6 +151,8 @@ struct ServerDetailStatusView: View {
             }
             .padding(.horizontal)
             
+            Spacer()
+            
             HStack {
                 Gauge(value: memoryUsage) {
                     
@@ -149,7 +161,7 @@ struct ServerDetailStatusView: View {
                 Text("\(memoryUsage * 100, specifier: "%.0f")%")
             }
             .font(.caption)
-            .padding(10)
+            .padding([.horizontal, .bottom], 10)
         }
     }
     
@@ -163,7 +175,9 @@ struct ServerDetailStatusView: View {
             }
             .font(.caption)
             .foregroundStyle(.secondary)
-            .padding(10)
+            .padding([.horizontal, .top], 10)
+            
+            Spacer()
             
             HStack {
                 Image(systemName: "internaldrive")
@@ -178,6 +192,8 @@ struct ServerDetailStatusView: View {
             }
             .padding(.horizontal)
             
+            Spacer()
+            
             HStack {
                 Gauge(value: diskUsage) {
                     
@@ -186,7 +202,7 @@ struct ServerDetailStatusView: View {
                 Text("\(diskUsage * 100, specifier: "%.0f")%")
             }
             .font(.caption)
-            .padding(10)
+            .padding([.horizontal, .bottom], 10)
         }
     }
     
@@ -207,7 +223,9 @@ struct ServerDetailStatusView: View {
             }
             .font(.caption)
             .foregroundStyle(.secondary)
-            .padding(10)
+            .padding([.horizontal, .top], 10)
+            
+            Spacer()
             
             VStack {
                 if server.ipv4 != "" {
@@ -225,6 +243,8 @@ struct ServerDetailStatusView: View {
             }
             .padding(.horizontal)
             
+            Spacer()
+            
             HStack(spacing: 20) {
                 VStack(alignment: .leading) {
                     Text("↑ \(formatBytes(server.status.networkOut))")
@@ -239,6 +259,8 @@ struct ServerDetailStatusView: View {
             .fontDesign(.rounded)
             .padding(.horizontal)
             
+            Spacer()
+            
             HStack {
                 HStack(spacing: 5) {
                     Text("TCP")
@@ -251,7 +273,7 @@ struct ServerDetailStatusView: View {
                 Spacer()
             }
             .font(.caption)
-            .padding(10)
+            .padding([.horizontal, .bottom], 10)
         }
         .contextMenu {
             if server.ipv4 != "" {

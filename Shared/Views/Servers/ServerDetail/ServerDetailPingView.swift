@@ -48,13 +48,12 @@ struct ServerDetailPingChartView: View {
                     VStack(spacing: 10) {
                         ForEach(pingDatas) { pingData in
                             cardView {
-                                VStack {
+                                VStack(spacing: 0) {
                                     HStack {
                                         Text(pingData.monitorName)
-                                        Spacer()
                                     }
                                     .foregroundStyle(.secondary)
-                                    .padding(10)
+                                    .padding(.top, 10)
                                     
                                     PingChart(pingData: pingData, dateRange: dateRange)
                                         .padding()

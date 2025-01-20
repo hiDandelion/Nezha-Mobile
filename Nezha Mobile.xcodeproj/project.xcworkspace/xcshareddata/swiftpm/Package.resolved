@@ -1,5 +1,5 @@
 {
-  "originHash" : "56e601334ce2c014548f53797dcef1000aa5a29fc53133faaaa2b7243efadeb5",
+  "originHash" : "82239222c033e2a1a5aaf703ad09568d137a842d7cb4a3053b8d72208f602035",
   "pins" : [
     {
       "identity" : "cache",
@@ -11,48 +11,12 @@
       }
     },
     {
-      "identity" : "colorfulx",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Lakr233/ColorfulX.git",
-      "state" : {
-        "revision" : "60f39555d2e39db9c27a3df3ce4d634c235ad438",
-        "version" : "5.5.3"
-      }
-    },
-    {
-      "identity" : "colorvector",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Lakr233/ColorVector.git",
-      "state" : {
-        "revision" : "031ce6ce65c0b347fb192302aa8ec4a17cc1494f",
-        "version" : "1.0.3"
-      }
-    },
-    {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/evgenyneu/keychain-swift.git",
       "state" : {
         "revision" : "5e1b02b6a9dac2a759a1d5dbc175c86bd192a608",
         "version" : "24.0.0"
-      }
-    },
-    {
-      "identity" : "msdisplaylink",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Lakr233/MSDisplayLink.git",
-      "state" : {
-        "revision" : "6e92b5513e3473e064685e64056c4ac46470e7b0",
-        "version" : "2.0.3"
-      }
-    },
-    {
-      "identity" : "springinterpolation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Lakr233/SpringInterpolation.git",
-      "state" : {
-        "revision" : "f9d1ee3d2466bdb00fd0ade7f256ed20229c8413",
-        "version" : "1.3.0"
       }
     },
     {
