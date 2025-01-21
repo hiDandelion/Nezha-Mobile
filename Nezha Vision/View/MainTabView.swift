@@ -40,19 +40,19 @@ struct MainTabView: View {
             Tab(value: MainTab.servers) {
                 ServerListView()
             } label: {
-                Image(systemName: MainTab.servers.systemName)
+                Label(MainTab.servers.title, systemImage: MainTab.servers.systemName)
             }
 
             Tab(value: MainTab.tools) {
                 ToolListView()
             } label: {
-                Image(systemName: MainTab.tools.systemName)
+                Label(MainTab.tools.title, systemImage: MainTab.tools.systemName)
             }
             
             Tab(value: MainTab.settings) {
                 SettingsView()
             } label: {
-                Image(systemName: MainTab.settings.systemName)
+                Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
             }
         }
     }

@@ -46,24 +46,21 @@ struct ServerListView: View {
         Group {
             Group {
                 if !state.servers.isEmpty {
-                    GeometryReader { proxy in
-                        let isWideLayout = proxy.size.width > 600
-                        ScrollView {
-                            groupPicker
-                                .safeAreaPadding(.horizontal, 15)
-                            
-                            serverList
-                        }
-                        .navigationTitle("Servers")
-                        .searchable(text: $searchText)
-                        .toolbar {
-                            Button {
-                                Task {
-                                    await state.refreshServerAndServerGroup()
-                                }
-                            } label: {
-                                Label("Refresh", systemImage: "arrow.clockwise")
+                    ScrollView {
+                        groupPicker
+                            .safeAreaPadding(.horizontal, 15)
+                        
+                        serverList
+                    }
+                    .navigationTitle("Servers")
+                    .searchable(text: $searchText)
+                    .toolbar {
+                        Button {
+                            Task {
+                                await state.refreshServerAndServerGroup()
                             }
+                        } label: {
+                            Label("Refresh", systemImage: "arrow.clockwise")
                         }
                     }
                 }

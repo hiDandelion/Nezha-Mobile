@@ -34,7 +34,8 @@ struct NezhaDesktopApp: App {
             CommandGroup(before: CommandGroupPlacement.help) {
                 Link("User Guide", destination: NMCore.userGuideURL)
                 NavigationLink {
-                    WishKit.FeedbackListView().navigationTitle("Feature Suggestions")
+                    WishKit.FeedbackListView()
+                        .navigationTitle("Feature Suggestions")
                 } label: {
                     Text("Feature Suggestions")
                 }

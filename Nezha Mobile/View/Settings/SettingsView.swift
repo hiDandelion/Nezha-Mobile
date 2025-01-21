@@ -39,9 +39,8 @@ struct SettingsView: View {
                         requestReview()
                     }
                     NavigationLink(value: "feature-suggestions") {
-                        Text("Feature Suggestions").navigationTitle("Feature Suggestions")
+                        Text("Feature Suggestions")
                     }
-                    
                     NavigationLink(value: "acknowledgments") {
                         Text("Acknowledgments")
                     }
