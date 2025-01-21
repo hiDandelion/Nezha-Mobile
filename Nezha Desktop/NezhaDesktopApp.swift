@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NezhaMobileData
+import WishKit
 
 @main
 struct NezhaDesktopApp: App {
@@ -17,6 +18,7 @@ struct NezhaDesktopApp: App {
     init() {
         NMCore.registerUserDefaults()
         NMCore.registerKeychain()
+        NMCore.configureWishKit()
     }
     
     var body: some Scene {
@@ -31,6 +33,11 @@ struct NezhaDesktopApp: App {
         .commands {
             CommandGroup(before: CommandGroupPlacement.help) {
                 Link("User Guide", destination: NMCore.userGuideURL)
+                NavigationLink {
+                    WishKit.FeedbackListView().navigationTitle("Feature Suggestions")
+                } label: {
+                    Text("Feature Suggestions")
+                }
                 NavigationLink(destination: {
                     NMUI.AcknowledgmentView()
                 }) {

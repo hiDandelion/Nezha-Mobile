@@ -1573,6 +1573,22 @@
         }
       }
     },
+    "Feature Suggestions" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "機能提案"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "功能建议"
+          }
+        }
+      }
+    },
     "General" : {
       "localizations" : {
         "ja" : {
@@ -1789,6 +1805,18 @@
             "state" : "new",
             "value" : "Load %1$.2f %2$.2f %3$.2f"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ロード %1$.2f %2$.2f %3$.2f"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "负载 %1$.2f %2$.2f %3$.2f"
+          }
         }
       }
     },
@@ -1971,7 +1999,20 @@
       }
     },
     "Network" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ネットワーク"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网络"
+          }
+        }
+      }
     },
     "Network Data" : {
       "localizations" : {
@@ -2257,7 +2298,20 @@
       }
     },
     "OS" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OS"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "操作系统"
+          }
+        }
+      }
     },
     "Part of this project is related to Project nezhahq/nezha which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
       "shouldTranslate" : false
@@ -3122,7 +3176,20 @@
       }
     },
     "TCP" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TCP"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TCP"
+          }
+        }
+      }
     },
     "TCP Connection" : {
       "localizations" : {
@@ -3141,7 +3208,20 @@
       }
     },
     "TCPing" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TCPing"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TCPing"
+          }
+        }
+      }
     },
     "Terminal" : {
       "localizations" : {
@@ -3784,7 +3864,20 @@
       }
     },
     "UDP" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UDP"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UDP"
+          }
+        }
+      }
     },
     "UDP Connection" : {
       "localizations" : {

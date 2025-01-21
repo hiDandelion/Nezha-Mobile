@@ -8,6 +8,7 @@
 import SwiftUI
 import UserNotifications
 import StoreKit
+import WishKit
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
@@ -37,6 +38,9 @@ struct SettingsView: View {
                     Button("Rate Us") {
                         requestReview()
                     }
+                    NavigationLink(value: "feature-suggestions") {
+                        Text("Feature Suggestions").navigationTitle("Feature Suggestions")
+                    }
                     
                     NavigationLink(value: "acknowledgments") {
                         Text("Acknowledgments")
@@ -50,6 +54,8 @@ struct SettingsView: View {
                     DashboardSettingsView()
                 case "theme-settings":
                     ThemeSettingsView()
+                case "feature-suggestions":
+                    WishKit.FeedbackListView()
                 case "acknowledgments":
                     NMUI.AcknowledgmentView()
                 default:

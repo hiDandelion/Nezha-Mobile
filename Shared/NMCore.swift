@@ -22,18 +22,13 @@ class NMCore {
     static let NMWatchPushNotificationsToken = "NMWatchPushNotificationsToken"
     static let NMMacPushNotificationsToken = "NMMacPushNotificationsToken"
     
+    static let userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
+    static let keychain = KeychainSwift()
+    static var cachedPassword: String?
+    
     static let apnsSendAlertURLString: String = "https://nezha-mobile-apns.argsment.com/api/send-alert"
     
     static let userGuideURL: URL = URL(string: "https://support.argsment.com/nezha-mobile/user-guide")!
-    static let userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.argsment.Nezha-Mobile")!
-    static let keychain = KeychainSwift()
-    
-    static var isNezhaDashboardConfigured: Bool {
-        if getNezhaDashboardLink() == "" { return false }
-        if getNezhaDashboardUsername() == "" { return false }
-        if getNezhaDashboardPassword() == "" { return false }
-        return true
-    }
     
     static func debugLog(_ message: Any) -> Any? {
         #if DEBUG
@@ -42,6 +37,14 @@ class NMCore {
         return nil
     }
     
+    static var isNezhaDashboardConfigured: Bool {
+        if getNezhaDashboardLink() == "" { return false }
+        if getNezhaDashboardUsername() == "" { return false }
+        if getNezhaDashboardPassword() == "" { return false }
+        return true
+    }
+    
+    // MARK: - App Initialization
     static func registerUserDefaults() {
         let defaultValues: [String: Any] = [
             NMLastModifyDate: 0,
@@ -152,7 +155,13 @@ class NMCore {
     }
     
     static func getNezhaDashboardPassword() -> String {
-        return keychain.get(NMDashboardPassword)!
+        if let cachedPassword {
+            return cachedPassword
+        }
+        else {
+            cachedPassword = keychain.get(NMDashboardPassword)
+            return cachedPassword!
+        }
     }
     
     static func getIsNezhaDashboardSSLEnabled() -> Bool {

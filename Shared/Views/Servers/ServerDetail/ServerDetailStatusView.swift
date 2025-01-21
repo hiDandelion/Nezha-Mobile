@@ -52,11 +52,12 @@ struct ServerDetailStatusView: View {
         cardView {
             HStack {
                 Text("OS")
+                    .font(.system(size: 15, weight: .semibold))
                 Spacer()
                 Text(server.host.virtualization)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
-            .font(.caption)
-            .foregroundStyle(.secondary)
             .padding([.horizontal, .top], 10)
             
             Spacer()
@@ -85,11 +86,12 @@ struct ServerDetailStatusView: View {
         cardView {
             HStack {
                 Text("CPU")
+                    .font(.system(size: 15, weight: .semibold))
                 Spacer()
                 Text(server.host.architecture)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
-            .font(.caption)
-            .foregroundStyle(.secondary)
             .padding([.horizontal, .top], 10)
             
             Spacer()
@@ -124,16 +126,17 @@ struct ServerDetailStatusView: View {
             
             HStack {
                 Text("Memory")
+                    .font(.system(size: 15, weight: .semibold))
                 Spacer()
                 if server.host.swapTotal != 0 {
                     HStack(spacing: 5) {
                         Text("Swap")
                         Text("\(swapUsage * 100, specifier: "%.0f")%")
                     }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 }
             }
-            .font(.caption)
-            .foregroundStyle(.secondary)
             .padding([.horizontal, .top], 10)
             
             Spacer()
@@ -171,10 +174,9 @@ struct ServerDetailStatusView: View {
             
             HStack {
                 Text("Disk")
+                    .font(.system(size: 15, weight: .semibold))
                 Spacer()
             }
-            .font(.caption)
-            .foregroundStyle(.secondary)
             .padding([.horizontal, .top], 10)
             
             Spacer()
@@ -210,6 +212,7 @@ struct ServerDetailStatusView: View {
         cardView {
             HStack {
                 Text("Network")
+                    .font(.system(size: 15, weight: .semibold))
                 Spacer()
                 if server.countryCode.uppercased() == "TW" {
                     Text("🇹🇼")
@@ -221,8 +224,6 @@ struct ServerDetailStatusView: View {
                     Text("🏴‍☠️")
                 }
             }
-            .font(.caption)
-            .foregroundStyle(.secondary)
             .padding([.horizontal, .top], 10)
             
             Spacer()

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import ColorfulX
 
 @Observable
 class NMTheme {

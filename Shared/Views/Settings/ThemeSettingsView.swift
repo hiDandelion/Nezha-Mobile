@@ -10,7 +10,6 @@ import PhotosUI
 #if os(iOS)
 import WidgetKit
 #endif
-import ColorfulX
 
 struct ThemeSettingsView: View {
     @Environment(NMTheme.self) var theme

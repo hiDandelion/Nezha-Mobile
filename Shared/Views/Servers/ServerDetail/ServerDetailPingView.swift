@@ -51,8 +51,8 @@ struct ServerDetailPingChartView: View {
                                 VStack(spacing: 0) {
                                     HStack {
                                         Text(pingData.monitorName)
+                                            .font(.system(size: 15, weight: .semibold))
                                     }
-                                    .foregroundStyle(.secondary)
                                     .padding(.top, 10)
                                     
                                     PingChart(pingData: pingData, dateRange: dateRange)

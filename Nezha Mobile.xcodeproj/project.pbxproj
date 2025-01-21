@@ -148,6 +148,10 @@
 		CB3175222CB113D800186028 /* DeviceInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3175212CB113CC00186028 /* DeviceInfoViewModel.swift */; };
 		CB3179012C748E0E002979E2 /* PieceOfInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF42C68DB7800BA9A36 /* PieceOfInfo.swift */; };
 		CB4087472D0BBE51009DFE27 /* AlertDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4087462D0BBE4F009DFE27 /* AlertDetailView.swift */; };
+		CB40A8F22D3F31D600050F56 /* WishKit in Frameworks */ = {isa = PBXBuildFile; productRef = CB40A8F12D3F31D600050F56 /* WishKit */; };
+		CB40A8F42D3F38A000050F56 /* WishKit in Frameworks */ = {isa = PBXBuildFile; productRef = CB40A8F32D3F38A000050F56 /* WishKit */; };
+		CB40A8F72D3F393300050F56 /* NMCore+WishKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB40A8F52D3F392C00050F56 /* NMCore+WishKit.swift */; };
+		CB40A8F82D3F393300050F56 /* NMCore+WishKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB40A8F52D3F392C00050F56 /* NMCore+WishKit.swift */; };
 		CB6864AD2C800E530052727A /* ServerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6864AC2C800E530052727A /* ServerMapView.swift */; };
 		CB695D4F2CC8A514003426F7 /* ServerPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB695D4E2CC8A50E003426F7 /* ServerPinView.swift */; };
 		CB695D552CC8AD0F003426F7 /* ServerDetailStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */; };
@@ -198,7 +202,6 @@
 		CB9C60862C5B293100DAE1E3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60852C5B293100DAE1E3 /* Utilities.swift */; };
 		CB9C608A2C5B5CC700DAE1E3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C60892C5B5CC700DAE1E3 /* SettingsView.swift */; };
 		CB9C608E2C5B9FC200DAE1E3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */; };
-		CB9E96BB2D389A77001AD713 /* ColorfulX in Frameworks */ = {isa = PBXBuildFile; productRef = CB9E96BA2D389A77001AD713 /* ColorfulX */; };
 		CB9E96CA2D390917001AD713 /* getOSLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E96C92D390917001AD713 /* getOSLogo.swift */; };
 		CB9E96CB2D390917001AD713 /* getCPULogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E96C72D390917001AD713 /* getCPULogo.swift */; };
 		CB9E96CC2D390917001AD713 /* getGPULogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E96C82D390917001AD713 /* getGPULogo.swift */; };
@@ -544,6 +547,7 @@
 		CB31751F2CB1139C00186028 /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
 		CB3175212CB113CC00186028 /* DeviceInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewModel.swift; sourceTree = "<group>"; };
 		CB4087462D0BBE4F009DFE27 /* AlertDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDetailView.swift; sourceTree = "<group>"; };
+		CB40A8F52D3F392C00050F56 /* NMCore+WishKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NMCore+WishKit.swift"; sourceTree = "<group>"; };
 		CB6864AC2C800E530052727A /* ServerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMapView.swift; sourceTree = "<group>"; };
 		CB695D4E2CC8A50E003426F7 /* ServerPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPinView.swift; sourceTree = "<group>"; };
 		CB695D5B2CC8C5A8003426F7 /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
@@ -680,7 +684,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB0D2C192CC780C90075FAB7 /* NezhaMobileData in Frameworks */,
-				CB9E96BB2D389A77001AD713 /* ColorfulX in Frameworks */,
 				CBED109C2D0074B4004DAD8D /* XTerminalUI in Frameworks */,
 				CB1142072D0D180D00A63CE7 /* KeychainSwift in Frameworks */,
 				CBED10B62D00788C004DAD8D /* SwiftyJSON in Frameworks */,
@@ -719,6 +722,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB40A8F22D3F31D600050F56 /* WishKit in Frameworks */,
 				CB1D68442C847B6E00D81526 /* XTerminalUI in Frameworks */,
 				CBDAC3CA2C7B2DCE002AA675 /* Cache in Frameworks */,
 				CB1142012D0D17DC00A63CE7 /* KeychainSwift in Frameworks */,
@@ -731,6 +735,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB40A8F42D3F38A000050F56 /* WishKit in Frameworks */,
 				CBDAC3D22C7BFF13002AA675 /* Cache in Frameworks */,
 				CBED10982D00728E004DAD8D /* XTerminalUI in Frameworks */,
 				CB1142052D0D17FB00A63CE7 /* KeychainSwift in Frameworks */,
@@ -1036,6 +1041,7 @@
 			children = (
 				CB9C608D2C5B9FC200DAE1E3 /* Localizable.xcstrings */,
 				CB0D2B862CC35AB40075FAB7 /* NMCore.swift */,
+				CB40A8F52D3F392C00050F56 /* NMCore+WishKit.swift */,
 				CB0C58052D1B974900AA573D /* NMState.swift */,
 				CBF04EDF2C7439E700A35505 /* NMTheme.swift */,
 				CB11725B2CEC30CD000B780D /* NMUI.swift */,
@@ -1535,7 +1541,6 @@
 				CBED109B2D0074B4004DAD8D /* XTerminalUI */,
 				CBED10B52D00788C004DAD8D /* SwiftyJSON */,
 				CB1142062D0D180D00A63CE7 /* KeychainSwift */,
-				CB9E96BA2D389A77001AD713 /* ColorfulX */,
 			);
 			productName = "Nezha Vision";
 			productReference = CB0D2C012CC77E1E0075FAB7 /* Nezha Vision.app */;
@@ -1626,6 +1631,7 @@
 				CB7B9CFD2C9E965F004383C7 /* NezhaMobileData */,
 				CBED105A2CFE7FEB004DAD8D /* SwiftyJSON */,
 				CB1142002D0D17DC00A63CE7 /* KeychainSwift */,
+				CB40A8F12D3F31D600050F56 /* WishKit */,
 			);
 			productName = "Nezha Mobile";
 			productReference = CB9C60672C5AF76E00DAE1E3 /* Nezha Mobile.app */;
@@ -1650,6 +1656,7 @@
 				CBED10972D00728E004DAD8D /* XTerminalUI */,
 				CBBDDF822D02EA200068AD5E /* SwiftyJSON */,
 				CB1142042D0D17FB00A63CE7 /* KeychainSwift */,
+				CB40A8F32D3F38A000050F56 /* WishKit */,
 			);
 			productName = "Nezha-Mobile";
 			productReference = CBD2BB112C6C269800BA9A36 /* Nezha Desktop.app */;
@@ -1701,6 +1708,7 @@
 				CB1D68422C847B6E00D81526 /* XCRemoteSwiftPackageReference "XTerminalUI" */,
 				CBED10592CFE7FEB004DAD8D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				CB1141FF2D0D17DC00A63CE7 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				CB40A8F02D3F31D600050F56 /* XCRemoteSwiftPackageReference "wishkit-ios" */,
 			);
 			productRefGroup = CB9C60682C5AF76E00DAE1E3 /* Products */;
 			projectDirPath = "";
@@ -2041,6 +2049,7 @@
 				CBC6C2D92C89B1E30059031E /* AcknowledgmentView.swift in Sources */,
 				CBED10092CFC249A004DAD8D /* ServerGroupViewModel.swift in Sources */,
 				CBAC67132D07F02A0055F4CA /* ServiceDetailView.swift in Sources */,
+				CB40A8F72D3F393300050F56 /* NMCore+WishKit.swift in Sources */,
 				CBED10882D00508D004DAD8D /* getTerminalSession.swift in Sources */,
 				CBDAC3D02C7B63BB002AA675 /* MainTabView.swift in Sources */,
 				CBAC67082D06C3C90055F4CA /* addService.swift in Sources */,
@@ -2119,6 +2128,7 @@
 				CBBDDF742D02E9850068AD5E /* GetAlertRuleResponse.swift in Sources */,
 				CBAC670F2D06C3D90055F4CA /* updateService.swift in Sources */,
 				CBC6C2D82C89B1980059031E /* AcknowledgmentView.swift in Sources */,
+				CB40A8F82D3F393300050F56 /* NMCore+WishKit.swift in Sources */,
 				CB0D2BA12CC4F7030075FAB7 /* GetMonitorResponse.swift in Sources */,
 				CBAC66DE2D02F27F0055F4CA /* ServerGroupServerListView.swift in Sources */,
 				CBBDDF6D2D02E9590068AD5E /* DeleteServerGroupResponse.swift in Sources */,
@@ -2852,6 +2862,14 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		CB40A8F02D3F31D600050F56 /* XCRemoteSwiftPackageReference "wishkit-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wishkit/wishkit-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.7.0;
+			};
+		};
 		CBDAC3C82C7B2DCE002AA675 /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hyperoslo/Cache.git";
@@ -2910,6 +2928,16 @@
 			package = CB1D68422C847B6E00D81526 /* XCRemoteSwiftPackageReference "XTerminalUI" */;
 			productName = XTerminalUI;
 		};
+		CB40A8F12D3F31D600050F56 /* WishKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB40A8F02D3F31D600050F56 /* XCRemoteSwiftPackageReference "wishkit-ios" */;
+			productName = WishKit;
+		};
+		CB40A8F32D3F38A000050F56 /* WishKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB40A8F02D3F31D600050F56 /* XCRemoteSwiftPackageReference "wishkit-ios" */;
+			productName = WishKit;
+		};
 		CB7B9CFD2C9E965F004383C7 /* NezhaMobileData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NezhaMobileData;
@@ -2925,10 +2953,6 @@
 		CB7B9D092C9E9F14004383C7 /* NezhaMobileData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NezhaMobileData;
-		};
-		CB9E96BA2D389A77001AD713 /* ColorfulX */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ColorfulX;
 		};
 		CBBDDF822D02EA200068AD5E /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
