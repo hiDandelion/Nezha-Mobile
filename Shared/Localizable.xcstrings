@@ -587,6 +587,9 @@
         }
       }
     },
+    "Ascending" : {
+
+    },
     "Background Color" : {
       "localizations" : {
         "ja" : {
@@ -1114,6 +1117,9 @@
         }
       }
     },
+    "Default" : {
+
+    },
     "Delete" : {
       "localizations" : {
         "ja" : {
@@ -1177,6 +1183,9 @@
           }
         }
       }
+    },
+    "Descending" : {
+
     },
     "Device Info" : {
       "localizations" : {
@@ -2030,6 +2039,12 @@
         }
       }
     },
+    "Network Receive" : {
+
+    },
+    "Network Send" : {
+
+    },
     "Network Send/Receive" : {
       "localizations" : {
         "ja" : {
@@ -2296,6 +2311,9 @@
           }
         }
       }
+    },
+    "Order" : {
+
     },
     "OS" : {
       "localizations" : {
@@ -3030,6 +3048,12 @@
           }
         }
       }
+    },
+    "Sort" : {
+
+    },
+    "Sort By" : {
+
     },
     "Start" : {
       "localizations" : {
@@ -3944,7 +3968,6 @@
       }
     },
     "Up Time" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {

@@ -29,7 +29,7 @@ struct NezhaDesktopApp: App {
                 .environment(theme)
         }
         .modelContainer(NezhaMobileData.shared.modelContainer)
-        .defaultSize(width: 1000, height: 500)
+        .defaultSize(width: 1000, height: 600)
         .commands {
             CommandGroup(before: CommandGroupPlacement.help) {
                 Link("User Guide", destination: NMCore.userGuideURL)
