@@ -114,7 +114,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
                         swapUsed: server.state.swap_used ?? 0,
                         diskUsed: server.state.disk_used ?? 0,
                         networkIn: server.state.net_in_transfer ?? 0,
-                        networkOut: server.state.net_out_speed ?? 0,
+                        networkOut: server.state.net_out_transfer ?? 0,
                         networkInSpeed: server.state.net_in_speed ?? 0,
                         networkOutSpeed: server.state.net_out_speed ?? 0,
                         uptime: server.state.uptime ?? 0,
