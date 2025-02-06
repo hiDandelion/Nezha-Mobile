@@ -100,7 +100,7 @@ struct MainTabView: View {
             }
             
             MainTabBar(activeBackground: theme.themeTintColor(scheme: scheme), activeTab: Bindable(state).tab)
-                .opacity(state.path.isEmpty ? 1 : 0)
+                .opacity(state.path.isEmpty && !state.isShowMapView ? 1 : 0)
                 .animation(.easeInOut, value: state.path.count)
         }
     }

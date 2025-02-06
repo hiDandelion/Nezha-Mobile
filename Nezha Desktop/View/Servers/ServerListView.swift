@@ -210,7 +210,7 @@ struct ServerListView: View {
                     }
                 }
             } label: {
-                Text("Order")
+                Text("Sort Order")
             }
         } label: {
             Label("Sort", systemImage: "arrow.up.arrow.down")

@@ -51,9 +51,14 @@ struct ServerDetailStatusView: View {
     private var osCard: some View {
         cardView {
             HStack {
-                Text("OS")
-                    .font(.system(size: 15, weight: .semibold))
+                HStack {
+                    Image(systemName: "opticaldisc")
+                    Text("OS")
+                }
+                .font(.system(size: 15, weight: .semibold))
+                
                 Spacer()
+                
                 Text(server.host.virtualization)
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -85,12 +90,20 @@ struct ServerDetailStatusView: View {
     private var cpuCard: some View {
         cardView {
             HStack {
-                Text("CPU")
-                    .font(.system(size: 15, weight: .semibold))
+                HStack {
+                    Image(systemName: "cpu")
+                    Text("CPU")
+                }
+                .font(.system(size: 15, weight: .semibold))
+                
                 Spacer()
-                Text(server.host.architecture)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                
+                HStack {
+                    Image(systemName: "triangle")
+                    Text(server.host.architecture)
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
             }
             .padding([.horizontal, .top], 10)
             
@@ -125,13 +138,18 @@ struct ServerDetailStatusView: View {
             let swapUsage = Double(server.status.swapUsed) / Double(server.host.swapTotal)
             
             HStack {
-                Text("Memory")
-                    .font(.system(size: 15, weight: .semibold))
+                HStack {
+                    Image(systemName: "memorychip")
+                    Text("Memory")
+                }
+                .font(.system(size: 15, weight: .semibold))
+                
                 Spacer()
+                
                 if server.host.swapTotal != 0 {
-                    HStack(spacing: 5) {
-                        Text("Swap")
-                        Text("\(swapUsage * 100, specifier: "%.0f")%")
+                    HStack {
+                        Image(systemName: "document")
+                        Text("Swap \(swapUsage * 100, specifier: "%.0f")%")
                     }
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -142,8 +160,6 @@ struct ServerDetailStatusView: View {
             Spacer()
             
             HStack {
-                Image(systemName: "memorychip")
-                    .font(.title)
                 Text(formatBytes(server.status.memoryUsed, decimals: 2))
                     .font(.title3)
                     .fontDesign(.rounded)
@@ -173,8 +189,11 @@ struct ServerDetailStatusView: View {
             let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
             
             HStack {
-                Text("Disk")
-                    .font(.system(size: 15, weight: .semibold))
+                HStack {
+                    Image(systemName: "internaldrive")
+                    Text("Disk")
+                }
+                .font(.system(size: 15, weight: .semibold))
                 Spacer()
             }
             .padding([.horizontal, .top], 10)
@@ -182,8 +201,6 @@ struct ServerDetailStatusView: View {
             Spacer()
             
             HStack {
-                Image(systemName: "internaldrive")
-                    .font(.title)
                 Text(formatBytes(server.status.diskUsed, decimals: 2))
                     .font(.title3)
                     .fontDesign(.rounded)
@@ -211,9 +228,14 @@ struct ServerDetailStatusView: View {
     private var networkCard: some View {
         cardView {
             HStack {
-                Text("Network")
-                    .font(.system(size: 15, weight: .semibold))
+                HStack {
+                    Image(systemName: "network")
+                    Text("Network")
+                }
+                .font(.system(size: 15, weight: .semibold))
+                
                 Spacer()
+                
                 if server.countryCode.uppercased() == "TW" {
                     Text("🇹🇼")
                 }
