@@ -14,7 +14,7 @@ struct ServerDetailStatusView: View {
 #endif
     var server: ServerData
     
-    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 320, maximum: 450))]
+    private let columns: [GridItem] = [.init(.flexible()), .init(.flexible())]
     
     var body: some View {
         ScrollView {
@@ -23,6 +23,7 @@ struct ServerDetailStatusView: View {
                 cpuCard
                 memoryCard
                 diskCard
+                networkAddressCard
                 networkCard
             }
             .padding()
@@ -31,272 +32,234 @@ struct ServerDetailStatusView: View {
     
     @ViewBuilder
     private func cardView<Content: View>(@ViewBuilder _ content: @escaping () -> Content) -> some View {
-        VStack(spacing: 10) {
-            content()
-        }
-        .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-            #if os(iOS) || os(macOS)
-                .fill(theme.themeSecondaryColor(scheme: scheme))
-            #endif
-            #if os(visionOS)
-                .fill(.thinMaterial)
-            #endif
-                .shadow(color: .black.opacity(0.08), radius: 5, x: 5, y: 5)
-                .shadow(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)
-        )
+        content()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                #if os(iOS) || os(macOS)
+                    .fill(theme.themeSecondaryColor(scheme: scheme))
+                #endif
+                #if os(visionOS)
+                    .fill(.thinMaterial)
+                #endif
+                    .shadow(color: .black.opacity(0.08), radius: 5, x: 5, y: 5)
+                    .shadow(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)
+            )
+            .frame(maxWidth: .infinity)
+            .frame(height: 180)
     }
     
     private var osCard: some View {
         cardView {
-            HStack {
+            VStack {
                 HStack {
-                    Image(systemName: "opticaldisc")
-                    Text("OS")
+                    HStack {
+                        Image(systemName: "opticaldisc")
+                        Text("OS")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
                 }
-                .font(.system(size: 15, weight: .semibold))
                 
                 Spacer()
                 
-                Text(server.host.virtualization)
+                VStack {
+                    let osName = server.host.platform
+                    let osVersion = server.host.platformVersion
+                    NMUI.getOSLogo(OSName: osName)
+                    Text(osName == "" ? String(localized: "Unknown") : "\(osName.capitalizeFirstLetter()) \(osVersion)")
+                }
+                
+                Spacer()
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Load \(server.status.load1, specifier: "%.2f") \(server.status.load5, specifier: "%.2f") \(server.status.load15, specifier: "%.2f")")
+                        Text("Processes \(server.status.processCount)")
+                    }
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    Spacer()
+                }
             }
-            .padding([.horizontal, .top], 10)
-            
-            Spacer()
-            
-            HStack {
-                let osName = server.host.platform
-                let osVersion = server.host.platformVersion
-                NMUI.getOSLogo(OSName: osName)
-                Text(osName == "" ? String(localized: "Unknown") : "\(osName.capitalizeFirstLetter()) \(osVersion)")
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            HStack {
-                Text("Load \(server.status.load1, specifier: "%.2f") \(server.status.load5, specifier: "%.2f") \(server.status.load15, specifier: "%.2f")")
-                Spacer()
-                Text("\(server.status.processCount) Processes")
-            }
-            .font(.caption)
-            .padding([.horizontal, .bottom], 10)
+            .padding(10)
         }
     }
     
     private var cpuCard: some View {
         cardView {
-            HStack {
+            VStack {
                 HStack {
-                    Image(systemName: "cpu")
-                    Text("CPU")
+                    HStack {
+                        Image(systemName: "cpu")
+                        Text("CPU")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
                 }
-                .font(.system(size: 15, weight: .semibold))
+                
+                Spacer()
+                
+                VStack {
+                    if let cpuName = server.host.cpu.first {
+                        NMUI.getCPULogo(CPUName: cpuName)
+                        Text(cpuName)
+                            .lineLimit(1)
+                    }
+                    else {
+                        Text("Unknown")
+                    }
+                }
                 
                 Spacer()
                 
                 HStack {
-                    Image(systemName: "triangle")
-                    Text(server.host.architecture)
+                    let cpuUsage = server.status.cpuUsed / 100
+                    Gauge(value: cpuUsage) {
+                        
+                    }
+                    .gaugeStyle(.accessoryLinearCapacity)
+                    Text("\(cpuUsage * 100, specifier: "%.0f")%")
                 }
                 .font(.caption)
-                .foregroundStyle(.secondary)
             }
-            .padding([.horizontal, .top], 10)
-            
-            Spacer()
-            
-            HStack {
-                if let cpuName = server.host.cpu.first {
-                    NMUI.getCPULogo(CPUName: cpuName)
-                    Text(cpuName)
-                }
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            HStack {
-                let cpuUsage = server.status.cpuUsed / 100
-                Gauge(value: cpuUsage) {
-                    
-                }
-                .gaugeStyle(.accessoryLinearCapacity)
-                Text("\(cpuUsage * 100, specifier: "%.0f")%")
-            }
-            .font(.caption)
-            .padding([.horizontal, .bottom], 10)
+            .padding(10)
         }
     }
     
     private var memoryCard: some View {
         cardView {
-            let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
-            let swapUsage = Double(server.status.swapUsed) / Double(server.host.swapTotal)
-            
-            HStack {
+            VStack {
+                let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
+                
                 HStack {
-                    Image(systemName: "memorychip")
-                    Text("Memory")
+                    HStack {
+                        Image(systemName: "memorychip")
+                        Text("Memory")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
                 }
-                .font(.system(size: 15, weight: .semibold))
                 
                 Spacer()
                 
-                if server.host.swapTotal != 0 {
-                    HStack {
-                        Image(systemName: "document")
-                        Text("Swap \(swapUsage * 100, specifier: "%.0f")%")
+                HStack {
+                    Gauge(value: memoryUsage) {
+                        Text("\(memoryUsage * 100, specifier: "%.0f")%")
+                    }
+                    .gaugeStyle(.accessoryCircularCapacity)
+                    .tint(.accentColor)
+                }
+                
+                Spacer()
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Used \(formatBytes(server.status.memoryUsed))")
+                        Text("Total \(formatBytes(server.host.memoryTotal))")
                     }
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    Spacer()
                 }
             }
-            .padding([.horizontal, .top], 10)
-            
-            Spacer()
-            
-            HStack {
-                Text(formatBytes(server.status.memoryUsed, decimals: 2))
-                    .font(.title3)
-                    .fontDesign(.rounded)
-                Text("/")
-                Text(formatBytes(server.host.memoryTotal))
-                    .font(.title2)
-                    .fontDesign(.rounded)
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            HStack {
-                Gauge(value: memoryUsage) {
-                    
-                }
-                .gaugeStyle(.accessoryLinearCapacity)
-                Text("\(memoryUsage * 100, specifier: "%.0f")%")
-            }
-            .font(.caption)
-            .padding([.horizontal, .bottom], 10)
+            .padding(10)
         }
     }
     
     private var diskCard: some View {
         cardView {
-            let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
-            
-            HStack {
+            VStack {
+                let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
+                
                 HStack {
-                    Image(systemName: "internaldrive")
-                    Text("Disk")
-                }
-                .font(.system(size: 15, weight: .semibold))
-                Spacer()
-            }
-            .padding([.horizontal, .top], 10)
-            
-            Spacer()
-            
-            HStack {
-                Text(formatBytes(server.status.diskUsed, decimals: 2))
-                    .font(.title3)
-                    .fontDesign(.rounded)
-                Text("/")
-                Text(formatBytes(server.host.diskTotal))
-                    .font(.title2)
-                    .fontDesign(.rounded)
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            HStack {
-                Gauge(value: diskUsage) {
+                    HStack {
+                        Image(systemName: "internaldrive")
+                        Text("Disk")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
                     
+                    Spacer()
                 }
-                .gaugeStyle(.accessoryLinearCapacity)
-                Text("\(diskUsage * 100, specifier: "%.0f")%")
+                
+                Spacer()
+                
+                HStack {
+                    Gauge(value: diskUsage) {
+                        Text("\(diskUsage * 100, specifier: "%.0f")%")
+                    }
+                    .gaugeStyle(.accessoryCircularCapacity)
+                    .tint(.accentColor)
+                }
+                
+                Spacer()
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Used \(formatBytes(server.status.diskUsed))")
+                        Text("Total \(formatBytes(server.host.diskTotal))")
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    Spacer()
+                }
             }
-            .font(.caption)
-            .padding([.horizontal, .bottom], 10)
+            .padding(10)
         }
     }
     
-    private var networkCard: some View {
+    private var networkAddressCard: some View {
         cardView {
-            HStack {
-                HStack {
-                    Image(systemName: "network")
-                    Text("Network")
-                }
-                .font(.system(size: 15, weight: .semibold))
-                
-                Spacer()
-                
-                if server.countryCode.uppercased() == "TW" {
-                    Text("🇹🇼")
-                }
-                else if server.countryCode.uppercased() != "" {
-                    Text(countryFlagEmoji(countryCode: server.countryCode))
-                }
-                else {
-                    Text("🏴‍☠️")
-                }
-            }
-            .padding([.horizontal, .top], 10)
-            
-            Spacer()
-            
             VStack {
-                if server.ipv4 != "" {
+                HStack {
                     HStack {
-                        Image(systemName: "4.circle")
-                        Text(server.ipv4)
+                        Image(systemName: "pin.circle")
+                        Text("IP Address")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                    
+                    if server.countryCode.uppercased() == "TW" {
+                        Text("🇹🇼")
+                    }
+                    else if server.countryCode.uppercased() != "" {
+                        Text(countryFlagEmoji(countryCode: server.countryCode))
+                    }
+                    else {
+                        Text("🏴‍☠️")
                     }
                 }
-                if server.ipv6 != "" {
-                    HStack {
-                        Image(systemName: "6.circle")
-                        Text(server.ipv6)
+                
+                Spacer()
+                
+                VStack {
+                    if server.ipv4 != "" {
+                        HStack {
+                            Image(systemName: "4.circle")
+                            Text(server.ipv4)
+                        }
+                        .lineLimit(1)
+                    }
+                    if server.ipv6 != "" {
+                        HStack {
+                            Image(systemName: "6.circle")
+                            Text(server.ipv6)
+                        }
+                        .lineLimit(1)
                     }
                 }
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            HStack(spacing: 20) {
-                VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.networkOut))")
-                    Text("↓ \(formatBytes(server.status.networkIn))")
-                }
-                VStack(alignment: .leading) {
-                    Text("↑ \(formatBytes(server.status.networkOutSpeed))/s")
-                    Text("↓ \(formatBytes(server.status.networkInSpeed))/s")
-                }
-            }
-            .font(.title3)
-            .fontDesign(.rounded)
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            HStack {
-                HStack(spacing: 5) {
-                    Text("TCP")
-                    Text("\(server.status.tcpConnectionCount)")
-                }
-                HStack(spacing: 5) {
-                    Text("UDP")
-                    Text("\(server.status.udpConnectionCount)")
-                }
+                
                 Spacer()
             }
-            .font(.caption)
-            .padding([.horizontal, .bottom], 10)
+            .padding(10)
         }
         .contextMenu {
             if server.ipv4 != "" {
@@ -325,6 +288,53 @@ struct ServerDetailStatusView: View {
                     Label("Copy IPv6", systemImage: "6.circle")
                 }
             }
+            
+        }
+    }
+    
+    private var networkCard: some View {
+        cardView {
+            VStack {
+                HStack {
+                    HStack {
+                        Image(systemName: "network")
+                        Text("Network")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                }
+                
+                Spacer()
+                
+                VStack(spacing: 10) {
+                    VStack(alignment: .leading) {
+                        Text("↑ \(formatBytes(server.status.networkOut))")
+                        Text("↓ \(formatBytes(server.status.networkIn))")
+                    }
+                    VStack(alignment: .leading) {
+                        Text("↑ \(formatBytes(server.status.networkOutSpeed))/s")
+                        Text("↓ \(formatBytes(server.status.networkInSpeed))/s")
+                    }
+                }
+                
+                Spacer()
+                
+                HStack {
+                    HStack {
+                        Text("TCP \(server.status.tcpConnectionCount)")
+                        Text("UDP \(server.status.udpConnectionCount)")
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            }
+            .padding(10)
         }
     }
 }

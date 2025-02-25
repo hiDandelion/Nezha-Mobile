@@ -318,7 +318,7 @@ struct ServerListView: View {
         }
         
         let server = state.servers.first(where: { $0.id == id })
-        state.tab = .alerts
+        state.tab = .servers
         if let server {
             state.path.append(server)
         }

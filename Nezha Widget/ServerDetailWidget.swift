@@ -80,10 +80,13 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     
     func getServerEntry(serverID: Int64?, isShowIP: Bool?, color: WidgetBackgroundColor) async -> ServerEntry {
         do {
-            guard let serverID else {
-                return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: color)
+            var response: GetServerResponse
+            if let serverID {
+                response = try await RequestHandler.getServer(serverID: serverID)
             }
-            let response = try await RequestHandler.getServer(serverID: serverID)
+            else {
+                response = try await RequestHandler.getServer()
+            }
             guard let server = response.data?.first else {
                 return ServerEntry(date: Date(), server: nil, isShowIP: nil, message: String(localized: "error.invalidServerConfiguration"), color: color)
             }
@@ -147,6 +150,8 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
 
 struct ServerDetailWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
+    @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) var selectedWidgetBackgroundColor: Color = .blue
+    @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) var selectedWidgetTextColor: Color = .white
     var entry: ServerDetailProvider.Entry
     var color: AnyGradient {
         switch(entry.color) {
@@ -201,8 +206,6 @@ struct ServerDetailWidgetEntryView: View {
                         }
                     case .systemSmall:
                         let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
-                        @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) var selectedWidgetBackgroundColor: Color = .blue
-                        @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) var selectedWidgetTextColor: Color = .white
                         if widgetCustomizationEnabled {
                             serverDetailViewSystemSmall(server: server)
                                 .foregroundStyle(selectedWidgetTextColor)
@@ -215,8 +218,6 @@ struct ServerDetailWidgetEntryView: View {
                         }
                     case .systemMedium:
                         let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
-                        @AppStorage("NMWidgetBackgroundColor", store: NMCore.userDefaults) var selectedWidgetBackgroundColor: Color = .blue
-                        @AppStorage("NMWidgetTextColor", store: NMCore.userDefaults) var selectedWidgetTextColor: Color = .white
                         if widgetCustomizationEnabled {
                             serverDetailViewSystemMedium(server: server)
                                 .foregroundStyle(selectedWidgetTextColor)
