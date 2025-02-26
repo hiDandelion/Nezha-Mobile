@@ -13,15 +13,7 @@ struct ServerTitle: View {
     
     var body: some View {
         HStack {
-            if server.countryCode.uppercased() == "TW" {
-                Text("🇹🇼")
-            }
-            else if server.countryCode.uppercased() != "" {
-                Text(countryFlagEmoji(countryCode: server.countryCode))
-            }
-            else {
-                Text("🏴‍☠️")
-            }
+            CountryFlag(countryCode: server.countryCode)
             
             Text(server.name)
             

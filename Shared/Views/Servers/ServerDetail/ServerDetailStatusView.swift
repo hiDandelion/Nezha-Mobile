@@ -23,8 +23,9 @@ struct ServerDetailStatusView: View {
                 cpuCard
                 memoryCard
                 diskCard
-                networkAddressCard
                 networkCard
+                networkDataCard
+                networkAddressCard
             }
             .padding()
         }
@@ -107,7 +108,8 @@ struct ServerDetailStatusView: View {
                     if let cpuName = server.host.cpu.first {
                         NMUI.getCPULogo(CPUName: cpuName)
                         Text(cpuName)
-                            .lineLimit(1)
+                            .font(.caption)
+                            .lineLimit(2)
                     }
                     else {
                         Text("Unknown")
@@ -214,6 +216,73 @@ struct ServerDetailStatusView: View {
         }
     }
     
+    private var networkCard: some View {
+        cardView {
+            VStack {
+                HStack {
+                    HStack {
+                        Image(systemName: "network")
+                        Text("Network Send/Receive")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .leading) {
+                    Text("↑ \(formatBytes(server.status.networkOutSpeed))/s")
+                    Text("↓ \(formatBytes(server.status.networkInSpeed))/s")
+                }
+                
+                Spacer()
+                
+                HStack {
+                    HStack {
+                        Text("TCP \(server.status.tcpConnectionCount)")
+                        Text("UDP \(server.status.udpConnectionCount)")
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            }
+            .padding(10)
+        }
+    }
+    
+    private var networkDataCard: some View {
+        cardView {
+            VStack {
+                HStack {
+                    HStack {
+                        Image(systemName: "arrow.up.left.arrow.down.right")
+                        Text("Network Data")
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .leading) {
+                    Text("↑ \(formatBytes(server.status.networkOut))")
+                    Text("↓ \(formatBytes(server.status.networkIn))")
+                }
+                
+                Spacer()
+            }
+            .padding(10)
+        }
+    }
+    
     private var networkAddressCard: some View {
         cardView {
             VStack {
@@ -227,20 +296,12 @@ struct ServerDetailStatusView: View {
                     
                     Spacer()
                     
-                    if server.countryCode.uppercased() == "TW" {
-                        Text("🇹🇼")
-                    }
-                    else if server.countryCode.uppercased() != "" {
-                        Text(countryFlagEmoji(countryCode: server.countryCode))
-                    }
-                    else {
-                        Text("🏴‍☠️")
-                    }
+                    CountryFlag(countryCode: server.countryCode)
                 }
                 
                 Spacer()
                 
-                VStack {
+                VStack(alignment: .leading) {
                     if server.ipv4 != "" {
                         HStack {
                             Image(systemName: "4.circle")
@@ -252,8 +313,9 @@ struct ServerDetailStatusView: View {
                         HStack {
                             Image(systemName: "6.circle")
                             Text(server.ipv6)
+                                .font(.caption)
                         }
-                        .lineLimit(1)
+                        .lineLimit(2)
                     }
                 }
                 
@@ -289,52 +351,6 @@ struct ServerDetailStatusView: View {
                 }
             }
             
-        }
-    }
-    
-    private var networkCard: some View {
-        cardView {
-            VStack {
-                HStack {
-                    HStack {
-                        Image(systemName: "network")
-                        Text("Network")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
-                    
-                    Spacer()
-                }
-                
-                Spacer()
-                
-                VStack(spacing: 10) {
-                    VStack(alignment: .leading) {
-                        Text("↑ \(formatBytes(server.status.networkOut))")
-                        Text("↓ \(formatBytes(server.status.networkIn))")
-                    }
-                    VStack(alignment: .leading) {
-                        Text("↑ \(formatBytes(server.status.networkOutSpeed))/s")
-                        Text("↓ \(formatBytes(server.status.networkInSpeed))/s")
-                    }
-                }
-                
-                Spacer()
-                
-                HStack {
-                    HStack {
-                        Text("TCP \(server.status.tcpConnectionCount)")
-                        Text("UDP \(server.status.udpConnectionCount)")
-                    }
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    
-                    Spacer()
-                }
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            }
-            .padding(10)
         }
     }
 }

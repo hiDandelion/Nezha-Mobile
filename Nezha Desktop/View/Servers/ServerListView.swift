@@ -124,7 +124,7 @@ struct ServerListView: View {
     
     private var sortButton: some View {
         Menu {
-            Menu {
+            Section("Sort By") {
                 Button {
                     sortIndicator = .index
                 } label: {
@@ -187,11 +187,9 @@ struct ServerListView: View {
                         Image(systemName: "checkmark")
                     }
                 }
-            } label: {
-                Text("Sort By")
             }
             
-            Menu {
+            Section("Sort Order") {
                 Button {
                     sortOrder = .ascending
                 } label: {
@@ -209,8 +207,6 @@ struct ServerListView: View {
                         Image(systemName: "checkmark")
                     }
                 }
-            } label: {
-                Text("Sort Order")
             }
         } label: {
             Label("Sort", systemImage: "arrow.up.arrow.down")

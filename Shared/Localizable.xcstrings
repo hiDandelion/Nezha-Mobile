@@ -2060,6 +2060,7 @@
       }
     },
     "Network" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {

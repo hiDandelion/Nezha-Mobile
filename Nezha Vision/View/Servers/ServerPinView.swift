@@ -34,15 +34,7 @@ struct ServerPinView: View {
     private func title(server: ServerData) -> some View {
         HStack {
             HStack {
-                if server.countryCode.uppercased() == "TW" {
-                    Text("🇹🇼")
-                }
-                else if server.countryCode.uppercased() != "" {
-                    Text(countryFlagEmoji(countryCode: server.countryCode))
-                }
-                else {
-                    Text("🏴‍☠️")
-                }
+                CountryFlag(countryCode: server.countryCode)
             }
             .frame(width: 20)
             

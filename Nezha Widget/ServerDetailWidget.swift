@@ -255,15 +255,7 @@ struct ServerDetailWidgetEntryView: View {
     func serverDetailViewSystemSmall(server: ServerData) -> some View {
         Group {
             HStack {
-                if server.countryCode.uppercased() == "TW" {
-                    Text("🇹🇼")
-                }
-                else if server.countryCode.uppercased() != "" {
-                    Text(countryFlagEmoji(countryCode: server.countryCode))
-                }
-                else {
-                    Text("🏴‍☠️")
-                }
+                CountryFlag(countryCode: server.countryCode)
                 Text(server.name)
                     .lineLimit(1)
                 Spacer()
@@ -318,15 +310,7 @@ struct ServerDetailWidgetEntryView: View {
     func serverDetailViewSystemMedium(server: ServerData) -> some View {
         Group {
             HStack {
-                if server.countryCode.uppercased() == "TW" {
-                    Text("🇹🇼")
-                }
-                else if server.countryCode.uppercased() != "" {
-                    Text(countryFlagEmoji(countryCode: server.countryCode))
-                }
-                else {
-                    Text("🏴‍☠️")
-                }
+                CountryFlag(countryCode: server.countryCode)
                 ViewThatFits {
                     HStack {
                         Text(server.name)
