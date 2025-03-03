@@ -797,6 +797,22 @@
         }
       }
     },
+    "Configure Server Count Widget" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバー統計ウィジェットを設定"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配置服务器统计小组件"
+          }
+        }
+      }
+    },
     "Configure Server Detail Widget" : {
       "localizations" : {
         "ja" : {
@@ -939,6 +955,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "复制脚本"
+          }
+        }
+      }
+    },
+    "Count your servers with minimal effort." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "簡単でサーバーを統計する。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轻而易举地统计你的服务器。"
           }
         }
       }
@@ -1679,6 +1711,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "帮助"
+          }
+        }
+      }
+    },
+    "Hide Offline" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "オフラインを非表示"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐藏离线"
           }
         }
       }
@@ -2960,6 +3008,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "服务器"
+          }
+        }
+      }
+    },
+    "Server Count" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバー統計"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器统计"
           }
         }
       }
@@ -4265,7 +4329,7 @@
         }
       }
     },
-    "View details of your server at a glance." : {
+    "View details of your servers at a glance." : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {

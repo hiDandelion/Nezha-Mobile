@@ -41,7 +41,7 @@ struct ServerPinView: View {
             Text(server.name)
             
             Image(systemName: "circlebadge.fill")
-                .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: state.dashboardLastUpdateTime ?? Date()) || server.status.uptime == 0 ? .red : .green)
+                .foregroundStyle(!isServerOnline(timestamp: server.lastActive, lastUpdateTime: state.dashboardLastUpdateTime ?? Date()) || server.status.uptime == 0 ? .red : .green)
         }
     }
     

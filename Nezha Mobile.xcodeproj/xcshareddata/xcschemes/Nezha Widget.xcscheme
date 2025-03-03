@@ -80,7 +80,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
-            value = "ServerDetailWidget"
+            value = "ServerCountWidget"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable

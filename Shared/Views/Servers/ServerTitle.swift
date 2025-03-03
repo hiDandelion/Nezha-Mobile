@@ -19,7 +19,7 @@ struct ServerTitle: View {
             
             if let lastUpdateTime {
                 Image(systemName: "circlebadge.fill")
-                    .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
+                    .foregroundStyle(!isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
             }
         }
     }

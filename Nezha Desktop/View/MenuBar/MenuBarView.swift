@@ -132,7 +132,7 @@ struct MenuBarView: View {
                     Text(server.name)
                     if let lastUpdateTime = state.dashboardLastUpdateTime {
                         Image(systemName: "circlebadge.fill")
-                            .foregroundStyle(isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
+                            .foregroundStyle(!isServerOnline(timestamp: server.lastActive, lastUpdateTime: lastUpdateTime) || server.status.uptime == 0 ? .red : .green)
                     }
                 }
                 .font(.callout)

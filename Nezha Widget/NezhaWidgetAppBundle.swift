@@ -17,6 +17,7 @@ struct WidgetAppBundle: WidgetBundle {
     
     var body: some Widget {
         ServerDetailWidget()
+        ServerCountWidget()
 #if os(iOS)
         AgentWidget()
 #endif

@@ -154,6 +154,8 @@
 		CB40A8F82D3F393300050F56 /* NMCore+WishKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB40A8F52D3F392C00050F56 /* NMCore+WishKit.swift */; };
 		CB40A8FC2D3F407900050F56 /* WishKit in Frameworks */ = {isa = PBXBuildFile; productRef = CB40A8FB2D3F407900050F56 /* WishKit */; };
 		CB40A8FD2D3F408000050F56 /* NMCore+WishKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB40A8F52D3F392C00050F56 /* NMCore+WishKit.swift */; };
+		CB49E5FF2D713F660002E498 /* ServerCountWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB49E5FE2D713F600002E498 /* ServerCountWidget.swift */; };
+		CB49E6012D713F880002E498 /* ServerCountConfigurationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB49E6002D713F790002E498 /* ServerCountConfigurationIntent.swift */; };
 		CB6864AD2C800E530052727A /* ServerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6864AC2C800E530052727A /* ServerMapView.swift */; };
 		CB695D4F2CC8A514003426F7 /* ServerPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB695D4E2CC8A50E003426F7 /* ServerPinView.swift */; };
 		CB695D552CC8AD0F003426F7 /* ServerDetailStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD2BAF62C68DBCB00BA9A36 /* ServerDetailStatusView.swift */; };
@@ -561,6 +563,8 @@
 		CB3175212CB113CC00186028 /* DeviceInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewModel.swift; sourceTree = "<group>"; };
 		CB4087462D0BBE4F009DFE27 /* AlertDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDetailView.swift; sourceTree = "<group>"; };
 		CB40A8F52D3F392C00050F56 /* NMCore+WishKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NMCore+WishKit.swift"; sourceTree = "<group>"; };
+		CB49E5FE2D713F600002E498 /* ServerCountWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCountWidget.swift; sourceTree = "<group>"; };
+		CB49E6002D713F790002E498 /* ServerCountConfigurationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCountConfigurationIntent.swift; sourceTree = "<group>"; };
 		CB6864AC2C800E530052727A /* ServerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMapView.swift; sourceTree = "<group>"; };
 		CB695D4E2CC8A50E003426F7 /* ServerPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPinView.swift; sourceTree = "<group>"; };
 		CB695D5B2CC8C5A8003426F7 /* ServerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailView.swift; sourceTree = "<group>"; };
@@ -1109,6 +1113,7 @@
 				CB701A242C5CF93500019344 /* NezhaWidgetAppBundle.swift */,
 				CB3174F12CA6B71400186028 /* WidgetBackgroundColor.swift */,
 				CB701A262C5CF93500019344 /* ServerDetailWidget.swift */,
+				CB49E5FE2D713F600002E498 /* ServerCountWidget.swift */,
 				CB3174EA2CA6B52800186028 /* AgentWidget.swift */,
 				CB1172A52CED657B000B780D /* Models */,
 				CB3174EE2CA6B6EA00186028 /* AppIntents */,
@@ -1430,6 +1435,7 @@
 			isa = PBXGroup;
 			children = (
 				CB3174F32CA6B73200186028 /* ServerDetailConfigurationIntent.swift */,
+				CB49E6002D713F790002E498 /* ServerCountConfigurationIntent.swift */,
 				CB3175082CA8051500186028 /* AgentConfigurationContent.swift */,
 			);
 			path = ConfigurationIntents;
@@ -1947,6 +1953,7 @@
 				CBED0F972CFAB95A004DAD8D /* iCloudSync.swift in Sources */,
 				CB1172F52CF7FBFC000B780D /* LoginResponse.swift in Sources */,
 				CB1172DD2CF5A30D000B780D /* ServerData.swift in Sources */,
+				CB49E6012D713F880002E498 /* ServerCountConfigurationIntent.swift in Sources */,
 				CBDC6DCA2D6EAA8B0034080F /* CountryFlag.swift in Sources */,
 				CB3174ED2CA6B6CE00186028 /* ServerQuery.swift in Sources */,
 				CB11729F2CEC403D000B780D /* NezhaDashboardBaseResponse.swift in Sources */,
@@ -1963,6 +1970,7 @@
 				CB3174F62CA6B74C00186028 /* RefreshWidgetIntent.swift in Sources */,
 				CBED0F8A2CFAA87B004DAD8D /* MillisecondTimestamps.swift in Sources */,
 				CB1172762CEC3E22000B780D /* getServer.swift in Sources */,
+				CB49E5FF2D713F660002E498 /* ServerCountWidget.swift in Sources */,
 				CB3174EB2CA6B52D00186028 /* AgentWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2281,7 +2289,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2293,7 +2301,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
@@ -2312,7 +2320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Vision/Nezha Vision.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Vision/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2324,7 +2332,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
@@ -2344,7 +2352,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2357,7 +2365,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
@@ -2380,7 +2388,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Widget/Nezha Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Nezha Widget/Info.plist";
@@ -2393,7 +2401,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
@@ -2417,7 +2425,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2431,7 +2439,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2450,7 +2458,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Watch/Nezha Watch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Watch/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_PREVIEWS = YES;
@@ -2464,7 +2472,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2482,7 +2490,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2496,7 +2504,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.Notification-Service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
@@ -2517,7 +2525,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Notification Service/Notification Service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2531,7 +2539,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile.Notification-Service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
@@ -2673,7 +2681,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2697,7 +2705,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -2716,7 +2724,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Nezha Mobile/Nezha Mobile.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2740,7 +2748,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -2760,7 +2768,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2776,7 +2784,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2793,7 +2801,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Nezha Desktop/Nezha Desktop.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Nezha Desktop/Preview Content\"";
 				DEVELOPMENT_TEAM = C7AS5D38Q8;
@@ -2809,7 +2817,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.15;
+				MARKETING_VERSION = 1.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.argsment.Nezha-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

@@ -167,9 +167,8 @@ struct ServerDetailWidgetEntryView: View {
     }
     
     var body: some View {
-        VStack {
             if let server = entry.server {
-                VStack {
+                Group {
                     switch(family) {
                     case .accessoryCircular:
                         let totalCore = Double(getCore(server.host.cpu) ?? 1)
@@ -249,11 +248,10 @@ struct ServerDetailWidgetEntryView: View {
                 .foregroundStyle(.white)
                 .containerBackground(color, for: .widget)
             }
-        }
     }
     
     func serverDetailViewSystemSmall(server: ServerData) -> some View {
-        Group {
+        VStack {
             HStack {
                 CountryFlag(countryCode: server.countryCode)
                 Text(server.name)
@@ -308,7 +306,7 @@ struct ServerDetailWidgetEntryView: View {
     }
     
     func serverDetailViewSystemMedium(server: ServerData) -> some View {
-        Group {
+        VStack {
             HStack {
                 CountryFlag(countryCode: server.countryCode)
                 ViewThatFits {
@@ -411,7 +409,7 @@ struct ServerDetailWidget: Widget {
             ServerDetailWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Server Details")
-        .description("View details of your server at a glance.")
+        .description("View details of your servers at a glance.")
 #if os(iOS)
         .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular, .systemSmall, .systemMedium])
 #endif
