@@ -64,10 +64,6 @@ class NMCore {
     static func registerKeychain() {
         keychain.accessGroup = "C7AS5D38Q8.com.argsment.Nezha-Mobile"
         keychain.synchronizable = true
-        
-        if keychain.get(NMDashboardPassword) == nil {
-            keychain.set("", forKey: NMDashboardPassword)
-        }
     }
     
     // Save dashboard configuration
