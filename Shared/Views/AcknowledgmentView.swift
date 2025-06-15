@@ -24,6 +24,7 @@ extension NMUI {
                 .foregroundStyle(.secondary)
             }
             .navigationTitle("Acknowledgments")
+            .navigationBarTitleDisplayMode(.inline)
             .padding()
         }
     }

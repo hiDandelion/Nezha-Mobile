@@ -57,7 +57,7 @@ struct ContentView: View {
                 .padding()
             }
             else {
-                MainTabView()
+                HomeView()
             }
         }
     }

@@ -42,13 +42,35 @@ struct ServerDetailView: View {
             .navigationTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    toolbarMenu(server: server)
+                ToolbarItem {
+                    terminalButton(server: server)
+                }
+                ToolbarSpacer(.fixed)
+                ToolbarItem {
+                    refreshButton
                 }
             }
         }
         else {
             ProgressView()
+        }
+    }
+    
+    private func terminalButton(server: ServerData) -> some View {
+        NavigationLink {
+            TerminalView(server: server)
+        } label: {
+            Label("Terminal", systemImage: "apple.terminal")
+        }
+    }
+    
+    private var refreshButton: some View {
+        Button {
+            Task {
+                await state.refreshServerAndServerGroup()
+            }
+        } label: {
+            Label("Refresh", systemImage: "arrow.clockwise")
         }
     }
     
@@ -61,30 +83,6 @@ struct ServerDetailView: View {
                 tabbar
                 tabView(server: server)
             }
-        }
-    }
-    
-    private func toolbarMenu(server: ServerData) -> some View {
-        Menu {
-            Section {
-                Button {
-                    Task {
-                        await state.refreshServerAndServerGroup()
-                    }
-                } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-            }
-            
-            Section {
-                NavigationLink {
-                    TerminalView(server: server)
-                } label: {
-                    Label("Terminal", systemImage: "apple.terminal")
-                }
-            }
-        } label: {
-            Image(systemName: "ellipsis.circle")
         }
     }
     

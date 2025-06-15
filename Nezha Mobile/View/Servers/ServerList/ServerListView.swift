@@ -123,15 +123,23 @@ struct ServerListView: View {
             .searchable(text: $searchText)
             .toolbar {
                 ToolbarItem {
-                    sortButton
+                    mapButton
                 }
-                ToolbarItem {
+                ToolbarSpacer(.fixed)
+                ToolbarItemGroup {
+                    sortButton
                     refreshButton
                 }
             }
             .loadingState(loadingState: state.dashboardLoadingState) {
                 state.loadDashboard()
             }
+        }
+    }
+    
+    private var mapButton: some View {
+        Button("Map View", systemImage: "map") {
+            state.isShowMapView = true
         }
     }
     

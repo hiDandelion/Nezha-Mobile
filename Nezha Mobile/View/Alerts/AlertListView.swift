@@ -99,7 +99,7 @@ struct AlertListView: View {
                 Label("Delete All", systemImage: "trash")
             }
         } label: {
-            Image(systemName: "ellipsis.circle")
+            Image(systemName: "ellipsis")
         }
     }
     

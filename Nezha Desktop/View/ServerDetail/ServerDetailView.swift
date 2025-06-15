@@ -52,15 +52,37 @@ struct ServerDetailView: View {
                         }
                         .pickerStyle(.segmented)
                     }
-                    
+                    ToolbarSpacer(.flexible)
                     ToolbarItem {
-                        toolbarMenu(server: server)
+                        terminalButton(server: server)
+                    }
+                    ToolbarSpacer(.fixed)
+                    ToolbarItem {
+                        refreshButton
                     }
                 }
             }
             else {
                 ProgressView()
             }
+        }
+    }
+    
+    private func terminalButton(server: ServerData) -> some View {
+        NavigationLink {
+            TerminalView(server: server)
+        } label: {
+            Label("Terminal", systemImage: "apple.terminal")
+        }
+    }
+    
+    private var refreshButton: some View {
+        Button {
+            Task {
+                await state.refreshServerAndServerGroup()
+            }
+        } label: {
+            Label("Refresh", systemImage: "arrow.clockwise")
         }
     }
     
@@ -77,30 +99,6 @@ struct ServerDetailView: View {
                 ServerDetailPingChartView(server: server)
                     .tag(ServerDetailTab.monitors)
             }
-        }
-    }
-    
-    private func toolbarMenu(server: ServerData) -> some View {
-        Menu {
-            Section {
-                Button {
-                    Task {
-                        await state.refreshServerAndServerGroup()
-                    }
-                } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-            }
-            
-            Section {
-                NavigationLink {
-                    TerminalView(server: server)
-                } label: {
-                    Label("Terminal", systemImage: "apple.terminal")
-                }
-            }
-        } label: {
-            Image(systemName: "ellipsis.circle")
         }
     }
 }
