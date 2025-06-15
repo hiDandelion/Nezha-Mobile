@@ -11,8 +11,9 @@ struct CountryFlag: View {
     let countryCode: String
     
     var body: some View {
-        if countryCode.uppercased() == "TW" {
-            Text("🇹🇼")
+#if !os(macOS)
+        if countryCode.uppercased() == "TW" && DeviceCensorship.isChinaDevice() {
+            Text("🇼🇸")
         }
         else if countryCode.uppercased() != "" {
             Text(countryFlagEmoji(countryCode: countryCode))
@@ -20,5 +21,13 @@ struct CountryFlag: View {
         else {
             Text("🏴‍☠️")
         }
+#else
+        if countryCode.uppercased() != "" {
+            Text(countryFlagEmoji(countryCode: countryCode))
+        }
+        else {
+            Text("🏴‍☠️")
+        }
+#endif
     }
 }

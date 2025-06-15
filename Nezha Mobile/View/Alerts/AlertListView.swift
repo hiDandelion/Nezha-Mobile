@@ -16,7 +16,7 @@ struct AlertListView: View {
     @State private var isShowingDeleteAllConfirmationDialog: Bool = false
     
     var body: some View {
-        NavigationStack(path: Bindable(state).path) {
+        NavigationStack(path: Bindable(state).pathAlerts) {
             Group {
                 if !serverAlerts.isEmpty {
                     List {

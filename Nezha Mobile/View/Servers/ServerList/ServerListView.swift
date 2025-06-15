@@ -59,7 +59,7 @@ struct ServerListView: View {
     private let columns: [GridItem] = [GridItem(.adaptive(minimum: 320, maximum: 450))]
     
     var body: some View {
-        NavigationStack(path: Bindable(state).path) {
+        NavigationStack(path: Bindable(state).pathServers) {
             ZStack {
                 background
                     .zIndex(0)
@@ -288,7 +288,7 @@ struct ServerListView: View {
                     ForEach(filteredServers) { server in
                         ServerCardView(server: server, lastUpdateTime: state.dashboardLastUpdateTime)
                             .onTapGesture {
-                                state.path.append(server)
+                                state.pathServers.append(server)
                             }
                     }
                 }
@@ -324,7 +324,7 @@ struct ServerListView: View {
         let server = state.servers.first(where: { $0.id == id })
         state.tab = .servers
         if let server {
-            state.path.append(server)
+            state.pathServers.append(server)
         }
     }
 }

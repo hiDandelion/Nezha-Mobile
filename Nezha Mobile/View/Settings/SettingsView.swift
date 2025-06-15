@@ -19,7 +19,7 @@ struct SettingsView: View {
     @State private var isShowingChangeThemeSheet: Bool = false
     
     var body: some View {
-        NavigationStack(path: Bindable(state).path) {
+        NavigationStack(path: Bindable(state).pathSettings) {
             Form {
                 Section {
                     NavigationLink(value: "dashboard-settings") {

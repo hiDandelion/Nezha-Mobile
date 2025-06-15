@@ -12,7 +12,7 @@ struct ToolListView: View {
     @Environment(NMState.self) var state
     
     var body: some View {
-        NavigationStack(path: Bindable(state).path) {
+        NavigationStack(path: Bindable(state).pathTools) {
             List {
                 Section("Dashboard") {
                     NavigationLink(value: "server-group-list") {

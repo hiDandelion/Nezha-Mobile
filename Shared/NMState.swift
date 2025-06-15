@@ -13,7 +13,10 @@ import BackgroundTasks
 
 @Observable
 class NMState {
-    var path: NavigationPath = .init()
+    var pathServers: NavigationPath = .init()
+    var pathTools: NavigationPath = .init()
+    var pathAlerts: NavigationPath = .init()
+    var pathSettings: NavigationPath = .init()
     
 #if os(iOS) || os(visionOS)
     var tab: MainTab = .servers

@@ -18,6 +18,7 @@ struct LoadingStateModifier: ViewModifier {
                 EmptyView()
             case .loading:
                 ProgressView("Loading...")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .loaded:
                 content
             case .error(let message):

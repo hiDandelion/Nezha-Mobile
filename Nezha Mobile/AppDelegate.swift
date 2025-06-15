@@ -39,7 +39,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         DispatchQueue.main.async { [self] in
             state.tab = .alerts
-            state.path.append(ServerAlert(timestamp: Date(), title: title, content: body))
+            state.pathAlerts.append(ServerAlert(timestamp: Date(), title: title, content: body))
         }
     }
     
