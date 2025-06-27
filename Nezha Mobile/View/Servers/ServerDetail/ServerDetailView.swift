@@ -44,10 +44,6 @@ struct ServerDetailView: View {
                 ToolbarItem {
                     terminalButton(server: server)
                 }
-                ToolbarSpacer(.fixed)
-                ToolbarItem {
-                    refreshButton
-                }
             }
         }
         else {
@@ -60,16 +56,6 @@ struct ServerDetailView: View {
             TerminalView(server: server)
         } label: {
             Label("Terminal", systemImage: "apple.terminal")
-        }
-    }
-    
-    private var refreshButton: some View {
-        Button {
-            Task {
-                await state.refreshServerAndServerGroup()
-            }
-        } label: {
-            Label("Refresh", systemImage: "arrow.clockwise")
         }
     }
     

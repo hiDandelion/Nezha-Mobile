@@ -128,7 +128,6 @@ struct ServerListView: View {
                 ToolbarSpacer(.fixed)
                 ToolbarItemGroup {
                     sortButton
-                    refreshButton
                 }
             }
             .loadingState(loadingState: state.dashboardLoadingState) {
@@ -231,16 +230,6 @@ struct ServerListView: View {
             }
         } label: {
             Label("Sort", systemImage: "arrow.up.arrow.down")
-        }
-    }
-    
-    private var refreshButton: some View {
-        Button {
-            Task {
-                await state.refreshServerAndServerGroup()
-            }
-        } label: {
-            Label("Refresh", systemImage: "arrow.clockwise")
         }
     }
     

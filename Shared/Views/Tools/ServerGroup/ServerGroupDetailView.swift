@@ -43,7 +43,7 @@ struct ServerGroupDetailView: View {
                         editMode = .active
                     }
                 } label: {
-                    Text("Edit")
+                    Label("Edit", systemImage: "pencil")
                 }
             }
             if editMode == .active {
@@ -73,8 +73,7 @@ struct ServerGroupDetailView: View {
                             }
                         }
                     } label: {
-                        Text("Done")
-                            .fontWeight(.bold)
+                        Label("Done", systemImage: "checkmark")
                     }
                 }
                 else {

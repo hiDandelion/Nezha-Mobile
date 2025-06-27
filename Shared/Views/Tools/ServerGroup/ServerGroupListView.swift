@@ -43,16 +43,6 @@ struct ServerGroupListView: View {
         .navigationTitle("Server Groups")
         .toolbar {
             ToolbarItem {
-                Button {
-                    Task {
-                        await state.refreshServerGroup()
-                    }
-                } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-            }
-            
-            ToolbarItem {
                 if !isAddingServerGroup {
                     Button {
                         isShowAddServerGroupAlert = true

@@ -54,14 +54,16 @@ struct EditServiceView: View {
 #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button {
                         dismiss()
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
                     }
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
                     if !isProcessing {
-                        Button("Done") {
+                        Button {
                             isProcessing = true
                             if let service {
                                 Task {
@@ -93,6 +95,8 @@ struct EditServiceView: View {
                                     }
                                 }
                             }
+                        } label: {
+                            Label("Done", systemImage: "checkmark")
                         }
                     }
                     else {

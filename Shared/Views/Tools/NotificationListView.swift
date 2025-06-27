@@ -154,17 +154,6 @@ struct NotificationListView: View {
             state.loadNotifications()
         })
         .navigationTitle("Notifications")
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    Task {
-                        await state.refreshNotifications()
-                    }
-                } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-            }
-        }
         .onAppear {
             if state.notificationLoadingState == .idle {
                 state.loadNotifications()

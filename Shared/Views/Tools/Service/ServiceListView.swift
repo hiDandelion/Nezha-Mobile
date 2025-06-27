@@ -42,16 +42,6 @@ struct ServiceListView: View {
         .toolbar {
             ToolbarItem {
                 Button {
-                    Task {
-                        await state.refreshServices()
-                    }
-                } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-            }
-            
-            ToolbarItem {
-                Button {
                     isShowAddServiceSheet = true
                 } label: {
                     Label("Add Monitor", systemImage: "plus")

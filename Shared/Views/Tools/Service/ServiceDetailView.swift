@@ -23,8 +23,10 @@ struct ServiceDetailView: View {
         .navigationTitle(nameCanBeUntitled(service.name))
         .toolbar {
             ToolbarItem {
-                Button("Edit") {
+                Button {
                     isShowEditServiceSheet = true
+                } label: {
+                    Label("Edit", systemImage: "pencil")
                 }
             }
         }

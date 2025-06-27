@@ -39,13 +39,15 @@ struct EditSnippetView: View {
 #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button {
                         dismiss()
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
                     }
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                    Button {
                         if let terminalSnippet {
                             let createDataHandler = createDataHandler
                             Task {
@@ -64,6 +66,8 @@ struct EditSnippetView: View {
                                 }
                             }
                         }
+                    } label: {
+                        Label("Done", systemImage: "checkmark")
                     }
                 }
             }

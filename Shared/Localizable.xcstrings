@@ -2950,6 +2950,9 @@
         }
       }
     },
+    "Section" : {
+
+    },
     "Select Custom Background" : {
       "localizations" : {
         "ja" : {
