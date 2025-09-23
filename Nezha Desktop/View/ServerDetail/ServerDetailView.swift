@@ -52,11 +52,15 @@ struct ServerDetailView: View {
                         }
                         .pickerStyle(.segmented)
                     }
-                    ToolbarSpacer(.flexible)
+                    if #available(macOS 26.0, *) {
+                        ToolbarSpacer(.flexible)
+                    }
                     ToolbarItem {
                         terminalButton(server: server)
                     }
-                    ToolbarSpacer(.fixed)
+                    if #available(macOS 26.0, *) {
+                        ToolbarSpacer(.fixed)
+                    }
                     ToolbarItem {
                         refreshButton
                     }

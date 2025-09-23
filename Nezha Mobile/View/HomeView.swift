@@ -38,36 +38,72 @@ struct HomeView: View {
     @Environment(NMState.self) var state
     
     var body: some View {
-        TabView(selection: Bindable(state).tab) {
-            Tab(value: MainTab.servers) {
-                if state.isShowMapView {
-                    ServerMapView()
+        if #available(iOS 18.0, *) {
+            TabView(selection: Bindable(state).tab) {
+                Tab(value: MainTab.servers) {
+                    if state.isShowMapView {
+                        ServerMapView()
+                    }
+                    else {
+                        ServerListView()
+                    }
+                } label: {
+                    Label(MainTab.servers.title, systemImage: MainTab.servers.systemName)
                 }
-                else {
-                    ServerListView()
+                
+                Tab(value: MainTab.tools) {
+                    ToolListView()
+                } label: {
+                    Label(MainTab.tools.title, systemImage: MainTab.tools.systemName)
                 }
-            } label: {
-                Label(MainTab.servers.title, systemImage: MainTab.servers.systemName)
+                
+                Tab(value: MainTab.alerts) {
+                    AlertListView()
+                } label: {
+                    Label(MainTab.alerts.title, systemImage: MainTab.alerts.systemName)
+                }
+                
+                Tab(value: MainTab.settings) {
+                    SettingsView()
+                } label: {
+                    Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
+                }
             }
-            
-            Tab(value: MainTab.tools) {
+            .tabViewStyle(.sidebarAdaptable)
+        }
+        else {
+            TabView(selection: Bindable(state).tab) {
+                Group {
+                    if state.isShowMapView {
+                        ServerMapView()
+                    }
+                    else {
+                        ServerListView()
+                    }
+                }
+                .tag(MainTab.servers)
+                .tabItem {
+                    Label(MainTab.servers.title, systemImage: MainTab.servers.systemName)
+                }
+                
                 ToolListView()
-            } label: {
-                Label(MainTab.tools.title, systemImage: MainTab.tools.systemName)
-            }
-            
-            Tab(value: MainTab.alerts) {
+                    .tag(MainTab.tools)
+                    .tabItem {
+                        Label(MainTab.tools.title, systemImage: MainTab.tools.systemName)
+                    }
+                
                 AlertListView()
-            } label: {
-                Label(MainTab.alerts.title, systemImage: MainTab.alerts.systemName)
-            }
-            
-            Tab(value: MainTab.settings) {
+                    .tag(MainTab.alerts)
+                    .tabItem {
+                        Label(MainTab.alerts.title, systemImage: MainTab.alerts.systemName)
+                    }
+                
                 SettingsView()
-            } label: {
-                Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
+                    .tag(MainTab.settings)
+                    .tabItem {
+                        Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
+                    }
             }
         }
-        .tabViewStyle(.sidebarAdaptable)
     }
 }

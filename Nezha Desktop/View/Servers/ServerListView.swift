@@ -112,7 +112,9 @@ struct ServerListView: View {
                 ToolbarItem {
                     mapButton
                 }
-                ToolbarSpacer(.fixed)
+                if #available(macOS 26.0, *) {
+                    ToolbarSpacer(.fixed)
+                }
                 ToolbarItemGroup {
                     sortButton
                     refreshButton

@@ -125,7 +125,9 @@ struct ServerListView: View {
                 ToolbarItem {
                     mapButton
                 }
-                ToolbarSpacer(.fixed)
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.fixed)
+                }
                 ToolbarItemGroup {
                     sortButton
                 }
