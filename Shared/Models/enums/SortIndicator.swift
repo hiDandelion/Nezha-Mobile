@@ -5,7 +5,7 @@
 //  Created by Junhui Lou on 1/24/25.
 //
 
-enum SortIndicator {
+enum SortIndicator: CaseIterable {
     case index
     case uptime
     case cpu

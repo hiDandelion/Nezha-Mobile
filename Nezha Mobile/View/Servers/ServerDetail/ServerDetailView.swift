@@ -40,22 +40,14 @@ struct ServerDetailView: View {
             }
             .navigationTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem {
-                    terminalButton(server: server)
-                }
-            }
+//            .toolbar {
+//                ToolbarItem {
+//                    terminalButton(server: server)
+//                }
+//            }
         }
         else {
             ProgressView()
-        }
-    }
-    
-    private func terminalButton(server: ServerData) -> some View {
-        NavigationLink {
-            TerminalView(server: server)
-        } label: {
-            Label("Terminal", systemImage: "apple.terminal")
         }
     }
     

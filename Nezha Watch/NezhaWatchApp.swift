@@ -14,6 +14,7 @@ struct NezhaWatchApp: App {
     init() {
         NMCore.registerUserDefaults()
         NMCore.registerKeychain()
+        NMCore.configureTelemetryDeck()
     }
     
     var body: some Scene {

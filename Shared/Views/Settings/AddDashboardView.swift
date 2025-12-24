@@ -54,19 +54,37 @@ struct AddDashboardView: View {
             .navigationTitle("Add Dashboard")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
+                    if #available(iOS 26, macOS 26, visionOS 26, *) {
+                        Button("Cancel", systemImage: "xmark", role: .cancel) {
+                            dismiss()
+                        }
+                    }
+                    else {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
-                        state.loadDashboard()
-                        isShowingOnboarding = false
-                        dismiss()
+                    if #available(iOS 26, macOS 26, visionOS 26, *) {
+                        Button("Done", systemImage: "checkmark", role: .confirm) {
+                            NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
+                            state.loadDashboard()
+                            isShowingOnboarding = false
+                            dismiss()
+                        }
+                        .disabled(link == "" || username == "" || password == "")
                     }
-                    .disabled(link == "" || username == "" || password == "")
+                    else {
+                        Button("Done") {
+                            NMCore.saveNewDashboardConfigurations(dashboardLink: link, dashboardUsername: username, dashboardPassword: password, dashboardSSLEnabled: isSSLEnabled)
+                            state.loadDashboard()
+                            isShowingOnboarding = false
+                            dismiss()
+                        }
+                        .disabled(link == "" || username == "" || password == "")
+                    }
                 }
             }
         }

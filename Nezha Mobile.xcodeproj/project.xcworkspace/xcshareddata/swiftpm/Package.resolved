@@ -1,5 +1,5 @@
 {
-  "originHash" : "711705876fb28d8f2f4891ba9a824ae8f92ef48eb8c621c8c9c1086ad5b2fa03",
+  "originHash" : "4ee2d8d657a4bdc5fdcaf31600ebd10e8b58281bc34f9ea70d7fc85057b1998d",
   "pins" : [
     {
       "identity" : "cache",
@@ -20,39 +20,21 @@
       }
     },
     {
+      "identity" : "swiftsdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/TelemetryDeck/SwiftSDK",
+      "state" : {
+        "revision" : "8f332c1c256ba26cc46f74c9e5af94f7b1c37a9c",
+        "version" : "2.11.0"
+      }
+    },
+    {
       "identity" : "swiftyjson",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
       "state" : {
         "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
         "version" : "5.0.2"
-      }
-    },
-    {
-      "identity" : "wishkit-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/wishkit/wishkit-ios.git",
-      "state" : {
-        "revision" : "951b17b6b683c72d36627de77e8e26afcfbde6ae",
-        "version" : "4.7.0"
-      }
-    },
-    {
-      "identity" : "wishkit-ios-shared",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/wishkit/wishkit-ios-shared.git",
-      "state" : {
-        "revision" : "cd184932bcdbdc8766137ef8ecac63c424be93a7",
-        "version" : "1.5.0"
-      }
-    },
-    {
-      "identity" : "xterminalui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Lakr233/XTerminalUI.git",
-      "state" : {
-        "revision" : "a892f800d242f8165e5bb0a5dbcd1d24c17a68e2",
-        "version" : "1.7.0"
       }
     }
   ],

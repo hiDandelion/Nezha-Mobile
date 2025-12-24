@@ -39,35 +39,28 @@ struct EditSnippetView: View {
 #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Label("Cancel", systemImage: "xmark")
+                    if #available(iOS 26, macOS 26, visionOS 26, *) {
+                        Button("Cancel", systemImage: "xmark", role: .cancel) {
+                            dismiss()
+                        }
+                    }
+                    else {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button {
-                        if let terminalSnippet {
-                            let createDataHandler = createDataHandler
-                            Task {
-                                if let dataHandler = await createDataHandler() {
-                                    _ = try await dataHandler.updateTerminalSnippet(id: terminalSnippet.persistentModelID, title: name, content: content)
-                                    dismiss()
-                                }
-                            }
+                    if #available(iOS 26, macOS 26, visionOS 26, *) {
+                        Button("Done", systemImage: "checkmark", role: .confirm) {
+                            execute()
                         }
-                        else {
-                            let createDataHandler = createDataHandler
-                            Task {
-                                if let dataHandler = await createDataHandler() {
-                                    _ = try await dataHandler.newTerminalSnippet(timestamp: Date(), title: name, content: content)
-                                    dismiss()
-                                }
-                            }
+                    }
+                    else {
+                        Button("Done") {
+                            execute()
                         }
-                    } label: {
-                        Label("Done", systemImage: "checkmark")
                     }
                 }
             }
@@ -75,6 +68,27 @@ struct EditSnippetView: View {
                 if let terminalSnippet {
                     name = terminalSnippet.title ?? ""
                     content = terminalSnippet.content ?? ""
+                }
+            }
+        }
+    }
+    
+    private func execute() {
+        if let terminalSnippet {
+            let createDataHandler = createDataHandler
+            Task {
+                if let dataHandler = await createDataHandler() {
+                    _ = try await dataHandler.updateTerminalSnippet(id: terminalSnippet.persistentModelID, title: name, content: content)
+                    dismiss()
+                }
+            }
+        }
+        else {
+            let createDataHandler = createDataHandler
+            Task {
+                if let dataHandler = await createDataHandler() {
+                    _ = try await dataHandler.newTerminalSnippet(timestamp: Date(), title: name, content: content)
+                    dismiss()
                 }
             }
         }

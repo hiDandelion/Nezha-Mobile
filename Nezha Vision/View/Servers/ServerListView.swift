@@ -12,7 +12,7 @@ struct ServerListView: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(NMState.self) private var state
     @State private var sortIndicator: SortIndicator = .index
-    @State private var sortOrder: SortOrder = .ascending
+    @State private var sortOrder: SortOrder = .descending
     @State private var searchText: String = ""
     @State private var selectedServerGroup: ServerGroup?
     @Namespace private var tagNamespace
@@ -95,93 +95,34 @@ struct ServerListView: View {
     }
     
     private var sortButton: some View {
-        Menu {
-            Section("Sort By") {
-                Button {
-                    sortIndicator = .index
-                } label: {
-                    Text(SortIndicator.index.title)
-                    if sortIndicator == .index {
-                        Image(systemName: "checkmark")
+        Menu("More", systemImage: "ellipsis") {
+            Picker("Sort", selection: Binding(get: {
+                sortIndicator
+            }, set: { newValue in
+                if sortIndicator == newValue {
+                    switch(sortOrder) {
+                    case .ascending:
+                        sortOrder = .descending
+                    case .descending:
+                        sortOrder = .ascending
                     }
                 }
-                
-                Button {
-                    sortIndicator = .uptime
-                } label: {
-                    Text(SortIndicator.uptime.title)
-                    if sortIndicator == .uptime {
-                        Image(systemName: "checkmark")
-                    }
+                else {
+                    sortIndicator = newValue
                 }
-                
-                Button {
-                    sortIndicator = .cpu
-                } label: {
-                    Text(SortIndicator.cpu.title)
-                    if sortIndicator == .cpu {
-                        Image(systemName: "checkmark")
+            })) {
+                ForEach(SortIndicator.allCases, id: \.self) { sortIndicator in
+                    Button {
+                        
+                    } label: {
+                        Text(sortIndicator.title)
+                        if self.sortIndicator == sortIndicator && sortIndicator != .index {
+                            Text(sortOrder.title)
+                        }
                     }
-                }
-                
-                Button {
-                    sortIndicator = .memory
-                } label: {
-                    Text(SortIndicator.memory.title)
-                    if sortIndicator == .memory {
-                        Image(systemName: "checkmark")
-                    }
-                }
-                
-                Button {
-                    sortIndicator = .disk
-                } label: {
-                    Text(SortIndicator.disk.title)
-                    if sortIndicator == .disk {
-                        Image(systemName: "checkmark")
-                    }
-                }
-                
-                Button {
-                    sortIndicator = .send
-                } label: {
-                    Text(SortIndicator.send.title)
-                    if sortIndicator == .send {
-                        Image(systemName: "checkmark")
-                    }
-                }
-                
-                Button {
-                    sortIndicator = .receive
-                } label: {
-                    Text(SortIndicator.receive.title)
-                    if sortIndicator == .receive {
-                        Image(systemName: "checkmark")
-                    }
+                    .tag(sortIndicator)
                 }
             }
-            
-            Section("Sort Order") {
-                Button {
-                    sortOrder = .ascending
-                } label: {
-                    Text("Ascending")
-                    if sortOrder == .ascending {
-                        Image(systemName: "checkmark")
-                    }
-                }
-                
-                Button {
-                    sortOrder = .descending
-                } label: {
-                    Text("Descending")
-                    if sortOrder == .descending {
-                        Image(systemName: "checkmark")
-                    }
-                }
-            }
-        } label: {
-            Label("Sort", systemImage: "arrow.up.arrow.down")
         }
     }
     

@@ -84,11 +84,11 @@ struct ServerDetailView: View {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
                 
-                NavigationLink {
-                    TerminalView(server: server)
-                } label: {
-                    Label("Terminal", systemImage: "apple.terminal")
-                }
+//                NavigationLink {
+//                    TerminalView(server: server)
+//                } label: {
+//                    Label("Terminal", systemImage: "apple.terminal")
+//                }
             }
             
             Section {

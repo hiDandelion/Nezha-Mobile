@@ -52,12 +52,12 @@ struct ServerDetailView: View {
                         }
                         .pickerStyle(.segmented)
                     }
-                    if #available(macOS 26.0, *) {
-                        ToolbarSpacer(.flexible)
-                    }
-                    ToolbarItem {
-                        terminalButton(server: server)
-                    }
+//                    if #available(macOS 26.0, *) {
+//                        ToolbarSpacer(.flexible)
+//                    }
+//                    ToolbarItem {
+//                        terminalButton(server: server)
+//                    }
                     if #available(macOS 26.0, *) {
                         ToolbarSpacer(.fixed)
                     }
@@ -69,14 +69,6 @@ struct ServerDetailView: View {
             else {
                 ProgressView()
             }
-        }
-    }
-    
-    private func terminalButton(server: ServerData) -> some View {
-        NavigationLink {
-            TerminalView(server: server)
-        } label: {
-            Label("Terminal", systemImage: "apple.terminal")
         }
     }
     

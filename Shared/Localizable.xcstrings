@@ -4,9 +4,6 @@
     "" : {
 
     },
-    "·" : {
-
-    },
     "/" : {
 
     },
@@ -228,20 +225,7 @@
       }
     },
     "🇹🇼" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🇹🇼"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🇼🇸"
-          }
-        }
-      }
+
     },
     "🇼🇸" : {
 
@@ -409,23 +393,6 @@
         }
       }
     },
-    "Advanced Customization" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "高度なカスタマイズ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "高级自定义"
-          }
-        }
-      }
-    },
     "Agent" : {
       "localizations" : {
         "ja" : {
@@ -570,23 +537,6 @@
         }
       }
     },
-    "Architecture" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アーキテクチャ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "架构"
-          }
-        }
-      }
-    },
     "Ascending" : {
       "localizations" : {
         "ja" : {
@@ -651,40 +601,6 @@
         }
       }
     },
-    "Background Color Set Dark" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "背景色セットダークモード"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "背景颜色集 深色模式"
-          }
-        }
-      }
-    },
-    "Background Color Set Light" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "背景色セットライトモード"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "背景颜色集 浅色模式"
-          }
-        }
-      }
-    },
     "Background Customization" : {
       "localizations" : {
         "ja" : {
@@ -701,23 +617,6 @@
         }
       }
     },
-    "Basic" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "基本"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "基本"
-          }
-        }
-      }
-    },
     "Cancel" : {
       "localizations" : {
         "ja" : {
@@ -730,40 +629,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
-          }
-        }
-      }
-    },
-    "Choose Style" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スタイルを選択"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择样式"
-          }
-        }
-      }
-    },
-    "City" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "都市"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "城市"
           }
         }
       }
@@ -864,40 +729,6 @@
         }
       }
     },
-    "Continent" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "大陸"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "大陆"
-          }
-        }
-      }
-    },
-    "Copy" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コピー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "复制"
-          }
-        }
-      }
-    },
     "Copy IPv4" : {
       "localizations" : {
         "ja" : {
@@ -978,23 +809,6 @@
         }
       }
     },
-    "Country" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "国"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "国家/地区"
-          }
-        }
-      }
-    },
     "CPU" : {
       "localizations" : {
         "ja" : {
@@ -1045,23 +859,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "凭证"
-          }
-        }
-      }
-    },
-    "Customize your interface" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "インターフェースをカスタマイズ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "定制化你的界面"
           }
         }
       }
@@ -1274,23 +1071,6 @@
         }
       }
     },
-    "Disabled" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無効"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未启用"
-          }
-        }
-      }
-    },
     "Disk" : {
       "localizations" : {
         "ja" : {
@@ -1415,23 +1195,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用SSL"
-          }
-        }
-      }
-    },
-    "Enable Theme Customization" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "テーマのカスタマイズ有効"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启用主题自定义"
           }
         }
       }
@@ -1654,6 +1417,7 @@
       }
     },
     "Feature Suggestions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -1701,23 +1465,6 @@
         }
       }
     },
-    "Help" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ヘルプ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "帮助"
-          }
-        }
-      }
-    },
     "Hide Offline" : {
       "localizations" : {
         "ja" : {
@@ -1734,45 +1481,11 @@
         }
       }
     },
-    "Host" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ホスト"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "主机"
-          }
-        }
-      }
-    },
     "HTTP GET" : {
       "shouldTranslate" : false
     },
     "ICMP Ping" : {
       "shouldTranslate" : false
-    },
-    "ID" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ID"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ID"
-          }
-        }
-      }
     },
     "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, iOS logo and macOS logo are trademarks of Apple Inc." : {
       "shouldTranslate" : false
@@ -1809,57 +1522,6 @@
         }
       }
     },
-    "IPv4" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IPv4"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IPv4"
-          }
-        }
-      }
-    },
-    "IPv6" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IPv6"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IPv6"
-          }
-        }
-      }
-    },
-    "Last Active" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最終アクティブ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最后活跃"
-          }
-        }
-      }
-    },
     "Leaf" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1889,23 +1551,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "负载"
-          }
-        }
-      }
-    },
-    "Load %.2f" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ロード %.2f"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "负载 %.2f"
           }
         }
       }
@@ -2077,19 +1722,18 @@
         }
       }
     },
-    "N/A" : {
-      "extractionState" : "stale",
+    "More" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "該当なし"
+            "value" : "その他"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不可用"
+            "value" : "更多"
           }
         }
       }
@@ -2106,23 +1750,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "名称"
-          }
-        }
-      }
-    },
-    "Network" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ネットワーク"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "网络"
           }
         }
       }
@@ -2421,23 +2048,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "好"
-          }
-        }
-      }
-    },
-    "Operating System" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OS"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "操作系统"
           }
         }
       }
@@ -2757,23 +2367,6 @@
         }
       }
     },
-    "Registered Country" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "登録国"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "注册国家/地区"
-          }
-        }
-      }
-    },
     "Rename" : {
       "localizations" : {
         "ja" : {
@@ -2951,7 +2544,20 @@
       }
     },
     "Section" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择"
+          }
+        }
+      }
     },
     "Select Custom Background" : {
       "localizations" : {
@@ -2965,23 +2571,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择自定义背景"
-          }
-        }
-      }
-    },
-    "Select Theme" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "テーマを選択"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择主题"
           }
         }
       }
@@ -3130,23 +2719,6 @@
         }
       }
     },
-    "Servers(%lld)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サーバー(%lld)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "服务器(%lld)"
-          }
-        }
-      }
-    },
     "Settings" : {
       "localizations" : {
         "ja" : {
@@ -3228,6 +2800,7 @@
       }
     },
     "Sort By" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3244,6 +2817,7 @@
       }
     },
     "Sort Order" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -3339,40 +2913,6 @@
         }
       }
     },
-    "Swap" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スワップ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "交换"
-          }
-        }
-      }
-    },
-    "Swap %.0f%%" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "スワップ %.0f%%"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "交换 Swap %.0f%%"
-          }
-        }
-      }
-    },
     "System Version" : {
       "localizations" : {
         "ja" : {
@@ -3417,23 +2957,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "目标"
-          }
-        }
-      }
-    },
-    "TCP" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TCP"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TCP"
           }
         }
       }
@@ -3562,40 +3085,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "主题设置"
-          }
-        }
-      }
-    },
-    "These settings will overwrite theme configurations and custom theme configurations." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "これらの設定は、テーマ設定とテーマのカスタム設定を上書きします。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "这些设置会覆盖主题配置和自定义主题配置。"
-          }
-        }
-      }
-    },
-    "These settings will overwrite theme configurations." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "これらの設定は、テーマ設定を上書きします。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "这些设置会覆盖主题配置。"
           }
         }
       }
@@ -3882,9 +3371,6 @@
     "This project has dependency hyperoslo/Cache which is subject to\nMIT License" : {
       "shouldTranslate" : false
     },
-    "This project has dependency Lakr233/XTerminalUI which is subject to\nMIT License" : {
-      "shouldTranslate" : false
-    },
     "This project has dependency SwiftyJSON/SwiftyJSON which is subject to\nMIT License" : {
       "shouldTranslate" : false
     },
@@ -3903,23 +3389,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "时间"
-          }
-        }
-      }
-    },
-    "Time Zone" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "時間帯"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "时区"
           }
         }
       }
@@ -4142,23 +3611,6 @@
         }
       }
     },
-    "UDP" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "UDP"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "UDP"
-          }
-        }
-      }
-    },
     "UDP %lld" : {
       "localizations" : {
         "ja" : {
@@ -4363,23 +3815,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "查看设备信息"
-          }
-        }
-      }
-    },
-    "Virtualization" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "仮想化"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "虚拟化"
           }
         }
       }

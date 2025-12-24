@@ -73,8 +73,15 @@ struct SnippetListView: View {
             
             if executeAction != nil {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        dismiss()
+                    if #available(iOS 26, macOS 26, visionOS 26, *) {
+                        Button("Done", systemImage: "checkmark", role: .confirm) {
+                            dismiss()
+                        }
+                    }
+                    else {
+                        Button("Done") {
+                            dismiss()
+                        }
                     }
                 }
             }

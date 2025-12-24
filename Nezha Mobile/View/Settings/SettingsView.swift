@@ -8,7 +8,6 @@
 import SwiftUI
 import UserNotifications
 import StoreKit
-import WishKit
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
@@ -38,9 +37,6 @@ struct SettingsView: View {
                     Button("Rate Us") {
                         requestReview()
                     }
-                    NavigationLink(value: "feature-suggestions") {
-                        Text("Feature Suggestions")
-                    }
                     NavigationLink(value: "acknowledgments") {
                         Text("Acknowledgments")
                     }
@@ -53,8 +49,6 @@ struct SettingsView: View {
                     DashboardSettingsView()
                 case "theme-settings":
                     ThemeSettingsView()
-                case "feature-suggestions":
-                    WishKit.FeedbackListView()
                 case "acknowledgments":
                     NMUI.AcknowledgmentView()
                 default:
@@ -64,8 +58,15 @@ struct SettingsView: View {
             .toolbar {
                 if isPresentedAsSheet {
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") {
-                            dismiss()
+                        if #available(iOS 26, *) {
+                            Button("Done", systemImage: "checkmark", role: .confirm) {
+                                dismiss()
+                            }
+                        }
+                        else {
+                            Button("Done") {
+                                dismiss()
+                            }
                         }
                     }
                 }

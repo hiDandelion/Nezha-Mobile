@@ -36,23 +36,46 @@ struct MainTabView: View {
     @Environment(NMState.self) var state
     
     var body: some View {
-        TabView(selection: Bindable(state).tab) {
-            Tab(value: MainTab.servers) {
+        if #available(visionOS 2.0, *) {
+            TabView(selection: Bindable(state).tab) {
+                Tab(value: MainTab.servers) {
+                    ServerListView()
+                } label: {
+                    Label(MainTab.servers.title, systemImage: MainTab.servers.systemName)
+                }
+                
+                Tab(value: MainTab.tools) {
+                    ToolListView()
+                } label: {
+                    Label(MainTab.tools.title, systemImage: MainTab.tools.systemName)
+                }
+                
+                Tab(value: MainTab.settings) {
+                    SettingsView()
+                } label: {
+                    Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
+                }
+            }
+        }
+        else {
+            TabView(selection: Bindable(state).tab) {
                 ServerListView()
-            } label: {
-                Label(MainTab.servers.title, systemImage: MainTab.servers.systemName)
-            }
-
-            Tab(value: MainTab.tools) {
+                    .tag(MainTab.servers)
+                    .tabItem {
+                        Label(MainTab.servers.title, systemImage: MainTab.servers.systemName)
+                    }
+                
                 ToolListView()
-            } label: {
-                Label(MainTab.tools.title, systemImage: MainTab.tools.systemName)
-            }
-            
-            Tab(value: MainTab.settings) {
+                    .tag(MainTab.tools)
+                    .tabItem {
+                        Label(MainTab.tools.title, systemImage: MainTab.tools.systemName)
+                    }
+                
                 SettingsView()
-            } label: {
-                Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
+                    .tag(MainTab.settings)
+                    .tabItem {
+                        Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
+                    }
             }
         }
     }

@@ -48,37 +48,46 @@ struct ServerGroupDetailView: View {
             }
             if editMode == .active {
                 if !isUpdatingServerGroup {
-                    Button {
-                        let selectedServerIDArray = Array(selectedServerIDs)
-                        guard selectedServerIDArray != serverGroup.serverIDs else {
-                            withAnimation {
-                                editMode = .inactive
-                            }
-                            return
+                    if #available(iOS 26, macOS 26, visionOS 26, *) {
+                        Button("Done", systemImage: "checkmark", role: .confirm) {
+                            execute(serverGroup: serverGroup)
                         }
-                        isUpdatingServerGroup = true
-                        Task {
-                            do {
-                                let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: selectedServerIDArray)
-                                await state.refreshServerGroup()
-                                isUpdatingServerGroup = false
-                                withAnimation {
-                                    editMode = .inactive
-                                }
-                            } catch {
-                                isUpdatingServerGroup = false
-#if DEBUG
-                                let _ = NMCore.debugLog(error)
-#endif
-                            }
+                    }
+                    else {
+                        Button("Done") {
+                            execute(serverGroup: serverGroup)
                         }
-                    } label: {
-                        Label("Done", systemImage: "checkmark")
                     }
                 }
                 else {
                     ProgressView()
                 }
+            }
+        }
+    }
+    
+    private func execute(serverGroup: ServerGroup) {
+        let selectedServerIDArray = Array(selectedServerIDs)
+        guard selectedServerIDArray != serverGroup.serverIDs else {
+            withAnimation {
+                editMode = .inactive
+            }
+            return
+        }
+        isUpdatingServerGroup = true
+        Task {
+            do {
+                let _ = try await RequestHandler.updateServerGroup(serverGroup: serverGroup, serverIDs: selectedServerIDArray)
+                await state.refreshServerGroup()
+                isUpdatingServerGroup = false
+                withAnimation {
+                    editMode = .inactive
+                }
+            } catch {
+                isUpdatingServerGroup = false
+#if DEBUG
+                let _ = NMCore.debugLog(error)
+#endif
             }
         }
     }

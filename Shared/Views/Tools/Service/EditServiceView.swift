@@ -54,49 +54,29 @@ struct EditServiceView: View {
 #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Label("Cancel", systemImage: "xmark")
+                    if #available(iOS 26, macOS 26, visionOS 26, *) {
+                        Button("Cancel", systemImage: "xmark", role: .cancel) {
+                            dismiss()
+                        }
+                    }
+                    else {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
                     if !isProcessing {
-                        Button {
-                            isProcessing = true
-                            if let service {
-                                Task {
-                                    do {
-                                        let _ = try await RequestHandler.updateService(service: service, name: name, type: type, target: target, interval: Int64(interval))
-                                        await state.refreshServices()
-                                        isProcessing = false
-                                        dismiss()
-                                    } catch {
-#if DEBUG
-                                        let _ = NMCore.debugLog(error)
-#endif
-                                        isProcessing = false
-                                    }
-                                }
+                        if #available(iOS 26, macOS 26, visionOS 26, *) {
+                            Button("Done", systemImage: "checkmark", role: .confirm) {
+                                execute()
                             }
-                            else {
-                                Task {
-                                    do {
-                                        let _ = try await RequestHandler.addService(name: name, type: type, target: target, interval: interval)
-                                        await state.refreshServices()
-                                        isProcessing = false
-                                        dismiss()
-                                    } catch {
-#if DEBUG
-                                        let _ = NMCore.debugLog(error)
-#endif
-                                        isProcessing = false
-                                    }
-                                }
+                        }
+                        else {
+                            Button("Done") {
+                                execute()
                             }
-                        } label: {
-                            Label("Done", systemImage: "checkmark")
                         }
                     }
                     else {
@@ -110,6 +90,40 @@ struct EditServiceView: View {
                     type = service.type
                     target = service.target
                     interval = service.interval
+                }
+            }
+        }
+    }
+    
+    private func execute() {
+        isProcessing = true
+        if let service {
+            Task {
+                do {
+                    let _ = try await RequestHandler.updateService(service: service, name: name, type: type, target: target, interval: Int64(interval))
+                    await state.refreshServices()
+                    isProcessing = false
+                    dismiss()
+                } catch {
+#if DEBUG
+                    let _ = NMCore.debugLog(error)
+#endif
+                    isProcessing = false
+                }
+            }
+        }
+        else {
+            Task {
+                do {
+                    let _ = try await RequestHandler.addService(name: name, type: type, target: target, interval: interval)
+                    await state.refreshServices()
+                    isProcessing = false
+                    dismiss()
+                } catch {
+#if DEBUG
+                    let _ = NMCore.debugLog(error)
+#endif
+                    isProcessing = false
                 }
             }
         }

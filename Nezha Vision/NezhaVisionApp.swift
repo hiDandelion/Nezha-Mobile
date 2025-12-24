@@ -15,7 +15,7 @@ struct NezhaVisionApp: App {
     init() {
         NMCore.registerUserDefaults()
         NMCore.registerKeychain()
-        NMCore.configureWishKit()
+        NMCore.configureTelemetryDeck()
     }
     
     var body: some Scene {

@@ -43,8 +43,10 @@ struct SnippetDetailView: View {
         .navigationTitle(nameCanBeUntitled(terminalSnippet.title))
         .toolbar {
             ToolbarItem {
-                Button("Edit") {
+                Button {
                     isShowEditSnippetSheet = true
+                } label: {
+                    Label("Edit", systemImage: "pencil")
                 }
             }
         }

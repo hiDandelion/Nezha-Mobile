@@ -17,7 +17,6 @@ extension NMUI {
                     Text("This project has dependency hyperoslo/Cache which is subject to\nMIT License")
                     Text("This project has dependency evgenyneu/keychain-swift which is subject to\nMIT License")
                     Text("This project has dependency SwiftyJSON/SwiftyJSON which is subject to\nMIT License")
-                    Text("This project has dependency Lakr233/XTerminalUI which is subject to\nMIT License")
                     Text("Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, iOS logo and macOS logo are trademarks of Apple Inc.")
                 }
                 .font(.caption2)
