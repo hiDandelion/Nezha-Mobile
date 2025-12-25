@@ -22,6 +22,12 @@ struct ServerMapView: View {
     @Environment(NMState.self) private var state
     @State private var serverCoordinates: [ServerCoordinate] = []
     @State private var selectedCoordinate: ServerCoordinate?
+    let storage = try? Storage<String, GetIPCityDataResponse.IPCityData>(
+        diskConfig: DiskConfig(name: "NMIPCityData"),
+        memoryConfig: MemoryConfig(expiry: .never),
+        fileManager: FileManager(),
+        transformer: TransformerFactory.forCodable(ofType: GetIPCityDataResponse.IPCityData.self)
+    )
     
     var body: some View {
         VStack {
@@ -85,36 +91,35 @@ struct ServerMapView: View {
         }
         .onAppear {
             Task {
-                let storage = try? Storage<String, GetIPCityDataResponse.IPCityData>(
-                    diskConfig: DiskConfig(name: "NMIPCityData"),
-                    memoryConfig: MemoryConfig(expiry: .never),
-                    fileManager: FileManager(),
-                    transformer: TransformerFactory.forCodable(ofType: GetIPCityDataResponse.IPCityData.self)
-                )
-                
-                for server in state.servers {
-                    if let storage {
-                        if let currentIPCityData = try? storage.object(forKey: server.ipv4), let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
+                await loadCoordinates()
+            }
+        }
+    }
+    
+    private func loadCoordinates() async {
+        serverCoordinates.removeAll()
+        
+        for server in state.servers {
+            if let storage {
+                if let currentIPCityData = try? storage.object(forKey: server.ipv4), let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
+                    let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
+                    if let existingServerCoordinateIndex {
+                        serverCoordinates[existingServerCoordinateIndex].servers.append(server)
+                    }
+                    else {
+                        serverCoordinates.append(ServerCoordinate(servers: [server],latitude: latitude, longitude: longitude, country: currentIPCityData.country, city: currentIPCityData.city))
+                    }
+                }
+                else {
+                    if let response = try? await RequestHandler.getIPCityData(IP: server.ipv4, locale: Locale.preferredLanguages[0]), let currentIPCityData = response.result {
+                        try? storage.setObject(currentIPCityData, forKey: server.ipv4)
+                        if let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
                             let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
                             if let existingServerCoordinateIndex {
                                 serverCoordinates[existingServerCoordinateIndex].servers.append(server)
                             }
                             else {
                                 serverCoordinates.append(ServerCoordinate(servers: [server],latitude: latitude, longitude: longitude, country: currentIPCityData.country, city: currentIPCityData.city))
-                            }
-                        }
-                        else {
-                            if let response = try? await RequestHandler.getIPCityData(IP: server.ipv4, locale: Locale.preferredLanguages[0]), let currentIPCityData = response.result {
-                                try? storage.setObject(currentIPCityData, forKey: server.ipv4)
-                                if let latitude = currentIPCityData.location.latitude, let longitude = currentIPCityData.location.longitude {
-                                    let existingServerCoordinateIndex = serverCoordinates.firstIndex(where: { $0.latitude == latitude && $0.longitude == longitude })
-                                    if let existingServerCoordinateIndex {
-                                        serverCoordinates[existingServerCoordinateIndex].servers.append(server)
-                                    }
-                                    else {
-                                        serverCoordinates.append(ServerCoordinate(servers: [server],latitude: latitude, longitude: longitude, country: currentIPCityData.country, city: currentIPCityData.city))
-                                    }
-                                }
                             }
                         }
                     }

@@ -115,9 +115,8 @@ struct ServerListView: View {
                 if #available(macOS 26.0, *) {
                     ToolbarSpacer(.fixed)
                 }
-                ToolbarItemGroup {
-                    sortButton
-                    refreshButton
+                ToolbarItem {
+                    moreButton
                 }
             }
             .loadingState(loadingState: state.dashboardLoadingState) {
@@ -132,7 +131,7 @@ struct ServerListView: View {
         }
     }
     
-    private var sortButton: some View {
+    private var moreButton: some View {
         Menu("More", systemImage: "ellipsis") {
             Picker("Sort", selection: Binding(get: {
                 sortIndicator
@@ -161,16 +160,6 @@ struct ServerListView: View {
                     .tag(sortIndicator)
                 }
             }
-        }
-    }
-    
-    private var refreshButton: some View {
-        Button {
-            Task {
-                await state.refreshServerAndServerGroup()
-            }
-        } label: {
-            Label("Refresh", systemImage: "arrow.clockwise")
         }
     }
     

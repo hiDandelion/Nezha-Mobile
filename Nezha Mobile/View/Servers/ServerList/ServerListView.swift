@@ -67,11 +67,6 @@ struct ServerListView: View {
                 dashboard
                     .zIndex(1)
             }
-            .safeAreaInset(edge: .bottom) {
-                Rectangle()
-                    .fill(.clear)
-                    .frame(height: 50)
-            }
             .navigationDestination(for: ServerData.self) { server in
                 ServerDetailView(id: server.id)
             }
@@ -128,8 +123,8 @@ struct ServerListView: View {
                 if #available(iOS 26.0, *) {
                     ToolbarSpacer(.fixed)
                 }
-                ToolbarItemGroup {
-                    sortButton
+                ToolbarItem {
+                    moreButton
                 }
             }
             .loadingState(loadingState: state.dashboardLoadingState) {
@@ -144,7 +139,7 @@ struct ServerListView: View {
         }
     }
     
-    private var sortButton: some View {
+    private var moreButton: some View {
         Menu("More", systemImage: "ellipsis") {
             Picker("Sort", selection: Binding(get: {
                 sortIndicator

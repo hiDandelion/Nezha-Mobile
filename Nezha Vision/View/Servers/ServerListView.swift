@@ -77,10 +77,7 @@ struct ServerListView: View {
                     .searchable(text: $searchText)
                     .toolbar {
                         ToolbarItem {
-                            sortButton
-                        }
-                        ToolbarItem {
-                            refreshButton
+                            moreButton
                         }
                     }
                 }
@@ -94,7 +91,7 @@ struct ServerListView: View {
         }
     }
     
-    private var sortButton: some View {
+    private var moreButton: some View {
         Menu("More", systemImage: "ellipsis") {
             Picker("Sort", selection: Binding(get: {
                 sortIndicator

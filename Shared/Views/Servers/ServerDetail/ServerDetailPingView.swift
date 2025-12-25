@@ -36,36 +36,38 @@ struct ServerDetailPingChartView: View {
     var body: some View {
         ScrollView {
             if !pingDatas.isEmpty {
-                VStack(spacing: 0) {
+                VStack(spacing: 10) {
+                    ForEach(pingDatas) { pingData in
+                        cardView {
+                            VStack(spacing: 0) {
+                                HStack {
+                                    Text(pingData.monitorName)
+                                        .font(.system(size: 15, weight: .semibold))
+                                }
+                                .padding(.top, 10)
+                                
+                                PingChart(pingData: pingData, dateRange: dateRange)
+                                    .padding()
+                            }
+                        }
+                    }
+                }
+                .padding()
+            }
+            else {
+                Text("No data")
+            }
+        }
+        .toolbar {
+            ToolbarItem {
+                Menu("More", systemImage: "ellipsis") {
                     Picker("Date Range", selection: $dateRange) {
                         ForEach(PingChartDateRange.allCases, id: \.rawValue) { dateRange in
                             Text(dateRange.localizedDateRangeTitle)
                                 .tag(dateRange)
                         }
                     }
-                    .padding()
-                    
-                    VStack(spacing: 10) {
-                        ForEach(pingDatas) { pingData in
-                            cardView {
-                                VStack(spacing: 0) {
-                                    HStack {
-                                        Text(pingData.monitorName)
-                                            .font(.system(size: 15, weight: .semibold))
-                                    }
-                                    .padding(.top, 10)
-                                    
-                                    PingChart(pingData: pingData, dateRange: dateRange)
-                                        .padding()
-                                }
-                            }
-                        }
-                    }
-                    .padding()
                 }
-            }
-            else {
-                Text("No data")
             }
         }
         .loadingState(loadingState: loadingState) {

@@ -74,22 +74,14 @@ struct ServerDetailView: View {
     }
     
     private func toolbarMenu(server: ServerData) -> some View {
-        Menu {
-            Section {
-                Button {
-                    Task {
-                        await state.refreshServerAndServerGroup()
-                    }
-                } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-                
+        Menu("More", systemImage: "ellipsis") {
+//            Section {
 //                NavigationLink {
 //                    TerminalView(server: server)
 //                } label: {
 //                    Label("Terminal", systemImage: "apple.terminal")
 //                }
-            }
+//            }
             
             Section {
                 Button {
@@ -98,8 +90,6 @@ struct ServerDetailView: View {
                     Label("Pin View", systemImage: "arrow.up.forward.and.arrow.down.backward")
                 }
             }
-        } label: {
-            Image(systemName: "ellipsis.circle")
         }
     }
     
