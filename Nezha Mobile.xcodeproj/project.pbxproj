@@ -325,6 +325,7 @@
 		CBD9BA2E2EFBC671002B5394 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = CBD9BA2D2EFBC671002B5394 /* TelemetryDeck */; };
 		CBD9BA302EFBC678002B5394 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = CBD9BA2F2EFBC678002B5394 /* TelemetryDeck */; };
 		CBD9BA322EFBC691002B5394 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = CBD9BA312EFBC691002B5394 /* TelemetryDeck */; };
+		CBD9BA342EFE4820002B5394 /* README_zh.md in Sources */ = {isa = PBXBuildFile; fileRef = CBD9BA332EFE4819002B5394 /* README_zh.md */; };
 		CBDAC3CA2C7B2DCE002AA675 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = CBDAC3C92C7B2DCE002AA675 /* Cache */; };
 		CBDAC3CE2C7B5C31002AA675 /* ServerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3CD2C7B5C31002AA675 /* ServerMapView.swift */; };
 		CBDAC3D02C7B63BB002AA675 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDAC3CF2C7B63BB002AA675 /* HomeView.swift */; };
@@ -650,6 +651,7 @@
 		CBD5BE052D43234C00C6EBC0 /* SortIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortIndicator.swift; sourceTree = "<group>"; };
 		CBD5BE0A2D43248700C6EBC0 /* SortOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOrder.swift; sourceTree = "<group>"; };
 		CBD9BA222EFBC550002B5394 /* NMCore+TelemetryDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NMCore+TelemetryDeck.swift"; sourceTree = "<group>"; };
+		CBD9BA332EFE4819002B5394 /* README_zh.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README_zh.md; sourceTree = "<group>"; };
 		CBDAC3CD2C7B5C31002AA675 /* ServerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMapView.swift; sourceTree = "<group>"; };
 		CBDAC3CF2C7B63BB002AA675 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CBDAC3DC2C7CB74B002AA675 /* MatrixGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixGaugeView.swift; sourceTree = "<group>"; };
@@ -1200,6 +1202,7 @@
 			children = (
 				CB701A102C5BB58D00019344 /* LICENSE */,
 				CB701A0E2C5BB47600019344 /* README.md */,
+				CBD9BA332EFE4819002B5394 /* README_zh.md */,
 				CB4C50EF2C9BD85C00B2D05C /* Shared */,
 				CB9C60692C5AF76E00DAE1E3 /* Nezha Mobile */,
 				CB701A502C67077400019344 /* Nezha Watch */,
@@ -2068,6 +2071,7 @@
 				CBB6A0A82D0A6567007CFF99 /* SnippetListView.swift in Sources */,
 				CBED0FEE2CFC0AD6004DAD8D /* getNotification.swift in Sources */,
 				CB9C60802C5B089100DAE1E3 /* RequestHandler.swift in Sources */,
+				CBD9BA342EFE4820002B5394 /* README_zh.md in Sources */,
 				CBED10D32D012A6A004DAD8D /* DeleteAlertRuleResponse.swift in Sources */,
 				CB0C58002D1B86D100AA573D /* ServerCard.swift in Sources */,
 				CBED0FE72CFC09E5004DAD8D /* NotificationData.swift in Sources */,

@@ -2,15 +2,15 @@
 
 [English](README.md) | [中文](README_zh.md)
 
-## What is Nezha Mobile
+## 什么是Nezha Mobile
 
-Nezha Mobile is an unofficial iOS client for Nezha Dashboard.
+Nezha Mobile是一个非官方的Nezha Dashboard客户端。
 
-You can download Nezha Mobile from App Store.
+你可以从App Store下载Nezha Mobile。
 [![3e7fb65e-a6d2-4011-bbee-0a9fad60e6e0](https://github.com/user-attachments/assets/3e7fb65e-a6d2-4011-bbee-0a9fad60e6e0)](https://apps.apple.com/us/app/nezha-mobile/id6596729064)
 
 ![bc5d5c56-ae2e-40ac-a8e0-b9832e5417c3](https://github.com/user-attachments/assets/bc5d5c56-ae2e-40ac-a8e0-b9832e5417c3)
 
-Or build from source.
+或从源代码构建。
 
-For any information related to Nezha Dashboard or Nezha Agent, please visit [Nezha Wiki](https://nezha.wiki).
+对于任何与Nezha Dashboard或Nezha Agent相关的问题，请见[Nezha Wiki](https://nezha.wiki)。
