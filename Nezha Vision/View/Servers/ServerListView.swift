@@ -17,6 +17,8 @@ struct ServerListView: View {
     @State private var selectedServerGroup: ServerGroup?
     @Namespace private var tagNamespace
     
+    @State private var isShowAddServerSheet: Bool = false
+    
     private var filteredServers: [ServerData] {
         state.servers
             .sorted {
@@ -60,6 +62,9 @@ struct ServerListView: View {
     var body: some View {
         NavigationStack {
             dashboard
+        }
+        .sheet(isPresented: $isShowAddServerSheet) {
+            AddServerView()
         }
     }
     

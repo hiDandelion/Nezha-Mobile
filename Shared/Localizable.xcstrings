@@ -361,6 +361,22 @@
         }
       }
     },
+    "Add Server" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバーを追加"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加服务器"
+          }
+        }
+      }
+    },
     "Add Server Group" : {
       "localizations" : {
         "ja" : {
@@ -725,6 +741,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "内容"
+          }
+        }
+      }
+    },
+    "Copy" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コピー"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制"
           }
         }
       }
@@ -1539,6 +1571,9 @@
         }
       }
     },
+    "Linux" : {
+      "shouldTranslate" : false
+    },
     "Load" : {
       "localizations" : {
         "ja" : {
@@ -1592,6 +1627,9 @@
           }
         }
       }
+    },
+    "macOS" : {
+      "shouldTranslate" : false
     },
     "Main Window" : {
       "localizations" : {
@@ -3834,6 +3872,9 @@
           }
         }
       }
+    },
+    "Windows" : {
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

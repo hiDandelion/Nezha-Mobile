@@ -18,6 +18,8 @@ struct ServerListView: View {
     @State private var searchText: String = ""
     var selectedServerGroup: ServerGroup?
     
+    @State private var isShowAddServerSheet: Bool = false
+    
     private var filteredServers: [ServerData] {
         state.servers
             .sorted {
@@ -70,6 +72,9 @@ struct ServerListView: View {
             .navigationDestination(for: ServerData.self) { server in
                 ServerDetailView(id: server.id)
             }
+        }
+        .sheet(isPresented: $isShowAddServerSheet) {
+            AddServerView()
         }
         .onAppear {
             let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")

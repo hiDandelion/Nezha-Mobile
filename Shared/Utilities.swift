@@ -14,6 +14,17 @@ import SwiftUI
     import AppKit
 #endif
 
+// Copy text
+func copy(_ text: String) {
+#if os(iOS) || os(visionOS)
+        UIPasteboard.general.string = text
+#endif
+#if os(macOS)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+#endif
+}
+
 // Handle empty name
 func nameCanBeUntitled(_ name: String?) -> String {
     guard let name = name else { return String(localized: "Untitled") }

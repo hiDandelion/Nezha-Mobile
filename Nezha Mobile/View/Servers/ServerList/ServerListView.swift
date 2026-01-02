@@ -18,6 +18,8 @@ struct ServerListView: View {
     @State private var selectedServerGroup: ServerGroup?
     @Namespace private var tagNamespace
     
+    @State private var isShowAddServerSheet: Bool = false
+    
     private var filteredServers: [ServerData] {
         state.servers
             .sorted {
@@ -71,6 +73,9 @@ struct ServerListView: View {
                 ServerDetailView(id: server.id)
             }
         }
+        .sheet(isPresented: $isShowAddServerSheet) {
+            AddServerView()
+        }
         .onAppear {
             let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
@@ -118,10 +123,16 @@ struct ServerListView: View {
             .searchable(text: $searchText)
             .toolbar {
                 ToolbarItem {
-                    mapButton
+                    addButton
                 }
                 if #available(iOS 26.0, *) {
                     ToolbarSpacer(.fixed)
+                }
+                ToolbarItem {
+                    mapButton
+                }
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.flexible)
                 }
                 ToolbarItem {
                     moreButton
@@ -130,6 +141,12 @@ struct ServerListView: View {
             .loadingState(loadingState: state.dashboardLoadingState) {
                 state.loadDashboard()
             }
+        }
+    }
+    
+    private var addButton: some View {
+        Button("Add Server", systemImage: "plus") {
+            isShowAddServerSheet = true
         }
     }
     
