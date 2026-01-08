@@ -2,51 +2,187 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "/" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "/"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "/"
+          }
+        }
+      }
     },
     "%.0f" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f"
+          }
+        }
+      }
     },
     "%.0f%%" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f%%"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f%%"
+          }
+        }
+      }
     },
     "%.1f%%" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.1f%%"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.1f%%"
+          }
+        }
+      }
     },
     "%.2f" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.2f"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.2f"
+          }
+        }
+      }
     },
     "%.2f%%" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.2f%%"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.2f%%"
+          }
+        }
+      }
     },
     "%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "%@/%@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
+            "value" : "%1$@/%2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%1$@/%2$@"
           }
         }
       }
     },
     "%lf" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lf"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lf"
+          }
+        }
+      }
     },
     "%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "%lld Core" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lldコアー"
+            "value" : "%lld Core"
           }
         },
         "zh-Hans" : {
@@ -72,18 +208,6 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld rules"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "variations" : {
-            "plural" : {
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lldルール"
                 }
               }
             }
@@ -129,24 +253,6 @@
             }
           }
         },
-        "ja" : {
-          "variations" : {
-            "plural" : {
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lldサーバー"
-                }
-              },
-              "zero" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "サーバーなし"
-                }
-              }
-            }
-          }
-        },
         "zh-Hans" : {
           "variations" : {
             "plural" : {
@@ -172,7 +278,13 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
+            "value" : "%1$lld%2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%1$lld%2$@"
           }
         }
@@ -186,59 +298,181 @@
             "state" : "translated",
             "value" : "%1$lld%2$@ %3$lld%4$@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld%2$@ %3$lld%4$@"
+          }
         }
       }
     },
     "%llds" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%llds"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%llds"
+          }
+        }
+      }
     },
     "↑ %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑ %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑ %@"
+          }
+        }
+      }
     },
     "↑ %@/s" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑ %@/s"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑ %@/s"
+          }
+        }
+      }
     },
     "↓ %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓ %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓ %@"
+          }
+        }
+      }
     },
     "↓ %@ ↑ %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
+            "value" : "↓ %1$@ ↑ %2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "↓ %1$@ ↑ %2$@"
           }
         }
       }
     },
     "↓ %@/s" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓ %@/s"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓ %@/s"
+          }
+        }
+      }
     },
     "↓ %@/s ↑ %@/s" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
+            "value" : "↓ %1$@/s ↑ %2$@/s"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "↓ %1$@/s ↑ %2$@/s"
           }
         }
       }
     },
     "🇹🇼" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇼"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇼"
+          }
+        }
+      }
     },
     "🇼🇸" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇼🇸"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇼🇸"
+          }
+        }
+      }
     },
     "🏴‍☠️" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏴‍☠️"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏴‍☠️"
+          }
+        }
+      }
     },
     "About" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このソフトウェアについて"
+            "value" : "About"
           }
         },
         "zh-Hans" : {
@@ -251,10 +485,10 @@
     },
     "Acknowledgments" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "謝辞"
+            "value" : "Acknowledgments"
           }
         },
         "zh-Hans" : {
@@ -267,10 +501,10 @@
     },
     "Active Color Dark Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アクティブカラーダークモード"
+            "value" : "Active Color Dark Mode"
           }
         },
         "zh-Hans" : {
@@ -283,10 +517,10 @@
     },
     "Active Color Light Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アクティブカラーライトモード"
+            "value" : "Active Color Light Mode"
           }
         },
         "zh-Hans" : {
@@ -299,10 +533,10 @@
     },
     "Add" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "追加"
+            "value" : "Add"
           }
         },
         "zh-Hans" : {
@@ -315,10 +549,10 @@
     },
     "Add Alert" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラートを追加"
+            "value" : "Add Alert"
           }
         },
         "zh-Hans" : {
@@ -331,10 +565,10 @@
     },
     "Add Dashboard" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dashboardを追加"
+            "value" : "Add Dashboard"
           }
         },
         "zh-Hans" : {
@@ -347,10 +581,10 @@
     },
     "Add Monitor" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "モニターを追加"
+            "value" : "Add Monitor"
           }
         },
         "zh-Hans" : {
@@ -362,27 +596,14 @@
       }
     },
     "Add Server" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サーバーを追加"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加服务器"
-          }
-        }
-      }
+
     },
     "Add Server Group" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーグルプを追加"
+            "value" : "Add Server Group"
           }
         },
         "zh-Hans" : {
@@ -395,10 +616,10 @@
     },
     "Add Snippet" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Snippetを追加"
+            "value" : "Add Snippet"
           }
         },
         "zh-Hans" : {
@@ -411,7 +632,7 @@
     },
     "Agent" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agent"
@@ -427,10 +648,10 @@
     },
     "Alert" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラート"
+            "value" : "Alert"
           }
         },
         "zh-Hans" : {
@@ -443,10 +664,10 @@
     },
     "Alert Details" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラート情報"
+            "value" : "Alert Details"
           }
         },
         "zh-Hans" : {
@@ -459,10 +680,10 @@
     },
     "Alert Rules" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラートルール"
+            "value" : "Alert Rules"
           }
         },
         "zh-Hans" : {
@@ -475,10 +696,10 @@
     },
     "Alerts" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラート"
+            "value" : "Alerts"
           }
         },
         "zh-Hans" : {
@@ -491,10 +712,10 @@
     },
     "All" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "すべて"
+            "value" : "All"
           }
         },
         "zh-Hans" : {
@@ -507,10 +728,10 @@
     },
     "All alerts will be deleted. Are you sure?" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "すべてのアラートが削除されます。よろしいですか?"
+            "value" : "All alerts will be deleted. Are you sure?"
           }
         },
         "zh-Hans" : {
@@ -523,10 +744,10 @@
     },
     "All(%lld)" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "すべて(%lld)"
+            "value" : "All(%lld)"
           }
         },
         "zh-Hans" : {
@@ -539,10 +760,10 @@
     },
     "An error occurred" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "エラーが発生しました"
+            "value" : "An error occurred"
           }
         },
         "zh-Hans" : {
@@ -555,10 +776,10 @@
     },
     "Ascending" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "昇順"
+            "value" : "Ascending"
           }
         },
         "zh-Hans" : {
@@ -571,10 +792,10 @@
     },
     "Background Color" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "背景色"
+            "value" : "Background Color"
           }
         },
         "zh-Hans" : {
@@ -587,10 +808,10 @@
     },
     "Background Color Dark Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "背景色ダークモード"
+            "value" : "Background Color Dark Mode"
           }
         },
         "zh-Hans" : {
@@ -603,10 +824,10 @@
     },
     "Background Color Light Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "背景色ライトモード"
+            "value" : "Background Color Light Mode"
           }
         },
         "zh-Hans" : {
@@ -619,10 +840,10 @@
     },
     "Background Customization" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "背景色のカスタマイズ"
+            "value" : "Background Customization"
           }
         },
         "zh-Hans" : {
@@ -635,10 +856,10 @@
     },
     "Cancel" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "キアンセル"
+            "value" : "Cancel"
           }
         },
         "zh-Hans" : {
@@ -651,10 +872,10 @@
     },
     "Color" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "色"
+            "value" : "Color"
           }
         },
         "zh-Hans" : {
@@ -667,10 +888,10 @@
     },
     "Configure Agent Widget" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Agentウィジェットを設定"
+            "value" : "Configure Agent Widget"
           }
         },
         "zh-Hans" : {
@@ -683,10 +904,10 @@
     },
     "Configure Server Count Widget" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー統計ウィジェットを設定"
+            "value" : "Configure Server Count Widget"
           }
         },
         "zh-Hans" : {
@@ -699,10 +920,10 @@
     },
     "Configure Server Detail Widget" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー詳細ウィジェットを設定"
+            "value" : "Configure Server Detail Widget"
           }
         },
         "zh-Hans" : {
@@ -715,10 +936,10 @@
     },
     "Configure Widget" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ウィジェットを設定"
+            "value" : "Configure Widget"
           }
         },
         "zh-Hans" : {
@@ -731,10 +952,10 @@
     },
     "Content" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "コンテンツ"
+            "value" : "Content"
           }
         },
         "zh-Hans" : {
@@ -746,27 +967,14 @@
       }
     },
     "Copy" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コピー"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "复制"
-          }
-        }
-      }
+
     },
     "Copy IPv4" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "IPv4をコピー"
+            "value" : "Copy IPv4"
           }
         },
         "zh-Hans" : {
@@ -779,10 +987,10 @@
     },
     "Copy IPv6" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "IPv6をコピー"
+            "value" : "Copy IPv6"
           }
         },
         "zh-Hans" : {
@@ -795,10 +1003,10 @@
     },
     "Copy Push Notifications Token" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "プッシュ通知トークンをコピー"
+            "value" : "Copy Push Notifications Token"
           }
         },
         "zh-Hans" : {
@@ -811,10 +1019,10 @@
     },
     "Copy Script" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scriptをコピー"
+            "value" : "Copy Script"
           }
         },
         "zh-Hans" : {
@@ -827,10 +1035,10 @@
     },
     "Count your servers with minimal effort." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡単でサーバーを統計する。"
+            "value" : "Count your servers with minimal effort."
           }
         },
         "zh-Hans" : {
@@ -843,7 +1051,7 @@
     },
     "CPU" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "CPU"
@@ -861,14 +1069,8 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "CPU %1$.0f%% MEM %2$.0f%%"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
             "state" : "translated",
-            "value" : "CPU %1$.0f%% メモリ %2$.0f%%"
+            "value" : "CPU %1$.0f%% MEM %2$.0f%%"
           }
         },
         "zh-Hans" : {
@@ -881,10 +1083,10 @@
     },
     "Credentials" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "認証情報"
+            "value" : "Credentials"
           }
         },
         "zh-Hans" : {
@@ -897,7 +1099,7 @@
     },
     "Dashboard" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dashboard"
@@ -913,10 +1115,10 @@
     },
     "Dashboard Info" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dashboard情報"
+            "value" : "Dashboard Info"
           }
         },
         "zh-Hans" : {
@@ -929,10 +1131,10 @@
     },
     "Dashboard Link" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dashboardリンク"
+            "value" : "Dashboard Link"
           }
         },
         "zh-Hans" : {
@@ -945,10 +1147,10 @@
     },
     "Dashboard Link Example: server.hidandelion.com" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dashboardリンクの例: server.hidandelion.com"
+            "value" : "Dashboard Link Example: server.hidandelion.com"
           }
         },
         "zh-Hans" : {
@@ -961,10 +1163,10 @@
     },
     "Dashboard Settings" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dashboard設定"
+            "value" : "Dashboard Settings"
           }
         },
         "zh-Hans" : {
@@ -977,10 +1179,10 @@
     },
     "Date Range" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "時間範囲"
+            "value" : "Date Range"
           }
         },
         "zh-Hans" : {
@@ -993,10 +1195,10 @@
     },
     "Default" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "デフォルト"
+            "value" : "Default"
           }
         },
         "zh-Hans" : {
@@ -1009,10 +1211,10 @@
     },
     "Delete" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "削除"
+            "value" : "Delete"
           }
         },
         "zh-Hans" : {
@@ -1025,10 +1227,10 @@
     },
     "Delete All" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "すべて削除"
+            "value" : "Delete All"
           }
         },
         "zh-Hans" : {
@@ -1041,10 +1243,10 @@
     },
     "Delete All Alerts" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "すべてのアラートを削除"
+            "value" : "Delete All Alerts"
           }
         },
         "zh-Hans" : {
@@ -1057,10 +1259,10 @@
     },
     "Delete Custom Background" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "カスタム背景を削除"
+            "value" : "Delete Custom Background"
           }
         },
         "zh-Hans" : {
@@ -1073,10 +1275,10 @@
     },
     "Descending" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "降順"
+            "value" : "Descending"
           }
         },
         "zh-Hans" : {
@@ -1089,10 +1291,10 @@
     },
     "Device Info" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "デバイス情報"
+            "value" : "Device Info"
           }
         },
         "zh-Hans" : {
@@ -1105,10 +1307,10 @@
     },
     "Disk" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ディスク"
+            "value" : "Disk"
           }
         },
         "zh-Hans" : {
@@ -1121,10 +1323,10 @@
     },
     "DISK" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ディスク"
+            "value" : "DISK"
           }
         },
         "zh-Hans" : {
@@ -1137,10 +1339,10 @@
     },
     "Done" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "完了"
+            "value" : "Done"
           }
         },
         "zh-Hans" : {
@@ -1153,10 +1355,10 @@
     },
     "Edit" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "編集"
+            "value" : "Edit"
           }
         },
         "zh-Hans" : {
@@ -1169,10 +1371,10 @@
     },
     "Edit Monitor" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "モニターを編集"
+            "value" : "Edit Monitor"
           }
         },
         "zh-Hans" : {
@@ -1185,10 +1387,10 @@
     },
     "Edit Snippet" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Snippetを編集"
+            "value" : "Edit Snippet"
           }
         },
         "zh-Hans" : {
@@ -1201,10 +1403,10 @@
     },
     "Enable Menu Bar" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "メニューバー有効"
+            "value" : "Enable Menu Bar"
           }
         },
         "zh-Hans" : {
@@ -1217,10 +1419,10 @@
     },
     "Enable SSL" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SSL有効"
+            "value" : "Enable SSL"
           }
         },
         "zh-Hans" : {
@@ -1233,10 +1435,10 @@
     },
     "Enable Widget Customization" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ウィジェットのカスタマイズ有効"
+            "value" : "Enable Widget Customization"
           }
         },
         "zh-Hans" : {
@@ -1249,10 +1451,10 @@
     },
     "Enroll Automatically" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "自動的に登録"
+            "value" : "Enroll Automatically"
           }
         },
         "zh-Hans" : {
@@ -1265,10 +1467,10 @@
     },
     "Enter a name for the new server group." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新しいサーバーグループの名前を入力してください。"
+            "value" : "Enter a name for the new server group."
           }
         },
         "zh-Hans" : {
@@ -1281,10 +1483,10 @@
     },
     "Enter a new name for the alert rule." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このアラートルールの新しい名前を入力してください。"
+            "value" : "Enter a new name for the alert rule."
           }
         },
         "zh-Hans" : {
@@ -1297,10 +1499,10 @@
     },
     "Enter a new name for the monitor." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このモニターの新しい名前を入力してください。"
+            "value" : "Enter a new name for the monitor."
           }
         },
         "zh-Hans" : {
@@ -1313,10 +1515,10 @@
     },
     "Enter a new name for the notification method." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新しい通知方法の名前を入力してください。"
+            "value" : "Enter a new name for the notification method."
           }
         },
         "zh-Hans" : {
@@ -1329,10 +1531,10 @@
     },
     "Enter a new name for the server group." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このサーバーグループの新しい名前を入力してください。"
+            "value" : "Enter a new name for the server group."
           }
         },
         "zh-Hans" : {
@@ -1349,12 +1551,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dashboard authentication failed."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard認証に失敗しました。"
           }
         },
         "zh-Hans" : {
@@ -1374,12 +1570,6 @@
             "value" : "An error occurred when decoding data."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "データの復号化中にエラーが発生しました。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1394,12 +1584,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Invalid dashboard configuration."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard設定が無効です。"
           }
         },
         "zh-Hans" : {
@@ -1418,12 +1602,6 @@
             "value" : "Invalid configuration. Please ensure your server is selected and exists."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "設定が無効です。サーバーが選択されており、存在することを確認してください。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1434,10 +1612,10 @@
     },
     "Execute" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "実行"
+            "value" : "Execute"
           }
         },
         "zh-Hans" : {
@@ -1448,29 +1626,12 @@
         }
       }
     },
-    "Feature Suggestions" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "機能提案"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "功能建议"
-          }
-        }
-      }
-    },
     "General" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "一般"
+            "value" : "General"
           }
         },
         "zh-Hans" : {
@@ -1483,10 +1644,10 @@
     },
     "Get up-to-date information in your Widget." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ウィジェットで最新の情報を取得します。"
+            "value" : "Get up-to-date information in your Widget."
           }
         },
         "zh-Hans" : {
@@ -1499,10 +1660,10 @@
     },
     "Hide Offline" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "オフラインを非表示"
+            "value" : "Hide Offline"
           }
         },
         "zh-Hans" : {
@@ -1514,20 +1675,62 @@
       }
     },
     "HTTP GET" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP GET"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "ICMP Ping" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ICMP Ping"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, iOS logo and macOS logo are trademarks of Apple Inc." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intel logo is a trademark of Intel Corporation. AMD logo is a trademark of Advanced Micro Devices, Inc. ARM logo is a trademark of Arm Limited. Windows logo is a trademark of Microsoft Inc. Apple logo, iOS logo and macOS logo are trademarks of Apple Inc."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "Interval" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "間隔"
+            "value" : "Interval"
           }
         },
         "zh-Hans" : {
@@ -1540,10 +1743,10 @@
     },
     "IP Address" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "IPアドレス"
+            "value" : "IP Address"
           }
         },
         "zh-Hans" : {
@@ -1557,10 +1760,10 @@
     "Leaf" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "翠玉の輝"
+            "value" : "Leaf"
           }
         },
         "zh-Hans" : {
@@ -1572,14 +1775,14 @@
       }
     },
     "Linux" : {
-      "shouldTranslate" : false
+
     },
     "Load" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ロード"
+            "value" : "Load"
           }
         },
         "zh-Hans" : {
@@ -1594,14 +1797,8 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Load %1$.2f %2$.2f %3$.2f"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
             "state" : "translated",
-            "value" : "ロード %1$.2f %2$.2f %3$.2f"
+            "value" : "Load %1$.2f %2$.2f %3$.2f"
           }
         },
         "zh-Hans" : {
@@ -1614,10 +1811,10 @@
     },
     "Loading..." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "読み込み中..."
+            "value" : "Loading..."
           }
         },
         "zh-Hans" : {
@@ -1629,14 +1826,14 @@
       }
     },
     "macOS" : {
-      "shouldTranslate" : false
+
     },
     "Main Window" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "メインウィンドウ"
+            "value" : "Main Window"
           }
         },
         "zh-Hans" : {
@@ -1649,10 +1846,10 @@
     },
     "Map View" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "マップビュー"
+            "value" : "Map View"
           }
         },
         "zh-Hans" : {
@@ -1666,10 +1863,10 @@
     "Maple" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "秋の装"
+            "value" : "Maple"
           }
         },
         "zh-Hans" : {
@@ -1682,10 +1879,10 @@
     },
     "MEM" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "メモリ"
+            "value" : "MEM"
           }
         },
         "zh-Hans" : {
@@ -1698,10 +1895,10 @@
     },
     "Memory" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "メモリ"
+            "value" : "Memory"
           }
         },
         "zh-Hans" : {
@@ -1714,10 +1911,10 @@
     },
     "Menu Bar" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "メニューバー"
+            "value" : "Menu Bar"
           }
         },
         "zh-Hans" : {
@@ -1730,10 +1927,10 @@
     },
     "Model Identifier" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "モデル識別子"
+            "value" : "Model Identifier"
           }
         },
         "zh-Hans" : {
@@ -1746,10 +1943,10 @@
     },
     "Monitors" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "モニター"
+            "value" : "Monitors"
           }
         },
         "zh-Hans" : {
@@ -1762,10 +1959,10 @@
     },
     "More" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "その他"
+            "value" : "More"
           }
         },
         "zh-Hans" : {
@@ -1778,10 +1975,10 @@
     },
     "Name" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "名前"
+            "value" : "Name"
           }
         },
         "zh-Hans" : {
@@ -1794,10 +1991,10 @@
     },
     "Network Data" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ネットワークデータ"
+            "value" : "Network Data"
           }
         },
         "zh-Hans" : {
@@ -1810,10 +2007,10 @@
     },
     "Network Receive" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ネットワーク受信"
+            "value" : "Network Receive"
           }
         },
         "zh-Hans" : {
@@ -1826,10 +2023,10 @@
     },
     "Network Send" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ネットワーク送信"
+            "value" : "Network Send"
           }
         },
         "zh-Hans" : {
@@ -1842,10 +2039,10 @@
     },
     "Network Send/Receive" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ネットワーク送受信"
+            "value" : "Network Send/Receive"
           }
         },
         "zh-Hans" : {
@@ -1857,20 +2054,62 @@
       }
     },
     "Nezha Agent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nezha Agent"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "Nezha Desktop" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nezha Desktop"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "Nezha Vision" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nezha Vision"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "No Alert" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラートなし"
+            "value" : "No Alert"
           }
         },
         "zh-Hans" : {
@@ -1883,10 +2122,10 @@
     },
     "No alert information" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラート情報なし"
+            "value" : "No alert information"
           }
         },
         "zh-Hans" : {
@@ -1899,10 +2138,10 @@
     },
     "No Alert Rule" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラートルールなし"
+            "value" : "No Alert Rule"
           }
         },
         "zh-Hans" : {
@@ -1915,10 +2154,10 @@
     },
     "No data" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "データなし"
+            "value" : "No data"
           }
         },
         "zh-Hans" : {
@@ -1931,10 +2170,10 @@
     },
     "No Monitor" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "モニターなし"
+            "value" : "No Monitor"
           }
         },
         "zh-Hans" : {
@@ -1947,10 +2186,10 @@
     },
     "No Notification Method" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "通知方法なし"
+            "value" : "No Notification Method"
           }
         },
         "zh-Hans" : {
@@ -1963,10 +2202,10 @@
     },
     "No Server" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーなし"
+            "value" : "No Server"
           }
         },
         "zh-Hans" : {
@@ -1979,10 +2218,10 @@
     },
     "No Server Group" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーグルプなし"
+            "value" : "No Server Group"
           }
         },
         "zh-Hans" : {
@@ -1995,10 +2234,10 @@
     },
     "No Snippet" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Snippetなし"
+            "value" : "No Snippet"
           }
         },
         "zh-Hans" : {
@@ -2011,10 +2250,10 @@
     },
     "Notification Methods" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "通知方法"
+            "value" : "Notification Methods"
           }
         },
         "zh-Hans" : {
@@ -2027,10 +2266,10 @@
     },
     "Notifications" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "通知"
+            "value" : "Notifications"
           }
         },
         "zh-Hans" : {
@@ -2043,10 +2282,10 @@
     },
     "Obsidian" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "黒曜石"
+            "value" : "Obsidian"
           }
         },
         "zh-Hans" : {
@@ -2060,10 +2299,10 @@
     "Ocean" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "海の青"
+            "value" : "Ocean"
           }
         },
         "zh-Hans" : {
@@ -2076,7 +2315,7 @@
     },
     "OK" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -2092,7 +2331,7 @@
     },
     "OS" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OS"
@@ -2107,14 +2346,28 @@
       }
     },
     "Part of this project is related to Project nezhahq/nezha which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Part of this project is related to Project nezhahq/nezha which is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "Password" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "パスワード"
+            "value" : "Password"
           }
         },
         "zh-Hans" : {
@@ -2127,10 +2380,10 @@
     },
     "Pin View" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ピンビュー"
+            "value" : "Pin View"
           }
         },
         "zh-Hans" : {
@@ -2143,10 +2396,10 @@
     },
     "Ping" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ピング"
+            "value" : "Ping"
           }
         },
         "zh-Hans" : {
@@ -2165,12 +2418,6 @@
             "value" : "1 Day"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1日"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2185,12 +2432,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "6 Hours"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "6時間"
           }
         },
         "zh-Hans" : {
@@ -2209,12 +2450,6 @@
             "value" : "3 Hours"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3時間"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2231,12 +2466,6 @@
             "value" : "12 Hours"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "12時間"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2247,10 +2476,10 @@
     },
     "Primary Color Dark Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "プライマリーカラーダークモード"
+            "value" : "Primary Color Dark Mode"
           }
         },
         "zh-Hans" : {
@@ -2263,10 +2492,10 @@
     },
     "Primary Color Light Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "プライマリーカラーライトモード"
+            "value" : "Primary Color Light Mode"
           }
         },
         "zh-Hans" : {
@@ -2279,10 +2508,10 @@
     },
     "Process" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "プロセス"
+            "value" : "Process"
           }
         },
         "zh-Hans" : {
@@ -2295,10 +2524,10 @@
     },
     "Processes %lld" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "プロセス %lld"
+            "value" : "Processes %lld"
           }
         },
         "zh-Hans" : {
@@ -2311,10 +2540,10 @@
     },
     "Push Notifications Not Available" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "プッシュ通知利用不可"
+            "value" : "Push Notifications Not Available"
           }
         },
         "zh-Hans" : {
@@ -2327,10 +2556,10 @@
     },
     "Quit" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "終了"
+            "value" : "Quit"
           }
         },
         "zh-Hans" : {
@@ -2343,10 +2572,10 @@
     },
     "Rate Us" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "評価"
+            "value" : "Rate Us"
           }
         },
         "zh-Hans" : {
@@ -2359,10 +2588,10 @@
     },
     "Refresh" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "更新"
+            "value" : "Refresh"
           }
         },
         "zh-Hans" : {
@@ -2375,10 +2604,10 @@
     },
     "Refresh Widget" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ウィジェットを更新"
+            "value" : "Refresh Widget"
           }
         },
         "zh-Hans" : {
@@ -2391,10 +2620,10 @@
     },
     "Refresh Widgets" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ウィジェットを更新"
+            "value" : "Refresh Widgets"
           }
         },
         "zh-Hans" : {
@@ -2407,10 +2636,10 @@
     },
     "Rename" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "名称変更"
+            "value" : "Rename"
           }
         },
         "zh-Hans" : {
@@ -2423,10 +2652,10 @@
     },
     "Rename Alert Rule" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラートルールの名称を変更"
+            "value" : "Rename Alert Rule"
           }
         },
         "zh-Hans" : {
@@ -2439,10 +2668,10 @@
     },
     "Rename Monitor" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "モニターの名称を変更"
+            "value" : "Rename Monitor"
           }
         },
         "zh-Hans" : {
@@ -2455,10 +2684,10 @@
     },
     "Rename Notification Method" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "通知方法の名称を変更"
+            "value" : "Rename Notification Method"
           }
         },
         "zh-Hans" : {
@@ -2471,10 +2700,10 @@
     },
     "Rename Server Group" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーグルプの名称を変更"
+            "value" : "Rename Server Group"
           }
         },
         "zh-Hans" : {
@@ -2487,10 +2716,10 @@
     },
     "Retry" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "再試行"
+            "value" : "Retry"
           }
         },
         "zh-Hans" : {
@@ -2503,10 +2732,10 @@
     },
     "Save & Apply" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "保存・適用"
+            "value" : "Save & Apply"
           }
         },
         "zh-Hans" : {
@@ -2519,10 +2748,10 @@
     },
     "Script" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "スクリプト"
+            "value" : "Script"
           }
         },
         "zh-Hans" : {
@@ -2535,10 +2764,10 @@
     },
     "Secondary Color Dark Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "セカンダリーカラーダークモード"
+            "value" : "Secondary Color Dark Mode"
           }
         },
         "zh-Hans" : {
@@ -2551,10 +2780,10 @@
     },
     "Secondary Color Light Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "セカンダリーカラーライトモード"
+            "value" : "Secondary Color Light Mode"
           }
         },
         "zh-Hans" : {
@@ -2567,10 +2796,10 @@
     },
     "Seconds" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "秒"
+            "value" : "Seconds"
           }
         },
         "zh-Hans" : {
@@ -2583,10 +2812,10 @@
     },
     "Section" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選択"
+            "value" : "Section"
           }
         },
         "zh-Hans" : {
@@ -2599,10 +2828,10 @@
     },
     "Select Custom Background" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "カスタマイズの背景を選択"
+            "value" : "Select Custom Background"
           }
         },
         "zh-Hans" : {
@@ -2615,10 +2844,10 @@
     },
     "Selected" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選択された"
+            "value" : "Selected"
           }
         },
         "zh-Hans" : {
@@ -2631,10 +2860,10 @@
     },
     "Server" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー"
+            "value" : "Server"
           }
         },
         "zh-Hans" : {
@@ -2647,10 +2876,10 @@
     },
     "Server Count" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー統計"
+            "value" : "Server Count"
           }
         },
         "zh-Hans" : {
@@ -2663,10 +2892,10 @@
     },
     "Server Detail Tab" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー詳細のタブ"
+            "value" : "Server Detail Tab"
           }
         },
         "zh-Hans" : {
@@ -2679,10 +2908,10 @@
     },
     "Server Details" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー詳細"
+            "value" : "Server Details"
           }
         },
         "zh-Hans" : {
@@ -2695,10 +2924,10 @@
     },
     "Server Groups" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーグルプ"
+            "value" : "Server Groups"
           }
         },
         "zh-Hans" : {
@@ -2711,10 +2940,10 @@
     },
     "Server returned an invalid response." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーが無効な応答を返しました。"
+            "value" : "Server returned an invalid response."
           }
         },
         "zh-Hans" : {
@@ -2727,10 +2956,10 @@
     },
     "Server Unavailable" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー利用不可"
+            "value" : "Server Unavailable"
           }
         },
         "zh-Hans" : {
@@ -2743,10 +2972,10 @@
     },
     "Servers" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバー"
+            "value" : "Servers"
           }
         },
         "zh-Hans" : {
@@ -2759,10 +2988,10 @@
     },
     "Settings" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "Settings"
           }
         },
         "zh-Hans" : {
@@ -2775,10 +3004,10 @@
     },
     "Share Token" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "トークンを共有"
+            "value" : "Share Token"
           }
         },
         "zh-Hans" : {
@@ -2791,10 +3020,10 @@
     },
     "Show IP" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "IPを表示"
+            "value" : "Show IP"
           }
         },
         "zh-Hans" : {
@@ -2807,7 +3036,7 @@
     },
     "Snippets" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Snippets"
@@ -2823,10 +3052,10 @@
     },
     "Sort" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "並べ替え"
+            "value" : "Sort"
           }
         },
         "zh-Hans" : {
@@ -2837,46 +3066,12 @@
         }
       }
     },
-    "Sort By" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "並び替え基準"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "排序方式"
-          }
-        }
-      }
-    },
-    "Sort Order" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "並び替え順"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "排序顺序"
-          }
-        }
-      }
-    },
     "Start" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "スタート"
+            "value" : "Start"
           }
         },
         "zh-Hans" : {
@@ -2889,10 +3084,10 @@
     },
     "Start your journey with Nezha Mobile" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "あなたの新たな一歩、Nezha Mobileとともに。"
+            "value" : "Start your journey with Nezha Mobile"
           }
         },
         "zh-Hans" : {
@@ -2905,10 +3100,10 @@
     },
     "Status" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ステータス"
+            "value" : "Status"
           }
         },
         "zh-Hans" : {
@@ -2921,10 +3116,10 @@
     },
     "Successfully Saved" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "保存しました"
+            "value" : "Successfully Saved"
           }
         },
         "zh-Hans" : {
@@ -2937,10 +3132,10 @@
     },
     "Successfuly Refreshed" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "更新しました"
+            "value" : "Successfuly Refreshed"
           }
         },
         "zh-Hans" : {
@@ -2953,10 +3148,10 @@
     },
     "System Version" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "システムバージョン"
+            "value" : "System Version"
           }
         },
         "zh-Hans" : {
@@ -2969,10 +3164,10 @@
     },
     "Tag" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "タグ"
+            "value" : "Tag"
           }
         },
         "zh-Hans" : {
@@ -2985,10 +3180,10 @@
     },
     "Target" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ターゲット"
+            "value" : "Target"
           }
         },
         "zh-Hans" : {
@@ -3001,7 +3196,7 @@
     },
     "TCP %lld" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "TCP %lld"
@@ -3017,10 +3212,10 @@
     },
     "TCP Connection" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "TCP接続"
+            "value" : "TCP Connection"
           }
         },
         "zh-Hans" : {
@@ -3033,7 +3228,7 @@
     },
     "TCPing" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "TCPing"
@@ -3049,10 +3244,10 @@
     },
     "Terminal" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ターミナル"
+            "value" : "Terminal"
           }
         },
         "zh-Hans" : {
@@ -3065,10 +3260,10 @@
     },
     "Text Color" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字色"
+            "value" : "Text Color"
           }
         },
         "zh-Hans" : {
@@ -3081,10 +3276,10 @@
     },
     "Theme" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テーマ"
+            "value" : "Theme"
           }
         },
         "zh-Hans" : {
@@ -3097,10 +3292,10 @@
     },
     "Theme Customization" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テーマのカスタマイズ"
+            "value" : "Theme Customization"
           }
         },
         "zh-Hans" : {
@@ -3113,10 +3308,10 @@
     },
     "Theme Settings" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テーマ設定"
+            "value" : "Theme Settings"
           }
         },
         "zh-Hans" : {
@@ -3129,10 +3324,10 @@
     },
     "These settings will overwrite widget configurations and apply to all widgets." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "これらの設定は、ウィジェット設定を上書きし、すべてのウィジェットに適用されます。"
+            "value" : "These settings will overwrite widget configurations and apply to all widgets."
           }
         },
         "zh-Hans" : {
@@ -3180,50 +3375,8 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "new",
+                  "state" : "translated",
                   "value" : "This device is enrolled"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "variations" : {
-            "device" : {
-              "applevision" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このApple Visionは登録されています"
-                }
-              },
-              "ipad" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このiPadは登録されています"
-                }
-              },
-              "iphone" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このiPhoneは登録されています"
-                }
-              },
-              "ipod" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このiPodは登録されています"
-                }
-              },
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このMacは登録されています"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このデバイスは登録されています"
                 }
               }
             }
@@ -3310,50 +3463,8 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "new",
+                  "state" : "translated",
                   "value" : "This device is not enrolled"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "variations" : {
-            "device" : {
-              "applevision" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このApple Visionは登録されていません"
-                }
-              },
-              "ipad" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このiPadは登録されていません"
-                }
-              },
-              "iphone" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このiPhoneは登録されていません"
-                }
-              },
-              "ipod" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このiPodは登録されていません"
-                }
-              },
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このMacは登録されていません"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "このデバイスは登録されていません"
                 }
               }
             }
@@ -3404,23 +3515,79 @@
       }
     },
     "This project has dependency evgenyneu/keychain-swift which is subject to\nMIT License" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This project has dependency evgenyneu/keychain-swift which is subject to\nMIT License"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "This project has dependency hyperoslo/Cache which is subject to\nMIT License" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This project has dependency hyperoslo/Cache which is subject to\nMIT License"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "This project has dependency SwiftyJSON/SwiftyJSON which is subject to\nMIT License" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This project has dependency SwiftyJSON/SwiftyJSON which is subject to\nMIT License"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This project is subject to\nApache License\nVersion 2.0, January 2004\nhttps://www.apache.org/licenses/"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "Time" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "時間"
+            "value" : "Time"
           }
         },
         "zh-Hans" : {
@@ -3440,12 +3607,6 @@
             "value" : "d"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "日"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3461,12 +3622,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "h"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "時間"
           }
         },
         "zh-Hans" : {
@@ -3486,12 +3641,6 @@
             "value" : "m"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "分"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3507,12 +3656,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "mo"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ヶ月"
           }
         },
         "zh-Hans" : {
@@ -3532,12 +3675,6 @@
             "value" : "s"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "秒"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3555,12 +3692,6 @@
             "value" : "y"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "年"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3571,10 +3702,10 @@
     },
     "Tint Color Dark Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ティントカラーダークモード"
+            "value" : "Tint Color Dark Mode"
           }
         },
         "zh-Hans" : {
@@ -3587,10 +3718,10 @@
     },
     "Tint Color Light Mode" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ティントカラーライトモード"
+            "value" : "Tint Color Light Mode"
           }
         },
         "zh-Hans" : {
@@ -3603,10 +3734,10 @@
     },
     "Tools" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ツール"
+            "value" : "Tools"
           }
         },
         "zh-Hans" : {
@@ -3619,10 +3750,10 @@
     },
     "Total %@" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全部 %@"
+            "value" : "Total %@"
           }
         },
         "zh-Hans" : {
@@ -3635,10 +3766,10 @@
     },
     "Type" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "タイプ"
+            "value" : "Type"
           }
         },
         "zh-Hans" : {
@@ -3651,7 +3782,7 @@
     },
     "UDP %lld" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "UDP %lld"
@@ -3667,10 +3798,10 @@
     },
     "UDP Connection" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "UDP接続"
+            "value" : "UDP Connection"
           }
         },
         "zh-Hans" : {
@@ -3683,10 +3814,10 @@
     },
     "Unknown" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不明"
+            "value" : "Unknown"
           }
         },
         "zh-Hans" : {
@@ -3699,10 +3830,10 @@
     },
     "Unsupported family" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サポートされていないファミリー"
+            "value" : "Unsupported family"
           }
         },
         "zh-Hans" : {
@@ -3715,10 +3846,10 @@
     },
     "Untitled" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "名前なし"
+            "value" : "Untitled"
           }
         },
         "zh-Hans" : {
@@ -3731,10 +3862,10 @@
     },
     "Up Time" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アップタイム"
+            "value" : "Up Time"
           }
         },
         "zh-Hans" : {
@@ -3747,10 +3878,10 @@
     },
     "Used %@" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "使用済み %@"
+            "value" : "Used %@"
           }
         },
         "zh-Hans" : {
@@ -3763,10 +3894,10 @@
     },
     "User Guide" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ユーザーガイド"
+            "value" : "User Guide"
           }
         },
         "zh-Hans" : {
@@ -3779,10 +3910,10 @@
     },
     "Username" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ユーザー名"
+            "value" : "Username"
           }
         },
         "zh-Hans" : {
@@ -3795,10 +3926,10 @@
     },
     "View and report your device information." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本機のデバイス情報を表示および報告します。"
+            "value" : "View and report your device information."
           }
         },
         "zh-Hans" : {
@@ -3811,10 +3942,10 @@
     },
     "View Details" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "詳細を表示"
+            "value" : "View Details"
           }
         },
         "zh-Hans" : {
@@ -3827,10 +3958,10 @@
     },
     "View details of your servers at a glance." : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サーバーの詳細を一目で確認します。"
+            "value" : "View details of your servers at a glance."
           }
         },
         "zh-Hans" : {
@@ -3843,10 +3974,10 @@
     },
     "View Device Info" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "デバイス情報を表示"
+            "value" : "View Device Info"
           }
         },
         "zh-Hans" : {
@@ -3859,10 +3990,10 @@
     },
     "Widget Customization" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ウィジェットのカスタマイズ"
+            "value" : "Widget Customization"
           }
         },
         "zh-Hans" : {
@@ -3874,7 +4005,7 @@
       }
     },
     "Windows" : {
-      "shouldTranslate" : false
+
     }
   },
   "version" : "1.0"

@@ -1,5 +1,5 @@
 //
-//  getSafeAreaInsets.swift
+//  View+getSafeAreaInsets.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 8/2/24.

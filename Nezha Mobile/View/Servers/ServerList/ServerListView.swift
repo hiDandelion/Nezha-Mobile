@@ -122,19 +122,16 @@ struct ServerListView: View {
             .navigationTitle("Servers")
             .searchable(text: $searchText)
             .toolbar {
-                ToolbarItem {
+                ToolbarItem(placement: .topBarLeading) {
+                    mapButton
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     addButton
                 }
                 if #available(iOS 26.0, *) {
-                    ToolbarSpacer(.fixed)
+                    ToolbarSpacer(.fixed, placement: .topBarTrailing)
                 }
-                ToolbarItem {
-                    mapButton
-                }
-                if #available(iOS 26.0, *) {
-                    ToolbarSpacer(.flexible)
-                }
-                ToolbarItem {
+                ToolbarItem(placement: .topBarTrailing) {
                     moreButton
                 }
             }

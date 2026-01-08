@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum MainTab: String, CaseIterable {
+enum MainTab: String, CaseIterable, AnimatedTabSelectionProtocol {
     case servers = "servers"
     case tools = "tools"
     case alerts = "alerts"
@@ -39,7 +39,7 @@ struct HomeView: View {
     
     var body: some View {
         if #available(iOS 18.0, *) {
-            TabView(selection: Bindable(state).tab) {
+            AnimatedTabView(selection: Bindable(state).tab) {
                 Tab(value: MainTab.servers) {
                     if state.isShowMapView {
                         ServerMapView()
@@ -68,8 +68,14 @@ struct HomeView: View {
                 } label: {
                     Label(MainTab.settings.title, systemImage: MainTab.settings.systemName)
                 }
+            } effects: { selection in
+                switch selection {
+                case .servers: [.bounce]
+                case .tools: [.bounce]
+                case .alerts: [.wiggle]
+                case .settings: [.rotate]
+                }
             }
-            .tabViewStyle(.sidebarAdaptable)
         }
         else {
             TabView(selection: Bindable(state).tab) {

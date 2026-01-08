@@ -14,6 +14,10 @@ struct AddServerView: View {
     @State private var macOSCommand: String = ""
     @State private var windowsCommand: String = ""
     
+#if os(iOS)
+    @State private var isShowToast: Bool = false
+#endif
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -24,7 +28,11 @@ struct AddServerView: View {
                         .monospaced()
                     Button {
                         copy(linuxCommand)
-                        
+#if os(iOS)
+                        if #available(iOS 26.0, *) {
+                            isShowToast = true
+                        }
+#endif
                     } label: {
                         Label("Copy", systemImage: "document.on.document")
                     }
@@ -36,6 +44,11 @@ struct AddServerView: View {
                         .monospaced()
                     Button {
                         copy(macOSCommand)
+#if os(iOS)
+                        if #available(iOS 26.0, *) {
+                            isShowToast = true
+                        }
+#endif
                     } label: {
                         Label("Copy", systemImage: "document.on.document")
                     }
@@ -47,11 +60,19 @@ struct AddServerView: View {
                         .monospaced()
                     Button {
                         copy(windowsCommand)
+#if os(iOS)
+                        if #available(iOS 26.0, *) {
+                            isShowToast = true
+                        }
+#endif
                     } label: {
                         Label("Copy", systemImage: "document.on.document")
                     }
                 }
             }
+#if os(iOS)
+            .dynamicIslandToast(isPresented: $isShowToast, value: .successfullyCopied)
+#endif
             .loadingState(loadingState: loadingState, retryAction: {
                 initialize()
             })

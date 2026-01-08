@@ -40,6 +40,16 @@ struct ServerDetailView: View {
             }
             .navigationTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
+            .topSafeAreaBar {
+                Picker("Section", selection: $activeTab) {
+                    ForEach(ServerDetailTab.allCases) {
+                        Text($0.localized())
+                            .tag($0)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+            }
 //            .toolbar {
 //                ToolbarItem {
 //                    terminalButton(server: server)
@@ -56,22 +66,11 @@ struct ServerDetailView: View {
             theme.themeBackgroundColor(scheme: scheme)
                 .ignoresSafeArea()
             
-            VStack {
-                Picker("Section", selection: $activeTab) {
-                    ForEach(ServerDetailTab.allCases) {
-                        Text($0.localized())
-                            .tag($0)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                
-                switch(activeTab) {
-                case .status:
-                    ServerDetailStatusView(server: server)
-                case .monitors:
-                    ServerDetailPingChartView(server: server)
-                }
+            switch(activeTab) {
+            case .status:
+                ServerDetailStatusView(server: server)
+            case .monitors:
+                ServerDetailPingChartView(server: server)
             }
         }
     }
