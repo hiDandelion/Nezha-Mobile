@@ -229,7 +229,7 @@ struct ServerListView: View {
                                 openWindow(id: "server-detail-view", value: server.id)
                             }
                         .contextMenu {
-                            ControlGroup("Copy IP", systemImage: "document.on.document") {
+                            ControlGroup {
                                 if server.ipv4 != "" {
                                     Button {
                                         UIPasteboard.general.string = server.ipv4

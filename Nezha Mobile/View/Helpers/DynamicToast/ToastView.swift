@@ -31,7 +31,7 @@ struct DynamicIslandToastViewModifier: ViewModifier {
     var value: Toast
     /// View Properties
     @State private var overlayWindow: PassThroughWindow?
-    @State private var overlayController: CustomHostingView?
+    @State private var overlayController: StatusBarHidableHostingView?
     func body(content: Content) -> some View {
         content
             .background(WindowExtractor { mainWindow in
@@ -52,7 +52,6 @@ struct DynamicIslandToastViewModifier: ViewModifier {
             .onChange(of: overlayWindow?.isPresented) {
                 if let isOverlayWindowPresented = overlayWindow?.isPresented, let overlayWindow,
                    overlayWindow.toast?.id == value.id, isOverlayWindowPresented != isPresented {
-                    print("Updated Since there is a change in value")
                     isPresented = false
                 }
             }
@@ -68,9 +67,8 @@ struct DynamicIslandToastViewModifier: ViewModifier {
         guard let windowScene = mainWindow.windowScene else { return }
         
         if let window = windowScene.windows.first(where: { $0.tag == 1009 }) as? PassThroughWindow {
-            print("Using Already Exisiting Window!")
             self.overlayWindow = window
-            self.overlayController = window.rootViewController as? CustomHostingView
+            self.overlayController = window.rootViewController as? StatusBarHidableHostingView
         } else {
             let overlayWindow = PassThroughWindow(windowScene: windowScene)
             overlayWindow.backgroundColor = .clear
@@ -84,7 +82,7 @@ struct DynamicIslandToastViewModifier: ViewModifier {
     }
     
     private func createRootController(_ window: PassThroughWindow) {
-        let hostingController = CustomHostingView(
+        let hostingController = StatusBarHidableHostingView(
             rootView: ToastView(window: window)
         )
         
@@ -153,7 +151,7 @@ struct ToastView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .ignoresSafeArea()
-            .animation(.bouncy(duration: 0.5, extraBounce: 0), value: isExpanded)
+            .animation(isExpanded ? .bouncy(duration: 0.5, extraBounce: 0) : .smooth(duration: 0.3), value: isExpanded)
         }
     }
     

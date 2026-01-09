@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 26.0, *)
-class CustomHostingView: UIHostingController<ToastView> {
+class StatusBarHidableHostingView: UIHostingController<ToastView> {
     var isStatusBarHidden: Bool = false {
         didSet {
             setNeedsStatusBarAppearanceUpdate()

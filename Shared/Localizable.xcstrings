@@ -2518,6 +2518,16 @@
         }
       }
     },
+    "Please paste the command on your server." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在你的服务器上粘贴命令。"
+          }
+        }
+      }
+    },
     "Primary Color Dark Mode" : {
       "localizations" : {
         "en" : {
@@ -3164,6 +3174,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "状态"
+          }
+        }
+      }
+    },
+    "Success" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "成功"
+          }
+        }
+      }
+    },
+    "Success copied" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "成功复制"
           }
         }
       }

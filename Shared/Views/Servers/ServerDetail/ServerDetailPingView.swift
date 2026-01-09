@@ -1,5 +1,5 @@
 //
-//  ServerDetailPingChartView.swift
+//  ServerDetailPingView.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 8/11/24.
@@ -23,7 +23,7 @@ enum PingChartDateRange: Int, CaseIterable {
     }
 }
 
-struct ServerDetailPingChartView: View {
+struct ServerDetailPingView: View {
 #if os(iOS) || os(macOS)
     @Environment(\.colorScheme) private var scheme
     @Environment(NMTheme.self) var theme

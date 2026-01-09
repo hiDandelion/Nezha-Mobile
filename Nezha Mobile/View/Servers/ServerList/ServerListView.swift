@@ -267,7 +267,7 @@ struct ServerListView: View {
                                 state.pathServers.append(server)
                             }
                             .contextMenu {
-                                ControlGroup("Copy IP", systemImage: "document.on.document") {
+                                ControlGroup {
                                     if server.ipv4 != "" {
                                         Button {
                                             UIPasteboard.general.string = server.ipv4

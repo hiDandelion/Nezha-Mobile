@@ -9,14 +9,13 @@ import SwiftUI
 
 struct AddServerView: View {
     @Environment(\.dismiss) private var dismiss
+#if os(iOS)
+    @Environment(NMState.self) private var state
+#endif
     @State private var loadingState: LoadingState = .idle
     @State private var linuxCommand: String = ""
     @State private var macOSCommand: String = ""
     @State private var windowsCommand: String = ""
-    
-#if os(iOS)
-    @State private var isShowToast: Bool = false
-#endif
     
     var body: some View {
         NavigationStack {
@@ -30,7 +29,8 @@ struct AddServerView: View {
                         copy(linuxCommand)
 #if os(iOS)
                         if #available(iOS 26.0, *) {
-                            isShowToast = true
+                            state.toastType = .successfullyCopied
+                            state.isShowToast = true
                         }
 #endif
                     } label: {
@@ -46,7 +46,8 @@ struct AddServerView: View {
                         copy(macOSCommand)
 #if os(iOS)
                         if #available(iOS 26.0, *) {
-                            isShowToast = true
+                            state.toastType = .successfullyCopied
+                            state.isShowToast = true
                         }
 #endif
                     } label: {
@@ -62,7 +63,8 @@ struct AddServerView: View {
                         copy(windowsCommand)
 #if os(iOS)
                         if #available(iOS 26.0, *) {
-                            isShowToast = true
+                            state.toastType = .successfullyCopied
+                            state.isShowToast = true
                         }
 #endif
                     } label: {
@@ -71,9 +73,6 @@ struct AddServerView: View {
                 }
             }
             .formStyle(.grouped)
-#if os(iOS)
-            .dynamicIslandToast(isPresented: $isShowToast, value: .successfullyCopied)
-#endif
             .loadingState(loadingState: loadingState, retryAction: {
                 initialize()
             })

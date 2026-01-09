@@ -22,15 +22,25 @@ extension RequestHandler {
             throw NezhaDashboardError.dashboardAuthenticationFailed
         }
         
-        var settingRequest = URLRequest(url: settingConfiguration.url)
-        var profileRequest = URLRequest(url: profileConfiguration.url)
-        settingRequest.httpMethod = "GET"
-        profileRequest.httpMethod = "GET"
-        settingRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        profileRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        let settingRequest: URLRequest = {
+            var request = URLRequest(url: settingConfiguration.url)
+            request.httpMethod = "GET"
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            return request
+        }()
         
-        let (settingData, _) = try await URLSession.shared.data(for: settingRequest)
-        let (profileData, _) = try await URLSession.shared.data(for: profileRequest)
+        let profileRequest: URLRequest = {
+            var request = URLRequest(url: profileConfiguration.url)
+            request.httpMethod = "GET"
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            return request
+        }()
+        
+        async let settingResult = URLSession.shared.data(for: settingRequest)
+        async let profileResult = URLSession.shared.data(for: profileRequest)
+        
+        let (settingData, _) = try await settingResult
+        let (profileData, _) = try await profileResult
         
         let getSettingResponse: GetSettingResponse = try decodeNezhaDashboardResponse(data: settingData)
         let getProfileResponse: GetProfileResponse = try decodeNezhaDashboardResponse(data: profileData)

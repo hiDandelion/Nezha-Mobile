@@ -22,6 +22,7 @@ struct ContentView: View {
             content
                 .zIndex(1)
         }
+        .dynamicIslandToast(isPresented: Bindable(state).isShowToast, value: state.toastType)
         .onAppear {
             NMCore.syncWithiCloud()
             
