@@ -19,6 +19,13 @@ struct ServerListView: View {
     
     @State private var isShowAddServerSheet: Bool = false
     
+    @State private var isShowRenameServerAlert: Bool = false
+    @State private var serverToRename: ServerData?
+    @State private var newNameOfServer: String = ""
+    
+    @State private var isShowDeleteServerAlert: Bool = false
+    @State private var serverToDelete: ServerData?
+    
     private var filteredServers: [ServerData] {
         state.servers
             .sorted {
@@ -66,6 +73,33 @@ struct ServerListView: View {
         .sheet(isPresented: $isShowAddServerSheet) {
             AddServerView()
         }
+        .alert("Rename Server", isPresented: $isShowRenameServerAlert) {
+            TextField("Name", text: $newNameOfServer)
+            Button("OK") {
+                Task {
+                    let result = try? await RequestHandler.renameServer(serverID: serverToRename!.serverID, to: newNameOfServer)
+                    if result?.success == true {
+                        await state.refreshServerAndServerGroup()
+                    }
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Enter a new name for the server.")
+        }
+        .alert("Delete Server", isPresented: $isShowDeleteServerAlert) {
+            Button("Delete", role: .destructive) {
+                Task {
+                    let result = try? await RequestHandler.deleteServer(serverID: serverToRename!.serverID)
+                    if result?.success == true {
+                        await state.refreshServerAndServerGroup()
+                    }
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("You are about to delete this server. Are you sure?")
+        }
     }
     
     private var dashboard: some View {
@@ -81,7 +115,10 @@ struct ServerListView: View {
                     .navigationTitle("Servers")
                     .searchable(text: $searchText)
                     .toolbar {
-                        ToolbarItem {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            addButton
+                        }
+                        ToolbarItem(placement: .topBarTrailing) {
                             moreButton
                         }
                     }
@@ -93,6 +130,12 @@ struct ServerListView: View {
             .loadingState(loadingState: state.dashboardLoadingState) {
                 state.loadDashboard()
             }
+        }
+    }
+    
+    private var addButton: some View {
+        Button("Add Server", systemImage: "plus") {
+            isShowAddServerSheet = true
         }
     }
     
@@ -181,9 +224,41 @@ struct ServerListView: View {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(filteredServers) { server in
                         ServerCardView(server: server, lastUpdateTime: state.dashboardLastUpdateTime)
+                        hoverEffect(.automatic)
                             .onTapGesture {
                                 openWindow(id: "server-detail-view", value: server.id)
                             }
+                        .contextMenu {
+                            ControlGroup("Copy IP", systemImage: "document.on.document") {
+                                if server.ipv4 != "" {
+                                    Button {
+                                        UIPasteboard.general.string = server.ipv4
+                                    } label: {
+                                        Label("Copy IPv4", systemImage: "4.circle")
+                                    }
+                                }
+                                if server.ipv6 != "" {
+                                    Button {
+                                        UIPasteboard.general.string = server.ipv6
+                                    } label: {
+                                        Label("Copy IPv6", systemImage: "6.circle")
+                                    }
+                                }
+                            }
+                            Button {
+                                serverToRename = server
+                                newNameOfServer = server.name
+                                isShowRenameServerAlert = true
+                            } label: {
+                                Label("Rename", systemImage: "pencil")
+                            }
+                            Button(role: .destructive) {
+                                serverToDelete = server
+                                isShowDeleteServerAlert = true
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                     }
                 }
                 .padding(.horizontal, 15)

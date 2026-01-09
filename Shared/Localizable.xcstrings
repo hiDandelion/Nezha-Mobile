@@ -596,7 +596,14 @@
       }
     },
     "Add Server" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加服务器"
+          }
+        }
+      }
     },
     "Add Server Group" : {
       "localizations" : {
@@ -967,7 +974,24 @@
       }
     },
     "Copy" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制"
+          }
+        }
+      }
+    },
+    "Copy IP" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制IP"
+          }
+        }
+      }
     },
     "Copy IPv4" : {
       "localizations" : {
@@ -1273,6 +1297,16 @@
         }
       }
     },
+    "Delete Server" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除服务器"
+          }
+        }
+      }
+    },
     "Descending" : {
       "localizations" : {
         "en" : {
@@ -1545,6 +1579,16 @@
         }
       }
     },
+    "Enter a new name for the server." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为此服务器输入新名称。"
+          }
+        }
+      }
+    },
     "error.dashboardAuthenticationFailed" : {
       "localizations" : {
         "en" : {
@@ -1775,7 +1819,7 @@
       }
     },
     "Linux" : {
-
+      "shouldTranslate" : false
     },
     "Load" : {
       "localizations" : {
@@ -1826,7 +1870,7 @@
       }
     },
     "macOS" : {
-
+      "shouldTranslate" : false
     },
     "Main Window" : {
       "localizations" : {
@@ -2694,6 +2738,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重新命名通知方式"
+          }
+        }
+      }
+    },
+    "Rename Server" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新命名服务器"
           }
         }
       }
@@ -4005,7 +4059,17 @@
       }
     },
     "Windows" : {
-
+      "shouldTranslate" : false
+    },
+    "You are about to delete this server. Are you sure?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你将要删除此服务器。你确定吗？"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

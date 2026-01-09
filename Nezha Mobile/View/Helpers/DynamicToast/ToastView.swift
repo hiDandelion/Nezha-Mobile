@@ -153,7 +153,7 @@ struct ToastView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .ignoresSafeArea()
-            .animation(.bouncy(duration: 0.3, extraBounce: 0), value: isExpanded)
+            .animation(.bouncy(duration: 0.5, extraBounce: 0), value: isExpanded)
         }
     }
     

@@ -20,6 +20,13 @@ struct ServerListView: View {
     
     @State private var isShowAddServerSheet: Bool = false
     
+    @State private var isShowRenameServerAlert: Bool = false
+    @State private var serverToRename: ServerData?
+    @State private var newNameOfServer: String = ""
+    
+    @State private var isShowDeleteServerAlert: Bool = false
+    @State private var serverToDelete: ServerData?
+    
     private var filteredServers: [ServerData] {
         state.servers
             .sorted {
@@ -76,6 +83,33 @@ struct ServerListView: View {
         .sheet(isPresented: $isShowAddServerSheet) {
             AddServerView()
         }
+        .alert("Rename Server", isPresented: $isShowRenameServerAlert) {
+            TextField("Name", text: $newNameOfServer)
+            Button("OK") {
+                Task {
+                    let result = try? await RequestHandler.renameServer(serverID: serverToRename!.serverID, to: newNameOfServer)
+                    if result?.success == true {
+                        await state.refreshServerAndServerGroup()
+                    }
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Enter a new name for the server.")
+        }
+        .alert("Delete Server", isPresented: $isShowDeleteServerAlert) {
+            Button("Delete", role: .destructive) {
+                Task {
+                    let result = try? await RequestHandler.deleteServer(serverID: serverToRename!.serverID)
+                    if result?.success == true {
+                        await state.refreshServerAndServerGroup()
+                    }
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("You are about to delete this server. Are you sure?")
+        }
         .onAppear {
             let backgroundPhotoData = NMCore.userDefaults.data(forKey: "NMBackgroundPhotoData")
             if let backgroundPhotoData {
@@ -121,12 +155,24 @@ struct ServerListView: View {
                     ToolbarSpacer(.fixed)
                 }
                 ToolbarItem {
+                    addButton
+                }
+                if #available(macOS 26.0, *) {
+                    ToolbarSpacer(.fixed)
+                }
+                ToolbarItem {
                     moreButton
                 }
             }
             .loadingState(loadingState: state.dashboardLoadingState) {
                 state.loadDashboard()
             }
+        }
+    }
+    
+    private var addButton: some View {
+        Button("Add Server", systemImage: "plus") {
+            isShowAddServerSheet = true
         }
     }
     
@@ -176,6 +222,43 @@ struct ServerListView: View {
                         ServerCardView(server: server, lastUpdateTime: state.dashboardLastUpdateTime)
                             .onTapGesture {
                                 openWindow(id: "server-detail-view", value: server.id)
+                            }
+                            .contextMenu {
+                                ControlGroup("Copy IP", systemImage: "document.on.document") {
+                                    if server.ipv4 != "" {
+                                        Button {
+#if os(macOS)
+                                            NSPasteboard.general.clearContents()
+                                            NSPasteboard.general.setString(server.ipv4, forType: .string)
+#endif
+                                        } label: {
+                                            Label("Copy IPv4", systemImage: "4.circle")
+                                        }
+                                    }
+                                    if server.ipv6 != "" {
+                                        Button {
+#if os(macOS)
+                                            NSPasteboard.general.clearContents()
+                                            NSPasteboard.general.setString(server.ipv6, forType: .string)
+#endif
+                                        } label: {
+                                            Label("Copy IPv6", systemImage: "6.circle")
+                                        }
+                                    }
+                                }
+                                Button {
+                                    serverToRename = server
+                                    newNameOfServer = server.name
+                                    isShowRenameServerAlert = true
+                                } label: {
+                                    Label("Rename", systemImage: "pencil")
+                                }
+                                Button(role: .destructive) {
+                                    serverToDelete = server
+                                    isShowDeleteServerAlert = true
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
                             }
                     }
                 }

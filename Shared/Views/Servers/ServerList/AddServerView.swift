@@ -70,6 +70,7 @@ struct AddServerView: View {
                     }
                 }
             }
+            .formStyle(.grouped)
 #if os(iOS)
             .dynamicIslandToast(isPresented: $isShowToast, value: .successfullyCopied)
 #endif
