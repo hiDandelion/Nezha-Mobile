@@ -1,5 +1,5 @@
 //
-//  ServerCountConfigurationIntent.swift
+//  SummaryConfigurationIntent.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 2/28/25.
@@ -7,19 +7,16 @@
 
 import AppIntents
 
-struct ServerCountConfigurationIntent: WidgetConfigurationIntent {
+struct SummaryConfigurationIntent: WidgetConfigurationIntent {
     static let title: LocalizedStringResource = "Configure Widget"
-    static let description = IntentDescription("Configure Server Count Widget")
-    
-    @Parameter(title: "Hide Offline")
-    var isHideOffline: Bool?
+    static let description = IntentDescription("Configure Summary Widget")
+
     @Parameter(title: "Color")
     var color: WidgetBackgroundColor?
 
     init() {}
 
-    init(isHideOffline: Bool, color: WidgetBackgroundColor) {
-        self.isHideOffline = isHideOffline
+    init(color: WidgetBackgroundColor) {
         self.color = color
     }
 }

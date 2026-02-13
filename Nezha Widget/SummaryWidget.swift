@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SummaryProvider: AppIntentTimelineProvider {
     typealias Entry = SummaryEntry
-    typealias Intent = ServerCountConfigurationIntent
+    typealias Intent = SummaryConfigurationIntent
 
     func placeholder(in context: Context) -> SummaryEntry {
         SummaryEntry(
@@ -26,12 +26,12 @@ struct SummaryProvider: AppIntentTimelineProvider {
         )
     }
 
-    func snapshot(for configuration: ServerCountConfigurationIntent, in context: Context) async -> SummaryEntry {
+    func snapshot(for configuration: SummaryConfigurationIntent, in context: Context) async -> SummaryEntry {
         let color = configuration.color ?? .blue
         return await getSummaryEntry(color: color)
     }
 
-    func timeline(for configuration: ServerCountConfigurationIntent, in context: Context) async -> Timeline<SummaryEntry> {
+    func timeline(for configuration: SummaryConfigurationIntent, in context: Context) async -> Timeline<SummaryEntry> {
         let color = configuration.color ?? .blue
         let entry = await getSummaryEntry(color: color)
         return Timeline(entries: [entry], policy: .atEnd)
@@ -93,6 +93,7 @@ struct SummaryWidgetEntryView: View {
                             .foregroundStyle(.white)
                             .tint(.white)
                             .containerBackground(color, for: .widget)
+                            .dynamicTypeSize(.medium)
                     case .systemMedium:
                         summaryViewSystemMedium
                             .foregroundStyle(.white)
@@ -159,15 +160,11 @@ struct SummaryWidgetEntryView: View {
 
             VStack(spacing: 3) {
                 HStack {
-                    Image(systemName: "circle.dotted.circle")
-                        .frame(width: 10)
                     Text("↑ \(formatBytes(entry.totalUpload ?? 0, decimals: 1))")
                     Spacer()
                     Text("↓ \(formatBytes(entry.totalDownload ?? 0, decimals: 1))")
                 }
                 HStack {
-                    Image(systemName: "network")
-                        .frame(width: 10)
                     Text("↑ \(formatBytes(entry.uploadSpeed ?? 0, decimals: 1))/s")
                     Spacer()
                     Text("↓ \(formatBytes(entry.downloadSpeed ?? 0, decimals: 1))/s")
@@ -192,48 +189,46 @@ struct SummaryWidgetEntryView: View {
             .font(.subheadline)
 
             HStack(spacing: 20) {
+                Spacer()
+                
                 // Server counts
-                HStack(spacing: 16) {
-                    VStack(spacing: 2) {
+                HStack(spacing: 30) {
+                    HStack(spacing: 3) {
                         Image(systemName: "circle.fill")
                             .foregroundStyle(.green)
-                            .font(.system(size: 8))
+                            .font(.system(size: 6))
                         Text("\(entry.onlineCount ?? 0)")
-                            .font(.system(size: 32, design: .rounded))
+                            .font(.system(size: 24, design: .rounded))
                     }
-                    VStack(spacing: 2) {
+                    HStack(spacing: 3) {
                         Image(systemName: "circle.fill")
                             .foregroundStyle(.red)
-                            .font(.system(size: 8))
+                            .font(.system(size: 6))
                         Text("\(entry.offlineCount ?? 0)")
                             .font(.system(size: 24, design: .rounded))
                     }
                 }
                 .minimumScaleFactor(0.5)
                 .lineLimit(1)
+                
+                Spacer()
 
                 // Traffic info
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack {
-                        Image(systemName: "circle.dotted.circle")
-                            .frame(width: 10)
-                        VStack(alignment: .leading) {
-                            Text("↑ \(formatBytes(entry.totalUpload ?? 0, decimals: 1))")
-                            Text("↓ \(formatBytes(entry.totalDownload ?? 0, decimals: 1))")
-                        }
+                VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading) {
+                        Text("↑ \(formatBytes(entry.totalUpload ?? 0, decimals: 1))")
+                        Text("↓ \(formatBytes(entry.totalDownload ?? 0, decimals: 1))")
                     }
-                    HStack {
-                        Image(systemName: "network")
-                            .frame(width: 10)
-                        VStack(alignment: .leading) {
-                            Text("↑ \(formatBytes(entry.uploadSpeed ?? 0, decimals: 1))/s")
-                            Text("↓ \(formatBytes(entry.downloadSpeed ?? 0, decimals: 1))/s")
-                        }
+                    VStack(alignment: .leading) {
+                        Text("↑ \(formatBytes(entry.uploadSpeed ?? 0, decimals: 1))/s")
+                        Text("↓ \(formatBytes(entry.downloadSpeed ?? 0, decimals: 1))/s")
                     }
                 }
                 .font(.system(size: 12))
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
+                
+                Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -253,14 +248,14 @@ struct SummaryEntry: TimelineEntry {
 }
 
 struct SummaryWidget: Widget {
-    let kind: String = "ServerCountWidget"
+    let kind: String = "SummaryWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ServerCountConfigurationIntent.self, provider: SummaryProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SummaryConfigurationIntent.self, provider: SummaryProvider()) { entry in
             SummaryWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Summary")
-        .description("View online/offline server counts and total traffic at a glance.")
+        .description("View server summary at a glance.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

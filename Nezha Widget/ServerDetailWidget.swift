@@ -341,13 +341,19 @@ struct ServerDetailWidgetEntryView: View {
                 HStack(spacing: 20) {
                     gaugeView(server: server)
                     
-                    HStack {
+                    VStack(alignment: .leading, spacing: 10) {
                         VStack(alignment: .leading) {
                             Text("↑ \(formatBytes(server.status.networkOut, decimals: 1))")
                             Text("↓ \(formatBytes(server.status.networkIn, decimals: 1))")
                         }
+                        VStack(alignment: .leading) {
+                            Text("↑ \(formatBytes(server.status.networkOutSpeed, decimals: 1))/s")
+                            Text("↓ \(formatBytes(server.status.networkInSpeed, decimals: 1))/s")
+                        }
                     }
-                    .font(.system(size: 14))
+                    .font(.system(size: 12))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 }
                 
                 gaugeView(server: server)

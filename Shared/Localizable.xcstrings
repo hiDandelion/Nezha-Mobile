@@ -909,22 +909,6 @@
         }
       }
     },
-    "Configure Server Count Widget" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configure Server Count Widget"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "配置服务器统计小组件"
-          }
-        }
-      }
-    },
     "Configure Server Detail Widget" : {
       "localizations" : {
         "en" : {
@@ -937,6 +921,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "配置服务器详细信息小组件"
+          }
+        }
+      }
+    },
+    "Configure Summary Widget" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配置总统计小组件"
           }
         }
       }
@@ -1053,22 +1047,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "复制脚本"
-          }
-        }
-      }
-    },
-    "Count your servers with minimal effort." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Count your servers with minimal effort."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "轻而易举地统计你的服务器。"
           }
         }
       }
@@ -1703,6 +1681,7 @@
       }
     },
     "Hide Offline" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2938,22 +2917,6 @@
         }
       }
     },
-    "Server Count" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Server Count"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "服务器统计"
-          }
-        }
-      }
-    },
     "Server Detail Tab" : {
       "localizations" : {
         "en" : {
@@ -3226,6 +3189,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "成功刷新"
+          }
+        }
+      }
+    },
+    "Summary" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "总统计"
           }
         }
       }
@@ -4068,6 +4041,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "查看设备信息"
+          }
+        }
+      }
+    },
+    "View server summary at a glance." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快速查看你的服务器总统计信息。"
           }
         }
       }
