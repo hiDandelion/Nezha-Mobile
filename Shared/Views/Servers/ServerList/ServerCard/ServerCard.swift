@@ -32,18 +32,17 @@ struct ServerCard: View {
             .padding(.horizontal, 10)
             
             VStack {
-                ViewThatFits {
-                    HStack {
-                        gaugeView
-                        
-                        infoView
-                            .font(.caption2)
-                    }
-                    
+                HStack(spacing: 0) {
                     gaugeView
+                    
+                    infoView
+                        .font(.caption2)
+                        .frame(width: 100)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.bottom, 5)
+            .padding(.horizontal, 10)
         }
         .frame(maxWidth: .infinity, minHeight: 160)
     }

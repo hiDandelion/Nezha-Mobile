@@ -81,8 +81,10 @@ class NMCore {
         syncWithiCloud()
         
         keychain.set(dashboardPassword, forKey: NMDashboardPassword)
+
+        Task { await TokenManager.shared.invalidateToken() }
     }
-    
+
     // Save agent configuration
     static func saveNewAgentConfigurations(dashboardGRPCLink: String, dashboardGRPCPort: String, agentSecret: String, agentSSLEnabled: Bool) {
         userDefaults.set(Int(Date().timeIntervalSince1970), forKey: NMLastModifyDate)

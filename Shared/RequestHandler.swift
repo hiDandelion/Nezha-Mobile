@@ -22,4 +22,8 @@ class RequestHandler {
             _ = NMCore.debugLog("Unknown decoding error")
         }
     }
+
+    static func getToken() async throws -> String {
+        try await TokenManager.shared.getToken()
+    }
 }

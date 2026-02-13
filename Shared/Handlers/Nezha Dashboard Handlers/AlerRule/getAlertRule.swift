@@ -13,11 +13,7 @@ extension RequestHandler {
             throw NezhaDashboardError.invalidDashboardConfiguration
         }
         
-        let loginResponse = try await login()
-        guard let token = loginResponse.data?.token else {
-            _ = NMCore.debugLog("Login Error - Cannot get token")
-            throw NezhaDashboardError.dashboardAuthenticationFailed
-        }
+        let token = try await getToken()
         
         var request = URLRequest(url: configuration.url)
         request.httpMethod = "GET"
