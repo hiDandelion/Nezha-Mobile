@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import AppIntents
 
 struct SummaryProvider: AppIntentTimelineProvider {
     typealias Entry = SummaryEntry

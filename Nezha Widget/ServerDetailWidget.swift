@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import AppIntents
 
 struct ServerDetailProvider: AppIntentTimelineProvider {
     typealias Entry = ServerEntry

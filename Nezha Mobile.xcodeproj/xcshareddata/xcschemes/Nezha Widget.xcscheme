@@ -16,7 +16,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CB701A1C2C5CF93500019344"
+               BlueprintIdentifier = "CB9706762F409EB700CFFF76"
                BuildableName = "Nezha Widget.appex"
                BlueprintName = "Nezha Widget"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
@@ -62,7 +62,7 @@
          BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB701A1C2C5CF93500019344"
+            BlueprintIdentifier = "CB9706762F409EB700CFFF76"
             BuildableName = "Nezha Widget.appex"
             BlueprintName = "Nezha Widget"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
@@ -80,7 +80,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
-            value = "ServerDetailWidget"
+            value = "SummaryWidget"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable

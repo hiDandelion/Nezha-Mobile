@@ -20,18 +20,21 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack(path: Bindable(state).pathSettings) {
             Form {
-                Section {
+                Section("App Settings") {
                     NavigationLink(value: "dashboard-settings") {
                         Text("Dashboard Settings")
                     }
-                }
-                
-                Section {
                     NavigationLink(value: "theme-settings") {
                         Text("Theme Settings")
                     }
                 }
-                
+
+                Section("Dashboard Admin") {
+                    NavigationLink(value: "profile") {
+                        Text("Profile")
+                    }
+                }
+
                 Section("About") {
                     Link("User Guide", destination: NMCore.userGuideURL)
                     Button("Rate Us") {
@@ -49,6 +52,8 @@ struct SettingsView: View {
                     DashboardSettingsView()
                 case "theme-settings":
                     ThemeSettingsView()
+                case "profile":
+                    ProfileView()
                 case "acknowledgments":
                     NMUI.AcknowledgmentView()
                 default:

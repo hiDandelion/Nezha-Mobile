@@ -8,6 +8,7 @@
 #if os(iOS)
 import WidgetKit
 import SwiftUI
+import AppIntents
 
 struct AgentProvider: AppIntentTimelineProvider {
     typealias Entry = AgentEntry

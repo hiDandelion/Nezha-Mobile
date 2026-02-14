@@ -17,6 +17,9 @@ enum Tool {
     case serverGroups
     case monitors
     case notifications
+    case tasks
+    case ddns
+    case nat
     case snippets
 }
 
@@ -52,6 +55,12 @@ struct HomeView: View {
                         .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .monitors))
                     Text("Notifications")
                         .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .notifications))
+                    Text("Tasks")
+                        .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .tasks))
+                    Text("DDNS")
+                        .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .ddns))
+                    Text("NAT")
+                        .tag(UserSection(tab: .dashboard, serverGroup: nil, tool: .nat))
                 }
                 
                 Section("Terminal") {
@@ -77,6 +86,18 @@ struct HomeView: View {
                 case .notifications:
                     NavigationStack {
                         NotificationListView()
+                    }
+                case .tasks:
+                    NavigationStack {
+                        CronListView()
+                    }
+                case .ddns:
+                    NavigationStack {
+                        DDNSListView()
+                    }
+                case .nat:
+                    NavigationStack {
+                        NATListView()
                     }
                 case .snippets:
                     NavigationStack {

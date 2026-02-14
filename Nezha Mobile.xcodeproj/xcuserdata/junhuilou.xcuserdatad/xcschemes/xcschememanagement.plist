@@ -39,6 +39,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>Playground (Playground).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>SimpleStorage (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -58,7 +63,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Storage (Playground) 1.xcscheme</key>
 		<dict>
@@ -79,7 +84,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>8</integer>
 		</dict>
 		<key>Watch App Watch App.xcscheme_^#shared#^_</key>
 		<dict>
@@ -110,6 +115,11 @@
 			<true/>
 		</dict>
 		<key>CB7B9CD92C9E8678004383C7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB9706762F409EB700CFFF76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
