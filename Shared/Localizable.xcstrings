@@ -49,6 +49,9 @@
         }
       }
     },
+    "%.1f%%" : {
+
+    },
     "%.2f%%" : {
       "localizations" : {
         "en" : {
@@ -715,6 +718,9 @@
         }
       }
     },
+    "Agent" : {
+
+    },
     "Agent Secet" : {
       "localizations" : {
         "zh-Hans" : {
@@ -979,6 +985,9 @@
         }
       }
     },
+    "Color" : {
+
+    },
     "Command" : {
       "localizations" : {
         "zh-Hans" : {
@@ -998,6 +1007,18 @@
           }
         }
       }
+    },
+    "Configure Agent Widget" : {
+
+    },
+    "Configure Server Detail Widget" : {
+
+    },
+    "Configure Summary Widget" : {
+
+    },
+    "Configure Widget" : {
+
     },
     "Content" : {
       "localizations" : {
@@ -1121,6 +1142,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "CPU"
+          }
+        }
+      }
+    },
+    "CPU %.0f%% MEM %.0f%%" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "CPU %1$.0f%% MEM %2$.0f%%"
           }
         }
       }
@@ -1968,6 +1999,9 @@
         }
       }
     },
+    "error.invalidServerConfiguration" : {
+
+    },
     "Exclude specific servers" : {
       "localizations" : {
         "zh-Hans" : {
@@ -2029,6 +2063,9 @@
           }
         }
       }
+    },
+    "Get up-to-date information in your Widget." : {
+
     },
     "GPU Monitoring" : {
       "localizations" : {
@@ -2250,6 +2287,9 @@
     },
     "Linux" : {
       "shouldTranslate" : false
+    },
+    "Load" : {
+
     },
     "Load %.2f %.2f %.2f" : {
       "localizations" : {
@@ -2641,6 +2681,9 @@
         }
       }
     },
+    "Nezha Agent" : {
+
+    },
     "Nezha Desktop" : {
       "localizations" : {
         "en" : {
@@ -2991,6 +3034,9 @@
         }
       }
     },
+    "Obsidian" : {
+
+    },
     "Ocean" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3238,6 +3284,9 @@
         }
       }
     },
+    "Process" : {
+
+    },
     "Process Count" : {
       "localizations" : {
         "zh-Hans" : {
@@ -3357,6 +3406,9 @@
           }
         }
       }
+    },
+    "Refresh Widget" : {
+
     },
     "Refresh Widgets" : {
       "localizations" : {
@@ -3886,6 +3938,12 @@
         }
       }
     },
+    "Share Token" : {
+
+    },
+    "Show IP" : {
+
+    },
     "Skip" : {
       "localizations" : {
         "zh-Hans" : {
@@ -4032,6 +4090,9 @@
         }
       }
     },
+    "Summary" : {
+
+    },
     "System Version" : {
       "localizations" : {
         "en" : {
@@ -4135,6 +4196,9 @@
           }
         }
       }
+    },
+    "TCP Connection" : {
+
     },
     "TCP Connections" : {
       "localizations" : {
@@ -4806,6 +4870,9 @@
         }
       }
     },
+    "UDP Connection" : {
+
+    },
     "UDP Connections" : {
       "localizations" : {
         "zh-Hans" : {
@@ -4831,6 +4898,9 @@
           }
         }
       }
+    },
+    "Unsupported family" : {
+
     },
     "Untitled" : {
       "localizations" : {
@@ -4912,6 +4982,9 @@
         }
       }
     },
+    "View and report your device information." : {
+
+    },
     "View Details" : {
       "localizations" : {
         "en" : {
@@ -4927,6 +5000,12 @@
           }
         }
       }
+    },
+    "View details of your servers at a glance." : {
+
+    },
+    "View server summary at a glance." : {
+
     },
     "Webhook" : {
       "localizations" : {
