@@ -6,15 +6,15 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		RStAmzWrwEwG3SI+8AHWavILGe4=
+		zppNP9vPS3gBX+pnJ5yWNvkxJiU=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		v3UJKECW3YnRrCPLTuG4mTIC87A=
+		2kLo0B9DZ39olnQ5honQY4eSNTc=
 		</data>
 		<key>Nezha Watch.debug.dylib</key>
 		<data>
-		0CX8bc+pt0Hoh+/GBR31fLeW1wM=
+		8vbTe0R8IxyWe1jwZi4GSidDSCY=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -48,6 +48,42 @@
 		<data>
 		Mxft2k0P4cHs9zIGJJ+LDs8tR6o=
 		</data>
+		<key>en.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+fb6Z61QchbOi/K1QsJQYafY3W4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>en.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9UQZjOQXq7DtRB/qPjkz7N+UaOI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			eH052vp7tpmVaoOnMjGHBmqzrSQ=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RbHvYHAGV73YH7nhM2uymPWoz5Q=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -55,14 +91,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			g5x+k5eHmYa/WDfX6DNpA5LFFyXPfeGNOfbOkKBB7yw=
+			Ub7SLjHuD/Onds+SQcA4LwTHSHQk11vFk4OJfBhcsZE=
 			</data>
 		</dict>
 		<key>Nezha Watch.debug.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			OViy5SLzAMa7fkHkdtXsOYbL2h42eOrKqC5A9YFK14A=
+			3JrZN+rbcsA0Pk/8bZyJAtbUdTDTmt6BZAY4L9r4uMM=
 			</data>
 		</dict>
 		<key>TelemetryDeck_TelemetryDeck.bundle/Info.plist</key>
@@ -113,6 +149,42 @@
 			<data>
 			gHVxHvIJbUHmSXJXqWlGHg/mgnaLFCttPAiENy/NJ/Q=
 			</data>
+		</dict>
+		<key>en.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			I/yMly4yMd4exjyisPlljq3NCQGUjnV0Zp91Vx/u4bs=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>en.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1CF3qYRxlV+QBD8WP0gNuq6/qyLLmEdeVOvAQVLQgOg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			c5vPRQFNUGoxIc9z2LNuQQkkjdV785ecLvnv3xnbVCE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QhIT6BoYhG89c+h7/5jvTz0BgkmUD9bKG8wqBYv/iyY=
+			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>rules</key>

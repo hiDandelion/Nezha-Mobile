@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		d7ME2x6LbIxejONXjTI3OiheYYQ=
+		Aaz26QrX8u0ztJy8pKxHjCcYSpM=
 		</data>
 		<key>Resources/Cache_Cache.bundle/Contents/Info.plist</key>
 		<data>
@@ -79,7 +79,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			KUQyl1bJo8XdkEbPs7JGQWQmfxk=
+			ZtPzHRuObTb5NCLqK5HJx8ImunU=
 			</data>
 			<key>requirement</key>
 			<string>identifier "Nezha Desktop.debug" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Junhui Lou (R45L4RV74K)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -93,6 +93,24 @@
 			<key>requirement</key>
 			<string>identifier "__preview" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Junhui Lou (R45L4RV74K)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 		</dict>
+		<key>PlugIns/Nezha Widget.appex</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			ZtAKtfGKTR86GWVvfgPPtYX3WrI=
+			</data>
+			<key>requirement</key>
+			<string>identifier "com.argsment.Nezha-Mobile.Widget" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Junhui Lou (R45L4RV74K)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		</dict>
+		<key>PlugIns/Notification Service.appex</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			KIgskMZSYGTnT61MqjdAN+ctv6Y=
+			</data>
+			<key>requirement</key>
+			<string>identifier "com.argsment.Nezha-Mobile.Notification-Service" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Junhui Lou (R45L4RV74K)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
 			<key>hash2</key>
@@ -104,7 +122,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mQ1CHJc+rjWO+1EkgFv4Gdqu8FnsOPJWQAB0KX5Hvcs=
+			RY3tpdJCosGPmxTMx7RkGV9LEeosS+e5ssKsC8F34zg=
 			</data>
 		</dict>
 		<key>Resources/Cache_Cache.bundle/Contents/Info.plist</key>

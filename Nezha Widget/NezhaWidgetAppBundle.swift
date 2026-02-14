@@ -17,7 +17,9 @@ struct WidgetAppBundle: WidgetBundle {
     
     var body: some Widget {
         ServerDetailWidget()
+#if os(iOS) || os(macOS) || os(visionOS)
         SummaryWidget()
+#endif
 #if os(iOS)
         AgentWidget()
 #endif

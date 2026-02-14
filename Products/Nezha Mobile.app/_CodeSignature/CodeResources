@@ -14,7 +14,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		ANnBcTQLucUnE6CjxX/ewsi8ZQk=
+		AqUtvCQmsvjUXIid7sElLRSVeTM=
 		</data>
 		<key>Cache_Cache.bundle/Info.plist</key>
 		<data>
@@ -42,15 +42,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		OtX0QaBEtILyJu2529OlZvTo/RY=
-		</data>
-		<key>LICENSE</key>
-		<data>
-		ae4fL8+wDfUY7cqUeJRfd/SB0Gg=
+		xySOTVQMzUMVKhiQ60gnALoZ7eg=
 		</data>
 		<key>Nezha Mobile.debug.dylib</key>
 		<data>
-		altdfhWPGuBb4AwsgtsOtsVfT8A=
+		12FL//ZsxCbpuO30M1eP6XxMoM8=
 		</data>
 		<key>Nezha Widget.appex/Assets.car</key>
 		<data>
@@ -66,11 +62,11 @@
 		</data>
 		<key>Nezha Widget.appex/Metadata.appintents/version.json</key>
 		<data>
-		kSxBG4AkjH7gz3iMXvK2JDx3VZI=
+		TY2tWAqgMoaE49pcDLWKF8StLJ0=
 		</data>
 		<key>Nezha Widget.appex/Nezha Widget</key>
 		<data>
-		u3yQlfPJVcsrrBmSn05QsOrtw98=
+		6LX/r5+X2lBaaSepO8n7ujraw0s=
 		</data>
 		<key>Nezha Widget.appex/Nezha Widget.debug.dylib</key>
 		<data>
@@ -102,7 +98,7 @@
 		</data>
 		<key>Nezha Widget.appex/_CodeSignature/CodeResources</key>
 		<data>
-		STTzHeR2qp6Lr1TuQ/le9/2xaBc=
+		uNuE5yFx5GyBvvD2Vp8SLIHBo5g=
 		</data>
 		<key>Nezha Widget.appex/__preview.dylib</key>
 		<data>
@@ -112,9 +108,117 @@
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
 		</data>
-		<key>README.md</key>
+		<key>PlugIns/Nezha Widget.appex/Assets.car</key>
 		<data>
-		azm3Wx7kZHLuLv4oXcUlAkMX1Jg=
+		7IJDcP9NRkWZejMkQQiOeb7iRsY=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/Info.plist</key>
+		<data>
+		KpNw1zwFQWHsDr5Widz2mUDYg+w=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/Metadata.appintents/extract.actionsdata</key>
+		<data>
+		7QTFTZLcI84J00lcHzxLut6/aoY=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/Metadata.appintents/version.json</key>
+		<data>
+		kSxBG4AkjH7gz3iMXvK2JDx3VZI=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/Nezha Widget</key>
+		<data>
+		57eHJPXgeLPWqMV3ZlTsiqTwLNI=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/Nezha Widget.debug.dylib</key>
+		<data>
+		TkVi1RphXrAnPFxZ1/edrEKsCvM=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/Info.plist</key>
+		<data>
+		hwAaDsQgVtW8+GW0EfGU3b+kGeE=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		mpTiVzQPqV/WrGPo5zTCsMtE/kM=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeDirectory</key>
+		<data>
+		+7y1VPHPKsdUOy7yBKLz4cxmO40=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeRequirements</key>
+		<data>
+		OnX22wWFKRSOFN1+obRynMCeyXM=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeResources</key>
+		<data>
+		rArSm0EX77y6W7PS6xXA0XKLrx0=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeSignature</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/_CodeSignature/CodeResources</key>
+		<data>
+		2D0n1jr/YAJW7MyF5powY2YFZtI=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/__preview.dylib</key>
+		<data>
+		gfF9DygcCL3MP2c0jszpfZSQJUg=
+		</data>
+		<key>PlugIns/Nezha Widget.appex/en.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+fb6Z61QchbOi/K1QsJQYafY3W4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/en.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9UQZjOQXq7DtRB/qPjkz7N+UaOI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/zh-Hans.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			eH052vp7tpmVaoOnMjGHBmqzrSQ=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/zh-Hans.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RbHvYHAGV73YH7nhM2uymPWoz5Q=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Notification Service.appex/Info.plist</key>
+		<data>
+		ktvsPrvL0Ov9MMAgWnwILiMUFCQ=
+		</data>
+		<key>PlugIns/Notification Service.appex/Notification Service</key>
+		<data>
+		wNj6E+z4tDn4D4/h30/8FeZ0W6Y=
+		</data>
+		<key>PlugIns/Notification Service.appex/Notification Service.debug.dylib</key>
+		<data>
+		kR1APgJgbWj6uoVrx+B+sPFK2/0=
+		</data>
+		<key>PlugIns/Notification Service.appex/_CodeSignature/CodeResources</key>
+		<data>
+		4O6gzoPkxIQRleMiNj8hBrPkwtE=
+		</data>
+		<key>PlugIns/Notification Service.appex/__preview.dylib</key>
+		<data>
+		TuzjZAKJ/KC5AyYGwevs2QtW10A=
 		</data>
 		<key>SwiftyJSON_SwiftyJSON.bundle/Info.plist</key>
 		<data>
@@ -225,7 +329,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oJ2YjRtAzTpWVJOvGiWb7F2sThWoIlzNrUbNgr57bww=
+			dr0Jb2bd0+LmJEvrdoOnDN/LwQl1b8BsokVh+tcYN9Y=
 			</data>
 		</dict>
 		<key>Cache_Cache.bundle/Info.plist</key>
@@ -270,18 +374,11 @@
 			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
 			</data>
 		</dict>
-		<key>LICENSE</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			GbKId0uv49Wp36WtfxO4TCcz9VWNpYz7ReYXc6M1x2k=
-			</data>
-		</dict>
 		<key>Nezha Mobile.debug.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			uPJSouMiIKyycq0ZvOmJH9tIs+Pxk9HtXREhSCFgWAI=
+			R+eRvoKfxg+r8AM6D660fHEUx2B5mBXKLQhRwsZpPSk=
 			</data>
 		</dict>
 		<key>Nezha Widget.appex/Assets.car</key>
@@ -309,14 +406,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			U78a4FzpdDBQtWWERXa1pFNZguleRB2jhjmEeUCRdy4=
+			Y056N8w2ciFNVb92lsX2dN5w8ZQHSQrKaKbrHAt2K9Q=
 			</data>
 		</dict>
 		<key>Nezha Widget.appex/Nezha Widget</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hhnR0dTc+feQZEniokxhJfy8qG9z76kbUcDbrV97WJ4=
+			V+PY4vY0vL7WdIwktjHage6vuNU1Epr9ivIn4dg3d8w=
 			</data>
 		</dict>
 		<key>Nezha Widget.appex/Nezha Widget.debug.dylib</key>
@@ -372,7 +469,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TO1DE/2f3DoIYE4VRLx4wVPTPHWmFNybypcqdNOMePQ=
+			GQYL59gvp3QvhtKXc/lJVPlIyjgR2mONq0ap1lOBH0E=
 			</data>
 		</dict>
 		<key>Nezha Widget.appex/__preview.dylib</key>
@@ -382,11 +479,173 @@
 			LE9izUys4wij4lxj5ySIKkxbDuqLp8tmHmG43uGfJ7E=
 			</data>
 		</dict>
-		<key>README.md</key>
+		<key>PlugIns/Nezha Widget.appex/Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			20As7hf3I+DVWqxXAMmwn89bpO/AivDj47csnLQoZX0=
+			JjBAKecspcZVrx7ydbX78E3Bo2kuzcJVcRYyhiz0als=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			qm25w/jj5Xg8CfQqk84q2ZKHTCh3/AtbKsdRRd3NzRI=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/Metadata.appintents/extract.actionsdata</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3xLaPWUWcPbr9McePOcSFrglM/x7zcX1K125s7W9o7Y=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/Metadata.appintents/version.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			U78a4FzpdDBQtWWERXa1pFNZguleRB2jhjmEeUCRdy4=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/Nezha Widget</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LSSQCrQLGAhE4tO1xOVb9RdRJH5bS7wtKvsAPeBU6M8=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/Nezha Widget.debug.dylib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SRuJhQ1RtyXcBw1wUh47L80szzZfefpAgXMoV7qcLSI=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			nZc8Sjw+w5lDXIoYrPFDH3TmKiDkGbzKGtUlVScNW8w=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			O+ZYoiQ4qA0O8iAWzPXOkR1loMBd7szBweQqcuphiOA=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeDirectory</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Vc/3ouEUMnhLac2IhwG8HK2espirLSue2j8SFyvRH6s=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeRequirements</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mHkgkE6rZQ51eIwFSqCwUk5qgL/HGqMt+NI3phdD+YY=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sDf1GK/K318kD5RpNJhy/oS51zXHPOINXJEcvdJDvPM=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/TelemetryDeck_TelemetryDeck.bundle/_CodeSignature/CodeSignature</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dYgMvEklSuwfPulELZslyEL0zfQRTeGziZWT8LyS95g=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/__preview.dylib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4H9qFa88ZaThPChL87gscT8KhWTx8tDH7O8dRIBSMS0=
+			</data>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/en.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			I/yMly4yMd4exjyisPlljq3NCQGUjnV0Zp91Vx/u4bs=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/en.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1CF3qYRxlV+QBD8WP0gNuq6/qyLLmEdeVOvAQVLQgOg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/zh-Hans.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			c5vPRQFNUGoxIc9z2LNuQQkkjdV785ecLvnv3xnbVCE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Nezha Widget.appex/zh-Hans.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QhIT6BoYhG89c+h7/5jvTz0BgkmUD9bKG8wqBYv/iyY=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>PlugIns/Notification Service.appex/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			o0YfNFciFBwO1B1JLzZgbrkT5DFnJc/Wdx1nIm2xY00=
+			</data>
+		</dict>
+		<key>PlugIns/Notification Service.appex/Notification Service</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5zKfvurJ8bShdsXwRlnB+Mh7SP2RN7ZrgsuFWEWy38U=
+			</data>
+		</dict>
+		<key>PlugIns/Notification Service.appex/Notification Service.debug.dylib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RY0/2kCLUXA5L1pFUMJ6REEA0XkTeK3ivHRa4bwUx8I=
+			</data>
+		</dict>
+		<key>PlugIns/Notification Service.appex/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BAtJx1U7Kp0BA1fDuUCbcdQkMzoiYYskJVfgDqOyak0=
+			</data>
+		</dict>
+		<key>PlugIns/Notification Service.appex/__preview.dylib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YqDeK6J10mkemQ2kJTKCIpCYKcuEc7U/xUsGP6nEnZ8=
 			</data>
 		</dict>
 		<key>SwiftyJSON_SwiftyJSON.bundle/Info.plist</key>

@@ -12,19 +12,25 @@ import AppIntents
 struct SummaryProvider: AppIntentTimelineProvider {
     typealias Entry = SummaryEntry
     typealias Intent = SummaryConfigurationIntent
+    
+    static private let demoSummaryEntry = SummaryEntry(
+        date: Date(),
+        onlineCount: 47,
+        offlineCount: 5,
+        totalUpload: 107_374_182_400,
+        totalDownload: 536_870_912_000,
+        uploadSpeed: 1_048_576,
+        downloadSpeed: 5_242_880,
+        message: "Placeholder",
+        color: .blue
+    )
+    
+    func recommendations() -> [AppIntentRecommendation<SummaryConfigurationIntent>] {
+        return [AppIntentRecommendation(intent: SummaryConfigurationIntent(color: .blue), description: "Recommendation")]
+    }
 
     func placeholder(in context: Context) -> SummaryEntry {
-        SummaryEntry(
-            date: Date(),
-            onlineCount: 47,
-            offlineCount: 5,
-            totalUpload: 107_374_182_400,
-            totalDownload: 536_870_912_000,
-            uploadSpeed: 1_048_576,
-            downloadSpeed: 5_242_880,
-            message: "Placeholder",
-            color: .blue
-        )
+        return SummaryProvider.demoSummaryEntry
     }
 
     func snapshot(for configuration: SummaryConfigurationIntent, in context: Context) async -> SummaryEntry {

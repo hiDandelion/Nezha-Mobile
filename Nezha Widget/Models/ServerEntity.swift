@@ -8,6 +8,7 @@
 import AppIntents
 
 struct ServerEntity: AppEntity {
+    var isDemo: Bool = false
     var id: String {
         String(serverID)
     }

@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		ILvSisdDMghwLKIKW43b2Lm7n4g=
+		7IJDcP9NRkWZejMkQQiOeb7iRsY=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		f9+pIapTCNJthpfEHtChroYDG/s=
+		KpNw1zwFQWHsDr5Widz2mUDYg+w=
 		</data>
 		<key>Metadata.appintents/extract.actionsdata</key>
 		<data>
@@ -18,11 +18,11 @@
 		</data>
 		<key>Metadata.appintents/version.json</key>
 		<data>
-		TY2tWAqgMoaE49pcDLWKF8StLJ0=
+		kSxBG4AkjH7gz3iMXvK2JDx3VZI=
 		</data>
 		<key>Nezha Widget.debug.dylib</key>
 		<data>
-		5kDtNEkcnkroOylmOGRlGPuJG1k=
+		TkVi1RphXrAnPFxZ1/edrEKsCvM=
 		</data>
 		<key>TelemetryDeck_TelemetryDeck.bundle/Info.plist</key>
 		<data>
@@ -50,8 +50,44 @@
 		</data>
 		<key>__preview.dylib</key>
 		<data>
-		oFL7FINU9lMJWjmcCdmC2Qt0kJQ=
+		gfF9DygcCL3MP2c0jszpfZSQJUg=
 		</data>
+		<key>en.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+fb6Z61QchbOi/K1QsJQYafY3W4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>en.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9UQZjOQXq7DtRB/qPjkz7N+UaOI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			eH052vp7tpmVaoOnMjGHBmqzrSQ=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RbHvYHAGV73YH7nhM2uymPWoz5Q=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -59,7 +95,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wnkrLVaF5Rx66aPhDhDKfePscW1urwo5PWEstPShjeY=
+			JjBAKecspcZVrx7ydbX78E3Bo2kuzcJVcRYyhiz0als=
 			</data>
 		</dict>
 		<key>Metadata.appintents/extract.actionsdata</key>
@@ -73,14 +109,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y056N8w2ciFNVb92lsX2dN5w8ZQHSQrKaKbrHAt2K9Q=
+			U78a4FzpdDBQtWWERXa1pFNZguleRB2jhjmEeUCRdy4=
 			</data>
 		</dict>
 		<key>Nezha Widget.debug.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QNIC8xSi9TgXiFVJvPXzxiqvHuQoa09pQEFrFP9et+4=
+			SRuJhQ1RtyXcBw1wUh47L80szzZfefpAgXMoV7qcLSI=
 			</data>
 		</dict>
 		<key>TelemetryDeck_TelemetryDeck.bundle/Info.plist</key>
@@ -129,8 +165,44 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LE9izUys4wij4lxj5ySIKkxbDuqLp8tmHmG43uGfJ7E=
+			4H9qFa88ZaThPChL87gscT8KhWTx8tDH7O8dRIBSMS0=
 			</data>
+		</dict>
+		<key>en.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			I/yMly4yMd4exjyisPlljq3NCQGUjnV0Zp91Vx/u4bs=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>en.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1CF3qYRxlV+QBD8WP0gNuq6/qyLLmEdeVOvAQVLQgOg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			c5vPRQFNUGoxIc9z2LNuQQkkjdV785ecLvnv3xnbVCE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>zh-Hans.lproj/Localizable.stringsdict</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QhIT6BoYhG89c+h7/5jvTz0BgkmUD9bKG8wqBYv/iyY=
+			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>rules</key>

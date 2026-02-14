@@ -5,58 +5,65 @@
 //  Created by Junhui Lou on 8/2/24.
 //
 
+#if os(iOS) || os(macOS) || os(visionOS)
 import WidgetKit
 import SwiftUI
 import AppIntents
 
 struct ServerDetailProvider: AppIntentTimelineProvider {
     typealias Entry = ServerEntry
-    
     typealias Intent = ServerDetailConfigurationIntent
     
-    func placeholder(in context: Context) -> ServerEntry {
-        ServerEntry(
-            date: Date(),
-            server: ServerData(
-                serverID: 0,
-                name: "Demo",
-                displayIndex: 0,
-                lastActive: Date(),
-                ipv4: "255.255.255.255",
-                ipv6: "::1",
-                countryCode: "us",
-                host: ServerData.Host(
-                    platform: "debian",
-                    platformVersion: "12",
-                    cpu: ["Intel 4 Virtual Core"],
-                    memoryTotal: 1024000,
-                    swapTotal: 1024000,
-                    diskTotal: 1024000,
-                    architecture: "x86_64",
-                    virtualization: "kvm",
-                    bootTime: 0
-                ),
-                status: ServerData.Status(
-                    cpuUsed: 100,
-                    memoryUsed: 1024000,
-                    swapUsed: 1024000,
-                    diskUsed: 1024000,
-                    networkIn: 1024000,
-                    networkOut: 1024000,
-                    networkInSpeed: 1024000,
-                    networkOutSpeed: 1024000,
-                    uptime: 600,
-                    load1: 0.30,
-                    load5: 0.20,
-                    load15: 0.10,
-                    tcpConnectionCount: 100,
-                    udpConnectionCount: 100,
-                    processCount: 100)
+    static private let demoServerEntry = ServerEntry(
+        date: Date(),
+        server: ServerData(
+            serverID: -100,
+            name: "Demo",
+            displayIndex: -100,
+            lastActive: Date(),
+            ipv4: "192.168.1.1",
+            ipv6: "fe80::1",
+            countryCode: "us",
+            host: ServerData.Host(
+                platform: "debian",
+                platformVersion: "12",
+                cpu: ["Intel 4 Virtual Core"],
+                memoryTotal: 1024000,
+                swapTotal: 1024000,
+                diskTotal: 1024000,
+                architecture: "x86_64",
+                virtualization: "kvm",
+                bootTime: 0
             ),
-            isShowIP: true,
-            message: "Placeholder",
-            color: .blue
-        )
+            status: ServerData.Status(
+                cpuUsed: 50,
+                memoryUsed: 256000,
+                swapUsed: 384000,
+                diskUsed: 512000,
+                networkIn: 204800000000,
+                networkOut: 102400000000,
+                networkInSpeed: 2048000,
+                networkOutSpeed: 1024000,
+                uptime: 600,
+                load1: 0.30,
+                load5: 0.20,
+                load15: 0.10,
+                tcpConnectionCount: 50,
+                udpConnectionCount: 30,
+                processCount: 30
+            )
+        ),
+        isShowIP: true,
+        message: "Demo",
+        color: .blue
+    )
+    
+    func recommendations() -> [AppIntentRecommendation<ServerDetailConfigurationIntent>] {
+        [AppIntentRecommendation(intent: ServerDetailConfigurationIntent(server: ServerEntity( serverID: -100, name: "Demo", displayIndex: -100), isShowIP: true, color: .blue), description: "Recommendation")]
+    }
+    
+    func placeholder(in context: Context) -> ServerEntry {
+        return ServerDetailProvider.demoServerEntry
     }
     
     func snapshot(for configuration: ServerDetailConfigurationIntent, in context: Context) async -> ServerEntry {
@@ -80,6 +87,7 @@ struct ServerDetailProvider: AppIntentTimelineProvider {
     }
     
     func getServerEntry(serverID: Int64?, isShowIP: Bool?, color: WidgetBackgroundColor) async -> ServerEntry {
+        if serverID == -100 { return ServerDetailProvider.demoServerEntry }
         do {
             var response: GetServerResponse
             if let serverID {
@@ -171,6 +179,7 @@ struct ServerDetailWidgetEntryView: View {
             if let server = entry.server {
                 Group {
                     switch(family) {
+#if os(iOS) || os(macOS) || os(watchOS)
                     case .accessoryCircular:
                         let totalCore = Double(getCore(server.host.cpu) ?? 1)
                         let loadPressure = server.status.load15 / totalCore
@@ -204,6 +213,7 @@ struct ServerDetailWidgetEntryView: View {
                             }
                             Text("↑ \(formatBytes(server.status.networkOut))")
                         }
+#endif
                     case .systemSmall:
                         let widgetCustomizationEnabled = NMCore.userDefaults.bool(forKey: "NMWidgetCustomizationEnabled")
                         if widgetCustomizationEnabled {
@@ -401,6 +411,7 @@ struct ServerDetailWidgetEntryView: View {
 }
 
 struct ServerEntry: TimelineEntry {
+    let isDemo: Bool = false
     let date: Date
     let server: ServerData?
     let isShowIP: Bool?
@@ -425,9 +436,4 @@ struct ServerDetailWidget: Widget {
 #endif
     }
 }
-
-//#Preview("ServerDetailWidget", as: .systemMedium) {
-//    ServerDetailWidget()
-//} timeline: {
-//    ServerEntry(date: Date(), server: Server(id: 0, name: "Demo", tag: "Group", lastActive: 0, IPv4: "255.255.255.255", IPv6: "::1", validIP: "255.255.255.255", displayIndex: 0, host: ServerHost(platform: "debian", platformVersion: "12", cpu: ["Intel 4 Virtual Core"], gpu: nil, memTotal: 1024000, diskTotal: 1024000, swapTotal: 1024000, arch: "x86_64", virtualization: "kvm", bootTime: 0, countryCode: "us", version: "1"), status: ServerStatus(cpu: 100, memUsed: 1024000, swapUsed: 1024000, diskUsed: 1024000, netInTransfer: 1024000, netOutTransfer: 1024000, netInSpeed: 1024000, netOutSpeed: 1024000, uptime: 600, load1: 0.30, load5: 0.20, load15: 0.10, TCPConnectionCount: 100, UDPConnectionCount: 100, processCount: 100)), isShowIP: true, message: "OK", color: .blue)
-//}
+#endif
