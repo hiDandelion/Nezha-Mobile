@@ -193,6 +193,40 @@
         }
       }
     },
+    "%lld Notification Method(s)" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Notification Method"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Notification Methods"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld个通知方式"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld rule(s)" : {
       "localizations" : {
         "en" : {
@@ -575,6 +609,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加Dashboard"
+          }
+        }
+      }
+    },
+    "Add Notification Method Group" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加通知方式分组"
           }
         }
       }
@@ -1449,6 +1493,16 @@
         }
       }
     },
+    "Enter a name for the new notification method group." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为新通知方式分组输入名称。"
+          }
+        }
+      }
+    },
     "Enter a name for the new server group." : {
       "localizations" : {
         "en" : {
@@ -1477,6 +1531,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "为此告警规则输入新名称。"
+          }
+        }
+      }
+    },
+    "Enter a new name for the notification method group." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为此通知方式分组分组输入新名称。"
           }
         }
       }
@@ -1747,7 +1811,14 @@
       }
     },
     "Linux" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linux"
+          }
+        }
+      }
     },
     "Load" : {
       "localizations" : {
@@ -1798,7 +1869,14 @@
       }
     },
     "macOS" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS"
+          }
+        }
+      }
     },
     "Main Window" : {
       "localizations" : {
@@ -2192,6 +2270,16 @@
         }
       }
     },
+    "No Notification Group" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无通知分组"
+          }
+        }
+      }
+    },
     "No Notification Method" : {
       "localizations" : {
         "en" : {
@@ -2262,6 +2350,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无Snippet"
+          }
+        }
+      }
+    },
+    "Notification Method Groups" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知方式分组"
           }
         }
       }
@@ -2646,6 +2744,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重新命名通知方式"
+          }
+        }
+      }
+    },
+    "Rename Notification Method Group" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新命名通知方式分组"
           }
         }
       }

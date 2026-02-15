@@ -14,11 +14,16 @@ struct RenamableAndDeletable: ViewModifier {
     func body(content: Content) -> some View {
         content
             .swipeActions(edge: .trailing) {
-                Button("Delete", role: .destructive) {
+                Button(role: .destructive) {
                     deleteAction()
+                } label: {
+                    Label("Delete", systemImage: "trash")
                 }
-                Button("Rename") {
+                
+                Button {
                     renameAction()
+                } label: {
+                    Label("Rename", systemImage: "pencil")
                 }
             }
             .contextMenu {

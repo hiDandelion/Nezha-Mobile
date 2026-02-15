@@ -44,12 +44,14 @@ class NMState {
     
     var notificationLoadingState: LoadingState = .idle
     var notifications: [NotificationData] = .init()
+    var notificationGroups: [NotificationGroup] = .init()
     var alertRules: [AlertRuleData] = .init()
     
     private var getServerTask: Task<Void, Error>?
     private var getServerGroupTask: Task<Void, Error>?
     private var getServicesTask: Task<Void, Error>?
     private var getNotificationTask: Task<Void, Error>?
+    private var getNotificationGroupTask: Task<Void, Error>?
     private var getAlertRuleTask: Task<Void, Error>?
     
     func loadDashboard() {
@@ -124,6 +126,7 @@ class NMState {
         Task {
             do {
                 try await getNotification()
+                try await getNotificationGroup()
                 try await getAlertRule()
                 notificationLoadingState = .loaded
             }
@@ -149,11 +152,15 @@ class NMState {
     func refreshServices() async {
         try? await getServices()
     }
-    
+
     func refreshNotifications() async {
         try? await getNotification()
     }
-    
+
+    func refreshNotificationGroups() async {
+        try? await getNotificationGroup()
+    }
+
     func refreshAlertRules() async {
         try? await getAlertRule()
     }
@@ -320,7 +327,29 @@ class NMState {
         
         try await getNotificationTask?.value
     }
-    
+
+    private func getNotificationGroup() async throws {
+        getNotificationGroupTask?.cancel()
+
+        getNotificationGroupTask = Task {
+            let response = try await RequestHandler.getNotificationGroup()
+
+            guard !Task.isCancelled else { return }
+
+            withAnimation {
+                self.notificationGroups = response.data?.map({
+                    NotificationGroup(
+                        notificationGroupID: $0.group.id,
+                        name: $0.group.name,
+                        notificationIDs: $0.notifications ?? .init()
+                    )
+                }) ?? []
+            }
+        }
+
+        try await getNotificationGroupTask?.value
+    }
+
     private func getAlertRule() async throws {
         getAlertRuleTask?.cancel()
         

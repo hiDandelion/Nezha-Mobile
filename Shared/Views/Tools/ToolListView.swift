@@ -20,7 +20,7 @@ struct ToolListView: View {
                     }
                     
                     NavigationLink(value: "service-list") {
-                        TextWithColorfulIcon(titleKey: "Monitors", systemName: "chart.xyaxis.line", color: .purple)
+                        TextWithColorfulIcon(titleKey: "Services", systemName: "chart.xyaxis.line", color: .purple)
                     }
                     
                     NavigationLink(value: "notification-list") {
@@ -48,7 +48,7 @@ struct ToolListView: View {
                 case "service-list":
                     ServiceListView()
                 case "notification-list":
-                    NotificationListView()
+                    NotificationSettingsView()
                 case "device-info":
                     DeviceInfoView()
                 case "snippet-list":

@@ -76,7 +76,7 @@ struct HomeView: View {
                     }
                 case .notifications:
                     NavigationStack {
-                        NotificationListView()
+                        NotificationSettingsView()
                     }
                 case .snippets:
                     NavigationStack {
