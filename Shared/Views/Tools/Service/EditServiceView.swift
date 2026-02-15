@@ -48,7 +48,7 @@ struct EditServiceView: View {
                 }
             }
             .formStyle(.grouped)
-            .navigationTitle(service != nil ? "Edit Monitor" : "Add Monitor")
+            .navigationTitle(service != nil ? "Edit Service" : "Add Service")
 #if os(iOS) || os(visionOS)
             .navigationBarTitleDisplayMode(.inline)
 #endif

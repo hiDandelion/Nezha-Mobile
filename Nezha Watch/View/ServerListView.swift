@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServerListView: View {
-    @ObservedObject var dashboardViewModel: DashboardViewModel
+    var dashboardViewModel: DashboardViewModel
     @State private var selectedServer: ServerData?
     @State private var isShowingErrorDetailAlert: Bool = false
     @State private var isShowingSettingSheet: Bool = false

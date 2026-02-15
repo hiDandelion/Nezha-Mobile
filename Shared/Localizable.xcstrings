@@ -579,22 +579,6 @@
         }
       }
     },
-    "Add Monitor" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add Monitor"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加监控"
-          }
-        }
-      }
-    },
     "Add Server" : {
       "localizations" : {
         "zh-Hans" : {
@@ -617,6 +601,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加服务器分组"
+          }
+        }
+      }
+    },
+    "Add Service" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加服务"
           }
         }
       }
@@ -1179,22 +1173,6 @@
         }
       }
     },
-    "Date Range" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Date Range"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "时间范围"
-          }
-        }
-      }
-    },
     "Default" : {
       "localizations" : {
         "en" : {
@@ -1381,18 +1359,12 @@
         }
       }
     },
-    "Edit Monitor" : {
+    "Edit Service" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Monitor"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "编辑监控"
+            "value" : "编辑服务"
           }
         }
       }
@@ -1509,22 +1481,6 @@
         }
       }
     },
-    "Enter a new name for the monitor." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter a new name for the monitor."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "为此监控输入新名称。"
-          }
-        }
-      }
-    },
     "Enter a new name for the notification method." : {
       "localizations" : {
         "en" : {
@@ -1563,6 +1519,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "为此服务器输入新名称。"
+          }
+        }
+      }
+    },
+    "Enter a new name for the service." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为此服务输入新名称。"
           }
         }
       }
@@ -1676,23 +1642,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在小组件中获取服务器的最新信息。"
-          }
-        }
-      }
-    },
-    "Hide Offline" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Offline"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隐藏离线"
           }
         }
       }
@@ -1948,6 +1897,16 @@
         }
       }
     },
+    "Metrics" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指标"
+          }
+        }
+      }
+    },
     "Model Identifier" : {
       "localizations" : {
         "en" : {
@@ -1960,6 +1919,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "机型识别符"
+          }
+        }
+      }
+    },
+    "MonitorPeriod.oneDay" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Day"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1天"
+          }
+        }
+      }
+    },
+    "MonitorPeriod.sevenDays" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7 Days"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7天"
+          }
+        }
+      }
+    },
+    "MonitorPeriod.thirtyDays" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 Days"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30天"
           }
         }
       }
@@ -2175,34 +2182,12 @@
         }
       }
     },
-    "No data" : {
+    "No Data" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No data"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "无数据"
-          }
-        }
-      }
-    },
-    "No Monitor" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Monitor"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无监控"
           }
         }
       }
@@ -2251,6 +2236,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无服务器分组"
+          }
+        }
+      }
+    },
+    "No Service" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无服务"
           }
         }
       }
@@ -2401,6 +2396,16 @@
         }
       }
     },
+    "Period" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "周期"
+          }
+        }
+      }
+    },
     "Pin View" : {
       "localizations" : {
         "en" : {
@@ -2413,86 +2418,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pin 视图"
-          }
-        }
-      }
-    },
-    "Ping" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ping"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "延迟"
-          }
-        }
-      }
-    },
-    "PingChartDateRange.oneDay" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 Day"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1天"
-          }
-        }
-      }
-    },
-    "PingChartDateRange.sixHours" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "6 Hours"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "6小时"
-          }
-        }
-      }
-    },
-    "PingChartDateRange.threeHours" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3 Hours"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3小时"
-          }
-        }
-      }
-    },
-    "PingChartDateRange.twelveHours" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "12 Hours"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "12小时"
           }
         }
       }
@@ -2620,7 +2545,14 @@
       }
     },
     "Recommendation" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建议"
+          }
+        }
+      }
     },
     "Refresh" : {
       "localizations" : {
@@ -2702,22 +2634,6 @@
         }
       }
     },
-    "Rename Monitor" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rename Monitor"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重命名监控"
-          }
-        }
-      }
-    },
     "Rename Notification Method" : {
       "localizations" : {
         "en" : {
@@ -2756,6 +2672,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重新命名服务器分组"
+          }
+        }
+      }
+    },
+    "Rename Service" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重命名服务"
           }
         }
       }
@@ -3016,6 +2942,16 @@
         }
       }
     },
+    "Services" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务"
+          }
+        }
+      }
+    },
     "Settings" : {
       "localizations" : {
         "en" : {
@@ -3202,6 +3138,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "总统计"
+          }
+        }
+      }
+    },
+    "Swap" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "交换"
           }
         }
       }
@@ -3984,6 +3930,16 @@
         }
       }
     },
+    "Value" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "值"
+          }
+        }
+      }
+    },
     "View and report your device information." : {
       "localizations" : {
         "en" : {
@@ -4075,7 +4031,14 @@
       }
     },
     "Windows" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Windows"
+          }
+        }
+      }
     },
     "You are about to delete this server. Are you sure?" : {
       "localizations" : {

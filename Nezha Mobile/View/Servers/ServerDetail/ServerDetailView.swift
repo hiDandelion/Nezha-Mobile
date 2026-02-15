@@ -70,7 +70,7 @@ struct ServerDetailView: View {
             case .status:
                 ServerDetailStatusView(server: server)
             case .monitors:
-                ServerDetailPingView(server: server)
+                ServerDetailMonitorView(server: server)
             }
         }
     }

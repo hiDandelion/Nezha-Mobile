@@ -31,20 +31,20 @@ struct ServiceListView: View {
                 }
             }
             else {
-                Text("No Monitor")
+                Text("No Service")
                     .foregroundStyle(.secondary)
             }
         }
         .loadingState(loadingState: state.serviceLoadingState) {
             state.loadServices()
         }
-        .navigationTitle("Monitors")
+        .navigationTitle("Services")
         .toolbar {
             ToolbarItem {
                 Button {
                     isShowAddServiceSheet = true
                 } label: {
-                    Label("Add Monitor", systemImage: "plus")
+                    Label("Add Service", systemImage: "plus")
                 }
             }
         }
@@ -56,14 +56,14 @@ struct ServiceListView: View {
         .sheet(isPresented: $isShowAddServiceSheet, content: {
             EditServiceView(service: nil)
         })
-        .alert("Rename Monitor", isPresented: $isShowRenameServiceAlert) {
+        .alert("Rename Service", isPresented: $isShowRenameServiceAlert) {
             TextField("Name", text: $newNameOfService)
             Button("Cancel", role: .cancel) { }
             Button("OK") {
                 renameService(service: serviceToRename!, name: newNameOfService)
             }
         } message: {
-            Text("Enter a new name for the monitor.")
+            Text("Enter a new name for the service.")
         }
     }
     

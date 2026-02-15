@@ -1,5 +1,5 @@
 //
-//  PingChart.swift
+//  ServiceChart.swift
 //  Nezha Mobile
 //
 //  Created by Junhui Lou on 9/25/24.
@@ -14,17 +14,13 @@ struct PingDataPlot: Identifiable {
     let delay: Double
 }
 
-struct PingChart: View {
+struct ServiceChart: View {
     @Environment(\.colorScheme) private var scheme
     let pingData: MonitorData
-    let dateRange: PingChartDateRange
+    let period: MonitorPeriod
     var pingDataPlots: [PingDataPlot] {
-        let plots = zip(pingData.dates, pingData.delays)
+        zip(pingData.dates, pingData.delays)
             .map { PingDataPlot(date: $0, delay: $1) }
-        let filteredPlots = plots.filter {
-            isTimeDifferenceLessThanHours(from: $0.date, to: Date(), hours: dateRange.rawValue)
-        }
-        return filteredPlots
     }
     @State private var rawSelectedDate: Date?
     var selectedPingDataPlot: PingDataPlot? {
@@ -34,17 +30,22 @@ struct PingChart: View {
             calendar.isDate(plot.date, equalTo: rawSelectedDate, toGranularity: .minute)
         }
     }
-    
+
     var body: some View {
         VStack {
+            if pingDataPlots.isEmpty {
+                Text("No Data")
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 200)
+            } else {
             Chart {
                 ForEach(pingDataPlots, id: \.id) { data in
                     LineMark(
                         x: .value("Time", data.date),
-                        y: .value("Ping", data.delay)
+                        y: .value("Value", data.delay)
                     )
                 }
-                
+
                 if let rawSelectedDate {
                     RuleMark(
                         x: .value("Selected", rawSelectedDate)
@@ -64,9 +65,9 @@ struct PingChart: View {
                 }
             }
             .chartXAxis {
-                AxisMarks() { value in
+                AxisMarks { _ in
                     AxisGridLine()
-                    AxisValueLabel(format: .dateTime.hour())
+                    AxisValueLabel(format: period.xAxisDateFormat)
                 }
             }
             .chartYAxis {
@@ -74,10 +75,11 @@ struct PingChart: View {
             }
             .chartXSelection(value: $rawSelectedDate)
             .frame(minHeight: 200)
+            }
         }
         .padding(.top, 20)
     }
-    
+
     var valueSelectionPopover: some View {
         VStack {
             if let selectedPingDataPlot {

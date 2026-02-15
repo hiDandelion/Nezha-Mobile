@@ -53,12 +53,12 @@ struct ServerDetailStatusView: View {
         cardView {
             VStack {
                 HStack {
-                    HStack {
-                        Image(systemName: "opticaldisc")
-                        Text("OS")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    Label("OS", systemImage: "opticaldisc")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Spacer()
                 }
@@ -92,12 +92,12 @@ struct ServerDetailStatusView: View {
         cardView {
             VStack {
                 HStack {
-                    HStack {
-                        Image(systemName: "cpu")
-                        Text("CPU")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    Label("CPU", systemImage: "cpu")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Spacer()
                 }
@@ -138,12 +138,12 @@ struct ServerDetailStatusView: View {
                 let memoryUsage = (server.host.memoryTotal == 0 ? 0 : Double(server.status.memoryUsed) / Double(server.host.memoryTotal))
                 
                 HStack {
-                    HStack {
-                        Image(systemName: "memorychip")
-                        Text("Memory")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    Label("Memory", systemImage: "memorychip")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Spacer()
                 }
@@ -180,12 +180,12 @@ struct ServerDetailStatusView: View {
                 let diskUsage = (server.host.diskTotal == 0 ? 0 : Double(server.status.diskUsed) / Double(server.host.diskTotal))
                 
                 HStack {
-                    HStack {
-                        Image(systemName: "internaldrive")
-                        Text("Disk")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    Label("Disk", systemImage: "internaldrive")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Spacer()
                 }
@@ -220,12 +220,12 @@ struct ServerDetailStatusView: View {
         cardView {
             VStack {
                 HStack {
-                    HStack {
-                        Image(systemName: "network")
-                        Text("Network Send/Receive")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    Label("Network Send/Receive", systemImage: "network")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Spacer()
                 }
@@ -260,12 +260,12 @@ struct ServerDetailStatusView: View {
         cardView {
             VStack {
                 HStack {
-                    HStack {
-                        Image(systemName: "arrow.up.left.arrow.down.right")
-                        Text("Network Data")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    Label("Network Data", systemImage: "arrow.up.left.arrow.down.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Spacer()
                 }
@@ -287,12 +287,12 @@ struct ServerDetailStatusView: View {
         cardView {
             VStack {
                 HStack {
-                    HStack {
-                        Image(systemName: "pin.circle")
-                        Text("IP Address")
-                    }
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    Label("IP Address", systemImage: "pin.circle")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Spacer()
                     

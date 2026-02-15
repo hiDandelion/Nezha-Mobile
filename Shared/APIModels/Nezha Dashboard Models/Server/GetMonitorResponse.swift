@@ -17,6 +17,7 @@ struct GetMonitorResponse: Codable, NezhaDashboardBaseResponse {
         let server_id: Int64
         let monitor_name: String
         let server_name: String
+        let display_index: Int?
         @MillisecondTimestamps var created_at: [Date]
         let avg_delay: [Double]
     }

@@ -15,6 +15,7 @@ struct MonitorData: Codable, Identifiable, Hashable {
     let serverID: Int64
     let monitorName: String
     let serverName: String
+    let displayIndex: Int
     let dates: [Date]
     let delays: [Double]
 }

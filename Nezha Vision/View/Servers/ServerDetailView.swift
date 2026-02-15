@@ -39,7 +39,7 @@ struct ServerDetailView: View {
                                 ServerDetailStatusView(server: server)
                                     .tag(ServerDetailTab.status)
                             case .monitors:
-                                ServerDetailPingView(server: server)
+                                ServerDetailMonitorView(server: server)
                                     .tag(ServerDetailTab.monitors)
                             }
                             Spacer()

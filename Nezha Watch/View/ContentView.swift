@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var dashboardViewModel: DashboardViewModel = DashboardViewModel()
+    @State var dashboardViewModel: DashboardViewModel = DashboardViewModel()
     @State private var isShowingOnboarding: Bool = false
     @State private var isShowingAddDashboardSheet: Bool = false
     
