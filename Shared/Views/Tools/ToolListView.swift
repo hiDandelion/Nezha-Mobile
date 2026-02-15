@@ -26,20 +26,14 @@ struct ToolListView: View {
                     NavigationLink(value: "notification-list") {
                         TextWithColorfulIcon(titleKey: "Notifications", systemName: "bell.badge", color: .red)
                     }
-
-                    NavigationLink(value: "cron-list") {
-                        TextWithColorfulIcon(titleKey: "Tasks", systemName: "clock.arrow.2.circlepath", color: .green)
-                    }
-
-                    NavigationLink(value: "ddns-list") {
-                        TextWithColorfulIcon(titleKey: "DDNS", systemName: "network.badge.shield.half.filled", color: .cyan)
-                    }
-
-                    NavigationLink(value: "nat-list") {
-                        TextWithColorfulIcon(titleKey: "NAT", systemName: "arrow.left.arrow.right", color: .teal)
+                }
+                
+                Section("Agent") {
+                    NavigationLink(value: "device-info") {
+                        TextWithColorfulIcon(titleKey: "View Device Info", systemName: "info.circle", color: .blue)
                     }
                 }
-
+                
                 Section("Terminal") {
                     NavigationLink(value: "snippet-list") {
                         TextWithColorfulIcon(titleKey: "Snippets", systemName: "text.page", color: .orange)
@@ -55,14 +49,10 @@ struct ToolListView: View {
                     ServiceListView()
                 case "notification-list":
                     NotificationListView()
+                case "device-info":
+                    DeviceInfoView()
                 case "snippet-list":
                     SnippetListView(executeAction: nil)
-                case "cron-list":
-                    CronListView()
-                case "ddns-list":
-                    DDNSListView()
-                case "nat-list":
-                    NATListView()
                 default:
                     EmptyView()
                 }
@@ -72,21 +62,6 @@ struct ToolListView: View {
             }
             .navigationDestination(for: ServiceData.self) { service in
                 ServiceDetailView(service: service)
-            }
-            .navigationDestination(for: NATData.self) { nat in
-                NATDetailView(natID: nat.natID)
-            }
-            .navigationDestination(for: NotificationGroupData.self) { notificationGroup in
-                NotificationGroupDetailView(notificationGroupID: notificationGroup.notificationGroupID)
-            }
-            .navigationDestination(for: CronData.self) { cron in
-                CronDetailView(cronID: cron.cronID)
-            }
-            .navigationDestination(for: DDNSData.self) { ddns in
-                DDNSDetailView(ddnsID: ddns.ddnsID)
-            }
-            .navigationDestination(for: AlertRuleData.self) { alertRule in
-                AlertRuleDetailView(alertRuleID: alertRule.alertRuleID)
             }
             .navigationDestination(for: TerminalSnippet.self) { terminalSnippet in
                 SnippetDetailView(terminalSnippet: terminalSnippet)

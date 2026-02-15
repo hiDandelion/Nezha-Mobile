@@ -27,19 +27,6 @@ struct SettingView: View {
                 Label("Menu Bar", systemImage: "menubar.rectangle")
             }
             
-            NavigationStack {
-                Form {
-                    NavigationLink("Profile") {
-                        ProfileView()
-                    }
-                }
-                .padding()
-                .frame(width: 600, height: 400)
-            }
-            .tabItem {
-                Label("Admin", systemImage: "person.badge.shield.checkmark")
-            }
-
             Form {
                 let pushNotificationsToken = NMCore.userDefaults.string(forKey: "NMMacPushNotificationsToken")!
                 if pushNotificationsToken != "" {

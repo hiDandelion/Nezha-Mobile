@@ -16,9 +16,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CB7B9CD92C9E8678004383C7"
-               BuildableName = "Nezha Notification Service.appex"
-               BlueprintName = "Nezha Notification Service"
+               BlueprintIdentifier = "CB97478B2F41BCCF00CFFF76"
+               BuildableName = "Nezha Watch Widget.appex"
+               BlueprintName = "Nezha Watch Widget"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,6 +33,20 @@
                BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
                BuildableName = "Nezha Mobile.app"
                BlueprintName = "Nezha Mobile"
+               ReferencedContainer = "container:Nezha Mobile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CB701A4E2C67077400019344"
+               BuildableName = "Nezha Watch.app"
+               BlueprintName = "Nezha Watch"
                ReferencedContainer = "container:Nezha Mobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -67,22 +81,37 @@
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "_XCWidgetKind"
+            value = ""
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "_XCWidgetDefaultView"
+            value = "timeline"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "_XCWidgetFamily"
+            value = "systemMedium"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES"
-      askForAppToLaunch = "Yes"
-      launchAutomaticallySubstyle = "2">
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB9C60662C5AF76E00DAE1E3"
-            BuildableName = "Nezha Mobile.app"
-            BlueprintName = "Nezha Mobile"
+            BlueprintIdentifier = "CB97478B2F41BCCF00CFFF76"
+            BuildableName = "Nezha Watch Widget.appex"
+            BlueprintName = "Nezha Watch Widget"
             ReferencedContainer = "container:Nezha Mobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -26,7 +26,6 @@ struct ServerListView: View {
     
     @State private var isShowDeleteServerAlert: Bool = false
     @State private var serverToDelete: ServerData?
-    @State private var serverForConfig: ServerData?
     
     private var filteredServers: [ServerData] {
         state.servers
@@ -98,15 +97,10 @@ struct ServerListView: View {
         } message: {
             Text("Enter a new name for the server.")
         }
-        .sheet(item: $serverForConfig) { server in
-            NavigationStack {
-                ServerConfigView(serverID: server.serverID)
-            }
-        }
         .alert("Delete Server", isPresented: $isShowDeleteServerAlert) {
             Button("Delete", role: .destructive) {
                 Task {
-                    let result = try? await RequestHandler.deleteServer(serverID: serverToDelete!.serverID)
+                    let result = try? await RequestHandler.deleteServer(serverID: serverToRename!.serverID)
                     if result?.success == true {
                         await state.refreshServerAndServerGroup()
                     }
@@ -288,11 +282,6 @@ struct ServerListView: View {
                                             Label("Copy IPv6", systemImage: "6.circle")
                                         }
                                     }
-                                }
-                                Button {
-                                    serverForConfig = server
-                                } label: {
-                                    Label("Server Config", systemImage: "gearshape.2")
                                 }
                                 Button {
                                     serverToRename = server

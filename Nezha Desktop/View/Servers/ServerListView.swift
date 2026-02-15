@@ -26,8 +26,7 @@ struct ServerListView: View {
     
     @State private var isShowDeleteServerAlert: Bool = false
     @State private var serverToDelete: ServerData?
-    @State private var serverForConfig: ServerData?
-
+    
     private var filteredServers: [ServerData] {
         state.servers
             .sorted {
@@ -248,11 +247,6 @@ struct ServerListView: View {
                                     }
                                 }
                                 Button {
-                                    serverForConfig = server
-                                } label: {
-                                    Label("Server Config", systemImage: "gearshape.2")
-                                }
-                                Button {
                                     serverToRename = server
                                     newNameOfServer = server.name
                                     isShowRenameServerAlert = true
@@ -273,11 +267,6 @@ struct ServerListView: View {
             }
             else {
                 ContentUnavailableView("No Server", systemImage: "square.stack.3d.up.slash.fill")
-            }
-        }
-        .sheet(item: $serverForConfig) { server in
-            NavigationStack {
-                ServerConfigView(serverID: server.serverID)
             }
         }
     }

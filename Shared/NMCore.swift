@@ -158,7 +158,7 @@ class NMCore {
         }
         else {
             cachedPassword = keychain.get(NMDashboardPassword)
-            return cachedPassword ?? ""
+            return cachedPassword!
         }
     }
     

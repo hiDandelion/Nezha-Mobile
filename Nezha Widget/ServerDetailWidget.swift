@@ -5,7 +5,6 @@
 //  Created by Junhui Lou on 8/2/24.
 //
 
-#if os(iOS) || os(macOS) || os(visionOS)
 import WidgetKit
 import SwiftUI
 import AppIntents
@@ -431,9 +430,11 @@ struct ServerDetailWidget: Widget {
 #if os(iOS)
         .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular, .systemSmall, .systemMedium])
 #endif
-#if os(macOS)
+#if os(watchOS)
+        .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular])
+#endif
+#if os(macOS) || os(visionOS)
         .supportedFamilies([.systemSmall, .systemMedium])
 #endif
     }
 }
-#endif

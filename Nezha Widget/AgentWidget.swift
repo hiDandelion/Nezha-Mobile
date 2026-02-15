@@ -8,7 +8,6 @@
 #if os(iOS)
 import WidgetKit
 import SwiftUI
-import AppIntents
 
 struct AgentProvider: AppIntentTimelineProvider {
     typealias Entry = AgentEntry
@@ -296,4 +295,19 @@ struct AgentWidget: Widget {
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
+
+//#Preview("AgentWidget", as: .systemMedium) {
+//    AgentWidget()
+//} timeline: {
+//    let deviceModelIdentifier = DeviceInfo.getDeviceModelIdentifier()
+//    let OSVersionNumber = DeviceInfo.getOSVersionNumber()
+//    let cpuUsage = DeviceInfo.getCPUUsage()
+//    let memoryTotal = DeviceInfo.getMemoryTotal()
+//    let memoryUsed = DeviceInfo.getMemoryUsed()
+//    let diskUsed = DeviceInfo.getDiskUsed()
+//    let diskTotal = DeviceInfo.getDiskTotal()
+//    let bootTime = DeviceInfo.getBootTime()
+//    let uptime = DeviceInfo.getUptime()
+//    AgentEntry(date: Date(), deviceModelIdentifier: deviceModelIdentifier, OSVersionNumber: OSVersionNumber, cpuUsage: cpuUsage, memoryUsed: memoryUsed, memoryTotal: memoryTotal, diskUsed: diskUsed, diskTotal: diskTotal, uptime: uptime)
+//}
 #endif
