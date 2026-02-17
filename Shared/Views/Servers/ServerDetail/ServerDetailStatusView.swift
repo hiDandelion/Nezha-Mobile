@@ -56,7 +56,6 @@ struct ServerDetailStatusView: View {
                     Label("OS", systemImage: "opticaldisc")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundStyle(.secondary)
-                        .padding(.horizontal, 5)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     

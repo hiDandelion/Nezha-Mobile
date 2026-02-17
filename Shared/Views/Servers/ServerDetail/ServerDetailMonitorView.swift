@@ -141,16 +141,7 @@ struct ServerDetailMonitorView: View {
                     VStack(spacing: 10) {
                         ForEach(pingDatas) { pingData in
                             cardView {
-                                VStack(spacing: 0) {
-                                    HStack {
-                                        Text(pingData.monitorName)
-                                            .font(.system(size: 15, weight: .semibold))
-                                    }
-                                    .padding(.top, 10)
-
-                                    ServiceChart(pingData: pingData, period: period)
-                                        .padding()
-                                }
+                                ServiceChart(pingData: pingData, period: period)
                             }
                         }
                     }
@@ -203,11 +194,22 @@ struct ServerDetailMonitorView: View {
             do {
                 let results = try await withThrowingTaskGroup(of: ServerMetricsTimeSeries?.self, returning: [ServerMetricsTimeSeries].self) { group in
                     for metric in Self.metricKeys {
-                        group.addTask {
+                        group.addTask { [server] in
                             let response = try await RequestHandler.getServerMetrics(serverID: server.serverID, metric: metric, period: period.rawValue)
                             guard let data = response.data else { return nil }
+                            let total: Double? = switch metric {
+                            case "memory": Double(server.host.memoryTotal)
+                            case "swap": Double(server.host.swapTotal)
+                            case "disk": Double(server.host.diskTotal)
+                            default: nil
+                            }
                             let plots = data.data_points.map { point in
-                                MetricsDataPlot(date: Date(timeIntervalSince1970: TimeInterval(point.ts)), value: point.value)
+                                let value = if let total, total > 0 {
+                                    point.value / total * 100
+                                } else {
+                                    point.value
+                                }
+                                return MetricsDataPlot(date: Date(timeIntervalSince1970: TimeInterval(point.ts)), value: value)
                             }
                             return ServerMetricsTimeSeries(metric: data.metric, plots: plots)
                         }

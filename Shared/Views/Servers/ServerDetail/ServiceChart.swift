@@ -15,41 +15,70 @@ struct PingDataPlot: Identifiable {
 }
 
 struct ServiceChart: View {
-    @Environment(\.colorScheme) private var scheme
     let pingData: MonitorData
     let period: MonitorPeriod
-    var pingDataPlots: [PingDataPlot] {
+    @State private var rawSelectedDate: Date?
+
+    private var pingDataPlots: [PingDataPlot] {
         zip(pingData.dates, pingData.delays)
             .map { PingDataPlot(date: $0, delay: $1) }
     }
-    @State private var rawSelectedDate: Date?
-    var selectedPingDataPlot: PingDataPlot? {
-        guard let rawSelectedDate = rawSelectedDate else { return nil }
-        let calendar = Calendar.current
-        return pingDataPlots.first { plot in
-            calendar.isDate(plot.date, equalTo: rawSelectedDate, toGranularity: .minute)
+
+    private var selectedPlot: PingDataPlot? {
+        guard let rawSelectedDate else { return nil }
+        return pingDataPlots.min { a, b in
+            abs(a.date.timeIntervalSince(rawSelectedDate)) < abs(b.date.timeIntervalSince(rawSelectedDate))
         }
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 15) {
+            Label(pingData.monitorName, systemImage: "chart.xyaxis.line")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+
             if pingDataPlots.isEmpty {
                 Text("No Data")
                     .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, minHeight: 200)
+                    .frame(maxWidth: .infinity, minHeight: 160)
             } else {
-            Chart {
-                ForEach(pingDataPlots, id: \.id) { data in
-                    LineMark(
-                        x: .value("Time", data.date),
-                        y: .value("Value", data.delay)
-                    )
-                }
+                chartContent
+                    .chartXSelection(value: $rawSelectedDate)
+                    .frame(minHeight: 160)
+            }
+        }
+        .padding(10)
+    }
 
-                if let rawSelectedDate {
-                    RuleMark(
-                        x: .value("Selected", rawSelectedDate)
+    @ViewBuilder
+    private var chartContent: some View {
+        Chart {
+            ForEach(pingDataPlots) { plot in
+                LineMark(
+                    x: .value("Time", plot.date),
+                    y: .value("Value", plot.delay)
+                )
+                .foregroundStyle(.blue)
+                .interpolationMethod(.catmullRom)
+
+                AreaMark(
+                    x: .value("Time", plot.date),
+                    y: .value("Value", plot.delay)
+                )
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [.blue.opacity(0.3), .blue.opacity(0.0)],
+                        startPoint: .top,
+                        endPoint: .bottom
                     )
+                )
+                .interpolationMethod(.catmullRom)
+            }
+
+            if let rawSelectedDate {
+                RuleMark(x: .value("Selected", rawSelectedDate))
                     .foregroundStyle(Color.gray.opacity(0.3))
                     .offset(yStart: -10)
                     .zIndex(-1)
@@ -62,28 +91,23 @@ struct ServiceChart: View {
                     ) {
                         valueSelectionPopover
                     }
-                }
-            }
-            .chartXAxis {
-                AxisMarks { _ in
-                    AxisGridLine()
-                    AxisValueLabel(format: period.xAxisDateFormat)
-                }
-            }
-            .chartYAxis {
-                AxisMarks(position: .leading)
-            }
-            .chartXSelection(value: $rawSelectedDate)
-            .frame(minHeight: 200)
             }
         }
-        .padding(.top, 20)
+        .chartXAxis {
+            AxisMarks { _ in
+                AxisGridLine()
+                AxisValueLabel(format: period.xAxisDateFormat)
+            }
+        }
+        .chartYAxis {
+            AxisMarks(position: .leading)
+        }
     }
 
-    var valueSelectionPopover: some View {
+    private var valueSelectionPopover: some View {
         VStack {
-            if let selectedPingDataPlot {
-                Text("\(selectedPingDataPlot.delay, specifier: "%.0f")")
+            if let selectedPlot {
+                Text("\(selectedPlot.delay, specifier: "%.0f")")
             }
         }
         .font(.system(size: 12, design: .rounded))

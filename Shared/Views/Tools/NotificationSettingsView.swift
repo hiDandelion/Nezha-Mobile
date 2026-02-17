@@ -111,6 +111,7 @@ struct NotificationSettingsView: View {
             Section {
                 if !state.notificationGroups.isEmpty {
                     ForEach(state.notificationGroups) { notificationGroup in
+#if os(iOS) || os(visionOS)
                         NavigationLink(value: notificationGroup) {
                             notificationGroupLabel(notificationGroup: notificationGroup)
                         }
@@ -119,6 +120,15 @@ struct NotificationSettingsView: View {
                         } deleteAction: {
                             deleteNotificationGroup(notificationGroup: notificationGroup)
                         }
+#endif
+#if os(macOS)
+                        notificationGroupLabel(notificationGroup: notificationGroup)
+                            .renamableAndDeletable {
+                                showRenameNotificationGroupAlert(notificationGroup: notificationGroup)
+                            } deleteAction: {
+                                deleteNotificationGroup(notificationGroup: notificationGroup)
+                            }
+#endif
                     }
                 }
                 else {
@@ -196,9 +206,11 @@ struct NotificationSettingsView: View {
             state.loadNotifications()
         })
         .navigationTitle("Notifications")
+#if os(iOS) || os(visionOS)
         .navigationDestination(for: NotificationGroup.self) { notificationGroup in
             NotificationGroupDetailView(notificationGroupID: notificationGroup.notificationGroupID)
         }
+#endif
         .onAppear {
             if state.notificationLoadingState == .idle {
                 state.loadNotifications()

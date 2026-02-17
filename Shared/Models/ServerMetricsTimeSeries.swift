@@ -34,7 +34,7 @@ struct ServerMetricsTimeSeries: Identifiable {
         switch metric {
         case "cpu": "cpu"
         case "memory": "memorychip"
-        case "swap": "arrow.triangle.swap"
+        case "swap": "arrow.left.arrow.right"
         case "disk": "internaldrive"
         case "net_in_speed": "arrow.down.circle"
         case "net_out_speed": "arrow.up.circle"
@@ -42,10 +42,24 @@ struct ServerMetricsTimeSeries: Identifiable {
         }
     }
 
-    var isPercentage: Bool {
+    var displaysAsPercentage: Bool {
         switch metric {
         case "cpu", "memory", "swap", "disk": true
         default: false
         }
+    }
+
+    func formattedValue(_ value: Double) -> String {
+        if displaysAsPercentage {
+            return String(format: "%.0f%%", value)
+        }
+        return formatBytes(Int64(value), decimals: 2) + "/s"
+    }
+
+    func formattedAxisValue(_ value: Double) -> String {
+        if displaysAsPercentage {
+            return String(format: "%.0f%%", value)
+        }
+        return formatBytes(Int64(value), decimals: 0) + "/s"
     }
 }

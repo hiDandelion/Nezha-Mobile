@@ -15,9 +15,8 @@ struct MetricsChart: View {
 
     private var selectedPlot: MetricsDataPlot? {
         guard let rawSelectedDate else { return nil }
-        let calendar = Calendar.current
-        return timeSeries.plots.first { plot in
-            calendar.isDate(plot.date, equalTo: rawSelectedDate, toGranularity: .minute)
+        return timeSeries.plots.min { a, b in
+            abs(a.date.timeIntervalSince(rawSelectedDate)) < abs(b.date.timeIntervalSince(rawSelectedDate))
         }
     }
 
@@ -26,23 +25,20 @@ struct MetricsChart: View {
             Label(timeSeries.localizedTitle, systemImage: timeSeries.systemImage)
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(.secondary)
-                .padding(.horizontal, 12)
-                .padding(.top, 10)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
 
             if timeSeries.plots.isEmpty {
                 Text("No Data")
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, minHeight: 160)
-                    .padding(.horizontal, 12)
-                    .padding(.bottom, 12)
             } else {
                 chartContent
                     .chartXSelection(value: $rawSelectedDate)
                     .frame(minHeight: 160)
-                    .padding(.horizontal, 12)
-                    .padding(.bottom, 12)
             }
         }
+        .padding(10)
     }
 
     @ViewBuilder
@@ -93,20 +89,27 @@ struct MetricsChart: View {
             }
         }
         .chartYAxis {
-            AxisMarks(position: .leading)
+            AxisMarks(position: .leading) { value in
+                AxisGridLine()
+                AxisValueLabel {
+                    if let v = value.as(Double.self) {
+                        Text(timeSeries.formattedAxisValue(v))
+                    }
+                }
+            }
         }
 
-        if timeSeries.isPercentage {
+        if timeSeries.displaysAsPercentage {
             chart.chartYScale(domain: 0...100)
         } else {
             chart
         }
     }
 
-    var valueSelectionPopover: some View {
+    private var valueSelectionPopover: some View {
         VStack {
             if let selectedPlot {
-                Text("\(selectedPlot.value, specifier: "%.0f")")
+                Text(timeSeries.formattedValue(selectedPlot.value))
             }
         }
         .font(.system(size: 12, design: .rounded))
